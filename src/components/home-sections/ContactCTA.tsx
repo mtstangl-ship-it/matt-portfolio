@@ -4,7 +4,7 @@ import { contactCta } from "@/content/home";
 
 export function ContactCTA() {
   return (
-    <Section className="border-t border-ink-300 py-section">
+    <Section className="border-t-2 border-accent/30 bg-gradient-to-b from-accent-muted/40 to-ink-100 py-section">
       <div className="mx-auto max-w-xl text-center prose-optimal">
         <h2 className="font-display text-section font-bold text-ink-950">
           {contactCta.headline}

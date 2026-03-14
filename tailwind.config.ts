@@ -38,6 +38,7 @@ const config: Config = {
         ink: {
           50: "#f7f6f5",
           100: "#ebe9e6",
+          150: "#e3e0db",
           200: "#d6d2cc",
           300: "#b8b2a8",
           400: "#9a9286",
@@ -59,6 +60,8 @@ const config: Config = {
           light: "#3d7a8c",
           dark: "#1e424e",
           muted: "#e8f1f4",
+          warm: "#c4785a",
+          cool: "#4a7c9e",
         },
       },
       spacing: {

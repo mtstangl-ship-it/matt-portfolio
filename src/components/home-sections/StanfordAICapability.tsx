@@ -24,21 +24,21 @@ export function StanfordAICapability() {
   );
 
   return (
-    <Section className="border-t border-ink-300 py-section">
-      <Card variant="bordered" className="overflow-hidden">
+    <Section className="border-t-2 border-accent/20 bg-accent-muted/60 py-section">
+      <Card variant="bordered" className="overflow-hidden border-ink-300 bg-paper-50">
         <div className="flex flex-col gap-8 p-8 sm:flex-row sm:items-start sm:justify-between lg:p-10">
           <div className="flex items-start gap-8">
-            <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-sm border border-ink-200 bg-paper-50">
+            <div className="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-md border-2 border-accent/30 bg-accent-muted/60 p-3">
               {stanfordAI.certImage ? (
                 <Image
                   src={stanfordAI.certImage}
                   alt={`${stanfordAI.title} certification`}
-                  width={80}
-                  height={80}
-                  className="object-contain opacity-95"
+                  width={112}
+                  height={112}
+                  className="object-contain"
                 />
               ) : (
-                <span className="font-display text-xl font-bold text-accent">
+                <span className="font-display text-2xl font-bold text-accent">
                   {stanfordAI.badge}
                 </span>
               )}

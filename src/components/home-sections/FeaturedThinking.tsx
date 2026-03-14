@@ -5,7 +5,7 @@ import { featuredThinking } from "@/content/home";
 
 export function FeaturedThinking() {
   return (
-    <Section className="border-t border-ink-300 bg-paper-100 py-section">
+    <Section className="border-t border-ink-300 bg-paper-200/80 py-section">
       <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="font-display text-section font-bold text-ink-950">
@@ -27,7 +27,7 @@ export function FeaturedThinking() {
           <Card
             key={i}
             variant="subtle"
-            className="animate-fade-up border-l-4 border-l-accent p-6 motion-reduce:animate-none"
+            className="animate-fade-up border-l-4 border-l-accent bg-white/60 p-6 shadow-sm motion-reduce:animate-none"
             style={{ animationDelay: `${i * 100}ms` }}
           >
             <blockquote className="font-display text-quote font-bold italic leading-[1.5] text-ink-950">

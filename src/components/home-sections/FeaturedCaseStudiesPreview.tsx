@@ -6,7 +6,7 @@ import { featuredCaseStudies } from "@/content/home";
 
 export function FeaturedCaseStudiesPreview() {
   return (
-    <Section className="border-t border-ink-300 py-section">
+    <Section className="border-t border-ink-300 bg-paper-50 py-section">
       <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="font-display text-section font-bold text-ink-950">

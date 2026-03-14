@@ -1,4 +1,6 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 
 interface CompanyWordmarkProps {
   name: string;
@@ -8,9 +10,9 @@ interface CompanyWordmarkProps {
 }
 
 const sizes = {
-  sm: { height: 20, width: 80, class: "h-5 w-20" },
-  md: { height: 24, width: 100, class: "h-6 w-[6.25rem]" },
-  lg: { height: 28, width: 120, class: "h-7 w-[7.5rem]" },
+  sm: { height: 28, width: 100, class: "h-7 w-[6.25rem]" },
+  md: { height: 36, width: 130, class: "h-9 w-[8.125rem]" },
+  lg: { height: 40, width: 150, class: "h-10 w-[9.375rem]" },
 };
 
 export function CompanyWordmark({
@@ -20,26 +22,27 @@ export function CompanyWordmark({
   size = "md",
 }: CompanyWordmarkProps) {
   const dim = sizes[size];
+  const [error, setError] = useState(false);
 
-  if (src) {
+  if (!src || error) {
     return (
-      <Image
-        src={src}
-        alt={name}
-        width={dim.width}
-        height={dim.height}
-        className={`object-contain object-left opacity-80 transition-opacity hover:opacity-95 ${dim.class} ${className}`.trim()}
-        style={{ filter: "grayscale(1) contrast(0.9) brightness(0.97)" }}
-      />
+      <span
+        className={`font-body block font-bold tracking-[0.05em] text-ink-700 ${dim.class} ${className}`.trim()}
+        style={{ fontSize: size === "sm" ? "0.75rem" : size === "md" ? "0.8125rem" : "0.875rem" }}
+      >
+        {name}
+      </span>
     );
   }
 
   return (
-    <span
-      className={`font-body block font-semibold tracking-[0.05em] text-ink-600 ${dim.class} ${className}`.trim()}
-      style={{ fontSize: size === "sm" ? "0.6875rem" : size === "md" ? "0.75rem" : "0.8125rem" }}
-    >
-      {name}
-    </span>
+    <img
+      src={src}
+      alt={name}
+      width={dim.width}
+      height={dim.height}
+      className={`object-contain object-left ${dim.class} ${className}`.trim()}
+      onError={() => setError(true)}
+    />
   );
 }

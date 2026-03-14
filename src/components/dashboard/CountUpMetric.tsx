@@ -43,10 +43,9 @@ function formatDisplay(num: number, suffix: string, prefix: string): string {
 
 export function CountUpMetric({ value, label, index }: CountUpMetricProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const inView = useInView(ref, { once: true, amount: 0.3 });
   const [display, setDisplay] = useState(value);
   const [hasAnimated, setHasAnimated] = useState(false);
-
   const parsed = parseValue(value);
 
   useEffect(() => {
@@ -54,14 +53,12 @@ export function CountUpMetric({ value, label, index }: CountUpMetricProps) {
       if (inView && !parsed) setDisplay(value);
       return;
     }
-
     const { numeric, suffix, prefix } = parsed;
-    const duration = 1200;
-    const steps = 30;
+    const duration = 1500;
+    const steps = 40;
     const stepDuration = duration / steps;
     const stepValue = numeric / steps;
     let current = 0;
-
     const timer = setInterval(() => {
       current += stepValue;
       if (current >= numeric) {
@@ -71,34 +68,24 @@ export function CountUpMetric({ value, label, index }: CountUpMetricProps) {
       }
       setDisplay(formatDisplay(current, suffix, prefix));
     }, stepDuration);
-
     return () => clearInterval(timer);
   }, [inView, hasAnimated, parsed, value]);
 
-  if (!parsed) {
-    return (
-      <motion.div
-        ref={ref}
-        className="rounded-sm border border-ink-300/70 border-l-2 border-l-accent/60 bg-ink-100/90 px-5 py-4"
-        initial={{ opacity: 0, y: 8 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.1 + index * 0.05, duration: 0.35 }}
-      >
-        <p className="font-mono text-metric font-bold tabular-nums text-ink-950">{value}</p>
-        <p className="font-body mt-1 text-metric-sm font-semibold text-ink-700">{label}</p>
-      </motion.div>
-    );
-  }
+  const content = parsed ? (
+    <p className="font-mono text-metric font-bold tabular-nums text-ink-950">{display}</p>
+  ) : (
+    <p className="font-mono text-metric font-bold tabular-nums text-ink-950">{value}</p>
+  );
 
   return (
     <motion.div
       ref={ref}
-      className="rounded-sm border border-ink-300/70 border-l-2 border-l-accent/60 bg-ink-100/90 px-5 py-4"
-      initial={{ opacity: 0, y: 8 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: 0.1 + index * 0.05, duration: 0.35 }}
+      className="rounded-sm border border-ink-300/70 border-l-4 border-l-accent bg-ink-100/90 px-5 py-4"
+      initial={{ opacity: 0, y: 12 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+      transition={{ delay: 0.15 + index * 0.06, duration: 0.5 }}
     >
-      <p className="font-mono text-metric font-bold tabular-nums text-ink-950">{display}</p>
+      {content}
       <p className="font-body mt-1 text-metric-sm font-semibold text-ink-700">{label}</p>
     </motion.div>
   );

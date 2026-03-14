@@ -3,7 +3,7 @@ import { brandThesis } from "@/content/home";
 
 export function BrandThesis() {
   return (
-    <Section className="border-t border-ink-300 bg-paper-100 py-section">
+    <Section className="border-t border-ink-300 bg-paper-200/80 py-section">
       <div className="mx-auto max-w-2xl prose-optimal">
         <h2 className="font-display text-section font-bold text-ink-950">
           {brandThesis.headline}

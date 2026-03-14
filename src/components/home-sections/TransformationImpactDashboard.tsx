@@ -39,7 +39,7 @@ function CompanyCard({
 
   return (
     <motion.article
-      className="overflow-hidden border border-ink-300/80 bg-paper-50 shadow-card transition-shadow hover:shadow-card-hover"
+      className="overflow-hidden border border-ink-300 bg-paper-50 shadow-card transition-shadow hover:shadow-card-hover"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
@@ -56,7 +56,7 @@ function CompanyCard({
         </div>
       </header>
       {VizComponent && (
-        <div className="relative border-b border-ink-300/60 bg-ink-300/25 px-6 py-5">
+        <div className="relative border-b border-ink-300 bg-accent-muted/30 px-6 py-5">
           <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)", backgroundSize: "16px 16px" }} aria-hidden />
           <div className="relative">
             <VizComponent />
@@ -68,7 +68,7 @@ function CompanyCard({
           {narrative}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-3 border-t border-ink-300/60 bg-ink-200/40 px-6 py-5">
+      <div className="grid grid-cols-2 gap-3 border-t border-ink-300 bg-ink-200/70 px-6 py-5">
         {kpis.map((kpi, i) => (
           <CountUpMetric key={i} {...kpi} index={i} />
         ))}
@@ -89,7 +89,7 @@ function CompanyCard({
 
 export function TransformationImpactDashboard() {
   return (
-    <section className="relative overflow-hidden border-t border-ink-400/60 bg-[#e5e2de] py-section">
+    <section className="relative overflow-hidden border-t-2 border-accent/30 bg-gradient-to-b from-accent-muted/50 to-ink-200/90 py-section">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
@@ -102,7 +102,7 @@ export function TransformationImpactDashboard() {
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent opacity-60"
         aria-hidden
       />
       <Section className="relative">

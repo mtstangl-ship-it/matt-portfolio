@@ -24,21 +24,19 @@ function ConnectorLine({ index }: { index: number }) {
         y1={34}
         x2={x + 15}
         y2={34}
-        stroke="currentColor"
+        stroke="#2c5f6f"
         strokeWidth={0.8}
         strokeDasharray="4 3"
-        className="text-accent"
         initial={{ strokeDashoffset: 0 }}
         animate={{ strokeDashoffset: -14 }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-        style={{ opacity: 0.7 }}
+        style={{ opacity: 0.9 }}
       />
       <motion.circle
         cx={x + 8}
         cy={34}
         r={2}
-        fill="currentColor"
-        className="text-accent"
+        fill="#2c5f6f"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 0.9, scale: 1 }}
         transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}

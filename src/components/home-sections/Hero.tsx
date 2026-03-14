@@ -3,9 +3,9 @@ import { hero } from "@/content/home";
 
 export function Hero() {
   return (
-    <Section className="pt-section pb-section-sm">
+    <Section className="border-b border-ink-200 bg-paper-50 pt-section pb-section-sm">
       <div className="max-w-3xl">
-        <p className="font-body text-eyebrow font-bold uppercase text-accent">
+        <p className="font-body text-eyebrow font-bold uppercase text-accent-dark">
           {hero.tagline}
         </p>
         <h1 className="font-display mt-4 text-hero font-bold leading-[0.98] text-ink-950">

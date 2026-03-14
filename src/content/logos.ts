@@ -1,6 +1,6 @@
 /**
- * Logo paths. Place SVG/PNG files in public/images/logos/
- * Use monochrome or low-contrast versions. Falls back to typographic wordmark if missing.
+ * Logo paths. Local SVGs in public/images/logos/
+ * Replace placeholder SVGs with real logo files (same filenames).
  */
 export const logoPaths: Record<string, string | undefined> = {
   Autodesk: "/images/logos/autodesk.svg",
