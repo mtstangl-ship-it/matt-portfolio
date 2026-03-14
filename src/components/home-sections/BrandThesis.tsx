@@ -3,14 +3,14 @@ import { brandThesis } from "@/content/home";
 
 export function BrandThesis() {
   return (
-    <Section className="border-t border-ink-200 bg-paper-100/60 py-section">
+    <Section className="border-t border-ink-300 bg-paper-100 py-section">
       <div className="mx-auto max-w-2xl prose-optimal">
-        <h2 className="font-display text-section font-semibold tracking-tight text-ink-950">
+        <h2 className="font-display text-section font-bold text-ink-950">
           {brandThesis.headline}
         </h2>
-        <div className="font-body mt-12 space-y-10 text-body text-ink-700 sm:text-body-lg">
+        <div className="font-body mt-8 space-y-4 text-body font-bold text-ink-900 leading-[1.55] sm:text-body-lg">
           {brandThesis.body.map((paragraph, i) => (
-            <p key={i} className="leading-[1.75]">
+            <p key={i}>
               {paragraph}
             </p>
           ))}

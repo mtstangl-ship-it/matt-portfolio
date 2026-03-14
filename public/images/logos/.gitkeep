@@ -1,3 +1,2 @@
-# Add company logos here as SVG (monochrome or low-contrast).
-# Supported: autodesk.svg, wipro.svg, ey.svg
-# Update src/content/logos.ts with paths when added.
+# Add company logos: autodesk.svg, wipro.svg, ey.svg, discovery.svg
+# Monochrome or desaturated preferred. Update src/content/logos.ts when added.

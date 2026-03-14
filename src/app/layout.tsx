@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
 import {
-  Cormorant_Garamond,
-  Source_Sans_3,
+  Libre_Baskerville,
+  DM_Sans,
   JetBrains_Mono,
 } from "next/font/google";
 import { Nav, Footer } from "@/components/layout";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const libreBaskerville = Libre_Baskerville({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+const dmSans = DM_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${sourceSans.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${libreBaskerville.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
       <body className="font-body flex min-h-screen flex-col antialiased">
         <Nav />
         <main className="flex-1">{children}</main>

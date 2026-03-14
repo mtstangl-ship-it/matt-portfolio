@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <rect width="160" height="160" rx="8" fill="#f4f0ea" stroke="#d6d2cc" stroke-width="1"/>
+  <text x="80" y="75" font-family="Georgia, serif" font-size="24" font-weight="700" fill="#2c5f6f" text-anchor="middle">Stanford</text>
+  <text x="80" y="100" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#7d756a" text-anchor="middle">AI Certified</text>
+  <rect x="50" y="115" width="60" height="1" fill="#b8b2a8"/>
+</svg>

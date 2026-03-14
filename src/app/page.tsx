@@ -1,6 +1,7 @@
 import {
   Hero,
   CredibilityRail,
+  ClientTicker,
   BrandThesis,
   TransformationImpactDashboard,
   StanfordAICapability,
@@ -14,6 +15,7 @@ export default function Home() {
     <>
       <Hero />
       <CredibilityRail />
+      <ClientTicker />
       <BrandThesis />
       <TransformationImpactDashboard />
       <StanfordAICapability />

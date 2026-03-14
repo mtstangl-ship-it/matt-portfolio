@@ -1,5 +1,6 @@
 export { Hero } from "./Hero";
 export { CredibilityRail } from "./CredibilityRail";
+export { ClientTicker } from "./ClientTicker";
 export { BrandThesis } from "./BrandThesis";
 export { TransformationImpactDashboard } from "./TransformationImpactDashboard";
 export { StanfordAICapability } from "./StanfordAICapability";

@@ -1,8 +1,24 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { CompanyWordmark } from "@/components/ui/CompanyWordmark";
+import {
+  JourneyFlowViz,
+  TowerConvergenceViz,
+  OrchestrationTimelineViz,
+  CountUpMetric,
+} from "@/components/dashboard";
 import { logoPaths } from "@/content/logos";
 import { transformationDashboard } from "@/content/home";
+
+const vizMap = {
+  Autodesk: JourneyFlowViz,
+  Wipro: TowerConvergenceViz,
+  EY: OrchestrationTimelineViz,
+} as const;
+
 
 function CompanyCard({
   name,
@@ -19,73 +35,94 @@ function CompanyCard({
   capabilityTags: readonly string[];
   index: number;
 }) {
+  const VizComponent = vizMap[name as keyof typeof vizMap];
+
   return (
-    <article
-      className="animate-fade-up border border-ink-200/80 bg-paper-50"
-      style={{ animationDelay: `${index * 100}ms` }}
+    <motion.article
+      className="overflow-hidden border border-ink-300/80 bg-paper-50 shadow-card transition-shadow hover:shadow-card-hover"
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4, delay: index * 0.06 }}
     >
-      <header className="flex items-start justify-between gap-4 border-b border-ink-200/80 px-6 py-6">
+      <header className="flex items-start justify-between gap-4 border-b border-ink-200 px-6 py-5">
         <div>
-          <div className="mb-3">
+          <div className="mb-2">
             <CompanyWordmark name={name} src={logoPaths[name]} size="sm" />
           </div>
-          <h3 className="font-display text-card-title font-semibold tracking-tight text-ink-950">
+          <h3 className="font-display text-card-title font-bold text-ink-950">
             {headline}
           </h3>
         </div>
       </header>
-      <div className="px-6 py-6">
-        <p className="font-body text-body text-ink-700 leading-[1.7]">
+      {VizComponent && (
+        <div className="relative border-b border-ink-300/60 bg-ink-300/25 px-6 py-5">
+          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)", backgroundSize: "16px 16px" }} aria-hidden />
+          <div className="relative">
+            <VizComponent />
+          </div>
+        </div>
+      )}
+      <div className="px-6 py-5">
+        <p className="font-body text-body font-bold text-ink-900 leading-[1.5]">
           {narrative}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-4 border-t border-ink-200/80 bg-ink-50/30 px-6 py-6">
+      <div className="grid grid-cols-2 gap-3 border-t border-ink-300/60 bg-ink-200/40 px-6 py-5">
         {kpis.map((kpi, i) => (
-          <div key={i} className="rounded-sm bg-paper-50 px-5 py-4">
-            <p className="font-mono text-metric font-semibold tabular-nums text-ink-950">
-              {kpi.value}
-            </p>
-            <p className="font-body mt-1 text-metric-sm text-ink-600">
-              {kpi.label}
-            </p>
-          </div>
+          <CountUpMetric key={i} {...kpi} index={i} />
         ))}
       </div>
-      <div className="flex flex-wrap gap-2 border-t border-ink-200/80 px-6 py-4">
-        {capabilityTags.map((tag) => (
+      <div className="flex flex-wrap gap-2 border-t border-ink-200 px-6 py-3">
+        {capabilityTags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="font-body text-metric-sm rounded-sm border border-ink-200/80 bg-paper-50 px-3 py-1.5 font-medium uppercase tracking-[0.08em] text-ink-600"
+            className="font-body text-metric-sm rounded-sm border-2 border-ink-200 bg-paper-50 px-2.5 py-1 font-bold uppercase text-ink-700"
           >
             {tag}
           </span>
         ))}
       </div>
-    </article>
+    </motion.article>
   );
 }
 
 export function TransformationImpactDashboard() {
   return (
-    <section className="border-t border-ink-200 bg-ink-50/30 py-section">
-      <Section>
-        <div className="flex flex-col gap-14 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-xl">
-            <h2 className="font-display text-section font-semibold tracking-tight text-ink-950">
+    <section className="relative overflow-hidden border-t border-ink-400/60 bg-[#e5e2de] py-section">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: "20px 20px",
+        }}
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"
+        aria-hidden
+      />
+      <Section className="relative">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-lg">
+            <h2 className="font-display text-section font-bold text-ink-950">
               {transformationDashboard.headline}
             </h2>
-            <p className="font-body mt-6 text-subhead text-ink-600 leading-relaxed">
+            <p className="font-body mt-2 text-subhead font-bold text-ink-800">
               {transformationDashboard.subhead}
             </p>
           </div>
           <Link
             href={transformationDashboard.ctaHref}
-            className="font-body shrink-0 text-metric-sm font-medium text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
+            className="font-body shrink-0 text-metric-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
           >
             {transformationDashboard.cta} →
           </Link>
         </div>
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {transformationDashboard.companies.map((company, i) => (
             <CompanyCard key={company.name} {...company} index={i} />
           ))}

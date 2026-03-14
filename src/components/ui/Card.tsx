@@ -13,9 +13,9 @@ export function Card({
 }: CardProps) {
   const base = "rounded-sm bg-paper-50 transition-shadow duration-200";
   const variants = {
-    elevated: "shadow-card hover:shadow-card-hover",
-    bordered: "border border-ink-200/80",
-    subtle: "bg-paper-100/60",
+    elevated: "shadow-card hover:shadow-card-hover border-2 border-ink-200",
+    bordered: "border-2 border-ink-200",
+    subtle: "border border-ink-200 bg-paper-100",
   };
   return (
     <div

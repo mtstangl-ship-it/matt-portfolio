@@ -28,15 +28,15 @@ export function CompanyWordmark({
         alt={name}
         width={dim.width}
         height={dim.height}
-        className={`object-contain object-left opacity-60 transition-opacity hover:opacity-80 ${dim.class} ${className}`.trim()}
-        style={{ filter: "grayscale(1) contrast(0.85)" }}
+        className={`object-contain object-left opacity-80 transition-opacity hover:opacity-95 ${dim.class} ${className}`.trim()}
+        style={{ filter: "grayscale(1) contrast(0.9) brightness(0.97)" }}
       />
     );
   }
 
   return (
     <span
-      className={`font-body block font-medium tracking-[0.06em] text-ink-500 ${dim.class} ${className}`.trim()}
+      className={`font-body block font-semibold tracking-[0.05em] text-ink-600 ${dim.class} ${className}`.trim()}
       style={{ fontSize: size === "sm" ? "0.6875rem" : size === "md" ? "0.75rem" : "0.8125rem" }}
     >
       {name}

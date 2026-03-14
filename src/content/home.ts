@@ -1,28 +1,37 @@
 export const hero = {
   tagline: "From fragmentation to flow",
-  headlines: [
-    "Journey architecture that reduces effort, eliminates manual work, and improves end-to-end resolution.",
-    "I design and operationalize service systems that flow — from cross-channel support to closed-loop insight.",
-    "AI-native transformation leader. Journey design. Service modernization. Cross-functional execution.",
-  ] as const,
-  activeHeadlineIndex: 0, // 0, 1, or 2 — pick your preferred headline
+  headline: "I lead product and service transformation.",
   subhead:
-    "Journey architecture, service modernization, and cross-functional execution — reducing effort, eliminating manual work, and improving end-to-end resolution for enterprises.",
-  proofStrip: ["Autodesk", "Wipro", "EY", "Stanford AI Certified"] as const,
+    "Journey architecture and service modernization that reduce effort and improve resolution.",
+  proofStrip: [
+    "Autodesk",
+    "Wipro",
+    "EY",
+    "Discovery Communications",
+    "Stanford AI Certified",
+  ] as const,
 };
+
+export const clientTicker = [
+  "Estée Lauder Companies",
+  "University of Georgia Athletics",
+  "Humana",
+  "Citi",
+  "Travel Wisconsin",
+  "Molson Coors",
+] as const;
 
 export const brandThesis = {
   headline: "Experience isn't one moment. It's the whole journey.",
   body: [
-    "Most organizations fix touchpoints in isolation. The result: fragmented experiences, frustrated customers, and wasted effort.",
-    "I work at the system level — mapping journeys, aligning teams, and designing services that flow. The outcome: experiences that feel intentional, teams that move in sync, and outcomes that compound.",
+    "Most organizations fix touchpoints in isolation — fragmented experiences, frustrated customers, wasted effort.",
+    "I work at the system level: mapping journeys, aligning teams, designing services that flow. Outcomes that compound.",
   ],
 };
 
 export const transformationDashboard = {
   headline: "Transformation impact",
-  subhead:
-    "Outcomes from engagements across Autodesk, Wipro, and EY — journey-led operating models, service design, and operational transformation.",
+  subhead: "Journey-led operating models and service design.",
   cta: "View full dashboard",
   ctaHref: "/work",
   companies: [
@@ -30,12 +39,12 @@ export const transformationDashboard = {
       name: "Autodesk",
       headline: "Cross-channel service & support transformation",
       narrative:
-        "Led design and operationalization of cross-channel customer servicing and support systems. Defined scalable journey models, platform requirements, and workflow logic. Drove CX strategy across Product, Engineering, Support, and Customer Success. Operationalized a 3–5 year experience vision and launched 3-tiered post-purchase service packages.",
+        "Journey models, platform requirements, CX strategy across Product, Engineering, Support. Launched post-purchase service packages and a 3–5 year experience vision.",
       kpis: [
-        { value: "+27%", label: "RR in first quarter" },
-        { value: "10M+", label: "YOY AOV" },
-        { value: "3-tier", label: "post-purchase packages" },
-        { value: "5 yr", label: "experience vision" },
+        { value: "+27%", label: "RR in Q1 post-launch" },
+        { value: "10M+", label: "YOY AOV in Q1 post-launch" },
+        { value: "0→1", label: "post-purchase service launch" },
+        { value: "3–5 yr", label: "experience vision" },
       ],
       capabilityTags: [
         "Journey Models",
@@ -49,12 +58,12 @@ export const transformationDashboard = {
       name: "Wipro",
       headline: "CX practice build & eight-figure renewal",
       narrative:
-        "Built a CX practice from the ground up. Led transformation across six operating towers and partnered with C-suite stakeholders on financial and CX/EX outcomes. Delivered beyond target on customer experience improvement.",
+        "CX practice from zero. Six operating towers aligned. C-suite partnership on financial and CX/EX outcomes.",
       kpis: [
+        { value: "33%", label: "MTTR reduction in 2 years" },
+        { value: "30+", label: "CX/EX outcomes delivered" },
         { value: "15%+", label: "NPS improvement" },
         { value: "8-figure", label: "client renewal" },
-        { value: "6", label: "operating towers" },
-        { value: "C-suite", label: "stakeholder partnership" },
       ],
       capabilityTags: [
         "Practice Build",
@@ -67,18 +76,18 @@ export const transformationDashboard = {
       name: "EY",
       headline: "Experience strategy & large-scale transformation",
       narrative:
-        "Led experience strategy and service design initiatives focused on large-scale operational transformation across public and private sector clients.",
+        "Experience strategy for public health. Vaccine partnerships, vaccination outreach, claims at scale.",
       kpis: [
-        { value: "Public", label: "sector experience" },
-        { value: "Private", label: "sector experience" },
-        { value: "Large-scale", label: "operational transformation" },
-        { value: "Service Design", label: "& strategy" },
+        { value: "10+", label: "vaccine brand partnerships" },
+        { value: "715", label: "Say Yes Summer vaccinations" },
+        { value: "4.57M", label: "social impressions" },
+        { value: "15K", label: "UI claims in 6 weeks" },
       ],
       capabilityTags: [
         "Experience Strategy",
         "Service Design",
-        "Operational Transformation",
-        "Public & Private Sector",
+        "Public Health",
+        "Public Sector",
       ],
     },
   ] as const,
@@ -88,8 +97,8 @@ export const stanfordAI = {
   badge: "Stanford",
   title: "AI for Product Strategy",
   credential: "Professional Certificate",
-  description:
-    "Formal certification in AI applications for product and experience strategy — building AI literacy into how I advise on transformation.",
+  description: "AI for product and experience strategy.",
+  certImage: "/images/certifications/stanford-ai.svg",
   cta: "View credential",
   ctaHref: "https://credentials.stanford.edu",
   ctaExternal: true,
@@ -97,7 +106,7 @@ export const stanfordAI = {
 
 export const featuredThinking = {
   headline: "Thinking",
-  subhead: "Curated insights from LinkedIn — on experience design, transformation, and leadership.",
+  subhead: "Experience design, transformation, leadership.",
   cta: "Read more",
   ctaHref: "/thinking",
   items: [
@@ -124,41 +133,44 @@ export const featuredThinking = {
 
 export const featuredCaseStudies = {
   headline: "Selected work",
-  subhead: "Deep dives into service and experience transformations.",
-  cta: "View all case studies",
+  subhead: "Four transformations.",
+  cta: "View all",
   ctaHref: "/work",
   items: [
     {
-      slug: "financial-services-omni",
-      client: "Financial Services",
-      title: "Omni-channel redesign",
-      description:
-        "Unifying fragmented touchpoints into a single, coherent customer journey.",
+      slug: "autodesk",
+      client: "Autodesk",
+      title: "Turning fragmented support into a unified post-purchase journey",
+      outcome: "+27% RR, 10M+ AOV in Q1. First end-to-end post-purchase service launch.",
       category: "Service Design",
     },
     {
-      slug: "healthcare-care-pathway",
-      client: "Healthcare",
-      title: "Care pathway transformation",
-      description:
-        "Redesigning the patient journey from first contact through follow-up.",
-      category: "Journey Design",
+      slug: "wipro",
+      client: "Wipro",
+      title: "From zero to eight-figure renewal: building a CX practice",
+      outcome: "33% MTTR reduction, 15%+ NPS. Eight-figure renewal.",
+      category: "Transformation",
     },
     {
-      slug: "retail-experience-strategy",
-      client: "Retail",
-      title: "Experience strategy",
-      description:
-        "Aligning digital and physical experiences around a shared vision.",
+      slug: "ey-georgia-dph",
+      client: "EY / Georgia DPH",
+      title: "Public health at scale: vaccine outreach and claims",
+      outcome: "10+ brand partnerships, 715 vaccinations, 4.57M impressions, 15K claims in 6 weeks.",
+      category: "Public Sector",
+    },
+    {
+      slug: "discovery",
+      client: "Discovery Communications",
+      title: "Experience strategy across a global media portfolio",
+      outcome: "Aligned experience architecture and operating models. Reduced effort, improved resolution.",
       category: "Experience Strategy",
     },
   ] as const,
 };
 
 export const contactCta = {
-  headline: "Let's talk transformation",
-  subhead:
-    "Whether you're navigating a complex journey redesign or rethinking how your organization delivers value — I'd like to hear from you.",
+  headline: "Let's talk",
+  subhead: "Journey redesign, experience strategy, operational transformation.",
   cta: "Get in touch",
   ctaHref: "/contact",
 };
