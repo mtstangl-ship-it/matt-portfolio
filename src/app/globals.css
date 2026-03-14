@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: 26, 24, 22;
+  --background: 253, 252, 251;
+  --muted: 100, 94, 134;
+  --measure: 65ch;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: rgb(var(--foreground));
+    background-color: rgb(var(--background));
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .prose-optimal {
+    max-width: var(--measure);
+  }
+}
