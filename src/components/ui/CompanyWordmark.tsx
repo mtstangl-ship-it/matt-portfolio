@@ -7,6 +7,7 @@ interface CompanyWordmarkProps {
   src?: string;
   className?: string;
   size?: "sm" | "md" | "lg";
+  inverted?: boolean;
 }
 
 const sizes = {
@@ -20,6 +21,7 @@ export function CompanyWordmark({
   src,
   className = "",
   size = "md",
+  inverted = false,
 }: CompanyWordmarkProps) {
   const dim = sizes[size];
   const [error, setError] = useState(false);
@@ -27,7 +29,7 @@ export function CompanyWordmark({
   if (!src || error) {
     return (
       <span
-        className={`font-body block font-bold tracking-[0.05em] text-ink-700 ${dim.class} ${className}`.trim()}
+        className={`font-body block font-bold tracking-[0.05em] ${inverted ? "text-dashboard-ink-muted" : "text-ink-700"} ${dim.class} ${className}`.trim()}
         style={{ fontSize: size === "sm" ? "0.75rem" : size === "md" ? "0.8125rem" : "0.875rem" }}
       >
         {name}
@@ -41,7 +43,7 @@ export function CompanyWordmark({
       alt={name}
       width={dim.width}
       height={dim.height}
-      className={`object-contain object-left ${dim.class} ${className}`.trim()}
+      className={`object-contain object-left ${inverted ? "brightness-0 invert opacity-90" : ""} ${dim.class} ${className}`.trim()}
       onError={() => setError(true)}
     />
   );

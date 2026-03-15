@@ -9,7 +9,7 @@ export function ClientTicker() {
 
   return (
     <div
-      className="group overflow-hidden border-t-2 border-accent/15 bg-ink-150 py-6"
+      className="group overflow-hidden border-t border-ink-200/50 bg-support-200 py-6"
       aria-label="Selected client experience"
     >
       <div className="animate-ticker flex w-max items-center gap-x-14 md:gap-x-20 motion-reduce:animate-none group-hover:[animation-play-state:paused]">

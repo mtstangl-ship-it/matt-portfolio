@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 
 const phases = [
-  { x: 12, w: 32, label: "Complex", fill: "text-ink-400" },
-  { x: 50, w: 38, label: "Align", fill: "text-ink-500" },
-  { x: 94, w: 42, label: "Coordinate", fill: "text-ink-600" },
-  { x: 142, w: 38, label: "Flow", fill: "text-accent" },
+  { x: 12, w: 32, label: "Complex", fill: "text-dashboard-ink-muted/60" },
+  { x: 50, w: 38, label: "Align", fill: "text-dashboard-ink-muted" },
+  { x: 94, w: 42, label: "Coordinate", fill: "text-dashboard-ink-muted" },
+  { x: 142, w: 38, label: "Flow", fill: "text-accent-signal" },
 ];
 
 export function OrchestrationTimelineViz() {
@@ -24,7 +24,7 @@ export function OrchestrationTimelineViz() {
           y2={36}
           stroke="currentColor"
           strokeWidth={0.8}
-          className="text-ink-400/60"
+          className="text-dashboard-ink-muted/50"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 0.8 }}
@@ -37,7 +37,7 @@ export function OrchestrationTimelineViz() {
           stroke="currentColor"
           strokeWidth={0.5}
           strokeDasharray="6 4"
-          className="text-accent/50"
+          className="text-accent-signal/70"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
@@ -77,13 +77,13 @@ export function OrchestrationTimelineViz() {
                 height={6}
                 rx={1}
                 fill="currentColor"
-                className="text-accent"
+                className="text-accent-signal"
                 initial={{ width: 0 }}
                 animate={{ width: phase.w }}
                 transition={{ delay: 0.5, duration: 0.4 }}
                 style={{
                   opacity: 0.4,
-                  filter: "drop-shadow(0 0 6px rgb(44 95 111 / 0.35))",
+                  filter: "drop-shadow(0 0 6px rgb(34 211 199 / 0.4))",
                 }}
               />
             )}
@@ -91,7 +91,7 @@ export function OrchestrationTimelineViz() {
               x={phase.x + phase.w / 2}
               y={44}
               textAnchor="middle"
-              className="fill-ink-800 font-body text-[6px] font-semibold"
+              className="fill-dashboard-ink-light font-body text-[6px] font-semibold"
             >
               {phase.label}
             </text>
@@ -102,14 +102,14 @@ export function OrchestrationTimelineViz() {
           cy={36}
           r={4}
           fill="currentColor"
-          className="text-accent"
+          className="text-accent-signal"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: [0.7, 1, 0.7], scale: 1 }}
           transition={{
             opacity: { duration: 2.2, repeat: Infinity, ease: "easeInOut" },
             scale: { duration: 0.3, delay: 0.7 },
           }}
-          style={{ filter: "drop-shadow(0 0 8px rgb(44 95 111 / 0.4))" }}
+          style={{ filter: "drop-shadow(0 0 8px rgb(34 211 199 / 0.5))" }}
         />
       </svg>
     </div>

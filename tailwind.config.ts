@@ -35,6 +35,13 @@ const config: Config = {
         "card-title": ["1rem", { lineHeight: "1.1", letterSpacing: "-0.03em" }],
       },
       colors: {
+        // Premium light base — page and primary surfaces (warm off-white, not stark)
+        base: {
+          DEFAULT: "#f5f3ef",
+          50: "#faf9f6",
+          100: "#f5f3ef",
+          200: "#eeebe6",
+        },
         ink: {
           50: "#f7f6f5",
           100: "#ebe9e6",
@@ -55,13 +62,41 @@ const config: Config = {
           200: "#f4f0ea",
           300: "#ebe5db",
         },
+        surface: {
+          50: "#faf9f7",
+          100: "#f3f1ec",
+          200: "#eae6df",
+        },
+        // Softer support tint — subtle backgrounds, layering, section alternation
+        support: {
+          DEFAULT: "#f0ede8",
+          50: "#f5f3f0",
+          100: "#f0ede8",
+          200: "#e8e4de",
+        },
+        // Dashboard — darker, richer field (most energized visual layer)
+        dashboard: {
+          bg: "#1c1b19",
+          surface: "#252320",
+          card: "#2c2926",
+          border: "#3a3734",
+          muted: "#161513",
+          "ink-light": "#eae8e4",
+          "ink-muted": "#9e9a94",
+        },
+        // Electric accent — instrumentation, signal lines, highlights, active states
         accent: {
+          DEFAULT: "#0d9488",
+          light: "#14b8a6",
+          dark: "#0f766e",
+          muted: "#ccfbf1",
+          tint: "#f0fdfa",
+          // Brighter accent on dark (dashboard viz, signal lines)
+          signal: "#22d3c7",
+        },
+        accentLegacy: {
           DEFAULT: "#2c5f6f",
-          light: "#3d7a8c",
-          dark: "#1e424e",
           muted: "#e8f1f4",
-          warm: "#c4785a",
-          cool: "#4a7c9e",
         },
       },
       spacing: {
@@ -100,8 +135,9 @@ const config: Config = {
       boxShadow: {
         card: "0 1px 3px 0 rgb(26 24 22 / 0.06)",
         "card-hover": "0 4px 12px 0 rgb(26 24 22 / 0.08)",
-        glow: "0 0 20px -4px rgb(44 95 111 / 0.25)",
-        "glow-sm": "0 0 12px -2px rgb(44 95 111 / 0.2)",
+        glow: "0 0 24px -4px rgb(13 148 136 / 0.35)",
+        "glow-sm": "0 0 12px -2px rgb(13 148 136 / 0.25)",
+        "dashboard-glow": "0 0 20px -2px rgb(34 211 199 / 0.25)",
       },
     },
   },

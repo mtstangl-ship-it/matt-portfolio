@@ -10,7 +10,7 @@ const showStanford = hero.proofStrip.includes("Stanford AI Certified");
 
 export function CredibilityRail() {
   return (
-    <Section className="border-t-2 border-accent/20 bg-gradient-to-r from-ink-100 via-accent-muted/30 to-ink-100 py-10">
+    <Section className="border-t border-ink-200/50 bg-support py-10">
       <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8 sm:gap-x-16">
         {logoCompanies.map((name) => (
           <CompanyWordmark

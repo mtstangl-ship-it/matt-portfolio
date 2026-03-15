@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
+import { AutomationIcon } from "@/components/icons";
+import { SignalMapMotif } from "@/components/visuals";
 import { stanfordAI } from "@/content/home";
 
 export function StanfordAICapability() {
@@ -24,11 +26,14 @@ export function StanfordAICapability() {
   );
 
   return (
-    <Section className="border-t-2 border-accent/20 bg-accent-muted/60 py-section">
-      <Card variant="bordered" className="overflow-hidden border-ink-300 bg-paper-50">
+    <Section className="relative overflow-hidden border-t border-ink-200/50 bg-support py-section">
+      <div className="pointer-events-none absolute right-0 top-1/2 w-48 -translate-y-1/2 opacity-[0.07]" aria-hidden>
+        <SignalMapMotif />
+      </div>
+      <Card variant="bordered" className="relative overflow-hidden border-ink-200 bg-base-50">
         <div className="flex flex-col gap-8 p-8 sm:flex-row sm:items-start sm:justify-between lg:p-10">
           <div className="flex items-start gap-8">
-            <div className="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-md border-2 border-accent/30 bg-accent-muted/60 p-3">
+            <div className="flex h-28 w-28 shrink-0 flex-col items-center justify-center gap-2 overflow-hidden rounded-md border-2 border-accent/40 bg-accent-tint p-4">
               {stanfordAI.certImage ? (
                 <Image
                   src={stanfordAI.certImage}
@@ -38,9 +43,12 @@ export function StanfordAICapability() {
                   className="object-contain"
                 />
               ) : (
-                <span className="font-display text-2xl font-bold text-accent">
-                  {stanfordAI.badge}
-                </span>
+                <>
+                  <AutomationIcon className="h-10 w-10 text-accent" />
+                  <span className="font-display text-xl font-bold text-accent">
+                    {stanfordAI.badge}
+                  </span>
+                </>
               )}
             </div>
             <div>

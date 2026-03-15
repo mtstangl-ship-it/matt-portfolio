@@ -39,45 +39,50 @@ function CompanyCard({
 
   return (
     <motion.article
-      className="overflow-hidden border border-ink-300 bg-paper-50 shadow-card transition-shadow hover:shadow-card-hover"
+      className="overflow-hidden border border-dashboard-border bg-dashboard-card shadow-card transition-shadow hover:shadow-card-hover hover:border-accent-signal/30 hover:shadow-dashboard-glow"
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, delay: index * 0.06 }}
     >
-      <header className="flex items-start justify-between gap-4 border-b border-ink-200 px-6 py-5">
+      <header className="flex items-start justify-between gap-4 border-b border-dashboard-border px-6 py-5">
         <div>
           <div className="mb-2">
-            <CompanyWordmark name={name} src={logoPaths[name]} size="sm" />
+            <CompanyWordmark name={name} src={logoPaths[name]} size="sm" inverted />
           </div>
-          <h3 className="font-display text-card-title font-bold text-ink-950">
+          <h3 className="font-display text-card-title font-bold text-dashboard-ink-light">
             {headline}
           </h3>
         </div>
       </header>
       {VizComponent && (
-        <div className="relative border-b border-ink-300 bg-accent-muted/30 px-6 py-5">
-          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)", backgroundSize: "16px 16px" }} aria-hidden />
+        <div className="relative border-b border-dashboard-border bg-dashboard-muted px-6 py-5">
+          <div className="absolute inset-0 opacity-[0.1]" style={{ backgroundImage: "linear-gradient(to right, rgb(34 211 199) 1px, transparent 1px), linear-gradient(to bottom, rgb(34 211 199) 1px, transparent 1px)", backgroundSize: "16px 16px" }} aria-hidden />
           <div className="relative">
             <VizComponent />
           </div>
         </div>
       )}
       <div className="px-6 py-5">
-        <p className="font-body text-body font-bold text-ink-900 leading-[1.5]">
+        <p className="font-body text-body font-bold text-dashboard-ink-muted leading-[1.5]">
           {narrative}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-3 border-t border-ink-300 bg-ink-200/70 px-6 py-5">
+      <div className="grid grid-cols-2 gap-3 border-t border-dashboard-border bg-dashboard-surface px-6 py-5">
         {kpis.map((kpi, i) => (
-          <CountUpMetric key={i} {...kpi} index={i} />
+          <CountUpMetric
+            key={`${name}-${i}-${kpi.value}`}
+            {...kpi}
+            index={i}
+            variant="dashboard"
+          />
         ))}
       </div>
-      <div className="flex flex-wrap gap-2 border-t border-ink-200 px-6 py-3">
+      <div className="flex flex-wrap gap-2 border-t border-dashboard-border px-6 py-3">
         {capabilityTags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="font-body text-metric-sm rounded-sm border-2 border-ink-200 bg-paper-50 px-2.5 py-1 font-bold uppercase text-ink-700"
+            className="font-body text-metric-sm rounded-sm border border-accent-signal/50 bg-accent-signal/10 px-2.5 py-1 font-bold uppercase text-accent-signal"
           >
             {tag}
           </span>
@@ -89,35 +94,35 @@ function CompanyCard({
 
 export function TransformationImpactDashboard() {
   return (
-    <section className="relative overflow-hidden border-t-2 border-accent/30 bg-gradient-to-b from-accent-muted/50 to-ink-200/90 py-section">
+    <section className="relative overflow-hidden border-t-2 border-accent/60 bg-dashboard-bg py-section">
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, currentColor 1px, transparent 1px),
-            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+            linear-gradient(to right, rgb(34 211 199) 1px, transparent 1px),
+            linear-gradient(to bottom, rgb(34 211 199) 1px, transparent 1px)
           `,
-          backgroundSize: "20px 20px",
+          backgroundSize: "24px 24px",
         }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-accent to-transparent opacity-60"
+        className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-accent-signal to-transparent opacity-90"
         aria-hidden
       />
       <Section className="relative">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-lg">
-            <h2 className="font-display text-section font-bold text-ink-950">
+            <h2 className="font-display text-section font-bold text-dashboard-ink-light">
               {transformationDashboard.headline}
             </h2>
-            <p className="font-body mt-2 text-subhead font-bold text-ink-800">
+            <p className="font-body mt-2 text-subhead font-bold text-dashboard-ink-muted">
               {transformationDashboard.subhead}
             </p>
           </div>
           <Link
             href={transformationDashboard.ctaHref}
-            className="font-body shrink-0 text-metric-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
+            className="font-body shrink-0 text-metric-sm font-semibold text-accent-signal underline decoration-accent-signal underline-offset-4 transition-colors hover:text-accent-light hover:decoration-accent-light"
           >
             {transformationDashboard.cta} →
           </Link>

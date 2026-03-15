@@ -16,7 +16,7 @@ function ConnectorLine({ index }: { index: number }) {
         y2={34}
         stroke="currentColor"
         strokeWidth={0.6}
-        className="text-ink-400/60"
+        className="text-dashboard-ink-muted/50"
         strokeDasharray="4 3"
       />
       <motion.line
@@ -24,9 +24,10 @@ function ConnectorLine({ index }: { index: number }) {
         y1={34}
         x2={x + 15}
         y2={34}
-        stroke="#2c5f6f"
+        stroke="currentColor"
         strokeWidth={0.8}
         strokeDasharray="4 3"
+        className="text-accent-signal"
         initial={{ strokeDashoffset: 0 }}
         animate={{ strokeDashoffset: -14 }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
@@ -36,11 +37,12 @@ function ConnectorLine({ index }: { index: number }) {
         cx={x + 8}
         cy={34}
         r={2}
-        fill="#2c5f6f"
+        fill="currentColor"
+        className="text-accent-signal"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 0.9, scale: 1 }}
         transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
-        style={{ filter: "drop-shadow(0 0 4px rgb(44 95 111 / 0.4))" }}
+        style={{ filter: "drop-shadow(0 0 4px rgb(34 211 199 / 0.5))" }}
       />
     </>
   );
@@ -67,7 +69,7 @@ export function JourneyFlowViz() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={1}
-                className="text-ink-600"
+                className="text-dashboard-ink-muted"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.1, duration: 0.4 }}
@@ -81,19 +83,19 @@ export function JourneyFlowViz() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={0.5}
-                className="text-accent/40"
+                className="text-accent-signal/50"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 + i * 0.08, duration: 0.6 }}
                 style={{
-                  filter: "drop-shadow(0 0 6px rgb(44 95 111 / 0.15))",
+                  filter: "drop-shadow(0 0 6px rgb(34 211 199 / 0.25))",
                 }}
               />
               <text
                 x={x}
                 y={37}
                 textAnchor="middle"
-                className="fill-ink-800 font-body text-[7px] font-semibold"
+                className="fill-dashboard-ink-light font-body text-[7px] font-semibold"
               >
                 {label}
               </text>

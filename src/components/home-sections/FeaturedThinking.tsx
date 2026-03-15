@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
+import { WorkflowIcon, TransformationIcon, AutomationIcon } from "@/components/icons";
 import { featuredThinking } from "@/content/home";
+
+const topicIcons = { workflow: WorkflowIcon, transformation: TransformationIcon, automation: AutomationIcon };
 
 export function FeaturedThinking() {
   return (
-    <Section className="border-t border-ink-300 bg-paper-200/80 py-section">
+    <Section className="border-t border-ink-200/50 bg-base-50 py-section">
       <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="font-display text-section font-bold text-ink-950">
@@ -27,9 +30,17 @@ export function FeaturedThinking() {
           <Card
             key={i}
             variant="subtle"
-            className="animate-fade-up border-l-4 border-l-accent bg-white/60 p-6 shadow-sm motion-reduce:animate-none"
+            className="animate-fade-up border-l-4 border-l-accent bg-base p-6 shadow-sm motion-reduce:animate-none"
             style={{ animationDelay: `${i * 100}ms` }}
           >
+            {"topicIcon" in item && (
+              <div className="mb-4 text-accent/70">
+                {(() => {
+                  const Icon = topicIcons[item.topicIcon as keyof typeof topicIcons];
+                  return Icon ? <Icon className="h-6 w-6" /> : null;
+                })()}
+              </div>
+            )}
             <blockquote className="font-display text-quote font-bold italic leading-[1.5] text-ink-950">
               &ldquo;{item.quote}&rdquo;
             </blockquote>

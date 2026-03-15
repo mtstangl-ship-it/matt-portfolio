@@ -114,18 +114,21 @@ export const featuredThinking = {
       quote:
         "The best service design is invisible. When everything flows, customers don't notice the design — they just get what they need.",
       topic: "Service design",
+      topicIcon: "workflow" as const,
       date: "Nov 2024",
     },
     {
       quote:
         "Transformation fails when we optimize for efficiency before we understand the journey. Map first. Prescribe second.",
       topic: "Transformation",
+      topicIcon: "transformation" as const,
       date: "Oct 2024",
     },
     {
       quote:
         "AI won't replace experience strategy — but leaders who understand AI will replace those who don't.",
       topic: "AI & Strategy",
+      topicIcon: "automation" as const,
       date: "Sep 2024",
     },
   ] as const,
@@ -139,6 +142,7 @@ export const featuredCaseStudies = {
   items: [
     {
       slug: "autodesk",
+      motif: "journey" as const,
       client: "Autodesk",
       title: "Turning fragmented support into a unified post-purchase journey",
       outcome: "+27% RR, 10M+ AOV in Q1. First end-to-end post-purchase service launch.",
@@ -146,6 +150,7 @@ export const featuredCaseStudies = {
     },
     {
       slug: "wipro",
+      motif: "converge" as const,
       client: "Wipro",
       title: "From zero to eight-figure renewal: building a CX practice",
       outcome: "33% MTTR reduction, 15%+ NPS. Eight-figure renewal.",
@@ -153,6 +158,7 @@ export const featuredCaseStudies = {
     },
     {
       slug: "ey-georgia-dph",
+      motif: "flow" as const,
       client: "EY / Georgia DPH",
       title: "Public health at scale: vaccine outreach and claims",
       outcome: "10+ brand partnerships, 715 vaccinations, 4.57M impressions, 15K claims in 6 weeks.",
@@ -160,6 +166,7 @@ export const featuredCaseStudies = {
     },
     {
       slug: "discovery",
+      motif: "default" as const,
       client: "Discovery Communications",
       title: "Experience strategy across a global media portfolio",
       outcome: "Aligned experience architecture and operating models. Reduced effort, improved resolution.",
