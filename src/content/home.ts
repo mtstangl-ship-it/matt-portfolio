@@ -98,7 +98,7 @@ export const stanfordAI = {
   title: "AI for Product Strategy",
   credential: "Professional Certificate",
   description: "AI for product and experience strategy.",
-  certImage: "/images/certifications/stanford-ai.svg",
+  certImage: "/images/certifications/stanford-certificate.png",
   cta: "View credential",
   ctaHref: "https://credentials.stanford.edu",
   ctaExternal: true,

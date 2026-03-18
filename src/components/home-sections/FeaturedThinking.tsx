@@ -2,13 +2,14 @@ import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { WorkflowIcon, TransformationIcon, AutomationIcon } from "@/components/icons";
+import { SignalMapMotif } from "@/components/visuals";
 import { featuredThinking } from "@/content/home";
 
 const topicIcons = { workflow: WorkflowIcon, transformation: TransformationIcon, automation: AutomationIcon };
 
 export function FeaturedThinking() {
   return (
-    <Section className="border-t border-ink-200/50 bg-base-50 py-section">
+    <Section className="relative overflow-hidden border-t border-ink-200/50 bg-base-50 py-section">
       <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="font-display text-section font-bold text-ink-950">
@@ -25,7 +26,10 @@ export function FeaturedThinking() {
           {featuredThinking.cta} →
         </Link>
       </div>
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="pointer-events-none absolute right-0 top-28 hidden h-52 w-52 opacity-[0.06] lg:block">
+        <SignalMapMotif />
+      </div>
+      <div className="relative z-10 mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {featuredThinking.items.map((item, i) => (
           <Card
             key={i}

@@ -1,7 +1,8 @@
 import { Section } from "@/components/ui/Section";
 import { CompanyWordmark } from "@/components/ui/CompanyWordmark";
+import Image from "next/image";
 import { logoPaths } from "@/content/logos";
-import { hero } from "@/content/home";
+import { hero, stanfordAI } from "@/content/home";
 
 const logoCompanies = hero.proofStrip.filter(
   (item) => item !== "Stanford AI Certified"
@@ -10,8 +11,8 @@ const showStanford = hero.proofStrip.includes("Stanford AI Certified");
 
 export function CredibilityRail() {
   return (
-    <Section className="border-t border-ink-200/50 bg-support py-10">
-      <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8 sm:gap-x-16">
+    <Section container={false} className="border-t border-ink-200/50 bg-support py-10">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-14 gap-y-8 px-6 sm:gap-x-16">
         {logoCompanies.map((name) => (
           <CompanyWordmark
             key={name}
@@ -21,9 +22,16 @@ export function CredibilityRail() {
           />
         ))}
         {showStanford && (
-          <span className="font-body text-metric-sm font-bold uppercase tracking-widest text-ink-600">
-            Stanford AI Certified
-          </span>
+          <div className="flex h-[2.75rem] w-[9.375rem] items-center justify-center">
+            <Image
+              src={stanfordAI.certImage}
+              alt="Stanford AI Certified"
+              width={120}
+              height={120}
+              className="h-[2.75rem] w-auto object-contain"
+              priority
+            />
+          </div>
         )}
       </div>
     </Section>

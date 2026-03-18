@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { CompanyWordmark } from "@/components/ui/CompanyWordmark";
-import { CaseStudyMotif } from "@/components/visuals";
+import { CaseStudyMiniViz, CaseStudyMotif, HumanPortraitMotif } from "@/components/visuals";
 import { logoPaths } from "@/content/logos";
 import { featuredCaseStudies } from "@/content/home";
 
@@ -25,7 +25,7 @@ export function FeaturedCaseStudiesPreview() {
         </Link>
       </div>
       <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {featuredCaseStudies.items.map((item) => (
+        {featuredCaseStudies.items.map((item, i) => (
           <li key={item.slug}>
             <Link
               href={`/work#${item.slug}`}
@@ -33,6 +33,14 @@ export function FeaturedCaseStudiesPreview() {
             >
               {/* Visual portal: motif hero + gradient */}
               <div className="relative flex h-32 items-center justify-center overflow-hidden bg-gradient-to-br from-ink-150/50 via-support-200 to-accent-tint/25 transition-all duration-300 group-hover/card:from-accent-tint/50 group-hover/card:via-support-200 group-hover/card:to-ink-150/40">
+                <div className="pointer-events-none absolute right-3 top-3 h-14 w-20 text-accent/70 opacity-[0.18] transition-opacity duration-300 group-hover/card:opacity-[0.26]">
+                  <CaseStudyMiniViz motif={item.motif} />
+                </div>
+                {i === 0 && (
+                  <div className="pointer-events-none absolute left-3 bottom-2 h-12 w-12 text-ink-800 opacity-[0.08]">
+                    <HumanPortraitMotif />
+                  </div>
+                )}
                 <div className="h-16 w-24 text-accent/60 transition-all duration-300 group-hover/card:text-accent group-hover/card:scale-105">
                   <CaseStudyMotif variant={item.motif} />
                 </div>

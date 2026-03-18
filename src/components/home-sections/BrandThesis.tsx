@@ -1,6 +1,7 @@
 import { Section } from "@/components/ui/Section";
 import { JourneyThesisVisual } from "@/components/visuals";
 import { brandThesis } from "@/content/home";
+import Image from "next/image";
 
 export function BrandThesis() {
   return (
@@ -16,8 +17,30 @@ export function BrandThesis() {
             ))}
           </div>
         </div>
-        <div className="min-h-[140px] w-full max-w-lg text-ink-400/70 lg:min-h-[180px] lg:max-w-none">
-          <JourneyThesisVisual />
+        <div className="min-h-[180px] w-full max-w-lg lg:min-h-[240px] lg:max-w-none">
+          <div className="relative h-full w-full overflow-hidden rounded-lg border border-ink-200/70 bg-support-50">
+            {/* Editorial portrait frame (human trust) */}
+            <div className="absolute inset-0">
+              <Image
+                src="/images/portraits/matt-portrait.png"
+                alt="Portrait of Matt"
+                fill
+                className="object-cover object-[50%_20%]"
+                sizes="(max-width: 1024px) 100vw, 420px"
+                priority
+                style={{ filter: "grayscale(15%) contrast(1.06) saturate(0.92)" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-base-50/30 via-transparent to-accent-tint/10" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-base-50/55" />
+            </div>
+
+            {/* Systems visual stays primary */}
+            <div className="relative z-10 flex h-full items-end justify-center p-5">
+              <div className="w-full text-ink-400/70">
+                <JourneyThesisVisual />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </Section>
