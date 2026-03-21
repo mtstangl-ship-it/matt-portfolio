@@ -1,8 +1,10 @@
 export const hero = {
   tagline: "From fragmentation to flow",
-  headline: "I lead product and service transformation.",
+  // Variants explored: 2) "CX leadership: product and service transformation — from fragmentation to flow." 3) "I lead CX, product, and service transformation. Fragmentation becomes flow."
+  headline:
+    "I lead CX, product, and service transformation — turning fragmentation into flow.",
   subhead:
-    "Journey architecture and service modernization that reduce effort and improve resolution.",
+    "CX leadership grounded in journey architecture and modernization — reducing effort, improving resolution, and aligning teams around experiences that flow.",
   proofStrip: [
     "Autodesk",
     "Wipro",
@@ -42,7 +44,7 @@ export const transformationDashboard = {
         "Journey models, platform requirements, CX strategy across Product, Engineering, Support. Launched post-purchase service packages and a 3–5 year experience vision.",
       kpis: [
         { value: "+27%", label: "RR in Q1 post-launch" },
-        { value: "10M+", label: "YOY AOV in Q1 post-launch" },
+        { value: "50M+", label: "projected YOY AOV" },
         { value: "0→1", label: "post-purchase service launch" },
         { value: "3–5 yr", label: "experience vision" },
       ],
@@ -56,14 +58,14 @@ export const transformationDashboard = {
     },
     {
       name: "Wipro",
-      headline: "CX practice build & eight-figure renewal",
+      headline: "CX practice build & renewal",
       narrative:
         "CX practice from zero. Six operating towers aligned. C-suite partnership on financial and CX/EX outcomes.",
       kpis: [
-        { value: "33%", label: "MTTR reduction in 2 years" },
+        { value: "31%", label: "MTTR reduction in 2 years" },
         { value: "30+", label: "CX/EX outcomes delivered" },
         { value: "15%+", label: "NPS improvement" },
-        { value: "8-figure", label: "client renewal" },
+        { value: "16k", label: "annual reduction in lockout cases QoQ" },
       ],
       capabilityTags: [
         "Practice Build",
@@ -74,14 +76,14 @@ export const transformationDashboard = {
     },
     {
       name: "EY",
-      headline: "Experience strategy & large-scale transformation",
+      headline: "Experience strategy & eight-figure renewal",
       narrative:
         "Experience strategy for public health. Vaccine partnerships, vaccination outreach, claims at scale.",
       kpis: [
         { value: "10+", label: "vaccine brand partnerships" },
         { value: "715", label: "Say Yes Summer vaccinations" },
         { value: "4.57M", label: "social impressions" },
-        { value: "15K", label: "UI claims in 6 weeks" },
+        { value: "8-figure", label: "renewal" },
       ],
       capabilityTags: [
         "Experience Strategy",
@@ -145,7 +147,7 @@ export const featuredCaseStudies = {
       motif: "journey" as const,
       client: "Autodesk",
       title: "Turning fragmented support into a unified post-purchase journey",
-      outcome: "+27% RR, 10M+ AOV in Q1. First end-to-end post-purchase service launch.",
+      outcome: "+27% RR, 50M+ projected YOY AOV. First end-to-end post-purchase service launch.",
       category: "Service Design",
     },
     {
@@ -153,7 +155,7 @@ export const featuredCaseStudies = {
       motif: "converge" as const,
       client: "Wipro",
       title: "From zero to eight-figure renewal: building a CX practice",
-      outcome: "33% MTTR reduction, 15%+ NPS. Eight-figure renewal.",
+      outcome: "31% MTTR reduction, 15%+ NPS. 16k annual reduction in lockout cases QoQ.",
       category: "Transformation",
     },
     {
@@ -161,7 +163,7 @@ export const featuredCaseStudies = {
       motif: "flow" as const,
       client: "EY / Georgia DPH",
       title: "Public health at scale: vaccine outreach and claims",
-      outcome: "10+ brand partnerships, 715 vaccinations, 4.57M impressions, 15K claims in 6 weeks.",
+      outcome: "10+ brand partnerships, 715 vaccinations, 4.57M impressions. Eight-figure renewal.",
       category: "Public Sector",
     },
     {

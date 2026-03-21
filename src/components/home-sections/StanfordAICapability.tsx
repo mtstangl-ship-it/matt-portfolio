@@ -46,7 +46,7 @@ export function StanfordAICapability() {
         <div className="pointer-events-none absolute left-6 top-10 h-24 w-24 opacity-[0.07]">
           <HumanPortraitMotif />
         </div>
-        <div className="flex flex-col gap-8 p-6 sm:flex-row sm:items-start sm:justify-between sm:p-8 lg:p-10">
+        <div className="flex flex-col gap-6 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-6 lg:p-8">
           <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left">
             <div className="flex h-[7.5rem] w-[7.5rem] shrink-0 flex-col items-center justify-center gap-2 overflow-hidden rounded-md border-2 border-accent/40 bg-accent-tint p-3 sm:h-28 sm:w-28 sm:p-4">
               {stanfordAI.certImage ? (
@@ -78,7 +78,7 @@ export function StanfordAICapability() {
               </p>
             </div>
           </div>
-          <div className="shrink-0 border-t border-ink-200/80 pt-6 sm:border-t-0 sm:border-l sm:pl-8 sm:pt-0 lg:pl-10">
+          <div className="shrink-0 border-t border-ink-200/80 pt-5 sm:border-t-0 sm:border-l sm:pl-6 sm:pt-0 lg:pl-8">
             {CtaLink}
           </div>
         </div>

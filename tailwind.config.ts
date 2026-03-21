@@ -18,6 +18,10 @@ const config: Config = {
           "clamp(3.5rem, 7.5vw, 5.25rem)",
           { lineHeight: "0.96", letterSpacing: "-0.04em" },
         ],
+        "hero-tight": [
+          "clamp(1.875rem, 4vw, 2.5rem)",
+          { lineHeight: "1.15", letterSpacing: "-0.02em" },
+        ],
         section: [
           "clamp(2.125rem, 4.5vw, 3rem)",
           { lineHeight: "1", letterSpacing: "-0.03em" },
@@ -100,8 +104,8 @@ const config: Config = {
         },
       },
       spacing: {
-        section: "clamp(2.75rem, 5vw, 4.5rem)",
-        "section-sm": "clamp(1.75rem, 3.5vw, 3rem)",
+        section: "clamp(2.5rem, 5vw, 4.5rem)",
+        "section-sm": "clamp(1.5rem, 3.5vw, 3rem)",
       },
       animation: {
         ticker: "ticker 45s linear infinite",

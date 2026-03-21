@@ -9,7 +9,7 @@ export function ClientTicker() {
 
   return (
     <div
-      className="relative group overflow-hidden border-t border-ink-200/50 bg-support-200 py-6"
+      className="relative group overflow-hidden border-t border-ink-200/50 bg-support-200 py-5 sm:py-6"
       aria-label="Selected client experience"
     >
       <div

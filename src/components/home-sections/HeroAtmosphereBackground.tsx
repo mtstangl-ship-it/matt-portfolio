@@ -5,14 +5,15 @@ import { getPointillismPoints } from "@/lib/portraitPointillism";
 
 const VIEW_W = 1200;
 const VIEW_H = 420;
-const TOTAL_DURATION = 14;
+// Phases: chaos (0-4) → flow/journey (4.5-9) → portrait (9.5-15) → loop
+const TOTAL_DURATION = 18;
 const FACE_OFFSET_X = 280;
 
 const MARGIN = 80;
 const PONG_BOUNDS = { x: MARGIN, y: 60, w: VIEW_W - 2 * MARGIN, h: VIEW_H - 2 * 60 };
 
 const allPoints = getPointillismPoints();
-const numDots = Math.min(200, Math.max(1, allPoints.length || 200));
+const numDots = Math.min(280, Math.max(1, allPoints.length || 280));
 const pts: [number, number, number][] =
   allPoints.length >= numDots
     ? allPoints.slice(0, numDots)
@@ -43,14 +44,14 @@ function getPongPos(i: number, t: number): [number, number] {
   return [px, py];
 }
 
+// Journey / road / service map: clearer left-to-right path with slight vertical rhythm
 function getFlowPos(i: number): [number, number] {
   const rt = (i + 0.5) / numDots;
-  const roadX = 80 + rt * 1100;
-  const wave = Math.sin(rt * Math.PI * 3.5) * 42;
-  const wave2 = Math.sin(rt * Math.PI * 6) * 12;
-  const wave3 = Math.sin(rt * Math.PI * 1.8) * 18;
+  const roadX = 100 + rt * 1000;
+  const wave = Math.sin(rt * Math.PI * 2.5) * 28;
+  const wave2 = Math.sin(rt * Math.PI * 5) * 8;
   const row = i % 3;
-  const roadY = 200 + wave + wave2 + wave3 + (row - 1) * 6;
+  const roadY = 210 + wave + wave2 + (row - 1) * 4;
   return [roadX, roadY];
 }
 
@@ -127,6 +128,7 @@ export function HeroAtmosphereBackground() {
       const elapsed = (performance.now() - startRef.current) / 1000;
       const cycle = elapsed % TOTAL_DURATION;
 
+      // Phase timing: chaos 0-4 | chaos→flow 4-4.5 | flow 4.5-9 | flow→portrait 9-9.5 | portrait 9.5-15 | portrait→chaos 15-18
       for (let i = 0; i < numDots; i++) {
         let x: number, y: number, r: number, opacity: number;
         const flowPosI = getFlowPos(i);
@@ -134,49 +136,54 @@ export function HeroAtmosphereBackground() {
         const faceXI = (ptI?.[0] ?? 600) + FACE_OFFSET_X;
         const faceYI = ptI?.[1] ?? 210;
         const lumI = ptI?.[2] ?? 0.5;
-        const faceRI = lumI > 0.7 ? 2 : lumI > 0.4 ? 1.5 : 1;
-        const faceOpacityI = 0.35 + lumI * 0.65;
-        if (cycle < 3) {
+        const faceRI = lumI > 0.7 ? 2.2 : lumI > 0.4 ? 1.6 : 1.1;
+        const faceOpacityI = 0.45 + lumI * 0.5;
+        if (cycle < 4) {
           const pongPos = getPongPos(i, cycle);
           x = pongPos[0];
           y = pongPos[1];
-          r = 1.5;
-          opacity = 0.55;
+          r = 1.6;
+          opacity = 0.72;
         } else if (cycle < 4.5) {
-          const localT = (cycle - 3) / 1.5;
+          const localT = (cycle - 4) / 0.5;
           const eased = easeInOutCubic(localT);
-          const pongAt3 = getPongPos(i, 3);
-          x = lerp(pongAt3[0], flowPosI[0], eased);
-          y = lerp(pongAt3[1], flowPosI[1], eased);
-          r = 1.5;
-          opacity = lerp(0.55, 0.88, eased);
-        } else if (cycle < 7) {
-          const localT = (cycle - 4.5) / 2.5;
+          const pongAt4 = getPongPos(i, 4);
+          x = lerp(pongAt4[0], flowPosI[0], eased);
+          y = lerp(pongAt4[1], flowPosI[1], eased);
+          r = 1.6;
+          opacity = lerp(0.72, 0.9, eased);
+        } else if (cycle < 9) {
+          x = flowPosI[0];
+          y = flowPosI[1];
+          r = 1.7;
+          opacity = 0.9;
+        } else if (cycle < 9.5) {
+          const localT = (cycle - 9) / 0.5;
           const eased = easeInOutCubic(localT);
           x = lerp(flowPosI[0], faceXI, eased);
           y = lerp(flowPosI[1], faceYI, eased);
-          r = lerp(1.5, faceRI, eased);
-          opacity = lerp(0.88, faceOpacityI, eased);
-        } else if (cycle < 11) {
+          r = lerp(1.7, faceRI, eased);
+          opacity = lerp(0.9, faceOpacityI, eased);
+        } else if (cycle < 15) {
           x = faceXI;
           y = faceYI;
           r = faceRI;
           opacity = faceOpacityI;
         } else {
-          const localT = (cycle - 11) / 3;
+          const localT = (cycle - 15) / 3;
           const eased = easeInOutCubic(localT);
           const pongPos = getPongPos(i, 0);
           x = lerp(faceXI, pongPos[0], eased);
           y = lerp(faceYI, pongPos[1], eased);
-          r = lerp(faceRI, 1.5, eased);
-          opacity = lerp(faceOpacityI, 0.55, eased);
+          r = lerp(faceRI, 1.6, eased);
+          opacity = lerp(faceOpacityI, 0.72, eased);
         }
 
-        ctx.shadowColor = "rgba(34, 211, 199, 0.35)";
-        ctx.shadowBlur = 4;
+        ctx.shadowColor = "rgba(34, 211, 199, 0.2)";
+        ctx.shadowBlur = 2;
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(34, 211, 199, ${opacity * 0.9})`;
+        ctx.fillStyle = `rgba(34, 211, 199, ${opacity})`;
         ctx.fill();
         ctx.shadowBlur = 0;
       }

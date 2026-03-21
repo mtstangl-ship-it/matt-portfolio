@@ -25,7 +25,7 @@ export function FeaturedCaseStudiesPreview() {
             "radial-gradient(ellipse at 30% 10%, rgba(13,148,136,0.16), transparent 55%), radial-gradient(ellipse at 75% 55%, rgba(13,148,136,0.10), transparent 60%)",
         }}
       />
-      <div className="relative z-10 flex flex-col gap-8 sm:gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <div className="relative z-10 flex flex-col gap-6 sm:gap-8 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="font-display text-section font-bold text-ink-950">
             {featuredCaseStudies.headline}
@@ -41,7 +41,7 @@ export function FeaturedCaseStudiesPreview() {
           {featuredCaseStudies.cta} →
         </Link>
       </div>
-      <ul className="relative z-10 mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="relative z-10 mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {featuredCaseStudies.items.map((item, i) => (
           <li key={item.slug}>
             <Link
@@ -49,7 +49,7 @@ export function FeaturedCaseStudiesPreview() {
               className="group/card block overflow-hidden rounded-xl border border-ink-200/70 bg-base-50 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-card-hover hover:shadow-glow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
             >
               {/* Visual portal: doorway frame + motif */}
-              <div className="relative h-44 overflow-hidden bg-gradient-to-br from-ink-150/40 via-support-200 to-accent-tint/20 transition-all duration-300 group-hover/card:from-accent-tint/45 group-hover/card:via-support-200 group-hover/card:to-ink-150/35">
+              <div className="relative h-40 overflow-hidden bg-gradient-to-br from-ink-150/40 via-support-200 to-accent-tint/20 transition-all duration-300 group-hover/card:from-accent-tint/45 group-hover/card:via-support-200 group-hover/card:to-ink-150/35 sm:h-44">
                 <div
                   className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/card:opacity-100"
                   aria-hidden
@@ -85,7 +85,7 @@ export function FeaturedCaseStudiesPreview() {
               </div>
 
               {/* Content */}
-              <div className="relative p-6">
+              <div className="relative p-5 sm:p-6">
                 <span className="inline-flex items-center rounded-full border border-ink-200/70 bg-base-50 px-3 py-1 font-body text-eyebrow font-semibold uppercase tracking-wider text-ink-600">
                   {item.category}
                 </span>

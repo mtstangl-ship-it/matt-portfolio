@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 
 const phases = [
-  { x: 12, w: 32, label: "Complex" },
-  { x: 50, w: 38, label: "Align" },
-  { x: 94, w: 42, label: "Coordinate" },
+  { x: 12, w: 32, label: "Fragmented" },
+  { x: 50, w: 38, label: "Mapped" },
+  { x: 94, w: 42, label: "Aligned" },
   { x: 142, w: 38, label: "Flow" },
 ];
 

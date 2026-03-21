@@ -13,7 +13,7 @@ export function ContactCTA() {
             "radial-gradient(ellipse at 50% 0%, rgba(34,211,199,0.18), transparent 55%), linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0) 45%)",
         }}
       />
-      <div className="relative z-10 mx-auto max-w-xl px-2 text-center prose-optimal sm:px-0">
+      <div className="relative z-10 mx-auto max-w-xl text-center prose-optimal">
         <h2 className="font-display text-section font-bold text-ink-950">
           {contactCta.headline}
         </h2>

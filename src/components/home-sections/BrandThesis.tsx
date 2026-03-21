@@ -14,18 +14,18 @@ export function BrandThesis() {
             "radial-gradient(ellipse at 20% 10%, rgba(34,211,199,0.22), transparent 55%), radial-gradient(ellipse at 80% 0%, rgba(13,148,136,0.16), transparent 50%), linear-gradient(to bottom, rgba(0,0,0,0.04), rgba(0,0,0,0) 45%)",
         }}
       />
-      <div className="relative z-10 mx-auto grid max-w-5xl gap-8 sm:gap-12 lg:grid-cols-[1fr,minmax(0,1.2fr)] lg:items-center lg:gap-16">
+      <div className="relative z-10 grid gap-6 sm:gap-10 lg:grid-cols-[1fr,minmax(0,1.2fr)] lg:items-center lg:gap-12">
         <div>
           <h2 className="font-display text-section font-bold text-ink-950">
             {brandThesis.headline}
           </h2>
-          <div className="font-body mt-8 space-y-4 text-body font-bold text-ink-900 leading-[1.55] sm:text-body-lg prose-optimal">
+          <div className="font-body mt-6 space-y-3 text-body font-bold leading-[1.55] text-ink-900 sm:mt-8 sm:space-y-4 sm:text-body-lg prose-optimal">
             {brandThesis.body.map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
             ))}
           </div>
         </div>
-        <div className="min-h-[140px] w-full max-w-lg lg:min-h-[240px] lg:max-w-none">
+        <div className="min-h-[140px] w-full max-w-xl lg:min-h-[240px] lg:max-w-none">
           <div className="relative h-full w-full overflow-hidden rounded-lg border border-ink-200/70 bg-support-50 p-2 sm:p-4">
             {/* Editorial, separated composition: both panels stay side by side, scaling down on small screens */}
             <div className="grid h-full grid-cols-[1.05fr,0.95fr] gap-2 sm:gap-4 lg:items-stretch">

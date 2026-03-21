@@ -11,7 +11,7 @@ const showStanford = hero.proofStrip.includes("Stanford AI Certified");
 
 export function CredibilityRail() {
   return (
-    <Section container={false} className="relative overflow-hidden border-t border-ink-200/50 bg-support py-10">
+    <Section container={false} className="relative overflow-hidden border-t border-ink-200/50 bg-support py-8 sm:py-10">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
         aria-hidden
@@ -20,7 +20,7 @@ export function CredibilityRail() {
             "radial-gradient(ellipse at 20% 0%, rgba(34,211,199,0.30), transparent 55%), radial-gradient(ellipse at 80% 30%, rgba(13,148,136,0.22), transparent 60%), linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0))",
         }}
       />
-      <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center gap-10 px-6 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-12 sm:gap-y-10 md:gap-x-16">
+      <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-12 sm:gap-y-10 sm:px-6 md:gap-x-16">
         {logoCompanies.map((name) => (
           <div
             key={name}

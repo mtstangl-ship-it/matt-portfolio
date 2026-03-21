@@ -167,20 +167,20 @@ export function CountUpMetric({ value, label, index, variant = "default" }: Coun
   return (
     <motion.div
       ref={ref}
-      className={`rounded-sm border px-5 py-4 ${
+      className={`flex h-[4rem] flex-col justify-between rounded-sm border px-3 py-2.5 sm:h-[4.25rem] sm:px-4 sm:py-3 ${
         isDashboard
-          ? "border-dashboard-border border-l-4 border-l-accent-signal bg-dashboard-muted/80"
-          : "border-ink-300/70 border-l-4 border-l-accent bg-ink-100/90"
+          ? "border-dashboard-border border-l-[3px] border-l-accent-signal bg-dashboard-muted/80"
+          : "border-ink-300/70 border-l-[3px] border-l-accent bg-ink-100/90"
       }`}
       initial={{ opacity: 0, y: 12 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
       transition={{ delay: 0.1 + index * 0.05, duration: 0.4 }}
     >
-      <p className={`font-mono text-metric font-bold tabular-nums ${isDashboard ? "text-dashboard-ink-light" : "text-ink-950"}`}>
+      <p className={`font-mono text-[1rem] font-bold tabular-nums leading-tight sm:text-[1.25rem] ${isDashboard ? "text-dashboard-ink-light" : "text-ink-950"}`}>
         {showAnimated ? display : finalDisplay}
       </p>
       <p
-        className={`font-body mt-1 leading-[1.25] ${isDashboard ? "text-dashboard-ink-muted" : "text-ink-700"} text-[0.75rem] tracking-normal font-medium`}
+        className={`font-body line-clamp-2 leading-[1.2] ${isDashboard ? "text-dashboard-ink-muted" : "text-ink-700"} text-[0.625rem] font-medium sm:text-[0.6875rem]`}
       >
         {label}
       </p>

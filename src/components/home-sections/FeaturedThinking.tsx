@@ -18,7 +18,7 @@ export function FeaturedThinking() {
             "radial-gradient(ellipse at 0% 0%, rgba(34,211,199,0.18), transparent 40%), radial-gradient(ellipse at 100% 30%, rgba(13,148,136,0.14), transparent 55%), linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0) 40%)",
         }}
       />
-      <div className="relative z-10 flex flex-col gap-8 sm:gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <div className="relative z-10 flex flex-col gap-6 sm:gap-8 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="font-display text-section font-bold text-ink-950">
             {featuredThinking.headline}
@@ -37,12 +37,12 @@ export function FeaturedThinking() {
       <div className="pointer-events-none absolute right-0 top-28 hidden h-52 w-52 opacity-[0.06] lg:block">
         <SignalMapMotif />
       </div>
-      <div className="relative z-10 mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="relative z-10 mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
         {featuredThinking.items.map((item, i) => (
           <Card
             key={i}
             variant="subtle"
-            className="animate-fade-up border-l-4 border-l-accent/70 bg-base p-6 shadow-sm motion-reduce:animate-none"
+            className="animate-fade-up border-l-4 border-l-accent/70 bg-base p-5 shadow-sm motion-reduce:animate-none sm:p-6"
             style={{ animationDelay: `${i * 100}ms` }}
           >
             {"topicIcon" in item && (

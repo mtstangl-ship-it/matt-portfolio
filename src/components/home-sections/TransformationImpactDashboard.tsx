@@ -48,7 +48,7 @@ function CompanyCard({
 
   return (
     <motion.article
-      className="group/card overflow-hidden border border-dashboard-border/70 bg-dashboard-card/70 shadow-card transition-shadow hover:shadow-card-hover hover:border-accent-signal/35 hover:shadow-dashboard-glow"
+      className="group/card flex h-full flex-col overflow-hidden border border-dashboard-border/70 bg-dashboard-card/70 shadow-card transition-shadow hover:shadow-card-hover hover:border-accent-signal/35 hover:shadow-dashboard-glow"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       initial={{ opacity: 0, y: 12 }}
@@ -65,24 +65,22 @@ function CompanyCard({
             }
       }
     >
-      <header className="flex items-start justify-between gap-4 border-b border-dashboard-border/70 px-6 py-5">
-        <div>
-          <div className="mb-2">
-            <CompanyWordmark
-              name={name}
-              src={logoPaths[name]}
-              size="sm"
-              inverted
-              className="object-left"
-            />
-          </div>
-          <h3 className="font-display text-card-title font-bold text-dashboard-ink-light">
+      <header className="flex h-[4.25rem] shrink-0 items-center border-b border-dashboard-border/70 px-4 py-0 sm:px-5">
+        <div className="min-w-0 flex-1 space-y-1.5">
+          <CompanyWordmark
+            name={name}
+            src={logoPaths[name]}
+            size="sm"
+            inverted
+            className="object-left"
+          />
+          <h3 className="font-display text-[0.9375rem] font-bold leading-[1.15] tracking-tight text-dashboard-ink-light line-clamp-1">
             {headline}
           </h3>
         </div>
       </header>
       {VizComponent && (
-        <div className="relative border-b border-dashboard-border/70 bg-dashboard-muted px-6 py-7">
+        <div className="relative h-[9.5rem] shrink-0 border-b border-dashboard-border/70 bg-dashboard-muted px-4 py-4 sm:px-5 sm:py-5">
           <div
             className="absolute inset-0 opacity-[0.12]"
             style={{
@@ -99,12 +97,12 @@ function CompanyCard({
           </motion.div>
         </div>
       )}
-      <div className="px-6 py-5">
-        <p className="font-body text-body font-bold text-dashboard-ink-muted leading-[1.5]">
+      <div className="flex min-h-[3.75rem] flex-1 flex-col justify-center px-4 py-3 sm:px-5 sm:py-4">
+        <p className="font-body text-[0.8125rem] font-bold leading-[1.45] text-dashboard-ink-muted line-clamp-3 sm:text-body">
           {narrative}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-2 border-t border-dashboard-border/70 bg-dashboard-surface px-4 py-4 sm:gap-3 sm:px-6 sm:py-5">
+      <div className="grid min-w-0 shrink-0 grid-cols-2 gap-2 border-t border-dashboard-border/70 bg-dashboard-surface px-4 py-3 sm:gap-2.5 sm:px-5 sm:py-4">
         {kpis.map((kpi, i) => (
           <CountUpMetric
             key={`${name}-${i}-${kpi.value}`}
@@ -114,7 +112,7 @@ function CompanyCard({
           />
         ))}
       </div>
-      <div className="flex flex-wrap gap-2 border-t border-dashboard-border/70 px-6 py-3">
+      <div className="flex shrink-0 flex-wrap gap-1.5 border-t border-dashboard-border/70 px-4 py-2.5 sm:px-5">
         {capabilityTags.slice(0, 3).map((tag) => (
           <span
             key={tag}
@@ -154,7 +152,7 @@ export function TransformationImpactDashboard() {
             "radial-gradient(circle at 20% 20%, rgba(34,211,199,0.25), transparent 45%), radial-gradient(circle at 70% 10%, rgba(34,211,199,0.18), transparent 50%), radial-gradient(circle at 60% 70%, rgba(34,211,199,0.12), transparent 55%)",
         }} aria-hidden />
         <Section className="relative">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
           <div className="max-w-lg">
             <h2 className="font-display text-section font-bold text-dashboard-ink-light">
               {transformationDashboard.headline}
@@ -170,8 +168,8 @@ export function TransformationImpactDashboard() {
             {transformationDashboard.cta} →
           </Link>
           </div>
-          <div className="mt-10 rounded-lg border border-dashboard-border/60 bg-dashboard-surface/25 p-4 shadow-card sm:p-5">
-            <div className="grid min-w-0 gap-5 lg:grid-cols-3">
+          <div className="mt-8 rounded-md border border-dashboard-border/60 bg-dashboard-surface/25 p-4 shadow-card sm:mt-10 sm:p-5">
+            <div className="grid min-w-0 grid-rows-1 gap-4 sm:gap-4 lg:grid-cols-3 lg:items-stretch">
               {transformationDashboard.companies.map((company, i) => (
                 <CompanyCard key={company.name} {...company} index={i} />
               ))}
