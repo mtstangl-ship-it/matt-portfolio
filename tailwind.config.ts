@@ -107,8 +107,10 @@ const config: Config = {
         ticker: "ticker 45s linear infinite",
         "fade-up": "fade-up 0.6s ease-out both",
         "fade-in": "fade-in 0.5s ease-out both",
-        "signal-flow": "signal-flow 2.5s ease-in-out infinite",
-        "node-pulse": "node-pulse 2.5s ease-in-out infinite",
+        "signal-flow": "signal-flow 1.4s ease-in-out infinite",
+        "node-pulse": "node-pulse 1.2s ease-in-out infinite",
+        "hero-flow": "hero-flow 1.2s ease-in-out infinite",
+        "hero-pulse": "hero-pulse 1s ease-in-out infinite",
       },
       keyframes: {
         ticker: {
@@ -130,6 +132,15 @@ const config: Config = {
         "node-pulse": {
           "0%, 100%": { opacity: "0.7", transform: "scale(1)" },
           "50%": { opacity: "1", transform: "scale(1.05)" },
+        },
+        "hero-flow": {
+          "0%": { strokeDashoffset: "0", opacity: "0.85" },
+          "50%": { strokeDashoffset: "20", opacity: "1" },
+          "100%": { strokeDashoffset: "0", opacity: "0.85" },
+        },
+        "hero-pulse": {
+          "0%, 100%": { opacity: "0.75", transform: "scale(1)" },
+          "50%": { opacity: "1", transform: "scale(1.25)" },
         },
       },
       boxShadow: {

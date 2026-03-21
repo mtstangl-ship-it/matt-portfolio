@@ -1,128 +1,220 @@
 "use client";
 
-/**
- * Premium, subtle “fragmented signals → orchestrated flow” background.
- * Kept intentionally low-opacity so hero text stays readable.
- */
+import { useEffect, useRef, useCallback, useState } from "react";
+import { getPointillismPoints } from "@/lib/portraitPointillism";
+
+const VIEW_W = 1200;
+const VIEW_H = 420;
+const TOTAL_DURATION = 14;
+const FACE_OFFSET_X = 280;
+
+const MARGIN = 80;
+const PONG_BOUNDS = { x: MARGIN, y: 60, w: VIEW_W - 2 * MARGIN, h: VIEW_H - 2 * 60 };
+
+const allPoints = getPointillismPoints();
+const numDots = Math.min(200, Math.max(1, allPoints.length || 200));
+const pts: [number, number, number][] =
+  allPoints.length >= numDots
+    ? allPoints.slice(0, numDots)
+    : [...allPoints, ...Array.from({ length: numDots - allPoints.length }, (): [number, number, number] => [600, 210, 0.5])];
+
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
+}
+
+function easeInOutCubic(t: number) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+function bounce1D(p0: number, v: number, t: number, L: number): number {
+  let x = p0 + v * t;
+  const period = 2 * L;
+  x = ((x % period) + period) % period;
+  return x > L ? 2 * L - x : x;
+}
+
+function getPongPos(i: number, t: number): [number, number] {
+  const sx = PONG_BOUNDS.x + ((i * 97) % 1000) / 1000 * PONG_BOUNDS.w * 0.9;
+  const sy = PONG_BOUNDS.y + ((i * 137) % 1000) / 1000 * PONG_BOUNDS.h * 0.9;
+  const vx = 180 + ((i * 61) % 120) - 60;
+  const vy = 140 + ((i * 89) % 100) - 50;
+  const px = PONG_BOUNDS.x + bounce1D(sx - PONG_BOUNDS.x, vx, t, PONG_BOUNDS.w);
+  const py = PONG_BOUNDS.y + bounce1D(sy - PONG_BOUNDS.y, vy, t, PONG_BOUNDS.h);
+  return [px, py];
+}
+
+function getFlowPos(i: number): [number, number] {
+  const rt = (i + 0.5) / numDots;
+  const roadX = 80 + rt * 1100;
+  const wave = Math.sin(rt * Math.PI * 3.5) * 42;
+  const wave2 = Math.sin(rt * Math.PI * 6) * 12;
+  const wave3 = Math.sin(rt * Math.PI * 1.8) * 18;
+  const row = i % 3;
+  const roadY = 200 + wave + wave2 + wave3 + (row - 1) * 6;
+  return [roadX, roadY];
+}
+
+// When stacked (narrow), use fixed canvas size so it never overflows; face center in view
+const FACE_CENTER_X = 600 + FACE_OFFSET_X;
+const STACKED_CANVAS_W = 500;
+const STACKED_CANVAS_H = 320;
+
 export function HeroAtmosphereBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>();
+  const startRef = useRef<number>(0);
+  const [isStacked, setIsStacked] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsStacked(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const draw = useCallback(() => {
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+    const ctx = canvas?.getContext("2d", { alpha: true });
+
+    if (!canvas || !ctx) {
+      rafRef.current = requestAnimationFrame(draw);
+      return;
+    }
+
+    const rect = container?.getBoundingClientRect() ?? canvas.getBoundingClientRect();
+    if (rect.width < 1 || rect.height < 1) {
+      rafRef.current = requestAnimationFrame(draw);
+      return;
+    }
+
+    const isNarrow = rect.width < 768;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+
+    let w: number, h: number, scale: number, offX: number, offY: number;
+
+    if (isNarrow) {
+      // Fixed canvas size when stacked: prevents overflow, ensures centering, zoomed on face
+      w = Math.round(STACKED_CANVAS_W * dpr);
+      h = Math.round(STACKED_CANVAS_H * dpr);
+      const scaleX = w / VIEW_W;
+      const scaleY = h / VIEW_H;
+      scale = Math.max(scaleX, scaleY) * 1.25;
+      // Center the crop on the face (right side of composition) so it's not cut off
+      offX = w / 2 - FACE_CENTER_X * scale;
+      offY = (h - VIEW_H * scale) / 2;
+    } else {
+      w = Math.round(rect.width * dpr);
+      h = Math.round(rect.height * dpr);
+      const scaleX = w / VIEW_W;
+      const scaleY = h / VIEW_H;
+      scale = Math.min(scaleX, scaleY);
+      offX = (w - VIEW_W * scale) / 2;
+      offY = (h - VIEW_H * scale) / 2;
+    }
+
+    try {
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+      }
+      ctx.clearRect(0, 0, w, h);
+      ctx.save();
+      ctx.translate(offX, offY);
+      ctx.scale(scale, scale);
+
+      const elapsed = (performance.now() - startRef.current) / 1000;
+      const cycle = elapsed % TOTAL_DURATION;
+
+      for (let i = 0; i < numDots; i++) {
+        let x: number, y: number, r: number, opacity: number;
+        const flowPosI = getFlowPos(i);
+        const ptI = pts[i];
+        const faceXI = (ptI?.[0] ?? 600) + FACE_OFFSET_X;
+        const faceYI = ptI?.[1] ?? 210;
+        const lumI = ptI?.[2] ?? 0.5;
+        const faceRI = lumI > 0.7 ? 2 : lumI > 0.4 ? 1.5 : 1;
+        const faceOpacityI = 0.35 + lumI * 0.65;
+        if (cycle < 3) {
+          const pongPos = getPongPos(i, cycle);
+          x = pongPos[0];
+          y = pongPos[1];
+          r = 1.5;
+          opacity = 0.55;
+        } else if (cycle < 4.5) {
+          const localT = (cycle - 3) / 1.5;
+          const eased = easeInOutCubic(localT);
+          const pongAt3 = getPongPos(i, 3);
+          x = lerp(pongAt3[0], flowPosI[0], eased);
+          y = lerp(pongAt3[1], flowPosI[1], eased);
+          r = 1.5;
+          opacity = lerp(0.55, 0.88, eased);
+        } else if (cycle < 7) {
+          const localT = (cycle - 4.5) / 2.5;
+          const eased = easeInOutCubic(localT);
+          x = lerp(flowPosI[0], faceXI, eased);
+          y = lerp(flowPosI[1], faceYI, eased);
+          r = lerp(1.5, faceRI, eased);
+          opacity = lerp(0.88, faceOpacityI, eased);
+        } else if (cycle < 11) {
+          x = faceXI;
+          y = faceYI;
+          r = faceRI;
+          opacity = faceOpacityI;
+        } else {
+          const localT = (cycle - 11) / 3;
+          const eased = easeInOutCubic(localT);
+          const pongPos = getPongPos(i, 0);
+          x = lerp(faceXI, pongPos[0], eased);
+          y = lerp(faceYI, pongPos[1], eased);
+          r = lerp(faceRI, 1.5, eased);
+          opacity = lerp(faceOpacityI, 0.55, eased);
+        }
+
+        ctx.shadowColor = "rgba(34, 211, 199, 0.35)";
+        ctx.shadowBlur = 4;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(34, 211, 199, ${opacity * 0.9})`;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      ctx.restore();
+    } catch {
+      /* ignore frame */
+    }
+
+    rafRef.current = requestAnimationFrame(draw);
+  }, []);
+
+  useEffect(() => {
+    startRef.current = performance.now();
+    rafRef.current = requestAnimationFrame(draw);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [draw]);
+
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-      <svg
-        viewBox="0 0 1200 420"
-        className="h-full w-full text-accent-signal/80"
-        aria-hidden
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <defs>
-          <radialGradient
-            id="pulseGlow"
-            cx="20%"
-            cy="25%"
-            r="55%"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0%" stopColor="currentColor" stopOpacity="0.55" />
-            <stop offset="45%" stopColor="currentColor" stopOpacity="0.16" />
-            <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient
-            id="pulseGlow2"
-            cx="80%"
-            cy="60%"
-            r="50%"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0%" stopColor="currentColor" stopOpacity="0.4" />
-            <stop offset="55%" stopColor="currentColor" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-
-        {/* Ambient glows */}
-        <rect x="0" y="0" width="1200" height="420" fill="url(#pulseGlow)" opacity="0.7" />
-        <rect x="0" y="0" width="1200" height="420" fill="url(#pulseGlow2)" opacity="0.6" />
-
-        {/* Fragmented signal field (left/middle) */}
-        <g opacity="0.45">
-          <path
-            d="M120 170 C 210 90, 300 110, 360 160"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeDasharray="8 12"
-            className="animate-signal-flow"
-            style={{ animationDuration: "2s" }}
-          />
-          <path
-            d="M160 260 C 240 220, 310 235, 410 280"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            strokeLinecap="round"
-            strokeDasharray="7 14"
-            style={{ animationDelay: "0.55s", animationDuration: "2s" }}
-            className="animate-signal-flow"
-          />
-          <path
-            d="M310 120 L 420 160"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            strokeDasharray="5 12"
-            style={{ animationDelay: "1.05s", animationDuration: "2.1s" }}
-            className="animate-signal-flow"
-          />
-        </g>
-
-        {/* Topology lines (dim + precise) */}
-        <g opacity="0.22" stroke="currentColor" fill="none" strokeWidth="1">
-          <path d="M80 310 L 220 260 L 360 300 L 520 240 L 690 275 L 840 220 L 1030 255" />
-          <path d="M120 110 L 260 145 L 430 125 L 580 150 L 760 135 L 920 160 L 1100 140" />
-        </g>
-
-        {/* Nodes (glowing pulses) */}
-        <g opacity="0.78">
-          <circle cx="150" cy="200" r="5.2" fill="currentColor" className="animate-node-pulse" style={{ animationDelay: "0s", animationDuration: "1.9s", filter: "drop-shadow(0 0 10px rgba(34, 211, 199, 0.35))" }} />
-          <circle cx="225" cy="132" r="3.9" fill="currentColor" className="animate-node-pulse" style={{ animationDelay: "0.28s", animationDuration: "1.8s" }} />
-          <circle cx="320" cy="165" r="3.4" fill="currentColor" className="animate-node-pulse" style={{ animationDelay: "0.62s", animationDuration: "1.8s" }} />
-          <circle cx="260" cy="260" r="3.9" fill="currentColor" className="animate-node-pulse" style={{ animationDelay: "0.18s", animationDuration: "1.8s" }} />
-          <circle cx="395" cy="290" r="3.4" fill="currentColor" className="animate-node-pulse" style={{ animationDelay: "0.5s", animationDuration: "1.9s" }} />
-          <circle cx="520" cy="240" r="4.3" fill="currentColor" className="animate-node-pulse" style={{ animationDelay: "0.82s", animationDuration: "1.95s" }} />
-        </g>
-
-        {/* Orchestrated flow paths into the center (stronger + still restrained) */}
-        <g opacity="0.85">
-          <path
-            d="M410 260 C 520 140, 660 140, 770 220 C 860 285, 960 275, 1060 230"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3.6"
-            strokeLinecap="round"
-            strokeDasharray="12 16"
-            className="animate-signal-flow"
-            style={{ animationDuration: "1.9s" }}
-          />
-          <path
-            d="M410 260 C 520 140, 660 140, 770 220 C 860 285, 960 275, 1060 230"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeDasharray="9 18"
-            style={{ opacity: 0.85, animationDuration: "2.05s" }}
-            className="animate-signal-flow"
-          />
-          <circle cx="520" cy="190" r="5.6" fill="currentColor" opacity="0.6" className="animate-node-pulse" style={{ animationDelay: "0.22s", animationDuration: "1.8s" }} />
-          <circle cx="690" cy="195" r="4.2" fill="currentColor" opacity="0.48" className="animate-node-pulse" style={{ animationDelay: "0.48s", animationDuration: "1.85s" }} />
-          <circle cx="900" cy="260" r="4.5" fill="currentColor" opacity="0.55" className="animate-node-pulse" style={{ animationDelay: "0.78s", animationDuration: "2s" }} />
-        </g>
-      </svg>
-
-      {/* Slight editorial vignette to keep focus on content */}
-      <div className="absolute inset-0 bg-gradient-to-r from-dashboard-bg/80 via-dashboard-bg/25 to-dashboard-bg/70" />
+    <div
+      ref={containerRef}
+      className="pointer-events-none relative z-0 flex h-full min-w-0 max-w-full flex-1 items-center justify-center self-stretch overflow-hidden"
+    >
+      <div className="flex h-full w-full min-w-0 max-w-full items-center justify-center overflow-hidden">
+        <canvas
+          ref={canvasRef}
+          className={isStacked ? "max-h-full max-w-full" : "h-full w-full"}
+          style={{
+            display: "block",
+            maxWidth: "100%",
+            maxHeight: "100%",
+            ...(isStacked ? { width: "auto", height: "auto" } : { width: "100%", height: "100%" }),
+          }}
+          aria-hidden
+        />
+      </div>
     </div>
   );
 }
-

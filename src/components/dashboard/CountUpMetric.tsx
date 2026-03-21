@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 interface CountUpMetricProps {
   value: string;
@@ -56,7 +56,13 @@ function formatDisplay(
 
   if (suffixBase.includes("M")) {
     const formatted =
-      num >= 1 ? num.toFixed(2).replace(/\.?0+$/, "") : num.toString();
+      num >= 1
+        ? isFinal
+          ? num.toFixed(2).replace(/\.?0+$/, "")
+          : num.toFixed(2)
+        : isFinal
+          ? num.toString()
+          : num.toFixed(2);
     return `${prefix}${formatted}M${plus}`;
   }
   if (suffixBase.includes("K")) {
@@ -77,6 +83,7 @@ function formatDisplay(
 export function CountUpMetric({ value, label, index, variant = "default" }: CountUpMetricProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
+  const reducedMotion = useReducedMotion();
   const [display, setDisplay] = useState(value);
   const [hasAnimated, setHasAnimated] = useState(false);
   const animationRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(
@@ -84,11 +91,25 @@ export function CountUpMetric({ value, label, index, variant = "default" }: Coun
   );
   const startTimeRef = useRef<number>(0);
   const parsed = parseValue(value);
+  const lastFormattedRef = useRef<string>(value);
 
   useEffect(() => {
     const parsedVal = parseValue(value);
     if (!parsedVal) {
       setDisplay(value);
+      lastFormattedRef.current = value;
+      return;
+    }
+    if (reducedMotion) {
+      const snapped = formatDisplay(
+        parsedVal.numeric,
+        parsedVal.suffix,
+        parsedVal.prefix,
+        true
+      );
+      setDisplay(snapped);
+      lastFormattedRef.current = snapped;
+      setHasAnimated(true);
       return;
     }
     if (!inView || hasAnimated) return;
@@ -96,7 +117,9 @@ export function CountUpMetric({ value, label, index, variant = "default" }: Coun
     const { numeric: targetValue, suffix, prefix } = parsedVal;
     const durationMs = 1200;
 
-    setDisplay(formatDisplay(0, suffix, prefix, false));
+    const startFormatted = formatDisplay(0, suffix, prefix, false);
+    setDisplay(startFormatted);
+    lastFormattedRef.current = startFormatted;
 
     const animate = (timestamp: number) => {
       if (!startTimeRef.current) startTimeRef.current = timestamp;
@@ -105,10 +128,22 @@ export function CountUpMetric({ value, label, index, variant = "default" }: Coun
       const eased = 1 - Math.pow(1 - progress, 2);
       const current = targetValue * eased;
       const isFinal = progress >= 1;
-      setDisplay(formatDisplay(current, suffix, prefix, isFinal));
+      const nextFormatted = formatDisplay(current, suffix, prefix, isFinal);
+      // Throttle renders: update only when the string changes.
+      if (lastFormattedRef.current !== nextFormatted) {
+        setDisplay(nextFormatted);
+        lastFormattedRef.current = nextFormatted;
+      }
       if (isFinal) {
         setHasAnimated(true);
-        setDisplay(formatDisplay(targetValue, suffix, prefix, true));
+        const finalFormatted = formatDisplay(
+          targetValue,
+          suffix,
+          prefix,
+          true
+        );
+        setDisplay(finalFormatted);
+        lastFormattedRef.current = finalFormatted;
         return;
       }
       animationRef.current = requestAnimationFrame(animate);
@@ -144,7 +179,9 @@ export function CountUpMetric({ value, label, index, variant = "default" }: Coun
       <p className={`font-mono text-metric font-bold tabular-nums ${isDashboard ? "text-dashboard-ink-light" : "text-ink-950"}`}>
         {showAnimated ? display : finalDisplay}
       </p>
-      <p className={`font-body mt-1 text-metric-sm font-semibold ${isDashboard ? "text-dashboard-ink-muted" : "text-ink-700"}`}>
+      <p
+        className={`font-body mt-1 leading-[1.25] ${isDashboard ? "text-dashboard-ink-muted" : "text-ink-700"} text-[0.75rem] tracking-normal font-medium`}
+      >
         {label}
       </p>
     </motion.div>

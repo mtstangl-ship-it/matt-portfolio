@@ -27,23 +27,35 @@ export function StanfordAICapability() {
 
   return (
     <Section className="relative overflow-hidden border-t border-ink-200/50 bg-support py-section">
+      {/* Editorial tonal depth behind the card (kept extremely low opacity). */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse at 25% 0%, rgba(34,211,199,0.22), transparent 55%), radial-gradient(ellipse at 85% 30%, rgba(13,148,136,0.18), transparent 60%), linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0) 45%)",
+        }}
+      />
       <div className="pointer-events-none absolute right-0 top-1/2 w-48 -translate-y-1/2 opacity-[0.07]" aria-hidden>
         <SignalMapMotif />
       </div>
-      <Card variant="bordered" className="relative overflow-hidden border-ink-200 bg-base-50">
+      <Card
+        variant="bordered"
+        className="relative z-10 overflow-hidden border-ink-200 bg-base-50"
+      >
         <div className="pointer-events-none absolute left-6 top-10 h-24 w-24 opacity-[0.07]">
           <HumanPortraitMotif />
         </div>
-        <div className="flex flex-col gap-8 p-8 sm:flex-row sm:items-start sm:justify-between lg:p-10">
-          <div className="flex items-start gap-8">
-            <div className="flex h-28 w-28 shrink-0 flex-col items-center justify-center gap-2 overflow-hidden rounded-md border-2 border-accent/40 bg-accent-tint p-4">
+        <div className="flex flex-col gap-8 p-6 sm:flex-row sm:items-start sm:justify-between sm:p-8 lg:p-10">
+          <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left">
+            <div className="flex h-[7.5rem] w-[7.5rem] shrink-0 flex-col items-center justify-center gap-2 overflow-hidden rounded-md border-2 border-accent/40 bg-accent-tint p-3 sm:h-28 sm:w-28 sm:p-4">
               {stanfordAI.certImage ? (
                 <Image
                   src={stanfordAI.certImage}
                   alt={`${stanfordAI.title} certification`}
                   width={112}
                   height={112}
-                  className="object-contain"
+                  className="h-full w-full object-contain p-0.5"
                 />
               ) : (
                 <>
@@ -54,19 +66,19 @@ export function StanfordAICapability() {
                 </>
               )}
             </div>
-            <div>
-              <h3 className="font-display text-section font-bold text-ink-950">
+            <div className="w-full min-w-0 max-w-lg">
+              <h3 className="font-display text-[clamp(1.5rem,5vw,2.125rem)] font-bold leading-tight text-ink-950 sm:text-section">
                 {stanfordAI.title}
               </h3>
               <p className="font-body mt-2 text-metric-sm text-ink-600">
                 {stanfordAI.credential}
               </p>
-              <p className="font-body mt-3 max-w-md text-body font-semibold text-ink-800 leading-[1.5]">
+              <p className="font-body mt-3 max-w-md text-body font-semibold leading-[1.5] text-ink-800">
                 {stanfordAI.description}
               </p>
             </div>
           </div>
-          <div className="shrink-0 border-t border-ink-200/80 pt-8 sm:border-t-0 sm:border-l sm:pl-10 sm:pt-0">
+          <div className="shrink-0 border-t border-ink-200/80 pt-6 sm:border-t-0 sm:border-l sm:pl-8 sm:pt-0 lg:pl-10">
             {CtaLink}
           </div>
         </div>

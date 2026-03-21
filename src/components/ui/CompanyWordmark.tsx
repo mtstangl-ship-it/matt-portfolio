@@ -43,7 +43,7 @@ export function CompanyWordmark({
       alt={name}
       width={dim.width}
       height={dim.height}
-      className={`object-contain object-left ${inverted ? "brightness-0 invert opacity-90" : ""} ${dim.class} ${className}`.trim()}
+      className={`object-contain ${inverted ? "brightness-0 invert opacity-90" : ""} ${dim.class} ${className}`.trim()}
       onError={() => setError(true)}
     />
   );

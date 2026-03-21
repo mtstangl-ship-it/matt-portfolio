@@ -9,10 +9,20 @@ export function ClientTicker() {
 
   return (
     <div
-      className="group overflow-hidden border-t border-ink-200/50 bg-support-200 py-6"
+      className="relative group overflow-hidden border-t border-ink-200/50 bg-support-200 py-6"
       aria-label="Selected client experience"
     >
-      <div className="animate-ticker flex w-max items-center gap-x-14 md:gap-x-20 motion-reduce:animate-none group-hover:[animation-play-state:paused]">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        aria-hidden
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse at 15% 0%, rgba(34,211,199,0.28), transparent 55%), radial-gradient(ellipse at 85% 40%, rgba(13,148,136,0.18), transparent 60%), repeating-linear-gradient(to bottom, rgba(26,24,22,0.20) 1px, transparent 1px)",
+          backgroundSize: "cover, cover, 22px 22px",
+          backgroundPosition: "center, center, center",
+        }}
+      />
+      <div className="relative z-10 flex w-max animate-ticker items-center gap-x-10 sm:gap-x-14 md:gap-x-20 motion-reduce:animate-none group-hover:[animation-play-state:paused]">
         {items.map((name, i) => {
           const src = logoPaths[name as keyof typeof logoPaths];
           return (
@@ -34,13 +44,13 @@ function TickerLogo({ name, src }: { name: string; src?: string }) {
     );
   }
   return (
-    <div className="relative h-7 w-32 shrink-0">
+    <div className="relative h-8 w-[8.75rem] min-w-[7.5rem] shrink-0 sm:h-7 sm:w-32 sm:min-w-0">
       <img
         src={src}
         alt={name}
         width={128}
         height={28}
-        className="h-7 w-32 object-contain object-left"
+        className="h-full w-full object-contain object-left"
         onError={() => setError(true)}
       />
     </div>

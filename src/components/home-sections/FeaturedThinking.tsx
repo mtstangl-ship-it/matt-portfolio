@@ -10,7 +10,15 @@ const topicIcons = { workflow: WorkflowIcon, transformation: TransformationIcon,
 export function FeaturedThinking() {
   return (
     <Section className="relative overflow-hidden border-t border-ink-200/50 bg-base-50 py-section">
-      <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse at 0% 0%, rgba(34,211,199,0.18), transparent 40%), radial-gradient(ellipse at 100% 30%, rgba(13,148,136,0.14), transparent 55%), linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0) 40%)",
+        }}
+      />
+      <div className="relative z-10 flex flex-col gap-8 sm:gap-10 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="font-display text-section font-bold text-ink-950">
             {featuredThinking.headline}
@@ -34,11 +42,11 @@ export function FeaturedThinking() {
           <Card
             key={i}
             variant="subtle"
-            className="animate-fade-up border-l-4 border-l-accent bg-base p-6 shadow-sm motion-reduce:animate-none"
+            className="animate-fade-up border-l-4 border-l-accent/70 bg-base p-6 shadow-sm motion-reduce:animate-none"
             style={{ animationDelay: `${i * 100}ms` }}
           >
             {"topicIcon" in item && (
-              <div className="mb-4 text-accent/70">
+              <div className="mb-4 text-accent/55">
                 {(() => {
                   const Icon = topicIcons[item.topicIcon as keyof typeof topicIcons];
                   return Icon ? <Icon className="h-6 w-6" /> : null;
@@ -48,8 +56,8 @@ export function FeaturedThinking() {
             <blockquote className="font-display text-quote font-bold italic leading-[1.5] text-ink-950">
               &ldquo;{item.quote}&rdquo;
             </blockquote>
-            <footer className="mt-6 flex items-center justify-between gap-4">
-              <span className="font-body text-eyebrow font-semibold uppercase text-accent">
+            <footer className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <span className="font-body text-eyebrow font-semibold uppercase text-accent/75">
                 {item.topic}
               </span>
               <span className="font-mono text-metric-sm tabular-nums text-ink-500">
