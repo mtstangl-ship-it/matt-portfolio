@@ -26,29 +26,28 @@ export function StanfordAICapability() {
   );
 
   return (
-    <Section className="relative overflow-hidden border-t border-ink-200/50 bg-support py-section">
-      {/* Editorial tonal depth behind the card (kept extremely low opacity). */}
+    <Section className="relative overflow-hidden border-t border-ink-200/55 bg-support py-section">
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0"
         aria-hidden
         style={{
           background:
-            "radial-gradient(ellipse at 25% 0%, rgba(34,211,199,0.22), transparent 55%), radial-gradient(ellipse at 85% 30%, rgba(13,148,136,0.18), transparent 60%), linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0) 45%)",
+            "radial-gradient(ellipse 70% 50% at 20% 0%, rgba(34,211,199,0.1), transparent 55%), radial-gradient(ellipse 60% 45% at 90% 40%, rgba(13,148,136,0.07), transparent 55%), linear-gradient(to bottom, rgba(0,0,0,0.02), transparent 40%)",
         }}
       />
-      <div className="pointer-events-none absolute right-0 top-1/2 w-48 -translate-y-1/2 opacity-[0.07]" aria-hidden>
+      <div className="pointer-events-none absolute right-0 top-1/2 w-48 -translate-y-1/2 opacity-[0.08]" aria-hidden>
         <SignalMapMotif />
       </div>
       <Card
         variant="bordered"
-        className="relative z-10 overflow-hidden border-ink-200 bg-base-50"
+        className="relative z-10 overflow-hidden border-ink-200/80 bg-paper-50 shadow-card-elevated"
       >
         <div className="pointer-events-none absolute left-6 top-10 h-24 w-24 opacity-[0.07]">
           <HumanPortraitMotif />
         </div>
-        <div className="flex flex-col gap-6 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-6 lg:p-8">
-          <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left">
-            <div className="flex h-[7.5rem] w-[7.5rem] shrink-0 flex-col items-center justify-center gap-2 overflow-hidden rounded-md border-2 border-accent/40 bg-accent-tint p-3 sm:h-28 sm:w-28 sm:p-4">
+        <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-6 sm:gap-6">
+          <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left">
+            <div className="flex h-20 w-20 shrink-0 flex-col items-center justify-center gap-2 overflow-hidden rounded-lg border-2 border-accent/40 bg-accent-tint p-2.5 sm:h-28 sm:w-28 sm:p-4">
               {stanfordAI.certImage ? (
                 <Image
                   src={stanfordAI.certImage}
@@ -78,7 +77,7 @@ export function StanfordAICapability() {
               </p>
             </div>
           </div>
-          <div className="shrink-0 border-t border-ink-200/80 pt-5 sm:border-t-0 sm:border-l sm:pl-6 sm:pt-0 lg:pl-8">
+          <div className="shrink-0 border-t border-ink-200/80 pt-4 sm:border-t-0 sm:border-l sm:pl-6 sm:pt-0 lg:pl-8">
             {CtaLink}
           </div>
         </div>

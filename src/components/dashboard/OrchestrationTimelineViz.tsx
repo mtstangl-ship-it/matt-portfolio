@@ -148,7 +148,7 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
           />
         )}
 
-        {/* 4. WORDS */}
+        {/* 4. Phase labels */}
         {phases.map((phase) => (
           <text
             key={phase.label}
@@ -157,8 +157,9 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
             textAnchor="middle"
             fill="#eae8e4"
             fontFamily="system-ui, sans-serif"
-            fontSize="7"
+            fontSize="6.5"
             fontWeight="600"
+            style={{ letterSpacing: "0.06em" }}
           >
             {phase.label}
           </text>

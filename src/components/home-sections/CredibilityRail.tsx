@@ -11,37 +11,39 @@ const showStanford = hero.proofStrip.includes("Stanford AI Certified");
 
 export function CredibilityRail() {
   return (
-    <Section container={false} className="relative overflow-hidden border-t border-ink-200/50 bg-support py-8 sm:py-10">
+    <Section
+      className="relative overflow-hidden border-t border-ink-200/50 bg-support-100 py-6 sm:py-7"
+    >
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0"
         aria-hidden
         style={{
-          backgroundImage:
-            "radial-gradient(ellipse at 20% 0%, rgba(34,211,199,0.30), transparent 55%), radial-gradient(ellipse at 80% 30%, rgba(13,148,136,0.22), transparent 60%), linear-gradient(to bottom, rgba(0,0,0,0.03), rgba(0,0,0,0))",
+          background:
+            "linear-gradient(to bottom, rgba(26,24,22,0.025), transparent 35%), radial-gradient(ellipse 80% 50% at 50% 0%, rgba(13,148,136,0.06), transparent 50%)",
         }}
       />
-      <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-12 sm:gap-y-10 sm:px-6 md:gap-x-16">
+      <div className="relative z-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-12 sm:gap-y-6 md:gap-x-14">
         {logoCompanies.map((name) => (
           <div
             key={name}
-            className="flex w-full max-w-[12rem] shrink-0 items-center justify-center sm:w-auto sm:max-w-none"
+            className="flex shrink-0 items-center justify-center opacity-90 transition-opacity duration-200 hover:opacity-100"
           >
             <CompanyWordmark
               name={name}
               src={logoPaths[name]}
-              size="lg"
-              className="max-h-11 w-auto max-w-[min(100%,12.5rem)] object-center sm:max-h-10 sm:w-[9.375rem] sm:object-left"
+              size="md"
+              className="h-7 w-auto max-w-[6.5rem] object-contain sm:h-7 sm:max-w-[7rem]"
             />
           </div>
         ))}
         {showStanford && (
-          <div className="flex w-full max-w-[13rem] shrink-0 items-center justify-center sm:w-auto">
+          <div className="flex shrink-0 items-center justify-center opacity-90 transition-opacity duration-200 hover:opacity-100">
             <Image
               src={stanfordAI.certImage}
               alt="Stanford AI Certified"
               width={132}
               height={132}
-              className="h-[3rem] w-auto max-w-full object-contain sm:h-[2.75rem]"
+              className="h-5 w-auto object-contain sm:h-5"
               priority
             />
           </div>

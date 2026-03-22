@@ -1,10 +1,8 @@
 export const hero = {
   tagline: "From fragmentation to flow",
-  // Variants explored: 2) "CX leadership: product and service transformation — from fragmentation to flow." 3) "I lead CX, product, and service transformation. Fragmentation becomes flow."
-  headline:
-    "I lead CX, product, and service transformation — turning fragmentation into flow.",
+  headline: "I lead CX, product, and service transformation.",
   subhead:
-    "CX leadership grounded in journey architecture and modernization — reducing effort, improving resolution, and aligning teams around experiences that flow.",
+    "Journey architecture and service modernization that reduce effort, improve resolution, and turn fragmentation into flow.",
   proofStrip: [
     "Autodesk",
     "Wipro",
@@ -58,31 +56,31 @@ export const transformationDashboard = {
     },
     {
       name: "Wipro",
-      headline: "CX practice build & renewal",
+      headline: "CX practice build and renewal",
       narrative:
-        "CX practice from zero. Six operating towers aligned. C-suite partnership on financial and CX/EX outcomes.",
+        "Built the practice from the ground up. Six operating towers aligned. C-suite partnership on financial and experience outcomes.",
       kpis: [
-        { value: "31%", label: "MTTR reduction in 2 years" },
-        { value: "30+", label: "CX/EX outcomes delivered" },
+        { value: "31%", label: "MTTR reduction, 2 years" },
+        { value: "30+", label: "CX and EX outcomes" },
         { value: "15%+", label: "NPS improvement" },
-        { value: "16k", label: "annual reduction in lockout cases QoQ" },
+        { value: "16k", label: "lockout cases reduced, annual" },
       ],
       capabilityTags: [
         "Practice Build",
         "Transformation",
         "Operating Towers",
-        "CX/EX Outcomes",
+        "Experience Outcomes",
       ],
     },
     {
       name: "EY",
-      headline: "Experience strategy & eight-figure renewal",
+      headline: "Experience strategy and eight-figure renewal",
       narrative:
-        "Experience strategy for public health. Vaccine partnerships, vaccination outreach, claims at scale.",
+        "Experience strategy for public health. Vaccine partnerships, vaccination outreach, and claims at scale.",
       kpis: [
-        { value: "10+", label: "vaccine brand partnerships" },
+        { value: "10+", label: "vaccine brand partners" },
         { value: "715", label: "Say Yes Summer vaccinations" },
-        { value: "4.57M", label: "social impressions" },
+        { value: "4.57M", label: "social reach" },
         { value: "8-figure", label: "renewal" },
       ],
       capabilityTags: [
@@ -155,7 +153,7 @@ export const featuredCaseStudies = {
       motif: "converge" as const,
       client: "Wipro",
       title: "From zero to eight-figure renewal: building a CX practice",
-      outcome: "31% MTTR reduction, 15%+ NPS. 16k annual reduction in lockout cases QoQ.",
+      outcome: "31% MTTR reduction, 15%+ NPS. 16k lockout cases reduced, annual.",
       category: "Transformation",
     },
     {
@@ -163,7 +161,7 @@ export const featuredCaseStudies = {
       motif: "flow" as const,
       client: "EY / Georgia DPH",
       title: "Public health at scale: vaccine outreach and claims",
-      outcome: "10+ brand partnerships, 715 vaccinations, 4.57M impressions. Eight-figure renewal.",
+      outcome: "10+ brand partners, 715 vaccinations, 4.57M social reach. Eight-figure renewal.",
       category: "Public Sector",
     },
     {

@@ -159,7 +159,8 @@ export function TowerConvergenceViz({ isHovered = false }: { isHovered?: boolean
           x={boxCenterX}
           y={boxCenterY + 9}
           textAnchor="middle"
-          className="fill-dashboard-ink-light font-body text-[5px] font-bold"
+          className="fill-dashboard-ink-light font-body text-[5.5px] font-semibold tracking-wide"
+          style={{ letterSpacing: "0.08em" }}
         >
           Aligned
         </text>

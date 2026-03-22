@@ -19,8 +19,8 @@ const config: Config = {
           { lineHeight: "0.96", letterSpacing: "-0.04em" },
         ],
         "hero-tight": [
-          "clamp(1.875rem, 4vw, 2.5rem)",
-          { lineHeight: "1.15", letterSpacing: "-0.02em" },
+          "clamp(1.75rem, 3.8vw, 2.25rem)",
+          { lineHeight: "1.2", letterSpacing: "-0.02em" },
         ],
         section: [
           "clamp(2.125rem, 4.5vw, 3rem)",
@@ -39,12 +39,12 @@ const config: Config = {
         "card-title": ["1rem", { lineHeight: "1.1", letterSpacing: "-0.03em" }],
       },
       colors: {
-        // Premium light base — page and primary surfaces (warm off-white, not stark)
+        // Premium light base — warm editorial, richer than stark white
         base: {
-          DEFAULT: "#f5f3ef",
-          50: "#faf9f6",
-          100: "#f5f3ef",
-          200: "#eeebe6",
+          DEFAULT: "#f2efea",
+          50: "#f8f6f2",
+          100: "#f2efea",
+          200: "#eae6df",
         },
         ink: {
           50: "#f7f6f5",
@@ -61,32 +61,32 @@ const config: Config = {
           950: "#1a1816",
         },
         paper: {
-          50: "#fdfcfb",
-          100: "#faf8f5",
-          200: "#f4f0ea",
-          300: "#ebe5db",
+          50: "#fdfbf8",
+          100: "#f9f6f1",
+          200: "#f2ede5",
+          300: "#e8e2d8",
         },
         surface: {
-          50: "#faf9f7",
-          100: "#f3f1ec",
-          200: "#eae6df",
+          50: "#f7f4ef",
+          100: "#efece4",
+          200: "#e5e0d6",
         },
-        // Softer support tint — subtle backgrounds, layering, section alternation
+        // Support tint — warmer, more presence for section alternation
         support: {
-          DEFAULT: "#f0ede8",
-          50: "#f5f3f0",
-          100: "#f0ede8",
-          200: "#e8e4de",
+          DEFAULT: "#ebe7e0",
+          50: "#f2efe8",
+          100: "#ebe7e0",
+          200: "#e2ddd4",
         },
         // Dashboard — darker, richer field (most energized visual layer)
         dashboard: {
-          bg: "#1c1b19",
-          surface: "#252320",
-          card: "#2c2926",
-          border: "#3a3734",
-          muted: "#161513",
-          "ink-light": "#eae8e4",
-          "ink-muted": "#9e9a94",
+          bg: "#1a1918",
+          surface: "#22201e",
+          card: "#2a2825",
+          border: "#383531",
+          muted: "#141312",
+          "ink-light": "#e8e6e2",
+          "ink-muted": "#a39f98",
         },
         // Electric accent — instrumentation, signal lines, highlights, active states
         accent: {
@@ -109,6 +109,7 @@ const config: Config = {
       },
       animation: {
         ticker: "ticker 45s linear infinite",
+        "ticker-slow": "ticker 65s linear infinite",
         "fade-up": "fade-up 0.6s ease-out both",
         "fade-in": "fade-in 0.5s ease-out both",
         "signal-flow": "signal-flow 1.4s ease-in-out infinite",
@@ -148,8 +149,11 @@ const config: Config = {
         },
       },
       boxShadow: {
-        card: "0 1px 3px 0 rgb(26 24 22 / 0.06)",
-        "card-hover": "0 4px 12px 0 rgb(26 24 22 / 0.08)",
+        card: "0 1px 4px 0 rgb(26 24 22 / 0.08), 0 1px 2px -1px rgb(26 24 22 / 0.04)",
+        "card-hover": "0 8px 24px -4px rgb(26 24 22 / 0.1), 0 4px 8px -4px rgb(26 24 22 / 0.06)",
+        "card-elevated": "0 4px 16px -2px rgb(26 24 22 / 0.09), 0 2px 6px -2px rgb(26 24 22 / 0.05)",
+        portal: "0 4px 24px -2px rgb(26 24 22 / 0.14), 0 2px 10px -2px rgb(26 24 22 / 0.08)",
+        "portal-hover": "0 16px 48px -8px rgb(26 24 22 / 0.2), 0 0 28px -4px rgb(13 148 136 / 0.22)",
         glow: "0 0 24px -4px rgb(13 148 136 / 0.35)",
         "glow-sm": "0 0 12px -2px rgb(13 148 136 / 0.25)",
         "dashboard-glow": "0 0 20px -2px rgb(34 211 199 / 0.25)",

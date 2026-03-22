@@ -18,9 +18,9 @@ const root = join(__dirname, "..");
 const portraitPath = join(root, "public", "images", "portraits", "matt-portrait-mapping.png");
 const outputPath = join(root, "src", "data", "pointillism.json");
 
-const NUM_DOTS = 450;
-const JITTER = 1.2; // px - organic, non-grid look
-const LUM_POWER = 1.8; // >1 boosts highlights, dims shadows
+const NUM_DOTS = 950;
+const JITTER = 0.85; // Tighter for editorial precision
+const LUM_POWER = 1.35; // Balanced: highlights dense, shadows still define contours
 
 function seededRandom(seed) {
   const x = Math.sin(seed) * 10000;
@@ -45,7 +45,7 @@ async function main() {
   const meta = await img.metadata();
   const w = meta.width || 1024;
   const h = meta.height || 1024;
-  const scale = Math.min(320 / w, 320 / h, 1);
+  const scale = Math.min(440 / w, 440 / h, 1);
   const sw = Math.round(w * scale);
   const sh = Math.round(h * scale);
 
@@ -109,7 +109,7 @@ async function main() {
   const viewH = 420;
   const originX = viewW / 2;
   const originY = viewH / 2;
-  const scaleOut = Math.min(200 / rangeX, 220 / rangeY);
+  const scaleOut = Math.min(240 / rangeX, 260 / rangeY);
 
   const scaled = pts.map(([x, y, l]) => [
     Math.round(originX + (x - midX) * scaleOut),
