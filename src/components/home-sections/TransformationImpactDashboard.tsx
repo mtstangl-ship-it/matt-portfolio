@@ -65,7 +65,7 @@ function CompanyCard({
             }
       }
     >
-      <header className="flex min-h-[4rem] shrink-0 items-center border-b border-dashboard-border/70 px-4 py-3 sm:min-h-[4.25rem] sm:px-5 sm:py-2.5">
+      <header className="flex min-h-[5rem] shrink-0 items-center border-b border-dashboard-border/70 px-4 py-3 sm:min-h-[5.5rem] sm:px-5 sm:py-3">
         <div className="min-w-0 flex-1 space-y-1.5">
           <CompanyWordmark
             name={name}
@@ -74,21 +74,17 @@ function CompanyCard({
             inverted
             className="object-left max-h-7 sm:max-h-8"
           />
-          <h3 className="font-display text-[0.875rem] font-bold leading-[1.2] tracking-tight text-dashboard-ink-light line-clamp-2 sm:text-[0.9375rem] sm:leading-[1.15] sm:line-clamp-1">
+          <h3 className="font-display text-[0.875rem] font-bold leading-[1.25] tracking-tight text-dashboard-ink-light line-clamp-2 sm:text-[0.9375rem] sm:leading-[1.2]">
             {headline}
           </h3>
         </div>
       </header>
       {VizComponent && (
         <div
-          className={`relative h-[9.5rem] shrink-0 border-b border-dashboard-border/70 px-4 py-4 sm:px-5 sm:py-5 ${
-            name === "Autodesk" ? "bg-dashboard-muted/90" : "bg-dashboard-muted"
-          }`}
+          className="relative flex h-[9rem] shrink-0 flex-col border-b border-dashboard-border/70 bg-dashboard-muted px-4 py-4 sm:px-5 sm:py-5"
         >
           <div
-            className={`absolute inset-0 ${
-              name === "Autodesk" ? "opacity-[0.06]" : "opacity-[0.12]"
-            }`}
+            className="absolute inset-0 opacity-[0.12]"
             style={{
               backgroundImage:
                 "linear-gradient(to right, rgb(34 211 199) 1px, transparent 1px), linear-gradient(to bottom, rgb(34 211 199) 1px, transparent 1px)",
@@ -97,18 +93,18 @@ function CompanyCard({
             aria-hidden
           />
           <motion.div
-            className={`relative w-full transform-gpu transition-transform duration-250 ease-out will-change-transform motion-reduce:transition-none ${vizHoverClasses}`}
+            className={`relative min-h-0 flex-1 w-full transform-gpu transition-transform duration-250 ease-out will-change-transform motion-reduce:transition-none ${vizHoverClasses}`}
           >
             <VizComponent isHovered={isHovered && !reducedMotion} />
           </motion.div>
         </div>
       )}
-      <div className="flex min-h-[3.5rem] flex-1 flex-col justify-center px-4 py-3 sm:min-h-[3.75rem] sm:px-5 sm:py-4">
-        <p className="font-body text-[0.8125rem] font-bold leading-[1.5] text-dashboard-ink-muted line-clamp-3 sm:text-body sm:leading-[1.45]">
+      <div className="flex min-h-0 flex-1 flex-col justify-center px-4 pt-3 pb-2 sm:px-5 sm:pt-4 sm:pb-2">
+        <p className="font-body text-[0.8125rem] font-bold leading-[1.5] text-dashboard-ink-muted line-clamp-4 sm:text-[0.8125rem] sm:leading-[1.5]">
           {narrative}
         </p>
       </div>
-      <div className="grid min-w-0 shrink-0 grid-cols-2 gap-2 border-t border-dashboard-border/70 bg-dashboard-surface px-4 py-3 sm:gap-2.5 sm:px-5 sm:py-4">
+      <div className="grid min-w-0 shrink-0 grid-cols-2 gap-2 border-t border-dashboard-border/70 bg-dashboard-surface px-4 pt-2 pb-3 sm:gap-2.5 sm:px-5 sm:pt-2.5 sm:pb-4">
         {kpis.map((kpi, i) => (
           <CountUpMetric
             key={`${name}-${i}-${kpi.value}`}
@@ -119,7 +115,7 @@ function CompanyCard({
         ))}
       </div>
       <div className="flex shrink-0 flex-wrap gap-1.5 border-t border-dashboard-border/70 px-4 py-3 sm:px-5">
-        {capabilityTags.slice(0, 3).map((tag) => (
+        {capabilityTags.slice(0, 4).map((tag) => (
           <span
             key={tag}
             className="font-body text-metric-sm rounded-sm border border-accent-signal/40 bg-accent-signal/8 px-2.5 py-1 font-semibold uppercase tracking-wider text-accent-signal/95"

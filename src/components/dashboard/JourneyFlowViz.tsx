@@ -2,204 +2,172 @@
 
 import { motion } from "framer-motion";
 
-const accent = "#22d3c7";
-const ease = [0.25, 0.46, 0.45, 0.94] as const;
+// Revenue through productized services: fragmentation → productization → growth
+// Signals (scattered) → Offering (packaged blocks) → Growth (expand)
 
-// Scattered origins — fragmented signals across the field
-const scatterPositions: [number, number, number][] = [
-  [28, 16, 1.2],
-  [72, 48, 1.5],
-  [42, 44, 1.1],
-  [95, 18, 1.4],
-  [115, 42, 1.3],
-  [148, 24, 1.6],
-  [178, 48, 1.2],
-  [205, 32, 1.4],
-  [55, 58, 1.0],
-  [135, 12, 1.3],
-  [165, 56, 1.2],
-  [218, 48, 1.1],
+const accent = "#22d3c7";
+const cycleDuration = 4.5;
+
+// Phase 1: Scattered signal dots (scaled to fit graphic area)
+const signalDots: [number, number][] = [
+  [30, 10],
+  [95, 6],
+  [55, 26],
+  [170, 12],
+  [120, 30],
+  [200, 22],
+  [75, 32],
+  [145, 8],
 ];
 
-// Flow path — organic journey arc (no literal line in final design)
-const flowPath = "M 12 38 Q 70 22, 120 36 T 228 34";
+// Phase 2: Network formation — dots converge toward these positions
+const networkPositions: [number, number][] = [
+  [55, 16],
+  [95, 14],
+  [75, 22],
+  [165, 16],
+  [120, 22],
+  [185, 20],
+  [85, 26],
+  [135, 17],
+];
 
-// Sample points along path for dot targets
-function samplePath(t: number): [number, number] {
-  const segs = 12;
-  const i = Math.min(Math.floor(t * segs), segs - 1);
-  const local = (t * segs) % 1;
-  const pts: [number, number][] = [
-    [18, 36],
-    [38, 32],
-    [62, 30],
-    [88, 33],
-    [112, 35],
-    [136, 36],
-    [158, 35],
-    [180, 34],
-    [198, 33],
-    [212, 33],
-    [222, 33],
-    [228, 34],
-  ];
-  const [x0, y0] = pts[i];
-  const [x1, y1] = pts[Math.min(i + 1, pts.length - 1)];
-  return [x0 + (x1 - x0) * local, y0 + (y1 - y0) * local];
-}
+// Phase 3: Packaging — 3 clean blocks (productized offering)
+const blocks = [
+  { x: 32, y: 8, w: 56, h: 28 },
+  { x: 92, y: 8, w: 56, h: 28 },
+  { x: 152, y: 8, w: 56, h: 28 },
+];
+
+// Labels
+const labels = [
+  { x: 50, label: "Signals" },
+  { x: 120, label: "Offering" },
+  { x: 190, label: "Growth" },
+];
 
 export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = {}) {
-  const connectDuration = 3.2;
-  const settleDuration = 2;
-  const pathRevealDuration = 2.4;
-
   return (
-    <div className="relative h-32 w-full overflow-hidden">
-      {/* Atmospheric gradient — depth, not decoration */}
-      <div
-        className="absolute inset-0 opacity-[0.07]"
-        aria-hidden
-        style={{
-          background: `radial-gradient(ellipse 80% 60% at 50% 50%, ${accent}, transparent 70%)`,
-        }}
-      />
+    <div className="relative flex h-full w-full flex-col">
       <svg
-        viewBox="0 0 240 70"
-        className="relative h-full w-full"
+        viewBox="0 0 240 42"
+        className="min-h-0 flex-1"
         preserveAspectRatio="xMidYMid meet"
       >
-        <defs>
-          <linearGradient
-            id="journeyFlowGlow"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="0%"
-          >
-            <stop offset="0%" stopColor={accent} stopOpacity="0" />
-            <stop offset="15%" stopColor={accent} stopOpacity="0.08" />
-            <stop offset="50%" stopColor={accent} stopOpacity="0.2" />
-            <stop offset="85%" stopColor={accent} stopOpacity="0.08" />
-            <stop offset="100%" stopColor={accent} stopOpacity="0" />
-          </linearGradient>
-          <filter id="journeyBlur" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <filter id="dotGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="blur" />
-            <feMerge>
-              <feMergeNode in="SourceGraphic" />
-              <feMergeNode in="blur" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* Flow channel — soft illuminated path, not a literal line */}
-        <motion.path
-          d={flowPath}
-          fill="none"
-          stroke="url(#journeyFlowGlow)"
-          strokeWidth={12}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={
-            isHovered
-              ? {
-                  pathLength: 1,
-                  opacity: 1,
-                  transition: {
-                    pathLength: { duration: pathRevealDuration, ease },
-                    opacity: { duration: 1, delay: 0.3 },
-                  },
-                }
-              : { pathLength: 0, opacity: 0, transition: { duration: 0.8, ease } }
-          }
-          style={{ filter: "url(#journeyBlur)" }}
-        />
-
-        {/* Signal dots — varied size for dimensionality */}
-        {scatterPositions.map(([sx, sy, baseR], i) => {
-          const [fx, fy] = samplePath((i + 0.5) / scatterPositions.length);
-          const delay = i * 0.08;
+        {/* Phase 1–2: Connecting lines — form network, fade before packaging */}
+        {[
+          [0, 2], [1, 2], [2, 4], [3, 4], [4, 5], [4, 6], [5, 7], [2, 7],
+        ].map(([a, b], i) => {
+          const [ax, ay] = networkPositions[a];
+          const [bx, by] = networkPositions[b];
           return (
-            <g key={i}>
-              <motion.circle
-                r={baseR}
-                fill={accent}
-                initial={{ cx: sx, cy: sy, opacity: 0.4, scale: 1 }}
-                animate={
-                  isHovered
-                    ? {
-                        cx: [sx, fx],
-                        cy: [sy, fy],
-                        opacity: [0.4, 0.88],
-                        scale: [1, 1.05],
-                        transition: {
-                          cx: {
-                            duration: connectDuration,
-                            delay,
-                            ease,
-                          },
-                          cy: {
-                            duration: connectDuration,
-                            delay,
-                            ease,
-                          },
-                          opacity: {
-                            duration: connectDuration * 0.6,
-                            delay,
-                          },
-                          scale: {
-                            duration: settleDuration,
-                            delay: delay + connectDuration * 0.7,
-                            ease,
-                          },
-                        },
-                      }
-                    : {
-                        cx: sx,
-                        cy: sy,
-                        opacity: 0.4,
-                        scale: 1,
-                        transition: { duration: 1.4, ease },
-                      }
-                }
-                style={{
-                  filter: "url(#dotGlow)",
-                  transformOrigin: "center",
-                }}
-              />
-            </g>
+            <motion.line
+              key={`${a}-${b}`}
+              x1={ax}
+              y1={ay}
+              x2={bx}
+              y2={by}
+              stroke={accent}
+              strokeWidth={0.6}
+              strokeLinecap="round"
+              initial={false}
+              animate={
+                isHovered
+                  ? {
+                      opacity: [0, 0, 0.3, 0.3, 0.05, 0],
+                      transition: {
+                        duration: cycleDuration,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        times: [0, 0.2, 0.38, 0.46, 0.5, 0.54],
+                      },
+                    }
+                  : { opacity: 0 }
+              }
+            />
           );
         })}
 
-        {/* Traveling luminescence — flow indication when system is active */}
-        {isHovered && (
-          <circle
-            r={2}
+        {/* Phase 3–4: Packaged blocks — snap in (crisp), then grow */}
+        {blocks.map((block, i) => (
+          <motion.rect
+            key={i}
+            x={block.x}
+            y={block.y}
+            width={block.w}
+            height={block.h}
+            style={{ transformOrigin: `${block.x + block.w / 2}px ${block.y + block.h / 2}px` }}
+            rx={2}
+            ry={2}
             fill={accent}
-            opacity={0.35}
-            style={{ filter: "url(#journeyBlur)" }}
-          >
-            <animateMotion
-              dur="6s"
-              repeatCount="indefinite"
-              path={flowPath}
+            stroke="rgba(255,255,255,0.2)"
+            strokeWidth={0.5}
+            initial={false}
+            animate={
+              isHovered
+                ? {
+                    opacity: [0, 0, 1, 1, 1],
+                    scale: [0.5, 0.5, 1, 1, 1.1],
+                    y: [block.y + 8, block.y + 8, block.y, block.y, block.y - 2],
+                    transition: {
+                      duration: cycleDuration,
+                      repeat: Infinity,
+                      ease: [0.33, 1, 0.68, 1],
+                      times: [0, 0.48, 0.52, 0.65, 1],
+                      delay: i * 0.015,
+                    },
+                  }
+                : { opacity: 0, scale: 0.8 }
+            }
+          />
+        ))}
+
+        {/* Phase 1–2: Signal dots — scattered → network → fade as blocks appear */}
+        {signalDots.map(([sx, sy], i) => {
+          const [nx, ny] = networkPositions[i] ?? [sx, sy];
+          return (
+            <motion.circle
+              key={i}
+              r={2.2}
+              fill={accent}
+              initial={false}
+              animate={
+                isHovered
+                  ? {
+                      cx: [sx, nx, nx, nx],
+                      cy: [sy, ny, ny, ny],
+                      opacity: [0.55, 0.8, 0.8, 0],
+                      scale: [1, 1.1, 1.1, 0.5],
+                      transition: {
+                        duration: cycleDuration,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        times: [0, 0.4, 0.48, 0.55],
+                        delay: i * 0.025,
+                      },
+                    }
+                  : {
+                      cx: sx,
+                      cy: sy,
+                      opacity: 0.5,
+                      scale: 1,
+                    }
+              }
             />
-            <animate
-              attributeName="opacity"
-              values="0.2;0.5;0.2"
-              dur="3s"
-              repeatCount="indefinite"
-            />
-          </circle>
-        )}
+          );
+        })}
+
       </svg>
+      <div className="flex shrink-0 justify-between px-2 pt-3">
+        {labels.map(({ label }) => (
+          <span
+            key={label}
+            className="font-body text-[0.5rem] font-semibold uppercase tracking-wider text-dashboard-ink-light"
+          >
+            {label}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

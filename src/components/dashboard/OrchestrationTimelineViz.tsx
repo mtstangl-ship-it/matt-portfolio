@@ -2,79 +2,57 @@
 
 import { motion } from "framer-motion";
 
-const phases = [
-  { x: 12, w: 34, label: "Scattered" },
-  { x: 52, w: 36, label: "Structured" },
-  { x: 94, w: 40, label: "Aligned" },
-  { x: 140, w: 40, label: "Flow" },
+// Georgia outline (from GeoJSON) with metro nodes radiating like radar
+// Metros: Atlanta, Augusta, Savannah, Columbus, Macon
+
+// Georgia from US Census GeoJSON — equal x/y scale to preserve proportions
+const georgiaPath =
+  "M94.5 15 L87.7 21.8 L87.2 25.2 L97.8 32.1 L101.1 31.5 L106 38.6 L107 42.3 L112.1 49 L119.4 53 L123.5 59 L132.1 64.5 L131.7 68.2 L137.3 74.2 L145.8 79.1 L147.9 84.4 L148.3 91.3 L152.6 93.6 L157.7 102.2 L157.8 107.7 L165.1 110.5 L157.3 121.4 L155.9 127.1 L152.6 132 L152.3 137.1 L148.8 139.4 L147.4 153.2 L138.7 151.9 L131.4 149.3 L128.4 151.7 L129.6 157.7 L128.2 164.3 L124.4 164.4 L122.8 157.6 L82.1 155.1 L38.6 153 L34.3 143.6 L30.8 134.8 L33 126.4 L29.9 116.7 L32.7 111.2 L32.5 107.2 L37.9 103.1 L34.3 101.2 L35.6 98 L32.2 92.9 L28.5 83.9 L20.7 43.2 L15.1 15.5 L56 15.3 L78.3 15.5 L94.5 15 Z";
+
+const metros = [
+  { x: 53, y: 57, name: "Atlanta" },
+  { x: 130, y: 63, name: "Augusta" },
+  { x: 158, y: 108, name: "Savannah" },
+  { x: 34, y: 95, name: "Columbus" },
+  { x: 79, y: 86, name: "Macon" },
 ];
 
-const barBaselineY = 22;
-const lineY = 44;
-const wordsY = 58;
-const lineStartX = 14;
-const lineEndX = 186;
-const mutedFill = "#9e9a94";
 const accentFill = "#22d3c7";
-
-// Dot passes bar i on L→R at t = (center - lineStart) / (lineEnd - lineStart) * 0.5
-// Dot passes bar i on R→L at t = 0.5 + (lineEnd - center) / (lineEnd - lineStart) * 0.5
-const centers = phases.map((p) => p.x + p.w / 2);
-const lineLen = lineEndX - lineStartX;
-
-function getGrowTime(i: number) {
-  return ((centers[i] - lineStartX) / lineLen) * 0.5;
-}
-function getShrinkTime(i: number) {
-  return 0.5 + ((lineEndX - centers[i]) / lineLen) * 0.5;
-}
+const ease = [0.25, 0.46, 0.45, 0.94] as const;
+const ringsPerMetro = 2;
+const cycleDuration = 2.8;
 
 export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: boolean } = {}) {
-  // Dot path: left → right → left (infinite loop)
-  const dotPath = [lineStartX, lineEndX, lineStartX];
-  const cycleDuration = 5;
-
   return (
     <div className="relative h-32 w-full">
       <svg
-        viewBox="0 0 200 65"
+        viewBox="0 0 200 190"
         className="h-full w-full"
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* 1. BARS – grow as dot passes L→R (stick), shrink as dot passes R→L */}
-        {phases.map((phase, i) => {
-          const baseHeight = 8 + i * 2;
-          const litHeight = 14 + i * 2;
-          const growT = getGrowTime(i);
-          const shrinkT = getShrinkTime(i);
-
-          return (
-            <motion.rect
-              key={phase.label}
-              x={phase.x}
-              width={phase.w}
-              rx={3}
-              ry={3}
-              fill={mutedFill}
-              initial={{ y: barBaselineY - baseHeight, height: baseHeight }}
+        {/* Radar rings from each metro */}
+        {metros.map((metro, mi) =>
+          Array.from({ length: ringsPerMetro }).map((_, ri) => (
+            <motion.circle
+              key={`${mi}-${ri}`}
+              cx={metro.x}
+              cy={metro.y}
+              r={12 + ri * 14}
+              fill="none"
+              stroke={accentFill}
+              strokeWidth={1}
+              initial={false}
               animate={
                 isHovered
                   ? {
-                      height: [baseHeight, baseHeight, litHeight, litHeight, baseHeight, baseHeight],
-                      y: [
-                        barBaselineY - baseHeight,
-                        barBaselineY - baseHeight,
-                        barBaselineY - litHeight,
-                        barBaselineY - litHeight,
-                        barBaselineY - baseHeight,
-                        barBaselineY - baseHeight,
-                      ],
-                      fill: [mutedFill, mutedFill, accentFill, accentFill, mutedFill, mutedFill],
+                      r: [12 + ri * 14, 28 + ri * 16, 28 + ri * 16, 12 + ri * 14],
+                      opacity: [0.45, 0.18, 0.04, 0.45],
+                      strokeWidth: [1.2, 0.6, 0.4, 1.2],
                     }
                   : {
-                      height: baseHeight,
-                      y: barBaselineY - baseHeight,
-                      fill: i === phases.length - 1 ? accentFill : mutedFill,
+                      r: 12 + ri * 14,
+                      opacity: 0.18,
+                      strokeWidth: 0.8,
                     }
               }
               transition={
@@ -82,83 +60,49 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
                   ? {
                       duration: cycleDuration,
                       repeat: Infinity,
-                      ease: "linear",
-                      times: [0, Math.max(0.01, growT - 0.04), growT + 0.04, shrinkT - 0.04, Math.min(0.99, shrinkT + 0.04), 1],
+                      ease: "easeOut",
+                      delay: mi * 0.18 + ri * 0.45,
                     }
                   : { duration: 0.3 }
               }
-              style={{
-                opacity: isHovered ? 1 : i === phases.length - 1 ? 0.85 : 0.5,
-              }}
             />
-          );
-        })}
-
-        {/* 2. LINE – full length */}
-        <line
-          x1={lineStartX}
-          y1={lineY}
-          x2={lineEndX}
-          y2={lineY}
-          stroke="currentColor"
-          strokeWidth={0.8}
-          className="text-dashboard-ink-muted/50"
-        />
-        <line
-          x1={lineStartX}
-          y1={lineY}
-          x2={lineEndX}
-          y2={lineY}
-          stroke="currentColor"
-          strokeWidth={0.5}
-          strokeDasharray="6 4"
-          className="text-accent-signal/70"
-        />
-
-        {/* 3. DOT – full length, then backwards */}
-        {isHovered ? (
-          <motion.circle
-            r={4}
-            cy={lineY}
-            fill="currentColor"
-            className="text-accent-signal"
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{
-              opacity: 1,
-              scale: 1.05,
-              cx: dotPath,
-            }}
-            transition={{
-              duration: cycleDuration,
-              repeat: Infinity,
-              ease: "linear",
-              times: [0, 0.5, 1],
-            }}
-            style={{ filter: "drop-shadow(0 0 10px rgb(34 211 199 / 0.6))" }}
-          />
-        ) : (
-          <circle
-            cx={lineEndX}
-            cy={lineY}
-            r={4}
-            fill="currentColor"
-            className="text-accent-signal"
-            opacity={0.9}
-            style={{ filter: "drop-shadow(0 0 8px rgb(34 211 199 / 0.5))" }}
-          />
+          ))
         )}
 
-        {/* 4. Phase labels */}
-        {phases.map((phase) => (
-          <text
-            key={phase.label}
-            x={phase.x + phase.w / 2}
-            y={wordsY}
-            textAnchor="middle"
-            className="fill-dashboard-ink-light font-body text-[6px] font-semibold uppercase tracking-[0.1em]"
-          >
-            {phase.label}
-          </text>
+        {/* Georgia outline */}
+        <path
+          d={georgiaPath}
+          fill="currentColor"
+          className="text-dashboard-ink-muted/15"
+        />
+        <path
+          d={georgiaPath}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={1}
+          className="text-accent-signal"
+          opacity={isHovered ? 0.85 : 0.55}
+        />
+
+        {/* Metro nodes */}
+        {metros.map((metro) => (
+          <motion.circle
+            key={metro.name}
+            cx={metro.x}
+            cy={metro.y}
+            r={3}
+            fill="currentColor"
+            className="text-accent-signal"
+            initial={false}
+            animate={{
+              opacity: isHovered ? 1 : 0.75,
+              scale: isHovered ? 1.15 : 1,
+              transition: { duration: 0.3, ease },
+            }}
+            style={{
+              filter: isHovered ? "drop-shadow(0 0 5px rgb(34 211 199 / 0.5))" : undefined,
+            }}
+          />
         ))}
       </svg>
     </div>

@@ -167,20 +167,20 @@ export function CountUpMetric({ value, label, index, variant = "default" }: Coun
   return (
     <motion.div
       ref={ref}
-      className={`flex h-[4rem] flex-col justify-between rounded-sm border px-3 py-2.5 sm:h-[4.25rem] sm:px-4 sm:py-3 ${
+      className={`flex flex-col justify-start gap-1.5 rounded-sm border px-3 py-2.5 sm:px-4 sm:py-3 ${
         isDashboard
-          ? "border-dashboard-border border-l-[3px] border-l-accent-signal bg-dashboard-muted/80"
-          : "border-ink-300/70 border-l-[3px] border-l-accent bg-ink-100/90"
+          ? "h-[5.5rem] border-dashboard-border border-l-[3px] border-l-accent-signal bg-dashboard-muted/80 sm:h-[5.75rem]"
+          : "h-[4rem] border-ink-300/70 border-l-[3px] border-l-accent bg-ink-100/90 sm:h-[4.25rem]"
       }`}
       initial={{ opacity: 0, y: 12 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
       transition={{ delay: 0.1 + index * 0.05, duration: 0.4 }}
     >
-      <p className={`font-mono text-[1rem] font-bold tabular-nums leading-tight sm:text-[1.25rem] ${isDashboard ? "text-dashboard-ink-light" : "text-ink-950"}`}>
+      <p className={`shrink-0 font-mono text-[1rem] font-bold tabular-nums leading-tight sm:text-[1.25rem] ${isDashboard ? "text-dashboard-ink-light" : "text-ink-950"}`}>
         {showAnimated ? display : finalDisplay}
       </p>
       <p
-        className={`font-body line-clamp-2 leading-[1.25] tracking-[0.01em] ${isDashboard ? "text-dashboard-ink-muted/95" : "text-ink-700"} text-[0.625rem] font-medium sm:text-[0.6875rem]`}
+        className={`min-w-0 font-body text-[0.625rem] font-medium leading-[1.35] tracking-[0.01em] sm:text-[0.6875rem] ${isDashboard ? "line-clamp-2 text-dashboard-ink-muted/95" : "line-clamp-2 text-ink-700"}`}
       >
         {label}
       </p>
