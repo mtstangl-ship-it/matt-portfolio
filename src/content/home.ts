@@ -2,7 +2,7 @@ export const hero = {
   tagline: "From fragmentation to flow",
   headline: "I lead CX, product, and service transformation.",
   subhead:
-    "Journey architecture and service modernization that reduce effort and improve resolution.",
+    "Journey architecture and service modernization that reduce effort, improve resolution, and turn fragmentation into flow.",
   proofStrip: [
     "Autodesk",
     "Wipro",

@@ -18,15 +18,15 @@ export function Hero() {
       <div className="flex flex-col lg:relative lg:min-h-[min(92vh,780px)]">
         <div className="relative z-10 order-1 bg-dashboard-bg px-4 pt-6 pb-5 sm:px-6 sm:pt-section sm:pb-8 lg:order-2 lg:absolute lg:inset-0 lg:z-10 lg:flex lg:items-center lg:bg-transparent lg:pb-0 lg:pt-0">
           <div className="mx-auto grid w-full max-w-6xl grid-cols-1 lg:grid-cols-[minmax(0,26rem),1fr] lg:items-center lg:gap-16">
-            <div className="w-full max-w-[min(20rem,100%)] sm:max-w-[22rem] lg:max-w-[26rem] space-y-5 sm:space-y-6">
-              <p className="font-display text-[clamp(1.375rem,4vw,2rem)] font-bold leading-[1.12] tracking-tight text-dashboard-ink-light flex items-center gap-3 sm:gap-4">
-                <JourneyArchitectureIcon className="h-7 w-7 shrink-0 sm:h-8 sm:w-8 text-accent-signal/95" aria-hidden />
+            <div className="flex w-full max-w-[min(18rem,100%)] flex-col sm:max-w-[20rem] lg:max-w-[22rem]">
+              <p className="mb-3 flex items-center gap-2 font-body text-[0.625rem] font-medium uppercase leading-[1.2] tracking-[0.14em] text-dashboard-ink-light/85 sm:mb-3.5 sm:gap-2.5 sm:text-[0.6875rem]">
+                <JourneyArchitectureIcon className="h-4 w-4 shrink-0 text-accent-signal/75" aria-hidden />
                 {hero.tagline}
               </p>
-              <h1 className="font-display text-[clamp(1rem,2.2vw,1.3125rem)] font-semibold leading-[1.28] tracking-tight text-dashboard-ink-light/95">
+              <h1 className="mb-4 font-display text-[clamp(1.25rem,3.2vw,1.5625rem)] font-semibold leading-[1.22] tracking-[-0.02em] text-dashboard-ink-light sm:mb-5">
                 {hero.headline}
               </h1>
-              <p className="font-body text-[0.8125rem] font-medium leading-[1.55] text-dashboard-ink-muted sm:text-[0.875rem] sm:leading-[1.5] max-w-[min(18rem,100%)]">
+              <p className="max-w-[min(16.5rem,100%)] font-body text-[0.8125rem] font-normal leading-[1.55] tracking-[0.01em] text-dashboard-ink-muted/90">
                 {hero.subhead}
               </p>
             </div>
