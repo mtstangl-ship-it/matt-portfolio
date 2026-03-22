@@ -3,10 +3,10 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { getPointillismPoints } from "@/lib/portraitPointillism";
 
-// Larger view for stronger visual presence
-const VIEW_W = 1600;
-const VIEW_H = 560;
-const FACE_OFFSET_X = 400;
+// Hero-scale view — big, immersive pointillism
+const VIEW_W = 2200;
+const VIEW_H = 780;
+const FACE_OFFSET_X = 520;
 const SRC_W = 1200;
 const SRC_H = 420;
 
@@ -17,18 +17,26 @@ const CHAOS_END = 4;
 const FLOW_END = 12.5;
 const PORTRAIT_END = 20;
 
-const MARGIN = 100;
-const PONG_BOUNDS = { x: MARGIN, y: 80, w: VIEW_W - 2 * MARGIN, h: VIEW_H - 2 * 80 };
+const MARGIN = 140;
+const PONG_BOUNDS = { x: MARGIN, y: 100, w: VIEW_W - 2 * MARGIN, h: VIEW_H - 2 * 100 };
 
 const allPoints = getPointillismPoints();
-const PORTRAIT_DOTS = Math.min(950, Math.max(1, allPoints.length || 600));
-const AMBIENT_DOTS = 180; // Dots from off-screen — portrait built from larger signal field
+const PORTRAIT_DOTS = Math.min(1400, Math.max(1, allPoints.length || 600));
+const AMBIENT_DOTS = 480; // Dots from off-screen — portrait built from massive signal field
 const numDots = PORTRAIT_DOTS + AMBIENT_DOTS;
 
-const pts: [number, number, number][] =
-  allPoints.length >= PORTRAIT_DOTS
-    ? allPoints.slice(0, PORTRAIT_DOTS)
-    : [...allPoints, ...Array.from({ length: PORTRAIT_DOTS - allPoints.length }, (): [number, number, number] => [800, 280, 0.5])];
+// Use all points; tile with deterministic jitter if we need more for denser portrait
+function buildPortraitPoints(): [number, number, number][] {
+  if (allPoints.length >= PORTRAIT_DOTS) return allPoints.slice(0, PORTRAIT_DOTS);
+  const out: [number, number, number][] = [];
+  for (let i = 0; i < PORTRAIT_DOTS; i++) {
+    const src = allPoints[i % allPoints.length];
+    const jitter = (i * 7) % 11 - 5; // deterministic offset
+    out.push([src[0] + jitter * 0.8, src[1] + ((i * 13) % 7 - 3) * 0.8, src[2]]);
+  }
+  return out;
+}
+const pts: [number, number, number][] = buildPortraitPoints();
 
 function scaleToView(x: number, y: number): [number, number] {
   return [x * (VIEW_W / SRC_W), y * (VIEW_H / SRC_H)];
@@ -47,13 +55,12 @@ function getAmbientTarget(i: number): [number, number, number] {
 }
 
 function getAmbientStartPos(i: number): [number, number] {
-  // Spread around the edges: left, right, top, bottom
   const side = i % 4;
   const t = (i * 0.17) % 1;
-  if (side === 0) return [-80 - (i % 5) * 40, 80 + t * (VIEW_H - 160)];
-  if (side === 1) return [VIEW_W + 80 + (i % 5) * 35, 80 + t * (VIEW_H - 160)];
-  if (side === 2) return [MARGIN + t * (VIEW_W - 2 * MARGIN), -60 - (i % 4) * 30];
-  return [MARGIN + t * (VIEW_W - 2 * MARGIN), VIEW_H + 60 + (i % 4) * 25];
+  if (side === 0) return [-120 - (i % 6) * 50, 100 + t * (VIEW_H - 200)];
+  if (side === 1) return [VIEW_W + 120 + (i % 6) * 45, 100 + t * (VIEW_H - 200)];
+  if (side === 2) return [MARGIN + t * (VIEW_W - 2 * MARGIN), -80 - (i % 5) * 35];
+  return [MARGIN + t * (VIEW_W - 2 * MARGIN), VIEW_H + 80 + (i % 5) * 30];
 }
 
 const ambientTargets: [number, number, number][] = Array.from({ length: AMBIENT_DOTS }, (_, i) =>
@@ -89,14 +96,14 @@ function getPongPos(i: number, t: number): [number, number] {
   return [px, py];
 }
 
-// Journey map: waypoint nodes connected by paths — complexity becoming navigable
+// Journey map: waypoint nodes — undulating wave path across the view
 const NODES: [number, number][] = [
-  [140, VIEW_H / 2 - 15],
-  [380, VIEW_H / 2 - 55],
-  [620, VIEW_H / 2 + 25],
-  [880, VIEW_H / 2 - 35],
-  [1140, VIEW_H / 2 + 15],
-  [1460, VIEW_H / 2 - 5],
+  [180, VIEW_H / 2],
+  [480, VIEW_H / 2 - 70],
+  [820, VIEW_H / 2 + 55],
+  [1160, VIEW_H / 2 - 50],
+  [1500, VIEW_H / 2 + 25],
+  [1880, VIEW_H / 2 - 20],
 ];
 
 function getPathT(i: number): number {
@@ -120,18 +127,25 @@ function lerpPath(t: number): [number, number] {
   ];
 }
 
-function getFlowPos(i: number): [number, number] {
+// Wave undulation for journey phase — pronounced undulating wave
+const WAVE_AMPLITUDE = 42;
+const WAVE_FREQ = 1.8;
+
+function getFlowPos(i: number, elapsed?: number): [number, number] {
   const t = getPathT(i);
   const [px, py] = lerpPath(t);
-  // Slight perpendicular spread so path reads as a band, not a single line
   const lane = (i % 3) - 1;
-  const spread = 4;
-  return [px, py + lane * spread];
+  const spread = 6;
+  let waveY = lane * spread;
+  if (elapsed !== undefined) {
+    waveY += WAVE_AMPLITUDE * Math.sin(elapsed * WAVE_FREQ + t * Math.PI * 2.5);
+  }
+  return [px, py + waveY];
 }
 
 const FACE_CENTER_X = VIEW_W / 2 + FACE_OFFSET_X * 0.5;
-const STACKED_CANVAS_W = 560;
-const STACKED_CANVAS_H = 400;
+const STACKED_CANVAS_W = 680;
+const STACKED_CANVAS_H = 500;
 
 export function HeroAtmosphereBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -173,7 +187,7 @@ export function HeroAtmosphereBackground() {
       h = Math.round(STACKED_CANVAS_H * dpr);
       const scaleX = w / VIEW_W;
       const scaleY = h / VIEW_H;
-      scale = Math.max(scaleX, scaleY) * 1.2;
+      scale = Math.max(scaleX, scaleY) * 1.35;
       offX = w / 2 - FACE_CENTER_X * scale;
       offY = (h - VIEW_H * scale) / 2;
     } else {
@@ -181,7 +195,7 @@ export function HeroAtmosphereBackground() {
       h = Math.round(rect.height * dpr);
       const scaleX = w / VIEW_W;
       const scaleY = h / VIEW_H;
-      scale = Math.max(scaleX, scaleY) * 1.05; // Slightly scale up so graphic reads larger
+      scale = Math.max(scaleX, scaleY) * 1.22;
       offX = (w - VIEW_W * scale) / 2;
       offY = (h - VIEW_H * scale) / 2;
     }
@@ -199,31 +213,37 @@ export function HeroAtmosphereBackground() {
       const elapsed = (performance.now() - startRef.current) / 1000;
       const cycle = elapsed % TOTAL_DURATION;
       const inMapPhase = cycle >= CHAOS_END + 0.5 && cycle < FLOW_END;
+      const inFlowPhase = cycle >= CHAOS_END + 0.8 && cycle < FLOW_END + 0.5;
 
-      // Draw subtle journey path during map phase — reinforces structure
+      // Draw undulating journey path during map phase
       if (inMapPhase) {
-        const mapPhaseProgress = (cycle - CHAOS_END - 0.5) / 0.6;
-        const pathOpacity = Math.min(1, Math.max(0, mapPhaseProgress)) * 0.1;
+        const mapPhaseProgress = Math.min(1, (cycle - CHAOS_END - 0.5) / 0.6);
+        const pathOpacity = mapPhaseProgress * 0.12;
+        const waveOffset = WAVE_AMPLITUDE * Math.sin(elapsed * WAVE_FREQ) * 0.6;
         ctx.strokeStyle = `rgba(34, 211, 199, ${pathOpacity})`;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 2;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
         ctx.beginPath();
-        ctx.moveTo(NODES[0][0], NODES[0][1]);
-        for (let n = 1; n < NODES.length; n++) {
-          ctx.lineTo(NODES[n][0], NODES[n][1]);
+        const samples = 60;
+        for (let s = 0; s <= samples; s++) {
+          const t = s / samples;
+          const [px, py] = lerpPath(t);
+          const waveY = waveOffset * Math.sin(t * Math.PI * 2.5);
+          if (s === 0) ctx.moveTo(px, py + waveY);
+          else ctx.lineTo(px, py + waveY);
         }
         ctx.stroke();
       }
 
       for (let i = 0; i < numDots; i++) {
         const isAmbient = i >= PORTRAIT_DOTS;
-        const flowPosI = getFlowPos(i);
+        const flowPosI = getFlowPos(i, inFlowPhase ? elapsed : undefined);
 
         let faceXI: number, faceYI: number, faceRI: number, faceOpacityI: number;
 
-        // Luminance → radius & opacity: dimensional, editorial tonal variation
-        const lumToRadius = (lum: number) => 1.35 + lum * 1.35;
+        // Luminance → radius & opacity: bigger dots for hero presence
+        const lumToRadius = (lum: number) => 1.6 + lum * 1.6;
         const lumToOpacity = (lum: number) => 0.52 + lum * 0.48;
         let lumI = 0.5;
 
@@ -258,7 +278,7 @@ export function HeroAtmosphereBackground() {
             x = pongPos[0];
             y = pongPos[1];
           }
-          r = isAmbient ? 1.4 : 1.6;
+          r = isAmbient ? 1.7 : 2;
           opacity = 0.68;
         } else if (cycle < CHAOS_END + 0.8) {
           const localT = (cycle - CHAOS_END) / 0.8;
@@ -276,8 +296,8 @@ export function HeroAtmosphereBackground() {
           }
           x = lerp(fromX, flowPosI[0], eased);
           y = lerp(fromY, flowPosI[1], eased);
-          r = 1.65;
-          opacity = lerp(0.68, 0.9, eased);
+          r = 2;
+          opacity = lerp(0.7, 0.92, eased);
         } else if (cycle < FLOW_END) {
           x = flowPosI[0];
           y = flowPosI[1];
@@ -289,14 +309,14 @@ export function HeroAtmosphereBackground() {
             )
           );
           const atNode = distToNode < 0.08;
-          r = atNode ? 2 : 1.65;
+          r = atNode ? 2.4 : 2;
           opacity = atNode ? 0.95 : 0.86;
         } else if (cycle < FLOW_END + 0.7) {
           const localT = (cycle - FLOW_END) / 0.7;
           const eased = easeInOutCubic(localT);
           x = lerp(flowPosI[0], faceXI, eased);
           y = lerp(flowPosI[1], faceYI, eased);
-          r = lerp(1.7, faceRI, eased);
+          r = lerp(2.1, faceRI, eased);
           opacity = lerp(0.88, faceOpacityI, eased);
         } else if (cycle < PORTRAIT_END) {
           x = faceXI;
@@ -309,13 +329,13 @@ export function HeroAtmosphereBackground() {
           const pongPos = getPongPos(i, 0);
           x = lerp(faceXI, pongPos[0], eased);
           y = lerp(faceYI, pongPos[1], eased);
-          r = lerp(faceRI, 1.6, eased);
+          r = lerp(faceRI, 2, eased);
           opacity = lerp(faceOpacityI, 0.72, eased);
         }
 
         const inPortrait = cycle >= FLOW_END + 0.5 && cycle < PORTRAIT_END;
-        ctx.shadowColor = `rgba(34, 211, 199, ${0.15 + lumI * 0.12})`;
-        ctx.shadowBlur = inPortrait ? 1.5 + lumI * 2 : 2.5;
+        ctx.shadowColor = `rgba(34, 211, 199, ${0.2 + lumI * 0.15})`;
+        ctx.shadowBlur = inPortrait ? 2.5 + lumI * 2.5 : 3.5;
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(34, 211, 199, ${opacity})`;
