@@ -65,7 +65,7 @@ function CompanyCard({
             }
       }
     >
-      <header className="flex min-h-[4rem] shrink-0 items-center border-b border-dashboard-border/70 px-4 py-3 sm:min-h-[4.25rem] sm:px-5 sm:py-0">
+      <header className="flex min-h-[4rem] shrink-0 items-center border-b border-dashboard-border/70 px-4 py-3 sm:min-h-[4.25rem] sm:px-5 sm:py-2.5">
         <div className="min-w-0 flex-1 space-y-1.5">
           <CompanyWordmark
             name={name}
@@ -181,7 +181,7 @@ export function TransformationImpactDashboard() {
             </Link>
           </div>
           <div className="mt-8 rounded-lg border border-dashboard-border/70 bg-dashboard-surface/40 p-4 shadow-card sm:mt-10 sm:p-5">
-            <div className="grid min-w-0 grid-rows-1 gap-6 sm:gap-4 lg:grid-cols-3 lg:items-stretch lg:gap-4">
+            <div className="grid min-w-0 gap-6 lg:grid-cols-3 lg:items-stretch">
               {transformationDashboard.companies.map((company, i) => (
                 <CompanyCard key={company.name} {...company} index={i} />
               ))}

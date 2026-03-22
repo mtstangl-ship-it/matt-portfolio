@@ -22,7 +22,7 @@ export function ContactCTA() {
         </p>
         <Link
           href={contactCta.ctaHref}
-          className="font-body mt-5 inline-flex w-full max-w-xs items-center justify-center rounded-sm bg-accent px-6 py-3.5 text-metric-sm font-bold uppercase text-white shadow-[0_2px_8px_-2px_rgba(13,148,136,0.4)] transition-all hover:bg-accent-dark hover:shadow-[0_4px_12px_-2px_rgba(13,148,136,0.45)] sm:mt-6 sm:inline-block sm:w-auto sm:max-w-none sm:px-10 sm:py-4"
+          className="font-body mt-5 inline-flex w-full max-w-xs items-center justify-center rounded-sm bg-accent px-6 py-3.5 text-metric-sm font-bold uppercase text-white shadow-[0_2px_8px_-2px_rgba(13,148,136,0.4)] transition-all hover:bg-accent-dark hover:shadow-[0_4px_12px_-2px_rgba(13,148,136,0.45)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:mt-6 sm:inline-block sm:w-auto sm:max-w-none sm:px-10 sm:py-4"
         >
           {contactCta.cta}
         </Link>

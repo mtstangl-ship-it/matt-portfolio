@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <Section
       container={false}
-      className="relative isolate overflow-hidden border-b border-dashboard-border/90 bg-dashboard-bg pb-4 lg:pb-5 lg:min-h-[min(92vh,780px)]"
+      className="relative isolate overflow-hidden border-b border-dashboard-border/90 bg-dashboard-bg pb-4 sm:pb-5 lg:min-h-[min(92vh,780px)]"
     >
       {/* Soft transition into light sections */}
       <div

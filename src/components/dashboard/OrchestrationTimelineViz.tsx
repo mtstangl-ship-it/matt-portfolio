@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 
 const phases = [
-  { x: 12, w: 32, label: "Fragmented" },
-  { x: 50, w: 38, label: "Mapped" },
-  { x: 94, w: 42, label: "Aligned" },
-  { x: 142, w: 38, label: "Flow" },
+  { x: 12, w: 34, label: "Scattered" },
+  { x: 52, w: 36, label: "Structured" },
+  { x: 94, w: 40, label: "Aligned" },
+  { x: 140, w: 40, label: "Flow" },
 ];
 
 const barBaselineY = 22;
@@ -155,11 +155,7 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
             x={phase.x + phase.w / 2}
             y={wordsY}
             textAnchor="middle"
-            fill="#eae8e4"
-            fontFamily="system-ui, sans-serif"
-            fontSize="6.5"
-            fontWeight="600"
-            style={{ letterSpacing: "0.06em" }}
+            className="fill-dashboard-ink-light font-body text-[6px] font-semibold uppercase tracking-[0.1em]"
           >
             {phase.label}
           </text>

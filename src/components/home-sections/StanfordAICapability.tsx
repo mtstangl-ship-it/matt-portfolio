@@ -45,7 +45,7 @@ export function StanfordAICapability() {
         <div className="pointer-events-none absolute left-6 top-10 h-24 w-24 opacity-[0.07]">
           <HumanPortraitMotif />
         </div>
-        <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:p-6 sm:gap-6">
+        <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:p-6">
           <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left">
             <div className="flex h-20 w-20 shrink-0 flex-col items-center justify-center gap-2 overflow-hidden rounded-lg border-2 border-accent/40 bg-accent-tint p-2.5 sm:h-28 sm:w-28 sm:p-4">
               {stanfordAI.certImage ? (
