@@ -32,18 +32,50 @@ const networkPositions: [number, number][] = [
   [135, 17],
 ];
 
-// Phase 3: Packaging — 3 clean blocks (productized offering)
+// Phase 3: Packaging — 3 rigid blocks with gaps between
+const blockW = 52;
+const gap = 26;
 const blocks = [
-  { x: 32, y: 8, w: 56, h: 28 },
-  { x: 92, y: 8, w: 56, h: 28 },
-  { x: 152, y: 8, w: 56, h: 28 },
+  { x: 24, y: 6, w: blockW, h: 26 },
+  { x: 24 + blockW + gap, y: 6, w: blockW, h: 26 },
+  { x: 24 + (blockW + gap) * 2, y: 6, w: blockW, h: 26 },
 ];
 
-// Labels
+// Block centers for interstitial clustering
+const blockCenters: [number, number][] = blocks.map(
+  (b) => [b.x + b.w / 2, b.y + b.h / 2] as [number, number]
+);
+
+// Assign each dot to nearest block (for clustering phase)
+function nearestBlockCenter(i: number): [number, number] {
+  const [nx, ny] = networkPositions[i] ?? [120, 19];
+  let best = blockCenters[0];
+  let bestD = Infinity;
+  for (const [cx, cy] of blockCenters) {
+    const d = (nx - cx) ** 2 + (ny - cy) ** 2;
+    if (d < bestD) {
+      bestD = d;
+      best = [cx, cy];
+    }
+  }
+  return best;
+}
+
+// Slight offset per dot so they don't all overlap — forms a tight cluster
+const clusterOffsets: [number, number][] = [
+  [-1.5, 0], [1, -0.5], [-1, 0.5], [1.5, 0], [-0.5, 0.5], [0, 0], [1, 0.5], [-0.5, -0.5],
+];
+const clusterTargets = signalDots.map((_, i) => {
+  const [cx, cy] = nearestBlockCenter(i);
+  const [ox, oy] = clusterOffsets[i];
+  return [cx + ox, cy + oy] as [number, number];
+});
+
+// Labels — x as % to align with block centers
 const labels = [
-  { x: 50, label: "Signals" },
-  { x: 120, label: "Offering" },
-  { x: 190, label: "Growth" },
+  { x: (24 + blockW / 2) / 240, label: "Signals" },
+  { x: (24 + blockW + gap + blockW / 2) / 240, label: "Offering" },
+  { x: (24 + (blockW + gap) * 2 + blockW / 2) / 240, label: "Growth" },
 ];
 
 export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = {}) {
@@ -54,7 +86,7 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
         className="min-h-0 flex-1"
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* Phase 1–2: Connecting lines — form network, fade before packaging */}
+        {/* Phase 1–2: Connecting lines — form network, fade as dots cluster */}
         {[
           [0, 2], [1, 2], [2, 4], [3, 4], [4, 5], [4, 6], [5, 7], [2, 7],
         ].map(([a, b], i) => {
@@ -74,12 +106,12 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
               animate={
                 isHovered
                   ? {
-                      opacity: [0, 0, 0.3, 0.3, 0.05, 0],
+                      opacity: [0, 0, 0.35, 0.38, 0],
                       transition: {
                         duration: cycleDuration,
                         repeat: Infinity,
-                        ease: "easeInOut",
-                        times: [0, 0.2, 0.38, 0.46, 0.5, 0.54],
+                        ease: "linear",
+                        times: [0, 0.2, 0.36, 0.42, 0.44],
                       },
                     }
                   : { opacity: 0 }
@@ -88,7 +120,7 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
           );
         })}
 
-        {/* Phase 3–4: Packaged blocks — snap in (crisp), then grow */}
+        {/* Phase 3–4: Blocks — fade in as dots cluster, then growth */}
         {blocks.map((block, i) => (
           <motion.rect
             key={i}
@@ -97,34 +129,34 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
             width={block.w}
             height={block.h}
             style={{ transformOrigin: `${block.x + block.w / 2}px ${block.y + block.h / 2}px` }}
-            rx={2}
-            ry={2}
+            rx={1}
+            ry={1}
             fill={accent}
-            stroke="rgba(255,255,255,0.2)"
-            strokeWidth={0.5}
+            stroke="rgba(255,255,255,0.25)"
+            strokeWidth={0.6}
             initial={false}
             animate={
               isHovered
                 ? {
-                    opacity: [0, 0, 1, 1, 1],
-                    scale: [0.5, 0.5, 1, 1, 1.1],
-                    y: [block.y + 8, block.y + 8, block.y, block.y, block.y - 2],
+                    opacity: [0, 0, 0, 0, 1, 1, 1],
+                    scale: [1, 1, 1, 1, 1, 1.12, 1.12],
+                    y: [block.y, block.y, block.y, block.y, block.y, block.y - 4, block.y - 4],
                     transition: {
                       duration: cycleDuration,
                       repeat: Infinity,
-                      ease: [0.33, 1, 0.68, 1],
-                      times: [0, 0.48, 0.52, 0.65, 1],
-                      delay: i * 0.015,
+                      ease: "linear",
+                      times: [0, 0.42, 0.44, 0.48, 0.52, 0.62, 1],
                     },
                   }
-                : { opacity: 0, scale: 0.8 }
+                : { opacity: 0, scale: 1 }
             }
           />
         ))}
 
-        {/* Phase 1–2: Signal dots — scattered → network → fade as blocks appear */}
+        {/* Phase 1–3: Signal dots — scattered → network → cluster → crossfade to blocks */}
         {signalDots.map(([sx, sy], i) => {
           const [nx, ny] = networkPositions[i] ?? [sx, sy];
+          const [tx, ty] = clusterTargets[i];
           return (
             <motion.circle
               key={i}
@@ -134,16 +166,15 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
               animate={
                 isHovered
                   ? {
-                      cx: [sx, nx, nx, nx],
-                      cy: [sy, ny, ny, ny],
-                      opacity: [0.55, 0.8, 0.8, 0],
-                      scale: [1, 1.1, 1.1, 0.5],
+                      cx: [sx, nx, nx, tx, tx],
+                      cy: [sy, ny, ny, ty, ty],
+                      opacity: [0.55, 0.85, 0.85, 0.9, 0],
+                      scale: [1, 1.05, 1.05, 0.9, 0.9],
                       transition: {
                         duration: cycleDuration,
                         repeat: Infinity,
                         ease: "easeInOut",
-                        times: [0, 0.4, 0.48, 0.55],
-                        delay: i * 0.025,
+                        times: [0, 0.32, 0.38, 0.5, 0.54],
                       },
                     }
                   : {
@@ -158,11 +189,12 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
         })}
 
       </svg>
-      <div className="flex shrink-0 justify-between px-2 pt-3">
-        {labels.map(({ label }) => (
+      <div className="relative shrink-0 pt-1.5 min-h-[0.875rem]">
+        {labels.map(({ x, label }) => (
           <span
             key={label}
-            className="font-body text-[0.5rem] font-semibold uppercase tracking-wider text-dashboard-ink-light"
+            className="absolute font-body text-[0.5rem] font-semibold uppercase tracking-wider text-dashboard-ink-light"
+            style={{ left: `${x * 100}%`, transform: "translateX(-50%)" }}
           >
             {label}
           </span>
