@@ -6,7 +6,6 @@ import { useEffect, useMemo, useState } from "react";
 type MetricSignal = {
   value: string;
   label: string;
-  context?: string;
 };
 
 function parseValue(val: string): { numeric: number; prefix: string; suffix: string } | null {
@@ -45,7 +44,7 @@ function AnimatedMetricValue({ value }: { value: string }) {
     }
     let raf = 0;
     const start = performance.now();
-    const duration = 1000;
+    const duration = 800;
     const step = (now: number) => {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 2);
@@ -61,96 +60,24 @@ function AnimatedMetricValue({ value }: { value: string }) {
 }
 
 export function ImpactMetricInstrument({ mode, metrics }: { mode: string; metrics: readonly MetricSignal[] }) {
-  const [focused, setFocused] = useState(0);
-
-  useEffect(() => {
-    setFocused(0);
-  }, [mode]);
-
   return (
     <motion.div
       key={mode}
-      initial={{ opacity: 0, y: 8 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -6 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
-      className="relative mt-3 min-h-[14.5rem]"
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className="mt-2 flex flex-col gap-6"
     >
-      <div className="hidden sm:block">
-        {metrics.map((m, i) => {
-          const pos =
-            i === 0
-              ? "left-[4%] top-[10%]"
-              : i === 1
-                ? "left-[34%] top-[2%]"
-                : "left-[62%] top-[16%]";
-          const active = focused === i;
-          return (
-            <motion.button
-              key={`${m.label}-${m.value}`}
-              type="button"
-              onMouseEnter={() => setFocused(i)}
-              onFocus={() => setFocused(i)}
-              onClick={() => setFocused(i)}
-              className={`absolute ${pos} w-[34%] text-left`}
-              initial={false}
-              animate={{
-                opacity: active ? 1 : 0.72,
-                scale: active ? 1.03 : 1,
-                y: active ? -2 : 0,
-              }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
-            >
-              <div className="relative pl-4">
-                <span className="absolute left-0 top-2 h-2 w-2 rounded-full bg-accent-signal/75" />
-                <p className="font-mono text-[1.55rem] font-bold leading-[1.05] tracking-[-0.03em] text-dashboard-ink-light">
-                  <AnimatedMetricValue value={m.value} />
-                </p>
-                <p className="mt-1 font-body text-[0.625rem] font-semibold uppercase tracking-[0.11em] text-dashboard-ink-muted">
-                  {m.label}
-                </p>
-              </div>
-            </motion.button>
-          );
-        })}
-
-        <motion.div
-          key={`context-${mode}-${focused}`}
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute bottom-0 left-0 right-0 rounded-sm border border-dashboard-border/65 bg-[#0e0d0c]/75 px-3 py-2"
-        >
-          <p className="font-body text-[0.75rem] font-bold leading-[1.55] text-dashboard-ink-muted">
-            {metrics[focused]?.context ?? metrics[focused]?.label}
+      {metrics.map((m) => (
+        <div key={m.label} className="flex flex-col gap-1">
+          <p className="font-mono text-[1.2rem] font-bold tabular-nums leading-none text-dashboard-ink-light">
+            <AnimatedMetricValue value={m.value} />
           </p>
-        </motion.div>
-      </div>
-
-      <div className="grid grid-cols-1 gap-2 sm:hidden">
-        {metrics.map((m, i) => (
-          <button
-            key={`${m.label}-${m.value}-mobile`}
-            type="button"
-            onClick={() => setFocused(i)}
-            className={`rounded-sm border px-3 py-2 text-left ${
-              focused === i ? "border-accent-signal/55 bg-accent-signal/10" : "border-dashboard-border/65 bg-[#0e0d0c]/72"
-            }`}
-          >
-            <p className="font-mono text-[1.25rem] font-bold text-dashboard-ink-light">
-              <AnimatedMetricValue value={m.value} />
-            </p>
-            <p className="mt-1 font-body text-[0.625rem] font-semibold uppercase tracking-[0.11em] text-dashboard-ink-muted">
-              {m.label}
-            </p>
-            {focused === i ? (
-              <p className="mt-1.5 font-body text-[0.75rem] font-bold leading-[1.5] text-dashboard-ink-muted">
-                {m.context}
-              </p>
-            ) : null}
-          </button>
-        ))}
-      </div>
+          <p className="font-body text-[0.5625rem] font-semibold leading-tight text-dashboard-ink-muted/90">
+            {m.label}
+          </p>
+        </div>
+      ))}
     </motion.div>
   );
 }
-

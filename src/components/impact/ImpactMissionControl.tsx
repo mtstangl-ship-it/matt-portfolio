@@ -1,37 +1,25 @@
 "use client";
 
-import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
-import type { ComponentType } from "react";
-import {
-  JourneyFlowViz,
-  OrchestrationTimelineViz,
-  TowerConvergenceViz,
-} from "@/components/dashboard";
-import { ImpactSystemMapViz } from "./ImpactSystemMapViz";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { ImpactCentralSystem } from "./ImpactCentralSystem";
 import { ImpactSignalFieldBackground } from "./ImpactSignalFieldBackground";
 import { ImpactInterconnectSignals } from "./ImpactInterconnectSignals";
-import { ImpactMetricInstrument } from "./ImpactMetricInstrument";
+import { ImpactDataNoiseBackground } from "./ImpactDataNoiseBackground";
+import { ImpactSignalOverlays } from "./ImpactSignalOverlays";
+import { ImpactMicroReadouts } from "./ImpactMicroReadouts";
+import { ImpactAmbientMetrics } from "./ImpactAmbientMetrics";
+import { ImpactSystemSummary } from "./ImpactSystemSummary";
 import type { ImpactOutcomeMode } from "@/content/impact-page";
 import { impactMissionControl } from "@/content/impact-mission-control";
 
 const systemKeys = ["revenue", "operations", "healthcare"] as const;
 
-const modeToViz: Record<ImpactOutcomeMode, ComponentType<{ isHovered?: boolean }>> = {
-  all: JourneyFlowViz,
-  revenue: JourneyFlowViz,
-  operations: TowerConvergenceViz,
-  healthcare: OrchestrationTimelineViz,
-};
-
 export function ImpactMissionControl() {
-  const [mode, setMode] = useState<ImpactOutcomeMode>("all");
+  const [mode, setMode] = useState<ImpactOutcomeMode>("revenue");
   const [expandedSystem, setExpandedSystem] = useState<(typeof systemKeys)[number]>("revenue");
 
-  const metrics = useMemo(() => impactMissionControl.metricsByMode[mode], [mode]);
-  const Viz = modeToViz[mode];
-  const emphasizedSystem = mode === "all" ? expandedSystem : mode;
+  const activeSystem = mode === "all" ? expandedSystem : mode;
 
   useEffect(() => {
     if (mode !== "all") {
@@ -40,7 +28,7 @@ export function ImpactMissionControl() {
   }, [mode]);
 
   return (
-    <section className="relative overflow-hidden bg-dashboard-bg px-4 py-6 sm:px-6 sm:py-8 lg:min-h-[calc(100vh-8.5rem)]">
+    <section className="relative overflow-hidden bg-dashboard-bg px-3 py-4 sm:px-5 sm:py-5 lg:min-h-[calc(100vh-8.5rem)]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.58]"
@@ -58,27 +46,39 @@ export function ImpactMissionControl() {
         }}
       />
       <ImpactSignalFieldBackground mode={mode} />
+      <ImpactDataNoiseBackground mode={mode} />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="rounded-sm border border-dashboard-border/80 bg-[#0f0e0d]/90 shadow-[0_28px_70px_-28px_rgba(0,0,0,0.75),inset_0_1px_0_rgba(232,230,226,0.06)]">
-          <header className="flex flex-col gap-4 border-b border-dashboard-border/80 px-4 py-4 sm:px-5 sm:py-4 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-[38rem]">
-              <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/90">
-                Mission Control
-              </p>
-              <h1 className="mt-2 font-display text-hero-tight font-semibold leading-[1.03] text-dashboard-ink-light">
-                {impactMissionControl.headline}
-              </h1>
-              <p className="mt-2 font-body text-[0.875rem] font-bold leading-[1.6] text-dashboard-ink-muted">
-                {impactMissionControl.subhead}
-              </p>
+        {/* Continuous surface: no outer card, gradient edge for definition */}
+        <div
+          className="relative"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(15,14,13,0.94) 0%, rgba(12,11,10,0.97) 100%), linear-gradient(to right, rgba(34,211,199,0.03) 0%, transparent 20%, transparent 80%, rgba(34,211,199,0.02) 100%)",
+            boxShadow: "inset 0 1px 0 rgba(232,230,226,0.04)",
+          }}
+        >
+          <header className="flex flex-col gap-2 border-b border-dashboard-border/20 px-3 py-2 sm:px-4 sm:py-2.5 lg:flex-row lg:items-end lg:justify-between" style={{ opacity: 0.85 }}>
+            <div>
+              <div className="flex items-baseline gap-3">
+                <h1 className="font-display text-[1.5rem] font-semibold leading-[1.1] text-dashboard-ink-light sm:text-[1.75rem]">
+                  {impactMissionControl.headline}
+                </h1>
+                <p className="font-mono text-[0.625rem] font-semibold tabular-nums text-dashboard-ink-muted/60">
+                  {impactMissionControl.subhead}
+                </p>
+              </div>
             </div>
 
-            <div className="w-full lg:w-auto lg:max-w-[32rem]">
+            <div className="w-full lg:w-auto lg:max-w-[30rem]">
               <div
                 role="tablist"
                 aria-label="Mission control modes"
-                className="inline-flex w-full flex-wrap gap-2 rounded-sm border border-dashboard-border/75 bg-dashboard-muted/55 p-1.5 lg:flex-nowrap lg:gap-0"
+                className="inline-flex w-full flex-wrap gap-2 p-1.5 lg:flex-nowrap lg:gap-0"
+                style={{
+                  background: "rgba(14,13,12,0.4)",
+                  boxShadow: "inset 0 0 0 1px rgba(232,230,226,0.08)",
+                }}
               >
                 {impactMissionControl.modes.map((m) => {
                   const active = mode === m.key;
@@ -90,12 +90,18 @@ export function ImpactMissionControl() {
                       aria-selected={active}
                       onClick={() => setMode(m.key)}
                       className={[
-                        "relative flex-1 rounded-sm px-3 py-2",
+                        "relative flex-1 px-3 py-2",
                         "font-body text-[0.75rem] font-bold uppercase tracking-[0.12em]",
-                        active
-                          ? "border border-accent-signal/55 text-accent-signal"
-                          : "border border-transparent text-dashboard-ink-muted hover:text-dashboard-ink-light",
+                        active ? "text-accent-signal" : "text-dashboard-ink-muted hover:text-dashboard-ink-light",
                       ].join(" ")}
+                      style={
+                        active
+                          ? {
+                              background: "rgba(34,211,199,0.1)",
+                              boxShadow: "inset 0 0 0 1px rgba(34,211,199,0.3)",
+                            }
+                          : undefined
+                      }
                     >
                       {active ? (
                         <motion.span
@@ -111,190 +117,88 @@ export function ImpactMissionControl() {
               </div>
               <motion.p
                 key={mode}
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-2 font-body text-[0.75rem] font-bold leading-[1.5] text-dashboard-ink-muted/95"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mt-1.5 font-mono text-[0.625rem] font-semibold tabular-nums text-dashboard-ink-muted/60"
               >
                 {impactMissionControl.stateNarrative[mode]}
               </motion.p>
             </div>
           </header>
 
-          <div className="relative grid gap-4 p-4 sm:p-5 lg:grid-cols-[15rem,1fr,18rem] lg:grid-rows-[auto_auto] lg:gap-5">
-            <ImpactInterconnectSignals mode={mode} />
-            <aside className="rounded-sm border border-dashboard-border/75 bg-dashboard-muted/60 p-3.5 lg:row-span-2">
-              <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/85">
-                Aggregate metrics
-              </p>
-              <AnimatePresence mode="wait">
-                <ImpactMetricInstrument key={mode} mode={mode} metrics={metrics} />
-              </AnimatePresence>
+          <div className="relative isolate grid gap-0 p-3 sm:p-4 lg:grid-cols-[18rem,1fr]">
+            {/* Tertiary layer — must not capture clicks or sit above content */}
+            <div
+              className="pointer-events-none col-span-full row-span-full"
+              style={{ zIndex: 0 }}
+            >
+              <ImpactInterconnectSignals mode={mode} />
+              <ImpactSignalOverlays mode={mode} />
+              <ImpactAmbientMetrics mode={mode} />
+              <ImpactMicroReadouts />
+            </div>
+
+            {/* Supporting: Clean metric cluster — flows into center, opaque to avoid ambient bleed */}
+            <aside
+              className="relative z-10 py-4 pr-3 pl-2"
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(12,11,10,0.92) 0%, rgba(12,11,10,0.85) 100%), linear-gradient(to right, transparent 70%, rgba(34,211,199,0.03) 100%)",
+                boxShadow: "inset -1px 0 0 rgba(34,211,199,0.06)",
+              }}
+            >
+              <ImpactSystemSummary key={activeSystem} system={activeSystem} />
             </aside>
 
-            <div className="relative rounded-sm border border-dashboard-border/75 bg-dashboard-muted/60 p-3.5">
+            {/* Primary: System brain — dominant focal point; flows into engine */}
+            <div
+              className="relative z-20 col-span-1 flex min-h-0 flex-col items-center justify-center p-3 lg:p-6"
+              style={{
+                background:
+                  "radial-gradient(ellipse 85% 75% at 50% 48%, rgba(34,211,199,0.1) 0%, transparent 50%), linear-gradient(135deg, rgba(15,14,13,0.9) 0%, rgba(15,14,13,0.7) 100%), linear-gradient(to right, transparent 55%, rgba(34,211,199,0.06) 85%, rgba(34,211,199,0.12) 100%)",
+                boxShadow:
+                  "inset 0 0 0 1px rgba(34,211,199,0.12), inset 0 0 120px -30px rgba(34,211,199,0.08), 2px 0 24px -8px rgba(34,211,199,0.15)",
+              }}
+            >
               <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-[0.11]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to right, rgba(34,211,199,0.35) 1px, transparent 1px), linear-gradient(to bottom, rgba(34,211,199,0.2) 1px, transparent 1px)",
-                  backgroundSize: "18px 18px",
-                }}
-              />
-              <div className="relative flex items-center justify-between">
-                <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/80">
-                  System canvas
-                </p>
-                <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/90">
-                  {mode.toUpperCase()} state
-                </p>
-              </div>
-
-              <div className="relative mt-3 h-[18rem]">
-                <ImpactSystemMapViz mode={mode} />
-                <div className="pointer-events-none absolute inset-0 hidden lg:block">
-                  {systemKeys.map((key, i) => {
-                    const isActive = expandedSystem === key;
-                    const pos =
-                      i === 0
-                        ? "left-[8%] top-[12%]"
-                        : i === 1
-                          ? "left-[44%] top-[4%]"
-                          : "right-[8%] top-[12%]";
-                    return (
-                      <button
-                        key={key}
-                        type="button"
-                        onClick={() => setExpandedSystem(key)}
-                        className={`pointer-events-auto absolute ${pos} rounded-sm border px-2.5 py-1 font-body text-[0.625rem] font-semibold uppercase tracking-[0.12em] transition-colors ${
-                          isActive
-                            ? "border-accent-signal/55 bg-accent-signal/14 text-accent-signal"
-                            : "border-dashboard-border/70 bg-[#0e0d0c]/75 text-dashboard-ink-muted hover:text-dashboard-ink-light"
-                        }`}
-                      >
-                        {key}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
-            <aside className="rounded-sm border border-dashboard-border/75 bg-dashboard-muted/60 p-3.5">
-              <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/85">
-                Active engine
-              </p>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`viz-${mode}`}
-                  initial={{ opacity: 0, scale: 0.98, y: 6 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.985, y: -6 }}
-                  transition={{ duration: 0.28, ease: "easeOut" }}
-                  className="mt-3 h-[11.5rem] rounded-sm border border-dashboard-border/70 bg-[#0f0e0d]/85 p-2.5"
-                >
-                  <Viz isHovered />
-                </motion.div>
-              </AnimatePresence>
-              <p className="mt-2 font-body text-[0.75rem] font-bold leading-[1.55] text-dashboard-ink-muted">
-                Live instrumentation view updates with mode state to show system behavior, not static slides.
-              </p>
-            </aside>
-
-            <div className="rounded-sm border border-dashboard-border/75 bg-dashboard-muted/60 p-3.5 lg:col-span-2">
-              <div className="flex flex-wrap items-center gap-2">
-                {systemKeys.map((key) => {
-                  const active = expandedSystem === key;
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => setExpandedSystem(key)}
-                      className={`rounded-sm border px-2.5 py-1 font-body text-[0.625rem] font-semibold uppercase tracking-[0.12em] transition-colors ${
-                        active
-                          ? "border-accent-signal/55 bg-accent-signal/14 text-accent-signal"
-                          : "border-dashboard-border/70 bg-[#0e0d0c]/75 text-dashboard-ink-muted hover:text-dashboard-ink-light"
-                      }`}
-                    >
-                      {impactMissionControl.systems[key].title}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={expandedSystem}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.2 }}
-                  className="mt-3"
-                >
-                  <h3 className="font-display text-[1.1rem] font-semibold text-dashboard-ink-light">
-                    {impactMissionControl.systems[expandedSystem].title}
-                  </h3>
-                  <p className="mt-2 font-body text-[0.875rem] font-bold leading-[1.62] text-dashboard-ink-muted">
-                    {impactMissionControl.systems[expandedSystem].narrative}
-                  </p>
-                  <div className="mt-3 grid gap-2 sm:grid-cols-3">
-                    {impactMissionControl.systems[expandedSystem].signals.map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-sm border border-dashboard-border/70 bg-[#0e0d0c]/80 px-2.5 py-2"
-                      >
-                        <div className="font-body text-[0.75rem] font-bold leading-[1.5] text-dashboard-ink-muted">
-                          {item}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                {systemKeys.map((key) => {
-                  const system = impactMissionControl.systems[key];
-                  const isFocused = emphasizedSystem === key;
-                  return (
-                    <motion.button
-                      key={`module-${key}`}
-                      type="button"
-                      onClick={() => setExpandedSystem(key)}
-                      className={`rounded-sm border px-2.5 py-2 text-left transition-colors ${
-                        isFocused
-                          ? "border-accent-signal/55 bg-accent-signal/10"
-                          : "border-dashboard-border/70 bg-[#0e0d0c]/72"
-                      }`}
-                      initial={false}
-                      animate={{
-                        opacity: isFocused ? 1 : mode === "all" ? 0.9 : 0.55,
-                        scale: isFocused ? 1.02 : 1,
-                      }}
-                      transition={{ duration: 0.26, ease: "easeOut" }}
-                    >
-                      <p className={`font-body text-[0.625rem] font-semibold uppercase tracking-[0.12em] ${isFocused ? "text-accent-signal" : "text-dashboard-ink-muted"}`}>
-                        {system.title}
-                      </p>
-                      <p className="mt-1.5 font-body text-[0.75rem] font-bold leading-[1.5] text-dashboard-ink-muted">
-                        {system.signals[0]}
-                      </p>
-                    </motion.button>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between rounded-sm border border-dashboard-border/75 bg-dashboard-muted/60 px-3.5 py-2.5 lg:col-span-3">
-              <p className="font-body text-[0.75rem] font-bold text-dashboard-ink-muted">
-                Executive state feed: integrated across Autodesk, Wipro, and EY by system type.
-              </p>
-              <Link
-                href="/contact"
-                className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-accent-signal hover:text-accent-light"
+                className="relative w-full flex-1 min-h-[20rem] sm:min-h-[22rem] lg:min-h-[26rem]"
+                style={{ minHeight: "clamp(18rem, 55vh, 28rem)" }}
               >
-                Request deep-dive session →
-              </Link>
+                <ImpactCentralSystem
+                  activeSystem={activeSystem}
+                  onRevenueTierHover={undefined}
+                />
+              </div>
+            </div>
+
+            {/* Supporting: System narrative */}
+            <div
+              className="relative z-10 flex flex-wrap items-center gap-2 p-2 lg:col-span-2"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(34,211,199,0.03) 0%, transparent 50%), linear-gradient(135deg, rgba(15,14,13,0.2) 0%, transparent 100%)",
+                opacity: 0.8,
+                boxShadow: "inset 0 1px 0 rgba(34,211,199,0.04)",
+              }}
+            >
+              {systemKeys.map((key) => {
+                const active = expandedSystem === key;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setExpandedSystem(key)}
+                    className={`px-2 py-0.5 font-body text-[0.5625rem] font-semibold uppercase tracking-[0.1em] transition-colors ${
+                      active ? "text-accent-signal" : "text-dashboard-ink-muted/70 hover:text-dashboard-ink-light"
+                    }`}
+                  >
+                    {impactMissionControl.systems[key].title}
+                  </button>
+                );
+              })}
+              <span className="font-body text-[0.5rem] font-medium text-dashboard-ink-muted/50">
+                {impactMissionControl.systems[expandedSystem].narrative}
+              </span>
             </div>
           </div>
         </div>

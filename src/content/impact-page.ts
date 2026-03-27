@@ -30,7 +30,7 @@ export const impactPage = {
       operations: [
         { label: "MTTR reduction", value: "31%" },
         { label: "Lockout cases reduced", value: "16k" },
-        { label: "AON driven service output", value: "50M+" },
+        { label: "AOV driven service output", value: "50M+" },
       ],
       healthcare: [
         { label: "Vaccinations driven", value: "715" },

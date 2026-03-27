@@ -44,10 +44,10 @@ function getModeWeight({
   endpointOutcome: (typeof outcomeKeys)[number];
   base: number;
 }): number {
-  if (mode === "all") return 0.12 + base * 0.85;
-  if (mode === endpointOutcome) return 0.18 + base * 0.95;
+  if (mode === "all") return 0.35 + base * 0.65;
+  if (mode === endpointOutcome) return 0.5 + base * 0.5;
   // Dim the non-selected outcomes, but keep some “system context”.
-  return 0.08 + base * 0.18;
+  return 0.12 + base * 0.2;
 }
 
 export function ImpactSystemMapViz({ mode }: { mode: ImpactOutcomeMode }) {
@@ -67,31 +67,31 @@ export function ImpactSystemMapViz({ mode }: { mode: ImpactOutcomeMode }) {
   );
 
   return (
-    <div className="relative h-[15rem] w-full">
+    <div className="relative h-full min-h-[14rem] w-full">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
+        className="pointer-events-none absolute inset-0 opacity-[0.25]"
         style={{
           background:
-            "radial-gradient(ellipse at 22% 24%, rgba(34,211,199,0.18), transparent 42%), radial-gradient(ellipse at 78% 72%, rgba(34,211,199,0.12), transparent 45%)",
+            "radial-gradient(ellipse 90% 80% at 50% 50%, rgba(34,211,199,0.12) 0%, transparent 55%), radial-gradient(ellipse at 22% 24%, rgba(34,211,199,0.2), transparent 40%), radial-gradient(ellipse at 78% 72%, rgba(34,211,199,0.15), transparent 42%)",
         }}
       />
       <svg viewBox="0 0 680 240" className="h-full w-full" aria-hidden>
-        <g opacity="0.22">
+        <g opacity="0.4">
           {moduleKeys.map((mk) => {
             const x = nodes[mk].x;
             const y = nodes[mk].y;
-            return <circle key={`halo-${mk}`} cx={x} cy={y} r={22} fill="none" stroke="rgba(34,211,199,0.18)" strokeWidth={0.8} />;
+            return <circle key={`halo-${mk}`} cx={x} cy={y} r={24} fill="none" stroke="rgba(34,211,199,0.25)" strokeWidth={1} />;
           })}
         </g>
-        {/* Connections */}
+        {/* Connections — thicker, higher contrast */}
         <g>
           {lines.map((l) => (
             <motion.path
               key={l.key}
               d={l.d}
               stroke={accent}
-              strokeWidth={l.isActive ? 1.5 : 1}
+              strokeWidth={l.isActive ? 2.2 : 1.4}
               strokeLinecap="round"
               fill="none"
               opacity={l.intensity}
@@ -118,8 +118,8 @@ export function ImpactSystemMapViz({ mode }: { mode: ImpactOutcomeMode }) {
                       }
                     : { duration: 0.35, ease: "easeOut" }
               }
-              strokeDasharray="8 14"
-              style={{ filter: l.isActive ? "drop-shadow(0 0 10px rgba(34,211,199,0.35))" : undefined }}
+              strokeDasharray="6 10"
+              style={{ filter: l.isActive ? "drop-shadow(0 0 12px rgba(34,211,199,0.5))" : undefined }}
             />
           ))}
         </g>
@@ -131,7 +131,7 @@ export function ImpactSystemMapViz({ mode }: { mode: ImpactOutcomeMode }) {
             .map((l, i) => (
               <motion.circle
                 key={`packet-${l.key}`}
-                r={2.1}
+                r={2.8}
                 fill={accent}
                 initial={false}
                 animate={{ offsetDistance: ["0%", "100%"], opacity: [0, 0.95, 0] }}
@@ -164,9 +164,9 @@ export function ImpactSystemMapViz({ mode }: { mode: ImpactOutcomeMode }) {
                 key={mk}
                 cx={x}
                 cy={y}
-                r={mk === "wipro" ? 4 : 5}
+                r={mk === "wipro" ? 5 : 6}
                 fill={accent}
-                opacity={mode === "all" ? 0.85 : 0.55}
+                opacity={mode === "all" ? 0.95 : 0.7}
                 initial={false}
                 animate={
                   reducedMotion
@@ -198,14 +198,14 @@ export function ImpactSystemMapViz({ mode }: { mode: ImpactOutcomeMode }) {
                 <circle
                   cx={x}
                   cy={y}
-                  r={active ? 7 : 5.6}
-                  fill="rgba(34,211,199,0.08)"
+                  r={active ? 9 : 6.5}
+                  fill="rgba(34,211,199,0.12)"
                   opacity={active ? 1 : 0.5}
                 />
                 <motion.circle
                   cx={x}
                   cy={y}
-                  r={active ? 4.2 : 3.2}
+                  r={active ? 5.5 : 4}
                   fill={accent}
                   initial={false}
                   animate={
@@ -230,10 +230,10 @@ export function ImpactSystemMapViz({ mode }: { mode: ImpactOutcomeMode }) {
                   <motion.circle
                     cx={x}
                     cy={y}
-                    r={8.5}
+                    r={10}
                     fill="none"
                     stroke={accent}
-                    strokeWidth={0.8}
+                    strokeWidth={1}
                     initial={false}
                     animate={
                       reducedMotion
@@ -257,7 +257,7 @@ export function ImpactSystemMapViz({ mode }: { mode: ImpactOutcomeMode }) {
       {/* Subtle “instrumentation” outline */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-sm border border-dashboard-border/60"
+        className="pointer-events-none absolute inset-0 rounded-sm border border-accent-signal/25"
       />
     </div>
   );

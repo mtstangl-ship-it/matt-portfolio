@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 // Signals (scattered) → Offering (packaged blocks) → Growth (expand)
 
 const accent = "#22d3c7";
-const cycleDuration = 4.5;
+const cycleDuration = 3;
 
 // Phase 1: Scattered signal dots (scaled to fit graphic area)
 const signalDots: [number, number][] = [

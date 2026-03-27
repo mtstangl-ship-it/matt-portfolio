@@ -20,7 +20,7 @@ const metros = [
 const accentFill = "#22d3c7";
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 const ringsPerMetro = 2;
-const cycleDuration = 2.8;
+const cycleDuration = 2;
 
 export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: boolean } = {}) {
   return (

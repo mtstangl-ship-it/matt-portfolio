@@ -1,74 +1,240 @@
 import type { ImpactOutcomeMode } from "./impact-page";
 
 export const impactMissionControl = {
-  headline: "Impact across transformation systems",
-  subhead:
-    "A single transformation control surface where signals, system decisions, and measurable outcomes update in one stateful view.",
+  headline: "Impact",
+  subhead: "Autodesk · Wipro · EY",
   modes: [
     { key: "all", label: "All" },
     { key: "revenue", label: "Revenue" },
     { key: "operations", label: "Operations" },
     { key: "healthcare", label: "Healthcare" },
   ] as const,
+  /** Simplified: 2 key metrics per mode, value + label only */
   metricsByMode: {
     all: [
-      { value: "3", label: "transformation systems active", context: "Revenue, operations, and healthcare signal channels running in one integrated view." },
-      { value: "50M+", label: "combined service/revenue impact", context: "Commercial outcome from productized service modernization and operating model design." },
-      { value: "4.57M", label: "operational + healthcare delta", context: "Measured public engagement and downstream operational movement across complex ecosystems." },
+      { value: "50M+", label: "Service & revenue impact" },
+      { value: "4.57M", label: "Operational + healthcare reach" },
     ],
     revenue: [
-      { value: "50M+", label: "AON / commercial impact", context: "Net-new offering and service architecture impact on top-line growth pathways." },
-      { value: "106%", label: "NRR path performance", context: "Relationship design and lifecycle experience supporting expansion and retention." },
-      { value: "8-figure", label: "renewal path scale", context: "Program value sustained through transformation performance and operating alignment." },
+      { value: "+27%", label: "RR lift" },
+      { value: "106%", label: "NRR" },
     ],
     operations: [
-      { value: "31%", label: "MTTR reduction", context: "Support performance gains from workflow and handoff redesign across systems." },
-      { value: "16k", label: "annual lockout case reduction", context: "Operational friction removed through system-level service intervention." },
-      { value: "30+", label: "CX/EX outcomes delivered", context: "Cross-team outcomes achieved via coordinated onboarding and support operations." },
+      { value: "31%", label: "MTTR reduction" },
+      { value: "16k", label: "Lockout cases reduced" },
     ],
     healthcare: [
-      { value: "10+", label: "statewide partner network", context: "Agency, provider, and ecosystem collaboration activated toward shared care goals." },
-      { value: "715", label: "vaccinations driven in activation", context: "Targeted campaign conversion from engagement into real-world care action." },
-      { value: "4.57M", label: "public health engagements", context: "Scaled outreach footprint supporting access and navigation into care pathways." },
+      { value: "715", label: "Vaccinations driven" },
+      { value: "4.57M", label: "Public health engagements" },
     ],
   } as const,
+
+  /** Mode-specific floating numerals — Revenue excludes ops/health/global rollups */
+  ambientMetricsByMode: {
+    all: [
+      "27%", "106%", "31%", "16k", "50M", "4.57M", "715", "10+", "30+",
+      "Q1", "QoQ", "YoY", "NRR", "AOV", "MTTR", "NPS", "R/O/H",
+      "0→1→2", "3 systems", "8-fig",
+    ],
+    revenue: [
+      "+27%", "106%", "50M+", "NRR", "AOV", "RR", "QoQ", "YoY",
+      "30+", "services", "tier", "expansion", "pipeline", "upsell",
+      "▲", "R/O/H",
+    ],
+    operations: [
+      "31%", "16k", "30+", "MTTR", "NPS", "cases", "handoff",
+      "Q1", "QoQ", "50M", "▲", "CX", "EX",
+    ],
+    healthcare: [
+      "715", "4.57M", "10+", "vacc", "reach", "partners", "state",
+      "Q1", "engagement", "access", "▲",
+    ],
+  } as const satisfies Record<ImpactOutcomeMode, readonly string[]>,
   systems: {
     revenue: {
-      title: "Revenue system",
-      narrative:
-        "Productized service architecture modernized post-purchase journeys and connected experience design to commercial outcomes.",
-      signals: [
-        "Autodesk: new offering model with measurable RR lift",
-        "Autodesk: service design leadership drove large AON path",
-        "Cross-functional modernization linking product, support, and success",
+      title: "Revenue",
+      narrative: "Tiered success plans → productized · under 12 mo",
+      stats: ["+27% RR", "106% NRR path", "50M+ AOV", "30+ services"],
+      signals: ["Autodesk RR", "Autodesk AOV", "Cross-org"],
+    },
+    operations: {
+      title: "Operations",
+      narrative: "Handoff redesign · lockout ↓ · CX/EX",
+      stats: ["31% MTTR", "16k cases", "30+ outcomes", "+13% NPS"],
+      signals: ["Wipro handoff", "Wipro lockout", "CX/EX exec"],
+    },
+    healthcare: {
+      title: "Healthcare",
+      narrative: "Engagement · access · care uptake",
+      stats: ["10+ partners", "715 vacc", "4.57M reach", "multi-state"],
+      signals: ["EY activation", "EY access", "Ecosystem"],
+    },
+  } as const,
+  /** Primary system readout — horizontal strip metrics */
+  readoutStrip: {
+    all: [
+      { value: "3", label: "systems" },
+      { value: "50M+", label: "service impact" },
+      { value: "4.57M", label: "reach" },
+      { value: "106%", label: "NRR path" },
+      { value: "31%", label: "MTTR ↓" },
+    ],
+    revenue: [
+      { value: "End to end service and journey design", label: "" },
+      { value: "Service Innovation", label: "" },
+      { value: "Leading Through Change", label: "" },
+      { value: "Customer Co-Creation", label: "" },
+      { value: "Research Strategy", label: "" },
+    ],
+    operations: [
+      { value: "31%", label: "MTTR ↓" },
+      { value: "16k", label: "cases ↓" },
+      { value: "30+", label: "outcomes" },
+      { value: "+13%", label: "NPS" },
+    ],
+    healthcare: [
+      { value: "10+", label: "partners" },
+      { value: "715", label: "vaccinations" },
+      { value: "4.57M", label: "engagements" },
+    ],
+  } as const satisfies Record<ImpactOutcomeMode, readonly { value: string; label: string }[]>,
+
+  stateNarrative: {
+    all: "R/O/H unified",
+    revenue: "Autodesk service innovation",
+    operations: "MTTR · cases · NPS",
+    healthcare: "partners · vacc · reach",
+  } as const satisfies Record<ImpactOutcomeMode, string>,
+
+  dataNoiseByMode: {
+    all: [
+      "0.02", "1.4k", "99.2%", "▲", "●", "│", "├", "◆", "→", "·",
+      "RSS", "OK", "PING", "LAT", "Q1", "QoQ", "NRR", "AOV",
+      "3→", "106", "31", "715", "4.57M", "50M", "16k", "10+",
+    ],
+    revenue: [
+      "0.02", "99.2%", "▲", "●", "→", "·", "Q1", "QoQ", "NRR", "AOV",
+      "106", "+27", "50M", "30+", "RR", "tier", "expansion", "services",
+    ],
+    operations: [
+      "0.02", "1.4k", "99.2%", "▲", "●", "→", "·", "Q1", "MTTR", "31",
+      "16k", "50M", "cases", "NPS", "OK", "LAT",
+    ],
+    healthcare: [
+      "0.02", "99.2%", "▲", "●", "→", "·", "715", "4.57M", "10+", "vacc", "reach",
+    ],
+  } as const satisfies Record<ImpactOutcomeMode, readonly string[]>,
+
+  /** Micro readout telemetry strings */
+  telemetryReadouts: {
+    metrics: ["LAT 0.02ms", "OK", "3→", "▲ sync"],
+    canvas: ["9 paths", "live", "3 nodes", "▲"],
+    engine: ["RUN", "0.1s", "▲"],
+    narrative: ["stream", "OK", "▲"],
+  } as const,
+  revenueTierExplanation: {
+    business: {
+      planLabel: "Business Plan",
+      whyThisMatters: "Transforms services from support into revenue drivers",
+      enabled: [
+        "Strategic success planning",
+        "+60% coaching engagement",
+        "Faster time to value (-22%)",
+      ],
+      role: ["Premium service layer driving expansion and retention"],
+      impact: ["50M+ AOV", "106% NRR path"],
+    },
+    professional: {
+      planLabel: "Professional Plan",
+      whyThisMatters:
+        "Bridges self-service and guided support to scale strategic adoption.",
+      enabled: [
+        "Scaled success services built to increase utilization",
+        "Improved feature adoption across mid-tier customers",
+        "Bridged self-service with guided support",
+      ],
+      role: ["Scaled success layer that increases utilization and adoption"],
+      impact: ["Supports the 106% NRR path", "Expands monetization through broader service uptake"],
+    },
+    included: {
+      planLabel: "Included Plan",
+      whyThisMatters:
+        "Builds early value quickly and reduces dependency during onboarding.",
+      enabled: [
+        "Foundational self-service experiences for faster onboarding",
+        "Reduced dependency on reactive support",
+        "Improved early value realization",
+      ],
+      role: ["Foundational self-service layer for onboarding and early activation"],
+      impact: ["Feeds retention by accelerating early outcomes", "Supports scalable service monetization"],
+    },
+  } as const,
+  systemSummary: {
+    revenue: {
+      label: "AUTODESK SERVICE INNOVATION",
+      introLines: [] as const,
+      strategicRole:
+        "Designed a new post-purchase service model at a critical moment when Autodesk needed to create greater value beyond the sale. Translated fragmented service experiences into a tiered, monetized offering system that aligned Design, Product, Support, and Engineering around a more strategic growth model.",
+      modelTitle: "Model:",
+      model: "Tiered success plans → productized services",
+      buildLine: "30+ services across three packaged success plans.",
+      timeframeLine: "2Q to launch runway to design services for a net-new model.",
+      scopeLines: [] as const,
+      outcomesTitle: "Impact",
+      outcomes: [
+        {
+          value: "+27%",
+          label: "Rev lift",
+          descriptor: "Premium retention engine",
+        },
+        {
+          value: "106%",
+          label: "NRR path",
+          descriptor: "Retention path secured",
+        },
+        {
+          value: "50M+",
+          label: "AOV impact",
+          descriptor: "Monetized AOV engine",
+        },
+      ],
+      whyItMattered: [
+        "Turned post-purchase services from reactive support into a tiered revenue engine.",
+        "Connected Design, Product, Support, and Engineering through packaged offerings that increased retention, accelerated value realization, and expanded monetization.",
       ],
     },
     operations: {
-      title: "Operations system",
-      narrative:
-        "Workflow alignment across onboarding and support reduced friction and improved operational speed with executive-level orchestration.",
-      signals: [
-        "Wipro: handoff redesign across product, IT, and operations",
-        "Wipro: reduced lockout and support workflow drag",
-        "System-level CX/EX execution with measurable performance movement",
+      label: "OPERATIONS",
+      introLines: [] as const,
+      modelTitle: "Model:",
+      model: "Handoff redesign · throughput acceleration",
+      scopeLines: [
+        "3 tiers · support pipelines",
+        "MTTR ↓ via optimized escalation paths",
+        "CX/EX alignment for faster resolution",
+      ],
+      outcomes: [
+        { value: "31%", label: "MTTR ↓" },
+        { value: "16k", label: "cases ↓" },
+        { value: "30+", label: "outcomes" },
       ],
     },
     healthcare: {
-      title: "Healthcare system",
-      narrative:
-        "Coordinated engagement and access design translated outreach into real care uptake across complex public health ecosystems.",
-      signals: [
-        "EY: statewide and regional public health activation model",
-        "EY: engagement-to-care navigation reduced access barriers",
-        "Ecosystem orchestration across agencies, providers, and partners",
+      label: "HEALTHCARE",
+      introLines: [] as const,
+      modelTitle: "Model:",
+      model: "Engagement · access · care uptake",
+      scopeLines: [
+        "3 transformation systems · ecosystem partners",
+        "Care pathways optimized for adoption velocity",
+        "Multi-state delivery for scalable outcomes",
+      ],
+      outcomes: [
+        { value: "715", label: "vaccinations" },
+        { value: "4.57M", label: "engagements" },
+        { value: "10+", label: "partners" },
       ],
     },
   } as const,
-  stateNarrative: {
-    all: "Cross-domain command view combining revenue, operations, and healthcare systems.",
-    revenue: "Revenue mode emphasizes offering design and modernization performance.",
-    operations: "Operations mode emphasizes workflow reliability and service throughput.",
-    healthcare: "Healthcare mode emphasizes engagement, access, and care outcomes.",
-  } as const satisfies Record<ImpactOutcomeMode, string>,
 } as const;
 

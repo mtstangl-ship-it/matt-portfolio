@@ -42,7 +42,7 @@ export const transformationDashboard = {
         "Connected Design, Product, Support, and Engineering through journey architecture and experience design. Delivered post-purchase service innovation, new offering models, and a 3–5 year CX vision that shaped Sales and Success modernization.",
       kpis: [
         { value: "+27%", label: "RR in Q1 post launch of new offering model" },
-        { value: "50M+", label: "YOY AON driven through service design leadership" },
+        { value: "50M+", label: "YOY AOV driven through service design leadership" },
         { value: "0→1→2", label: "experience management community of practice" },
         { value: "106%", label: "NRR path achieved via customer relationship design" },
       ],

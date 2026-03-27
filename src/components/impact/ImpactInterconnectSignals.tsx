@@ -15,23 +15,24 @@ type SignalPath = {
 
 const accent = "#22d3c7";
 
-// Coordinates are in overlay viewBox space (1000x520), tuned to align with mission-control modules.
+// Coordinates in overlay viewBox 1000x520 — connect metrics → graph → engine → readout
 const paths: SignalPath[] = [
-  // Metrics panel -> system map routes
-  { id: "metrics-revenue", d: "M 105 120 C 190 90, 300 110, 420 145", systems: ["revenue"], baseOpacity: 0.12, weight: 0.9 },
-  { id: "metrics-operations", d: "M 105 180 C 200 165, 300 185, 510 170", systems: ["operations"], baseOpacity: 0.12, weight: 0.9 },
-  { id: "metrics-healthcare", d: "M 105 242 C 220 252, 320 242, 610 155", systems: ["healthcare"], baseOpacity: 0.12, weight: 0.9 },
+  // Metrics → central graph
+  { id: "metrics-revenue", d: "M 100 130 C 200 100, 350 120, 450 150", systems: ["revenue"], baseOpacity: 0.12, weight: 0.9 },
+  { id: "metrics-operations", d: "M 100 200 C 220 180, 380 190, 500 170", systems: ["operations"], baseOpacity: 0.12, weight: 0.9 },
+  { id: "metrics-healthcare", d: "M 100 270 C 240 260, 400 250, 520 190", systems: ["healthcare"], baseOpacity: 0.12, weight: 0.9 },
 
-  // System map -> active engine
-  { id: "map-engine", d: "M 650 170 C 740 170, 810 155, 880 145", systems: ["revenue", "operations", "healthcare"], baseOpacity: 0.1, weight: 0.8 },
+  // Central graph → engine (primary connection)
+  { id: "map-engine-1", d: "M 620 140 C 720 135, 820 130, 920 135", systems: ["revenue", "operations", "healthcare"], baseOpacity: 0.16, weight: 0.95 },
+  { id: "map-engine-2", d: "M 640 180 C 750 175, 850 170, 940 175", systems: ["revenue", "operations", "healthcare"], baseOpacity: 0.14, weight: 0.9 },
 
-  // System map -> system narrative panel
-  { id: "map-panel", d: "M 520 245 C 560 300, 640 350, 720 380", systems: ["revenue", "operations", "healthcare"], baseOpacity: 0.09, weight: 0.75 },
+  // Graph → narrative/readout
+  { id: "map-panel", d: "M 500 230 C 600 320, 700 380, 850 450", systems: ["revenue", "operations", "healthcare"], baseOpacity: 0.09, weight: 0.75 },
 
-  // Cross-system relationship links (triangle, very subtle)
-  { id: "rel-rev-ops", d: "M 725 412 C 770 386, 815 386, 860 412", systems: ["revenue", "operations"], baseOpacity: 0.08, weight: 0.6 },
-  { id: "rel-ops-health", d: "M 860 412 C 875 440, 875 468, 860 496", systems: ["operations", "healthcare"], baseOpacity: 0.08, weight: 0.6 },
-  { id: "rel-health-rev", d: "M 860 496 C 795 520, 760 470, 725 412", systems: ["healthcare", "revenue"], baseOpacity: 0.08, weight: 0.6 },
+  // Cross-system links
+  { id: "rel-rev-ops", d: "M 720 420 C 780 400, 840 400, 900 420", systems: ["revenue", "operations"], baseOpacity: 0.07, weight: 0.6 },
+  { id: "rel-ops-health", d: "M 900 420 C 920 460, 920 500, 900 540", systems: ["operations", "healthcare"], baseOpacity: 0.07, weight: 0.6 },
+  { id: "rel-health-rev", d: "M 900 540 C 780 580, 720 520, 720 420", systems: ["healthcare", "revenue"], baseOpacity: 0.07, weight: 0.6 },
 ];
 
 function intensityForPath(mode: ImpactOutcomeMode, systems: SystemKey[], base: number, weight: number) {
@@ -48,7 +49,7 @@ export function ImpactInterconnectSignals({ mode }: { mode: ImpactOutcomeMode })
   const reducedMotion = useReducedMotion();
 
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
+    <div aria-hidden className="pointer-events-none absolute inset-0">
       <svg viewBox="0 0 1000 520" className="h-full w-full">
         {paths.map((p) => {
           const opacity = intensityForPath(mode, p.systems, p.baseOpacity, p.weight);
@@ -59,7 +60,7 @@ export function ImpactInterconnectSignals({ mode }: { mode: ImpactOutcomeMode })
               d={p.d}
               fill="none"
               stroke={accent}
-              strokeWidth={p.id.startsWith("rel-") ? 0.9 : 1}
+              strokeWidth={p.id.startsWith("rel-") ? 1 : p.id.startsWith("map-engine") ? 1.2 : 1}
               strokeLinecap="round"
               strokeDasharray={p.id.startsWith("rel-") ? "4 10" : "7 12"}
               initial={false}
@@ -74,7 +75,7 @@ export function ImpactInterconnectSignals({ mode }: { mode: ImpactOutcomeMode })
                 reducedMotion
                   ? { duration: 0 }
                   : active
-                    ? { duration: 4.2, repeat: Infinity, ease: "linear" }
+                    ? { duration: 2.5, repeat: Infinity, ease: "linear" }
                     : { duration: 0.28 }
               }
             />
