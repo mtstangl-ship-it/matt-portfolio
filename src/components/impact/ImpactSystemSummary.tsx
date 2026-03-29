@@ -14,9 +14,16 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
     <div className="flex flex-col gap-4">
       <div className="space-y-2">
         {system === "revenue" ? (
-          <p className="font-mono text-[0.78rem] font-bold uppercase tracking-[0.12em] text-accent-signal">
-            {summary.label}
-          </p>
+          <div className="space-y-2">
+            <p className="font-mono text-[0.78rem] font-bold uppercase tracking-[0.12em] text-accent-signal">
+              {summary.label}
+            </p>
+            {"systemContextLine" in summary && summary.systemContextLine ? (
+              <p className="font-body text-[0.62rem] leading-relaxed text-dashboard-ink-light/78">
+                {summary.systemContextLine}
+              </p>
+            ) : null}
+          </div>
         ) : (
           <p className="font-mono text-[0.7rem] font-bold uppercase tracking-[0.14em] text-dashboard-ink-muted/70">
             {summary.label}

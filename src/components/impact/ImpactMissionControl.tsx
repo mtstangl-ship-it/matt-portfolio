@@ -12,7 +12,6 @@ import { ImpactAmbientMetrics } from "./ImpactAmbientMetrics";
 import { ImpactSystemSummary } from "./ImpactSystemSummary";
 import type { ImpactOutcomeMode } from "@/content/impact-page";
 import { impactMissionControl } from "@/content/impact-mission-control";
-
 const systemKeys = ["revenue", "operations", "healthcare"] as const;
 
 export function ImpactMissionControl() {
@@ -126,7 +125,13 @@ export function ImpactMissionControl() {
             </div>
           </header>
 
-          <div className="relative isolate grid gap-0 p-3 sm:p-4 lg:grid-cols-[18rem,1fr]">
+          <div
+            className={
+              activeSystem === "revenue"
+                ? "relative isolate grid gap-0 p-3 sm:p-4 lg:grid-cols-[18rem,minmax(0,1fr)]"
+                : "relative isolate grid gap-0 p-3 sm:p-4 lg:grid-cols-[18rem,minmax(0,1fr)]"
+            }
+          >
             {/* Tertiary layer — must not capture clicks or sit above content */}
             <div
               className="pointer-events-none col-span-full row-span-full"
@@ -140,7 +145,7 @@ export function ImpactMissionControl() {
 
             {/* Supporting: Clean metric cluster — flows into center, opaque to avoid ambient bleed */}
             <aside
-              className="relative z-10 py-4 pr-3 pl-2"
+              className="relative z-10 py-4 pr-3 pl-2 lg:row-span-2"
               style={{
                 background:
                   "linear-gradient(to bottom, rgba(12,11,10,0.92) 0%, rgba(12,11,10,0.85) 100%), linear-gradient(to right, transparent 70%, rgba(34,211,199,0.03) 100%)",
@@ -152,7 +157,9 @@ export function ImpactMissionControl() {
 
             {/* Primary: System brain — dominant focal point; flows into engine */}
             <div
-              className="relative z-20 col-span-1 flex min-h-0 flex-col items-center justify-center p-3 lg:p-6"
+              className={`relative z-20 col-span-1 flex min-h-0 flex-col p-3 lg:row-span-2 lg:p-6 ${
+                activeSystem === "revenue" ? "justify-stretch" : "items-center justify-center"
+              }`}
               style={{
                 background:
                   "radial-gradient(ellipse 85% 75% at 50% 48%, rgba(34,211,199,0.1) 0%, transparent 50%), linear-gradient(135deg, rgba(15,14,13,0.9) 0%, rgba(15,14,13,0.7) 100%), linear-gradient(to right, transparent 55%, rgba(34,211,199,0.06) 85%, rgba(34,211,199,0.12) 100%)",
@@ -161,19 +168,24 @@ export function ImpactMissionControl() {
               }}
             >
               <div
-                className="relative w-full flex-1 min-h-[20rem] sm:min-h-[22rem] lg:min-h-[26rem]"
-                style={{ minHeight: "clamp(18rem, 55vh, 28rem)" }}
+                className={
+                  activeSystem === "revenue"
+                    ? "relative flex min-h-0 w-full flex-1 flex-col"
+                    : "relative w-full flex-1 min-h-[20rem] sm:min-h-[22rem] lg:min-h-[26rem]"
+                }
+                style={
+                  activeSystem === "revenue"
+                    ? { minHeight: "clamp(16rem, 58vh, 40rem)" }
+                    : { minHeight: "clamp(18rem, 55vh, 28rem)" }
+                }
               >
-                <ImpactCentralSystem
-                  activeSystem={activeSystem}
-                  onRevenueTierHover={undefined}
-                />
+                <ImpactCentralSystem activeSystem={activeSystem} />
               </div>
             </div>
 
             {/* Supporting: System narrative */}
             <div
-              className="relative z-10 flex flex-wrap items-center gap-2 p-2 lg:col-span-2"
+              className={`relative z-10 flex flex-wrap items-center gap-2 p-2 lg:col-span-2`}
               style={{
                 background:
                   "linear-gradient(to top, rgba(34,211,199,0.03) 0%, transparent 50%), linear-gradient(135deg, rgba(15,14,13,0.2) 0%, transparent 100%)",

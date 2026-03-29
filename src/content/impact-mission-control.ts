@@ -172,6 +172,9 @@ export const impactMissionControl = {
   systemSummary: {
     revenue: {
       label: "AUTODESK SERVICE INNOVATION",
+      /** Short system line under the title (revenue only) */
+      systemContextLine:
+        "Built and scaled within a 12-month window by a net-new team that designed, automated, and improved 30+ services across three packaged success plans.",
       introLines: [] as const,
       strategicRole:
         "Designed a new post-purchase service model at a critical moment when Autodesk needed to create greater value beyond the sale. Translated fragmented service experiences into a tiered, monetized offering system that aligned Design, Product, Support, and Engineering around a more strategic growth model.",

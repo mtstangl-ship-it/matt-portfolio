@@ -31,7 +31,9 @@ export function ImpactCentralSystem({
         initial={{ opacity: 0.85 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.28, ease: "easeOut" }}
-        className="relative min-h-[280px] w-full lg:absolute lg:inset-0 lg:min-h-0"
+        className={`relative min-h-[280px] w-full lg:absolute lg:inset-0 lg:min-h-0 ${
+          activeSystem === "revenue" ? "flex h-full min-h-0 flex-col" : ""
+        }`}
       >
         {activeSystem === "revenue" ? (
           <RevenueSystemViz onTierHover={onRevenueTierHover} />
