@@ -171,6 +171,12 @@ export const impactMissionControl = {
   } as const,
   systemSummary: {
     revenue: {
+      /** Shown first in the left column — above system label — so the metric is always visible without scrolling. */
+      leadMetric: {
+        value: "$50M",
+        label: "Incremental AOV",
+        descriptor: "Monetized AOV engine",
+      },
       label: "AUTODESK SERVICE INNOVATION",
       /** Short system line under the title (revenue only) */
       systemContextLine:
@@ -194,11 +200,6 @@ export const impactMissionControl = {
           value: "106%",
           label: "NRR path",
           descriptor: "Retention path secured",
-        },
-        {
-          value: "50M+",
-          label: "AOV impact",
-          descriptor: "Monetized AOV engine",
         },
       ],
       whyItMattered: [

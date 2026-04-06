@@ -35,14 +35,14 @@ export function BrandThesis() {
                 </div>
               </div>
 
-              <div className="relative min-h-[140px] min-w-0 overflow-hidden rounded-lg border border-ink-200/50 bg-paper-50 shadow-card sm:min-h-[180px] lg:min-h-0">
+              <div className="relative min-w-0 overflow-hidden rounded-lg border border-ink-200/50 bg-paper-50 shadow-card">
                 <Image
                   src="/images/portraits/matt-portrait.png"
                   alt="Portrait of Matt"
-                  fill
-                  className="object-cover object-[50%_20%]"
-                  sizes="(max-width: 1024px) 100vw, 280px"
-                  priority
+                  width={1024}
+                  height={1024}
+                  className="h-auto w-full max-h-[min(52vh,380px)] object-cover object-[50%_20%] sm:max-h-[400px] lg:max-h-[360px]"
+                  sizes="(max-width: 640px) min(100vw - 3rem, 36rem), (max-width: 1024px) min(45vw, 24rem), min(360px, 28vw)"
                   style={{ filter: "grayscale(12%) contrast(1.08) saturate(0.9)" }}
                 />
                 {/* Subtle tonality — depth and editorial warmth */}

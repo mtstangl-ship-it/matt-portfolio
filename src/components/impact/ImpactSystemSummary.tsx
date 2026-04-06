@@ -12,6 +12,32 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
 
   return (
     <div className="flex flex-col gap-4">
+      {isRevenue && "leadMetric" in summary && summary.leadMetric ? (
+        <div
+          className="border-b border-dashboard-border/30 pb-4"
+          aria-label={`${summary.leadMetric.value} ${summary.leadMetric.label}`}
+        >
+          <p
+            className="font-mono font-bold tabular-nums tracking-[-0.03em] text-white"
+            style={{
+              fontSize: "clamp(1.75rem, 5.5vw, 2.5rem)",
+              lineHeight: 0.95,
+              textShadow: "0 0 24px rgba(34,211,199,0.2)",
+            }}
+          >
+            {summary.leadMetric.value}
+          </p>
+          <p className="mt-2 font-body text-[0.6875rem] font-semibold uppercase leading-snug tracking-[0.12em] text-accent-signal/85">
+            {summary.leadMetric.label}
+          </p>
+          {summary.leadMetric.descriptor ? (
+            <p className="mt-1.5 font-body text-[0.5rem] font-semibold uppercase tracking-[0.1em] text-dashboard-ink-light/55">
+              {summary.leadMetric.descriptor}
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+
       <div className="space-y-2">
         {system === "revenue" ? (
           <div className="space-y-2">
@@ -166,10 +192,8 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
                 boxShadow: "inset 0 1px 0 rgba(232,230,226,0.03)",
               }}
             >
-              <span className="font-mono text-[0.82rem] font-bold tabular-nums text-white">
-                {o.value}
-              </span>
-              <div className="flex flex-col items-end gap-0.5">
+              <span className="font-mono text-[0.82rem] font-bold tabular-nums text-white">{o.value}</span>
+              <div className="flex min-w-0 flex-col items-end gap-0.5 text-right">
                 <span className="font-body text-[0.5rem] font-semibold uppercase tracking-[0.1em] text-dashboard-ink-light/75">
                   {o.label}
                 </span>

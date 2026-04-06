@@ -99,7 +99,12 @@ export function ImpactGlobalImpactSection() {
           <motion.div
             className="rounded-sm border border-dashboard-border/80 bg-dashboard-muted/55 p-4 shadow-[inset_0_1px_0_rgba(232,230,226,0.06)] sm:p-5"
             initial={false}
-            animate={{ boxShadow: mode === "all" ? "inset 0 1px 0 rgba(232,230,226,0.08), 0 0 0 rgba(34,211,199,0)" : "inset 0 1px 0 rgba(232,230,226,0.08), 0 0 28px -16px rgba(34,211,199,0.35)" }}
+            animate={{
+              boxShadow:
+                mode === "all"
+                  ? "inset 0 1px 0 rgba(232,230,226,0.08), 0 0 0 0 rgba(34,211,199,0)"
+                  : "inset 0 1px 0 rgba(232,230,226,0.08), 0 0 28px -16px rgba(34,211,199,0.35)",
+            }}
             transition={{ duration: 0.35, ease: "easeOut" }}
           >
             <div className="flex items-center justify-between gap-4">

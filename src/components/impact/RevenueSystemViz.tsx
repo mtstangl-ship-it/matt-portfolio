@@ -40,7 +40,6 @@ export function RevenueSystemViz({
     [clearLeaveTimer, onTierHover]
   );
 
-  /** Only when the pointer leaves the entire tier stack (not when moving between rows). */
   const scheduleResetToBusiness = useCallback(() => {
     clearLeaveTimer();
     leaveTimerRef.current = setTimeout(() => {
@@ -65,18 +64,29 @@ export function RevenueSystemViz({
         <RevenueLeadMetric />
       </div>
 
-      <div className="shrink-0 px-0.5 sm:px-1">
-        <RevenueLayerDescriptors tier={hoveredTier} />
-      </div>
-
-      <div className="flex min-h-0 flex-1 flex-col gap-1.5 px-0.5 sm:gap-2 sm:px-1">
-        {tierOrder.map((tier) => (
-          <PlanTierRow
-            key={tier}
-            tier={tier}
-            isActive={hoveredTier === tier}
-            onSelect={() => selectTier(tier)}
+      <div className="flex min-h-0 flex-1 flex-col gap-1 px-0.5 min-[380px]:gap-1.5 sm:gap-2 sm:px-1">
+        <div className="shrink-0">
+          <RevenueLayerDescriptors
+            tier={hoveredTier}
+            pairing={hoveredTier === "business" ? "stack" : "inline"}
           />
+        </div>
+
+        {tierOrder.map((tier) => (
+          <div
+            key={tier}
+            className={
+              hoveredTier === tier
+                ? "flex min-h-0 min-w-0 flex-1 flex-col"
+                : "flex shrink-0 flex-col"
+            }
+          >
+            <PlanTierRow
+              tier={tier}
+              isActive={hoveredTier === tier}
+              onSelect={() => selectTier(tier)}
+            />
+          </div>
         ))}
       </div>
     </div>

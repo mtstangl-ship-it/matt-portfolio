@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CLUSTER_LABELS, type CategoryKind } from "./revenue-tier-config";
+import { CLUSTER_LABELS, type CategoryKind, type TierKey } from "./revenue-tier-config";
 import { ServiceCategoryContent } from "./ServiceCategoryContent";
 
 type Props = {
   kind: CategoryKind;
+  tier: TierKey;
   count: number;
   /** 0 = Innovated, 1 = Optimized, 2 = Refined */
   labelIndex: 0 | 1 | 2;
@@ -36,6 +37,7 @@ const headerByKind: Record<CategoryKind, string> = {
 
 export function CategoryServiceBox({
   kind,
+  tier,
   count,
   labelIndex,
   compact,
@@ -79,7 +81,7 @@ export function CategoryServiceBox({
       >
         {/* Local stage: pills animate only here; clipped to card */}
         <div className="relative h-full min-h-0 w-full overflow-hidden">
-          <ServiceCategoryContent kind={kind} count={count} hovered={animationActive} />
+          <ServiceCategoryContent kind={kind} tier={tier} count={count} hovered={animationActive} />
         </div>
       </div>
     </div>

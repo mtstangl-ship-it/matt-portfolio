@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 const accent = "#22d3c7";
 
-/** Full-width lead: 50M+ anchored at top of the revenue stage. */
+/** Full-width lead: $50M with “Incremental AOV” descriptor at top of the revenue stage. */
 export function RevenueLeadMetric() {
   const reducedMotion = useReducedMotion();
 
@@ -74,8 +74,9 @@ export function RevenueLeadMetric() {
                 lineHeight: 0.9,
                 textShadow: "0 0 56px rgba(34,211,199,0.3), 0 2px 28px rgba(0,0,0,0.4)",
               }}
+              aria-label="50 million dollars incremental average order value"
             >
-              50M+
+              $50M
             </span>
           </motion.div>
 
@@ -83,7 +84,7 @@ export function RevenueLeadMetric() {
             className="mt-2 font-[family-name:var(--font-body)] font-semibold uppercase leading-snug tracking-[0.08em] text-accent-signal/75 [font-size:clamp(0.65625rem,calc(0.4rem+1vw),0.875rem)] sm:mt-2.5"
             style={{ letterSpacing: "0.06em" }}
           >
-            Projected AOV Impact
+            Incremental AOV
           </p>
         </div>
       </div>
