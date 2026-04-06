@@ -1,61 +1,77 @@
-/** About page — positioning, narrative, and structure (Matt Stangl). */
+/** About page — modular narrative (Matt Stangl). */
 
 export const aboutPage = {
   hero: {
-    headline: "Service & experience transformation, made legible.",
+    headline: "I design systems that turn ambiguity into momentum.",
     subhead:
-      "I help organizations turn ambiguity into structure—connecting strategy, systems, storytelling, and the messy reality of cross-functional work so teams can ship offers, journeys, and operating models that stick.",
+      "Strategy, service design, and storytelling that connect experience to adoption, retention, and growth.",
   },
-  intro: [
-    "I’m a service and experience transformation leader. My work sits where strategy meets execution: journey and service models, productized offerings, adoption and retention, and the narratives that help organizations understand what to change and why it matters commercially.",
-    "That’s an unusual mix—creative and consulting roots, enterprise depth, and a bias toward making things real. I’m as interested in how work gets coordinated as I am in what the experience looks like, because the two either reinforce each other or they fight.",
-    "I’ve built capabilities, shaped post-purchase and lifecycle models, aligned design with product, support, and engineering, and helped teams move from fragmented touchpoints to coherent systems—with clarity for customers and employees, and line of sight to revenue, retention, and growth.",
-    "I’m strongest when the problem is fuzzy: competing priorities, unclear ownership, legacy process, or transformation that can’t afford to stay theoretical. I translate complexity into structure, sequence, and artifacts people can actually use.",
-    "I’m not interested in design as decoration. I’m interested in design as a lever—for clarity, trust, usefulness, adoption, and measurable impact.",
-  ],
-  pillars: {
-    title: "What I’m best at",
-    items: [
+  /** Horizontal strip — links to Impact / system language */
+  visualStrip: {
+    flow: ["Strategy", "Systems", "Adoption", "Growth"],
+    pills: ["0→1 models", "Service architecture", "Journey systems", "Revenue impact"],
+  },
+  howIThink: {
+    title: "How I think",
+    statements: [
+      "I don’t separate design from business outcomes.",
+      "I structure ambiguity into something teams can move on.",
+      "I translate complexity into systems people can actually use.",
+      "I care about adoption as much as I care about ideas.",
+    ],
+  },
+  whatIDo: {
+    title: "What I do",
+    cards: [
       {
-        title: "Shaping strategy from ambiguity",
-        body: "Framing the problem, the stakes, and the moves—without pretending the org is simpler than it is.",
+        title: "Service & experience strategy",
+        body: "Designing systems that connect experience to measurable business outcomes.",
       },
       {
-        title: "Productizing services and offers",
-        body: "Turning ideas into packaged logic, journeys, and monetization paths that teams can run, not just admire.",
+        title: "Journey & lifecycle design",
+        body: "Structuring end-to-end experiences that drive adoption, retention, and expansion.",
       },
       {
-        title: "Aligning cross-functional teams",
-        body: "Building shared language, rituals, and artifacts so design, product, operations, and business stakeholders pull in one direction.",
+        title: "Offer & service model design",
+        body: "Turning fragmented capabilities into clear, monetizable service offerings.",
       },
       {
-        title: "Improving adoption, retention, and value realization",
-        body: "Connecting experience work to outcomes that show up in usage, renewal, expansion, and customer confidence.",
+        title: "Adoption & retention systems",
+        body: "Designing for real usage, not just intent.",
       },
       {
-        title: "Narrative that makes transformation understandable",
-        body: "Stories, frames, and visuals that reduce fear, build conviction, and make change feel actionable.",
+        title: "Cross-functional alignment",
+        body: "Bringing design, product, support, and business into shared direction.",
       },
       {
-        title: "Creative instinct + business judgment",
-        body: "Bridging storytelling craft with operating reality—so the work is both compelling and executable.",
+        title: "Narrative & communication",
+        body: "Making complex transformation understandable and actionable.",
       },
+    ],
+  },
+  signals: {
+    title: "Select signals",
+    tiles: [
+      { value: "$50M+", label: "AOV impact through service model redesign" },
+      { value: "+27%", label: "Retention lift through premium service tier" },
+      { value: "106%", label: "NRR path through lifecycle design" },
+      { value: "Oprah narrated campaign", label: "Led creative production and storytelling execution" },
     ],
   },
   career: {
-    title: "How I got here",
+    title: "Career arc",
     paragraphs: [
-      "I started in creative and storytelling environments—learning how to earn attention, structure a narrative, and make complexity feel simple without dumbing it down. That instinct still shows up in how I frame programs, workshops, and change.",
-      "Consulting and enterprise work stretched me into transformation at scale: stakeholder maps, operating constraints, governance, and the long arc of adoption. I learned to pair vision with sequencing—what to do first, what to defer, and how to keep momentum when the work is cross-functional and politically charged.",
-      "Over time my focus settled on experience, journey, and service models: the connective tissue between what companies promise, what customers feel, and what teams can sustainably deliver. The through-line is commercial relevance—retention, monetization, and growth—not activity for its own sake.",
+      "Matt’s work spans creative storytelling, consulting, and enterprise transformation.",
+      "He started in creative environments, developing a strong instinct for narrative, craft, and audience. That foundation evolved into work shaping service models, experience systems, and organizational alignment—helping companies turn fragmented experiences into structured, scalable offerings.",
+      "What defines his work is not just strategy, but the ability to translate it into systems, teams, and execution.",
     ],
   },
   personal: {
-    title: "Outside the deck",
-    body: "I care about craft, clarity, and kindness in how teams work together. I’m direct, a little irreverent when it helps, and allergic to jargon that substitutes for thinking. I’m at my best alongside people who want to build something that lasts—not just ship a slide.",
-  },
-  closing: {
-    title: "What energizes me",
-    body: "Work where the mandate is real, the stakeholders are sharp, and the outcome has to survive contact with customers and the business. If you’re wrestling with fragmentation, monetization, adoption, or the gap between strategy and what actually ships, we’ll probably have a good conversation.",
+    title: "Personal note",
+    sentences: [
+      "I care about building a life that’s not just work.",
+      "I write, stay close to people who matter, and try to keep perspective.",
+      "The work matters to me, but it’s not the only thing—that balance shows up in how I think, how I lead, and what I build.",
+    ],
   },
 } as const;

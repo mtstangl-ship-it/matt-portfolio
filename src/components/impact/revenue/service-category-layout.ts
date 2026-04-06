@@ -29,14 +29,14 @@ const SHELL_3X2_INNOVATED = [
 /** Professional — tightest grouping (benchmark tightness). */
 const SHELL_3X2_INNOVATED_PRO = [
   "grid w-full grid-cols-3 grid-rows-2 [grid-template-columns:repeat(3,minmax(0,1fr))] [grid-template-rows:repeat(2,minmax(0,1fr))]",
-  "place-content-center place-items-center justify-items-center gap-[clamp(0.12rem,0.85vw,0.22rem)]",
+  "place-content-center place-items-center justify-items-center gap-[clamp(0.09rem,0.72vw,0.18rem)]",
   "px-0.5",
 ].join(" ");
 
 /** Included — grouped, slightly more air than Professional. */
 const SHELL_3X2_INNOVATED_INC = [
   "grid w-full grid-cols-3 grid-rows-2 [grid-template-columns:repeat(3,minmax(0,1fr))] [grid-template-rows:repeat(2,minmax(0,1fr))]",
-  "place-content-center place-items-center justify-items-center gap-[clamp(0.15rem,0.95vw,0.28rem)]",
+  "place-content-center place-items-center justify-items-center gap-[clamp(0.12rem,0.82vw,0.24rem)]",
   "px-0.5",
 ].join(" ");
 
@@ -70,8 +70,8 @@ export function refinedContainerClass(count: number): string {
 
 function innovated2x2Gap(tier: TierKey): string {
   if (tier === "business") return "gap-[clamp(0.28rem,1.85vw,0.52rem)]";
-  if (tier === "professional") return "gap-[clamp(0.07rem,0.55vw,0.16rem)]";
-  return "gap-[clamp(0.1rem,0.72vw,0.2rem)]";
+  if (tier === "professional") return "gap-[clamp(0.055rem,0.48vw,0.14rem)]";
+  return "gap-[clamp(0.085rem,0.65vw,0.17rem)]";
 }
 
 function gridGapXY(tier: TierKey): { gx: string; gy: string } {
@@ -83,13 +83,13 @@ function gridGapXY(tier: TierKey): { gx: string; gy: string } {
   }
   if (tier === "professional") {
     return {
-      gx: "gap-x-[clamp(0.1rem,0.85vw,0.22rem)]",
-      gy: "gap-y-[clamp(0.12rem,0.95vw,0.26rem)]",
+      gx: "gap-x-[clamp(0.085rem,0.78vw,0.19rem)]",
+      gy: "gap-y-[clamp(0.1rem,0.88vw,0.22rem)]",
     };
   }
   return {
-    gx: "gap-x-[clamp(0.13rem,1vw,0.26rem)]",
-    gy: "gap-y-[clamp(0.15rem,1.1vw,0.3rem)]",
+    gx: "gap-x-[clamp(0.11rem,0.92vw,0.23rem)]",
+    gy: "gap-y-[clamp(0.13rem,1.02vw,0.27rem)]",
   };
 }
 
