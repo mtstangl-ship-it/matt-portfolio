@@ -44,13 +44,29 @@ export function SignalStorySection() {
             title={lead.title}
             label={lead.label}
             variant="hero"
+            previewStartSeconds={lead.previewStartSeconds}
+            previewDurationSeconds={lead.previewDurationSeconds}
           />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:gap-8">
             {a ? (
-              <YouTubeInline youtubeId={a.youtubeId} title={a.title} label={a.label} variant="default" />
+              <YouTubeInline
+                youtubeId={a.youtubeId}
+                title={a.title}
+                label={a.label}
+                variant="default"
+                previewStartSeconds={a.previewStartSeconds}
+                previewDurationSeconds={a.previewDurationSeconds}
+              />
             ) : null}
             {b ? (
-              <YouTubeInline youtubeId={b.youtubeId} title={b.title} label={b.label} variant="default" />
+              <YouTubeInline
+                youtubeId={b.youtubeId}
+                title={b.title}
+                label={b.label}
+                variant="default"
+                previewStartSeconds={b.previewStartSeconds}
+                previewDurationSeconds={b.previewDurationSeconds}
+              />
             ) : null}
           </div>
         </div>

@@ -40,17 +40,33 @@ export default function SignalStoryPage() {
             title={featured.title}
             label={featured.label}
             variant="hero"
+            previewStartSeconds={featured.previewStartSeconds}
+            previewDurationSeconds={featured.previewDurationSeconds}
           />
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:gap-8">
             {rowA.map((v) => (
-              <YouTubeInline key={v.youtubeId} youtubeId={v.youtubeId} title={v.title} label={v.label} />
+              <YouTubeInline
+                key={v.youtubeId}
+                youtubeId={v.youtubeId}
+                title={v.title}
+                label={v.label}
+                previewStartSeconds={v.previewStartSeconds}
+                previewDurationSeconds={v.previewDurationSeconds}
+              />
             ))}
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:gap-8">
             {rowB.map((v) => (
-              <YouTubeInline key={v.youtubeId} youtubeId={v.youtubeId} title={v.title} label={v.label} />
+              <YouTubeInline
+                key={v.youtubeId}
+                youtubeId={v.youtubeId}
+                title={v.title}
+                label={v.label}
+                previewStartSeconds={v.previewStartSeconds}
+                previewDurationSeconds={v.previewDurationSeconds}
+              />
             ))}
           </div>
 
@@ -60,6 +76,8 @@ export default function SignalStoryPage() {
               title={finale.title}
               label={finale.label}
               variant="hero"
+              previewStartSeconds={finale.previewStartSeconds}
+              previewDurationSeconds={finale.previewDurationSeconds}
             />
           ) : null}
         </div>
