@@ -1,95 +1,148 @@
 import type { Metadata } from "next";
-import { Section } from "@/components/ui/Section";
 import { aboutPage } from "@/content/about";
 
 export const metadata: Metadata = {
   title: "About — Matt Stangl",
   description:
-    "Service and experience transformation leader—strategy, systems, storytelling, and measurable business impact.",
+    "Systems that turn ambiguity into momentum—strategy, service design, adoption, and growth.",
 };
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-base-100">
-      <Section className="border-b border-ink-200/40 bg-gradient-to-b from-paper-50 to-base-100 py-12 sm:py-16">
-        <div className="max-w-3xl">
-          <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/80">
+    <div className="min-h-screen bg-dashboard-bg text-dashboard-ink-light">
+      {/* 1. Hero */}
+      <section className="border-b border-white/[0.06] px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
+        <div className="mx-auto max-w-3xl">
+          <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.16em] text-accent-signal/85">
             About
           </p>
-          <h1 className="mt-3 font-display text-[clamp(1.75rem,4vw,2.375rem)] font-semibold leading-[1.15] tracking-[-0.02em] text-ink-950">
+          <h1 className="mt-4 font-display text-[clamp(1.65rem,4.5vw,2.5rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-white">
             {aboutPage.hero.headline}
           </h1>
-          <p className="mt-5 max-w-[46ch] font-body text-[clamp(1rem,2.1vw,1.125rem)] font-normal leading-[1.55] text-ink-700">
+          <p className="mt-5 max-w-[40ch] font-body text-[clamp(0.9375rem,2vw,1.0625rem)] font-normal leading-[1.55] text-dashboard-ink-muted">
             {aboutPage.hero.subhead}
           </p>
         </div>
-      </Section>
+      </section>
 
-      <Section className="py-10 sm:py-14">
-        <div className="mx-auto max-w-[46rem] space-y-5">
-          {aboutPage.intro.map((p) => (
-            <p
-              key={p.slice(0, 24)}
-              className="font-body text-[1.02rem] leading-[1.65] text-ink-800 [text-wrap:pretty]"
-            >
-              {p}
-            </p>
-          ))}
+      {/* 2. Visual strip */}
+      <section className="border-b border-white/[0.06] bg-dashboard-muted/40 px-4 py-8 sm:px-6">
+        <div className="mx-auto max-w-4xl">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+            {aboutPage.visualStrip.flow.map((label, i) => (
+              <span key={label} className="flex items-center gap-2 sm:gap-3">
+                <span className="rounded-full border border-accent-signal/35 bg-dashboard-card/80 px-3 py-1.5 font-mono text-[0.5625rem] font-semibold uppercase tracking-[0.12em] text-accent-signal/95">
+                  {label}
+                </span>
+                {i < aboutPage.visualStrip.flow.length - 1 ? (
+                  <span className="text-[0.65rem] font-medium text-dashboard-ink-muted/60" aria-hidden>
+                    →
+                  </span>
+                ) : null}
+              </span>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap justify-center gap-2">
+            {aboutPage.visualStrip.pills.map((p) => (
+              <span
+                key={p}
+                className="rounded-md border border-white/[0.08] bg-dashboard-surface/60 px-2.5 py-1 font-mono text-[0.5rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/75"
+              >
+                {p}
+              </span>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
-      <Section className="border-t border-ink-200/35 bg-paper-50/80 py-10 sm:py-14">
-        <div className="mx-auto max-w-[46rem]">
-          <h2 className="font-display text-[clamp(1.25rem,2.5vw,1.5rem)] font-semibold tracking-[-0.02em] text-ink-950">
-            {aboutPage.pillars.title}
+      {/* 3. How I think */}
+      <section className="px-4 py-12 sm:px-6 sm:py-14">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="font-display text-[clamp(1.15rem,2.5vw,1.35rem)] font-semibold tracking-[-0.02em] text-white">
+            {aboutPage.howIThink.title}
           </h2>
-          <ul className="mt-8 grid gap-6 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-8">
-            {aboutPage.pillars.items.map((item) => (
-              <li key={item.title} className="min-w-0">
-                <p className="font-body text-[0.9375rem] font-semibold leading-snug text-ink-950">{item.title}</p>
-                <p className="mt-1.5 font-body text-[0.9375rem] leading-relaxed text-ink-600">{item.body}</p>
+          <ul className="mt-8 space-y-0 divide-y divide-white/[0.07] border-y border-white/[0.07]">
+            {aboutPage.howIThink.statements.map((line) => (
+              <li
+                key={line}
+                className="py-4 font-body text-[0.9375rem] font-medium leading-snug text-dashboard-ink-light/92 first:pt-4 last:pb-4"
+              >
+                {line}
               </li>
             ))}
           </ul>
         </div>
-      </Section>
+      </section>
 
-      <Section className="py-10 sm:py-14">
-        <div className="mx-auto max-w-[46rem]">
-          <h2 className="font-display text-[clamp(1.25rem,2.5vw,1.5rem)] font-semibold tracking-[-0.02em] text-ink-950">
-            {aboutPage.career.title}
+      {/* 4. What I do — cards */}
+      <section className="border-t border-white/[0.06] bg-dashboard-muted/25 px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="font-display text-[clamp(1.15rem,2.5vw,1.35rem)] font-semibold tracking-[-0.02em] text-white">
+            {aboutPage.whatIDo.title}
           </h2>
-          <div className="mt-6 space-y-5">
-            {aboutPage.career.paragraphs.map((p) => (
-              <p key={p.slice(0, 20)} className="font-body text-[1.02rem] leading-[1.65] text-ink-800 [text-wrap:pretty]">
-                {p}
-              </p>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+            {aboutPage.whatIDo.cards.map((c) => (
+              <div
+                key={c.title}
+                className="rounded-md border border-accent-signal/15 bg-dashboard-card/90 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+              >
+                <p className="font-body text-[0.8125rem] font-semibold leading-snug text-accent-signal/95">{c.title}</p>
+                <p className="mt-2 font-body text-[0.8125rem] leading-relaxed text-dashboard-ink-muted">{c.body}</p>
+              </div>
             ))}
           </div>
         </div>
-      </Section>
+      </section>
 
-      <Section className="border-t border-ink-200/35 bg-paper-50/80 py-10 sm:py-14">
-        <div className="mx-auto max-w-[46rem]">
-          <h2 className="font-display text-[clamp(1.2rem,2.2vw,1.4rem)] font-semibold tracking-[-0.02em] text-ink-950">
+      {/* 5. Select signals */}
+      <section className="border-t border-white/[0.06] px-4 py-12 sm:px-6 sm:py-14">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="font-display text-[clamp(1.15rem,2.5vw,1.35rem)] font-semibold tracking-[-0.02em] text-white">
+            {aboutPage.signals.title}
+          </h2>
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {aboutPage.signals.tiles.map((t) => (
+              <div
+                key={t.value}
+                className="rounded-md border border-white/[0.08] bg-gradient-to-br from-dashboard-card to-dashboard-muted/80 px-3 py-4"
+              >
+                <p className="font-mono text-[clamp(1.25rem,3vw,1.65rem)] font-bold tabular-nums tracking-[-0.03em] text-white">
+                  {t.value}
+                </p>
+                <p className="mt-2 font-body text-[0.6875rem] font-medium leading-snug text-dashboard-ink-muted">{t.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Career arc */}
+      <section className="border-t border-white/[0.06] bg-dashboard-muted/20 px-4 py-12 sm:px-6 sm:py-14">
+        <div className="mx-auto max-w-2xl space-y-5">
+          <h2 className="font-display text-[clamp(1.15rem,2.5vw,1.35rem)] font-semibold tracking-[-0.02em] text-white">
+            {aboutPage.career.title}
+          </h2>
+          {aboutPage.career.paragraphs.map((p) => (
+            <p key={p.slice(0, 28)} className="font-body text-[0.9375rem] leading-[1.65] text-dashboard-ink-light/88">
+              {p}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      {/* 7. Personal note */}
+      <section className="border-t border-white/[0.06] px-4 py-12 sm:px-6 sm:pb-20">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="font-display text-[clamp(1.05rem,2vw,1.2rem)] font-semibold tracking-[-0.02em] text-white">
             {aboutPage.personal.title}
           </h2>
-          <p className="mt-4 font-body text-[1.02rem] leading-[1.65] text-ink-700 [text-wrap:pretty]">
-            {aboutPage.personal.body}
-          </p>
+          <div className="mt-5 space-y-3 font-body text-[0.9375rem] leading-[1.6] text-dashboard-ink-muted">
+            {aboutPage.personal.sentences.map((s) => (
+              <p key={s}>{s}</p>
+            ))}
+          </div>
         </div>
-      </Section>
-
-      <Section className="border-t border-ink-200/40 py-12 sm:py-16">
-        <div className="mx-auto max-w-[46rem] rounded-lg border border-ink-200/50 bg-base-100 px-5 py-6 shadow-card sm:px-8 sm:py-8">
-          <h2 className="font-display text-[clamp(1.2rem,2.2vw,1.35rem)] font-semibold tracking-[-0.02em] text-ink-950">
-            {aboutPage.closing.title}
-          </h2>
-          <p className="mt-3 font-body text-[1rem] leading-[1.65] text-ink-700 [text-wrap:pretty]">
-            {aboutPage.closing.body}
-          </p>
-        </div>
-      </Section>
+      </section>
     </div>
   );
 }

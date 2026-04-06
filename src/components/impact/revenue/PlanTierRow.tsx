@@ -16,8 +16,8 @@ const tierSurface: Record<
   }
 > = {
   business: {
-    row: "border-accent-signal/50 bg-[rgba(18,22,22,0.82)] shadow-[0_0_0_1px_rgba(34,211,199,0.12)]",
-    title: "font-extrabold tracking-wide text-[rgba(248,246,242,0.98)]",
+    row: "border-accent-signal/[0.58] bg-[rgba(18,23,23,0.9)] shadow-[0_0_0_1px_rgba(34,211,199,0.18),0_0_20px_-6px_rgba(34,211,199,0.12)]",
+    title: "font-extrabold tracking-wide text-[rgba(248,246,242,0.99)]",
     rx: "rounded-[5px]",
     businessGlow: true,
   },
@@ -66,8 +66,10 @@ export function PlanTierRow({ tier, isActive, onSelect }: Props) {
           ? "min-h-[min(13rem,34vh)] max-h-[min(27rem,54vh)] flex-1"
           : "h-11 max-h-11 shrink-0 sm:h-12 sm:max-h-12"
       } ${!isActive ? "opacity-[0.58]" : "opacity-100"} ${
-        surface.businessGlow && isActive ? "shadow-[0_0_24px_rgba(34,211,199,0.12)]" : ""
-      } ${isActive ? "ring-1 ring-accent-signal/40" : ""} transition-opacity`}
+        surface.businessGlow && isActive ? "shadow-[0_0_28px_rgba(34,211,199,0.14)]" : ""
+      } ${isActive ? "ring-1 ring-accent-signal/45" : ""} ${
+        tier === "business" && !isActive ? "ring-1 ring-accent-signal/15" : ""
+      } transition-opacity`}
       onMouseEnter={onSelect}
       role="button"
       tabIndex={0}

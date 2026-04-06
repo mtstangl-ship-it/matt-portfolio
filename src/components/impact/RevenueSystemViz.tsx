@@ -5,11 +5,44 @@ import { PlanTierRow } from "./revenue/PlanTierRow";
 import { RevenueLeadMetric } from "./revenue/RevenueLeadMetric";
 import { RevenueLayerDescriptors } from "./revenue/RevenueLayerDescriptors";
 import { tierOrder, type TierKey } from "./revenue/revenue-tier-config";
+import { revenueVizCopy } from "@/content/revenue-viz";
 
 export type { TierKey };
 
 const DEFAULT_TIER: TierKey = "business";
 const LEAVE_RESET_MS = 160;
+
+function TierSystemCue() {
+  const c = revenueVizCopy.tierCue;
+  return (
+    <div className="rounded-sm border border-accent-signal/25 bg-[rgba(6,8,8,0.78)] px-3 py-2.5 text-center shadow-[inset_0_1px_0_rgba(34,211,199,0.08)] sm:px-4">
+      <p className="font-mono text-[0.58rem] font-bold uppercase tracking-[0.14em] text-accent-signal">{c.kicker}</p>
+      <p className="mt-0.5 font-mono text-[0.5rem] font-semibold uppercase tracking-[0.18em] text-[rgba(232,230,226,0.82)]">
+        {c.sub}
+      </p>
+      <p className="mt-1.5 font-body text-[0.5625rem] font-medium text-accent-signal/60">{c.hint}</p>
+    </div>
+  );
+}
+
+/**
+ * Mobile-only: appears AFTER ImpactSystemSummary (Autodesk framing + impact).
+ * Bridge + tier labels + exploration prompt — no duplicate title/metrics.
+ */
+function MobileTierExplorationGate() {
+  const v = revenueVizCopy;
+  return (
+    <div className="space-y-5 border-t border-white/[0.1] pt-6 lg:hidden">
+      <p className="px-1 text-center font-body text-[0.6875rem] font-medium leading-relaxed text-[rgba(210,208,202,0.9)]">
+        {v.transitionLine}
+      </p>
+      <TierSystemCue />
+      <p className="font-mono text-[0.5rem] font-bold uppercase tracking-[0.18em] text-accent-signal/80 text-center">
+        {v.explorePrompt}
+      </p>
+    </div>
+  );
+}
 
 export function RevenueSystemViz({
   onTierHover,
@@ -60,11 +93,17 @@ export function RevenueSystemViz({
         scheduleResetToBusiness();
       }}
     >
-      <div className="shrink-0 px-0.5">
+      {/* Desktop: large lead metric (summary column carries story on mobile) */}
+      <div className="order-1 hidden shrink-0 px-0.5 lg:block">
         <RevenueLeadMetric />
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col gap-2.5 px-0.5 min-[380px]:gap-2 sm:gap-1.5 sm:px-1 md:gap-2">
+      {/* Tier cue (desktop) + bridge to plans (mobile) + plan stack */}
+      <div className="order-2 flex min-h-0 flex-1 flex-col gap-3 px-0.5 min-[380px]:gap-3 sm:gap-3 sm:px-1 lg:gap-2">
+        <div className="hidden lg:block">
+          <TierSystemCue />
+        </div>
+        <MobileTierExplorationGate />
         <div className="shrink-0">
           <RevenueLayerDescriptors
             tier={hoveredTier}
