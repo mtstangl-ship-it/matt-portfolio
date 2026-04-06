@@ -143,13 +143,9 @@ export function ImpactMissionControl() {
               <ImpactMicroReadouts />
             </div>
 
-            {/* Supporting: Autodesk / system summary — on mobile revenue mode, source narrative BEFORE tier UI */}
+            {/* Supporting: Clean metric cluster — flows into center, opaque to avoid ambient bleed */}
             <aside
-              className={
-                activeSystem === "revenue"
-                  ? "relative z-10 order-1 col-span-1 py-4 pr-3 pl-2 max-lg:border-b max-lg:border-dashboard-border/20 max-lg:pb-6 lg:order-none lg:row-span-2 lg:border-b-0"
-                  : "relative z-10 order-2 col-span-1 py-4 pr-3 pl-2 max-lg:border-t max-lg:border-dashboard-border/15 lg:order-none lg:row-span-2"
-              }
+              className="relative z-10 order-2 py-4 pr-3 pl-2 max-lg:border-t max-lg:border-dashboard-border/15 lg:order-none lg:row-span-2"
               style={{
                 background:
                   "linear-gradient(to bottom, rgba(12,11,10,0.92) 0%, rgba(12,11,10,0.85) 100%), linear-gradient(to right, transparent 70%, rgba(34,211,199,0.03) 100%)",
@@ -159,12 +155,10 @@ export function ImpactMissionControl() {
               <ImpactSystemSummary key={activeSystem} system={activeSystem} />
             </aside>
 
-            {/* Primary: System brain — revenue tier viz; on mobile must follow summary after narrative */}
+            {/* Primary: System brain — dominant focal point; flows into engine */}
             <div
-              className={`relative z-20 col-span-1 flex min-h-0 flex-col p-3 lg:order-none lg:row-span-2 lg:p-6 ${
-                activeSystem === "revenue"
-                  ? "order-2 justify-stretch max-lg:pt-2"
-                  : "order-1 items-center justify-center"
+              className={`relative z-20 order-1 col-span-1 flex min-h-0 flex-col p-3 lg:order-none lg:row-span-2 lg:p-6 ${
+                activeSystem === "revenue" ? "justify-stretch" : "items-center justify-center"
               }`}
               style={{
                 background:

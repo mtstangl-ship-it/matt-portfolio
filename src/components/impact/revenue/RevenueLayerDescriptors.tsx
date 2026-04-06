@@ -34,7 +34,7 @@ export function RevenueLayerDescriptors({ tier, pairing = "stack" }: Props) {
       aria-live="polite"
     >
       {/* Fixed slot: tier copy swaps in place (opacity only) — no flex reorder, minimal vertical jump */}
-      <div className="relative min-h-[min(18vh,9.5rem)] max-lg:min-h-[min(16vh,8.75rem)] sm:min-h-[11rem] lg:min-h-[12.25rem]">
+      <div className="relative min-h-[min(28vh,13.5rem)] sm:min-h-[12.25rem]">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={tier}
