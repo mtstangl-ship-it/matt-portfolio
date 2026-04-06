@@ -64,7 +64,7 @@ export function RevenueSystemViz({
         <RevenueLeadMetric />
       </div>
 
-      <div className="flex min-h-0 flex-1 flex-col gap-1 px-0.5 min-[380px]:gap-1.5 sm:gap-2 sm:px-1">
+      <div className="flex min-h-0 flex-1 flex-col gap-2.5 px-0.5 min-[380px]:gap-2 sm:gap-1.5 sm:px-1 md:gap-2">
         <div className="shrink-0">
           <RevenueLayerDescriptors
             tier={hoveredTier}

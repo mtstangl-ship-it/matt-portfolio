@@ -38,7 +38,7 @@ export const impactMissionControl = {
     ],
     revenue: [
       "+27%", "106%", "50M+", "NRR", "AOV", "RR", "QoQ", "YoY",
-      "30+", "services", "tier", "expansion", "pipeline", "upsell",
+      "15+", "services", "tier", "expansion", "pipeline", "upsell",
       "▲", "R/O/H",
     ],
     operations: [
@@ -54,7 +54,7 @@ export const impactMissionControl = {
     revenue: {
       title: "Revenue",
       narrative: "Tiered success plans → productized · under 12 mo",
-      stats: ["+27% RR", "106% NRR path", "50M+ AOV", "30+ services"],
+      stats: ["+27% RR", "106% NRR path", "50M+ AOV", "15+ services"],
       signals: ["Autodesk RR", "Autodesk AOV", "Cross-org"],
     },
     operations: {
@@ -114,7 +114,7 @@ export const impactMissionControl = {
     ],
     revenue: [
       "0.02", "99.2%", "▲", "●", "→", "·", "Q1", "QoQ", "NRR", "AOV",
-      "106", "+27", "50M", "30+", "RR", "tier", "expansion", "services",
+      "106", "+27", "50M", "15+", "RR", "tier", "expansion", "services",
     ],
     operations: [
       "0.02", "1.4k", "99.2%", "▲", "●", "→", "·", "Q1", "MTTR", "31",
@@ -180,13 +180,13 @@ export const impactMissionControl = {
       label: "AUTODESK SERVICE INNOVATION",
       /** Short system line under the title (revenue only) */
       systemContextLine:
-        "Built and scaled within a 12-month window by a net-new team that designed, automated, and improved 30+ services across three packaged success plans.",
+        "Built and scaled within a 12-month window by a net-new team that designed, automated, and improved 15+ services across three packaged success plans.",
       introLines: [] as const,
       strategicRole:
         "Designed a new post-purchase service model at a critical moment when Autodesk needed to create greater value beyond the sale. Translated fragmented service experiences into a tiered, monetized offering system that aligned Design, Product, Support, and Engineering around a more strategic growth model.",
       modelTitle: "Model:",
       model: "Tiered success plans → productized services",
-      buildLine: "30+ services across three packaged success plans.",
+      buildLine: "15+ services across three packaged success plans.",
       timeframeLine: "2Q to launch runway to design services for a net-new model.",
       scopeLines: [] as const,
       outcomesTitle: "Impact",

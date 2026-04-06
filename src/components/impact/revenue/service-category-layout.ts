@@ -1,4 +1,4 @@
-import type { CategoryKind } from "./revenue-tier-config";
+import type { CategoryKind, TierKey } from "./revenue-tier-config";
 
 /**
  * Shared service block — one geometry for Innovated, Optimized, and Refined.
@@ -26,10 +26,17 @@ const SHELL_3X2_INNOVATED = [
   "px-0.5",
 ].join(" ");
 
-/** Professional / Included — visibly grouped 3×2 Innovated cluster. */
-const SHELL_3X2_INNOVATED_GROUPED = [
+/** Professional — tightest grouping (benchmark tightness). */
+const SHELL_3X2_INNOVATED_PRO = [
   "grid w-full grid-cols-3 grid-rows-2 [grid-template-columns:repeat(3,minmax(0,1fr))] [grid-template-rows:repeat(2,minmax(0,1fr))]",
-  "place-content-center place-items-center justify-items-center gap-[clamp(0.16rem,1.1vw,0.32rem)]",
+  "place-content-center place-items-center justify-items-center gap-[clamp(0.12rem,0.85vw,0.22rem)]",
+  "px-0.5",
+].join(" ");
+
+/** Included — grouped, slightly more air than Professional. */
+const SHELL_3X2_INNOVATED_INC = [
+  "grid w-full grid-cols-3 grid-rows-2 [grid-template-columns:repeat(3,minmax(0,1fr))] [grid-template-rows:repeat(2,minmax(0,1fr))]",
+  "place-content-center place-items-center justify-items-center gap-[clamp(0.15rem,0.95vw,0.28rem)]",
   "px-0.5",
 ].join(" ");
 
@@ -42,7 +49,7 @@ const SHELL_2X2_OPTIMIZED_OUTER = [
 ].join(" ");
 
 /**
- * Refined layout shell — **no gap in class**; `RefinedGrid` animates `gap` for hover tighten.
+ * Refined layout shell — **no gap in class**; `RefinedGrid` sets `gap` for static rhythm.
  */
 export function refinedContainerClass(count: number): string {
   if (count <= 0) return "";
@@ -61,47 +68,68 @@ export function refinedContainerClass(count: number): string {
   ].join(" ");
 }
 
+function innovated2x2Gap(tier: TierKey): string {
+  if (tier === "business") return "gap-[clamp(0.28rem,1.85vw,0.52rem)]";
+  if (tier === "professional") return "gap-[clamp(0.07rem,0.55vw,0.16rem)]";
+  return "gap-[clamp(0.1rem,0.72vw,0.2rem)]";
+}
+
+function gridGapXY(tier: TierKey): { gx: string; gy: string } {
+  if (tier === "business") {
+    return {
+      gx: "gap-x-[clamp(0.375rem,2.4vw,0.625rem)]",
+      gy: "gap-y-[clamp(0.375rem,2.4vw,0.625rem)]",
+    };
+  }
+  if (tier === "professional") {
+    return {
+      gx: "gap-x-[clamp(0.1rem,0.85vw,0.22rem)]",
+      gy: "gap-y-[clamp(0.12rem,0.95vw,0.26rem)]",
+    };
+  }
+  return {
+    gx: "gap-x-[clamp(0.13rem,1vw,0.26rem)]",
+    gy: "gap-y-[clamp(0.15rem,1.1vw,0.3rem)]",
+  };
+}
+
 /**
  * Final resting layout: grid/flex only — no absolute positioning.
+ * Tier controls internal gaps: Business = open; Professional = tightest; Included = grouped, slightly lighter.
  */
-export function serviceCategoryShell(kind: CategoryKind, count: number, tight = false): string {
+export function serviceCategoryShell(kind: CategoryKind, count: number, tier: TierKey): string {
   if (count <= 0) return "";
 
   if (kind === "refined") {
     return refinedContainerClass(count);
   }
 
-  const gapX = tight
-    ? "gap-x-[clamp(0.14rem,1.05vw,0.28rem)]"
-    : "gap-x-[clamp(0.375rem,2.4vw,0.625rem)]";
-  const gapY = tight
-    ? "gap-y-[clamp(0.18rem,1.35vw,0.36rem)]"
-    : "gap-y-[clamp(0.375rem,2.4vw,0.625rem)]";
+  const { gx, gy } = gridGapXY(tier);
 
   switch (count) {
     case 1:
       return `grid min-h-[clamp(2.5rem,11vw,3.5rem)] w-full place-items-center px-1`;
     case 2:
-      return `grid w-full grid-cols-2 place-content-center place-items-center justify-items-center ${gapX} ${gapY} px-0.5`;
+      return `grid w-full grid-cols-2 place-content-center place-items-center justify-items-center ${gx} ${gy} px-0.5`;
     case 3:
-      return `grid w-full grid-cols-3 place-content-center place-items-center justify-items-center ${gapX} ${gapY} px-0.5`;
+      return `grid w-full grid-cols-3 place-content-center place-items-center justify-items-center ${gx} ${gy} px-0.5`;
     case 4:
       if (kind === "optimized") {
         return SHELL_2X2_OPTIMIZED_OUTER;
       }
-      return tight
-        ? SHELL_2X2_INNOVATED.replace(
-            "gap-[clamp(0.28rem,1.85vw,0.52rem)]",
-            "gap-[clamp(0.12rem,0.85vw,0.24rem)]"
-          )
-        : SHELL_2X2_INNOVATED;
+      return SHELL_2X2_INNOVATED.replace(
+        "gap-[clamp(0.28rem,1.85vw,0.52rem)]",
+        innovated2x2Gap(tier)
+      );
     case 6:
       if (kind === "innovated") {
-        return tight ? SHELL_3X2_INNOVATED_GROUPED : SHELL_3X2_INNOVATED;
+        if (tier === "professional") return SHELL_3X2_INNOVATED_PRO;
+        if (tier === "included") return SHELL_3X2_INNOVATED_INC;
+        return SHELL_3X2_INNOVATED;
       }
-      return `grid w-full grid-cols-3 place-content-center place-items-center justify-items-center ${gapX} ${gapY} px-0.5`;
+      return `grid w-full grid-cols-3 place-content-center place-items-center justify-items-center ${gx} ${gy} px-0.5`;
     default:
-      return `grid w-full grid-cols-3 place-content-center place-items-center justify-items-center ${gapX} ${gapY} px-0.5`;
+      return `grid w-full grid-cols-3 place-content-center place-items-center justify-items-center ${gx} ${gy} px-0.5`;
   }
 }
 

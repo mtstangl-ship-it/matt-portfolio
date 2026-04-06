@@ -30,7 +30,7 @@ export function ImpactMissionControl() {
     <section className="relative overflow-hidden bg-dashboard-bg px-3 py-4 sm:px-5 sm:py-5 lg:min-h-[calc(100vh-8.5rem)]">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.58]"
+        className="pointer-events-none absolute inset-0 opacity-[0.42] lg:opacity-[0.58]"
         style={{
           background:
             "radial-gradient(1200px 620px at 10% -10%, rgba(34,211,199,0.12), transparent 60%), radial-gradient(950px 520px at 95% 10%, rgba(34,211,199,0.08), transparent 62%), linear-gradient(180deg, rgba(0,0,0,0.36) 0%, rgba(0,0,0,0.18) 35%, rgba(0,0,0,0.3) 100%)",
@@ -38,7 +38,7 @@ export function ImpactMissionControl() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute inset-0 opacity-[0.035] lg:opacity-[0.06]"
         style={{
           backgroundImage:
             "repeating-linear-gradient(0deg, rgba(232,230,226,0.06) 0px, rgba(232,230,226,0.06) 1px, transparent 1px, transparent 10px), repeating-linear-gradient(90deg, rgba(232,230,226,0.04) 0px, rgba(232,230,226,0.04) 1px, transparent 1px, transparent 12px)",
@@ -145,7 +145,7 @@ export function ImpactMissionControl() {
 
             {/* Supporting: Clean metric cluster — flows into center, opaque to avoid ambient bleed */}
             <aside
-              className="relative z-10 py-4 pr-3 pl-2 lg:row-span-2"
+              className="relative z-10 order-2 py-4 pr-3 pl-2 max-lg:border-t max-lg:border-dashboard-border/15 lg:order-none lg:row-span-2"
               style={{
                 background:
                   "linear-gradient(to bottom, rgba(12,11,10,0.92) 0%, rgba(12,11,10,0.85) 100%), linear-gradient(to right, transparent 70%, rgba(34,211,199,0.03) 100%)",
@@ -157,7 +157,7 @@ export function ImpactMissionControl() {
 
             {/* Primary: System brain — dominant focal point; flows into engine */}
             <div
-              className={`relative z-20 col-span-1 flex min-h-0 flex-col p-3 lg:row-span-2 lg:p-6 ${
+              className={`relative z-20 order-1 col-span-1 flex min-h-0 flex-col p-3 lg:order-none lg:row-span-2 lg:p-6 ${
                 activeSystem === "revenue" ? "justify-stretch" : "items-center justify-center"
               }`}
               style={{
@@ -185,7 +185,7 @@ export function ImpactMissionControl() {
 
             {/* Supporting: System narrative */}
             <div
-              className={`relative z-10 flex flex-wrap items-center gap-2 p-2 lg:col-span-2`}
+              className={`relative z-10 order-3 flex flex-wrap items-center gap-2 p-2 max-lg:border-t max-lg:border-dashboard-border/10 lg:order-none lg:col-span-2`}
               style={{
                 background:
                   "linear-gradient(to top, rgba(34,211,199,0.03) 0%, transparent 50%), linear-gradient(135deg, rgba(15,14,13,0.2) 0%, transparent 100%)",

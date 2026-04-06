@@ -3,49 +3,61 @@
 import type { SystemKey } from "./ImpactCentralSystem";
 import { impactMissionControl } from "@/content/impact-mission-control";
 
+function parseScalePrefix(buildLine: string): { prefix: string; body: string } {
+  const m = buildLine.match(/^(\d+\+)\s*(.*)$/);
+  if (m) return { prefix: m[1], body: m[2] };
+  return { prefix: "", body: buildLine };
+}
+
 export function ImpactSystemSummary({ system }: { system: SystemKey }) {
   const summary = impactMissionControl.systemSummary[system];
   const hasBuildTimeframe = "buildLine" in summary && Boolean(summary.buildLine);
   const outcomesHeading =
     "outcomesTitle" in summary && summary.outcomesTitle ? summary.outcomesTitle : "Outcomes";
   const isRevenue = system === "revenue";
+  const scaleParts =
+    isRevenue && "buildLine" in summary && summary.buildLine
+      ? parseScalePrefix(summary.buildLine)
+      : { prefix: "", body: "" };
 
   return (
     <div className="flex flex-col gap-4">
       {isRevenue && "leadMetric" in summary && summary.leadMetric ? (
         <div
-          className="border-b border-dashboard-border/30 pb-4"
+          className="order-2 border-b border-dashboard-border/30 pb-4 lg:order-1"
           aria-label={`${summary.leadMetric.value} ${summary.leadMetric.label}`}
         >
           <p
-            className="font-mono font-bold tabular-nums tracking-[-0.03em] text-white"
+            className="max-lg:max-w-[16rem] font-mono font-bold tabular-nums tracking-[-0.03em] text-white max-lg:mx-auto max-lg:text-center lg:max-w-none lg:text-left"
             style={{
-              fontSize: "clamp(1.75rem, 5.5vw, 2.5rem)",
+              fontSize: "clamp(1.5rem, 4.5vw, 2.35rem)",
               lineHeight: 0.95,
               textShadow: "0 0 24px rgba(34,211,199,0.2)",
             }}
           >
             {summary.leadMetric.value}
           </p>
-          <p className="mt-2 font-body text-[0.6875rem] font-semibold uppercase leading-snug tracking-[0.12em] text-accent-signal/85">
+          <p className="mt-2 font-body text-[0.6875rem] font-semibold uppercase leading-snug tracking-[0.12em] text-accent-signal/85 max-lg:text-center lg:text-left">
             {summary.leadMetric.label}
           </p>
           {summary.leadMetric.descriptor ? (
-            <p className="mt-1.5 font-body text-[0.5rem] font-semibold uppercase tracking-[0.1em] text-dashboard-ink-light/55">
+            <p className="mt-1.5 font-body text-[0.5rem] font-semibold uppercase tracking-[0.1em] text-dashboard-ink-light/55 max-lg:text-center lg:text-left">
               {summary.leadMetric.descriptor}
             </p>
           ) : null}
         </div>
       ) : null}
 
-      <div className="space-y-2">
+      <div
+        className={`space-y-2 ${isRevenue ? "order-1 lg:order-2" : ""}`}
+      >
         {system === "revenue" ? (
           <div className="space-y-2">
-            <p className="font-mono text-[0.78rem] font-bold uppercase tracking-[0.12em] text-accent-signal">
+            <p className="font-mono text-[0.78rem] font-bold uppercase tracking-[0.12em] text-accent-signal max-lg:text-center lg:text-left">
               {summary.label}
             </p>
             {"systemContextLine" in summary && summary.systemContextLine ? (
-              <p className="font-body text-[0.62rem] leading-relaxed text-dashboard-ink-light/78">
+              <p className="font-body text-[0.62rem] leading-relaxed text-dashboard-ink-light/85 max-lg:max-w-[40ch] max-lg:mx-auto max-lg:text-center lg:mx-0 lg:max-w-none lg:text-left">
                 {summary.systemContextLine}
               </p>
             ) : null}
@@ -81,21 +93,21 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
         ) : null}
         {!isRevenue ? (
           <p className="font-body text-[0.6rem] leading-snug text-dashboard-ink-light/75">
-            <span className="text-accent-signal/90 font-bold">{summary.modelTitle}</span>
+            <span className="font-bold text-accent-signal/90">{summary.modelTitle}</span>
             <span className="text-dashboard-ink-muted/70"> {summary.model}</span>
           </p>
         ) : null}
       </div>
 
-      <div className="h-px w-full bg-dashboard-border/25" />
+      <div className={`h-px w-full bg-dashboard-border/25 ${isRevenue ? "order-4 lg:order-3" : ""}`} />
 
       {isRevenue ? (
-        <div className="space-y-4">
+        <div className={`space-y-4 ${isRevenue ? "order-5 lg:order-4" : ""}`}>
           <div className="space-y-1.5">
             <p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.12em] text-dashboard-ink-muted/75">
               Strategic role
             </p>
-            <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light/90">
+            <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light/90 max-lg:leading-snug">
               {"strategicRole" in summary ? summary.strategicRole : ""}
             </p>
           </div>
@@ -113,8 +125,10 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
             >
               {"buildLine" in summary && summary.buildLine ? (
                 <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light">
-                  <span className="font-semibold text-white">30+</span>
-                  <span>{summary.buildLine.replace(/^30\+/, "")}</span>
+                  {scaleParts.prefix ? (
+                    <span className="font-semibold text-white">{scaleParts.prefix}</span>
+                  ) : null}
+                  <span>{scaleParts.body}</span>
                 </p>
               ) : null}
             </div>
@@ -177,7 +191,7 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
         </div>
       )}
 
-      <div className="space-y-2.5">
+      <div className={`space-y-2.5 ${isRevenue ? "order-3 lg:order-5" : ""}`}>
         <p className="font-mono text-[0.58rem] font-bold uppercase tracking-[0.12em] text-dashboard-ink-muted/75">
           {outcomesHeading}
         </p>
@@ -210,4 +224,3 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
     </div>
   );
 }
-

@@ -95,7 +95,7 @@ export function PlanTierRow({ tier, isActive, onSelect }: Props) {
 
       {isActive ? (
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-1 py-2 min-[380px]:px-1.5 sm:px-2 sm:py-2.5 [scrollbar-gutter:stable]">
-          <div className="grid min-h-0 w-full grid-cols-1 gap-1.5 min-[400px]:grid-cols-2 min-[560px]:grid-cols-3 min-[400px]:gap-2 md:gap-2.5">
+          <div className="grid min-h-0 w-full grid-cols-1 gap-2.5 min-[400px]:grid-cols-2 min-[400px]:gap-2 min-[560px]:grid-cols-3 md:gap-2.5">
             {tierKinds.map((kind, idx) => (
               <CategoryServiceBox
                 key={kind}

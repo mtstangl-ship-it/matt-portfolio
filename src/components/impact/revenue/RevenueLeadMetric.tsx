@@ -9,10 +9,10 @@ export function RevenueLeadMetric() {
   const reducedMotion = useReducedMotion();
 
   return (
-    <div className="relative w-full shrink-0 overflow-visible pb-2">
+    <div className="relative w-full shrink-0 overflow-visible pb-1 sm:pb-2">
       <div className="relative mx-auto w-full max-w-4xl">
         <div
-          className="pointer-events-none absolute left-1/2 top-[38%] -z-0 h-[min(220px,58vw)] w-[min(220px,58vw)] -translate-x-1/2 -translate-y-1/2"
+          className="pointer-events-none absolute left-1/2 top-[38%] -z-0 h-[min(140px,42vw)] w-[min(140px,42vw)] -translate-x-1/2 -translate-y-1/2 sm:h-[min(220px,58vw)] sm:w-[min(220px,58vw)]"
           aria-hidden
         >
           {[0, 1, 2].map((i) => (
@@ -68,9 +68,8 @@ export function RevenueLeadMetric() {
             transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
           >
             <span
-              className="block font-[family-name:var(--font-mono)] font-bold tracking-[-0.04em] text-white"
+              className="block font-[family-name:var(--font-mono)] font-bold tracking-[-0.04em] text-white [font-size:clamp(2.15rem,calc(0.9rem+6vw),3.1rem)] sm:[font-size:clamp(3rem,calc(1.5rem+7vw),5.25rem)]"
               style={{
-                fontSize: "clamp(3rem, calc(1.5rem + 7vw), 5.25rem)",
                 lineHeight: 0.9,
                 textShadow: "0 0 56px rgba(34,211,199,0.3), 0 2px 28px rgba(0,0,0,0.4)",
               }}

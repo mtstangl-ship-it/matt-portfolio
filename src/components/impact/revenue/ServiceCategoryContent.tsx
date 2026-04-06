@@ -11,63 +11,65 @@ type Props = {
   hovered: boolean;
 };
 
-const optSpring = { type: "spring" as const, stiffness: 420, damping: 34, mass: 0.82 };
+const optSpring = { type: "spring" as const, stiffness: 440, damping: 36, mass: 0.78 };
 
-/** Innovated: crisp ease-out — reads like drafting / CAD, not organic motion. */
-const easeDraft = [0.2, 0, 0, 1] as const;
 const easeLinearish = [0.25, 0.1, 0.25, 1] as const;
+const easeBuild = [0.33, 1, 0.68, 1] as const;
 
 /** Innovated construction: total sequence length (s); stagger per index. */
-const INNO_BUILD_DURATION = 1.12;
-const INNO_STAGGER = 0.052;
-const easeBuild = [0.33, 1, 0.68, 1] as const;
-const D_OPT_FILTER = 0.22;
-const D_OPT_GAP = 0.38;
-/** Refined: precision polish only — geometry/edge, no spatial compression. */
-const REF_GAP_STATIC = "0.42rem";
+const INNO_BUILD_DURATION = 1.05;
+const INNO_STAGGER = 0.048;
+const D_OPT_FILTER = 0.24;
+const D_OPT_GAP = 0.42;
 
-/** Optimized 2×2: rest = slightly loose (for hover-in); hover = tight cluster. */
-const OPT_2X2_GAP_LOOSE = "0.56rem";
-/** Professional / Included — rest state already reads as one grouped block. */
-const OPT_2X2_GAP_LOOSE_GROUPED = "0.3rem";
-const OPT_2X2_GAP_TIGHT = "0.06rem";
-const OPT_2X2_GAP_TIGHT_GROUPED = "0.045rem";
+function optimized2x2Gaps(tier: TierKey): { loose: string; tight: string } {
+  if (tier === "business") return { loose: "0.56rem", tight: "0.06rem" };
+  if (tier === "professional") return { loose: "0.22rem", tight: "0.035rem" };
+  return { loose: "0.3rem", tight: "0.045rem" };
+}
 
-/** Optimized rest offsets — a touch more legible so the spring snap reads clearly. */
+function optimizedRowGaps(tier: TierKey): { loose: string; tight: string } {
+  if (tier === "business") return { loose: "0.52rem", tight: "0.14rem" };
+  if (tier === "professional") return { loose: "0.26rem", tight: "0.08rem" };
+  return { loose: "0.32rem", tight: "0.1rem" };
+}
+
+function refinedGap(tier: TierKey): string {
+  if (tier === "professional") return "0.34rem";
+  if (tier === "included") return "0.38rem";
+  return "0.44rem";
+}
+
+/** Optimized rest offsets — looser at rest so compression reads clearly. */
 function subtleRestRaw(i: number): { x: number; y: number; rotate: number } {
   const seeds = [
-    { x: -1, y: 0.6, rotate: -0.28 },
-    { x: 1.1, y: -0.55, rotate: 0.22 },
-    { x: -0.55, y: -0.72, rotate: 0.16 },
-    { x: 0.9, y: 0.72, rotate: -0.18 },
-    { x: -1.1, y: -0.16, rotate: 0.26 },
-    { x: 0.55, y: 0.9, rotate: -0.14 },
-    { x: -0.4, y: -0.55, rotate: 0.14 },
-    { x: 0.72, y: 0.36, rotate: -0.22 },
-    { x: -0.72, y: -0.9, rotate: 0.18 },
-    { x: 0.95, y: -0.36, rotate: -0.16 },
-    { x: -0.65, y: 0.72, rotate: 0.16 },
-    { x: 1.1, y: 0.16, rotate: -0.2 },
-    { x: -0.95, y: -0.32, rotate: 0.15 },
-    { x: 0.4, y: -0.72, rotate: -0.11 },
-    { x: -1.1, y: 0.4, rotate: 0.2 },
+    { x: -1.15, y: 0.72, rotate: -0.32 },
+    { x: 1.2, y: -0.62, rotate: 0.26 },
+    { x: -0.62, y: -0.78, rotate: 0.18 },
+    { x: 0.95, y: 0.78, rotate: -0.2 },
+    { x: -1.15, y: -0.2, rotate: 0.28 },
+    { x: 0.58, y: 0.95, rotate: -0.16 },
+    { x: -0.45, y: -0.58, rotate: 0.16 },
+    { x: 0.78, y: 0.42, rotate: -0.24 },
+    { x: -0.82, y: -0.95, rotate: 0.2 },
+    { x: 1, y: -0.42, rotate: -0.18 },
+    { x: -0.72, y: 0.78, rotate: 0.18 },
+    { x: 1.05, y: 0.22, rotate: -0.22 },
+    { x: -1, y: -0.38, rotate: 0.16 },
+    { x: 0.48, y: -0.78, rotate: -0.12 },
+    { x: -1.12, y: 0.45, rotate: 0.22 },
   ];
   return seeds[i % seeds.length];
 }
 
-/** Optimized rest offsets — scaled up slightly so the spring snap reads clearly. */
 function subtleRest(i: number): { x: number; y: number; rotate: number } {
   const base = subtleRestRaw(i);
-  return {
-    x: base.x * 1.22,
-    y: base.y * 1.22,
-    rotate: base.rotate * 1.22,
-  };
+  const s = 1.28;
+  return { x: base.x * s, y: base.y * s, rotate: base.rotate * s };
 }
 
 export function ServiceCategoryContent({ kind, tier, count, hovered }: Props) {
   const reduceMotion = useReducedMotion();
-  const tightenForTier = tier !== "business" && (kind === "innovated" || kind === "optimized");
 
   if (count <= 0) {
     return (
@@ -81,33 +83,41 @@ export function ServiceCategoryContent({ kind, tier, count, hovered }: Props) {
 
   if (kind === "innovated") {
     return (
-      <InnovatedGrid items={items} hovered={hovered} reduceMotion={!!reduceMotion} tight={tightenForTier} />
+      <InnovatedGrid
+        items={items}
+        hovered={hovered}
+        reduceMotion={!!reduceMotion}
+        tier={tier}
+      />
     );
   }
   if (kind === "optimized") {
     return (
-      <OptimizedGrid items={items} hovered={hovered} reduceMotion={!!reduceMotion} tight={tightenForTier} />
+      <OptimizedGrid
+        items={items}
+        hovered={hovered}
+        reduceMotion={!!reduceMotion}
+        tier={tier}
+      />
     );
   }
-  return <RefinedGrid items={items} hovered={hovered} reduceMotion={!!reduceMotion} />;
+  return (
+    <RefinedGrid items={items} hovered={hovered} reduceMotion={!!reduceMotion} tier={tier} />
+  );
 }
 
-/**
- * Innovated — construction sequence (in place): ① faint sketch frame ② stroke draws ③ fills solid.
- * Same logic every block; stagger for readability only.
- */
 function InnovatedGrid({
   items,
   hovered,
   reduceMotion,
-  tight,
+  tier,
 }: {
   items: number[];
   hovered: boolean;
   reduceMotion: boolean;
-  tight: boolean;
+  tier: TierKey;
 }) {
-  const shell = serviceCategoryShell("innovated", items.length, tight);
+  const shell = serviceCategoryShell("innovated", items.length, tier);
   const pill = pillClassFor("innovated");
 
   return (
@@ -125,7 +135,6 @@ function InnovatedGrid({
   );
 }
 
-/** SVG unit box matches 4px radius service block; scales with pill size. */
 const INNO_VB = 34;
 const INNO_RX = 4;
 
@@ -157,50 +166,49 @@ function InnovatedBlock({
 
   return (
     <div className={`relative overflow-hidden ${pill}`}>
-      {/* ③ Solid fill — ramps in after stroke is mostly drawn */}
+      {/* Solid fill — builds in after stroke draws */}
       <motion.div
         className="absolute inset-0 rounded-[4px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
         initial={false}
         animate={{
-          opacity: hovered ? [0.07, 0.1, 0.42, 1] : 0.08,
+          opacity: hovered ? [0.04, 0.12, 0.5, 1] : 0.05,
           backgroundColor: hovered
             ? [
-                "rgba(34, 211, 199, 0.15)",
-                "rgba(34, 211, 199, 0.22)",
-                "rgba(34, 211, 199, 0.55)",
-                "rgba(34, 211, 199, 0.96)",
+                "rgba(34, 211, 199, 0.1)",
+                "rgba(34, 211, 199, 0.2)",
+                "rgba(34, 211, 199, 0.62)",
+                "rgba(34, 211, 199, 0.97)",
               ]
-            : "rgba(34, 211, 199, 0.12)",
+            : "rgba(34, 211, 199, 0.08)",
           boxShadow: hovered
             ? [
-                "inset 0 0 0 1px rgba(255,255,255,0.04)",
                 "inset 0 0 0 1px rgba(255,255,255,0.05)",
-                "inset 0 0 0 1px rgba(255,255,255,0.08)",
-                "inset 0 0 0 1px rgba(255,255,255,0.11)",
+                "inset 0 0 0 1px rgba(255,255,255,0.07)",
+                "inset 0 0 0 1px rgba(255,255,255,0.1)",
+                "inset 0 0 0 1px rgba(255,255,255,0.12)",
               ]
             : "inset 0 0 0 1px rgba(255,255,255,0.04)",
         }}
         transition={{
           ...t,
-          times: hovered ? [0, 0.12, 0.38, 1] : [0],
+          times: hovered ? [0, 0.18, 0.45, 1] : [0],
         }}
       />
 
-      {/* ① Faint sketch frame (dashed) — visible at rest; yields to drawn stroke */}
+      {/* Draft / outline — strong at rest; clears as build completes */}
       <motion.div
         className="pointer-events-none absolute inset-0 rounded-[4px] border border-dashed border-accent-signal"
         aria-hidden
         initial={false}
         animate={{
-          opacity: hovered ? [0.42, 0.55, 0.15, 0] : 0.48,
+          opacity: hovered ? [0.62, 0.72, 0.2, 0] : 0.58,
         }}
         transition={{
           ...t,
-          times: hovered ? [0, 0.1, 0.22, 0.32] : [0],
+          times: hovered ? [0, 0.08, 0.28, 0.42] : [0],
         }}
       />
 
-      {/* ② Vector stroke “draw” — pathLength-normalized dash reveal */}
       <svg
         className="pointer-events-none absolute inset-0 size-full"
         viewBox={`0 0 ${INNO_VB} ${INNO_VB}`}
@@ -215,18 +223,18 @@ function InnovatedBlock({
           rx={INNO_RX}
           fill="none"
           stroke="rgb(34, 211, 199)"
-          strokeWidth={1.35}
+          strokeWidth={1.45}
           pathLength={100}
           strokeDasharray={100}
           vectorEffect="nonScalingStroke"
           initial={false}
           animate={{
-            strokeOpacity: hovered ? [0.15, 0.45, 0.92, 0] : 0.22,
-            strokeDashoffset: hovered ? [100, 88, 0, 0] : 100,
+            strokeOpacity: hovered ? [0.35, 0.75, 0.95, 0] : 0.28,
+            strokeDashoffset: hovered ? [100, 55, 0, 0] : 100,
           }}
           transition={{
             ...t,
-            times: hovered ? [0, 0.14, 0.48, 0.72] : [0],
+            times: hovered ? [0, 0.12, 0.42, 0.68] : [0],
           }}
         />
       </svg>
@@ -234,7 +242,6 @@ function InnovatedBlock({
   );
 }
 
-/** Optimized — “loose grid → snap”: spring on x/y/rotate; 2×2 also animates gap looser → tighter on hover. */
 function OptimizedPill({
   i,
   pill,
@@ -259,7 +266,7 @@ function OptimizedPill({
               y: 0,
               rotate: 0,
               boxShadow:
-                "inset 0 0 0 1px rgba(255,255,255,0.11), 0 0 0 1px rgba(34,211,199,0.12)",
+                "inset 0 0 0 1px rgba(255,255,255,0.12), 0 0 0 1px rgba(34,211,199,0.14)",
             }
           : {
               x: r.x,
@@ -288,18 +295,19 @@ function OptimizedGrid({
   items,
   hovered,
   reduceMotion,
-  tight,
+  tier,
 }: {
   items: number[];
   hovered: boolean;
   reduceMotion: boolean;
-  tight: boolean;
+  tier: TierKey;
 }) {
-  const shell = serviceCategoryShell("optimized", items.length, tight);
+  const shell = serviceCategoryShell("optimized", items.length, tier);
   const pill = pillClassFor("optimized");
-  const gapLoose = tight ? OPT_2X2_GAP_LOOSE_GROUPED : OPT_2X2_GAP_LOOSE;
-  const gapTight = tight ? OPT_2X2_GAP_TIGHT_GROUPED : OPT_2X2_GAP_TIGHT;
-  const gapEnd = hovered ? gapTight : gapLoose;
+  const g2 = optimized2x2Gaps(tier);
+  const gRow = optimizedRowGaps(tier);
+  const gapEnd2 = hovered ? g2.tight : g2.loose;
+  const gapEndRow = hovered ? gRow.tight : gRow.loose;
 
   const optGapTransition = reduceMotion
     ? "none"
@@ -311,22 +319,16 @@ function OptimizedGrid({
         <div
           className={`mx-auto inline-grid grid-cols-2 grid-rows-2 justify-items-center place-content-center rounded-[6px] ring-1 transition-[padding,box-shadow] duration-300 ease-out ${
             hovered
-              ? "p-[1px] ring-white/[0.14] shadow-[inset_0_0_0_1px_rgba(34,211,199,0.16)]"
-              : "p-[3px] ring-white/[0.06] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]"
+              ? "p-[1px] ring-white/[0.16] shadow-[inset_0_0_0_1px_rgba(34,211,199,0.18)]"
+              : "p-[4px] ring-white/[0.07] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
           }`}
           style={{
-            gap: gapEnd,
+            gap: gapEnd2,
             transition: `${optGapTransition}, padding 0.3s ease-out, box-shadow 0.3s ease-out`,
           }}
         >
           {items.map((i) => (
-            <OptimizedPill
-              key={i}
-              i={i}
-              pill={pill}
-              hovered={hovered}
-              reduceMotion={reduceMotion}
-            />
+            <OptimizedPill key={i} i={i} pill={pill} hovered={hovered} reduceMotion={reduceMotion} />
           ))}
         </div>
       </div>
@@ -334,7 +336,13 @@ function OptimizedGrid({
   }
 
   return (
-    <div className={`relative h-full w-full overflow-hidden ${shell}`}>
+    <div
+      className={`relative h-full w-full overflow-hidden ${shell}`}
+      style={{
+        gap: gapEndRow,
+        transition: reduceMotion ? undefined : optGapTransition,
+      }}
+    >
       {items.map((i) => (
         <OptimizedPill key={i} i={i} pill={pill} hovered={hovered} reduceMotion={reduceMotion} />
       ))}
@@ -342,30 +350,34 @@ function OptimizedGrid({
   );
 }
 
-/**
- * Refined — polish, not reorganization: no positional motion; geometry + edge precision only.
- */
 function RefinedGrid({
   items,
   hovered,
   reduceMotion,
+  tier,
 }: {
   items: number[];
   hovered: boolean;
   reduceMotion: boolean;
+  tier: TierKey;
 }) {
   const shell = refinedContainerClass(items.length);
   const pill = pillClassFor("refined");
+  const gap = refinedGap(tier);
   const t = {
-    duration: reduceMotion ? 0 : 0.34,
+    duration: reduceMotion ? 0 : 0.36,
     ease: [0.2, 0, 0, 1] as const,
   };
+
+  const restRadius = items.length === 4 ? 5 : 5;
+  const hoverRadius = 1.5;
 
   return (
     <div
       className={`relative h-full w-full overflow-hidden ${shell}`}
       style={{
-        gap: REF_GAP_STATIC,
+        gap,
+        transition: reduceMotion ? undefined : `gap 0.35s ease`,
       }}
     >
       {items.map((i) => (
@@ -374,12 +386,12 @@ function RefinedGrid({
           className={`${pill} relative overflow-hidden`}
           initial={false}
           animate={{
-            borderRadius: hovered ? 2 : 6,
+            borderRadius: hovered ? hoverRadius : restRadius,
             boxShadow: hovered
-              ? "inset 0 0 0 1px rgba(255,255,255,0.2), 0 0 0 1px rgba(255,255,255,0.08)"
-              : "inset 0 0 0 1px rgba(255,255,255,0.06), 0 0 0 1px rgba(255,255,255,0)",
+              ? "inset 0 0 0 1.5px rgba(255,255,255,0.26), 0 0 0 1px rgba(255,255,255,0.1)"
+              : "inset 0 0 0 1px rgba(255,255,255,0.07), 0 0 0 0 rgba(255,255,255,0)",
           }}
-          transition={{ ...t, delay: reduceMotion ? 0 : i * 0.018 }}
+          transition={{ ...t, delay: reduceMotion ? 0 : i * 0.015 }}
         >
           <motion.div
             className="absolute inset-0"
@@ -387,10 +399,11 @@ function RefinedGrid({
             initial={false}
             animate={{
               backgroundColor: hovered
-                ? "rgba(34, 211, 199, 0.74)"
-                : "rgba(34, 211, 199, 0.88)",
+                ? "rgba(34, 211, 199, 0.78)"
+                : "rgba(34, 211, 199, 0.86)",
+              filter: hovered ? "brightness(1.05)" : "brightness(1)",
             }}
-            transition={{ ...t, delay: reduceMotion ? 0 : i * 0.018 }}
+            transition={{ ...t, delay: reduceMotion ? 0 : i * 0.015 }}
           />
         </motion.div>
       ))}
