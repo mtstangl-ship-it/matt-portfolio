@@ -4,9 +4,10 @@ import {
   ClientTicker,
   BrandThesis,
   TransformationImpactDashboard,
+  SignalStorySection,
   StanfordAICapability,
-  FeaturedThinking,
   FeaturedCaseStudiesPreview,
+  HomeAboutTeaser,
   ContactCTA,
 } from "@/components/home-sections";
 
@@ -14,13 +15,14 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TransformationImpactDashboard />
+      <SignalStorySection />
+      <FeaturedCaseStudiesPreview />
+      <HomeAboutTeaser />
       <CredibilityRail />
       <ClientTicker />
       <BrandThesis />
-      <TransformationImpactDashboard />
       <StanfordAICapability />
-      <FeaturedThinking />
-      <FeaturedCaseStudiesPreview />
       <ContactCTA />
     </>
   );

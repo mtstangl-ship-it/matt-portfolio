@@ -32,8 +32,8 @@ export const brandThesis = {
 export const transformationDashboard = {
   headline: "Design and Transformation Impact",
   subhead: "Journey-led operating models and service design.",
-  cta: "View full dashboard",
-  ctaHref: "/work",
+  cta: "View impact",
+  ctaHref: "/impact",
   companies: [
     {
       name: "Autodesk",
@@ -103,76 +103,19 @@ export const stanfordAI = {
   ctaExternal: true,
 };
 
-export const featuredThinking = {
-  headline: "Thinking",
-  subhead: "Experience design, transformation, leadership.",
-  cta: "Read more",
-  ctaHref: "/thinking",
-  items: [
-    {
-      quote:
-        "The best service design is invisible. When everything flows, customers don't notice the design — they just get what they need.",
-      topic: "Service design",
-      topicIcon: "workflow" as const,
-      date: "Nov 2024",
-    },
-    {
-      quote:
-        "Transformation fails when we optimize for efficiency before we understand the journey. Map first. Prescribe second.",
-      topic: "Transformation",
-      topicIcon: "transformation" as const,
-      date: "Oct 2024",
-    },
-    {
-      quote:
-        "AI won't replace experience strategy — but leaders who understand AI will replace those who don't.",
-      topic: "AI & Strategy",
-      topicIcon: "automation" as const,
-      date: "Sep 2024",
-    },
-  ] as const,
-};
-
-export const featuredCaseStudies = {
-  headline: "Selected work",
-  subhead: "Four transformations.",
+export const caseStudiesHomeSection = {
+  headline: "Case Studies",
+  subhead: "How I turn ideas into systems, and systems into results.",
   cta: "View all",
-  ctaHref: "/work",
-  items: [
-    {
-      slug: "autodesk",
-      motif: "journey" as const,
-      client: "Autodesk",
-      title: "Turning fragmented support into a unified post-purchase journey",
-      outcome: "+27% RR, 50M+ projected YOY AOV. First end-to-end post-purchase service launch.",
-      category: "Service Design",
-    },
-    {
-      slug: "wipro",
-      motif: "converge" as const,
-      client: "Wipro",
-      title: "From zero to eight-figure renewal: building a CX practice",
-      outcome: "31% MTTR reduction, 15%+ NPS. 16k lockout cases reduced, annual.",
-      category: "Transformation",
-    },
-    {
-      slug: "ey-georgia-dph",
-      motif: "flow" as const,
-      client: "EY / Georgia DPH",
-      title: "Public health at scale: vaccine outreach and claims",
-      outcome: "10+ brand partners, 715 vaccinations, 4.57M social reach. Eight-figure renewal.",
-      category: "Public Sector",
-    },
-    {
-      slug: "discovery",
-      motif: "default" as const,
-      client: "Discovery Communications",
-      title: "Experience strategy across a global media portfolio",
-      outcome: "Aligned experience architecture and operating models. Reduced effort, improved resolution.",
-      category: "Experience Strategy",
-    },
-  ] as const,
-};
+  ctaHref: "/case-studies",
+} as const;
+
+export const homeAboutTeaser = {
+  headline: "About",
+  line: "Who I am, how I work, and what makes the path here uncommon.",
+  cta: "Read more",
+  ctaHref: "/about",
+} as const;
 
 export const contactCta = {
   headline: "Let's talk",
