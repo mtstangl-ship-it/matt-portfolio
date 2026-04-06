@@ -6,27 +6,22 @@ import { AutomationIcon } from "@/components/icons";
 import { HumanPortraitMotif, SignalMapMotif } from "@/components/visuals";
 import { stanfordAI } from "@/content/home";
 
-export function StanfordAICapability() {
+function StanfordInner() {
+  const ctaClass =
+    "font-body inline-flex shrink-0 whitespace-nowrap text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent";
+
   const CtaLink = stanfordAI.ctaExternal ? (
-    <a
-      href={stanfordAI.ctaHref}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="font-body shrink-0 text-metric-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
-    >
+    <a href={stanfordAI.ctaHref} target="_blank" rel="noopener noreferrer" className={ctaClass}>
       {stanfordAI.cta} ↗
     </a>
   ) : (
-    <Link
-      href={stanfordAI.ctaHref}
-      className="font-body shrink-0 text-metric-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
-    >
+    <Link href={stanfordAI.ctaHref} className={ctaClass}>
       {stanfordAI.cta} →
     </Link>
   );
 
   return (
-    <Section className="relative overflow-hidden border-t border-ink-200/55 bg-support py-section">
+    <>
       <div
         className="pointer-events-none absolute inset-0"
         aria-hidden
@@ -40,13 +35,13 @@ export function StanfordAICapability() {
       </div>
       <Card
         variant="bordered"
-        className="relative z-10 overflow-hidden border-ink-200/80 bg-paper-50 shadow-card-elevated"
+        className="relative z-10 isolate border-ink-200/80 bg-paper-50 shadow-card-elevated"
       >
-        <div className="pointer-events-none absolute left-6 top-10 h-24 w-24 opacity-[0.07]">
+        <div className="pointer-events-none absolute left-6 top-10 h-24 w-24 overflow-hidden opacity-[0.07]">
           <HumanPortraitMotif />
         </div>
-        <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:p-6">
-          <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left">
+        <div className="flex flex-col gap-6 p-5 sm:p-6 lg:flex-row lg:items-center lg:gap-10 lg:justify-between">
+          <div className="flex min-w-0 flex-1 flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left">
             <div className="flex h-20 w-20 shrink-0 flex-col items-center justify-center gap-2 overflow-hidden rounded-lg border-2 border-accent/40 bg-accent-tint p-2.5 sm:h-28 sm:w-28 sm:p-4">
               {stanfordAI.certImage ? (
                 <Image
@@ -65,23 +60,41 @@ export function StanfordAICapability() {
                 </>
               )}
             </div>
-            <div className="w-full min-w-0 max-w-lg">
+            <div className="min-w-0 flex-1">
               <h3 className="font-display text-[clamp(1.5rem,5vw,2.125rem)] font-bold leading-tight text-ink-950 sm:text-section">
                 {stanfordAI.title}
               </h3>
               <p className="font-body mt-2 text-metric-sm text-ink-600">
                 {stanfordAI.credential}
               </p>
-              <p className="font-body mt-3 max-w-md text-body font-semibold leading-[1.5] text-ink-800">
+              <p className="font-body mt-3 text-body font-semibold leading-[1.5] text-ink-800 sm:max-w-2xl">
                 {stanfordAI.description}
               </p>
             </div>
           </div>
-          <div className="shrink-0 border-t border-ink-200/80 pt-4 sm:border-t-0 sm:border-l sm:pl-6 sm:pt-0 lg:pl-8">
+          <div className="flex shrink-0 justify-center border-t border-ink-200/80 pt-4 sm:justify-start lg:border-t-0 lg:border-l lg:pl-8 lg:pt-0">
             {CtaLink}
           </div>
         </div>
       </Card>
+    </>
+  );
+}
+
+/** Standalone section (e.g. if used alone on a page) */
+export function StanfordAICapability() {
+  return (
+    <Section className="relative overflow-hidden border-t border-ink-200/55 bg-support py-section">
+      <StanfordInner />
     </Section>
+  );
+}
+
+/** Directly under thesis headline + body (left column); before Impact */
+export function StanfordAICapabilityEmbedded() {
+  return (
+    <div className="relative z-10 w-full">
+      <StanfordInner />
+    </div>
   );
 }

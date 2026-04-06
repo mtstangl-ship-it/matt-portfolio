@@ -1,6 +1,6 @@
 import { Section } from "@/components/ui/Section";
 import { JourneyArchitectureIcon } from "@/components/icons";
-import { HeroAtmosphereBackground } from "./HeroAtmosphereBackground";
+import { HeroCanvasLazy } from "./HeroCanvasLazy";
 import { hero } from "@/content/home";
 
 export function Hero() {
@@ -34,7 +34,7 @@ export function Hero() {
           </div>
         </div>
         <div className="relative z-0 order-2 flex min-h-[min(58vh,420px)] w-full min-w-0 shrink-0 justify-center overflow-hidden border-t border-dashboard-border/50 bg-dashboard-bg sm:min-h-[min(68vh,520px)] lg:order-1 lg:absolute lg:inset-0 lg:min-h-[min(85vh,720px)] lg:border-t-0 lg:bg-transparent">
-          <HeroAtmosphereBackground />
+          <HeroCanvasLazy />
         </div>
       </div>
     </Section>

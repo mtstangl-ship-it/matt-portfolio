@@ -1,5 +1,6 @@
 /**
- * Creative narrative — editorial framing. Update externalHref to deep links when ready.
+ * Signal → Story — YouTube-backed narrative work.
+ * Homepage: 3 videos max. Subpage: up to 6, curated.
  */
 export const signalStoryCopy = {
   title: "Signal → Story",
@@ -7,50 +8,35 @@ export const signalStoryCopy = {
     "From fragmented signals — moments, behavior, culture, emotion — to narratives people can feel and move through.",
 } as const;
 
-export type SignalStoryPiece = {
-  id: string;
-  label: string;
-  caption?: string;
-  externalHref: string;
+export type SignalStoryVideo = {
+  youtubeId: string;
+  title: string;
+  /** Very short optional label */
+  label?: string;
 };
 
-export const signalStoryPiecesById = {
-  oprah: {
-    id: "oprah",
-    label: "Oprah narrated campaign",
-    caption: "Cultural signal → narrative",
-    externalHref: "https://mattstangl.com",
+/** Homepage: 1 lead + 2 supporting — Healthcare Heroes first, No Limits to Discovery (not “Oprah”) */
+export const signalStoryHomeVideos: SignalStoryVideo[] = [
+  {
+    youtubeId: "heAtSMBa5i8",
+    title: "Healthcare Heroes",
   },
-  travelWisconsin: {
-    id: "travel-wisconsin",
-    label: "Travel Wisconsin",
-    caption: "Moment → meaning",
-    externalHref: "https://mattstangl.com",
+  {
+    youtubeId: "t-RAl7g2Olw",
+    title: "Travel Wisconsin",
   },
-  dwb: {
-    id: "dwb",
-    label: "Doctors Without Borders",
-    caption: "Behavior → story",
-    externalHref: "https://mattstangl.com",
+  {
+    youtubeId: "XPZpVWSPZ2w",
+    title: "No Limits to Discovery",
   },
-  caronButler: {
-    id: "caron-butler",
-    label: "Caron Butler",
-    caption: "Moment → meaning",
-    externalHref: "https://mattstangl.com",
-  },
-  discovery: {
-    id: "discovery",
-    label: "Discovery",
-    caption: "Cultural signal → narrative",
-    externalHref: "https://mattstangl.com",
-  },
-} as const satisfies Record<string, SignalStoryPiece>;
+];
 
-/** Visual rhythm: dominant → pair → wide → wide */
-export const signalStoryLayout = [
-  { kind: "hero" as const, key: "oprah" as const },
-  { kind: "pair" as const, keys: ["travelWisconsin", "dwb"] as const },
-  { kind: "hero" as const, key: "caronButler" as const },
-  { kind: "hero" as const, key: "discovery" as const },
+/** Subpage: 6 entries — “Next Protectors” is separate from “No Limits to Discovery” */
+export const signalStoryPageVideos: SignalStoryVideo[] = [
+  { youtubeId: "heAtSMBa5i8", title: "Healthcare Heroes", label: "Featured" },
+  { youtubeId: "t-RAl7g2Olw", title: "Travel Wisconsin" },
+  { youtubeId: "XPZpVWSPZ2w", title: "No Limits to Discovery" },
+  { youtubeId: "LiPIUNutKRw", title: "Doctors Without Borders" },
+  { youtubeId: "wnFTdF0VWM0", title: "Caron Butler" },
+  { youtubeId: "V5lIXv8idUU", title: "Next Protectors" },
 ];

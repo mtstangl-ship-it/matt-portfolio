@@ -2,10 +2,13 @@
 
 import Link from "next/link";
 import { Section } from "@/components/ui/Section";
-import { signalStoryCopy } from "@/content/signal-story";
-import { SignalStoryVisualGrid } from "./SignalStoryVisualGrid";
+import { signalStoryCopy, signalStoryHomeVideos } from "@/content/signal-story";
+import { YouTubeInline } from "./YouTubeInline";
 
 export function SignalStorySection() {
+  const [lead, ...rest] = signalStoryHomeVideos;
+  const [a, b] = rest;
+
   return (
     <section className="relative overflow-hidden border-t border-ink-200/40 bg-[#070605] py-section">
       <div
@@ -26,14 +29,30 @@ export function SignalStorySection() {
           </p>
         </div>
         <p className="mt-6 font-mono text-[0.5rem] font-medium uppercase tracking-[0.14em] text-[rgba(180,176,170,0.55)]">
-          <Link href="/signal-story" className="text-accent/80 underline-offset-4 transition-colors hover:text-accent">
-            Full arc
+          <Link
+            href="/signal-story"
+            className="text-accent/80 underline-offset-4 transition-colors hover:text-accent"
+          >
+            More narrative work
           </Link>
-          <span className="text-[rgba(180,176,170,0.45)]"> · curated work</span>
+          <span className="text-[rgba(180,176,170,0.45)]"> · full arc</span>
         </p>
 
-        <div className="mt-10">
-          <SignalStoryVisualGrid />
+        <div className="mt-10 flex flex-col gap-6 md:gap-8">
+          <YouTubeInline
+            youtubeId={lead.youtubeId}
+            title={lead.title}
+            label={lead.label}
+            variant="hero"
+          />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:gap-8">
+            {a ? (
+              <YouTubeInline youtubeId={a.youtubeId} title={a.title} label={a.label} variant="default" />
+            ) : null}
+            {b ? (
+              <YouTubeInline youtubeId={b.youtubeId} title={b.title} label={b.label} variant="default" />
+            ) : null}
+          </div>
         </div>
       </Section>
     </section>

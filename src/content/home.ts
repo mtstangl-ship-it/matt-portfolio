@@ -110,13 +110,6 @@ export const caseStudiesHomeSection = {
   ctaHref: "/case-studies",
 } as const;
 
-export const homeAboutTeaser = {
-  headline: "About",
-  line: "Who I am, how I work, and what makes the path here uncommon.",
-  cta: "Read more",
-  ctaHref: "/about",
-} as const;
-
 export const contactCta = {
   headline: "Let's talk",
   subhead: "Journey redesign, experience strategy, operational transformation.",

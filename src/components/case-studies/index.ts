@@ -1,1 +1,1 @@
-// Case study components – cards, detail views, etc.
+export { CaseStudyIntelPanel, type CaseStudyPanelMode } from "./CaseStudyIntelPanel";

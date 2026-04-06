@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/Section";
+import { CaseStudyIntelPanel } from "@/components/case-studies";
 import { caseStudyEntries } from "@/content/case-studies";
 import { caseStudiesHomeSection } from "@/content/home";
 
 const preview = caseStudyEntries.slice(0, 3);
+const [featured, ...supporting] = preview;
 
 export function FeaturedCaseStudiesPreview() {
   return (
@@ -25,34 +27,21 @@ export function FeaturedCaseStudiesPreview() {
         </div>
         <Link
           href={caseStudiesHomeSection.ctaHref}
-          className="font-body shrink-0 text-metric-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
+          className="font-body shrink-0 text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
         >
           {caseStudiesHomeSection.cta} →
         </Link>
       </div>
 
-      <ul className="relative z-10 mt-8 divide-y divide-ink-200/60 border-y border-ink-200/55 sm:mt-10">
-        {preview.map((cs) => (
-          <li key={cs.slug}>
-            <Link
-              href={`/case-studies/${cs.slug}`}
-              className="group flex flex-col gap-2 py-6 transition-colors first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8 sm:py-7"
-            >
-              <div className="min-w-0">
-                <h3 className="font-display text-[1.0625rem] font-bold text-ink-950 transition-colors group-hover:text-accent-dark [text-wrap:balance] sm:text-[1.125rem]">
-                  {cs.title}
-                </h3>
-                <p className="font-body mt-1.5 max-w-[50ch] text-[0.8125rem] font-medium leading-relaxed text-ink-700">
-                  {cs.oneLine}
-                </p>
-              </div>
-              <span className="font-mono shrink-0 text-[0.55rem] font-semibold uppercase tracking-[0.14em] text-accent/80 transition-transform group-hover:translate-x-0.5">
-                Read →
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="relative z-10 mt-8 flex flex-col gap-4 sm:mt-10 sm:gap-5">
+        {featured ? <CaseStudyIntelPanel entry={featured} mode="homeFeatured" /> : null}
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
+          {supporting.map((entry) => (
+            <CaseStudyIntelPanel key={entry.slug} entry={entry} mode="homeSupporting" />
+          ))}
+        </div>
+      </div>
     </Section>
   );
 }
