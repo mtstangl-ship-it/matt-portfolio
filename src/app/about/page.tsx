@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AboutJudgment, AboutOperatingModel, AboutPresence } from "@/components/about";
 import { aboutPage } from "@/content/about";
 
 export const metadata: Metadata = {
@@ -55,7 +56,11 @@ export default function About() {
         </div>
       </section>
 
-      {/* 3. How I think */}
+      <AboutOperatingModel />
+      <AboutJudgment />
+      <AboutPresence />
+
+      {/* How I think */}
       <section className="px-4 py-12 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-display text-[clamp(1.15rem,2.5vw,1.35rem)] font-semibold tracking-[-0.02em] text-white">
@@ -74,7 +79,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 4. What I do — cards */}
+      {/* What I do — cards */}
       <section className="border-t border-white/[0.06] bg-dashboard-muted/25 px-4 py-12 sm:px-6 sm:py-16">
         <div className="mx-auto max-w-5xl">
           <h2 className="font-display text-[clamp(1.15rem,2.5vw,1.35rem)] font-semibold tracking-[-0.02em] text-white">
@@ -94,29 +99,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 5. Select signals */}
-      <section className="border-t border-white/[0.06] px-4 py-12 sm:px-6 sm:py-14">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="font-display text-[clamp(1.15rem,2.5vw,1.35rem)] font-semibold tracking-[-0.02em] text-white">
-            {aboutPage.signals.title}
-          </h2>
-          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {aboutPage.signals.tiles.map((t) => (
-              <div
-                key={t.value}
-                className="rounded-md border border-white/[0.08] bg-gradient-to-br from-dashboard-card to-dashboard-muted/80 px-3 py-4"
-              >
-                <p className="font-mono text-[clamp(1.25rem,3vw,1.65rem)] font-bold tabular-nums tracking-[-0.03em] text-white">
-                  {t.value}
-                </p>
-                <p className="mt-2 font-body text-[0.6875rem] font-medium leading-snug text-dashboard-ink-muted">{t.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Career arc */}
+      {/* Career arc */}
       <section className="border-t border-white/[0.06] bg-dashboard-muted/20 px-4 py-12 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-2xl space-y-5">
           <h2 className="font-display text-[clamp(1.15rem,2.5vw,1.35rem)] font-semibold tracking-[-0.02em] text-white">
@@ -130,7 +113,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 7. Personal note */}
+      {/* Personal note */}
       <section className="border-t border-white/[0.06] px-4 py-12 sm:px-6 sm:pb-20">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-display text-[clamp(1.05rem,2vw,1.2rem)] font-semibold tracking-[-0.02em] text-white">
