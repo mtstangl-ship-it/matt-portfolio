@@ -1,4 +1,12 @@
-export { AboutOperatingModel } from "./AboutOperatingModel";
-export { AboutDoubleDiamondRocket } from "./AboutDoubleDiamondRocket";
-export { AboutJudgment } from "./AboutJudgment";
-export { AboutPresence } from "./AboutPresence";
+export { AboutStation } from "./AboutStation";
+export { AboutMissionColumn } from "./AboutMissionColumn";
+export { GalaxyBackground } from "./GalaxyBackground";
+export {
+  DecorPad,
+  DecorGuidance,
+  DecorPayload,
+  DecorTelemetry,
+  DecorOperatorLog,
+  IconSatBay,
+  IconTelemetryChannel,
+} from "./AboutDecor";

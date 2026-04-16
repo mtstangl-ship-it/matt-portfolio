@@ -2,7 +2,7 @@
 
 export const aboutPage = {
   hero: {
-    headline: "I design systems that turn ambiguity into momentum.",
+    headline: "I build design systems for exit velocity.",
     subhead:
       "Strategy, service design, and storytelling that connect experience to adoption, retention, and growth.",
   },
@@ -153,10 +153,10 @@ export const aboutPage = {
   howIThink: {
     title: "How I think",
     statements: [
-      "I don’t separate design from business outcomes.",
-      "I structure ambiguity into something teams can move on.",
-      "I translate complexity into systems people can actually use.",
-      "I care about adoption as much as I care about ideas.",
+      "Design and business outcomes share one trajectory.",
+      "Ambiguity gets structured into something teams can move on.",
+      "Complexity is translated into systems people can actually use.",
+      "Adoption carries the same weight as the idea itself.",
     ],
   },
   whatIDo: {
