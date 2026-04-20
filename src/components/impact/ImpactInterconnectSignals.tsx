@@ -15,7 +15,7 @@ type SignalPath = {
 
 const accent = "#22d3c7";
 
-// Coordinates in overlay viewBox 1000x520 — connect metrics → graph → engine → readout
+// Coordinates in overlay viewBox 1000x520, connect metrics → graph → engine → readout
 const paths: SignalPath[] = [
   // Metrics → central graph
   { id: "metrics-revenue", d: "M 100 130 C 200 100, 350 120, 450 150", systems: ["revenue"], baseOpacity: 0.12, weight: 0.9 },

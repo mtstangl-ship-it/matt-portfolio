@@ -59,45 +59,45 @@ export function PlanTierRow({ tier, isActive, onSelect }: Props) {
   return (
     <div
       style={tierTypeScale[tier]}
-      className={`relative flex min-h-0 cursor-pointer flex-col overflow-hidden border duration-200 ease-out ${surface.row} ${
+      className={`relative flex min-h-0 flex-col overflow-hidden border duration-200 ease-out ${surface.row} ${
         surface.rx
       } ${
         isActive
-          ? "min-h-[min(13rem,34vh)] max-h-[min(27rem,54vh)] flex-1"
+          ? "min-h-0 max-lg:flex-1 max-lg:basis-0 lg:flex-none"
           : "h-11 max-h-11 shrink-0 sm:h-12 sm:max-h-12"
       } ${!isActive ? "opacity-[0.58]" : "opacity-100"} ${
         surface.businessGlow && isActive ? "shadow-[0_0_28px_rgba(34,211,199,0.14)]" : ""
       } ${isActive ? "ring-1 ring-accent-signal/45" : ""} ${
         tier === "business" && !isActive ? "ring-1 ring-accent-signal/15" : ""
       } transition-opacity`}
-      onMouseEnter={onSelect}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onSelect();
-        }
+      onMouseEnter={() => {
+        if (typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches) onSelect();
       }}
     >
-      <div
-        className={`flex shrink-0 items-center justify-between gap-2 border-b border-white/[0.07] px-2.5 py-2 sm:px-3 ${
+      <button
+        type="button"
+        aria-expanded={isActive}
+        className={`flex w-full shrink-0 cursor-pointer items-center justify-between gap-2 border-b border-white/[0.07] bg-transparent px-2.5 py-2 text-left sm:px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-signal/45 ${
           isActive ? "bg-white/[0.03]" : ""
         }`}
+        onClick={onSelect}
       >
-        <h3
+        <span
           className={`truncate font-[family-name:var(--font-body)] [font-size:var(--tier-title)] ${surface.title}`}
         >
           {copy.planLabel}
-        </h3>
-        <span className="shrink-0 font-mono text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/45">
+        </span>
+        <span className="shrink-0 font-mono text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/45 max-lg:hidden">
           {isActive ? "Scroll" : "Open"}
         </span>
-      </div>
+        <span className="hidden shrink-0 font-mono text-[0.5625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/55 lg:hidden">
+          {isActive ? "Details" : "Tap"}
+        </span>
+      </button>
 
       {isActive ? (
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-1 py-2 min-[380px]:px-1.5 sm:px-2 sm:py-2.5 [scrollbar-gutter:stable]">
-          <div className="grid min-h-0 w-full grid-cols-1 gap-2.5 min-[400px]:grid-cols-2 min-[400px]:gap-2 min-[560px]:grid-cols-3 md:gap-2.5">
+        <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden overscroll-y-contain px-1 py-2 min-[380px]:px-1.5 sm:px-2 sm:py-2.5 max-lg:[scrollbar-gutter:stable] lg:flex-none lg:overflow-visible">
+          <div className="grid min-h-0 w-full min-w-0 grid-cols-1 gap-3 lg:grid-cols-3 lg:items-stretch lg:gap-2.5">
             {tierKinds.map((kind, idx) => (
               <CategoryServiceBox
                 key={kind}

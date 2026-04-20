@@ -1,11 +1,16 @@
 /**
- * Signal → Story — YouTube-backed narrative work.
+ * Signal → Story, YouTube-backed narrative work.
  * Homepage: 3 videos max. Subpage: up to 6, curated.
  */
 export const signalStoryCopy = {
+  eyebrow: "Ongoing archive",
   title: "Signal → Story",
+  /** Full intro, used on the dedicated Signal → Story page. */
   intro:
-    "From fragmented signals — moments, behavior, culture, emotion — to narratives people can feel and move through.",
+    "A running record of the signals I catch (moments, behavior, culture, emotion) and the short films they turn into.",
+  /** Home-section teaser, one beat of craft, so the subpage copy isn't repeated. */
+  homeTeaser:
+    "Short films built on close observation. The craft side of the practice, in its own language.",
 } as const;
 
 export type SignalStoryVideo = {
@@ -21,7 +26,7 @@ export type SignalStoryVideo = {
   previewDurationSeconds?: number;
 };
 
-/** Homepage: 1 lead + 2 supporting — Healthcare Heroes first, No Limits to Discovery (not “Oprah”) */
+/** Homepage: 1 lead + 2 supporting, Healthcare Heroes first, No Limits to Discovery (not “Oprah”) */
 export const signalStoryHomeVideos: SignalStoryVideo[] = [
   {
     youtubeId: "heAtSMBa5i8",
@@ -40,7 +45,7 @@ export const signalStoryHomeVideos: SignalStoryVideo[] = [
   },
 ];
 
-/** Subpage: 6 entries — “Next Protectors” is separate from “No Limits to Discovery” */
+/** Subpage: 6 entries, “Next Protectors” is separate from “No Limits to Discovery” */
 export const signalStoryPageVideos: SignalStoryVideo[] = [
   {
     youtubeId: "heAtSMBa5i8",

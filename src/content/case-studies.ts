@@ -1,6 +1,8 @@
 export const caseStudiesPage = {
-  title: "Case Studies",
-  subhead: "How I work, structure problems, and turn ideas into real systems.",
+  eyebrow: "Selected work",
+  title: "Proof in flight.",
+  subhead:
+    "Three missions where the strategy left the hangar. What shipped, what moved, and the trajectory each one actually traced.",
 } as const;
 
 export type CaseStudyEntry = {
@@ -42,7 +44,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
     method: "Structure → iterate → refine with AI as an explicit design partner",
     output: "Coherent portfolio system, IA, and reusable build pipeline",
     artifact:
-      "Map the system first, then use models for variation and critique — human owns narrative and architecture.",
+      "Map the system first, then use models for variation and critique, human owns narrative and architecture.",
   },
   {
     slug: "synthetic-users",
@@ -50,7 +52,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
     oneLine: "Simulating behavior to pressure-test experience decisions",
     body: [
       "Synthetic users help stress-test journeys before live traffic: plausible scenarios, edge cases, and language that surfaces where the experience breaks.",
-      "Used as a complement to research—not a replacement—they sharpen hypotheses and reduce rework when the cost of change is still low.",
+      "Used as a complement to research, not a replacement, they sharpen hypotheses and reduce rework when the cost of change is still low.",
     ],
     panelLabel: "SIMULATION",
     teaserLine: "Stress-test journeys before live traffic with plausible scenarios and edge cases.",
@@ -61,7 +63,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
     title: "Autodesk Planning System",
     oneLine: "Designing how customer planning actually works across the lifecycle",
     body: [
-      "Enterprise planning spans tools, teams, and time horizons. The work focused on how planning behavior actually shows up in the journey—not just the UI, but the handoffs, incentives, and success definitions.",
+      "Enterprise planning spans tools, teams, and time horizons. The work focused on how planning behavior actually shows up in the journey, not just the UI, but the handoffs, incentives, and success definitions.",
       "Framing planning as a system made it possible to align product, success, and support around a shared model customers could adopt without fighting the org chart.",
     ],
     panelLabel: "SERVICE DESIGN",

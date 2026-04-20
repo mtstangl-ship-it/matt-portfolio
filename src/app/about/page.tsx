@@ -14,13 +14,13 @@ import {
 import { aboutPage } from "@/content/about";
 
 export const metadata: Metadata = {
-  title: "About — Matt Stangl",
+  title: "About · Matt Stangl",
   description:
-    "Systems that turn ambiguity into momentum—strategy, service design, adoption, and growth.",
+    "Systems that turn ambiguity into momentum: strategy, service design, adoption, and growth.",
 };
 
 /* ----------------------------------------------------------------------------
- * FlightPlan — mission-profile trajectory.
+ * FlightPlan, mission-profile trajectory.
  * Four waypoints along a dashed ascent arc, each with a small icon, timestamp,
  * name, and micro-caption. Reads like a briefing slide.
  * ------------------------------------------------------------------------- */
@@ -95,7 +95,7 @@ function FlightPlan() {
       </div>
 
       <div className="relative mt-8 pt-4">
-        {/* Dashed ascent arc — decorative, above the rail */}
+        {/* Dashed ascent arc, decorative, above the rail */}
         <svg
           aria-hidden
           className="absolute inset-x-0 top-0 hidden h-12 w-full sm:block"
@@ -176,16 +176,17 @@ export default function About() {
     <div className="relative min-h-screen text-dashboard-ink-light">
       <GalaxyBackground />
 
-      {/* 00 · Launch pad — priming beliefs + flight plan */}
+      {/* 00 · Launch pad, priming beliefs + flight plan */}
       <AboutStation
         code="00"
         kicker="Launch pad"
         title={hero.headline}
         subtitle={hero.subhead}
         decor={<DecorPad />}
+        titleAs="h1"
       >
         <div className="space-y-16 sm:space-y-20">
-          {/* Pre-flight beliefs — spacious 2x2 grid */}
+          {/* Pre-flight beliefs, spacious 2x2 grid */}
           <div>
             <p className="font-mono text-[0.5rem] uppercase tracking-[0.28em] text-accent-signal/80">
               Pre-flight beliefs
@@ -215,12 +216,12 @@ export default function About() {
             </ul>
           </div>
 
-          {/* Flight plan — mission profile trajectory */}
+          {/* Flight plan, mission profile trajectory */}
           <FlightPlan />
         </div>
       </AboutStation>
 
-      {/* 01 · Launch system — the operating model */}
+      {/* 01 · Launch system, the operating model */}
       <AboutStation
         code="01"
         kicker="Launch system"
@@ -232,7 +233,7 @@ export default function About() {
         <AboutMissionColumn />
       </AboutStation>
 
-      {/* 02 · Guidance laws — decision principles + red lines */}
+      {/* 02 · Guidance laws, decision principles + red lines */}
       <AboutStation
         code="02"
         kicker="Guidance laws"
@@ -258,7 +259,7 @@ export default function About() {
         </ul>
       </AboutStation>
 
-      {/* 03 · Payload — what the system ships */}
+      {/* 03 · Payload, what the system ships */}
       <AboutStation
         code="03"
         kicker="Payload"
@@ -293,7 +294,7 @@ export default function About() {
         </div>
       </AboutStation>
 
-      {/* 04 · Telemetry — signals from working together */}
+      {/* 04 · Telemetry, signals from working together */}
       <AboutStation
         code="04"
         kicker="Telemetry"
@@ -332,7 +333,7 @@ export default function About() {
         </div>
       </AboutStation>
 
-      {/* 05 · Operator log — career arc + personal note */}
+      {/* 05 · Operator log, career arc + personal note */}
       <AboutStation
         code="05"
         kicker="Operator log"

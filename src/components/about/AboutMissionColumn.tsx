@@ -6,19 +6,23 @@ import { aboutPage } from "@/content/about";
  *
  * Vertical mission diagram: IGNITION → Stage I Booster (Discover/Define) →
  * Staging coupling → Stage II Orbit insertion (Develop/Deliver) → Payload
- * deploy. A celestial cast lives in the margins — Hubble, planets, astronaut,
- * constellations, mission patch, launching rocket — all line-art, low-opacity.
+ * deploy. A celestial cast lives in the margins, Hubble, planets, astronaut,
+ * constellations, mission patch, launching rocket, all line-art, low-opacity.
  * Phase headers and pillars carry inline mission icons so every move in the
  * diamond is pinned to something you can see.
  * ========================================================================== */
 
 /* ----------------------------------------------------------------------------
- * Inline icons — ~18–22px, same stroke vocabulary as the column outlines.
+ * Inline icons, ~18–22px, same stroke vocabulary as the column outlines.
  * All use currentColor so text color drives them.
  * ------------------------------------------------------------------------- */
 
 const iconCls = "inline-block h-[18px] w-auto shrink-0 text-accent-signal/85";
 const iconSmClass = "inline-block h-4 w-auto shrink-0 text-accent-signal/85";
+
+/** Shared read width for diamond headers, chambers, and mission stack alignment. */
+const DIAMOND_READ_WIDTH =
+  "max-w-[min(42rem,calc(100vw-1.75rem))] sm:max-w-[44rem] lg:max-w-[min(46rem,calc(100vw-2.5rem))]";
 
 function IconIgnition() {
   return (
@@ -166,7 +170,7 @@ function IconOrbit() {
 }
 
 /* ----------------------------------------------------------------------------
- * Celestial scatter — margin-resident, line-art decoration.
+ * Celestial scatter, margin-resident, line-art decoration.
  * ------------------------------------------------------------------------- */
 
 function PlanetWithRing() {
@@ -207,14 +211,14 @@ function Hubble() {
       {/* Aft cap */}
       <line x1="18" y1="32" x2="14" y2="34" stroke="currentColor" strokeWidth="0.6" />
       <line x1="18" y1="50" x2="14" y2="48" stroke="currentColor" strokeWidth="0.6" />
-      {/* Solar panels — top */}
+      {/* Solar panels, top */}
       <rect x="30" y="8" width="54" height="14" stroke="currentColor" strokeWidth="1" fill="none" vectorEffect="non-scaling-stroke" />
       <line x1="41" y1="8" x2="41" y2="22" stroke="currentColor" strokeWidth="0.5" />
       <line x1="52" y1="8" x2="52" y2="22" stroke="currentColor" strokeWidth="0.5" />
       <line x1="63" y1="8" x2="63" y2="22" stroke="currentColor" strokeWidth="0.5" />
       <line x1="74" y1="8" x2="74" y2="22" stroke="currentColor" strokeWidth="0.5" />
       <line x1="57" y1="22" x2="57" y2="28" stroke="currentColor" strokeWidth="0.7" />
-      {/* Solar panels — bottom */}
+      {/* Solar panels, bottom */}
       <rect x="30" y="60" width="54" height="14" stroke="currentColor" strokeWidth="1" fill="none" vectorEffect="non-scaling-stroke" />
       <line x1="41" y1="60" x2="41" y2="74" stroke="currentColor" strokeWidth="0.5" />
       <line x1="52" y1="60" x2="52" y2="74" stroke="currentColor" strokeWidth="0.5" />
@@ -329,7 +333,7 @@ const STARS: Array<{ left: string; top: string; size: number; opacity: number; t
 ];
 
 /**
- * Mission animations — all keyframes in one place.
+ * Mission animations, all keyframes in one place.
  * Respects prefers-reduced-motion.
  */
 const MISSION_KEYFRAMES = `
@@ -497,7 +501,7 @@ function OrbitRing({
 function CelestialScatter() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden mission-anim">
-      {/* Long trajectory arcs — lg+ */}
+      {/* Long trajectory arcs, lg+ */}
       <svg
         className="absolute inset-0 hidden h-full w-full text-accent-signal/15 lg:block"
         viewBox="0 0 1000 1600"
@@ -541,19 +545,19 @@ function CelestialScatter() {
         />
       ))}
 
-      {/* Shooting stars — staggered across full canvas */}
+      {/* Shooting stars, staggered across full canvas */}
       <div className="absolute inset-0 hidden overflow-hidden md:block">
         <ShootingStar animation="mission-shoot-1" duration="14s" delay="2s" top="12%" tailLength={140} />
         <ShootingStar animation="mission-shoot-2" duration="19s" delay="8s" top="58%" tailLength={120} />
         <ShootingStar animation="mission-shoot-1" duration="22s" delay="14s" top="78%" tailLength={100} />
       </div>
 
-      {/* Asteroid shower — periodic burst near the top quarter */}
+      {/* Asteroid shower, periodic burst near the top quarter */}
       <div className="absolute left-0 top-[6%] hidden h-[140px] w-full lg:block">
         <AsteroidShower />
       </div>
 
-      {/* Secondary asteroid shower — lower region */}
+      {/* Secondary asteroid shower, lower region */}
       <div className="absolute left-0 top-[62%] hidden h-[140px] w-full lg:block" style={{ transform: "scaleX(-1)" }}>
         <AsteroidShower />
       </div>
@@ -596,13 +600,13 @@ function CelestialScatter() {
 }
 
 /**
- * MissionFrame — blueprint bounding box with corner brackets, diagram ID,
+ * MissionFrame, blueprint bounding box with corner brackets, diagram ID,
  * project/sheet chrome. Wraps the entire mission column.
  */
 function MissionFrame({ children }: { children: ReactNode }) {
   return (
     <div className="relative mx-auto w-full max-w-[72rem] px-4 sm:px-6 md:px-10 lg:px-14">
-      {/* Dashed bounding box — lg+ only */}
+      {/* Dashed bounding box, lg+ only */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-2 inset-y-0 hidden border border-dashed border-accent-signal/25 lg:block"
@@ -743,7 +747,7 @@ function FlowConnector({ accent = false }: { accent?: boolean }) {
  * ------------------------------------------------------------------------- */
 
 /**
- * DiamondHeader — the diamond's identity.
+ * DiamondHeader, the diamond's identity.
  * Full-width banner that crowns its diamond. The headline ("Don't know · could
  * be" / "Do know · should be") is the diamond's name, not a side caption.
  * A double accent rule underlines the full width to signal "this label owns
@@ -766,7 +770,7 @@ function DiamondHeader({
 }) {
   const warm = tone === "warm";
   return (
-    <div className="relative mx-auto w-full max-w-3xl">
+    <div className={`relative mx-auto w-full ${DIAMOND_READ_WIDTH}`}>
       {/* Metadata bar */}
       <div className="flex items-center gap-3">
         <span
@@ -784,13 +788,13 @@ function DiamondHeader({
         </span>
       </div>
 
-      {/* Headline + sub — the diamond's name */}
+      {/* Headline + sub, the diamond's name */}
       <div
         className={`mt-3 flex flex-wrap items-end justify-between gap-x-6 gap-y-2 border-b-2 pb-3 ${
           warm ? "border-accent-signal/70" : "border-accent-signal/45"
         }`}
       >
-        <h3 className="font-display text-[clamp(1.4rem,3.4vw,2rem)] font-semibold uppercase leading-[1.05] tracking-[-0.02em] text-white">
+        <h3 className="font-display text-[clamp(1.05rem,2.8vw+0.4rem,2rem)] font-semibold uppercase leading-[1.05] tracking-[-0.02em] text-white">
           {label}
         </h3>
         <span className="shrink-0 pb-1 font-mono text-[0.6rem] uppercase tracking-[0.24em] text-dashboard-ink-muted">
@@ -828,7 +832,7 @@ function IgnitionBlock() {
         <Mono>Pre-launch check</Mono>
       </div>
       <p className="mt-2 font-body text-[0.8125rem] leading-snug text-dashboard-ink-light/92">
-        Mission inputs stacked on the pad — unknowns, goals, constraints, user signals,
+        Mission inputs stacked on the pad, unknowns, goals, constraints, user signals,
         organizational pressure. Engines spooling.
       </p>
     </div>
@@ -899,7 +903,7 @@ function PayloadDeployBlock() {
         </span>
       </div>
       <p className="mt-2 font-body text-[0.8125rem] leading-snug text-dashboard-ink-light/92">
-        Lander separates from the vehicle on target orbit — a shipped product, service, or
+        Lander separates from the vehicle on target orbit, a shipped product, service, or
         strategic decision the organization can actually operate against.
       </p>
     </div>
@@ -927,7 +931,7 @@ function PhaseRow({
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-white/[0.08] pb-3">
       <LevelCode code={level} />
       {icon ? <span className="inline-flex items-center">{icon}</span> : null}
-      <h3 className="font-display text-[1.0625rem] font-semibold leading-tight text-white sm:text-[1.125rem]">
+      <h3 className="font-display text-[clamp(0.98rem,2.2vw+0.55rem,1.125rem)] font-semibold leading-tight text-white">
         {label}
       </h3>
       <Mono>{note}</Mono>
@@ -953,7 +957,7 @@ function Pillar({
         {icon ? <span className="inline-flex items-center">{icon}</span> : null}
         <Mono>{kicker}</Mono>
       </div>
-      <p className="mt-1.5 font-body text-[0.8125rem] font-semibold leading-snug text-white sm:text-[0.875rem]">
+      <p className="mt-1.5 font-body text-[clamp(0.75rem,1.6vw+0.55rem,0.875rem)] font-semibold leading-snug text-white">
         {body}
       </p>
     </div>
@@ -968,7 +972,7 @@ function ParallelList({ items }: { items: readonly string[] }) {
         {items.map((line) => (
           <li
             key={line}
-            className="border-l border-accent-signal/45 pl-3 font-body text-[0.8125rem] leading-snug text-dashboard-ink-light/92 sm:text-[0.875rem]"
+            className="border-l border-accent-signal/45 pl-3 font-body text-[clamp(0.75rem,1.5vw+0.55rem,0.875rem)] leading-snug text-dashboard-ink-light/92"
           >
             {line}
           </li>
@@ -986,7 +990,7 @@ function StepList({ items, loop = false }: { items: readonly string[]; loop?: bo
           <IconOrbit />
           <Mono className="text-accent-signal/85">Orbit cycle</Mono>
           <span className="font-mono text-[0.6rem] leading-snug text-dashboard-ink-muted">
-            Iterate in flight — prototype, learn, build, release.
+            Iterate in flight, prototype, learn, build, release.
           </span>
         </div>
       ) : null}
@@ -994,7 +998,7 @@ function StepList({ items, loop = false }: { items: readonly string[]; loop?: bo
         {items.map((step, i) => (
           <li
             key={step}
-            className="flex items-start gap-3 border border-white/[0.06] bg-black/25 px-3 py-2 font-body text-[0.8125rem] leading-snug text-dashboard-ink-light/90 sm:text-[0.875rem]"
+            className="flex items-start gap-3 border border-white/[0.06] bg-black/25 px-3 py-2 font-body text-[clamp(0.75rem,1.5vw+0.55rem,0.875rem)] leading-snug text-dashboard-ink-light/90"
           >
             <span className="mt-0.5 shrink-0 font-mono text-[0.55rem] tracking-[0.16em] text-accent-signal/80">
               {String(i + 1).padStart(2, "0")}
@@ -1017,53 +1021,62 @@ function DiamondChamber({
   orbit?: boolean;
 }) {
   return (
-    <div className="relative mx-auto w-full max-w-3xl mission-anim">
-      {/* Rotating orbital rings — behind diamond */}
+    <div className={`relative mx-auto w-full ${DIAMOND_READ_WIDTH} mission-anim`}>
+      {/* Rotating orbital rings, behind diamond */}
       {orbit ? (
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-visible">
-          <OrbitRing size={420} duration="140s" opacity={0.18} />
-          <OrbitRing size={540} duration="220s" reverse opacity={0.12} />
+          <OrbitRing size={460} duration="140s" opacity={0.18} />
+          <OrbitRing size={580} duration="220s" reverse opacity={0.12} />
         </div>
       ) : null}
 
-      <svg
-        className="absolute inset-0 h-full w-full text-accent-signal/45"
-        preserveAspectRatio="none"
-        viewBox="0 0 400 1000"
+      {/*
+        Wider viewBox + uniform scaling: the frame "houses" content without
+        anamorphic stretch (preserveAspectRatio none was stretching the rhombus).
+      */}
+      <div
         aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 flex items-stretch justify-center px-1 sm:px-2"
       >
-        <polygon
-          points="200,6 394,500 200,994 6,500"
+        <svg
+          className="h-full w-full max-w-[min(94%,38rem)] text-accent-signal/[0.42] sm:max-w-[min(96%,42rem)] lg:max-w-[min(96%,44rem)]"
+          viewBox="0 0 520 1000"
           fill="none"
-          stroke="currentColor"
-          strokeWidth="1.25"
-          vectorEffect="non-scaling-stroke"
-        />
-        <line
-          x1="6"
-          y1="500"
-          x2="394"
-          y2="500"
-          stroke="currentColor"
-          strokeOpacity="0.5"
-          strokeWidth="0.8"
-          strokeDasharray="3 5"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
+          preserveAspectRatio="xMidYMid meet"
+          role="presentation"
+        >
+          <polygon
+            points="260,14 508,500 260,986 12,500"
+            stroke="currentColor"
+            strokeWidth="1.35"
+            vectorEffect="non-scaling-stroke"
+          />
+          <line
+            x1="12"
+            y1="500"
+            x2="508"
+            y2="500"
+            stroke="currentColor"
+            strokeOpacity="0.5"
+            strokeWidth="0.85"
+            strokeDasharray="3 5"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+      </div>
 
-      <div className="relative mx-auto w-[88%] max-w-[28rem] py-20 sm:py-28">
-        <div className="space-y-4 pt-6 sm:pt-10">{diverge}</div>
+      <div className="relative z-10 mx-auto w-[min(92%,36rem)] px-0.5 py-14 sm:w-[min(90%,38rem)] sm:py-20 lg:w-[min(88%,40rem)] lg:py-24">
+        <div className="space-y-4 pt-5 sm:pt-8 lg:pt-10">{diverge}</div>
 
-        <div className="my-10 flex items-center gap-3">
+        <div className="my-8 flex items-center gap-3 sm:my-10">
           <span className="h-px flex-1 bg-accent-signal/30" />
-          <span className="font-mono text-[0.5rem] uppercase tracking-[0.24em] text-accent-signal/85">
+          <span className="shrink-0 px-1 text-center font-mono text-[0.48rem] uppercase leading-tight tracking-[0.2em] text-accent-signal/85 sm:text-[0.5rem] sm:tracking-[0.24em]">
             Apogee · stage separation
           </span>
           <span className="h-px flex-1 bg-accent-signal/30" />
         </div>
 
-        <div className="space-y-4 pb-6 sm:pb-10">{converge}</div>
+        <div className="space-y-4 pb-5 sm:pb-8 lg:pb-10">{converge}</div>
       </div>
     </div>
   );
@@ -1084,12 +1097,12 @@ export function AboutMissionColumn() {
       <CelestialScatter />
 
       <MissionFrame>
-        <div className="relative mx-auto w-full max-w-3xl">
+        <div className={`relative mx-auto w-full ${DIAMOND_READ_WIDTH}`}>
           <div className="flex flex-col gap-5 lg:gap-7">
             <IgnitionBlock />
             <FlowConnector />
 
-            {/* Diamond I — the "Don't know · could be" diamond */}
+            {/* Diamond I, the "Don't know · could be" diamond */}
             <div className="flex flex-col gap-1">
               <DiamondHeader
                 stage="I"
@@ -1132,7 +1145,7 @@ export function AboutMissionColumn() {
             <StagingDrum body={m.bridge} />
             <FlowConnector />
 
-            {/* Diamond II — the "Do know · should be" diamond */}
+            {/* Diamond II, the "Do know · should be" diamond */}
             <div className="flex flex-col gap-1">
               <DiamondHeader
                 stage="II"

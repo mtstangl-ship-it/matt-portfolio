@@ -10,6 +10,7 @@ import { ImpactSignalOverlays } from "./ImpactSignalOverlays";
 import { ImpactMicroReadouts } from "./ImpactMicroReadouts";
 import { ImpactAmbientMetrics } from "./ImpactAmbientMetrics";
 import { ImpactSystemSummary } from "./ImpactSystemSummary";
+import { SiteGrid } from "@/components/ui/SiteGrid";
 import type { ImpactOutcomeMode } from "@/content/impact-page";
 import { impactMissionControl } from "@/content/impact-mission-control";
 const systemKeys = ["revenue", "operations", "healthcare"] as const;
@@ -36,14 +37,7 @@ export function ImpactMissionControl() {
             "radial-gradient(1200px 620px at 10% -10%, rgba(34,211,199,0.12), transparent 60%), radial-gradient(950px 520px at 95% 10%, rgba(34,211,199,0.08), transparent 62%), linear-gradient(180deg, rgba(0,0,0,0.36) 0%, rgba(0,0,0,0.18) 35%, rgba(0,0,0,0.3) 100%)",
         }}
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.035] lg:opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, rgba(232,230,226,0.06) 0px, rgba(232,230,226,0.06) 1px, transparent 1px, transparent 10px), repeating-linear-gradient(90deg, rgba(232,230,226,0.04) 0px, rgba(232,230,226,0.04) 1px, transparent 1px, transparent 12px)",
-        }}
-      />
+      <SiteGrid tone="dark" opacity={0.6} className="lg:opacity-100" />
       <ImpactSignalFieldBackground mode={mode} />
       <ImpactDataNoiseBackground mode={mode} />
 
@@ -60,9 +54,9 @@ export function ImpactMissionControl() {
           <header className="flex flex-col gap-2 border-b border-dashboard-border/20 px-3 py-2 sm:px-4 sm:py-2.5 lg:flex-row lg:items-end lg:justify-between" style={{ opacity: 0.85 }}>
             <div>
               <div className="flex items-baseline gap-3">
-                <h1 className="font-display text-[1.5rem] font-semibold leading-[1.1] text-dashboard-ink-light sm:text-[1.75rem]">
-                  {impactMissionControl.headline}
-                </h1>
+                <h2 className="font-mono text-eyebrow font-semibold uppercase tracking-[0.25em] text-accent-signal">
+                  Console
+                </h2>
                 <p className="font-mono text-[0.625rem] font-semibold tabular-nums text-dashboard-ink-muted/60">
                   {impactMissionControl.subhead}
                 </p>
@@ -132,7 +126,7 @@ export function ImpactMissionControl() {
                 : "relative isolate grid gap-0 p-3 sm:p-4 lg:grid-cols-[18rem,minmax(0,1fr)]"
             }
           >
-            {/* Tertiary layer — must not capture clicks or sit above content */}
+            {/* Tertiary layer, must not capture clicks or sit above content */}
             <div
               className="pointer-events-none col-span-full row-span-full"
               style={{ zIndex: 0 }}
@@ -143,7 +137,7 @@ export function ImpactMissionControl() {
               <ImpactMicroReadouts />
             </div>
 
-            {/* Supporting: Autodesk / system summary — on mobile revenue mode, source narrative BEFORE tier UI */}
+            {/* Supporting: Autodesk / system summary, on mobile revenue mode, source narrative BEFORE tier UI */}
             <aside
               className={
                 activeSystem === "revenue"
@@ -159,7 +153,7 @@ export function ImpactMissionControl() {
               <ImpactSystemSummary key={activeSystem} system={activeSystem} />
             </aside>
 
-            {/* Primary: System brain — revenue tier viz; on mobile must follow summary after narrative */}
+            {/* Primary: System brain, revenue tier viz; on mobile must follow summary after narrative */}
             <div
               className={`relative z-20 col-span-1 flex min-h-0 flex-col p-3 lg:order-none lg:row-span-2 lg:p-6 ${
                 activeSystem === "revenue"
@@ -176,12 +170,12 @@ export function ImpactMissionControl() {
               <div
                 className={
                   activeSystem === "revenue"
-                    ? "relative flex min-h-0 w-full flex-1 flex-col"
+                    ? "relative flex min-h-0 w-full flex-1 flex-col max-lg:min-h-[min(38rem,88svh)] lg:min-h-0"
                     : "relative w-full flex-1 min-h-[20rem] sm:min-h-[22rem] lg:min-h-[26rem]"
                 }
                 style={
                   activeSystem === "revenue"
-                    ? { minHeight: "clamp(16rem, 58vh, 40rem)" }
+                    ? undefined
                     : { minHeight: "clamp(18rem, 55vh, 28rem)" }
                 }
               >

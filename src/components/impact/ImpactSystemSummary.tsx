@@ -57,7 +57,7 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
               {summary.label}
             </p>
             {"systemContextLine" in summary && summary.systemContextLine ? (
-              <p className="font-body text-[0.62rem] leading-relaxed text-dashboard-ink-light/85 max-lg:max-w-[40ch] max-lg:mx-auto max-lg:text-center lg:mx-0 lg:max-w-none lg:text-left">
+              <p className="font-body text-[0.62rem] leading-relaxed text-dashboard-ink-light/85 max-lg:mx-auto max-lg:line-clamp-3 max-lg:max-w-[42ch] max-lg:text-center lg:mx-0 lg:max-w-none lg:text-left">
                 {summary.systemContextLine}
               </p>
             ) : null}
@@ -103,54 +103,89 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
 
       {isRevenue ? (
         <div className={`space-y-4 ${isRevenue ? "order-5 lg:order-4" : ""}`}>
-          <div className="space-y-1.5">
-            <p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.12em] text-dashboard-ink-muted/75">
-              Strategic role
+          <div
+            className="rounded-md border border-accent-signal/18 px-2.5 py-2 lg:hidden"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(14,13,12,0.92) 0%, rgba(10,10,9,0.94) 100%)",
+              boxShadow: "inset 0 1px 0 rgba(34,211,199,0.06)",
+            }}
+          >
+            <p className="font-mono text-[0.55rem] font-bold uppercase tracking-[0.12em] text-accent-signal/80">
+              Transformation spine
             </p>
-            <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light/90 max-lg:leading-snug">
+            <p className="mt-1.5 font-body text-[0.65rem] leading-snug text-dashboard-ink-light/88 line-clamp-4">
               {"strategicRole" in summary ? summary.strategicRole : ""}
             </p>
-          </div>
-          <div className="space-y-1.5">
-            <p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.12em] text-dashboard-ink-muted/75">
-              Scale
-            </p>
-            <div
-              className="rounded-md border border-accent-signal/14 px-2.5 py-1.5"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(14,13,12,0.88) 0%, rgba(10,10,9,0.9) 70%, rgba(34,211,199,0.04) 100%)",
-                boxShadow: "inset 0 1px 0 rgba(232,230,226,0.03)",
-              }}
-            >
+            <p className="mt-2 border-t border-white/[0.06] pt-2 font-body text-[0.6rem] leading-snug text-dashboard-ink-muted/90">
               {"buildLine" in summary && summary.buildLine ? (
-                <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light">
+                <>
                   {scaleParts.prefix ? (
                     <span className="font-semibold text-white">{scaleParts.prefix}</span>
                   ) : null}
                   <span>{scaleParts.body}</span>
-                </p>
+                </>
               ) : null}
-            </div>
-          </div>
-          <div className="space-y-1.5">
-            <p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.12em] text-dashboard-ink-muted/75">
-              Speed
-            </p>
-            <div
-              className="rounded-md border border-accent-signal/14 px-2.5 py-1.5"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(14,13,12,0.88) 0%, rgba(10,10,9,0.9) 70%, rgba(34,211,199,0.04) 100%)",
-                boxShadow: "inset 0 1px 0 rgba(232,230,226,0.03)",
-              }}
-            >
               {"timeframeLine" in summary && summary.timeframeLine ? (
-                <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light">
-                  <span className="font-semibold text-white">2Q </span>
+                <>
+                  <span className="mx-1.5 text-dashboard-ink-muted/50">·</span>
+                  <span className="font-semibold text-white">2Q</span>{" "}
                   <span>{summary.timeframeLine.replace(/^2Q\s*/, "")}</span>
-                </p>
+                </>
               ) : null}
+            </p>
+          </div>
+
+          <div className="hidden space-y-4 lg:block">
+            <div className="space-y-1.5">
+              <p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.12em] text-dashboard-ink-muted/75">
+                Strategic role
+              </p>
+              <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light/90">
+                {"strategicRole" in summary ? summary.strategicRole : ""}
+              </p>
+            </div>
+            <div className="space-y-1.5">
+              <p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.12em] text-dashboard-ink-muted/75">
+                Scale
+              </p>
+              <div
+                className="rounded-md border border-accent-signal/14 px-2.5 py-1.5"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(14,13,12,0.88) 0%, rgba(10,10,9,0.9) 70%, rgba(34,211,199,0.04) 100%)",
+                  boxShadow: "inset 0 1px 0 rgba(232,230,226,0.03)",
+                }}
+              >
+                {"buildLine" in summary && summary.buildLine ? (
+                  <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light">
+                    {scaleParts.prefix ? (
+                      <span className="font-semibold text-white">{scaleParts.prefix}</span>
+                    ) : null}
+                    <span>{scaleParts.body}</span>
+                  </p>
+                ) : null}
+              </div>
+            </div>
+            <div className="space-y-1.5">
+              <p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.12em] text-dashboard-ink-muted/75">
+                Speed
+              </p>
+              <div
+                className="rounded-md border border-accent-signal/14 px-2.5 py-1.5"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(14,13,12,0.88) 0%, rgba(10,10,9,0.9) 70%, rgba(34,211,199,0.04) 100%)",
+                  boxShadow: "inset 0 1px 0 rgba(232,230,226,0.03)",
+                }}
+              >
+                {"timeframeLine" in summary && summary.timeframeLine ? (
+                  <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light">
+                    <span className="font-semibold text-white">2Q </span>
+                    <span>{summary.timeframeLine.replace(/^2Q\s*/, "")}</span>
+                  </p>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>

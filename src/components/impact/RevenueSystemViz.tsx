@@ -27,12 +27,12 @@ function TierSystemCue() {
 
 /**
  * Mobile-only: appears AFTER ImpactSystemSummary (Autodesk framing + impact).
- * Bridge + tier labels + exploration prompt — no duplicate title/metrics.
+ * Bridge + tier labels + exploration prompt, no duplicate title/metrics.
  */
 function MobileTierExplorationGate() {
   const v = revenueVizCopy;
   return (
-    <div className="space-y-5 border-t border-white/[0.1] pt-6 lg:hidden">
+    <div className="space-y-3 border-t border-white/[0.1] pt-4 lg:hidden">
       <p className="px-1 text-center font-body text-[0.6875rem] font-medium leading-relaxed text-[rgba(210,208,202,0.9)]">
         {v.transitionLine}
       </p>
@@ -88,6 +88,7 @@ export function RevenueSystemViz({
       role="img"
       aria-label="Autodesk revenue: projected AOV impact and three plan tiers with innovated, optimized, and refined service units"
       onMouseLeave={(e) => {
+        if (typeof window !== "undefined" && !window.matchMedia("(hover: hover)").matches) return;
         const next = e.relatedTarget;
         if (next instanceof Node && e.currentTarget.contains(next)) return;
         scheduleResetToBusiness();
@@ -99,7 +100,7 @@ export function RevenueSystemViz({
       </div>
 
       {/* Tier cue (desktop) + bridge to plans (mobile) + plan stack */}
-      <div className="order-2 flex min-h-0 flex-1 flex-col gap-3 px-0.5 min-[380px]:gap-3 sm:gap-3 sm:px-1 lg:gap-2">
+      <div className="order-2 flex min-h-0 flex-1 flex-col gap-3 px-0.5 min-[380px]:gap-3 sm:gap-3 sm:px-1 lg:gap-1.5">
         <div className="hidden lg:block">
           <TierSystemCue />
         </div>
@@ -116,7 +117,7 @@ export function RevenueSystemViz({
             key={tier}
             className={
               hoveredTier === tier
-                ? "flex min-h-0 min-w-0 flex-1 flex-col"
+                ? "flex min-h-0 min-w-0 flex-col max-lg:flex-1 max-lg:basis-0 max-lg:overflow-hidden lg:flex-none lg:overflow-visible"
                 : "flex shrink-0 flex-col"
             }
           >

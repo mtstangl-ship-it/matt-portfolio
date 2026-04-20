@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Section } from "@/components/ui/Section";
+import { PageHero, Section, SiteGrid } from "@/components/ui";
 import { signalStoryCopy, signalStoryPageVideos } from "@/content/signal-story";
 import { YouTubeInline } from "@/components/home-sections/YouTubeInline";
 
@@ -16,22 +16,22 @@ export default function SignalStoryPage() {
   const finale = rest[4];
 
   return (
-    <div className="min-h-screen bg-[#070605]">
-      <div className="border-b border-white/[0.06] px-4 py-10 sm:px-6 sm:py-12">
-        <div className="mx-auto max-w-6xl">
-          <p className="font-mono text-[0.58rem] font-bold uppercase tracking-[0.2em] text-accent/90">
-            {signalStoryCopy.title}
-          </p>
-          <p className="font-body mt-4 max-w-3xl text-[1.0625rem] font-semibold leading-relaxed text-[rgba(232,230,226,0.92)] md:text-[1.125rem]">
-            {signalStoryCopy.intro}
-          </p>
-          <p className="mt-6 font-mono text-[0.5rem] font-medium uppercase tracking-[0.14em] text-[rgba(180,176,170,0.45)]">
-            <Link href="/" className="text-accent/80 transition-colors hover:text-accent">
-              ← Home
-            </Link>
-          </p>
-        </div>
-      </div>
+    <div className="relative min-h-screen bg-[#070605]">
+      <SiteGrid tone="dark" opacity={0.6} />
+      <PageHero
+        eyebrow={signalStoryCopy.eyebrow}
+        title={signalStoryCopy.title}
+        subtitle={signalStoryCopy.intro}
+        tone="dark"
+        meta={
+          <Link
+            href="/"
+            className="font-mono text-eyebrow font-semibold uppercase tracking-[0.25em] text-accent-signal/80 transition-colors hover:text-accent-signal"
+          >
+            ← Home
+          </Link>
+        }
+      />
 
       <Section className="relative z-10 py-section">
         <div className="flex flex-col gap-8 md:gap-10 lg:gap-12">

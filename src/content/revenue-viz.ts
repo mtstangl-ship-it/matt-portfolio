@@ -1,9 +1,9 @@
 /** In-viz narrative for Autodesk revenue stage (mobile order + tier cue). */
 
 export const revenueVizCopy = {
-  transitionLine: "Built through a tiered service model across three packaged success plans.",
+  transitionLine: "Three packaged success plans — tap a row to open the stack.",
   /** Shown above plan rows on mobile after the bridge line */
-  explorePrompt: "Explore the plan structure",
+  explorePrompt: "Open each plan to see innovated · optimized · refined",
   tierCue: {
     kicker: "Tiered service model",
     sub: "3 packaged success plans",

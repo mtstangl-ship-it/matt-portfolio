@@ -20,7 +20,7 @@ const signalDots: [number, number][] = [
   [145, 8],
 ];
 
-// Phase 2: Network formation — dots converge toward these positions
+// Phase 2: Network formation, dots converge toward these positions
 const networkPositions: [number, number][] = [
   [55, 16],
   [95, 14],
@@ -32,7 +32,7 @@ const networkPositions: [number, number][] = [
   [135, 17],
 ];
 
-// Phase 3: Packaging — 3 rigid blocks with gaps between
+// Phase 3: Packaging, 3 rigid blocks with gaps between
 const blockW = 52;
 const gap = 26;
 const blocks = [
@@ -61,7 +61,7 @@ function nearestBlockCenter(i: number): [number, number] {
   return best;
 }
 
-// Slight offset per dot so they don't all overlap — forms a tight cluster
+// Slight offset per dot so they don't all overlap, forms a tight cluster
 const clusterOffsets: [number, number][] = [
   [-1.5, 0], [1, -0.5], [-1, 0.5], [1.5, 0], [-0.5, 0.5], [0, 0], [1, 0.5], [-0.5, -0.5],
 ];
@@ -71,7 +71,7 @@ const clusterTargets = signalDots.map((_, i) => {
   return [cx + ox, cy + oy] as [number, number];
 });
 
-// Labels — x as % to align with block centers
+// Labels, x as % to align with block centers
 const labels = [
   { x: (24 + blockW / 2) / 240, label: "Signals" },
   { x: (24 + blockW + gap + blockW / 2) / 240, label: "Offering" },
@@ -86,7 +86,7 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
         className="min-h-0 flex-1"
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* Phase 1–2: Connecting lines — form network, fade as dots cluster */}
+        {/* Phase 1–2: Connecting lines, form network, fade as dots cluster */}
         {[
           [0, 2], [1, 2], [2, 4], [3, 4], [4, 5], [4, 6], [5, 7], [2, 7],
         ].map(([a, b], i) => {
@@ -120,7 +120,7 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
           );
         })}
 
-        {/* Phase 3–4: Blocks — fade in as dots cluster, then growth */}
+        {/* Phase 3–4: Blocks, fade in as dots cluster, then growth */}
         {blocks.map((block, i) => (
           <motion.rect
             key={i}
@@ -153,7 +153,7 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
           />
         ))}
 
-        {/* Phase 1–3: Signal dots — scattered → network → cluster → crossfade to blocks */}
+        {/* Phase 1–3: Signal dots, scattered → network → cluster → crossfade to blocks */}
         {signalDots.map(([sx, sy], i) => {
           const [nx, ny] = networkPositions[i] ?? [sx, sy];
           const [tx, ty] = clusterTargets[i];

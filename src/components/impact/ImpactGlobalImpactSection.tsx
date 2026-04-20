@@ -81,7 +81,7 @@ export function ImpactGlobalImpactSection() {
               })}
             </div>
             <p className="mt-2 font-body text-[0.75rem] font-bold leading-[1.5] text-dashboard-ink-muted/90">
-              Toggle the outcome lens—watch the system map re-instrument.
+              Toggle the outcome lens, watch the system map re-instrument.
             </p>
             <motion.p
               key={mode}

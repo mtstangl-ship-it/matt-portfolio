@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const inputs = 6;
 const cols = 3;
 
-// Input nodes — scattered, suggesting distinct sources
+// Input nodes, scattered, suggesting distinct sources
 function getInputCoords(i: number) {
   const col = i % cols;
   const row = Math.floor(i / cols);
@@ -70,7 +70,7 @@ export function TowerConvergenceViz({ isHovered = false }: { isHovered?: boolean
                 }}
               />
 
-              {/* Flow indicator — only when hovered */}
+              {/* Flow indicator, only when hovered */}
               {isHovered && (
                 <motion.circle
                   r={2.8}

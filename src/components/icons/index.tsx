@@ -2,7 +2,7 @@
 
 const iconClass = "stroke-current stroke-[1.5] fill-none";
 const viewBox = "0 0 24 24";
-/** Intrinsic size if Tailwind/CSS fails to load (e.g. embedded browsers) — classes still scale when CSS applies. */
+/** Intrinsic size if Tailwind/CSS fails to load (e.g. embedded browsers), classes still scale when CSS applies. */
 const svgSize = { width: 24, height: 24 } as const;
 
 export function JourneyArchitectureIcon({ className = "" }: { className?: string }) {

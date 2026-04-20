@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/Section";
+import { SiteGrid } from "@/components/ui/SiteGrid";
 import { JourneyArchitectureIcon } from "@/components/icons";
 import { HeroCanvasLazy } from "./HeroCanvasLazy";
 import { hero } from "@/content/home";
@@ -9,6 +10,8 @@ export function Hero() {
       container={false}
       className="relative isolate overflow-hidden border-b border-dashboard-border/90 bg-dashboard-bg pb-4 sm:pb-5 lg:min-h-[min(92vh,780px)]"
     >
+      {/* Shared grid DNA, keeps the home hero on the same graph paper as About + Impact. */}
+      <SiteGrid tone="dark" opacity={0.55} />
       {/* Soft transition into light sections */}
       <div
         className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-accent-signal/[0.04] via-accent-signal/[0.015] to-transparent"
@@ -18,15 +21,15 @@ export function Hero() {
       <div className="flex flex-col lg:relative lg:min-h-[min(92vh,780px)]">
         <div className="relative z-10 order-1 bg-dashboard-bg px-4 pt-6 pb-5 sm:px-6 sm:pt-section sm:pb-8 lg:order-2 lg:absolute lg:inset-0 lg:z-10 lg:flex lg:items-center lg:bg-transparent lg:pb-0 lg:pt-0">
           <div className="mx-auto grid w-full max-w-6xl grid-cols-1 lg:grid-cols-[minmax(0,26rem),1fr] lg:items-center lg:gap-16">
-            <div className="flex w-full max-w-[min(18rem,100%)] flex-col sm:max-w-[20rem] lg:max-w-[22rem]">
-              <p className="mb-3 flex items-center gap-2 font-body text-[0.625rem] font-medium uppercase leading-[1.2] tracking-[0.14em] text-dashboard-ink-light/85 sm:mb-3.5 sm:gap-2.5 sm:text-[0.6875rem]">
+            <div className="flex w-full max-w-[min(20rem,100%)] flex-col sm:max-w-[22rem] lg:max-w-[26rem]">
+              <p className="mb-3 flex items-center gap-2 font-mono text-[0.625rem] font-semibold uppercase leading-[1.2] tracking-[0.25em] text-accent-signal sm:mb-3.5 sm:gap-2.5">
                 <JourneyArchitectureIcon className="h-4 w-4 shrink-0 text-accent-signal/75" aria-hidden />
                 {hero.tagline}
               </p>
-              <h1 className="mb-4 font-display text-[clamp(1.25rem,3.2vw,1.5625rem)] font-semibold leading-[1.22] tracking-[-0.02em] text-dashboard-ink-light sm:mb-5">
+              <h1 className="mb-4 font-display text-[clamp(1.5rem,3.6vw,1.875rem)] font-semibold leading-[1.18] tracking-[-0.025em] text-dashboard-ink-light sm:mb-5">
                 {hero.headline}
               </h1>
-              <p className="max-w-[min(16.5rem,100%)] font-body text-[0.8125rem] font-normal leading-[1.55] tracking-[0.01em] text-dashboard-ink-muted/90">
+              <p className="max-w-[min(22rem,100%)] font-body text-subhead font-normal leading-[1.55] tracking-[0.01em] text-dashboard-ink-muted/90">
                 {hero.subhead}
               </p>
             </div>

@@ -45,7 +45,7 @@ function TelemetryLine({
 export function ImpactMicroReadouts() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 z-[5] hidden lg:block">
-      {/* Top-left corner only — clear of metrics panel (10rem) */}
+      {/* Top-left corner only, clear of metrics panel (10rem) */}
       <div
         className="absolute left-[0.5rem] top-[0.4rem]"
         style={{ opacity: 0.12 }}
@@ -53,7 +53,7 @@ export function ImpactMicroReadouts() {
         <TelemetryLine items={telemetryReadouts.metrics} />
       </div>
 
-      {/* Top-right corner — near engine */}
+      {/* Top-right corner, near engine */}
       <div
         className="absolute right-[0.5rem] top-[0.4rem]"
         style={{ opacity: 0.12 }}
@@ -61,7 +61,7 @@ export function ImpactMicroReadouts() {
         <TelemetryLine items={telemetryReadouts.engine} />
       </div>
 
-      {/* Bottom center — above readout strip, out of narrative flow */}
+      {/* Bottom center, above readout strip, out of narrative flow */}
       <div
         className="absolute bottom-[3rem] left-[50%] -translate-x-1/2"
         style={{ opacity: 0.1 }}

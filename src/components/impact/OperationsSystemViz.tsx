@@ -56,9 +56,9 @@ export function OperationsSystemViz() {
         viewBox="0 0 400 280"
         className="absolute inset-0 h-full w-full"
         preserveAspectRatio="xMidYMid meet"
-        aria-label="Operations system — continuous flow loop"
+        aria-label="Operations system, continuous flow loop"
       >
-        {/* Loop connection path — faint */}
+        {/* Loop connection path, faint */}
         <motion.path
           d={loopPath}
           fill="none"
@@ -82,7 +82,7 @@ export function OperationsSystemViz() {
           }}
         />
 
-        {/* Flowing markers — discrete positions (avoids offset-path browser gaps) */}
+        {/* Flowing markers, discrete positions (avoids offset-path browser gaps) */}
         {!reducedMotion &&
           [
             { cx: 200, cy: 50, d: 0 },
@@ -183,7 +183,7 @@ export function OperationsSystemViz() {
           );
         })}
 
-        {/* Center dot — flow convergence */}
+        {/* Center dot, flow convergence */}
         <motion.circle
           cx={200}
           cy={140}

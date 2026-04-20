@@ -4,7 +4,7 @@ export const impactPage = {
   hero: {
     headline: "Impact across transformation systems",
     subhead:
-      "Revenue lift, operational performance, and healthcare outcomes—proven through journey-led design across Autodesk, Wipro, and EY.",
+      "Revenue lift, operational performance, and healthcare outcomes, proven through journey-led design across Autodesk, Wipro, and EY.",
   },
   globalImpact: {
     headline: "Global impact, instrumented",
@@ -74,7 +74,7 @@ export const impactPage = {
     } as const,
     methodsHeadline: "How methods connect to outcomes",
     methodsSubhead:
-      "Not dashboards for dashboards’ sake—this proof layer shows the architecture behind the results.",
+      "Not dashboards for dashboards’ sake, this proof layer shows the architecture behind the results.",
     methods: [
       {
         title: "Journey architecture",
@@ -94,7 +94,7 @@ export const impactPage = {
       {
         title: "Research & co-creation",
         body:
-          "Validate with the people living the journey—then prototype with partners to reduce risk before scale.",
+          "Validate with the people living the journey, then prototype with partners to reduce risk before scale.",
       },
       {
         title: "Prototype builds",

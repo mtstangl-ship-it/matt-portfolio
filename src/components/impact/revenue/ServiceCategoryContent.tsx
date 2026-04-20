@@ -40,7 +40,7 @@ function refinedGap(tier: TierKey): string {
   return "0.44rem";
 }
 
-/** Optimized rest offsets — looser at rest so compression reads clearly. */
+/** Optimized rest offsets, looser at rest so compression reads clearly. */
 function subtleRestRaw(i: number): { x: number; y: number; rotate: number } {
   const seeds = [
     { x: -1.15, y: 0.72, rotate: -0.32 },
@@ -73,9 +73,7 @@ export function ServiceCategoryContent({ kind, tier, count, hovered }: Props) {
 
   if (count <= 0) {
     return (
-      <div className="flex min-h-[3rem] w-full items-center justify-center text-[length:clamp(0.5625rem,1.5vw,0.6875rem)] uppercase tracking-[0.18em] text-white/25">
-        —
-      </div>
+      <div className="flex min-h-[3rem] w-full items-center justify-center text-[length:clamp(0.5625rem,1.5vw,0.6875rem)] uppercase tracking-[0.18em] text-white/25">, </div>
     );
   }
 
@@ -121,7 +119,7 @@ function InnovatedGrid({
   const pill = pillClassFor("innovated");
 
   return (
-    <div className={`relative h-full w-full overflow-hidden ${shell}`}>
+    <div className={`relative h-full min-h-0 w-full overflow-hidden ${shell}`}>
       {items.map((i) => (
         <InnovatedBlock
           key={i}
@@ -166,7 +164,7 @@ function InnovatedBlock({
 
   return (
     <div className={`relative overflow-hidden ${pill}`}>
-      {/* Solid fill — builds in after stroke draws */}
+      {/* Solid fill, builds in after stroke draws */}
       <motion.div
         className="absolute inset-0 rounded-[4px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
         initial={false}
@@ -195,7 +193,7 @@ function InnovatedBlock({
         }}
       />
 
-      {/* Draft / outline — strong at rest; clears as build completes */}
+      {/* Draft / outline, strong at rest; clears as build completes */}
       <motion.div
         className="pointer-events-none absolute inset-0 rounded-[4px] border border-dashed border-accent-signal"
         aria-hidden
@@ -315,7 +313,7 @@ function OptimizedGrid({
 
   if (items.length === 4) {
     return (
-      <div className={`relative h-full w-full overflow-hidden ${shell}`}>
+      <div className={`relative h-full min-h-0 w-full overflow-hidden ${shell}`}>
         <div
           className={`mx-auto inline-grid grid-cols-2 grid-rows-2 justify-items-center place-content-center rounded-[6px] ring-1 transition-[padding,box-shadow] duration-300 ease-out ${
             hovered
@@ -337,7 +335,7 @@ function OptimizedGrid({
 
   return (
     <div
-      className={`relative h-full w-full overflow-hidden ${shell}`}
+      className={`relative h-full min-h-0 w-full overflow-hidden ${shell}`}
       style={{
         gap: gapEndRow,
         transition: reduceMotion ? undefined : optGapTransition,
@@ -374,7 +372,7 @@ function RefinedGrid({
 
   return (
     <div
-      className={`relative h-full w-full overflow-hidden ${shell}`}
+      className={`relative h-full min-h-0 w-full overflow-hidden ${shell}`}
       style={{
         gap,
         transition: reduceMotion ? undefined : `gap 0.35s ease`,

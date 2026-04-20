@@ -1,8 +1,8 @@
 export const hero = {
-  tagline: "From fragmentation to flow",
+  tagline: "CX · Product · Service transformation",
   headline: "I lead CX, product, and service transformation.",
   subhead:
-    "Journey architecture and service modernization that reduce effort, improve resolution, and turn fragmentation into flow.",
+    "For enterprises where experience has splintered across teams, channels, and systems. I rebuild it as one operating model that actually ships.",
   proofStrip: [
     "Autodesk",
     "Wipro",
@@ -24,7 +24,7 @@ export const clientTicker = [
 export const brandThesis = {
   headline: "Experience isn't one moment. It's the whole journey.",
   body: [
-    "Most organizations fix touchpoints in isolation — fragmented experiences, frustrated customers, wasted effort.",
+    "Most organizations fix touchpoints in isolation, fragmented experiences, frustrated customers, wasted effort.",
     "I work at the system level: mapping journeys, aligning teams, designing services that flow. Outcomes that compound.",
   ],
 };

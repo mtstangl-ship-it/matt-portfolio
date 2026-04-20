@@ -3,12 +3,12 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ImpactOutcomeMode } from "@/content/impact-page";
 
-// Wave paths with increased amplitude — musical, flowing curves
+// Wave paths with increased amplitude, musical, flowing curves
 const wavePaths = [
   "M 0 138 C 90 110, 190 168, 300 138 C 410 108, 520 168, 640 138 C 760 108, 870 168, 980 138 C 1085 114, 1180 164, 1280 140",
   "M 0 172 C 120 148, 220 204, 332 172 C 440 144, 548 208, 660 176 C 772 148, 884 208, 998 176 C 1108 152, 1196 206, 1280 180",
   "M 0 206 C 100 186, 206 232, 320 206 C 432 180, 540 234, 656 208 C 772 182, 880 236, 996 210 C 1112 184, 1208 230, 1280 214",
-  // Deeper layer — lower, softer, for depth
+  // Deeper layer, lower, softer, for depth
   "M 0 248 C 110 222, 200 268, 310 244 C 420 220, 530 266, 640 242 C 750 218, 860 264, 970 240 C 1080 218, 1170 260, 1280 250",
 ];
 
@@ -33,7 +33,7 @@ export function ImpactSignalFieldBackground({ mode }: { mode: ImpactOutcomeMode 
         }}
       />
 
-      {/* Soft signal texture — subtle grain */}
+      {/* Soft signal texture, subtle grain */}
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
@@ -43,7 +43,7 @@ export function ImpactSignalFieldBackground({ mode }: { mode: ImpactOutcomeMode 
         }}
       />
 
-      {/* Primary wave layers — front to back for depth */}
+      {/* Primary wave layers, front to back for depth */}
       <svg viewBox="0 0 1280 360" className="absolute inset-x-0 top-[6%] h-[55%] w-full blur-[0.3px]">
         {wavePaths.slice(0, 3).map((d, i) => {
           const baseOpacity = (0.10 - i * 0.02) * strength;
@@ -83,7 +83,7 @@ export function ImpactSignalFieldBackground({ mode }: { mode: ImpactOutcomeMode 
         })}
       </svg>
 
-      {/* Deep wave layer — back, softer, parallax depth */}
+      {/* Deep wave layer, back, softer, parallax depth */}
       <svg viewBox="0 0 1280 360" className="absolute inset-x-0 top-[18%] h-[48%] w-full blur-[0.8px]">
         {wavePaths.slice(3, 4).map((d) => (
           <motion.g
@@ -112,7 +112,7 @@ export function ImpactSignalFieldBackground({ mode }: { mode: ImpactOutcomeMode 
         ))}
       </svg>
 
-      {/* Slow baseline sweep — living signal floor */}
+      {/* Slow baseline sweep, living signal floor */}
       <motion.div
         className="absolute inset-x-0 bottom-[18%] h-[1px] bg-gradient-to-r from-transparent via-accent-signal/45 to-transparent"
         initial={false}

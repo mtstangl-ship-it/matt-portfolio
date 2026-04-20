@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CaseStudyIntelPanel } from "@/components/case-studies";
+import { PageHero, SiteGrid } from "@/components/ui";
 import { caseStudiesPage, caseStudyEntries } from "@/content/case-studies";
 
 export const metadata: Metadata = {
@@ -11,17 +12,16 @@ export default function CaseStudiesIndexPage() {
   const [featured, ...supporting] = caseStudyEntries;
 
   return (
-    <div className="min-h-screen bg-paper-50">
-      <div className="border-b border-ink-200/60 bg-support/30 px-4 py-10 sm:px-6 sm:py-12">
-        <div className="mx-auto max-w-6xl">
-          <h1 className="font-display text-3xl font-bold text-ink-950 sm:text-4xl">{caseStudiesPage.title}</h1>
-          <p className="font-body mt-3 max-w-2xl text-subhead font-semibold leading-relaxed text-ink-700">
-            {caseStudiesPage.subhead}
-          </p>
-        </div>
-      </div>
+    <div className="relative min-h-screen bg-paper-50">
+      <SiteGrid tone="light" opacity={0.3} />
+      <PageHero
+        eyebrow={caseStudiesPage.eyebrow}
+        title={caseStudiesPage.title}
+        subtitle={caseStudiesPage.subhead}
+        tone="light"
+      />
 
-      <div className="mx-auto max-w-6xl px-4 py-section sm:px-6">
+      <div className="relative mx-auto max-w-6xl px-4 py-section sm:px-6">
         {featured ? (
           <div className="mb-5 md:mb-6">
             <CaseStudyIntelPanel entry={featured} mode="pageFeatured" />

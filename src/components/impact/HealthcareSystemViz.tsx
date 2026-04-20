@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const accent = "#22d3c7";
 
-// Simplified Georgia outline — minimal, not cartographically precise
+// Simplified Georgia outline, minimal, not cartographically precise
 // Rough shape: top diagonal (TN/NC border), right (SC), southeast coast, southwest corner
 const georgiaOutline =
   "M 180 45 L 310 55 L 345 95 L 340 180 L 300 245 L 200 250 L 95 220 L 55 150 L 70 80 Z";
@@ -50,7 +50,7 @@ export function HealthcareSystemViz() {
         viewBox="0 0 400 280"
         className="absolute inset-0 h-full w-full"
         preserveAspectRatio="xMidYMid meet"
-        aria-label="Healthcare access — Georgia engagement map"
+        aria-label="Healthcare access, Georgia engagement map"
       >
         {/* Georgia outline */}
         <motion.path
@@ -173,7 +173,7 @@ export function HealthcareSystemViz() {
         })}
       </svg>
 
-      {/* Hover overlay — shared metrics for any metro */}
+      {/* Hover overlay, shared metrics for any metro */}
       <AnimatePresence>
         {hoveredMetro && (
           <motion.div

@@ -1,5 +1,5 @@
 /**
- * GalaxyBackground — fixed, viewport-wide deep-space field.
+ * GalaxyBackground, fixed, viewport-wide deep-space field.
  *
  * Mounted once at the root of the About page. Renders:
  * - Layered nebula gradient (very subtle teal / indigo)
@@ -53,7 +53,7 @@ const KEYFRAMES = `
 }
 `;
 
-/** Deterministic star field — tuned for even spatial distribution. */
+/** Deterministic star field, tuned for even spatial distribution. */
 const GALAXY_STARS: Array<{
   x: number;
   y: number;
@@ -123,7 +123,7 @@ export function GalaxyBackground() {
         }}
       />
 
-      {/* Nebula blobs — very soft */}
+      {/* Nebula blobs, very soft */}
       <div
         className="absolute"
         style={{
@@ -161,6 +161,21 @@ export function GalaxyBackground() {
             "radial-gradient(circle at 50% 50%, rgba(34,211,199,0.05) 0%, transparent 70%)",
           animation: "galaxy-drift-a 44s ease-in-out infinite reverse",
           filter: "blur(60px)",
+        }}
+      />
+
+      {/* Technical grid, same 10px/12px rhythm used sitewide so About reads as
+          drawn on the same graph paper as Impact, Case Studies, Contact. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.45]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, rgba(232,230,226,0.06) 0px, rgba(232,230,226,0.06) 1px, transparent 1px, transparent 10px), repeating-linear-gradient(90deg, rgba(232,230,226,0.04) 0px, rgba(232,230,226,0.04) 1px, transparent 1px, transparent 12px)",
+          maskImage:
+            "radial-gradient(ellipse at 50% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 55%, rgba(0,0,0,0.3) 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at 50% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 55%, rgba(0,0,0,0.3) 100%)",
         }}
       />
 
@@ -218,7 +233,7 @@ export function GalaxyBackground() {
         />
       ))}
 
-      {/* Shooting stars — three staggered */}
+      {/* Shooting stars, three staggered */}
       <ShootingStar top="15%" animation="galaxy-shoot-a" duration="18s" delay="3s" length={180} />
       <ShootingStar top="44%" animation="galaxy-shoot-b" duration="24s" delay="9s" length={150} />
       <ShootingStar top="78%" animation="galaxy-shoot-c" duration="32s" delay="18s" length={130} />

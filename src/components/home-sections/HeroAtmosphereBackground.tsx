@@ -3,16 +3,16 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { getPointillismPoints } from "@/lib/portraitPointillism";
 
-// Hero-scale view — big, immersive pointillism
+// Hero-scale view, big, immersive pointillism
 const VIEW_W = 2200;
 const VIEW_H = 780;
-const FACE_OFFSET_X = 160; // Portrait left of right edge — keeps full face in frame on desktop
+const FACE_OFFSET_X = 160; // Portrait left of right edge, keeps full face in frame on desktop
 const SRC_W = 1200;
 const SRC_H = 420;
 
 // Phase 1: Chaotic signal field
-// Phase 2: Map-wave / journey — intentional, legible
-// Phase 3: Pointillist portrait — resolved, held
+// Phase 2: Map-wave / journey, intentional, legible
+// Phase 3: Pointillist portrait, resolved, held
 const TOTAL_DURATION = 32;
 const CHAOS_END = 3.2;
 const FLOW_START = 5.2;     // chaos→flow transition
@@ -25,7 +25,7 @@ const PONG_BOUNDS = { x: MARGIN, y: 100, w: VIEW_W - 2 * MARGIN, h: VIEW_H - 2 *
 
 const allPoints = getPointillismPoints();
 const PORTRAIT_DOTS = Math.min(1800, Math.max(1, allPoints.length || 600));
-const AMBIENT_DOTS = 880; // Dots from off-screen — build portrait detail and silhouette
+const AMBIENT_DOTS = 880; // Dots from off-screen, build portrait detail and silhouette
 const numDots = PORTRAIT_DOTS + AMBIENT_DOTS;
 
 // Use all points; tile with deterministic jitter if we need more for denser portrait
@@ -111,7 +111,7 @@ function getPongPos(i: number, t: number): [number, number] {
   return [px, py];
 }
 
-// Journey path — smooth, intentional, legible
+// Journey path, smooth, intentional, legible
 const WAVE_X_START = 180;
 const WAVE_X_END = VIEW_W - 180;
 const WAVE_CENTER_Y = VIEW_H / 2;
@@ -144,7 +144,7 @@ function getFlowPos(i: number, elapsed?: number): [number, number] {
   return [px, py + lane * spread];
 }
 
-// Portrait center in view coords — used to center face on narrow/mobile
+// Portrait center in view coords, used to center face on narrow/mobile
 const PORTRAIT_CENTER_X = (SRC_W / 2) * (VIEW_W / SRC_W) + FACE_OFFSET_X;
 const PORTRAIT_CENTER_Y = (SRC_H / 2) * (VIEW_H / SRC_H);
 const STACKED_CANVAS_W = 680;
@@ -218,7 +218,7 @@ export function HeroAtmosphereBackground() {
       const inFlowHeld = cycle >= FLOW_START && cycle < FLOW_END;
       const inFlowPhase = cycle >= CHAOS_END + 0.3 && cycle <= PORTRAIT_START;
 
-      // Draw journey path — clean, legible
+      // Draw journey path, clean, legible
       if (inFlowHeld || (cycle >= CHAOS_END + 0.4 && cycle < FLOW_START)) {
         const fadeIn = cycle < FLOW_START ? (cycle - CHAOS_END - 0.25) / (FLOW_START - CHAOS_END - 0.25) : 1;
         const mapPhaseProgress = Math.min(1, Math.max(0, fadeIn));

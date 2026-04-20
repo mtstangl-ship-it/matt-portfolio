@@ -29,7 +29,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Matt — Service & Experience Transformation",
+  title: "Matt, Service & Experience Transformation",
   description:
     "From fragmentation to flow. Senior service design and experience transformation leader.",
 };

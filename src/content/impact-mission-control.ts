@@ -1,8 +1,11 @@
 import type { ImpactOutcomeMode } from "./impact-page";
 
 export const impactMissionControl = {
-  headline: "Impact",
+  eyebrow: "Live mission log",
+  headline: "Impact at altitude.",
   subhead: "Autodesk · Wipro · EY",
+  tagline:
+    "A live read on where the work actually registered: adoption, resolution, and revenue across enterprise service transformation.",
   modes: [
     { key: "all", label: "All" },
     { key: "revenue", label: "Revenue" },
@@ -29,7 +32,7 @@ export const impactMissionControl = {
     ],
   } as const,
 
-  /** Mode-specific floating numerals — Revenue excludes ops/health/global rollups */
+  /** Mode-specific floating numerals, Revenue excludes ops/health/global rollups */
   ambientMetricsByMode: {
     all: [
       "27%", "106%", "31%", "16k", "50M", "4.57M", "715", "10+", "30+",
@@ -70,7 +73,7 @@ export const impactMissionControl = {
       signals: ["EY activation", "EY access", "Ecosystem"],
     },
   } as const,
-  /** Primary system readout — horizontal strip metrics */
+  /** Primary system readout, horizontal strip metrics */
   readoutStrip: {
     all: [
       { value: "3", label: "systems" },
@@ -171,7 +174,7 @@ export const impactMissionControl = {
   } as const,
   systemSummary: {
     revenue: {
-      /** Shown first in the left column — above system label — so the metric is always visible without scrolling. */
+      /** Shown first in the left column, above system label, so the metric is always visible without scrolling. */
       leadMetric: {
         value: "$50M",
         label: "Incremental AOV",
@@ -180,7 +183,7 @@ export const impactMissionControl = {
       label: "AUTODESK SERVICE INNOVATION",
       /** Short system line under the title (revenue only) */
       systemContextLine:
-        "Built and scaled within a 12-month window by a net-new team that designed, automated, and improved 15+ services across three packaged success plans.",
+        "Net-new team: designed, automated, and improved 15+ services across three packaged success plans in under 12 months.",
       introLines: [] as const,
       strategicRole:
         "Designed a new post-purchase service model at a critical moment when Autodesk needed to create greater value beyond the sale. Translated fragmented service experiences into a tiered, monetized offering system that aligned Design, Product, Support, and Engineering around a more strategic growth model.",

@@ -1,5 +1,5 @@
 /**
- * AboutDecor — per-section celestial accents.
+ * AboutDecor, per-section celestial accents.
  * Each piece is a compact line-art SVG that lives in the right margin of a
  * section, reinforcing the mission metaphor without competing with content.
  *
@@ -8,7 +8,7 @@
 
 const WRAP = "text-accent-signal/35";
 
-/** Earth horizon curvature with pad gantry silhouette — section 00 (Pad). */
+/** Earth horizon curvature with pad gantry silhouette, section 00 (Pad). */
 export function DecorPad() {
   return (
     <div className={WRAP}>
@@ -70,7 +70,7 @@ export function DecorPad() {
   );
 }
 
-/** Star tracker / compass rose — section 02 (Guidance). */
+/** Star tracker / compass rose, section 02 (Guidance). */
 export function DecorGuidance() {
   return (
     <div className={WRAP}>
@@ -142,7 +142,7 @@ export function DecorGuidance() {
   );
 }
 
-/** Satellite array — section 03 (Payload). */
+/** Satellite array, section 03 (Payload). */
 export function DecorPayload() {
   return (
     <div className={WRAP}>
@@ -195,7 +195,7 @@ export function DecorPayload() {
             <circle cx="10" cy="-1" r="0.7" fill="currentColor" />
           </g>
         ))}
-        {/* Planet below — partial */}
+        {/* Planet below, partial */}
         <circle
           cx="70"
           cy="130"
@@ -210,7 +210,7 @@ export function DecorPayload() {
   );
 }
 
-/** Receiving dish + signal waves — section 04 (Telemetry). */
+/** Receiving dish + signal waves, section 04 (Telemetry). */
 export function DecorTelemetry() {
   return (
     <div className={WRAP}>
@@ -269,7 +269,7 @@ export function DecorTelemetry() {
   );
 }
 
-/** Star chart with constellation — section 05 (Operator log). */
+/** Star chart with constellation, section 05 (Operator log). */
 export function DecorOperatorLog() {
   return (
     <div className={WRAP}>
@@ -342,7 +342,7 @@ export function DecorOperatorLog() {
   );
 }
 
-/** Small payload-bay icon — for Payload cards (section 03). */
+/** Small payload-bay icon, for Payload cards (section 03). */
 export function IconSatBay() {
   return (
     <svg width="22" height="14" viewBox="0 0 22 14" aria-hidden className="text-accent-signal/80">
@@ -355,7 +355,7 @@ export function IconSatBay() {
   );
 }
 
-/** Small signal-wave icon — for Telemetry cards (section 04). */
+/** Small signal-wave icon, for Telemetry cards (section 04). */
 export function IconTelemetryChannel() {
   return (
     <svg width="22" height="14" viewBox="0 0 22 14" aria-hidden className="text-accent-signal/80">

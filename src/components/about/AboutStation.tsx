@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 type Tone = "default" | "muted" | "surface";
 
 /**
- * Translucent tones — the GalaxyBackground lives behind everything, so section
+ * Translucent tones, the GalaxyBackground lives behind everything, so section
  * surfaces are deliberately see-through. Content areas remain readable via the
  * card/border treatments inside each section.
  */
@@ -14,7 +14,7 @@ const toneClass: Record<Tone, string> = {
 };
 
 /**
- * AboutStation — section primitive for the About page.
+ * AboutStation, section primitive for the About page.
  *
  * Responsibilities:
  * - Render a section that sits above the site-wide GalaxyBackground.
@@ -33,6 +33,7 @@ export function AboutStation({
   bleed = false,
   decor,
   last = false,
+  titleAs = "h2",
 }: {
   code: string;
   kicker: string;
@@ -44,15 +45,18 @@ export function AboutStation({
   bleed?: boolean;
   /** Optional celestial accent rendered in the right margin. */
   decor?: ReactNode;
-  /** Last section — stops the spine from extending past the footer. */
+  /** Last section, stops the spine from extending past the footer. */
   last?: boolean;
+  /** Heading level for the station title. First station = h1, all others h2. */
+  titleAs?: "h1" | "h2";
 }) {
+  const TitleTag = titleAs;
   return (
     <section
       className={`relative border-b border-white/[0.05] ${toneClass[tone]} px-4 py-16 sm:px-6 sm:py-24`}
     >
       <div className="mx-auto flex w-full max-w-6xl gap-6 sm:gap-8 lg:gap-12">
-        {/* Left gutter — continuous spine + station node + tag */}
+        {/* Left gutter, continuous spine + station node + tag */}
         <div className="relative hidden w-14 shrink-0 flex-col items-start sm:flex lg:w-20">
           {/* Full-height spine (butts against next section's spine) */}
           <span
@@ -97,16 +101,24 @@ export function AboutStation({
           </div>
 
           <div className="relative">
-            <h2 className="max-w-[38ch] font-display text-[clamp(1.35rem,3vw,1.75rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-white">
+            <TitleTag
+              className={
+                titleAs === "h1"
+                  ? // Hero station, page h1. Larger, closer to PageHero's hero-tight scale
+                    // but kept expressive with uppercase display treatment to preserve About's tone.
+                    "max-w-[24ch] font-display text-hero-tight font-semibold leading-[1.05] tracking-[-0.03em] text-white"
+                  : "max-w-[38ch] font-display text-[clamp(1.35rem,3vw,1.75rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-white"
+              }
+            >
               {title}
-            </h2>
+            </TitleTag>
             {subtitle ? (
-              <p className="mt-4 max-w-[58ch] font-body text-[0.9375rem] leading-[1.6] text-dashboard-ink-muted">
+              <p className="mt-4 max-w-[52ch] font-body text-subhead font-semibold leading-relaxed text-dashboard-ink-muted">
                 {subtitle}
               </p>
             ) : null}
 
-            {/* Right-margin decor — hidden below lg so content breathes on mobile */}
+            {/* Right-margin decor, hidden below lg so content breathes on mobile */}
             {decor ? (
               <div className="pointer-events-none absolute -right-4 -top-4 hidden lg:block">
                 {decor}

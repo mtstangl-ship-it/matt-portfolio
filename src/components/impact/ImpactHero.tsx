@@ -62,7 +62,7 @@ export function ImpactHero() {
                 Executive proof layer
               </p>
               <p className="mt-2 font-body text-[0.8125rem] font-bold leading-[1.55] text-dashboard-ink-muted">
-                Instrumented outcomes from three transformations—designed to be shown, not just explained.
+                Instrumented outcomes from three transformations, designed to be shown, not just explained.
               </p>
             </div>
 

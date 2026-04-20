@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { aboutPage } from "@/content/about";
 
 /**
- * Subtle full-height wash — one fuselage silhouette, doesn’t fight text for scale.
+ * Subtle full-height wash, one fuselage silhouette, doesn’t fight text for scale.
  */
 function RocketFuselageBackdrop() {
   return (
@@ -54,7 +54,7 @@ function RocketFuselageBackdrop() {
   );
 }
 
-/** Small rhombus — title only so clip never fights paragraphs and grids. */
+/** Small rhombus, title only so clip never fights paragraphs and grids. */
 function DiamondTitleBadge({ children }: { children: ReactNode }) {
   return (
     <div className="mx-auto flex w-full max-w-[13.5rem] justify-center sm:max-w-[15rem]">
@@ -72,7 +72,7 @@ function DiamondTitleBadge({ children }: { children: ReactNode }) {
   );
 }
 
-/** All dense copy lives here — full-width rectangle, predictable reading order. */
+/** All dense copy lives here, full-width rectangle, predictable reading order. */
 function ContentPanel({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div
@@ -129,7 +129,7 @@ export function AboutDoubleDiamondRocket() {
         <RocketFuselageBackdrop />
 
         <div className="relative z-10 flex flex-col gap-10 sm:gap-12">
-          {/* A — same width as content panel */}
+          {/* A, same width as content panel */}
           <div className="rounded-lg border border-white/[0.12] bg-dashboard-card/85 px-4 py-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
             <div className="flex items-baseline gap-3">
               <span className="font-mono text-[0.55rem] font-bold text-accent-signal">A</span>
@@ -137,7 +137,7 @@ export function AboutDoubleDiamondRocket() {
             </div>
           </div>
 
-          {/* Diamond 1 — badge + panel */}
+          {/* Diamond 1, badge + panel */}
           <div className="flex flex-col gap-5">
             <DiamondTitleBadge>{m.leftDiamondTitle}</DiamondTitleBadge>
 
@@ -214,7 +214,7 @@ export function AboutDoubleDiamondRocket() {
                       ↻
                     </span>
                     <p className="font-mono text-[0.65rem] leading-relaxed text-dashboard-ink-muted sm:text-[0.6875rem]">
-                      Iteration loop across implementation—prototype, learn, build, release.
+                      Iteration loop across implementation, prototype, learn, build, release.
                     </p>
                   </div>
                 </div>

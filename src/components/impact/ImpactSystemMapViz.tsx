@@ -84,7 +84,7 @@ export function ImpactSystemMapViz({ mode }: { mode: ImpactOutcomeMode }) {
             return <circle key={`halo-${mk}`} cx={x} cy={y} r={24} fill="none" stroke="rgba(34,211,199,0.25)" strokeWidth={1} />;
           })}
         </g>
-        {/* Connections — thicker, higher contrast */}
+        {/* Connections, thicker, higher contrast */}
         <g>
           {lines.map((l) => (
             <motion.path

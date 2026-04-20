@@ -15,7 +15,7 @@ const microPaths: { d: string; systems: ("revenue" | "operations" | "healthcare"
   { d: "M 680 120 L 780 120", systems: ["revenue", "operations", "healthcare"] },
 ];
 
-/** Floating dot positions (x%, y%) — margins only, clear of metrics/viz/engine */
+/** Floating dot positions (x%, y%), margins only, clear of metrics/viz/engine */
 const floatingDots: { x: number; y: number; size: number; delay: number }[] = [
   { x: 3, y: 20, size: 1, delay: 0 },
   { x: 97, y: 25, size: 1.2, delay: 0.8 },

@@ -49,7 +49,7 @@ export function CategoryServiceBox({
 
   return (
     <div
-      className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-md border border-accent-signal/38 bg-black/[0.22] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+      className="relative flex h-full min-h-0 min-w-0 flex-col overflow-hidden rounded-md border border-accent-signal/38 bg-black/[0.22] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
       onMouseEnter={() => setCardHovered(true)}
       onMouseLeave={() => setCardHovered(false)}
     >
@@ -75,12 +75,12 @@ export function CategoryServiceBox({
         </span>
       </div>
       <div
-        className={`relative min-h-0 flex-1 overflow-hidden ${
+        className={`relative flex min-h-0 flex-1 flex-col overflow-hidden ${
           compact ? "p-2 sm:p-2.5" : "p-2 sm:p-2.5 md:p-3"
         }`}
       >
-        {/* Local stage: pills animate only here; clipped to card */}
-        <div className="relative h-full min-h-0 w-full overflow-hidden">
+        {/* Pills need a floor on touch; on lg, flex-1 + min-h fills the grid row without h-full collapsing to 0 */}
+        <div className="relative flex min-h-[8.5rem] w-full min-w-0 flex-1 flex-col overflow-hidden lg:min-h-0">
           <ServiceCategoryContent kind={kind} tier={tier} count={count} hovered={animationActive} />
         </div>
       </div>

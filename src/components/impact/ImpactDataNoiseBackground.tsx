@@ -17,7 +17,7 @@ const positions: { left: string; top: string; size: number; delay: number; drift
   { left: "76%", top: "94%", size: 0.28, delay: 1.4, drift: 3 },
 ];
 
-/** Faint grid lines — edges only, avoid content areas */
+/** Faint grid lines, edges only, avoid content areas */
 const lines = [
   { type: "h" as const, top: "4%", left: "0%", width: "100%", delay: 0 },
   { type: "h" as const, top: "92%", left: "0%", width: "100%", delay: 2 },
