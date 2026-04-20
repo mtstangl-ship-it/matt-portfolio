@@ -47,7 +47,7 @@ export default function CaseStudyDetailPage({ params }: Props) {
           {entry.body.map((p, i) => (
             <p
               key={i}
-              className="font-body text-body-lg leading-[1.65] text-ink-800"
+              className=" text-body-lg leading-[1.65] text-ink-800"
             >
               {p}
             </p>

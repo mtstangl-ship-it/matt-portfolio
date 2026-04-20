@@ -164,7 +164,7 @@ export function HealthcareSystemViz() {
                 x={metro.cx}
                 y={metro.cy + 20}
                 textAnchor="middle"
-                className="font-body text-[0.4375rem] font-semibold uppercase tracking-wider fill-dashboard-ink-muted"
+                className=" text-[0.4375rem] font-semibold uppercase tracking-wider fill-dashboard-ink-muted"
               >
                 {metro.label}
               </text>
@@ -186,7 +186,7 @@ export function HealthcareSystemViz() {
               boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
             }}
           >
-            <p className="font-body text-[0.625rem] font-bold uppercase tracking-wider text-accent-signal">
+            <p className=" text-[0.625rem] font-bold uppercase tracking-wider text-accent-signal">
               {metroData[hoveredMetro].label} · Engagement
             </p>
             <ul className="mt-1 space-y-0.5">

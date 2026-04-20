@@ -73,7 +73,7 @@ export function ImpactMetricInstrument({ mode, metrics }: { mode: string; metric
           <p className="font-mono text-[1.2rem] font-bold tabular-nums leading-none text-dashboard-ink-light">
             <AnimatedMetricValue value={m.value} />
           </p>
-          <p className="font-body text-[0.5625rem] font-semibold leading-tight text-dashboard-ink-muted/90">
+          <p className=" text-[0.5625rem] font-semibold leading-tight text-dashboard-ink-muted/90">
             {m.label}
           </p>
         </div>

@@ -203,7 +203,7 @@ export function YouTubeInline({
           {label ? (
             <p className="font-mono text-[0.45rem] font-bold uppercase tracking-[0.16em] text-accent/90">{label}</p>
           ) : null}
-          <p className="font-display text-base font-bold leading-tight text-white [text-wrap:balance] md:text-lg">
+          <p className="text-base font-bold leading-tight text-white [text-wrap:balance] md:text-lg">
             {title}
           </p>
         </div>

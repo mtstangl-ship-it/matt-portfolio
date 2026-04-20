@@ -36,10 +36,10 @@ export function ImpactGlobalImpactSection() {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-[42rem]">
-            <h2 className="font-display text-section font-bold text-dashboard-ink-light">
+            <h2 className=" text-section font-bold text-dashboard-ink-light">
               {impactPage.globalImpact.headline}
             </h2>
-            <p className="mt-3 font-body text-subhead font-bold leading-[1.6] text-dashboard-ink-muted">
+            <p className="mt-3  text-subhead font-bold leading-[1.6] text-dashboard-ink-muted">
               {impactPage.globalImpact.subhead}
             </p>
           </div>
@@ -61,7 +61,7 @@ export function ImpactGlobalImpactSection() {
                     onClick={() => setMode(s.key as ImpactOutcomeMode)}
                     className={[
                       "relative flex-1 rounded-sm px-3 py-2 text-left transition-colors",
-                      "font-body text-[0.75rem] font-bold uppercase tracking-[0.12em]",
+                      " text-[0.75rem] font-bold uppercase tracking-[0.12em]",
                       active
                         ? "text-accent-signal border border-accent-signal/45"
                         : "bg-transparent text-dashboard-ink-muted hover:text-dashboard-ink-light/90 border border-transparent hover:border-dashboard-border/60",
@@ -80,7 +80,7 @@ export function ImpactGlobalImpactSection() {
                 );
               })}
             </div>
-            <p className="mt-2 font-body text-[0.75rem] font-bold leading-[1.5] text-dashboard-ink-muted/90">
+            <p className="mt-2  text-[0.75rem] font-bold leading-[1.5] text-dashboard-ink-muted/90">
               Toggle the outcome lens, watch the system map re-instrument.
             </p>
             <motion.p
@@ -88,7 +88,7 @@ export function ImpactGlobalImpactSection() {
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.24, ease: "easeOut" }}
-              className="mt-2 font-body text-[0.75rem] font-bold leading-[1.55] text-dashboard-ink-light/80"
+              className="mt-2  text-[0.75rem] font-bold leading-[1.55] text-dashboard-ink-light/80"
             >
               {modeNarrative}
             </motion.p>
@@ -108,10 +108,10 @@ export function ImpactGlobalImpactSection() {
             transition={{ duration: 0.35, ease: "easeOut" }}
           >
             <div className="flex items-center justify-between gap-4">
-              <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/80">
+              <p className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/80">
                 Aggregate impact (all work)
               </p>
-              <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/90">
+              <p className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/90">
                 {modeLabel}
               </p>
             </div>
@@ -142,7 +142,7 @@ export function ImpactGlobalImpactSection() {
               {["Autodesk", "Wipro", "EY"].map((company) => (
                 <span
                   key={company}
-                  className="font-body text-metric-sm rounded-sm border border-dashboard-border/70 bg-dashboard-muted/45 px-2.5 py-1 font-semibold uppercase tracking-[0.12em] text-dashboard-ink-muted"
+                  className=" text-metric-sm rounded-sm border border-dashboard-border/70 bg-dashboard-muted/45 px-2.5 py-1 font-semibold uppercase tracking-[0.12em] text-dashboard-ink-muted"
                 >
                   {company}
                 </span>
@@ -152,10 +152,10 @@ export function ImpactGlobalImpactSection() {
 
           <div className="rounded-sm border border-dashboard-border/80 bg-dashboard-muted/55 p-4 shadow-[inset_0_1px_0_rgba(232,230,226,0.06)] sm:p-5">
             <div className="flex items-center justify-between">
-              <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/80">
+              <p className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/80">
                 Signal system map
               </p>
-              <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-muted">
+              <p className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-muted">
                 {mode === "all" ? "All signal channels" : `${mode} lens`}
               </p>
             </div>

@@ -29,7 +29,7 @@ export function CompanyWordmark({
   if (!src || error) {
     return (
       <span
-        className={`font-body block font-bold tracking-[0.05em] ${inverted ? "text-dashboard-ink-muted" : "text-ink-700"} ${dim.class} ${className}`.trim()}
+        className={` block font-bold tracking-[0.05em] ${inverted ? "text-dashboard-ink-muted" : "text-ink-700"} ${dim.class} ${className}`.trim()}
         style={{ fontSize: size === "sm" ? "0.75rem" : size === "md" ? "0.8125rem" : "0.875rem" }}
       >
         {name}

@@ -8,7 +8,7 @@ import { stanfordAI } from "@/content/home";
 
 function StanfordInner() {
   const ctaClass =
-    "font-body inline-flex shrink-0 whitespace-nowrap text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent";
+    " inline-flex shrink-0 whitespace-nowrap text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent";
 
   const CtaLink = stanfordAI.ctaExternal ? (
     <a href={stanfordAI.ctaHref} target="_blank" rel="noopener noreferrer" className={ctaClass}>
@@ -54,20 +54,20 @@ function StanfordInner() {
               ) : (
                 <>
                   <AutomationIcon className="h-10 w-10 text-accent" />
-                  <span className="font-display text-xl font-bold text-accent">
+                  <span className=" text-xl font-bold text-accent">
                     {stanfordAI.badge}
                   </span>
                 </>
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <h3 className="font-display text-[clamp(1.5rem,5vw,2.125rem)] font-bold leading-tight text-ink-950 sm:text-section">
+              <h3 className=" text-[clamp(1.5rem,5vw,2.125rem)] font-bold leading-tight text-ink-950 sm:text-section">
                 {stanfordAI.title}
               </h3>
-              <p className="font-body mt-2 text-metric-sm text-ink-600">
+              <p className=" mt-2 text-metric-sm text-ink-600">
                 {stanfordAI.credential}
               </p>
-              <p className="font-body mt-3 text-body font-semibold leading-[1.5] text-ink-800 sm:max-w-2xl">
+              <p className=" mt-3 text-body font-semibold leading-[1.5] text-ink-800 sm:max-w-2xl">
                 {stanfordAI.description}
               </p>
             </div>

@@ -28,7 +28,7 @@ function TickerLogo({ name, src }: { name: string; src?: string }) {
   const [error, setError] = useState(false);
   if (!src || error) {
     return (
-      <span className="shrink-0 font-body text-[0.6875rem] font-medium uppercase tracking-[0.1em] text-ink-500">
+      <span className="shrink-0  text-[0.6875rem] font-medium uppercase tracking-[0.1em] text-ink-500">
         {name}
       </span>
     );

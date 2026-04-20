@@ -38,14 +38,14 @@ export function CaseStudyIntelPanel({
     <Link href={href} className={`${panelShell} ${padding}`}>
       <span className={labelClass}>{entry.panelLabel}</span>
       <h3
-        className={`font-display font-bold tracking-[-0.02em] text-dashboard-ink-light [text-wrap:balance] ${
+        className={` font-bold tracking-[-0.02em] text-dashboard-ink-light [text-wrap:balance] ${
           isFeatured ? "mt-4 text-xl sm:text-2xl" : "mt-3 text-lg sm:text-xl"
         }`}
       >
         {entry.title}
       </h3>
       <p
-        className={`font-body font-semibold leading-relaxed text-dashboard-ink-muted ${
+        className={` font-semibold leading-relaxed text-dashboard-ink-muted ${
           isFeatured ? "mt-3 text-[0.9375rem] sm:max-w-3xl" : "mt-2.5 text-sm sm:text-[0.9375rem]"
         }`}
       >

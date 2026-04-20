@@ -1,6 +1,6 @@
 /**
  * Signal → Story, YouTube-backed narrative work.
- * Homepage: 3 videos max. Subpage: up to 6, curated.
+ * Homepage: 2 hero embeds + 2 supporting. Subpage: up to 6, curated.
  */
 export const signalStoryCopy = {
   eyebrow: "Ongoing archive",
@@ -26,11 +26,18 @@ export type SignalStoryVideo = {
   previewDurationSeconds?: number;
 };
 
-/** Homepage: 1 lead + 2 supporting, Healthcare Heroes first, No Limits to Discovery (not “Oprah”) */
+/** Homepage: 2 hero pieces (Caron Butler + Healthcare Heroes) + 2 supporting */
 export const signalStoryHomeVideos: SignalStoryVideo[] = [
+  {
+    youtubeId: "wnFTdF0VWM0",
+    title: "Caron Butler",
+    label: "Sports & culture",
+    previewStartSeconds: 9,
+  },
   {
     youtubeId: "heAtSMBa5i8",
     title: "Healthcare Heroes",
+    label: "Public health",
     previewStartSeconds: 8,
   },
   {

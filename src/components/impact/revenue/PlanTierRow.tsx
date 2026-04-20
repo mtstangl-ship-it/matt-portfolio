@@ -83,7 +83,7 @@ export function PlanTierRow({ tier, isActive, onSelect }: Props) {
         onClick={onSelect}
       >
         <span
-          className={`truncate font-[family-name:var(--font-body)] [font-size:var(--tier-title)] ${surface.title}`}
+          className={`truncate font-sans [font-size:var(--tier-title)] ${surface.title}`}
         >
           {copy.planLabel}
         </span>

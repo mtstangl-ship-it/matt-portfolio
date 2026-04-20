@@ -122,7 +122,7 @@ export function TransformationModule({
             <span className="inline-flex h-5 w-5 items-center justify-center rounded-sm border border-accent-signal/45 bg-accent-signal/12 font-mono text-[0.625rem] font-bold text-accent-signal">
               {identity.marker}
             </span>
-            <span className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-muted">
+            <span className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-muted">
               {identity.panelLabel}
             </span>
           </div>
@@ -164,16 +164,16 @@ export function TransformationModule({
           </div>
 
           <div className="flex min-w-0 flex-1 flex-col gap-4">
-            <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/95">
+            <p className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/95">
               {company.theme}
             </p>
-            <h3 className="font-display text-[1.35rem] font-semibold leading-[1.15] tracking-[-0.02em] text-dashboard-ink-light">
+            <h3 className=" text-[1.35rem] font-semibold leading-[1.15] tracking-[-0.02em] text-dashboard-ink-light">
               {company.headline}
             </h3>
-            <p className="font-body text-[0.9375rem] font-bold leading-[1.6] text-dashboard-ink-muted">
+            <p className=" text-[0.9375rem] font-bold leading-[1.6] text-dashboard-ink-muted">
               {company.narrative}
             </p>
-            <p className="rounded-sm border border-dashboard-border/70 bg-[#120f0e]/90 px-3 py-2.5 font-body text-[0.8125rem] font-bold leading-[1.65] text-dashboard-ink-muted/95">
+            <p className="rounded-sm border border-dashboard-border/70 bg-[#120f0e]/90 px-3 py-2.5  text-[0.8125rem] font-bold leading-[1.65] text-dashboard-ink-muted/95">
               {company.expandedNarrative}
             </p>
 
@@ -183,10 +183,10 @@ export function TransformationModule({
                   key={`${company.name}-${ssi.label}`}
                   className="rounded-sm border border-dashboard-border/70 bg-dashboard-muted/35 px-3 py-2.5"
                 >
-                  <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/90">
+                  <p className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent-signal/90">
                     {ssi.label}
                   </p>
-                  <p className="mt-1.5 font-body text-[0.75rem] font-bold leading-[1.55] text-dashboard-ink-muted">
+                  <p className="mt-1.5  text-[0.75rem] font-bold leading-[1.55] text-dashboard-ink-muted">
                     {ssi.value}
                   </p>
                 </div>
@@ -209,7 +209,7 @@ export function TransformationModule({
               {company.capabilityTags.map((tag) => (
                 <span
                   key={tag}
-                  className="font-body text-metric-sm rounded-sm border border-accent-signal/40 bg-accent-signal/8 px-2.5 py-1 font-semibold uppercase tracking-wider text-accent-signal/95"
+                  className=" text-metric-sm rounded-sm border border-accent-signal/40 bg-accent-signal/8 px-2.5 py-1 font-semibold uppercase tracking-wider text-accent-signal/95"
                 >
                   {tag}
                 </span>

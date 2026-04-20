@@ -6,7 +6,7 @@ import { signalStoryCopy, signalStoryHomeVideos } from "@/content/signal-story";
 import { YouTubeInline } from "./YouTubeInline";
 
 export function SignalStorySection() {
-  const [lead, ...rest] = signalStoryHomeVideos;
+  const [caronHero, healthHero, ...rest] = signalStoryHomeVideos;
   const [a, b] = rest;
 
   return (
@@ -25,7 +25,7 @@ export function SignalStorySection() {
           <Eyebrow tone="signal" className="tracking-[0.25em]">
             {signalStoryCopy.title}
           </Eyebrow>
-          <p className="font-body mt-4 text-[1.0625rem] font-semibold leading-relaxed text-[rgba(232,230,226,0.92)] md:text-[1.125rem]">
+          <p className="mt-4 text-[1.0625rem] font-semibold leading-relaxed text-[rgba(232,230,226,0.92)] md:text-[1.125rem]">
             {signalStoryCopy.homeTeaser}
           </p>
         </div>
@@ -39,14 +39,25 @@ export function SignalStorySection() {
         </p>
 
         <div className="mt-10 flex flex-col gap-6 md:gap-8">
-          <YouTubeInline
-            youtubeId={lead.youtubeId}
-            title={lead.title}
-            label={lead.label}
-            variant="hero"
-            previewStartSeconds={lead.previewStartSeconds}
-            previewDurationSeconds={lead.previewDurationSeconds}
-          />
+          {/* Two featured hero pieces, stacked — same large frame as the original single lead */}
+          <div className="flex flex-col gap-8 md:gap-10">
+            <YouTubeInline
+              youtubeId={caronHero.youtubeId}
+              title={caronHero.title}
+              label={caronHero.label}
+              variant="hero"
+              previewStartSeconds={caronHero.previewStartSeconds}
+              previewDurationSeconds={caronHero.previewDurationSeconds}
+            />
+            <YouTubeInline
+              youtubeId={healthHero.youtubeId}
+              title={healthHero.title}
+              label={healthHero.label}
+              variant="hero"
+              previewStartSeconds={healthHero.previewStartSeconds}
+              previewDurationSeconds={healthHero.previewDurationSeconds}
+            />
+          </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:gap-8">
             {a ? (
               <YouTubeInline

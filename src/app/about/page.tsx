@@ -143,7 +143,7 @@ function FlightPlan() {
                 </span>
 
                 {/* Name */}
-                <span className="mt-2 font-display text-[0.9375rem] font-semibold uppercase tracking-[0.08em] text-white">
+                <span className="mt-2  text-[0.9375rem] font-semibold uppercase tracking-[0.08em] text-white">
                   {wp.name}
                 </span>
 
@@ -203,7 +203,7 @@ export default function About() {
                     </span>
                     <span className="h-px flex-1 bg-accent-signal/25" aria-hidden />
                   </div>
-                  <p className="mt-4 font-display text-[1rem] font-medium leading-[1.45] tracking-[-0.01em] text-white sm:text-[1.0625rem]">
+                  <p className="mt-4  text-[1rem] font-medium leading-[1.45] tracking-[-0.01em] text-white sm:text-[1.0625rem]">
                     {line}
                   </p>
                   <span
@@ -247,11 +247,11 @@ export default function About() {
               key={item.emphasis}
               className="border border-white/[0.07] bg-dashboard-card/65 px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] backdrop-blur-[2px] sm:px-5"
             >
-              <p className="font-display text-[0.9375rem] font-semibold text-white">
+              <p className=" text-[0.9375rem] font-semibold text-white">
                 <span className="text-accent-signal">{item.emphasis}</span>{" "}
                 <span className="font-normal text-dashboard-ink-light/95">{item.rest}</span>
               </p>
-              <p className="mt-2 border-t border-white/[0.06] pt-3 font-body text-[0.8125rem] leading-relaxed text-dashboard-ink-muted">
+              <p className="mt-2 border-t border-white/[0.06] pt-3  text-[0.8125rem] leading-relaxed text-dashboard-ink-muted">
                 {item.example}
               </p>
             </li>
@@ -280,10 +280,10 @@ export default function About() {
                   BAY {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
-              <p className="mt-3 font-body text-[0.8125rem] font-semibold leading-snug text-accent-signal/95">
+              <p className="mt-3  text-[0.8125rem] font-semibold leading-snug text-accent-signal/95">
                 {c.title}
               </p>
-              <p className="mt-2 font-body text-[0.8125rem] leading-relaxed text-dashboard-ink-muted">
+              <p className="mt-2  text-[0.8125rem] leading-relaxed text-dashboard-ink-muted">
                 {c.body}
               </p>
               {/* Corner ticks */}
@@ -322,10 +322,10 @@ export default function About() {
                   LIVE
                 </span>
               </div>
-              <p className="mt-3 font-body text-[0.8125rem] font-semibold text-accent-signal/95">
+              <p className="mt-3  text-[0.8125rem] font-semibold text-accent-signal/95">
                 {item.title}
               </p>
-              <p className="mt-2 font-body text-[0.8125rem] leading-relaxed text-dashboard-ink-muted">
+              <p className="mt-2  text-[0.8125rem] leading-relaxed text-dashboard-ink-muted">
                 {item.body}
               </p>
             </div>
@@ -345,7 +345,7 @@ export default function About() {
           {career.paragraphs.map((p) => (
             <p
               key={p.slice(0, 28)}
-              className="font-body text-[0.9375rem] leading-[1.65] text-dashboard-ink-light/88"
+              className=" text-[0.9375rem] leading-[1.65] text-dashboard-ink-light/88"
             >
               {p}
             </p>
@@ -355,7 +355,7 @@ export default function About() {
           <p className="font-mono text-[0.5rem] uppercase tracking-[0.24em] text-accent-signal/80">
             {personal.title} · Off-shift
           </p>
-          <div className="mt-4 space-y-3 font-body text-[0.9375rem] leading-[1.6] text-dashboard-ink-muted">
+          <div className="mt-4 space-y-3  text-[0.9375rem] leading-[1.6] text-dashboard-ink-muted">
             {personal.sentences.map((s) => (
               <p key={s}>{s}</p>
             ))}

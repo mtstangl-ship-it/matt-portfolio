@@ -21,10 +21,10 @@ export function MethodsToOutcomesSection() {
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="max-w-[48rem]">
-          <h2 className="font-display text-section font-bold text-dashboard-ink-light">
+          <h2 className=" text-section font-bold text-dashboard-ink-light">
             {impactPage.transformationModules.methodsHeadline}
           </h2>
-          <p className="mt-3 font-body text-subhead font-bold leading-[1.6] text-dashboard-ink-muted">
+          <p className="mt-3  text-subhead font-bold leading-[1.6] text-dashboard-ink-muted">
             {impactPage.transformationModules.methodsSubhead}
           </p>
         </div>
@@ -43,13 +43,13 @@ export function MethodsToOutcomesSection() {
               }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-muted">
+              <p className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-muted">
                 Method
               </p>
-              <h3 className="mt-3 font-display text-[1.05rem] font-semibold leading-[1.2] text-dashboard-ink-light">
+              <h3 className="mt-3  text-[1.05rem] font-semibold leading-[1.2] text-dashboard-ink-light">
                 {m.title}
               </h3>
-              <p className="mt-2 font-body text-[0.875rem] font-bold leading-[1.65] text-dashboard-ink-muted/95">
+              <p className="mt-2  text-[0.875rem] font-bold leading-[1.65] text-dashboard-ink-muted/95">
                 {m.body}
               </p>
             </motion.article>
@@ -57,10 +57,10 @@ export function MethodsToOutcomesSection() {
         </div>
 
         <div className="mt-10 rounded-sm border border-dashboard-border/70 bg-dashboard-surface/20 p-5 sm:p-6">
-          <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/85">
+          <p className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/85">
             Journey architecture, operational proof, healthcare outcomes
           </p>
-          <p className="mt-3 font-body text-[0.9375rem] font-bold leading-[1.65] text-dashboard-ink-muted">
+          <p className="mt-3  text-[0.9375rem] font-bold leading-[1.65] text-dashboard-ink-muted">
             The same operating pattern repeats: align constraints, instrument handoffs, then design the service loop that holds under
             pressure.
           </p>

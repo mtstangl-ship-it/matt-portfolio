@@ -68,7 +68,7 @@ export function RevenueLeadMetric() {
             transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
           >
             <span
-              className="block font-[family-name:var(--font-mono)] font-bold tracking-[-0.04em] text-white [font-size:clamp(2.15rem,calc(0.9rem+6vw),3.1rem)] sm:[font-size:clamp(3rem,calc(1.5rem+7vw),5.25rem)]"
+              className="block font-mono font-bold tracking-[-0.04em] text-white [font-size:clamp(2.15rem,calc(0.9rem+6vw),3.1rem)] sm:[font-size:clamp(3rem,calc(1.5rem+7vw),5.25rem)]"
               style={{
                 lineHeight: 0.9,
                 textShadow: "0 0 56px rgba(34,211,199,0.3), 0 2px 28px rgba(0,0,0,0.4)",
@@ -80,7 +80,7 @@ export function RevenueLeadMetric() {
           </motion.div>
 
           <p
-            className="mt-2 font-[family-name:var(--font-body)] font-semibold uppercase leading-snug tracking-[0.08em] text-accent-signal/75 [font-size:clamp(0.65625rem,calc(0.4rem+1vw),0.875rem)] sm:mt-2.5"
+            className="mt-2 font-sans font-semibold uppercase leading-snug tracking-[0.08em] text-accent-signal/75 [font-size:clamp(0.65625rem,calc(0.4rem+1vw),0.875rem)] sm:mt-2.5"
             style={{ letterSpacing: "0.06em" }}
           >
             Incremental AOV

@@ -20,14 +20,14 @@ export function FeaturedCaseStudiesPreview() {
       />
       <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
         <div className="min-w-0 max-w-lg">
-          <h2 className="font-display text-section font-bold text-ink-950">{caseStudiesHomeSection.headline}</h2>
-          <p className="font-body mt-2 max-w-md text-subhead font-semibold text-ink-700">
+          <h2 className=" text-section font-bold text-ink-950">{caseStudiesHomeSection.headline}</h2>
+          <p className=" mt-2 max-w-md text-subhead font-semibold text-ink-700">
             {caseStudiesHomeSection.subhead}
           </p>
         </div>
         <Link
           href={caseStudiesHomeSection.ctaHref}
-          className="font-body shrink-0 text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
+          className=" shrink-0 text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
         >
           {caseStudiesHomeSection.cta} →
         </Link>

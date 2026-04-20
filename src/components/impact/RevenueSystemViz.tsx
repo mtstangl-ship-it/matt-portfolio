@@ -20,7 +20,7 @@ function TierSystemCue() {
       <p className="mt-0.5 font-mono text-[0.5rem] font-semibold uppercase tracking-[0.18em] text-[rgba(232,230,226,0.82)]">
         {c.sub}
       </p>
-      <p className="mt-1.5 font-body text-[0.5625rem] font-medium text-accent-signal/60">{c.hint}</p>
+      <p className="mt-1.5  text-[0.5625rem] font-medium text-accent-signal/60">{c.hint}</p>
     </div>
   );
 }
@@ -33,7 +33,7 @@ function MobileTierExplorationGate() {
   const v = revenueVizCopy;
   return (
     <div className="space-y-3 border-t border-white/[0.1] pt-4 lg:hidden">
-      <p className="px-1 text-center font-body text-[0.6875rem] font-medium leading-relaxed text-[rgba(210,208,202,0.9)]">
+      <p className="px-1 text-center  text-[0.6875rem] font-medium leading-relaxed text-[rgba(210,208,202,0.9)]">
         {v.transitionLine}
       </p>
       <TierSystemCue />

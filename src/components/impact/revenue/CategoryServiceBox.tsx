@@ -68,7 +68,7 @@ export function CategoryServiceBox({
           {label}
         </span>
         <span
-          className="shrink-0 rounded-md bg-white/[0.07] px-1.5 py-0.5 font-[family-name:var(--font-mono)] tabular-nums text-white/75 [font-size:clamp(0.53125rem,calc(0.32rem+1.2vw),0.625rem)]"
+          className="shrink-0 rounded-md bg-white/[0.07] px-1.5 py-0.5 font-mono tabular-nums text-white/75 [font-size:clamp(0.53125rem,calc(0.32rem+1.2vw),0.625rem)]"
           aria-label={`${count} services`}
         >
           {count}

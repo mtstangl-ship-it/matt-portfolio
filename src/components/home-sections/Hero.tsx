@@ -26,10 +26,10 @@ export function Hero() {
                 <JourneyArchitectureIcon className="h-4 w-4 shrink-0 text-accent-signal/75" aria-hidden />
                 {hero.tagline}
               </p>
-              <h1 className="mb-4 font-display text-[clamp(1.5rem,3.6vw,1.875rem)] font-semibold leading-[1.18] tracking-[-0.025em] text-dashboard-ink-light sm:mb-5">
+              <h1 className="mb-4  text-[clamp(1.5rem,3.6vw,1.875rem)] font-semibold leading-[1.18] tracking-[-0.025em] text-dashboard-ink-light sm:mb-5">
                 {hero.headline}
               </h1>
-              <p className="max-w-[min(22rem,100%)] font-body text-subhead font-normal leading-[1.55] tracking-[0.01em] text-dashboard-ink-muted/90">
+              <p className="max-w-[min(22rem,100%)]  text-subhead font-normal leading-[1.55] tracking-[0.01em] text-dashboard-ink-muted/90">
                 {hero.subhead}
               </p>
             </div>

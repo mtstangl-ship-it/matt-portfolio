@@ -19,10 +19,10 @@ export function TransformationModules() {
       />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="max-w-[52rem]">
-          <h2 className="font-display text-section font-bold text-dashboard-ink-light">
+          <h2 className=" text-section font-bold text-dashboard-ink-light">
             Transformation modules
           </h2>
-          <p className="mt-3 font-body text-subhead font-bold leading-[1.6] text-dashboard-ink-muted">
+          <p className="mt-3  text-subhead font-bold leading-[1.6] text-dashboard-ink-muted">
             Expanded proof blocks for each system: Autodesk, Wipro, and EY.
           </p>
         </div>

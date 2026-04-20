@@ -34,7 +34,7 @@ export function ImpactCtaFooterTransition() {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/85"
+          className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/85"
         >
           Signal → System → Impact
         </motion.p>
@@ -44,7 +44,7 @@ export function ImpactCtaFooterTransition() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.4 }}
-          className="mt-4 font-display text-section font-bold text-dashboard-ink-light"
+          className="mt-4  text-section font-bold text-dashboard-ink-light"
         >
           {cta.headline}
         </motion.h2>
@@ -52,14 +52,14 @@ export function ImpactCtaFooterTransition() {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          className="mt-3 font-body text-[0.9375rem] font-bold leading-[1.7] text-dashboard-ink-muted"
+          className="mt-3  text-[0.9375rem] font-bold leading-[1.7] text-dashboard-ink-muted"
         >
           {cta.subhead}
         </motion.p>
 
         <Link
           href={cta.buttonHref}
-          className="mt-6 inline-flex w-full max-w-xs items-center justify-center rounded-sm bg-accent-signal px-6 py-3.5 font-body text-metric-sm font-bold uppercase text-white shadow-[0_2px_10px_-2px_rgba(13,148,136,0.45)] transition-all hover:bg-accent-light hover:shadow-[0_8px_28px_-6px_rgba(13,148,136,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-signal focus-visible:ring-offset-2 focus-visible:ring-offset-dashboard-bg sm:w-auto sm:px-10"
+          className="mt-6 inline-flex w-full max-w-xs items-center justify-center rounded-sm bg-accent-signal px-6 py-3.5  text-metric-sm font-bold uppercase text-white shadow-[0_2px_10px_-2px_rgba(13,148,136,0.45)] transition-all hover:bg-accent-light hover:shadow-[0_8px_28px_-6px_rgba(13,148,136,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-signal focus-visible:ring-offset-2 focus-visible:ring-offset-dashboard-bg sm:w-auto sm:px-10"
         >
           {cta.buttonLabel} →
         </Link>
@@ -71,7 +71,7 @@ export function ImpactCtaFooterTransition() {
           />
         </div>
 
-        <p className="mt-5 font-body text-[0.75rem] font-bold leading-[1.6] text-dashboard-ink-muted/90">
+        <p className="mt-5  text-[0.75rem] font-bold leading-[1.6] text-dashboard-ink-muted/90">
           Built for exec-ready reviews: concise, defensible, and instrumented.
         </p>
       </div>

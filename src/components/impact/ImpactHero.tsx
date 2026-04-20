@@ -40,28 +40,28 @@ export function ImpactHero() {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-[40rem]">
-            <p className="font-body text-[0.625rem] font-medium uppercase tracking-[0.14em] text-dashboard-ink-light/85">
+            <p className=" text-[0.625rem] font-medium uppercase tracking-[0.14em] text-dashboard-ink-light/85">
               Signal → System → Impact
             </p>
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: "easeOut" }}
-              className="mt-4 font-display text-hero-tight font-semibold leading-[1.02] tracking-[-0.03em] text-dashboard-ink-light"
+              className="mt-4  text-hero-tight font-semibold leading-[1.02] tracking-[-0.03em] text-dashboard-ink-light"
             >
               {impactPage.hero.headline}
             </motion.h1>
-            <p className="mt-4 max-w-[42rem] font-body text-[0.9375rem] font-bold leading-[1.6] text-dashboard-ink-muted">
+            <p className="mt-4 max-w-[42rem]  text-[0.9375rem] font-bold leading-[1.6] text-dashboard-ink-muted">
               {impactPage.hero.subhead}
             </p>
           </div>
 
           <div className="flex flex-col gap-4 lg:w-[20rem]">
             <div className="rounded-sm border border-dashboard-border/70 bg-dashboard-muted/55 p-4 shadow-[inset_0_1px_0_rgba(232,230,226,0.06)]">
-              <p className="font-body text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/80">
+              <p className=" text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-dashboard-ink-light/80">
                 Executive proof layer
               </p>
-              <p className="mt-2 font-body text-[0.8125rem] font-bold leading-[1.55] text-dashboard-ink-muted">
+              <p className="mt-2  text-[0.8125rem] font-bold leading-[1.55] text-dashboard-ink-muted">
                 Instrumented outcomes from three transformations, designed to be shown, not just explained.
               </p>
             </div>

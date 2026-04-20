@@ -101,14 +101,14 @@ export function PageHero({
         ) : null}
 
         <h1
-          className={`font-display text-hero-tight font-bold ${t.title}`}
+          className={` text-hero-tight font-bold ${t.title}`}
         >
           {title}
         </h1>
 
         {subtitle ? (
           <p
-            className={`font-body mt-5 max-w-[52ch] text-subhead font-semibold leading-relaxed ${t.subtitle}`}
+            className={` mt-5 max-w-[52ch] text-subhead font-semibold leading-relaxed ${t.subtitle}`}
           >
             {subtitle}
           </p>

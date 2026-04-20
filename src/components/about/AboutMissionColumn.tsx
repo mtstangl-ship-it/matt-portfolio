@@ -794,7 +794,7 @@ function DiamondHeader({
           warm ? "border-accent-signal/70" : "border-accent-signal/45"
         }`}
       >
-        <h3 className="font-display text-[clamp(1.05rem,2.8vw+0.4rem,2rem)] font-semibold uppercase leading-[1.05] tracking-[-0.02em] text-white">
+        <h3 className=" text-[clamp(1.05rem,2.8vw+0.4rem,2rem)] font-semibold uppercase leading-[1.05] tracking-[-0.02em] text-white">
           {label}
         </h3>
         <span className="shrink-0 pb-1 font-mono text-[0.6rem] uppercase tracking-[0.24em] text-dashboard-ink-muted">
@@ -831,7 +831,7 @@ function IgnitionBlock() {
         <span className="h-px flex-1 bg-white/[0.08]" />
         <Mono>Pre-launch check</Mono>
       </div>
-      <p className="mt-2 font-body text-[0.8125rem] leading-snug text-dashboard-ink-light/92">
+      <p className="mt-2  text-[0.8125rem] leading-snug text-dashboard-ink-light/92">
         Mission inputs stacked on the pad, unknowns, goals, constraints, user signals,
         organizational pressure. Engines spooling.
       </p>
@@ -871,7 +871,7 @@ function StagingDrum({ body }: { body: string }) {
             STAGING
           </span>
         </div>
-        <p className="mt-1 font-display text-[0.875rem] font-semibold leading-snug text-white sm:text-[0.9375rem]">
+        <p className="mt-1  text-[0.875rem] font-semibold leading-snug text-white sm:text-[0.9375rem]">
           {body}
         </p>
       </div>
@@ -902,7 +902,7 @@ function PayloadDeployBlock() {
           </svg>
         </span>
       </div>
-      <p className="mt-2 font-body text-[0.8125rem] leading-snug text-dashboard-ink-light/92">
+      <p className="mt-2  text-[0.8125rem] leading-snug text-dashboard-ink-light/92">
         Lander separates from the vehicle on target orbit, a shipped product, service, or
         strategic decision the organization can actually operate against.
       </p>
@@ -931,7 +931,7 @@ function PhaseRow({
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-white/[0.08] pb-3">
       <LevelCode code={level} />
       {icon ? <span className="inline-flex items-center">{icon}</span> : null}
-      <h3 className="font-display text-[clamp(0.98rem,2.2vw+0.55rem,1.125rem)] font-semibold leading-tight text-white">
+      <h3 className=" text-[clamp(0.98rem,2.2vw+0.55rem,1.125rem)] font-semibold leading-tight text-white">
         {label}
       </h3>
       <Mono>{note}</Mono>
@@ -957,7 +957,7 @@ function Pillar({
         {icon ? <span className="inline-flex items-center">{icon}</span> : null}
         <Mono>{kicker}</Mono>
       </div>
-      <p className="mt-1.5 font-body text-[clamp(0.75rem,1.6vw+0.55rem,0.875rem)] font-semibold leading-snug text-white">
+      <p className="mt-1.5  text-[clamp(0.75rem,1.6vw+0.55rem,0.875rem)] font-semibold leading-snug text-white">
         {body}
       </p>
     </div>
@@ -972,7 +972,7 @@ function ParallelList({ items }: { items: readonly string[] }) {
         {items.map((line) => (
           <li
             key={line}
-            className="border-l border-accent-signal/45 pl-3 font-body text-[clamp(0.75rem,1.5vw+0.55rem,0.875rem)] leading-snug text-dashboard-ink-light/92"
+            className="border-l border-accent-signal/45 pl-3  text-[clamp(0.75rem,1.5vw+0.55rem,0.875rem)] leading-snug text-dashboard-ink-light/92"
           >
             {line}
           </li>
@@ -998,7 +998,7 @@ function StepList({ items, loop = false }: { items: readonly string[]; loop?: bo
         {items.map((step, i) => (
           <li
             key={step}
-            className="flex items-start gap-3 border border-white/[0.06] bg-black/25 px-3 py-2 font-body text-[clamp(0.75rem,1.5vw+0.55rem,0.875rem)] leading-snug text-dashboard-ink-light/90"
+            className="flex items-start gap-3 border border-white/[0.06] bg-black/25 px-3 py-2  text-[clamp(0.75rem,1.5vw+0.55rem,0.875rem)] leading-snug text-dashboard-ink-light/90"
           >
             <span className="mt-0.5 shrink-0 font-mono text-[0.55rem] tracking-[0.16em] text-accent-signal/80">
               {String(i + 1).padStart(2, "0")}

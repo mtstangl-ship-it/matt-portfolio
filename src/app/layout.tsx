@@ -1,28 +1,17 @@
 import type { Metadata } from "next";
-import {
-  Libre_Baskerville,
-  DM_Sans,
-  JetBrains_Mono,
-} from "next/font/google";
+import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { Nav, Footer } from "@/components/layout";
 import "./globals.css";
 
-const libreBaskerville = Libre_Baskerville({
-  variable: "--font-display",
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
   subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
+  variable: "--font-jetbrains",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
@@ -40,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${libreBaskerville.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
-      <body className="font-body flex min-h-screen flex-col antialiased">
+    <html lang="en" className={`${interTight.variable} ${jetbrainsMono.variable}`}>
+      <body className="flex min-h-screen flex-col antialiased">
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />

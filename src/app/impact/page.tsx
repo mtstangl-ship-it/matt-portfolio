@@ -1,6 +1,10 @@
 import { ImpactPage } from "@/components/impact/ImpactPage";
 
 export default function Impact() {
-  return <ImpactPage />;
+  return (
+    <div className="impact-console">
+      <ImpactPage />
+    </div>
+  );
 }
 

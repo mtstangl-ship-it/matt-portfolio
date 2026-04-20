@@ -175,7 +175,7 @@ export function OperationsSystemViz() {
                         : node.y + 18
                 }
                 textAnchor="middle"
-                className="font-body text-[0.5rem] font-semibold uppercase tracking-wider fill-dashboard-ink-light/90"
+                className=" text-[0.5rem] font-semibold uppercase tracking-wider fill-dashboard-ink-light/90"
               >
                 {node.label}
               </text>
@@ -220,7 +220,7 @@ export function OperationsSystemViz() {
               boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
             }}
           >
-            <p className="font-body text-[0.625rem] font-bold uppercase tracking-wider text-accent-signal">
+            <p className=" text-[0.625rem] font-bold uppercase tracking-wider text-accent-signal">
               {nodeData[hoveredNode].label}
             </p>
             <ul className="mt-1 space-y-0.5">

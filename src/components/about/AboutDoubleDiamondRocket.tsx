@@ -108,8 +108,8 @@ function PhaseBlock({
     <div className="space-y-4">
       <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/[0.08] pb-3">
         <div className="min-w-0">
-          <h3 className="font-display text-base font-semibold text-white sm:text-lg">{label}</h3>
-          <p className="mt-0.5 font-body text-[0.7rem] text-dashboard-ink-muted">{phaseNote}</p>
+          <h3 className=" text-base font-semibold text-white sm:text-lg">{label}</h3>
+          <p className="mt-0.5  text-[0.7rem] text-dashboard-ink-muted">{phaseNote}</p>
         </div>
         <ModeStrip mode={mode} />
       </div>
@@ -133,7 +133,7 @@ export function AboutDoubleDiamondRocket() {
           <div className="rounded-lg border border-white/[0.12] bg-dashboard-card/85 px-4 py-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
             <div className="flex items-baseline gap-3">
               <span className="font-mono text-[0.55rem] font-bold text-accent-signal">A</span>
-              <p className="font-body text-[0.875rem] font-medium leading-snug text-dashboard-ink-light/95">{m.journey.from}</p>
+              <p className=" text-[0.875rem] font-medium leading-snug text-dashboard-ink-light/95">{m.journey.from}</p>
             </div>
           </div>
 
@@ -145,7 +145,7 @@ export function AboutDoubleDiamondRocket() {
               <PhaseBlock label={d1.discover.label} phaseNote={d1.discover.phaseNote} mode={d1.discover.mode}>
                 <div className="rounded-md border border-white/[0.08] bg-black/30 px-3 py-2.5">
                   <p className="font-mono text-[0.45rem] font-semibold uppercase tracking-[0.12em] text-dashboard-ink-muted">Start with</p>
-                  <p className="mt-1.5 font-body text-[0.8125rem] font-semibold leading-snug text-dashboard-ink-light/95">{d1.discover.pillar}</p>
+                  <p className="mt-1.5  text-[0.8125rem] font-semibold leading-snug text-dashboard-ink-light/95">{d1.discover.pillar}</p>
                 </div>
                 <div>
                   <p className="font-mono text-[0.45rem] font-semibold uppercase tracking-[0.12em] text-dashboard-ink-muted">Then run in parallel</p>
@@ -153,7 +153,7 @@ export function AboutDoubleDiamondRocket() {
                     {d1.discover.branches.map((line) => (
                       <li
                         key={line}
-                        className="border-l-2 border-accent-signal/45 pl-3 font-body text-[0.8125rem] leading-relaxed text-dashboard-ink-light/92"
+                        className="border-l-2 border-accent-signal/45 pl-3  text-[0.8125rem] leading-relaxed text-dashboard-ink-light/92"
                       >
                         {line}
                       </li>
@@ -167,7 +167,7 @@ export function AboutDoubleDiamondRocket() {
                   {d1.define.steps.map((step) => (
                     <li
                       key={step}
-                      className="rounded-md border border-white/[0.06] bg-black/25 px-3 py-2.5 font-body text-[0.8125rem] leading-relaxed text-dashboard-ink-light/88"
+                      className="rounded-md border border-white/[0.06] bg-black/25 px-3 py-2.5  text-[0.8125rem] leading-relaxed text-dashboard-ink-light/88"
                     >
                       {step}
                     </li>
@@ -179,7 +179,7 @@ export function AboutDoubleDiamondRocket() {
 
           <div className="rounded-lg border border-accent-signal/30 bg-accent-signal/[0.07] px-4 py-4 text-center shadow-[0_0_24px_-12px_rgba(34,211,199,0.18)]">
             <p className="font-mono text-[0.5rem] font-semibold uppercase tracking-[0.16em] text-accent-signal/85">Between diamonds</p>
-            <p className="mt-2 font-display text-[0.9375rem] font-semibold leading-snug text-white sm:text-[1rem]">{m.bridge}</p>
+            <p className="mt-2  text-[0.9375rem] font-semibold leading-snug text-white sm:text-[1rem]">{m.bridge}</p>
           </div>
 
           {/* Diamond 2 */}
@@ -190,13 +190,13 @@ export function AboutDoubleDiamondRocket() {
               <PhaseBlock label={d2.develop.label} phaseNote={d2.develop.phaseNote} mode={d2.develop.mode}>
                 <div className="rounded-md border border-white/[0.08] bg-black/30 px-3 py-2.5">
                   <p className="font-mono text-[0.45rem] font-semibold uppercase tracking-[0.12em] text-dashboard-ink-muted">Lead with</p>
-                  <p className="mt-1.5 font-body text-[0.8125rem] font-semibold leading-snug text-dashboard-ink-light/95">{d2.develop.pillar}</p>
+                  <p className="mt-1.5  text-[0.8125rem] font-semibold leading-snug text-dashboard-ink-light/95">{d2.develop.pillar}</p>
                 </div>
                 <ul className="space-y-2">
                   {d2.develop.branches.map((line) => (
                     <li
                       key={line}
-                      className="border-l-2 border-accent-signal/45 pl-3 font-body text-[0.8125rem] leading-relaxed text-dashboard-ink-light/92"
+                      className="border-l-2 border-accent-signal/45 pl-3  text-[0.8125rem] leading-relaxed text-dashboard-ink-light/92"
                     >
                       {line}
                     </li>
@@ -222,7 +222,7 @@ export function AboutDoubleDiamondRocket() {
                   {d2.deliver.steps.map((step) => (
                     <li
                       key={step}
-                      className="rounded-md border border-white/[0.06] bg-black/25 px-3 py-2.5 font-body text-[0.8125rem] leading-relaxed text-dashboard-ink-light/88"
+                      className="rounded-md border border-white/[0.06] bg-black/25 px-3 py-2.5  text-[0.8125rem] leading-relaxed text-dashboard-ink-light/88"
                     >
                       {step}
                     </li>
@@ -235,7 +235,7 @@ export function AboutDoubleDiamondRocket() {
           <div className="rounded-lg border border-white/[0.12] bg-dashboard-card/85 px-4 py-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
             <div className="flex items-baseline gap-3">
               <span className="font-mono text-[0.55rem] font-bold text-accent-signal">B</span>
-              <p className="font-body text-[0.875rem] font-medium leading-snug text-dashboard-ink-light/95">{m.journey.to}</p>
+              <p className=" text-[0.875rem] font-medium leading-snug text-dashboard-ink-light/95">{m.journey.to}</p>
             </div>
           </div>
         </div>

@@ -193,7 +193,7 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
         {labels.map(({ x, label }) => (
           <span
             key={label}
-            className="absolute font-body text-[0.5rem] font-semibold uppercase tracking-wider text-dashboard-ink-light"
+            className="absolute  text-[0.5rem] font-semibold uppercase tracking-wider text-dashboard-ink-light"
             style={{ left: `${x * 100}%`, transform: "translateX(-50%)" }}
           >
             {label}

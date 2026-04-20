@@ -2,6 +2,15 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import {
+  DASHBOARD_SESSION_TOP_RULE,
+  DASHBOARD_CANVAS_PANEL,
+  DASHBOARD_MODE_RAIL,
+  DASHBOARD_MODE_RAIL_SURFACE,
+  DashboardFineGridOverlay,
+  DashboardTopHairline,
+} from "@/components/dashboard";
+import { cn } from "@/lib/utils";
 import { ImpactCentralSystem } from "./ImpactCentralSystem";
 import { ImpactSignalFieldBackground } from "./ImpactSignalFieldBackground";
 import { ImpactInterconnectSignals } from "./ImpactInterconnectSignals";
@@ -28,7 +37,12 @@ export function ImpactMissionControl() {
   }, [mode]);
 
   return (
-    <section className="relative overflow-hidden bg-dashboard-bg px-3 py-4 sm:px-5 sm:py-5 lg:min-h-[calc(100vh-8.5rem)]">
+    <section
+      className={cn(
+        "relative overflow-hidden bg-dashboard-bg px-3 py-4 sm:px-5 sm:py-5 lg:min-h-[calc(100vh-8.5rem)]",
+        DASHBOARD_SESSION_TOP_RULE
+      )}
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.42] lg:opacity-[0.58]"
@@ -44,14 +58,15 @@ export function ImpactMissionControl() {
       <div className="relative mx-auto max-w-6xl">
         {/* Continuous surface: no outer card, gradient edge for definition */}
         <div
-          className="relative"
+          className={cn("relative overflow-hidden", DASHBOARD_CANVAS_PANEL)}
           style={{
             background:
               "linear-gradient(to bottom, rgba(15,14,13,0.94) 0%, rgba(12,11,10,0.97) 100%), linear-gradient(to right, rgba(34,211,199,0.03) 0%, transparent 20%, transparent 80%, rgba(34,211,199,0.02) 100%)",
             boxShadow: "inset 0 1px 0 rgba(232,230,226,0.04)",
           }}
         >
-          <header className="flex flex-col gap-2 border-b border-dashboard-border/20 px-3 py-2 sm:px-4 sm:py-2.5 lg:flex-row lg:items-end lg:justify-between" style={{ opacity: 0.85 }}>
+          <DashboardTopHairline className="z-[1]" />
+          <header className="relative z-[2] flex flex-col gap-2 border-b border-dashboard-border/20 px-3 py-2 sm:px-4 sm:py-2.5 lg:flex-row lg:items-end lg:justify-between" style={{ opacity: 0.85 }}>
             <div>
               <div className="flex items-baseline gap-3">
                 <h2 className="font-mono text-eyebrow font-semibold uppercase tracking-[0.25em] text-accent-signal">
@@ -67,12 +82,13 @@ export function ImpactMissionControl() {
               <div
                 role="tablist"
                 aria-label="Mission control modes"
-                className="inline-flex w-full flex-wrap gap-2 p-1.5 lg:flex-nowrap lg:gap-0"
-                style={{
-                  background: "rgba(14,13,12,0.4)",
-                  boxShadow: "inset 0 0 0 1px rgba(232,230,226,0.08)",
-                }}
+                className={cn(
+                  "relative inline-flex w-full flex-wrap gap-2 p-1.5 lg:flex-nowrap lg:gap-0",
+                  DASHBOARD_MODE_RAIL,
+                  DASHBOARD_MODE_RAIL_SURFACE
+                )}
               >
+                <DashboardFineGridOverlay className="z-0" opacity={0.06} />
                 {impactMissionControl.modes.map((m) => {
                   const active = mode === m.key;
                   return (
@@ -83,8 +99,8 @@ export function ImpactMissionControl() {
                       aria-selected={active}
                       onClick={() => setMode(m.key)}
                       className={[
-                        "relative flex-1 px-3 py-2",
-                        "font-body text-[0.75rem] font-bold uppercase tracking-[0.12em]",
+                        "relative z-10 flex-1 px-3 py-2",
+                        " text-[0.75rem] font-bold uppercase tracking-[0.12em]",
                         active ? "text-accent-signal" : "text-dashboard-ink-muted hover:text-dashboard-ink-light",
                       ].join(" ")}
                       style={
@@ -200,7 +216,7 @@ export function ImpactMissionControl() {
                     key={key}
                     type="button"
                     onClick={() => setExpandedSystem(key)}
-                    className={`px-2 py-0.5 font-body text-[0.5625rem] font-semibold uppercase tracking-[0.1em] transition-colors ${
+                    className={`px-2 py-0.5  text-[0.5625rem] font-semibold uppercase tracking-[0.1em] transition-colors ${
                       active ? "text-accent-signal" : "text-dashboard-ink-muted/70 hover:text-dashboard-ink-light"
                     }`}
                   >
@@ -208,7 +224,7 @@ export function ImpactMissionControl() {
                   </button>
                 );
               })}
-              <span className="font-body text-[0.5rem] font-medium text-dashboard-ink-muted/50">
+              <span className=" text-[0.5rem] font-medium text-dashboard-ink-muted/50">
                 {impactMissionControl.systems[expandedSystem].narrative}
               </span>
             </div>

@@ -106,14 +106,14 @@ export function AboutStation({
                 titleAs === "h1"
                   ? // Hero station, page h1. Larger, closer to PageHero's hero-tight scale
                     // but kept expressive with uppercase display treatment to preserve About's tone.
-                    "max-w-[24ch] font-display text-hero-tight font-semibold leading-[1.05] tracking-[-0.03em] text-white"
-                  : "max-w-[38ch] font-display text-[clamp(1.35rem,3vw,1.75rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-white"
+                    "max-w-[24ch]  text-hero-tight font-semibold leading-[1.05] tracking-[-0.03em] text-white"
+                  : "max-w-[38ch]  text-[clamp(1.35rem,3vw,1.75rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-white"
               }
             >
               {title}
             </TitleTag>
             {subtitle ? (
-              <p className="mt-4 max-w-[52ch] font-body text-subhead font-semibold leading-relaxed text-dashboard-ink-muted">
+              <p className="mt-4 max-w-[52ch]  text-subhead font-semibold leading-relaxed text-dashboard-ink-muted">
                 {subtitle}
               </p>
             ) : null}

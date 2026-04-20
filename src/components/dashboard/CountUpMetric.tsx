@@ -180,7 +180,7 @@ export function CountUpMetric({ value, label, index, variant = "default" }: Coun
         {showAnimated ? display : finalDisplay}
       </p>
       <p
-        className={`min-w-0 font-body text-[0.625rem] font-medium leading-[1.35] tracking-[0.01em] sm:text-[0.6875rem] ${isDashboard ? "line-clamp-2 text-dashboard-ink-muted/95" : "line-clamp-2 text-ink-700"}`}
+        className={`min-w-0  text-[0.625rem] font-medium leading-[1.35] tracking-[0.01em] sm:text-[0.6875rem] ${isDashboard ? "line-clamp-2 text-dashboard-ink-muted/95" : "line-clamp-2 text-ink-700"}`}
       >
         {label}
       </p>

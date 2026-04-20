@@ -44,7 +44,7 @@ export default function ContactPage() {
               <Eyebrow tone="accent" className="tracking-[0.25em]">
                 {c.label}
               </Eyebrow>
-              <p className="font-display mt-3 text-card-title font-semibold text-ink-950">
+              <p className=" mt-3 text-card-title font-semibold text-ink-950">
                 {c.value}
               </p>
             </a>

@@ -43,19 +43,19 @@ export function RevenueLayerDescriptors({ tier, pairing = "stack" }: Props) {
             transition={{ duration: 0.16, ease: "easeOut" }}
             className={`flex flex-col ${inline ? "gap-1 sm:gap-1.5" : "gap-1.5 lg:gap-2"}`}
           >
-            <p className="font-[family-name:var(--font-body)] text-[length:clamp(0.625rem,0.32rem+0.95vw,0.8125rem)] font-semibold leading-snug text-[rgba(248,246,242,0.96)] max-lg:line-clamp-3">
+            <p className="font-sans text-[length:clamp(0.625rem,0.32rem+0.95vw,0.8125rem)] font-semibold leading-snug text-[rgba(248,246,242,0.96)] max-lg:line-clamp-3">
               {copy.executiveSummary}
             </p>
-            <p className="hidden font-[family-name:var(--font-body)] text-[length:clamp(0.5625rem,0.28rem+0.85vw,0.6875rem)] font-medium leading-snug text-accent-signal lg:block">
+            <p className="hidden font-sans text-[length:clamp(0.5625rem,0.28rem+0.85vw,0.6875rem)] font-medium leading-snug text-accent-signal lg:block">
               {tierMeta.whyThisMatters}
             </p>
             {tagline ? (
-              <p className="hidden font-[family-name:var(--font-body)] text-[length:clamp(0.53125rem,0.24rem+0.78vw,0.65625rem)] leading-snug text-[rgba(200,206,202,0.85)] lg:block">
+              <p className="hidden font-sans text-[length:clamp(0.53125rem,0.24rem+0.78vw,0.65625rem)] leading-snug text-[rgba(200,206,202,0.85)] lg:block">
                 {tagline}
               </p>
             ) : null}
             <p
-              className="font-[family-name:var(--font-mono)] text-[length:clamp(0.5rem,0.22rem+0.72vw,0.625rem)] font-semibold tabular-nums text-accent-signal/90"
+              className="font-mono text-[length:clamp(0.5rem,0.22rem+0.72vw,0.625rem)] font-semibold tabular-nums text-accent-signal/90"
               style={{ letterSpacing: "0.02em" }}
             >
               {copy.microMetrics.join("  ·  ")}
@@ -69,7 +69,7 @@ export function RevenueLayerDescriptors({ tier, pairing = "stack" }: Props) {
               {tierMeta.enabled.slice(0, 3).map((line) => (
                 <p
                   key={line}
-                  className="min-w-0 text-left font-[family-name:var(--font-body)] text-[length:clamp(0.5rem,0.22rem+0.72vw,0.625rem)] leading-tight text-[rgba(228,226,222,0.88)]"
+                  className="min-w-0 text-left font-sans text-[length:clamp(0.5rem,0.22rem+0.72vw,0.625rem)] leading-tight text-[rgba(228,226,222,0.88)]"
                 >
                   {line}
                 </p>

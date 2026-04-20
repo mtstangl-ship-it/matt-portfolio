@@ -37,11 +37,11 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
           >
             {summary.leadMetric.value}
           </p>
-          <p className="mt-2 font-body text-[0.6875rem] font-semibold uppercase leading-snug tracking-[0.12em] text-accent-signal/85 max-lg:text-center lg:text-left">
+          <p className="mt-2  text-[0.6875rem] font-semibold uppercase leading-snug tracking-[0.12em] text-accent-signal/85 max-lg:text-center lg:text-left">
             {summary.leadMetric.label}
           </p>
           {summary.leadMetric.descriptor ? (
-            <p className="mt-1.5 font-body text-[0.5rem] font-semibold uppercase tracking-[0.1em] text-dashboard-ink-light/55 max-lg:text-center lg:text-left">
+            <p className="mt-1.5  text-[0.5rem] font-semibold uppercase tracking-[0.1em] text-dashboard-ink-light/55 max-lg:text-center lg:text-left">
               {summary.leadMetric.descriptor}
             </p>
           ) : null}
@@ -57,7 +57,7 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
               {summary.label}
             </p>
             {"systemContextLine" in summary && summary.systemContextLine ? (
-              <p className="font-body text-[0.62rem] leading-relaxed text-dashboard-ink-light/85 max-lg:mx-auto max-lg:line-clamp-3 max-lg:max-w-[42ch] max-lg:text-center lg:mx-0 lg:max-w-none lg:text-left">
+              <p className=" text-[0.62rem] leading-relaxed text-dashboard-ink-light/85 max-lg:mx-auto max-lg:line-clamp-3 max-lg:max-w-[42ch] max-lg:text-center lg:mx-0 lg:max-w-none lg:text-left">
                 {summary.systemContextLine}
               </p>
             ) : null}
@@ -83,7 +83,7 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
               {summary.introLines.map((line) => (
                 <p
                   key={line}
-                  className="font-body text-[0.62rem] leading-relaxed text-dashboard-ink-light/88"
+                  className=" text-[0.62rem] leading-relaxed text-dashboard-ink-light/88"
                 >
                   {line}
                 </p>
@@ -92,7 +92,7 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
           </div>
         ) : null}
         {!isRevenue ? (
-          <p className="font-body text-[0.6rem] leading-snug text-dashboard-ink-light/75">
+          <p className=" text-[0.6rem] leading-snug text-dashboard-ink-light/75">
             <span className="font-bold text-accent-signal/90">{summary.modelTitle}</span>
             <span className="text-dashboard-ink-muted/70"> {summary.model}</span>
           </p>
@@ -114,10 +114,10 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
             <p className="font-mono text-[0.55rem] font-bold uppercase tracking-[0.12em] text-accent-signal/80">
               Transformation spine
             </p>
-            <p className="mt-1.5 font-body text-[0.65rem] leading-snug text-dashboard-ink-light/88 line-clamp-4">
+            <p className="mt-1.5  text-[0.65rem] leading-snug text-dashboard-ink-light/88 line-clamp-4">
               {"strategicRole" in summary ? summary.strategicRole : ""}
             </p>
-            <p className="mt-2 border-t border-white/[0.06] pt-2 font-body text-[0.6rem] leading-snug text-dashboard-ink-muted/90">
+            <p className="mt-2 border-t border-white/[0.06] pt-2  text-[0.6rem] leading-snug text-dashboard-ink-muted/90">
               {"buildLine" in summary && summary.buildLine ? (
                 <>
                   {scaleParts.prefix ? (
@@ -141,7 +141,7 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
               <p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.12em] text-dashboard-ink-muted/75">
                 Strategic role
               </p>
-              <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light/90">
+              <p className=" text-[0.72rem] leading-relaxed text-dashboard-ink-light/90">
                 {"strategicRole" in summary ? summary.strategicRole : ""}
               </p>
             </div>
@@ -158,7 +158,7 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
                 }}
               >
                 {"buildLine" in summary && summary.buildLine ? (
-                  <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light">
+                  <p className=" text-[0.72rem] leading-relaxed text-dashboard-ink-light">
                     {scaleParts.prefix ? (
                       <span className="font-semibold text-white">{scaleParts.prefix}</span>
                     ) : null}
@@ -180,7 +180,7 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
                 }}
               >
                 {"timeframeLine" in summary && summary.timeframeLine ? (
-                  <p className="font-body text-[0.72rem] leading-relaxed text-dashboard-ink-light">
+                  <p className=" text-[0.72rem] leading-relaxed text-dashboard-ink-light">
                     <span className="font-semibold text-white">2Q </span>
                     <span>{summary.timeframeLine.replace(/^2Q\s*/, "")}</span>
                   </p>
@@ -243,11 +243,11 @@ export function ImpactSystemSummary({ system }: { system: SystemKey }) {
             >
               <span className="font-mono text-[0.82rem] font-bold tabular-nums text-white">{o.value}</span>
               <div className="flex min-w-0 flex-col items-end gap-0.5 text-right">
-                <span className="font-body text-[0.5rem] font-semibold uppercase tracking-[0.1em] text-dashboard-ink-light/75">
+                <span className=" text-[0.5rem] font-semibold uppercase tracking-[0.1em] text-dashboard-ink-light/75">
                   {o.label}
                 </span>
                 {"descriptor" in o && o.descriptor ? (
-                  <span className="font-body text-[0.42rem] font-semibold uppercase tracking-[0.08em] text-dashboard-ink-light/58">
+                  <span className=" text-[0.42rem] font-semibold uppercase tracking-[0.08em] text-dashboard-ink-light/58">
                     {o.descriptor}
                   </span>
                 ) : null}
