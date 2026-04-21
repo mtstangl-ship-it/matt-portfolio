@@ -101,6 +101,32 @@ const config: Config = {
           DEFAULT: "#2c5f6f",
           muted: "#e8f1f4",
         },
+        // Impact Console — resolves via OKLCH variables defined in tokens-impact.css.
+        // Using var() here lets Tailwind utilities (bg-impact-panel, text-impact-teal)
+        // coexist with raw CSS vars inside the .impact-console wrapper.
+        impact: {
+          bg: "var(--bg)",
+          "bg-2": "var(--bg-2)",
+          panel: "var(--panel)",
+          "panel-2": "var(--panel-2)",
+          line: "var(--line)",
+          "line-2": "var(--line-2)",
+          muted: "var(--muted)",
+          ink: "var(--ink)",
+          "ink-2": "var(--ink-2)",
+          teal: "var(--teal)",
+          "teal-2": "var(--teal-2)",
+          "teal-dim": "var(--teal-dim)",
+          "teal-wash": "var(--teal-wash)",
+        },
+        // Per-case accent colors — scoped to the article[data-case] root via CSS
+        // (see globals.css). Utilities like text-case-accent / border-case-accent
+        // resolve to the right color for whichever case owns the current element.
+        case: {
+          accent: "var(--case-accent, var(--teal))",
+          "accent-2": "var(--case-accent-2, var(--teal-2))",
+          "accent-3": "var(--case-accent-3, var(--teal-dim))",
+        },
       },
       spacing: {
         section: "clamp(2.5rem, 5vw, 4.5rem)",

@@ -1,0 +1,376 @@
+<header class="mast">
+    <div class="tag"><span class="bar"></span><span>Operations · ITIL Transformation · Estée Lauder Companies</span><span class="series">· Case 04 of 05</span></div>
+    <h1>Password lockouts were the symptom. Six towers were the disease.</h1>
+    <p class="dek">
+      Estée Lauder's service desk was taking 3,515 password-reset tickets a month — and
+      escalating 42.6% of them. I led the transformation that made the towers one.
+    </p>
+    <div class="brief">
+      <div class="c"><span class="k">Client</span><span class="v">Wipro Digital · Estée Lauder Companies (ELC)</span></div>
+      <div class="c"><span class="k">Role</span><span class="v">CX &amp; EX transformation lead</span></div>
+      <div class="c"><span class="k">Scope</span><span class="v">6 ITIL towers · 3 unified tiers · ~40K employees</span></div>
+      <div class="c"><span class="k">Outcome</span><span class="v">Eight-figure renewal · NPS past goal</span></div>
+    </div>
+  </header>
+
+  <!-- HERO: LOCKOUT ECONOMICS — the numbers that made the case -->
+  <section class="hero-band wip-hero" aria-label="Lockout economics">
+    <div class="hb-head">
+      <span class="hb-k">LOCKOUT.ECONOMICS</span>
+      <span class="hb-t">Password reset &amp; lockout INCs · 90-day SPLUNK analysis · ELC Service Desk</span>
+      <span class="hb-spacer"></span>
+      <span style="color:var(--muted);letter-spacing:.06em;font-size:11px">SOURCE · SPLUNK + ServiceNow</span>
+    </div>
+
+    <div class="hb-stage">
+      <div class="lockflow">
+
+        <!-- Stage 1: volume -->
+        <div class="lf-stage lf-intake">
+          <div class="lf-num"><em>3,515</em></div>
+          <div class="lf-lab">Password reset &amp; lockout INCs<br><span class="lf-sub">per month · Service Desk intake</span></div>
+          <div class="lf-bar"><i style="width:100%"></i><span>100% INCOMING</span></div>
+        </div>
+
+        <div class="lf-arrow" aria-hidden="true">→</div>
+
+        <!-- Stage 2: the leak -->
+        <div class="lf-stage lf-leak">
+          <div class="lf-num"><em>42.6<small>%</small></em></div>
+          <div class="lf-lab">Escalated beyond Service Desk<br><span class="lf-sub">~1,498 INCs leaking to higher tiers</span></div>
+          <div class="lf-bar"><i style="width:42.6%" class="leak"></i><span>ESCALATED</span></div>
+          <div class="lf-why">
+            <span class="lf-why-k">WHY THEY ESCALATED</span>
+            <ul>
+              <li>SD agents could not <b>localize</b> complex lockouts</li>
+              <li>No cross-tool telemetry — AD, Cisco ISE, endpoint all separate</li>
+              <li>Inaccurate routing · repeated customer restarts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lf-arrow" aria-hidden="true">→</div>
+
+        <!-- Stage 3: the cost -->
+        <div class="lf-stage lf-cost">
+          <div class="lf-num"><em>4<small>×</small></em></div>
+          <div class="lf-lab">Time-to-resolve when escalated<br><span class="lf-sub">vs. cases closed at the Service Desk</span></div>
+          <div class="lf-break">
+            <span class="lf-k">ROOT CAUSE · 43%</span>
+            <p>Lockouts traced to <b>browser-cached passwords</b> — not AD policy, not user error in the classical sense. Invisible to legacy routing.</p>
+          </div>
+        </div>
+
+        <div class="lf-arrow reverse" aria-hidden="true">→</div>
+
+        <!-- Stage 4: the intervention -->
+        <div class="lf-stage lf-fix">
+          <div class="lf-num"><em>10<small>%</small></em></div>
+          <div class="lf-lab">Reduction target<br><span class="lf-sub">Redesign + SPLUNK-driven routing</span></div>
+          <div class="lf-prize">
+            <div class="lp-row">
+              <span class="lp-v">$<em>62K</em></span>
+              <span class="lp-k">Annual SD cost · saved</span>
+            </div>
+            <div class="lp-row">
+              <span class="lp-v"><em>2,283</em> hrs</span>
+              <span class="lp-k">Employee lost time · reclaimed / yr</span>
+            </div>
+            <div class="lp-row">
+              <span class="lp-v"><em>15K+</em> hrs</span>
+              <span class="lp-k">Resolver-group time · potential saved</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="lf-splunk">
+        <span class="lfsp-k">THE DIAGNOSTIC THAT UNLOCKED IT</span>
+        <p>A single SPLUNK query — written by Wipro's CAS team, surfaced to 10 of 80+ SD agents — correlated AD lockout events (EventCode 4740) with source host, caller, and signature. Before: lockouts were anonymous. After: every lockout had a <b>traceable origin</b> — device, browser, session, repeat-offender pattern. <em>You can't redesign what you can't see.</em></p>
+          <code>source=WinEventLog:Security EventCode=4740 · dedup _time user EventCode · coalesce(Caller_Computer_Name, host) · eval signature=COALESCE(signature, failure_reason)</code>
+        </div>
+    </div>
+
+    <div class="hb-foot">
+      <div class="hb-m"><span class="v">35<em>%</em></span><span class="k">Lockouts handled by phone · pre-redesign</span></div>
+      <div class="hb-m"><span class="v">50+ · 200+</span><span class="k">Repeat users · INCs · reviewed via SPLUNK</span></div>
+      <div class="hb-m"><span class="v">10 / 80+</span><span class="k">Agents with SPLUNK access · day-one gap</span></div>
+    </div>
+  </section>
+
+  <section class="outcome">
+    <p class="claim">One operating model, owned in ServiceNow. The password-lockout problem didn't get <em>solved</em> — it stopped being a routing problem and became a <b>signal</b>.</p>
+    <div class="big">
+      <span class="n"><em>31</em>%</span>
+      <span class="cap">MTTR reduction · 16,000+ annual cases</span>
+      <span class="unit">Process behavior change, not throughput</span>
+    </div>
+  </section>
+  <div class="metrics">
+    <div class="m"><span class="v">+15<small>%</small></span><span class="k">NPS over goal</span></div>
+    <div class="m"><span class="v">30<small>+</small></span><span class="k">Operational outcomes shipped</span></div>
+    <div class="m"><span class="v">3</span><span class="k">Escalation tiers (from 6)</span></div>
+    <div class="m"><span class="v">72<small>%</small></span><span class="k">Cases resolved at T1</span></div>
+  </div>
+
+  <section class="chapter">
+    <div class="stage"><span class="lab">01 · Brief</span><span class="ttl">What I walked into</span></div>
+    <div class="chap-body">
+      <h2>The brief described a skills problem. It was a systems problem.</h2>
+      <p>
+        Wipro Digital recruited me to build their Experience Design practice
+        and lead CX/EX transformation for Estée Lauder Companies — a ~40,000-employee
+        global enterprise running its IT service delivery through six discrete
+        ITIL towers.
+      </p>
+      <p>
+        The brief was <em>SME enablement</em>: equip practitioners within each tower
+        with better CX practices. What I found inside: six towers operating as
+        six companies. No shared success metrics. No common escalation logic.
+        Customer experience managed as a function of IT delivery rather than as
+        a strategic design problem.
+      </p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="stage"><span class="lab">02 · Pivot</span><span class="ttl">The engagement-defining call</span></div>
+    <div class="chap-body">
+      <h2>Four weeks in, we killed the original plan.</h2>
+      <p>
+        The towers weren't failing at execution — they were failing at
+        <em>integration</em>. An ELC employee didn't experience six towers. They
+        experienced one company. And that company was incoherent.
+      </p>
+      <p>
+        We pivoted from SME enablement to <b>programmatic redesign</b>: instead
+        of training within existing structures, redesigning the structures
+        themselves. The lockout problem became the tip of the spear — a high-volume,
+        high-visibility workflow that proved the towers' incoherence could be
+        measured in hours of lost productivity.
+      </p>
+      <div class="callout warn">
+        <span class="k">What that cost</span>
+        <p class="body">Four weeks. I should have run a structural diagnostic before proposing the enablement model. Six towers operating independently is a systems problem — not a skills problem. The lesson carries forward: model organizational capacity before designing against it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="stage"><span class="lab">03 · Diagnosis</span><span class="ttl">Where lockouts actually came from</span></div>
+    <div class="chap-body">
+      <h2>3,515 tickets a month. Nobody could say where they originated.</h2>
+      <p>
+        The Service Desk was resolving ~2,000 password reset/lockout INCs a month —
+        most of them AD-related, routed by heuristic. But <b>42.6%</b> escalated,
+        and when they did, resolution took <b>4×</b> longer. The escalation tax was
+        the business.
+      </p>
+      <p>
+        Our CAS team built a SPLUNK query correlating AD lockout events with source
+        host, caller computer name, and failure signature. The result was the first
+        time lockouts had a <em>geography</em>. And the geography said something nobody
+        had said out loud: <b>43% of lockouts were browser-cached passwords</b> — users
+        who changed their AD password but didn't update the saved credential in Chrome,
+        Edge, or an enterprise app. A classical routing system couldn't see that. It
+        saw "AD lockout" and fired the same playbook every time.
+      </p>
+      <div class="callout">
+        <span class="k">The shift</span>
+        <p class="body">Lockouts moved from <em>volume problem to be deflected</em> to <em>signal to be listened to</em>. The 50+ repeat users surfaced by SPLUNK each month weren't bad-actor employees. They were the canaries for process gaps elsewhere — cached passwords in unmanaged apps, devices with stale policy, onboarding handoffs where credentials were distributed across four systems and three emails.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · CASE FLOW — the mid-case artifact: before/after a single password lockout ticket -->
+  <section class="chapter">
+    <div class="stage"><span class="lab">04 · Case Flow</span><span class="ttl">Before &amp; after · one ticket</span></div>
+    <div class="chap-body">
+      <h2>Follow one lockout ticket through both models.</h2>
+      <p>
+        This is the same employee, same problem, same Monday morning. Before:
+        they restart the story at every handoff. After: the context travels
+        with the case and the Service Desk closes it before coffee gets cold.
+      </p>
+    </div>
+  </section>
+
+  <!-- CASE FLOW DIAGRAM — full-bleed -->
+  <section class="caseflow" aria-label="Case flow — before and after">
+    <div class="caseflow-inner">
+
+      <!-- BEFORE -->
+      <div class="cf-lane cf-before">
+        <div class="cf-lane-head">
+          <span class="cf-k">BEFORE · legacy</span>
+          <h4>Context lost at every handoff</h4>
+          <span class="cf-sub">6 towers · manual routing · customer restarts</span>
+        </div>
+
+        <ol class="cf-flow">
+          <li class="cf-node" data-actor="user">
+            <span class="cf-t">09:12</span>
+            <span class="cf-who">Claudia</span>
+            <span class="cf-act">Can't sign in. Calls Service Desk.</span>
+          </li>
+          <li class="cf-node" data-actor="sd">
+            <span class="cf-t">09:18</span>
+            <span class="cf-who">SD Agent · T1</span>
+            <span class="cf-act">AD lockout assumed. Resets password. Hangs up.</span>
+          </li>
+          <li class="cf-node" data-actor="user repeat">
+            <span class="cf-t">10:47</span>
+            <span class="cf-who">Claudia</span>
+            <span class="cf-act">Locked out again. Different agent. <em>Restarts the story.</em></span>
+          </li>
+          <li class="cf-node" data-actor="sd">
+            <span class="cf-t">11:02</span>
+            <span class="cf-who">SD Agent · T1</span>
+            <span class="cf-act">Routes to AD Engineering — suspected policy issue.</span>
+          </li>
+          <li class="cf-node" data-actor="esc">
+            <span class="cf-t">Day 2</span>
+            <span class="cf-who">AD Tower</span>
+            <span class="cf-act">No AD issue. Bounces to Endpoint. No context payload.</span>
+          </li>
+          <li class="cf-node" data-actor="esc">
+            <span class="cf-t">Day 3</span>
+            <span class="cf-who">Endpoint Tower</span>
+            <span class="cf-act">Requests Claudia's asset ID. <em>Third restart.</em></span>
+          </li>
+          <li class="cf-node" data-actor="esc">
+            <span class="cf-t">Day 5</span>
+            <span class="cf-who">Network Tower</span>
+            <span class="cf-act">Routed again. Cisco ISE logs requested.</span>
+          </li>
+          <li class="cf-node done" data-actor="close">
+            <span class="cf-t">Day 6.8</span>
+            <span class="cf-who">Resolved</span>
+            <span class="cf-act">Root cause: browser-cached password. Nobody writes that down.</span>
+          </li>
+        </ol>
+
+        <div class="cf-totals">
+          <div class="cft"><span class="cft-v">6.8<small>d</small></span><span class="cft-k">MTTR</span></div>
+          <div class="cft"><span class="cft-v">4</span><span class="cft-k">Tower handoffs</span></div>
+          <div class="cft"><span class="cft-v">3</span><span class="cft-k">Customer restarts</span></div>
+        </div>
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="cf-divider" aria-hidden="true">
+        <span class="cfd-v">vs.</span>
+        <span class="cfd-k">same ticket<br>new model</span>
+      </div>
+
+      <!-- AFTER -->
+      <div class="cf-lane cf-after">
+        <div class="cf-lane-head">
+          <span class="cf-k">AFTER · redesigned</span>
+          <h4>Context travels with the case</h4>
+          <span class="cf-sub">3 tiers · SPLUNK-aware routing · structured intake</span>
+        </div>
+
+        <ol class="cf-flow">
+          <li class="cf-node" data-actor="user">
+            <span class="cf-t">09:12</span>
+            <span class="cf-who">Claudia</span>
+            <span class="cf-act">Can't sign in. Opens intake via self-service.</span>
+          </li>
+          <li class="cf-node" data-actor="sys">
+            <span class="cf-t">09:12</span>
+            <span class="cf-who">Intake · SPLUNK</span>
+            <span class="cf-act">Correlates AD event 4740 + source host + signature. Flags browser-cache pattern.</span>
+          </li>
+          <li class="cf-node" data-actor="sd">
+            <span class="cf-t">09:17</span>
+            <span class="cf-who">SD Agent · T1</span>
+            <span class="cf-act">Ticket opens with full payload: user, host, signature, 2 prior lockouts. Agent runs the browser-cache playbook.</span>
+          </li>
+          <li class="cf-node done" data-actor="close">
+            <span class="cf-t">09:34</span>
+            <span class="cf-who">Resolved · T1</span>
+            <span class="cf-act">Cleared Chrome credential cache. Guided re-auth. Closed at Service Desk.</span>
+          </li>
+          <li class="cf-node" data-actor="sys">
+            <span class="cf-t">09:34</span>
+            <span class="cf-who">Feedback loop</span>
+            <span class="cf-act">Resolution pattern logged. If the same signature fires 3× for a user, it routes direct-to-playbook next time.</span>
+          </li>
+        </ol>
+
+        <div class="cf-totals">
+          <div class="cft highlight"><span class="cft-v">22<small>min</small></span><span class="cft-k">MTTR</span></div>
+          <div class="cft highlight"><span class="cft-v">0</span><span class="cft-k">Tower handoffs</span></div>
+          <div class="cft highlight"><span class="cft-v">0</span><span class="cft-k">Customer restarts</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="stage"><span class="lab">05 · Design</span><span class="ttl">Six towers, three tiers</span></div>
+    <div class="chap-body">
+      <h2>Ops said three tiers was the ceiling. They were right.</h2>
+      <p>
+        My first design was four tiers. Operations pushed back — given current
+        staffing, they'd be stuck running two of them understaffed. We rebuilt
+        around three. It performed better because every team could actually own
+        their lane without ambiguity.
+      </p>
+
+      <div class="mini-ladder">
+        <div class="t">
+          <span class="idx">T01</span>
+          <span class="name">Triage &amp; resolve <small>Structured intake with SPLUNK-driven payload. 72% of cases close here. Browser-cache playbook lives here.</small></span>
+          <span class="lift"><em>&lt;4h</em> target</span>
+        </div>
+        <div class="t">
+          <span class="idx">T02</span>
+          <span class="name">Specialist engage <small>Domain engineers pick up a full context payload. No customer restart. Signature + source host + prior history attached.</small></span>
+          <span class="lift"><em>&lt;2d</em> target</span>
+        </div>
+        <div class="t">
+          <span class="idx">T03</span>
+          <span class="name">Product &amp; engineering <small>Reserved for defects and architectural fixes. Repeat signatures trigger here, feed roadmap directly.</small></span>
+          <span class="lift"><em>&lt;5d</em> target</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="stage"><span class="lab">06 · Delta</span><span class="ttl">Before / after · all cases</span></div>
+    <div class="chap-body">
+      <h2>Context traveled with the case.</h2>
+      <div class="delta">
+        <div class="b">
+          <span class="k">Before · legacy handoff</span>
+          <span class="v">6.8<small style="font-size:.5em;color:var(--muted);font-weight:400;letter-spacing:0;margin-left:4px">days</small></span>
+          <span class="d">Cases bounced across towers. Context rewritten at each handoff. Customer restarted the conversation.</span>
+        </div>
+        <div class="b after">
+          <span class="k">After · redesigned tiers</span>
+          <span class="v">4.7<small style="font-size:.5em;color:var(--muted);font-weight:400;letter-spacing:0;margin-left:4px">days</small></span>
+          <span class="d">Structured intake. Context payload per handoff. Resolution at the lowest capable tier, enforced in ServiceNow.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="stage"><span class="lab">07 · Lesson</span><span class="ttl">What I'd do differently</span></div>
+    <div class="chap-body">
+      <div class="pull">When an org has six of anything, the problem is almost never execution. Diagnose the system before prescribing the intervention.</div>
+      <p>
+        A structural diagnostic in week one would have saved four weeks of
+        proving the enablement model wrong. And the lockout story is the
+        smaller version of the same lesson: <em>signals the org can't see
+        are the signals the org is paying for.</em> The SPLUNK query didn't
+        reduce lockouts. It made them legible. Reducing them was a design
+        choice the legibility made possible.
+      </p>
+    </div>
+  </section>
