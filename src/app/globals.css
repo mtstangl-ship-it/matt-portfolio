@@ -1,5 +1,6 @@
 @import './tokens-type.css';
 @import './tokens-impact.css';
+@import './cases.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

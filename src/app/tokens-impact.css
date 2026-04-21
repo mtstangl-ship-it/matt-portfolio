@@ -27,6 +27,19 @@
   --teal-dim:  oklch(0.48 0.07 190);
   --teal-wash: oklch(0.82 0.13 190 / .10);
 
+  /* Secondary signal colors, referenced by ported case CSS
+     (.callout.warn, .trace.ai, flow-chart accents, etc.). */
+  --amber: oklch(0.82 0.12 70);
+  --red:   oklch(0.70 0.14 25);
+  --green: oklch(0.78 0.14 150);
+
+  /* Type + motion tokens used by ported case layouts. The sans/mono
+     values re-expose the next/font variables from layout.tsx so
+     `font-family: var(--sans)` inside cases.css resolves correctly. */
+  --sans: var(--font-inter-tight), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mono: var(--font-jetbrains), ui-monospace, monospace;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
   /* ---------- spacing (8px base) ---------- */
   --sp-1: 4px;
   --sp-2: 8px;
