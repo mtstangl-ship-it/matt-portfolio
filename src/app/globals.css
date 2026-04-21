@@ -38,3 +38,101 @@
     max-width: var(--measure);
   }
 }
+
+/* ============================================================
+   Case accent system — per-case CSS variables scoped to the
+   article root. Bug fix: these MUST live on the article, not
+   on .hero, or interior lists render monochrome.
+
+   Each case sets --case-accent(-2,-3) so shared utilities
+   (`text-case-accent`, `border-case-accent`) resolve correctly
+   inside the article subtree.
+   ============================================================ */
+article[data-case="ai"] {
+  --case-accent:    var(--teal);
+  --case-accent-2:  var(--teal-2);
+  --case-accent-3:  var(--teal-dim);
+}
+
+article[data-case="synthetic"] {
+  --sy-red:     oklch(0.62 0.21 25);
+  --sy-blue:    oklch(0.55 0.18 245);
+  --sy-green:   oklch(0.72 0.17 150);
+  --case-accent:    var(--teal);
+  --case-accent-2:  var(--teal-2);
+  --case-accent-3:  var(--teal-dim);
+}
+
+article[data-case="autodesk"] {
+  --bp-accent:      oklch(0.78 0.16 150);
+  --bp-accent-alt:  oklch(0.70 0.18 280);
+  --case-accent:    var(--bp-accent);
+  --case-accent-2:  var(--bp-accent-alt);
+  --case-accent-3:  oklch(0.48 0.09 150);
+}
+
+article[data-case="wipro"] {
+  --wip-red:    oklch(0.62 0.19 25);
+  --wip-amber:  oklch(0.78 0.14 75);
+  --wip-green:  oklch(0.78 0.16 150);
+  --case-accent:    var(--wip-red);
+  --case-accent-2:  var(--wip-amber);
+  --case-accent-3:  var(--wip-green);
+}
+
+article[data-case="ey"] {
+  --ey-red:     oklch(0.62 0.21 25);
+  --ey-blue:    oklch(0.55 0.18 245);
+  --ey-yellow:  oklch(0.85 0.15 85);
+  --ey-green:   oklch(0.72 0.17 150);
+  --case-accent:    var(--ey-red);
+  --case-accent-2:  var(--ey-blue);
+  --case-accent-3:  var(--ey-yellow);
+}
+
+/* ============================================================
+   Typography polish — applied site-wide so every page picks up
+   the design-critique fixes at once (balanced headings, tabular
+   numerics, pretty paragraphs).
+   ============================================================ */
+h1,
+h2 {
+  text-wrap: balance;
+}
+
+/* Tabular numerics for every mono utility and any element that
+   opts in via `.tabular-nums` or `[data-nums]`. */
+.mono,
+[data-mono],
+.tabular-nums,
+[data-nums] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   Focus ring — teal, 2px offset. Applied to all focus-visible
+   interactives unless an element opts out with .no-ring.
+   ============================================================ */
+:where(a, button, [role="tab"], [role="button"], input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--teal, rgba(34, 211, 199, 0.9));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.no-ring:focus-visible {
+  outline: none;
+}
+
+/* ============================================================
+   Reduced motion — sitewide, not just .impact-console. Matches
+   brief's design-critique requirement.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
