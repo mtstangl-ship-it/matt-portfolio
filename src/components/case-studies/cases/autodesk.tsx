@@ -4,5 +4,5 @@ import { CaseShell } from "../CaseShell";
 
 export function AutodeskCase({ entry }: { entry: CaseStudyEntry }) {
   const body = loadCaseHtml("autodesk");
-  return <CaseShell entry={entry} body={body} dataCase="autodesk" />;
+  return <CaseShell entry={entry} body={body} />;
 }

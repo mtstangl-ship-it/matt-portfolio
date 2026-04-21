@@ -11,5 +11,5 @@ import { CaseShell } from "../CaseShell";
  */
 export function SyntheticCase({ entry }: { entry: CaseStudyEntry }) {
   const body = loadCaseHtml("synth");
-  return <CaseShell entry={entry} body={body} dataCase="synth" />;
+  return <CaseShell entry={entry} body={body} />;
 }

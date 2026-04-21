@@ -25,14 +25,10 @@ import { caseStudyEntries } from "@/content/case-studies";
 export function CaseShell({
   entry,
   body,
-  dataCase,
 }: {
   entry: CaseStudyEntry;
   /** Raw HTML body extracted from reference/Case Study.html. */
   body: string;
-  /** The `data-case` value used by the reference CSS. `synth` for Synthetic
-   * Users, otherwise matches the route slug. */
-  dataCase: string;
 }) {
   const bodyRef = useRef<HTMLDivElement>(null);
 

@@ -4,5 +4,5 @@ import { CaseShell } from "../CaseShell";
 
 export function WiproCase({ entry }: { entry: CaseStudyEntry }) {
   const body = loadCaseHtml("wipro");
-  return <CaseShell entry={entry} body={body} dataCase="wipro" />;
+  return <CaseShell entry={entry} body={body} />;
 }

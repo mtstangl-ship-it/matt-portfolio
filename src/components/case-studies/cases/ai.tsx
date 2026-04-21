@@ -4,5 +4,5 @@ import { CaseShell } from "../CaseShell";
 
 export function AiCase({ entry }: { entry: CaseStudyEntry }) {
   const body = loadCaseHtml("ai");
-  return <CaseShell entry={entry} body={body} dataCase="ai" />;
+  return <CaseShell entry={entry} body={body} />;
 }
