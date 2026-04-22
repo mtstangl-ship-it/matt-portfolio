@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { SiteGrid } from "@/components/ui/SiteGrid";
 import { JourneyArchitectureIcon } from "@/components/icons";
@@ -32,6 +33,32 @@ export function Hero() {
               <p className="max-w-[min(22rem,100%)]  text-subhead font-normal leading-[1.55] tracking-[0.01em] text-dashboard-ink-muted/90">
                 {hero.subhead}
               </p>
+              {/* Availability + contact row — brief #6, #9: LinkedIn + Get in
+                  touch must be visible in the hero, not just the footer. */}
+              <div className="mt-5 flex flex-col gap-3 text-[0.8125rem] leading-[1.5] text-dashboard-ink-muted/90 sm:mt-6 sm:text-sm">
+                <p className="max-w-[min(22rem,100%)] font-medium text-dashboard-ink-light/90">
+                  {hero.availability}
+                </p>
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[0.6875rem] font-semibold uppercase tracking-[0.18em]">
+                  {hero.contactLinks.map((link) => {
+                    const LinkTag = link.external ? "a" : Link;
+                    const extraProps = link.external
+                      ? { target: "_blank" as const, rel: "noreferrer noopener" }
+                      : {};
+                    return (
+                      <LinkTag
+                        key={link.href}
+                        href={link.href}
+                        {...extraProps}
+                        className="inline-flex items-center gap-1.5 text-accent-signal/90 transition-colors hover:text-accent-signal"
+                      >
+                        {link.label}
+                        <span aria-hidden>↗</span>
+                      </LinkTag>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
             <div className="hidden lg:block" aria-hidden />
           </div>

@@ -1,39 +1,13 @@
-import type { Metadata } from "next";
-import { CaseStudyIntelPanel } from "@/components/case-studies";
-import { PageHero, SiteGrid } from "@/components/ui";
-import { caseStudiesPage, caseStudyEntries } from "@/content/case-studies";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Case Studies",
-  description: caseStudiesPage.subhead,
-};
-
+/**
+ * /case-studies has no landing page. The case picker inside each case
+ * is the navigation between cases, and dropping readers on a list of
+ * tiles made them decide before the site had shown them anything.
+ *
+ * Hitting the route lands directly on the first case (AI Workflow).
+ * Every other case remains deep-linkable via /case-studies/<slug>.
+ */
 export default function CaseStudiesIndexPage() {
-  const [featured, ...supporting] = caseStudyEntries;
-
-  return (
-    <div className="relative min-h-screen bg-paper-50">
-      <SiteGrid tone="light" opacity={0.3} />
-      <PageHero
-        eyebrow={caseStudiesPage.eyebrow}
-        title={caseStudiesPage.title}
-        subtitle={caseStudiesPage.subhead}
-        tone="light"
-      />
-
-      <div className="relative mx-auto max-w-6xl px-4 py-section sm:px-6">
-        {featured ? (
-          <div className="mb-5 md:mb-6">
-            <CaseStudyIntelPanel entry={featured} mode="pageFeatured" />
-          </div>
-        ) : null}
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 md:items-stretch">
-          {supporting.map((entry) => (
-            <CaseStudyIntelPanel key={entry.slug} entry={entry} mode="pageSupporting" />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+  redirect("/case-studies/ai");
 }

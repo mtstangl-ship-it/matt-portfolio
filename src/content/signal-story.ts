@@ -8,9 +8,13 @@ export const signalStoryCopy = {
   /** Full intro, used on the dedicated Signal → Story page. */
   intro:
     "A running record of the signals I catch (moments, behavior, culture, emotion) and the short films they turn into.",
-  /** Home-section teaser, one beat of craft, so the subpage copy isn't repeated. */
+  /**
+   * Home-section framing line above the film grid. Brief #4, verbatim:
+   * positions the short-film work as an extension of the same observational
+   * craft that drives product and service design.
+   */
   homeTeaser:
-    "Short films built on close observation. The craft side of the practice, in its own language.",
+    "The same skill that makes a good product and service design leader makes a good storyteller and advertiser: you watch before you design. Signal → Story is that practice in its own form.",
 } as const;
 
 export type SignalStoryVideo = {

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import type { CaseStudyEntry, CaseSlug } from "@/content/case-studies";
 import { caseStudyEntries } from "@/content/case-studies";
+import { CasePicker } from "./CasePicker";
 
 /**
  * CaseShell — minimal wrapper for every /case-studies/[slug] route.
@@ -16,11 +17,13 @@ import { caseStudyEntries } from "@/content/case-studies";
  *
  * Responsibilities:
  *   1. Scope .impact-console tokens and data-case accent vars to the article.
- *   2. Provide the shared "back to case studies" link.
+ *   2. Render the breadcrumb + case picker (horizontal switcher across all
+ *      five cases). /case-studies has no landing page, so the picker IS
+ *      the navigation between cases.
  *   3. Provide prev/next case navigation (Next Link routing, not hash).
  *   4. Wire the small set of interactive widgets that the reference HTML
  *      ships with: Autodesk tier toggle, AI terminal severity filter, AI
- *      telemetry node switcher.
+ *      telemetry node switcher, signal strip hover.
  */
 export function CaseShell({
   entry,
@@ -126,15 +129,23 @@ export function CaseShell({
       data-case={entry.slug as CaseSlug}
       className="impact-console relative min-h-screen"
     >
-      {/* Breadcrumb row — the reference HTML has a .crumb block per case but
-          we own a site-level breadcrumb so only the back-link is needed. */}
-      <div className="mx-auto max-w-[960px] px-6 pt-10">
-        <Link
-          href="/case-studies"
-          className="mono text-[var(--muted)] transition-colors hover:text-[var(--teal)]"
-        >
-          ← All case studies
-        </Link>
+      {/* Breadcrumb + picker. There is no /case-studies landing page; the
+          picker is how readers move between cases without going to the top
+          nav. Mirrors the reference HTML's .crumb + .picker pair. */}
+      <div className="mx-auto flex max-w-[960px] flex-col gap-5 px-6 pt-10">
+        <div className="mono flex items-center gap-2 text-[var(--muted)]">
+          <span
+            aria-hidden
+            className="inline-block h-[7px] w-[7px] rounded-full bg-[var(--teal)]"
+          />
+          <span>CASE STUDY</span>
+          <span aria-hidden className="text-[var(--line-2)]">/</span>
+          <span className="text-[var(--teal)]">
+            {entry.shortName.toUpperCase()}
+          </span>
+        </div>
+        <div className="h-px w-full bg-[var(--line)]" />
+        <CasePicker activeSlug={entry.slug} />
       </div>
 
       {/* The extracted HTML body — mast, outcome, metrics, chapters, lesson. */}

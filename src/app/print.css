@@ -1,0 +1,140 @@
+/* ============================================================
+   Print styles, scoped for /case-studies/[slug] routes.
+
+   Brief Part 4 requires each case study be usable as a PDF case
+   study. The case body is already laid out as a long-form article
+   so this stylesheet just strips chrome (nav, breadcrumb, picker,
+   prev/next, footer, background grid) and pushes the content to
+   black-on-white ink for printability.
+
+   Only applies inside `article[data-case]` so /impact, /about,
+   /signal-story, /contact and the homepage print with whatever the
+   browser default decides, not our dashboard dark theme.
+   ============================================================ */
+
+@media print {
+  /* Global: switch to ink-on-paper regardless of document tokens. */
+  html, body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  /* SiteGrid is pure decoration. Never print it. */
+  [aria-hidden="true"].pointer-events-none {
+    display: none !important;
+  }
+
+  /* --- Case study routes only ------------------------------------ */
+  article[data-case] {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  /* Remap the impact-console dark tokens to printable values so all
+     the borrowed body styles (.mast, .chapter, .outcome, .metrics,
+     etc.) stay legible on paper. */
+  .impact-console,
+  article[data-case] {
+    --bg: #ffffff !important;
+    --bg-2: #ffffff !important;
+    --panel: #f6f6f4 !important;
+    --panel-2: #ffffff !important;
+    --ink: #111111 !important;
+    --ink-2: #333333 !important;
+    --muted: #555555 !important;
+    --line: #cccccc !important;
+    --line-2: #b3b3b3 !important;
+    --teal: #005f61 !important;
+    --teal-2: #005f61 !important;
+    --teal-dim: #7aa4a5 !important;
+    --teal-wash: transparent !important;
+  }
+
+  /* Chrome the reader doesn't need on paper. */
+  nav[aria-label="Primary"],
+  nav[aria-label="Case study picker"],
+  nav[aria-label="Case study navigation"],
+  article[data-case] .crumb,
+  article[data-case] > div:first-child,
+  footer,
+  .mobile-nav,
+  .site-footer {
+    display: none !important;
+  }
+
+  /* Case body content: keep flowing but shed the fixed heights + scroll
+     affordances that only matter in a browser viewport. */
+  article[data-case] .shell,
+  article[data-case] main {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  article[data-case] .mast {
+    padding: 0 0 16pt !important;
+    break-inside: avoid;
+  }
+
+  article[data-case] .mast h1 {
+    font-size: 22pt !important;
+    line-height: 1.15 !important;
+  }
+
+  article[data-case] h2 {
+    font-size: 16pt !important;
+    break-after: avoid;
+  }
+
+  article[data-case] h3 {
+    font-size: 13pt !important;
+    break-after: avoid;
+  }
+
+  article[data-case] .outcome,
+  article[data-case] .metrics,
+  article[data-case] .chapter {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  article[data-case] .chapter.lesson {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* Convert hover-driven inline widgets into a static readable state so
+     the printed artifact shows all tiers / all severities / the default
+     telemetry week rather than whatever was clicked last. */
+  article[data-case] .tier-toggle,
+  article[data-case] .term-filters,
+  article[data-case] .tel-nodes,
+  article[data-case] .sev-filter {
+    display: none !important;
+  }
+
+  article[data-case] .term-body li,
+  article[data-case] .tel-panel,
+  article[data-case] .sig-col {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  article[data-case] .tel-panel {
+    break-inside: avoid;
+    margin-bottom: 12pt;
+  }
+
+  /* Ensure links keep their URL visible in paper form. */
+  article[data-case] a[href]:not([href^="#"])::after {
+    content: " (" attr(href) ")";
+    font-size: 8.5pt;
+    color: #555555;
+  }
+
+  /* Page margins — roomy enough for binders / margin notes. */
+  @page {
+    margin: 0.75in;
+  }
+}

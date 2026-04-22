@@ -29,6 +29,8 @@ export type CaseStudyEntry = {
   tag: string;
   /** 1-based position. Used for "CASE 01 OF 05" meta. */
   caseNumber: number;
+  /** Short label for the case picker, e.g. "AI Workflow", "EY Healthcare". */
+  shortName: string;
 
   // ------- Index + home tile metadata (existing schema) -------
   panelLabel: string;
@@ -49,6 +51,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
       "Six weeks. Four tools. One lesson I'll use for the rest of my career: AI raises the floor. Taste raises the ceiling.",
     tag: "AI WORKFLOW",
     caseNumber: 1,
+    shortName: "AI Workflow",
     panelLabel: "AI WORKFLOW",
     teaserLine:
       "AI as a creative and system design partner for structure, iteration, and system refinement.",
@@ -66,6 +69,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
       "A structured way to pressure-test experience decisions before live traffic, as a complement to research, not a replacement.",
     tag: "SIMULATION · RESEARCH",
     caseNumber: 2,
+    shortName: "Synthetic Users",
     panelLabel: "SIMULATION · RESEARCH",
     teaserLine:
       "Stress-test journeys before live traffic with plausible scenarios, edge cases, and evidence-graded hypotheses.",
@@ -78,6 +82,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
       "A three-tier post-purchase model that turned customer success from a retention cost into a revenue motion. And the six-week negotiation that had to happen before anything could be designed.",
     tag: "SERVICE DESIGN · REVENUE TRANSFORMATION",
     caseNumber: 3,
+    shortName: "Autodesk",
     panelLabel: "SERVICE DESIGN · REVENUE",
     teaserLine: "A three-tier service model that turned post-purchase into a revenue motion.",
     tools: "Service Design · Journey Architecture · Blueprint",
@@ -93,6 +98,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
       "A $12M service-desk leak diagnosed in six weeks, fixed by redesigning the handoff between six support towers. ITIL compliant. Behavioral at the core.",
     tag: "OPERATIONS · ITIL",
     caseNumber: 4,
+    shortName: "Wipro",
     panelLabel: "OPERATIONS · ITIL",
     teaserLine:
       "Diagnosed a $12M leak; fixed the handoff between six support towers.",
@@ -107,6 +113,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
       "Say YES Summer: three cities, ten events, live art, music, and murals. And 715 vaccinations delivered where mass media couldn't land.",
     tag: "HEALTHCARE · COMMUNITY",
     caseNumber: 5,
+    shortName: "EY Healthcare",
     panelLabel: "HEALTHCARE · COMMUNITY",
     teaserLine:
       "Community-led field activation: 4.57M engagements and 715 vaccinations across Georgia.",

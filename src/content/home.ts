@@ -1,8 +1,30 @@
 export const hero = {
-  tagline: "CX · Product · Service transformation",
+  /**
+   * Mono kicker above the headline. Per brief #1, this surfaces role +
+   * seniority so the hero answers "what is this person" in a single line.
+   */
+  tagline: "Product & Service Design Leader · IC to director-level, enterprise transformation",
   headline: "I lead CX, product, and service transformation.",
   subhead:
     "For enterprises where experience has splintered across teams, channels, and systems. I rebuild it as one operating model that actually ships.",
+  /**
+   * Availability + contact row under the subhead. Brief #6 + #9 require a
+   * visible LinkedIn and "Get in touch" surface in or immediately below the
+   * hero (footer-only was the prior bug).
+   */
+  availability: "Available for senior design leadership roles, especially in healthcare.",
+  contactLinks: [
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/mattstangl",
+      external: true,
+    },
+    {
+      label: "Get in touch",
+      href: "/contact",
+      external: false,
+    },
+  ] as const,
   proofStrip: [
     "Autodesk",
     "Wipro",
