@@ -1,6 +1,5 @@
 import { Section } from "@/components/ui/Section";
 import { JourneyThesisVisual } from "@/components/visuals";
-import { brandThesis } from "@/content/home";
 import Image from "next/image";
 import { StanfordAICapabilityEmbedded } from "./StanfordAICapability";
 
@@ -20,14 +19,7 @@ export function BrandThesis() {
         <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1fr,minmax(0,1.2fr)] lg:items-start lg:gap-12">
           <div className="min-w-0">
             <div className="max-w-lg lg:max-w-none">
-              <h2 className=" text-section font-bold text-ink-950">
-                {brandThesis.headline}
-              </h2>
-              <div className=" mt-4 space-y-3 text-subhead font-bold leading-[1.5] text-ink-900 sm:mt-6 sm:space-y-4 sm:text-body-lg sm:leading-[1.55] prose-optimal">
-                {brandThesis.body.map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
-              </div>
+              <h2 className=" text-section font-bold text-ink-950" />
             </div>
           </div>
 

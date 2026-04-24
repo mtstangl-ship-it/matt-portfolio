@@ -54,7 +54,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
     shortName: "AI Workflow",
     panelLabel: "AI WORKFLOW",
     teaserLine:
-      "AI as a creative and system design partner for structure, iteration, and system refinement.",
+      "Six weeks, four tools, one portfolio. What AI did, what it got wrong, and the decisions that stayed mine.",
     tools: "Cursor · Claude · Claude Design · Vercel",
     mode: "Centaur, human in the saddle",
     method: "Design a system, then use models for variation, critique, and scaffolding",
@@ -72,7 +72,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
     shortName: "Synthetic Users",
     panelLabel: "SIMULATION · RESEARCH",
     teaserLine:
-      "Stress-test journeys before live traffic with plausible scenarios, edge cases, and evidence-graded hypotheses.",
+      "Nine synthetic reviewers stress-tested this portfolio before launch. Three findings self-review missed.",
     supportingMeta: "COMPLEMENT: Research · Hypothesis · Pre-launch",
   },
   {
@@ -84,7 +84,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
     caseNumber: 3,
     shortName: "Autodesk",
     panelLabel: "SERVICE DESIGN · REVENUE",
-    teaserLine: "A three-tier service model that turned post-purchase into a revenue motion.",
+    teaserLine: "Built Autodesk's global Service Design practice from zero. $50M+ incremental AOV in 12 months.",
     tools: "Service Design · Journey Architecture · Blueprint",
     mode: "0→1 practice build · 12-month window",
     method: "Frame success as a revenue motion, then design the service model that delivers it",

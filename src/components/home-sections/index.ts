@@ -1,7 +1,7 @@
 export { Hero } from "./Hero";
 export { CredibilityRail } from "./CredibilityRail";
 export { ClientTicker } from "./ClientTicker";
-export { BrandThesis } from "./BrandThesis";
+export { ProblemLedger } from "./ProblemLedger";
 export { TransformationImpactDashboard } from "./TransformationImpactDashboard";
 export { StanfordAICapability, StanfordAICapabilityEmbedded } from "./StanfordAICapability";
 export { SignalStorySection } from "./SignalStorySection";

@@ -4,9 +4,9 @@ export const hero = {
    * seniority so the hero answers "what is this person" in a single line.
    */
   tagline: "Product & Service Design Leader · IC to director-level, enterprise transformation",
-  headline: "I lead CX, product, and service transformation.",
+  headline: "I rebuild fragmented enterprise experience into one operating model that ships.",
   subhead:
-    "For enterprises where experience has splintered across teams, channels, and systems. I rebuild it as one operating model that actually ships.",
+    "For enterprises where the journey has splintered across teams, channels, and systems.",
   /**
    * Availability + contact row under the subhead. Brief #6 + #9 require a
    * visible LinkedIn and "Get in touch" surface in or immediately below the
@@ -43,17 +43,35 @@ export const clientTicker = [
   "Molson Coors",
 ] as const;
 
-export const brandThesis = {
-  headline: "Experience isn't one moment. It's the whole journey.",
-  body: [
-    "Most organizations fix touchpoints in isolation, fragmented experiences, frustrated customers, wasted effort.",
-    "I work at the system level: mapping journeys, aligning teams, designing services that flow. Outcomes that compound.",
-  ],
+export const problemLedger = {
+  solved: {
+    eyebrow: "PROBLEMS SOLVED",
+    items: [
+      "Turned Autodesk's post-purchase support into a $50M revenue motion",
+      "Unified Wipro's six ITIL towers into one operating model for Estée Lauder and Takeda",
+      "De-politicized vaccination engagement across Georgia — CDC national best practice",
+      "Cut MTTR by 31% across 16,000 annual cases",
+      "Built a global CX practice from zero at an enterprise consultancy",
+      "Made synthetic users a research method with documented QA pipeline",
+    ],
+  },
+  intent: {
+    eyebrow: "PROBLEMS I WANT TO SOLVE",
+    items: [
+      "Scaling healthcare access for populations the system was never built to serve",
+      "Friction between patients, providers, and insurers that nobody owns by design",
+      "Stigmatized care treated as a clinical experience, not a moral one",
+      "Experience design as an operating model, not a team",
+      "Service tiers designed around what customers actually value, not what we can charge for",
+      "AI strategy that raises the ceiling of what teams can do, not just the floor",
+    ],
+  },
+  dimensionLabel: "TRACK RECORD → INTENT",
 };
 
 export const transformationDashboard = {
-  headline: "Design and Transformation Impact",
-  subhead: "Journey-led operating models and service design.",
+  headline: "Three transformations. In numbers.",
+  subhead: "Autodesk · Wipro · EY — what shipped, what moved.",
   cta: "View impact",
   ctaHref: "/impact",
   companies: [
@@ -64,7 +82,7 @@ export const transformationDashboard = {
         "Connected Design, Product, Support, and Engineering through journey architecture and experience design. Delivered post-purchase service innovation, new offering models, and a 3–5 year CX vision that shaped Sales and Success modernization.",
       kpis: [
         { value: "+27%", label: "RR in Q1 post launch of new offering model" },
-        { value: "50M+", label: "YOY AOV driven through service design leadership" },
+        { value: "$50M+", label: "incremental AOV · 12-mo post-launch window · prior-year AOV flat" },
         { value: "0→1→2", label: "experience management community of practice" },
         { value: "106%", label: "NRR path achieved via customer relationship design" },
       ],
@@ -100,8 +118,7 @@ export const transformationDashboard = {
         "Led public health experience strategy for Georgia Department of Public Health and multi-state initiatives, designing engagement models that increased vaccine uptake across diverse populations. Aligned state agencies, healthcare providers, and partner organizations to reduce barriers to access, improve navigation into care, and translate outreach into real vaccinations. Delivered measurable outcomes across patient, provider, and system levels in high-pressure public health conditions.",
       kpis: [
         { value: "10+", label: "statewide healthcare & brand partnerships" },
-        { value: "715", label: "vaccinations driven in targeted activation (Georgia DPH Say Yes Summer)" },
-        { value: "4.57M", label: "public health engagements" },
+        { value: "4.57M → 715", label: "engagements (awareness layer) to vaccinations (activation layer) — two stages, one program. The gap is the design, not a conversion failure." },
         { value: "8-figure", label: "renewal driven by program performance" },
       ],
       capabilityTags: [
@@ -133,8 +150,8 @@ export const caseStudiesHomeSection = {
 } as const;
 
 export const contactCta = {
-  headline: "Let's talk",
-  subhead: "Journey redesign, experience strategy, operational transformation.",
+  headline: "Let's talk.",
+  subhead: "Senior design leadership roles. Journey redesign. Experience strategy. Operational transformation. Healthcare preferred.",
   cta: "Get in touch",
   ctaHref: "/contact",
 };

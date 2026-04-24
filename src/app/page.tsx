@@ -3,7 +3,7 @@ import {
   Hero,
   CredibilityRail,
   ClientTicker,
-  BrandThesis,
+  ProblemLedger,
   ContactCTA,
 } from "@/components/home-sections";
 
@@ -82,7 +82,7 @@ export default function Home() {
       <Hero />
       <CredibilityRail />
       <ClientTicker />
-      <BrandThesis />
+      <ProblemLedger />
       <TransformationImpactDashboard />
       <SignalStorySection />
       <FeaturedCaseStudiesPreview />
