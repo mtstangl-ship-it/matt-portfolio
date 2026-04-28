@@ -123,7 +123,7 @@ export function HomePagePort() {
           <div className="hero__copy">
             <p className="kicker">{homeV2Hero.kicker}</p>
             <h1 className="hero__h1">
-              I turn fragmented experiences into <em>flow-state</em> customer value.
+              I turn fragmented CX into <em>flow</em>.
             </h1>
             <p className="hero__sub">{homeV2Hero.subhead}</p>
 

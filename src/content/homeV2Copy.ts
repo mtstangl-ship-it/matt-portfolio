@@ -5,7 +5,7 @@
 export const homeV2Hero = {
   kicker: "CX, Product & Service Design Leader · Director / Senior Manager",
   headline:
-    "I turn fragmented experiences into flow-state customer value.",
+    "I turn fragmented CX into flow.",
   subhead:
     "For enterprises where the journey has splintered across operational silos.",
   availability:

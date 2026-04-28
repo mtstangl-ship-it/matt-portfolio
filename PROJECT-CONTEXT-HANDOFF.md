@@ -147,7 +147,7 @@ Run B addition (April 27, 2026): The Pipeline section now documents two syntheti
 - **Availability:** "Available for senior design leadership roles, especially in healthcare."
 
 ### Home page
-- **Hero H1:** "I turn fragmented experiences into flow-state customer value."
+- **Hero H1:** "I turn fragmented CX into flow."
 - **Hero subhead:** "For enterprises where the journey has splintered across operational silos."
 - **Brand thesis replaced with PROBLEM LEDGER (diptych: Solved | Want to solve)**
 
