@@ -1,0 +1,388 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.container { padding: 2rem 0; max-width: 680px; }
+.env-header { display: flex; align-items: center; gap: 10px; margin: 2rem 0 1rem; padding-bottom: 8px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.env-badge { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: var(--border-radius-md); letter-spacing: 0.06em; }
+.badge-dev { background: #E6F1FB; color: #0C447C; }
+.badge-qa { background: #EEEDFE; color: #3C3489; }
+.badge-uat { background: #E1F5EE; color: #085041; }
+.badge-prod { background: #FAECE7; color: #712B13; }
+.badge-pass { background: #EAF3DE; color: #27500A; font-size: 11px; padding: 2px 7px; border-radius: 4px; }
+.badge-fail { background: #FCEBEB; color: #791F1F; font-size: 11px; padding: 2px 7px; border-radius: 4px; }
+.badge-partial { background: #FAEEDA; color: #633806; font-size: 11px; padding: 2px 7px; border-radius: 4px; }
+.env-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.persona-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
+.persona-name { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 6px; }
+.finding { font-size: 14px; color: var(--color-text-primary); line-height: 1.6; margin-bottom: 8px; }
+.finding-label { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.rec { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; border-left: 2px solid var(--color-border-secondary); padding-left: 10px; margin-top: 8px; }
+.section-head { font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin: 2rem 0 1rem; }
+.priority-item { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+.priority-num { font-size: 12px; font-weight: 500; min-width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.p-crit { background: #FCEBEB; color: #791F1F; }
+.p-major { background: #FAEEDA; color: #633806; }
+.p-minor { background: #E6F1FB; color: #0C447C; }
+.priority-text { font-size: 14px; color: var(--color-text-primary); line-height: 1.5; }
+.summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin: 1rem 0; }
+.summary-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; }
+.summary-label { font-size: 11px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.summary-count { font-size: 22px; font-weight: 500; }
+.c-crit { color: #A32D2D; }
+.c-major { color: #854F0B; }
+.c-minor { color: #185FA5; }
+.c-pos { color: #0F6E56; }
+.log-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 1rem 0; }
+.log-table th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-tertiary); padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.log-table td { padding: 8px 8px; vertical-align: top; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); line-height: 1.5; }
+.log-table tr:last-child td { border-bottom: none; }
+.outline-item { margin-bottom: 14px; }
+.outline-sec { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.outline-detail { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+.divider { height: 0.5px; background: var(--color-border-tertiary); margin: 1.5rem 0; }
+.tab-row { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tab-btn { font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; }
+.tab-btn.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+</style>
+
+<h2 class="sr-only">Matt Stangl portfolio QA report — four environments, nine personas, findings and research log</h2>
+
+<div class="container">
+
+<div class="tab-row">
+  <button class="tab-btn active" onclick="showTab('findings')">Findings</button>
+  <button class="tab-btn" onclick="showTab('dev')">DEV</button>
+  <button class="tab-btn" onclick="showTab('qa')">QA</button>
+  <button class="tab-btn" onclick="showTab('uat')">UAT</button>
+  <button class="tab-btn" onclick="showTab('prod')">PROD</button>
+  <button class="tab-btn" onclick="showTab('log')">Research log</button>
+  <button class="tab-btn" onclick="showTab('casestudy')">Case study outline</button>
+</div>
+
+<div id="findings" class="tab-content active">
+  <div class="section-head">Summary</div>
+  <div class="summary-grid">
+    <div class="summary-card"><div class="summary-label">Critical</div><div class="summary-count c-crit">3</div></div>
+    <div class="summary-card"><div class="summary-label">Major</div><div class="summary-count c-major">5</div></div>
+    <div class="summary-card"><div class="summary-label">Minor</div><div class="summary-count c-minor">4</div></div>
+    <div class="summary-card"><div class="summary-label">Positive signals</div><div class="summary-count c-pos">6</div></div>
+  </div>
+
+  <div class="section-head" style="margin-top:1.5rem;">Critical issues</div>
+  <div class="persona-card">
+    <div class="finding-label">C1 — Case study depth is near-zero</div>
+    <div class="finding">All three case study pages (AI Portfolio, Synthetic Users, Autodesk Planning System) are stubs — 3–5 sentences each. They have titles, taglines, and one short paragraph, then end. No process, no artifacts, no decisions, no tradeoffs, no what-failed. This is the most consequential structural failure in the portfolio.</div>
+  </div>
+  <div class="persona-card">
+    <div class="finding-label">C2 — Role and scope are ambiguous at the hero level</div>
+    <div class="finding">"I lead CX, product, and service transformation" is a positioning statement, not a role statement. It's unclear whether Matt is a Principal IC, a Director, a Head of, or a VP-equivalent. This creates friction for recruiters and hiring managers in the first 10 seconds, especially without a title, team size, or reporting level anywhere on the homepage or About page.</div>
+  </div>
+  <div class="persona-card">
+    <div class="finding-label">C3 — $50M metric has no denominator, no attribution, and no timeframe context</div>
+    <div class="finding">The homepage states "$50M+ YOY AOV driven through service design leadership." The Impact page frames it as "Monetized AOV engine · 12 mo." But Matt's specific contribution vs. org-wide motion is never established. No baseline, no comparison year, no indication whether Matt led, contributed to, or influenced this number. Skeptics will dismiss it without that frame.</div>
+  </div>
+
+  <div class="section-head">Major issues</div>
+  <div class="persona-card">
+    <div class="finding-label">M1 — No evidence of backstage/frontstage architecture in Autodesk work</div>
+    <div class="finding">The Autodesk work is framed in outcomes (service tiers, revenue lift) but the case study stub doesn't show the system architecture — who does what backstage to make the three-tier model real. Service blueprinting, org behavior change, internal capability gaps: none visible.</div>
+  </div>
+  <div class="persona-card">
+    <div class="finding-label">M2 — Synthetic Users case study has no methodology shown</div>
+    <div class="finding">The page acknowledges the right framing ("complement to research, not a replacement") but shows nothing. No persona construction logic, no hypothesis format, no sample outputs, no edge cases, no failure modes. It's a description of the concept, not the method.</div>
+  </div>
+  <div class="persona-card">
+    <div class="finding-label">M3 — AI Portfolio case study is opaque about the human/AI split</div>
+    <div class="finding">"AI supports drafting, variation, and refinement; the narrative and IA remain intentionally human-led." This is the correct framing but it's a claim, not a demonstration. Which sections were AI-drafted? What did Matt override? Where did the AI get it wrong? Without that, the case study reads as defensive rather than transparent.</div>
+  </div>
+  <div class="persona-card">
+    <div class="finding-label">M4 — "15 services shipped" is an output metric, not an outcome metric</div>
+    <div class="finding">The Impact page lists "15+ Services shipped" under Autodesk. Shipping services is an activity. The outcome is whether customers adopted them, which tiers had retention, and which drove NRR. This metric needs to be replaced or contextualized against an adoption or retention signal.</div>
+  </div>
+  <div class="persona-card">
+    <div class="finding-label">M5 — No failures, pivots, or constraints mentioned anywhere</div>
+    <div class="finding">The portfolio reads as a sequence of wins. Every metric is positive. No project failed, stalled, or changed course. This is the single biggest "polished but shallow" trigger for senior design reviewers and hiring leaders who have seen a lot of portfolios.</div>
+  </div>
+
+  <div class="section-head">Minor issues</div>
+  <div class="persona-card">
+    <div class="finding-label">mn1 — "Signal → Story" section has no clear purpose for hiring audiences</div>
+    <div class="finding">The short films are distinctive and show craft range. But a recruiter or VP Product doesn't immediately understand why it's here or what it signals about Matt as a design leader. One line of intentional framing would resolve this.</div>
+  </div>
+  <div class="persona-card">
+    <div class="finding-label">mn2 — EY vaccination metric scale mismatch</div>
+    <div class="finding">4.57M engagements and 715 vaccinations sit side by side without explanation of the conversion gap. At a glance this looks like a very low conversion rate. The program logic (engagements were awareness, vaccinations were a separate downstream activation) needs a one-sentence bridge.</div>
+  </div>
+  <div class="persona-card">
+    <div class="finding-label">mn3 — About page aerospace metaphor runs long</div>
+    <div class="finding">The launch pad / mission / telemetry framing is original and visually interesting. But it's applied to every section, including the career arc, which makes "Operator Log" a strained metaphor for a work history. The framework earns its place in the process section; it doesn't need to govern the entire About page.</div>
+  </div>
+  <div class="persona-card">
+    <div class="finding-label">mn4 — No LinkedIn or contact method visible on the homepage</div>
+    <div class="finding">Contact lives at the bottom footer only. For someone who closes tabs quickly, there's no low-friction next step that doesn't require scrolling to the end.</div>
+  </div>
+
+  <div class="section-head">Positive signals</div>
+  <div class="persona-card">
+    <div class="finding-label">What's working</div>
+    <div class="finding" style="color: var(--color-text-secondary);">
+      1. The three-tier service model visualization on Impact is the strongest systems-thinking artifact on the site — it shows the architecture, not just the outcome.<br><br>
+      2. "Outcomes that compound" in the homepage subhead is excellent. It's a distinct, defensible positioning phrase that doesn't read as AI-generated.<br><br>
+      3. The Impact console UX — framed as a "live briefing" — is genuinely surprising and memorable. It's the one moment most reviewers will pause at.<br><br>
+      4. The Wipro before/after handoff table (6.8 → 4.7 days, structured payload, tier ownership) is the clearest cause-and-effect design story on the site.<br><br>
+      5. The "even over" statements on About (clarity even over comfort, progress even over perfection) read as genuine values, not LinkedIn platitudes.<br><br>
+      6. Stanford AI certification prominently placed signals seriousness about the tools without overclaiming.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-head">Prioritized change list</div>
+
+  <div class="priority-item"><div class="priority-num p-crit">1</div><div class="priority-text"><strong style="font-weight:500;">Expand all three case study stubs into real studies.</strong> Each needs: problem framing, constraints, what Matt did (not the team), key decision moments, one thing that didn't work, and outcome with attribution. Target: 600–900 words each minimum.</div></div>
+  <div class="priority-item"><div class="priority-num p-crit">2</div><div class="priority-text"><strong style="font-weight:500;">Add role clarity to the homepage hero.</strong> One line: something like "Product & Service Design Leader — IC to director-level scope, enterprise clients." This removes the recruiter's first friction point.</div></div>
+  <div class="priority-item"><div class="priority-num p-crit">3</div><div class="priority-text"><strong style="font-weight:500;">Give $50M a denominator.</strong> Add a brief attribution frame: "as the design and strategy lead for..." + the baseline year and what shifted. One sentence suffices.</div></div>
+  <div class="priority-item"><div class="priority-num p-major">4</div><div class="priority-text"><strong style="font-weight:500;">Replace "15 services shipped" with an adoption or retention metric.</strong> E.g., "% of eligible customers onboarded to a paid tier within 90 days" or "tier-1 attach rate in first 6 months."</div></div>
+  <div class="priority-item"><div class="priority-num p-major">5</div><div class="priority-text"><strong style="font-weight:500;">Add one honest failure or pivot to at least one case study.</strong> It doesn't need to be dramatic — a hypothesis that was wrong, a stakeholder who pushed back hard, a feature that shipped but didn't move the metric. This single addition changes the trust register.</div></div>
+  <div class="priority-item"><div class="priority-num p-major">6</div><div class="priority-text"><strong style="font-weight:500;">Show the AI/human split in the AI Portfolio case study.</strong> One annotated artifact — a before/after draft, a decision log, or a version comparison — would demonstrate rather than assert the method.</div></div>
+  <div class="priority-item"><div class="priority-num p-major">7</div><div class="priority-text"><strong style="font-weight:500;">Add one page of synthetic user methodology to the Synthetic Users case study.</strong> Show the persona construction framework, a sample synthetic user card, and what finding surfaced that human research hadn't yet reached.</div></div>
+  <div class="priority-item"><div class="priority-num p-minor">8</div><div class="priority-text">Add a one-line framing sentence to Signal → Story explaining its relationship to design practice.</div></div>
+  <div class="priority-item"><div class="priority-num p-minor">9</div><div class="priority-text">Add a conversion bridge to the EY metrics (engagements vs. vaccinations are separate program stages).</div></div>
+  <div class="priority-item"><div class="priority-num p-minor">10</div><div class="priority-text">Surface a contact/LinkedIn link in or near the homepage hero area.</div></div>
+</div>
+
+<div id="dev" class="tab-content">
+  <div class="env-header"><span class="env-badge badge-dev">DEV</span><span class="env-title">Structural QA</span></div>
+
+  <div class="persona-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+      <div class="persona-name">Sam R. — Senior recruiter</div>
+      <span class="badge-partial">Partial pass</span>
+    </div>
+    <div class="finding">Sam loads the homepage. The logo carousel and enterprise client logos (Autodesk, Wipro, EY) land well — credibility signals in the first viewport. The hero reads as a positioning statement, not a role label. Sam is scanning for: title, level, company, scope. She finds "CX · Product · Service transformation" as a category tag but no seniority signal. She scrolls to the Autodesk card, sees $50M+ and 27% RR. The numbers are credible-looking but she doesn't know if Matt was the lead or one of twenty people. Navigation makes sense — five clear tabs, no mystery. She doesn't close the tab. But she's not sure if this is a Director or a senior IC.</div>
+    <div class="rec">Role label and level signal missing from hero. She'd proceed to request a resume, but the portfolio hasn't answered the seniority question independently.</div>
+  </div>
+
+  <div class="persona-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+      <div class="persona-name">Morgan V. — VP Product</div>
+      <span class="badge-pass">Pass</span>
+    </div>
+    <div class="finding">Morgan moves faster. He reads "I rebuild it as one operating model that actually ships" and pauses — that's the language of someone who's been in the political reality of enterprise transformation. He goes straight to the Autodesk card. The three-tier service ladder on Impact is exactly the kind of artifact that earns respect from a product leader: it shows sequencing logic, tier economics, and a monetization strategy. He doesn't close the tab. He clicks to the Impact console and finds it genuinely well-structured. He'd book a call.</div>
+    <div class="rec">Morgan passes, but would be even more convinced if the case study depth matched the Impact console quality. Right now Impact overdelivers relative to the case studies, which feels asymmetric.</div>
+  </div>
+</div>
+
+<div id="qa" class="tab-content">
+  <div class="env-header"><span class="env-badge badge-qa">QA</span><span class="env-title">Content QA — five thought leader personas</span></div>
+
+  <div class="persona-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+      <div class="persona-name">Marc S. — Service systems purist</div>
+      <span class="badge-fail">Fail</span>
+    </div>
+    <div class="finding">Marc opens the Autodesk Planning System case study. He sees: "Enterprise planning spans tools, teams, and time horizons." Then one paragraph. Then a copyright notice. He is immediately skeptical. The Impact console shows the three-tier model with revenue attribution, which is genuinely promising — he can see service architecture implied in the tier structure (Included retains, Professional attaches, Business expands). But the backstage is missing entirely. Who handles delivery of the Business tier? What organizational capability did Autodesk have to build or borrow? Was there a service blueprint? What changed in how teams were incentivized? None of this appears. The work reads as a product redesign with a service label on it, not a true service system design.</div>
+    <div class="rec">Add a service blueprint excerpt or organizational behavior change narrative to the Autodesk case study. Even one diagram showing what changed internally — not just the customer-facing model — would flip Marc's read.</div>
+  </div>
+
+  <div class="persona-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+      <div class="persona-name">Indi Y. — Thinking styles researcher</div>
+      <span class="badge-partial">Partial pass</span>
+    </div>
+    <div class="finding">Indi reads the Synthetic Users page carefully. She notices the framing is correct — "complement to research, not a replacement" — and that Matt has clearly thought about the epistemological limits of the method. But she wants to see the actual persona construction. How were the synthetic users built? What inputs went in? Were they constructed from interview transcripts, behavioral patterns, or from the designer's assumptions about role-based behavior? The page doesn't show a single user card, a single hypothesis, or a single moment where the synthetic user said something the team didn't expect. Without that, Indi can't tell whether this is a sophisticated research scaffold or a renamed assumption dump.</div>
+    <div class="rec">Show one complete synthetic user card and one finding it surfaced. The methodology earns credibility through demonstration, not description.</div>
+  </div>
+
+  <div class="persona-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+      <div class="persona-name">Ethan M. — AI pragmatist</div>
+      <span class="badge-partial">Partial pass</span>
+    </div>
+    <div class="finding">Ethan reads the AI Portfolio case study and finds the right instincts: "structure first, then tooling, then craft." He agrees with the framing. But he immediately asks: what would this portfolio look like without AI? If the answer is "basically the same structure with more manual writing effort," that's a Centaur workflow — human in the saddle, AI extending reach. If the answer is "it wouldn't exist in this form," that's Cyborg territory, more integrated and harder to separate. The case study doesn't declare which it is, and that ambiguity reads as evasion to Ethan. He also wants to see a specific decision where AI was wrong and Matt corrected it — that's the honesty signal he's looking for in AI-augmented work claims.</div>
+    <div class="rec">Declare the workflow model explicitly (Centaur is the defensible claim based on the framing). Add one annotated "AI said X, I changed it to Y because Z" moment. That single decision trace changes the credibility of the whole case study.</div>
+  </div>
+
+  <div class="persona-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+      <div class="persona-name">John M. — Metrics skeptic</div>
+      <span class="badge-partial">Partial pass</span>
+    </div>
+    <div class="finding">John's first stop is the $50M number. His question: is that AOV growth total, incremental, or Matt's attributable slice? The "Incremental AOV" label helps, but "driven through service design leadership" is doing too much work. He'd cut "15+ Services shipped" immediately — it's a vanity count. He also notes the 4.57M engagements at EY next to 715 vaccinations and raises an eyebrow. The Wipro metrics are the strongest in the portfolio — MTTR reduction is a hard operational number with a clear before/after. He'd actually simplify the Autodesk Impact console — there are too many metrics presented as equal when 27% RR and 106% NRR path are clearly the story; the others dilute them.</div>
+    <div class="rec">Reduce Autodesk to 3 headline metrics maximum. Give $50M a denominator or attribution sentence. Cut or reframe "15 services shipped." Add a conversion-rate or context line to the EY engagements figure.</div>
+  </div>
+
+  <div class="persona-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+      <div class="persona-name">Teresa H. — Outcome enforcer</div>
+      <span class="badge-fail">Fail</span>
+    </div>
+    <div class="finding">Teresa is direct: "15 services shipped" is an output. Shipping is an activity. The outcome is what happened after they shipped. Did customers use them? Did account managers sell them? Did they drive the 27% RR or was RR already trending? She challenges the $50M AOV figure similarly — AOV increasing could be pricing inflation, not experience-driven behavior change. The metrics she trusts most are MTTR reduction (−31%) because it's a process behavior change with a time baseline, and 16k annual lockout reduction because it implies a behavioral shift in how users self-serve. Her verdict: the Wipro metrics pass; the Autodesk metrics need behavior change anchors, not just outcome totals.</div>
+    <div class="rec">Replace "15 services shipped" with a behavior metric: tier adoption rate, first-value time within tier, or upsell conversion from Included to Professional. Add a line to the Autodesk section framing what customer behavior changed — not just what the revenue did.</div>
+  </div>
+</div>
+
+<div id="uat" class="tab-content">
+  <div class="env-header"><span class="env-badge badge-uat">UAT</span><span class="env-title">Audience QA</span></div>
+
+  <div class="persona-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+      <div class="persona-name">Avery K. — Staff product designer peer</div>
+      <span class="badge-partial">Partial pass</span>
+    </div>
+    <div class="finding">Avery's first read: the Impact console is genuinely impressive — the "live briefing" UX is the kind of thing a real systems thinker would build. She appreciates it. She clicks the Autodesk case study expecting depth and finds three sentences. This is where "polished but shallow" crystallizes. The homepage promises "I work at the system level" — but the case studies don't show the system. There's no journey map, no blueprint, no org diagram, no decision tree, no constraint acknowledgment. The even-over statements on About feel real. The Signal → Story films are a genuine surprise — she wasn't expecting documentary filmmaking in a design portfolio, and it reframes Matt's range in an interesting way. But the absence of tradeoffs is the tell. Real work has tradeoffs. Where are they?</div>
+    <div class="rec">Near-pass. The craft signals are there — the Impact console and the films prevent a "shallow" verdict. But case study depth is the barrier to full trust. One real case study with constraints and a failure moment would shift Avery's read from "impressive presentation" to "this person actually did this work."</div>
+  </div>
+</div>
+
+<div id="prod" class="tab-content">
+  <div class="env-header"><span class="env-badge badge-prod">PROD</span><span class="env-title">Stress QA</span></div>
+
+  <div class="persona-card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+      <div class="persona-name">Skeptical design leader — 300 portfolios this month</div>
+      <span class="badge-partial">Partial pass</span>
+    </div>
+    <div class="finding">She opens the homepage. The hero line is competent but she's heard "I work at the system level" before. She scrolls fast. Then the Impact console stops her — it looks different. The "live briefing" frame, the tier ladder with revenue attribution per tier, the Wipro handoff delta visualization — these don't look generated. They look decided. She clicks the AI Portfolio case study expecting a defensive essay about AI ethics and finds… three sentences and a methodology tagline. She closes it. Then she goes back to the Impact page and spends 90 seconds on the Autodesk tier structure. She's moderately impressed by the tier economics logic. She checks the Synthetic Users page. Empty. Her verdict: "There's a real designer in here, but they're hiding behind the frame. Show me the work, not the frame."</div>
+    <div class="rec">Survives initial hostility — the Impact console and tier architecture are the genuine surprise moments that prevent immediate dismissal. But the case study stubs actively undermine trust for the skeptical reader. The ratio of presentation quality to work depth is too high. That gap is the AI portfolio red flag, not the AI use itself.</div>
+  </div>
+</div>
+
+<div id="log" class="tab-content">
+  <div class="env-header"><span class="env-badge badge-dev">ALL ENVIRONMENTS</span><span class="env-title">Research log</span></div>
+  <table class="log-table">
+    <thead>
+      <tr>
+        <th style="width:15%">Persona</th>
+        <th style="width:25%">Finding</th>
+        <th style="width:22%">Hypothesis tested</th>
+        <th style="width:8%">Result</th>
+        <th style="width:30%">Change recommended</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sam R. (recruiter)</td>
+        <td>Role and seniority level not legible in first scroll</td>
+        <td>Hero message communicates who Matt is to a sourcing audience</td>
+        <td><span class="badge-partial">Partial</span></td>
+        <td>Add role title and scope indicator to hero area</td>
+      </tr>
+      <tr>
+        <td>Morgan V. (VP Product)</td>
+        <td>Impact console and tier model earn respect; would proceed to conversation</td>
+        <td>Business leader finds credible operational signal quickly</td>
+        <td><span class="badge-pass">Pass</span></td>
+        <td>Maintain Impact console quality; ensure case studies match its depth</td>
+      </tr>
+      <tr>
+        <td>Marc S. (systems purist)</td>
+        <td>Autodesk work reads as product redesign — no backstage, no org behavior change visible</td>
+        <td>Service design expertise is legible beyond outcomes</td>
+        <td><span class="badge-fail">Fail</span></td>
+        <td>Add service blueprint or organizational change narrative to Autodesk case study</td>
+      </tr>
+      <tr>
+        <td>Indi Y. (thinking styles)</td>
+        <td>Synthetic users framed correctly but construction logic invisible</td>
+        <td>Synthetic user method feels built from listening, not assumption</td>
+        <td><span class="badge-partial">Partial</span></td>
+        <td>Show one sample persona card and one finding it generated</td>
+      </tr>
+      <tr>
+        <td>Ethan M. (AI pragmatist)</td>
+        <td>AI workflow claim is asserted, not demonstrated; human/AI boundary unclear</td>
+        <td>AI portfolio build is transparent about the actual workflow</td>
+        <td><span class="badge-partial">Partial</span></td>
+        <td>Declare Centaur vs. Cyborg position explicitly; add one AI-correction trace</td>
+      </tr>
+      <tr>
+        <td>John M. (metrics skeptic)</td>
+        <td>$50M lacks attribution; "15 services shipped" is a vanity count; EY ratio unexplained</td>
+        <td>Metrics are minimal and defensible under scrutiny</td>
+        <td><span class="badge-partial">Partial</span></td>
+        <td>Add denominator to $50M; remove or reframe "15 shipped"; explain EY conversion gap</td>
+      </tr>
+      <tr>
+        <td>Teresa H. (outcome enforcer)</td>
+        <td>"15 services shipped" is an output; Autodesk lacks behavior-change metrics</td>
+        <td>Metrics measure behavior change, not just outputs</td>
+        <td><span class="badge-fail">Fail</span></td>
+        <td>Replace "15 shipped" with adoption or retention rate; add behavior-change anchor to Autodesk</td>
+      </tr>
+      <tr>
+        <td>Avery K. (peer designer)</td>
+        <td>Impact console and films prevent "shallow" read; case study absence is the gap</td>
+        <td>Process feels real; tradeoffs visible; systems thinking evident</td>
+        <td><span class="badge-partial">Partial</span></td>
+        <td>Expand case studies; add one constraint or failure moment per engagement</td>
+      </tr>
+      <tr>
+        <td>Skeptical design leader</td>
+        <td>Survives hostility due to Impact console; case study stubs are the red flag, not the AI use</td>
+        <td>Portfolio feels decided, not generated; survives experienced reviewer</td>
+        <td><span class="badge-partial">Partial</span></td>
+        <td>Case study depth is the fix. Ratio of presentation to depth is the actual AI tell.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="casestudy" class="tab-content">
+  <div class="env-header"><span class="env-badge badge-qa">CASE STUDY DRAFT</span><span class="env-title">Synthetic users as a research method</span></div>
+
+  <div class="outline-item">
+    <div class="outline-sec">Opening frame — what this document is</div>
+    <div class="outline-detail">This case study uses a real QA session — nine synthetic personas stress-testing this portfolio before it shipped to live audiences — as the primary research artifact. The methodology is documented exactly as practiced: persona construction, hypothesis formation, environmental staging, and findings under adversarial conditions.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="outline-item">
+    <div class="outline-sec">01 — The research problem</div>
+    <div class="outline-detail">Design artifacts fail in predictable ways: they're evaluated by the wrong audience at the wrong moment, with no structured way to stress-test assumptions before live exposure. Traditional usability testing requires access to real participants, which is often impossible for portfolios, internal tools, or pre-launch strategy work. The hypothesis: structured synthetic personas — modeled on real practitioners with documented worldviews — can surface category-level blind spots that self-review misses.</div>
+  </div>
+
+  <div class="outline-item">
+    <div class="outline-sec">02 — Persona construction logic</div>
+    <div class="outline-detail">Each persona was built from a known practitioner worldview (Mager, Young, Morville, etc.) and assigned a specific critical frame: systems architecture, research epistemology, AI workflow transparency, metric rigor, outcome vs. output distinction. Personas were not role-based stereotypes — they were hypothesis engines. The question for each: what would this person look for first, and what would make them stop reading?</div>
+  </div>
+
+  <div class="outline-item">
+    <div class="outline-sec">03 — Environmental staging</div>
+    <div class="outline-detail">Four QA environments mapped to research phases: DEV (structural/navigational validation), QA (content and methodology critique), UAT (peer-level authenticity check), PROD (adversarial stress test). Each environment had defined pass criteria before the session ran — not post-hoc. This staging is borrowed from software release management and applied to experience validation.</div>
+  </div>
+
+  <div class="outline-item">
+    <div class="outline-sec">04 — What the method found that self-review missed</div>
+    <div class="outline-detail">Three findings that didn't surface in solo review: (1) The ratio of presentation quality to case study depth reads as an AI-generation signal to experienced reviewers — not the AI use itself. (2) "$50M YOY AOV" and "15 services shipped" belong to different metric categories (outcome vs. output) and their coexistence undermines the more defensible numbers. (3) The Synthetic Users case study — the very methodology being documented here — had no methodology shown. The meta-irony was surfaced only by running the session.</div>
+  </div>
+
+  <div class="outline-item">
+    <div class="outline-sec">05 — Limitations of the method</div>
+    <div class="outline-detail">Synthetic users cannot replace real ones. They don't surface unknown unknowns — only hypotheses the designer was already able to form. The quality of a synthetic user session is bounded by the quality of the persona model. In this session, adversarial personas (PROD environment) were the most productive; consensus-seeking personas surfaced less. The method is a pre-research sharpening tool, not a substitute for observation.</div>
+  </div>
+
+  <div class="outline-item">
+    <div class="outline-sec">06 — Recommended practice format</div>
+    <div class="outline-detail">Persona card template: name, worldview anchor, first question asked, pass criteria, failure mode. Hypothesis format: "If this artifact works as intended, [persona] will [specific behavior] within [timeframe or scroll depth]." Finding format: persona · observation · hypothesis confirmed or disconfirmed · change recommended. Research log format: structured table (as produced in this session) — usable directly as documentation, not just a workshop artifact.</div>
+  </div>
+
+  <div class="outline-item">
+    <div class="outline-sec">07 — Closing argument</div>
+    <div class="outline-detail">The most honest thing this case study can say: this QA session improved this portfolio. The findings documented here became the change list. That traceability — from synthetic persona to specific design decision — is what separates a research methodology from an AI experiment. The method has inputs, outputs, and audit trail. That makes it research.</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>

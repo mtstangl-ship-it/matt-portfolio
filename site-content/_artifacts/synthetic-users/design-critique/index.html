@@ -1,0 +1,1016 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portfolio Critique — Matt Stangl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:       oklch(0.17 0.015 220);
+  --bg-2:     oklch(0.205 0.015 220);
+  --panel:    oklch(0.225 0.015 220);
+  --line:     oklch(0.32 0.018 220);
+  --line-2:   oklch(0.40 0.02 220);
+  --muted:    oklch(0.60 0.012 220);
+  --ink-2:    oklch(0.82 0.01 220);
+  --ink:      oklch(0.97 0.006 220);
+  --teal:     oklch(0.82 0.13 190);
+  --teal-dim: oklch(0.48 0.07 190);
+  --amber:    oklch(0.82 0.12 70);
+  --red:      oklch(0.70 0.14 25);
+  --green:    oklch(0.78 0.14 150);
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --sans: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(to right, oklch(0.32 0.02 220 / .05) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.32 0.02 220 / .05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 20%, black 10%, transparent 75%);
+}
+.shell{
+  position:relative;z-index:1;
+  max-width:880px;margin:0 auto;padding:48px 24px 140px;
+}
+@media (min-width:720px){ .shell{padding:64px 40px 160px} }
+
+/* Head */
+.head{
+  padding-bottom:24px;border-bottom:1px solid var(--line);
+  display:flex;flex-direction:column;gap:8px;
+}
+.head .crumb{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);
+  display:flex;gap:10px;align-items:center;
+}
+.head .crumb .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal)}
+.head .crumb em{color:var(--teal);font-style:normal}
+.head h1{
+  font-weight:500;letter-spacing:-.02em;line-height:1.05;
+  font-size:clamp(34px,5vw,52px);margin:8px 0 0;text-wrap:balance;
+}
+.head p{color:var(--ink-2);max-width:60ch;margin:8px 0 0;text-wrap:pretty}
+
+/* TOC */
+.toc{
+  margin:32px 0 16px;display:grid;gap:1px;background:var(--line);
+  border:1px solid var(--line);grid-template-columns:1fr;
+}
+@media (min-width:720px){ .toc{grid-template-columns:repeat(2,1fr)} }
+.toc a{
+  background:var(--bg-2);padding:14px 16px;text-decoration:none;color:var(--ink-2);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  transition:background 140ms ease;
+}
+.toc a:hover{background:var(--panel);color:var(--ink)}
+.toc a .n{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em}
+.toc a .ar{color:var(--teal)}
+
+/* Section */
+section{margin:56px 0 0}
+.sec-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:24px;
+}
+.sec-head h2{
+  font-weight:500;font-size:26px;letter-spacing:-.01em;margin:0;
+}
+.sec-head .kicker{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);
+}
+.lede{color:var(--ink-2);max-width:68ch;margin:0 0 20px;text-wrap:pretty}
+
+/* Summary grid */
+.summary{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);margin:24px 0 32px;
+}
+@media (min-width:720px){ .summary{grid-template-columns:repeat(4,1fr)} }
+.summary .c{
+  background:var(--bg-2);padding:16px;display:flex;flex-direction:column;gap:4px;
+}
+.summary .v{font-size:28px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.summary .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.v.crit{color:var(--red)}
+.v.major{color:var(--amber)}
+.v.minor{color:var(--ink-2)}
+.v.pos{color:var(--green)}
+
+/* Finding card */
+.find{
+  border:1px solid var(--line);background:var(--bg-2);
+  padding:20px;margin-bottom:12px;
+}
+.find .row1{
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px;
+}
+.badge{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;padding:3px 8px;border:1px solid var(--line-2);
+  color:var(--muted);
+}
+.badge.crit{color:var(--red);border-color:oklch(0.45 0.12 25)}
+.badge.major{color:var(--amber);border-color:oklch(0.55 0.10 70)}
+.badge.minor{color:var(--ink-2);border-color:var(--line-2)}
+.badge.pos{color:var(--green);border-color:oklch(0.50 0.10 150)}
+.badge.mobile{color:var(--teal);border-color:var(--teal-dim)}
+.find h3{
+  margin:0;font-size:17px;font-weight:500;letter-spacing:-.005em;
+}
+.find p{margin:8px 0 0;color:var(--ink-2)}
+.find .fix{
+  margin-top:14px;padding:12px 14px;background:oklch(0.225 0.015 220);
+  border-left:2px solid var(--teal);
+  font-family:var(--mono);font-size:12.5px;line-height:1.6;color:var(--ink-2);
+  white-space:pre-wrap;
+}
+.find .fix .k{color:var(--teal);letter-spacing:.08em;text-transform:uppercase;font-size:10.5px;display:block;margin-bottom:4px}
+
+/* Line-by-line table */
+.lbl{
+  margin:12px 0 0;border:1px solid var(--line);background:var(--bg-2);
+}
+.lbl-row{
+  display:grid;grid-template-columns:1fr;gap:0;
+  border-top:1px solid var(--line);
+}
+.lbl-row:first-child{border-top:0}
+@media (min-width:720px){ .lbl-row{grid-template-columns: 180px 1fr 1fr} }
+.lbl-row .where{
+  padding:14px 16px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  border-right:0;border-bottom:1px solid var(--line);
+}
+@media (min-width:720px){
+  .lbl-row .where{border-right:1px solid var(--line);border-bottom:0}
+}
+.lbl-row .before, .lbl-row .after{
+  padding:14px 16px;font-size:14px;line-height:1.55;
+}
+.lbl-row .before{
+  color:var(--muted);border-bottom:1px solid var(--line);
+}
+@media (min-width:720px){
+  .lbl-row .before{border-right:1px solid var(--line);border-bottom:0}
+}
+.lbl-row .after{color:var(--ink)}
+.lbl-row .before::before{
+  content:"BEFORE";display:block;font-family:var(--mono);font-size:10px;
+  letter-spacing:.08em;color:oklch(0.50 0.10 25);margin-bottom:4px;
+}
+.lbl-row .after::before{
+  content:"AFTER";display:block;font-family:var(--mono);font-size:10px;
+  letter-spacing:.08em;color:var(--teal);margin-bottom:4px;
+}
+.lbl-row.note .after::before{content:"DO";color:var(--amber)}
+.lbl-row.cut .before{text-decoration:line-through;text-decoration-color:var(--red)}
+.lbl-row.cut .after::before{content:"CUT";color:var(--red)}
+
+.meta-row{
+  display:flex;gap:16px;flex-wrap:wrap;padding:10px 16px;
+  background:oklch(0.20 0.015 220);border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);
+}
+.meta-row b{color:var(--ink-2);font-weight:500}
+
+/* Mobile call-outs */
+.mob{
+  margin:20px 0 0;padding:16px;border:1px dashed var(--teal-dim);
+  background:oklch(0.82 0.13 190 / .04);
+}
+.mob .k{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--teal);display:block;margin-bottom:6px;
+}
+.mob ul{margin:0;padding-left:18px;color:var(--ink-2)}
+.mob li{margin:4px 0}
+
+/* Cliché ledger */
+.cliche{
+  border:1px solid var(--line);
+  display:grid;grid-template-columns:1fr;
+}
+@media (min-width:720px){ .cliche{grid-template-columns: 40px 1.2fr 1fr 1fr} }
+.cliche .h, .cliche .c{
+  padding:12px 14px;border-top:1px solid var(--line);font-size:13.5px;
+}
+.cliche .h{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);background:oklch(0.20 0.015 220);
+  border-top:0;
+}
+@media (max-width:720px){
+  .cliche .h{display:none}
+  .cliche .c{display:flex;gap:8px;flex-direction:column}
+  .cliche .c::before{
+    content:attr(data-l);font-family:var(--mono);font-size:10px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  }
+}
+.cliche .c.verdict-keep{color:var(--green)}
+.cliche .c.verdict-cut{color:var(--red)}
+.cliche .c.verdict-trim{color:var(--amber)}
+
+/* Footer */
+.foot{
+  margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.anchor{scroll-margin-top:24px}
+</style>
+</head>
+<body>
+<main class="shell">
+
+  <header class="head">
+    <div class="crumb">
+      <span class="dot"></span>
+      <span>Critique</span>
+      <span>/</span>
+      <em>Matt Stangl portfolio · v3</em>
+      <span>/</span>
+      <span>Apr 2026</span>
+    </div>
+    <h1>Stronger than the first read suggested. Still not finished.</h1>
+    <p>
+      Second pass, with desktop screenshots. The Impact console, the About
+      double-diamond, the Signal → Story grid, and the hero scatter are
+      doing real design work — three of these I undersold the first time.
+      What's left: a light-mode section that breaks the system, a credential
+      card floating alone, four card-based About sections sharing one rhythm,
+      and the case study depth gap. Sequenced to ship in one working session.
+    </p>
+  </header>
+
+  <nav class="toc" aria-label="Contents">
+    <a href="#summary"><span><span class="n">01</span> &nbsp; Summary</span><span class="ar">→</span></a>
+    <a href="#top"><span><span class="n">02</span> &nbsp; Top 10 fixes</span><span class="ar">→</span></a>
+    <a href="#mobile"><span><span class="n">03</span> &nbsp; Mobile critique</span><span class="ar">→</span></a>
+    <a href="#home"><span><span class="n">04</span> &nbsp; Home — line by line</span><span class="ar">→</span></a>
+    <a href="#impact"><span><span class="n">05</span> &nbsp; Impact — line by line</span><span class="ar">→</span></a>
+    <a href="#about"><span><span class="n">06</span> &nbsp; About — line by line</span><span class="ar">→</span></a>
+    <a href="#casestudies"><span><span class="n">07</span> &nbsp; Case Studies — line by line</span><span class="ar">→</span></a>
+    <a href="#cliche"><span><span class="n">08</span> &nbsp; Cliché ledger</span><span class="ar">→</span></a>
+  </nav>
+
+  <!-- ============ 01 SUMMARY ============ -->
+  <section id="summary" class="anchor">
+    <div class="sec-head">
+      <h2>Summary</h2>
+      <span class="kicker">01 · Verdict</span>
+    </div>
+    <p class="lede">
+      Revised after desktop review. Four moments earn the visit — the hero
+      scatter, the Impact briefing card, the Double Diamond on About, and
+      Signal → Story. The structural problems are narrower than first read:
+      a theme break on the homepage, an isolated credential card, pattern
+      fatigue across four About sections, and case study depth. The
+      aerospace metaphor is less overreach than I thought — on the About
+      page, the Discover / Define / Develop / Deliver diamond is the best
+      IA on the site. Trust it.
+    </p>
+
+    <div class="summary">
+      <div class="c"><div class="v crit">4</div><div class="k">Critical</div></div>
+      <div class="c"><div class="v major">7</div><div class="k">Major</div></div>
+      <div class="c"><div class="v minor">4</div><div class="k">Minor</div></div>
+      <div class="c"><div class="v pos">4</div><div class="k">Working</div></div>
+    </div>
+
+    <div class="find">
+      <div class="row1"><span class="badge pos">Working</span><h3>What earns the visit (revised)</h3></div>
+      <p>
+        <b>Hero scatter</b> — the teal particle bloom reads as signal/data, not
+        ornament. Carries the "system" thesis visually before a word of copy.
+        <b>Impact briefing card</b> — Operator / Role / Engagements / Scope /
+        Window as an identity block. The clearest positioning device on the
+        site. <b>Double Diamond (About)</b> — the Don't know→Could be / Do
+        know→Should be spread, with Discover/Define/Develop/Deliver nested
+        underneath, is genuinely distinctive IA. <b>Signal → Story</b> — the
+        film grid works; keeps the case for taste without arguing for it.
+      </p>
+    </div>
+
+    <div class="find">
+      <div class="row1"><span class="badge pos">Reversal</span><h3>What I called wrong the first time</h3></div>
+      <p>
+        I said kill the decorative wave — wrong. The desktop hero scatter is
+        the strongest first impression on the site. I said the aerospace
+        metaphor was overreach on About — partly wrong. The Double Diamond
+        application is the best structural moment in the portfolio. Those
+        stay. What actually needs work is elsewhere: the light-mode section
+        that breaks the system, the isolated credential card, and the four
+        visually-identical sections below the diamond.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 02 TOP 10 ============ -->
+  <section id="top" class="anchor">
+    <div class="sec-head">
+      <h2>Top 10 fixes, prioritized</h2>
+      <span class="kicker">02 · Backlog</span>
+    </div>
+    <p class="lede">
+      Merges the QA report's prioritized list with my read. Critical = ship
+      before anything else; Major = before you send the link to anyone senior;
+      Minor = polish pass.
+    </p>
+
+    <div class="find"><div class="row1"><span class="badge crit">Critical · 01</span><h3>Replace hero positioning tag with a role</h3></div>
+      <p>"CX · Product · Service transformation" is a category, not a title. Recruiters need a seniority signal in the first 10 seconds.</p>
+      <div class="fix"><span class="k">Fix</span>Replace eyebrow tag with:
+<b>PRODUCT &amp; SERVICE DESIGN LEADER — IC TO DIRECTOR SCOPE · ENTERPRISE TRANSFORMATION</b></div>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge crit">Critical · 02</span><h3>Give the $50M a denominator</h3></div>
+      <p>Floating big number with no baseline. Credible-looking but dismissible. One sentence closes the gap.</p>
+      <div class="fix"><span class="k">Fix</span>$50M+ incremental AOV · 12-mo post-launch window · prior-year AOV was flat
+Design & strategy lead on the service model that drove it.</div>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge crit">Critical · 03</span><h3>Write the three case studies</h3></div>
+      <p>The stubs are the biggest credibility gap on the site. The QA report is right: the ratio of presentation quality to case study depth is the actual AI tell. The markdown you sent is 90% there — ship it.</p>
+      <div class="fix"><span class="k">Fix</span>600–900 words each · problem → constraint → pivot → outcome → one thing that didn't work. Template in the Case Study design I'm building alongside this doc.</div>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge major">Major · 04</span><h3>Cut "15 services shipped"</h3></div>
+      <p>Output metric sitting next to outcomes makes the outcomes look softer. Replace with behavior change.</p>
+      <div class="fix"><span class="k">Fix</span>Business plan renewal rate exceeded 75% goal in Q1 post-launch</div>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge major">Major · 05</span><h3>Bridge the EY scale gap</h3></div>
+      <p>4.57M vs 715 looks like a broken funnel until you add one line.</p>
+      <div class="fix"><span class="k">Fix</span>4.57M engagements (awareness) · 715 vaccinations (activation)
+Two stages, one program. The gap is the design, not a conversion failure.</div>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge major">Major · 06</span><h3>Surface contact in the hero</h3></div>
+      <p>Right now the only CTA is at the bottom of a long scroll. Put it where the recruiter is.</p>
+      <div class="fix"><span class="k">Fix</span>Available for senior design leadership · healthcare preferred
+LinkedIn ↗ &nbsp; · &nbsp; Get in touch ↗</div>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge major">Major · 07</span><h3>Frame Signal → Story</h3></div>
+      <p>One line above the film grid answers "why is this in a design portfolio." Without it, it reads as a hobby section.</p>
+      <div class="fix"><span class="k">Fix</span>The same skill that makes a good product &amp; service design leader makes a good storyteller: you watch before you design. Signal → Story is that practice in its own form.</div>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge major">Major · 08</span><h3>Add one pivot or failure per case study</h3></div>
+      <p>The markdown already contains them — Autodesk's CSM-capacity over-design, Wipro's four-tier cut-to-three, EY's late pivot from mass channels. Don't bury them. These are the trust-builders.</p>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge minor">Minor · 09</span><h3>Rein in the aerospace metaphor on About</h3></div>
+      <p>"Launch pad / mission profile / operator log" earns its place in the process section. It doesn't need to govern the career arc too. Drop the metaphor for the biographical content.</p>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge crit">Critical · 10</span><h3>Fix the theme break on Home</h3></div>
+      <p>
+        Between the hero (dark, teal particles) and the Design &amp; Transformation
+        Impact block (dark), there's a three-screen light-mode section:
+        "Experience isn't one moment" + headshot + AI for Product Strategy credential.
+        It's visually shocking in a way nothing else on the site is, and
+        reads as a leftover from a different portfolio template. Either
+        convert that whole stretch to dark — matching the rest — or commit
+        to a two-theme site with a rationale (e.g. "story in light, work in
+        dark"). Right now it's neither.
+      </p>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge major">Major · 11</span><h3>The floating credential card</h3></div>
+      <p>
+        "AI for Product Strategy · View credential ↗" sits alone in a
+        full-width white card on the homepage. One credential by itself
+        reads defensive ("look, I have AI experience") rather than
+        substantive. Either gather 3–4 credentials into a single strip
+        (Northwestern Kellogg-style row), or fold it into the About page's
+        existing content. It doesn't earn a standalone viewport.
+      </p>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge major">Major · 12</span><h3>Break the card rhythm on About</h3></div>
+      <p>
+        Below the Double Diamond, four consecutive sections — How I choose,
+        What I do, What working together feels like, Career arc — all use
+        the same outlined-card template. The diamond spent visual budget on
+        a strong moment; then the page spends the rest of its scroll on
+        uniform boxes. Rescue the opening by giving only <em>one</em> of those
+        four sections the card treatment. The others become typographic
+        sections — headline, body, done.
+      </p>
+    </div>
+
+    <div class="find"><div class="row1"><span class="badge minor">Minor · 13</span><h3>Tier chips on Impact read as filters</h3></div>
+      <p>
+        The Business tier expands to show "Strategic success planning",
+        "Executive business review", "Adoption roadmap" etc. as teal-outlined
+        pill chips. At a glance they look like interactive filter tags —
+        they're not. Switch to plain text with a separator dot, or a
+        single-line list. Preserve the tap affordance on the tier row itself;
+        kill the pill styling.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 03 MOBILE ============ -->
+  <section id="mobile" class="anchor">
+    <div class="sec-head">
+      <h2>Mobile critique</h2>
+      <span class="kicker">03 · iPhone read</span>
+    </div>
+    <p class="lede">
+      On mobile the site runs long. Every page is a single column of text
+      panels — 7 to 9 screens on About, 8 on Home. The aerospace metaphor,
+      which works beautifully as a diagram on desktop, fragments into
+      unrelated boxes when they're stacked. Below: what breaks, and where.
+    </p>
+
+    <div class="find">
+      <div class="row1"><span class="badge mobile">Mobile</span><span class="badge crit">Critical</span><h3>Home hero wastes the first viewport</h3></div>
+      <p>
+        First screen on iPhone: tiny eyebrow tag, 2-line H1, 3-line subhead,
+        then ~40% empty dark panel and a decorative teal wave. The next scroll
+        lands on a logo strip. You've used your most valuable real estate on
+        atmosphere.
+      </p>
+      <div class="fix"><span class="k">Fix</span>Hero should end with the role line + inline LinkedIn/Contact.
+Logos go directly under, no dead panel between.</div>
+    </div>
+
+    <div class="find">
+      <div class="row1"><span class="badge mobile">Mobile</span><span class="badge major">Major</span><h3>About is 8 screens, 2 metaphors, 1 person</h3></div>
+      <p>
+        T-90 / T-30 / T+10 / T+90 launch timeline → double-diamond mission →
+        L-0 through L-6 lander narrative → "even over" values → "what I do"
+        bays → "CH 01–04" telemetry → Operator Log (career arc). Each frame
+        is clever. Together they're a costume change every screen.
+      </p>
+      <div class="fix"><span class="k">Fix</span>Pick one spine. The mission/process metaphor is the strongest; let it own the methodology section and nothing else. "Even-over", "What I do", and career arc become plain typographic sections with a single shared rule: monospace eyebrow, sans headline, body. Half the screens. Double the clarity.</div>
+    </div>
+
+    <div class="find">
+      <div class="row1"><span class="badge mobile">Mobile</span><span class="badge major">Major</span><h3>Impact briefing card is too tall</h3></div>
+      <p>
+        The Operator/Role/Engagements/Scope/Window card on mobile reads as
+        five identical rows of text. It's the best kind of data on the site,
+        rendered at the lowest density.
+      </p>
+      <div class="fix"><span class="k">Fix</span>Collapse to 2 lines on mobile: name + role on one row; engagements + window on the next. Scope moves into the body as a sentence.</div>
+    </div>
+
+    <div class="find">
+      <div class="row1"><span class="badge mobile">Mobile</span><span class="badge major">Major</span><h3>Home "How I choose" cards all look the same</h3></div>
+      <p>
+        Five "X even over Y" cards stacked identically. Teal label + grey
+        body × 5. The rhythm dies. This is a pacing problem, not a content
+        problem.
+      </p>
+      <div class="fix"><span class="k">Fix</span>Make the first card (Clarity) the anchor — larger type, full-width. The other four shrink to tight two-per-row labels-only with a tap-to-expand, or inline one-liners separated by rules. Density, not uniformity.</div>
+    </div>
+
+    <div class="find">
+      <div class="row1"><span class="badge mobile">Mobile</span><span class="badge minor">Minor</span><h3>"CH 01 · LIVE" telemetry cards read as chat logs</h3></div>
+      <p>
+        "CH 01 · LIVE" visually imitates a messenger or live broadcast UI.
+        It's an unintentional tell. Drop the "LIVE" pill; the chapter number
+        is enough.
+      </p>
+    </div>
+
+    <div class="find">
+      <div class="row1"><span class="badge mobile">Mobile</span><span class="badge minor">Minor</span><h3>Top nav truncates on 375px</h3></div>
+      <p>
+        Home · Impact · Signal → Story · Case Studies · About just fits. Any
+        smaller (iPhone SE) and it wraps. Consider shortening "Signal → Story"
+        to "Signal" on mobile breakpoints, or moving to a drawer.
+      </p>
+    </div>
+
+    <div class="mob">
+      <span class="k">Mobile heuristics Matt should enforce</span>
+      <ul>
+        <li>44px minimum tap target on every card link and tab.</li>
+        <li>Max 3 screens per page before a visible section break or jump link.</li>
+        <li>No text smaller than 14px. Monospace labels can go 11px if uppercase + tracked.</li>
+        <li>Every ornamental flourish (dashed lines, corner brackets, teal sparks) earns its place once per screen — not every block.</li>
+        <li>No decorative imagery taller than 40% of viewport in any viewport &lt; 768px.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 04 HOME ============ -->
+  <section id="home" class="anchor">
+    <div class="sec-head">
+      <h2>Home — line by line</h2>
+      <span class="kicker">04 · /index</span>
+    </div>
+    <p class="lede">
+      Revised after seeing desktop. The hero itself is strong — the teal
+      scatter carries real signal. The problems start at viewport two: the
+      theme shifts to light, a single credential card sits alone, and the
+      page introduces itself twice before saying anything specific.
+    </p>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Hero</div>
+      <div class="lbl-row">
+        <div class="where">Eyebrow tag</div>
+        <div class="before">CX · PRODUCT · SERVICE TRANSFORMATION</div>
+        <div class="after">PRODUCT &amp; SERVICE DESIGN LEADER</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">H1</div>
+        <div class="before">I lead CX, product, and service transformation.</div>
+        <div class="after">I rebuild fragmented enterprise experience into one operating model that ships.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Subhead</div>
+        <div class="before">For enterprises where experience has splintered across teams, channels, and systems. I rebuild it as one operating model that actually ships.</div>
+        <div class="after">Autodesk, Wipro, EY. IC to director-level scope. Healthcare, enterprise, public sector.</div>
+      </div>
+      <div class="lbl-row note">
+        <div class="where">Add below subhead</div>
+        <div class="before">— nothing —</div>
+        <div class="after">Available for senior design leadership roles — healthcare preferred.
+<b>LinkedIn ↗</b> &nbsp; · &nbsp; <b>Get in touch ↗</b></div>
+      </div>
+      <div class="lbl-row note">
+        <div class="where">Hero scatter</div>
+        <div class="before">Teal particle bloom</div>
+        <div class="after">Keep exactly. Reversal from v1 of this critique — the desktop rendering reads as signal/data visualization, not decoration. It's the strongest first impression on the site.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Light-mode mid-page block <span style="color:var(--red)">· THEME BREAK</span></div>
+      <div class="lbl-row cut">
+        <div class="where">Whole block</div>
+        <div class="before">Light cream background · "Experience isn't one moment" + headshot + AI for Product Strategy credential</div>
+        <div class="after">Convert to dark theme to match hero and Impact block. The theme switch is the single most jarring moment in the entire site. Three dark viewports sandwich one light stretch — it reads as a layout leftover.</div>
+      </div>
+      <div class="lbl-row note">
+        <div class="where">Headshot placement</div>
+        <div class="before">Full-card right-side headshot at viewport 2</div>
+        <div class="after">Keep the photo. Move to About, or inline it much smaller next to the positioning statement. A portrait at this size pulls focus from the "system" story the site is making.</div>
+      </div>
+      <div class="lbl-row note">
+        <div class="where">"AI for Product Strategy" credential</div>
+        <div class="before">Standalone full-width card with View credential link</div>
+        <div class="after">Either add 2–3 credentials and make it a strip, or cut. A single floating credential reads defensive; it's answering a question the rest of the site hasn't been asked.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Positioning statement</div>
+      <div class="lbl-row">
+        <div class="where">H2</div>
+        <div class="before">Experience isn't one moment. It's the whole journey.</div>
+        <div class="after">Most experience work fixes the wrong thing.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Body · line 1</div>
+        <div class="before">Most organizations fix touchpoints in isolation, fragmented experiences, frustrated customers, wasted effort.</div>
+        <div class="after">Organizations fix touchpoints in isolation. Customers experience the gaps between them.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Body · line 2</div>
+        <div class="before">I work at the system level: mapping journeys, aligning teams, designing services that flow. Outcomes that compound.</div>
+        <div class="after">I work at the system level — journeys, teams, and service models that compound into outcomes, not activity.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Signal → Story grid</div>
+      <div class="lbl-row note">
+        <div class="where">Add above grid</div>
+        <div class="before">— nothing —</div>
+        <div class="after">The same skill that makes a good product &amp; service design leader makes a good storyteller: you watch before you design. Signal → Story is that practice in its own form.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;"Design &amp; Transformation Impact" card</div>
+      <div class="lbl-row">
+        <div class="where">H2</div>
+        <div class="before">Design and Transformation Impact</div>
+        <div class="after">Three transformations. In numbers.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Sub</div>
+        <div class="before">Journey-led operating models and service design.</div>
+        <div class="after">Autodesk · Wipro · EY — what shipped, what moved.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Case study teaser cards</div>
+      <div class="lbl-row">
+        <div class="where">AI Workflow · sub</div>
+        <div class="before">AI as a creative and system design partner for structure, iteration, and system refinement.</div>
+        <div class="after">Six weeks, four tools, one portfolio. What AI did, what it got wrong, and the decisions that stayed mine.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Synthetic Users · sub</div>
+        <div class="before">Stress-test journeys before live traffic with plausible scenarios and edge cases.</div>
+        <div class="after">Nine synthetic reviewers stress-tested this portfolio before launch. Three findings self-review missed.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Autodesk · sub</div>
+        <div class="before">Planning as a system: tools, teams, handoffs, and shared success definitions.</div>
+        <div class="after">Built Autodesk's global Service Design practice from zero. $50M+ incremental AOV in 12 months.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 IMPACT ============ -->
+  <section id="impact" class="anchor">
+    <div class="sec-head">
+      <h2>Impact — line by line</h2>
+      <span class="kicker">05 · /impact</span>
+    </div>
+    <p class="lede">
+      Impact is the strongest page on the site. Don't overwrite it — tune it.
+      Biggest wins: attribution sentences, metric cuts, and a mobile density pass.
+    </p>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Briefing header</div>
+      <div class="lbl-row">
+        <div class="where">H1</div>
+        <div class="before">Enterprise design, measured at altitude.</div>
+        <div class="after">Three enterprise transformations. In numbers.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Sub</div>
+        <div class="before">Three enterprise transformations. One leader. This is what the work returned — in revenue, resolution speed, and reach — after it shipped.</div>
+        <div class="after">What shipped, what moved, and the design decisions behind each.</div>
+      </div>
+      <div class="lbl-row note">
+        <div class="where">Briefing card</div>
+        <div class="before">5 rows (Operator / Role / Engagements / Scope / Window)</div>
+        <div class="after">Compress to 2 rows on mobile. Role and name together; Engagements and Window together. Scope drops into a single sentence above the card.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Autodesk</div>
+      <div class="lbl-row">
+        <div class="where">H2</div>
+        <div class="before">I built Autodesk's global Service Design practice from zero.</div>
+        <div class="after">Keep. This is the best headline on the site.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Body</div>
+        <div class="before">I led the strategy, design, and launch of a tiered post-purchase model — Business, Professional, Included — that turned customer success into a revenue engine.</div>
+        <div class="after">I led the strategy, design, and launch of a tiered post-purchase model — Business, Professional, Included. Customer success became a revenue motion, not a retention cost.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Hero metric caption</div>
+        <div class="before">Monetized AOV engine · 12 mo</div>
+        <div class="after">$50M+ incremental AOV · 12-mo post-launch window · prior-year AOV flat
+Design &amp; strategy lead on the service model that drove it.</div>
+      </div>
+      <div class="lbl-row cut">
+        <div class="where">Secondary metric</div>
+        <div class="before">15+ services shipped</div>
+        <div class="after">Business plan renewal rate exceeded 75% goal in Q1 post-launch</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Wipro</div>
+      <div class="lbl-row">
+        <div class="where">H2</div>
+        <div class="before">I unified six service towers into one operating model.</div>
+        <div class="after">Keep. Clear, active, owns the scope.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Body</div>
+        <div class="before">At Wipro, I led transformation across six ITIL service towers for Estée Lauder and Takeda — building the frameworks, metrics, and delivery model that improved NPS past goal and secured an eight-figure renewal.</div>
+        <div class="after">Six ITIL towers operating as six companies. I led the program that made them one — unified escalation, shared CX signals, tier ownership with teeth. Estée Lauder and Takeda. Eight-figure renewal.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Before/after table</div>
+        <div class="before">6.8 days → 4.7 days copy</div>
+        <div class="after">Keep exactly. This is the single clearest cause-and-effect story on the site.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;EY</div>
+      <div class="lbl-row">
+        <div class="where">Metric pair</div>
+        <div class="before">10+ statewide healthcare &amp; brand partnerships · 715 vaccinations · 4.57M public health engagements · 8-figure renewal</div>
+        <div class="after">4.57M engagements (awareness layer) · 715 vaccinations (activation layer)
+Two stages, one program. The gap is the design — not a conversion failure.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Body</div>
+        <div class="before">Led public health experience strategy for Georgia Department of Public Health and multi-state initiatives, designing engagement models that increased vaccine uptake across diverse populations.</div>
+        <div class="after">Georgia DPH + Humana + Oklahoma. Mass-channel outreach wasn't converting — the more official the message, the more resistance it triggered. We rebuilt it as two separate motions: awareness at scale, activation through community partners. Recognized by the CDC as a national best practice.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Three-tier ladder (Autodesk deep-dive)</div>
+      <div class="lbl-row">
+        <div class="where">Caption</div>
+        <div class="before">The three-tier service ladder · Tap a tier to open</div>
+        <div class="after">Keep. The tap affordance and per-tier revenue attribution are genuinely great.</div>
+      </div>
+      <div class="lbl-row note">
+        <div class="where">Mobile polish</div>
+        <div class="before">Expanded tier cards are cramped; teal progress bar underlines are thin</div>
+        <div class="after">Bump the bar to 2px at mobile breakpoint. Ensure "% of lift" and tier number are vertically aligned — they drift by ~4px on iPhone width.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 ABOUT ============ -->
+  <section id="about" class="anchor">
+    <div class="sec-head">
+      <h2>About — line by line</h2>
+      <span class="kicker">06 · /about</span>
+    </div>
+    <p class="lede">
+      Major revision from v1. The Double Diamond at the top of this page is
+      the best IA on the site — I undersold it in the first pass. What
+      actually needs work: the four identical card-based sections below the
+      diamond. Same shape, same tone, four viewports deep. Break the rhythm
+      and the page gets 40% shorter without losing content.
+    </p>
+
+    <div class="find">
+      <div class="row1"><span class="badge pos">Working</span><h3>The Double Diamond spread</h3></div>
+      <p>
+        DON'T KNOW / COULD BE → DO KNOW / SHOULD BE, with Discover / Define /
+        Develop / Deliver nested inside. The staged ignition + "Payload Lock"
+        delivery deploy language lands. This is genuinely distinctive IA.
+        Leave it alone.
+      </p>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Hero</div>
+      <div class="lbl-row">
+        <div class="where">H1</div>
+        <div class="before">I build design systems for exit velocity.</div>
+        <div class="after">I turn ambiguous briefs into systems that ship.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Sub</div>
+        <div class="before">The beliefs, the method, and the mission architecture behind how I move ambiguous briefs into shipped systems without losing altitude between them.</div>
+        <div class="after">What I believe, how I work, and what I've learned to cut.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Pre-flight beliefs</div>
+      <div class="lbl-row">
+        <div class="where">01</div>
+        <div class="before">Design and business outcomes share one trajectory.</div>
+        <div class="after">Keep.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">02</div>
+        <div class="before">Ambiguity gets structured into something teams can move on.</div>
+        <div class="after">Keep.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">03</div>
+        <div class="before">Complexity is translated into systems people can actually use.</div>
+        <div class="after">Complexity becomes systems people can actually use.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Flight plan (T-90/T-30/T+10/T+90)</div>
+      <div class="lbl-row cut">
+        <div class="where">Whole block</div>
+        <div class="before">Strategy / Systems / Adoption / Growth with T-minus labels and aerospace iconography</div>
+        <div class="after">Cut the T-minus timestamps. They're ornament. Keep four phases, strip the astronaut dressing: STRATEGY → SYSTEMS → ADOPTION → GROWTH. One line each. Done.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Double Diamond (confirmed working)</div>
+      <div class="lbl-row">
+        <div class="where">Verdict</div>
+        <div class="before">DON'T KNOW / COULD BE + DO KNOW / SHOULD BE diamonds</div>
+        <div class="after">Keep. This is the single strongest moment on About — and a serious IA reference a recruiter would screenshot. The constraint-to-delivery narrative (Rip the brief → Payload deploy) earns every pixel.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Pattern fatigue — four card sections in a row <span style="color:var(--red)">· STRUCTURAL</span></div>
+      <div class="lbl-row cut">
+        <div class="where">How I choose (5 cards)</div>
+        <div class="before">Outlined card grid · "X even over Y" format</div>
+        <div class="after">Convert to a typographic list. First statement (Clarity) full-width as anchor; other four as inline one-liners separated by rules. Keeps the content, kills the box repetition.</div>
+      </div>
+      <div class="lbl-row cut">
+        <div class="where">What I do (6 cards)</div>
+        <div class="before">Identical card grid · service lines</div>
+        <div class="after">This is where the card treatment earns its keep — six discrete offers, equal weight is right. Keep as cards, but shrink padding by ~30% and drop the "BAY 01 / 02..." labels. Let the service names do the work.</div>
+      </div>
+      <div class="lbl-row cut">
+        <div class="where">What working together feels like (4 cards)</div>
+        <div class="before">Outlined card grid · "CH 01–04" telemetry styling</div>
+        <div class="after">Kill the card treatment entirely. Two-column plain type with hairline rules between. The content is good; the format is identical to the section above it and the section below.</div>
+      </div>
+      <div class="lbl-row note">
+        <div class="where">Cadence fix</div>
+        <div class="before">Diamond (strong) → cards → cards → cards → prose (Career arc)</div>
+        <div class="after">Diamond (strong) → typographic list → cards (one, earned) → typographic list → prose. Variety, not monotony.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Telemetry (CH 01–04)</div>
+      <div class="lbl-row cut">
+        <div class="where">Labels</div>
+        <div class="before">CH 01 · LIVE · CH 02 · LIVE ...</div>
+        <div class="after">Drop the LIVE pill. Too close to a broadcast chat UI. Chapter numbers are fine on their own.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Career arc ("Operator Log")</div>
+      <div class="lbl-row">
+        <div class="where">Label</div>
+        <div class="before">OPERATOR · OPERATOR LOG</div>
+        <div class="after">CAREER · CAREER ARC</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Body</div>
+        <div class="before">Matt's work spans creative storytelling, consulting, and enterprise transformation. He started in creative environments, developing a strong instinct for narrative, craft, and audience. That foundation evolved into work shaping service models...</div>
+        <div class="after">I started in creative — narrative, craft, audience. That became service models, experience systems, and organizational alignment for enterprise clients. The through-line: translating strategy into systems teams actually run.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Voice</div>
+        <div class="before">Third person ("Matt's work spans...")</div>
+        <div class="after">Switch to first person. The rest of the site is "I" — this section jarring.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">"Personal note · off-shift"</div>
+        <div class="before">I care about building a life that's not just work. I write, stay close to people who matter, and try to keep perspective. The work matters to me, but it's not the only thing, that balance shows up in how I think, how I lead, and what I build.</div>
+        <div class="after">Off the clock: I write, spend time with people who matter, and try to stay outside the work long enough to bring something back to it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 CASE STUDIES ============ -->
+  <section id="casestudies" class="anchor">
+    <div class="sec-head">
+      <h2>Case Studies — line by line</h2>
+      <span class="kicker">07 · /case-studies</span>
+    </div>
+    <p class="lede">
+      The hub page is fine; the individual case study pages are the problem.
+      I've designed a template for those separately — see <a href="Case Study.html" style="color:var(--teal)">Case Study.html</a>. Below: fixes to the index page only.
+    </p>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Hub header</div>
+      <div class="lbl-row">
+        <div class="where">H1</div>
+        <div class="before">Proof in flight.</div>
+        <div class="after">Selected work.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Sub</div>
+        <div class="before">Three missions where the strategy left the hangar. What shipped, what moved, and the trajectory each one actually traced.</div>
+        <div class="after">Five studies. Three enterprise, two methodology. Read in any order.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;Card blocks (AI Workflow / Synthetic / Autodesk)</div>
+      <div class="lbl-row note">
+        <div class="where">Card TOOLS/METHOD/OUTPUT rows</div>
+        <div class="before">Three mono rows of "TOOLS: …" "METHOD: …" "OUTPUT: …"</div>
+        <div class="after">One row, three pieces, inline separators: <b>TOOLS · METHOD · OUTPUT</b>. The current stacked format reads as a terminal printout rather than a case index.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">"ARTIFACT" quote block</div>
+        <div class="before">Teal bordered inset on each card</div>
+        <div class="after">Keep. This is the one distinctive element. Make sure the quote is specific — "Map the system first, then use models for variation" is good; the Synthetic Users equivalent ("Stress-test journeys before live traffic") is actually the same copy from the subhead. Rewrite it to say something only this case study can say.</div>
+      </div>
+    </div>
+
+    <div class="lbl">
+      <div class="meta-row"><b>Section</b> &nbsp;"Let's talk" footer</div>
+      <div class="lbl-row">
+        <div class="where">H2</div>
+        <div class="before">Let's talk</div>
+        <div class="after">Let's talk.</div>
+      </div>
+      <div class="lbl-row">
+        <div class="where">Sub</div>
+        <div class="before">Journey redesign, experience strategy, operational transformation.</div>
+        <div class="after">Senior design leadership roles. Journey redesign. Experience strategy. Operational transformation. Healthcare preferred.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 CLICHE ============ -->
+  <section id="cliche" class="anchor">
+    <div class="sec-head">
+      <h2>Cliché ledger</h2>
+      <span class="kicker">08 · Voice audit</span>
+    </div>
+    <p class="lede">
+      Words and phrases currently on the site, and what to do with each. "Keep"
+      earns its place; "Trim" appears too often; "Cut" is a tell.
+    </p>
+
+    <div class="cliche">
+      <div class="h">#</div><div class="h">Phrase</div><div class="h">Why it's on the list</div><div class="h">Verdict</div>
+
+      <div class="c" data-l="#">01</div>
+      <div class="c" data-l="Phrase">"Outcomes that compound"</div>
+      <div class="c" data-l="Why">Specific, owned, does real work.</div>
+      <div class="c verdict-keep" data-l="Verdict">Keep</div>
+
+      <div class="c" data-l="#">02</div>
+      <div class="c" data-l="Phrase">"Human-centered methodologies and systems thinking"</div>
+      <div class="c" data-l="Why">You didn't write this anywhere — good. If it creeps back in, kill it on sight.</div>
+      <div class="c verdict-cut" data-l="Verdict">Cut on sight</div>
+
+      <div class="c" data-l="#">03</div>
+      <div class="c" data-l="Phrase">"At the system level"</div>
+      <div class="c" data-l="Why">Overused in the industry. You can earn it once if the page actually shows the system. Currently you use it twice in the homepage subhead.</div>
+      <div class="c verdict-trim" data-l="Verdict">Trim to once</div>
+
+      <div class="c" data-l="#">04</div>
+      <div class="c" data-l="Phrase">"Journey-led operating models"</div>
+      <div class="c" data-l="Why">Phrase of the year in 2019. Fine for one subhead, not three.</div>
+      <div class="c verdict-trim" data-l="Verdict">Trim to once</div>
+
+      <div class="c" data-l="#">05</div>
+      <div class="c" data-l="Phrase">"Exit velocity"</div>
+      <div class="c" data-l="Why">Startup vernacular in a service design context. Reads as borrowed.</div>
+      <div class="c verdict-cut" data-l="Verdict">Cut</div>
+
+      <div class="c" data-l="#">06</div>
+      <div class="c" data-l="Phrase">"Proof in flight"</div>
+      <div class="c" data-l="Why">The aerospace metaphor stretched past the process page.</div>
+      <div class="c verdict-cut" data-l="Verdict">Cut</div>
+
+      <div class="c" data-l="#">07</div>
+      <div class="c" data-l="Phrase">"Measured at altitude"</div>
+      <div class="c" data-l="Why">Same.</div>
+      <div class="c verdict-cut" data-l="Verdict">Cut</div>
+
+      <div class="c" data-l="#">08</div>
+      <div class="c" data-l="Phrase">"From zero"</div>
+      <div class="c" data-l="Why">"Built Autodesk's practice from zero" — this is the one you earned. Keep.</div>
+      <div class="c verdict-keep" data-l="Verdict">Keep</div>
+
+      <div class="c" data-l="#">09</div>
+      <div class="c" data-l="Phrase">"Beauty that doesn't ship doesn't count"</div>
+      <div class="c" data-l="Why">Tight. True. Only aphorism on the site that reads like yours.</div>
+      <div class="c verdict-keep" data-l="Verdict">Keep</div>
+
+      <div class="c" data-l="#">10</div>
+      <div class="c" data-l="Phrase">"Plausible scenarios and edge cases"</div>
+      <div class="c" data-l="Why">Lifted from AI marketing copy. Replace with the actual method.</div>
+      <div class="c verdict-cut" data-l="Verdict">Cut</div>
+
+      <div class="c" data-l="#">11</div>
+      <div class="c" data-l="Phrase">"Live briefing" / "Impact console"</div>
+      <div class="c" data-l="Why">The one metaphor that's doing real structural work. Don't touch.</div>
+      <div class="c verdict-keep" data-l="Verdict">Keep</div>
+
+      <div class="c" data-l="#">12</div>
+      <div class="c" data-l="Phrase">"Operator" (as a title frame)</div>
+      <div class="c" data-l="Why">Fine once in the identity card. Not a career arc label.</div>
+      <div class="c verdict-trim" data-l="Verdict">Trim to one use</div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div>Matt Stangl · Portfolio Critique · v1</div>
+    <div>April 2026</div>
+  </footer>
+
+</main>
+</body>
+</html>
