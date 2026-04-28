@@ -442,7 +442,7 @@ This page. Restructured from 3-section stub to six-section documented methodolog
 ```
 RUN B · SELECTED FIXES
 
-— Hub H1 "Proof in flight." → "Selected work." (cliché ledger violation)
+— Hub title cliché resolved April 2026 — see **Hub-only copy** footnote below (inventory aligns `caseStudiesPage` with Selected work / Five builds subhead).
 — Career arc voice: third person → first person ("Matt's work spans..." → "I started in creative...")
 — Cliché ledger: 12 verdicts logged. "Outcomes that compound" KEEP. "Exit velocity" CUT.
 
@@ -613,6 +613,20 @@ For Tuesday Claude Design — repeating from /DESIGN-NOTES.md to ensure visibili
 - Run B Section 04 lane: parallel methodology, not sequential phase
 - Section 05 F-cards inherit Centaur Practice Service Records grammar — apply, don't redesign
 - Artifact top bar (~48px, dark, mono kicker, single bottom border) — research appendix register, not site page header
+
+---
+
+## SOURCE FOOTNOTES
+
+### Case studies hub copy only in source file (`src/content/case-studies.ts`, `caseStudiesPage` — not rendered on `/case-studies/synthetic` by `CaseShell`; hub/route inventory)
+
+```
+eyebrow: (none — no eyebrow on hub)
+title: Selected work.
+subhead: Five builds. The systems behind the outcomes, and the decisions that shaped each.
+```
+
+*(Updated 2026-04-28 to reflect post-source-fix hub state. Live `src/content/case-studies.ts` may still contain old aerospace-cliché copy — flagged for separate cleanup.)*
 
 ---
 

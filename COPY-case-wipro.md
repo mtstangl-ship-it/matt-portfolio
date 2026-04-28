@@ -484,11 +484,11 @@ MTTR reduction · process behavior change, not throughput
 
 **Outcome strip**
 ```
-+13%   NPS over goal
++13%NPS over goal
 30+    Operational outcomes shipped
 3      Escalation tiers (from 6)
 72%    Cases resolved at T1
-13K    Annual lockouts eliminated
+13K Annual lockouts eliminated
 ```
 
 ### Tier 2 — Tight
@@ -686,9 +686,21 @@ These edits to live source files are required before or during Tuesday's Claude 
 4. **`src/content/cases/wipro.html`**: Add "13K annual lockouts eliminated" to outcome metrics strip alongside +13% NPS / 30+ outcomes / 3 tiers / 72% T1
 5. **`src/content/cases/wipro.html`**: Tag "Companies· Case 04" — add space between "Companies" and "·"
 6. **`src/components/case-studies/CasePicker.tsx`** or `case-studies.ts`: "01 · AI WORKFLOW" → "01 · CENTAUR PRACTICE" (cross-page fix, also affects all 5 case study pages)
-7. **`src/content/case-studies.ts`**: Hub title "Proof in flight." → "Selected work." (cliché kill list violation)
+7. **`src/content/case-studies.ts`**: Hub title/subhead — inventory documented in **Hub-only copy** footnote above (April 2026); verify live file matches or queue cleanup.
 8. **`src/content/cases/wipro.html`**: Section 02 entirely removed (Pivot folded into Section 01)
 9. **`src/content/cases/wipro.html`**: Section 02 chapter headline "Four weeks in, we killed the original plan." removed (no longer applicable since section dropped)
+
+---
+
+### Hub-only copy (`src/content/case-studies.ts`, `caseStudiesPage` — not rendered on this case route)
+
+```
+eyebrow: (none — no eyebrow on hub)
+title: Selected work.
+subhead: Five builds. The systems behind the outcomes, and the decisions that shaped each.
+```
+
+*(Updated 2026-04-28 to reflect post-source-fix hub state. Live `src/content/case-studies.ts` may still contain old aerospace-cliché copy — flagged for separate cleanup.)*
 
 ---
 

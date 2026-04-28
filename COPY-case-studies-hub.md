@@ -31,7 +31,7 @@ Selected studies
 
 **Title**
 ```
-Documented work.
+Selected work.
 ```
 
 **Subhead**
