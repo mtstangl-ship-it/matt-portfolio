@@ -223,17 +223,35 @@ export function HomePagePort() {
               <svg viewBox="0 0 80 80" width={80} height={80}>
                 <title>M. Stangl portrait stamp</title>
                 <defs>
-                  <pattern id="home-v2-ledger-halftone" width={3} height={3} patternUnits="userSpaceOnUse">
-                    <circle cx="1.5" cy="1.5" r="0.7" fill="var(--accent)" />
+                  <pattern id="ledger-portrait-halftone" width={3} height={3} patternUnits="userSpaceOnUse">
+                    <circle cx="1.5" cy="1.5" r={0.85} fill="var(--accent)" />
                   </pattern>
-                  <clipPath id="home-v2-ledger-silhouette">
+                  <clipPath id="ledger-portrait-mask">
                     <ellipse cx="40" cy="32" rx="14" ry="16" />
                     <path d="M16 78 C 16 56, 64 56, 64 78 Z" />
                   </clipPath>
                 </defs>
-                <rect width="80" height="80" fill="url(#home-v2-ledger-halftone)" clipPath="url(#home-v2-ledger-silhouette)" opacity={0.65} />
-                <ellipse cx="40" cy="32" rx="14" ry="16" fill="none" stroke="var(--ink-2)" strokeWidth="0.6" />
-                <path d="M16 78 C 16 56, 64 56, 64 78" fill="none" stroke="var(--ink-2)" strokeWidth="0.6" />
+                <g clipPath="url(#ledger-portrait-mask)">
+                  <image
+                    href="/portrait-matt-stangl.png"
+                    width={96}
+                    height={96}
+                    x={-10}
+                    y={-10}
+                    preserveAspectRatio="xMidYMid slice"
+                    opacity={0.88}
+                  />
+                  <rect
+                    width={80}
+                    height={80}
+                    fill="url(#ledger-portrait-halftone)"
+                    opacity={0.52}
+                    style={{ mixBlendMode: "multiply" }}
+                  />
+                  <rect width={80} height={80} fill="rgba(244, 241, 234, 0.14)" />
+                </g>
+                <ellipse cx="40" cy="32" rx="14" ry="16" fill="none" stroke="var(--ink-2)" strokeWidth={0.55} />
+                <path d="M16 78 C 16 56, 64 56, 64 78" fill="none" stroke="var(--ink-2)" strokeWidth={0.55} />
               </svg>
               <figcaption>
                 M. STANGL
