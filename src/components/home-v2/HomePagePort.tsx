@@ -16,6 +16,7 @@ import { logoPaths } from "@/content/logos";
 import {
   homeV2CentaurArtifacts,
   homeV2CentaurMeta,
+  homeV2Contact,
   homeV2Dashboard,
   homeV2Hero,
   homeV2LedgerIntent,
@@ -629,10 +630,16 @@ export function HomePagePort() {
               ))}
             </dl>
             <div className="case__artifacts">
-              <p className="case__artifacts-label">Artifacts</p>
+              <p className="kicker case__artifacts-eyebrow">Artifacts</p>
               <ul className="case__artifacts-list">
-                {homeV2CentaurArtifacts.map((line) => (
-                  <li key={line}>{line}</li>
+                {homeV2CentaurArtifacts.map((item) => (
+                  <li key={item.num}>
+                    <span className="case__artifacts-num">{item.num}</span>
+                    <span className="case__artifacts-sep" aria-hidden="true">
+                      ·
+                    </span>
+                    <span className="case__artifacts-text">{item.label}</span>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -759,7 +766,7 @@ export function HomePagePort() {
                   variant="default"
                   previewStartSeconds={film.previewStartSeconds}
                   previewDurationSeconds={3.5}
-                  className="!aspect-video min-h-[12rem]"
+                  className="h-full min-h-0 !aspect-auto max-sm:!min-h-0"
                 />
               </div>
               <figcaption className="tile__cap">
@@ -780,10 +787,7 @@ export function HomePagePort() {
       <section className="contact" aria-label="Contact">
         <p className="kicker">FIG. 07 · CONTACT</p>
         <h2 className="contact__h">Let&apos;s talk.</h2>
-        <p className="contact__sub">
-          Senior design leadership roles. Journey redesign. Experience strategy. Operational transformation.
-          Healthcare preferred.
-        </p>
+        <p className="contact__sub">{homeV2Contact.subhead}</p>
         <a className="contact__cta" href="mailto:mtstangl@gmail.com">
           <span>Get in touch</span>
           <b>mtstangl@gmail.com</b>

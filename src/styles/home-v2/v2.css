@@ -111,6 +111,13 @@
   gap: 0.5rem;
   min-height: 28px;
 }
+/* Wordmarks ship dark fills; cards sit on —bg-2. Force restrained mono ink-2 tone */
+.home-v2-root .card__logo img {
+  height: 24px;
+  width: auto;
+  opacity: 0.9;
+  filter: brightness(0) invert(0.72);
+}
 .card__logo-placeholder {
   display: inline-flex;
   align-items: center;

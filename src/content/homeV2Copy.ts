@@ -1,6 +1,6 @@
 /**
  * Editorial strings aligned with COPY-home.md / v2 prototype for Home port.
- * (COPY-*.md files are not edited by this port.)
+ * COPY-home.md is updated when shipped Home copy changes (keeps editorial lock aligned).
  */
 export const homeV2Hero = {
   kicker: "CX, Product & Service Design Leader · Director / Senior Manager",
@@ -75,11 +75,17 @@ export const homeV2CentaurMeta = [
   },
 ] as const;
 
+/** Number · label (sans); rendered as mono index + ink-4 sep + sans text */
 export const homeV2CentaurArtifacts = [
-  "Build telemetry · six-week decision trace",
-  "Synthetic Users QA · stress-test pipeline",
-  "Service records · methodology specimens",
+  { num: "01", label: "Six-week build telemetry · decision trace" },
+  { num: "02", label: "Synthetic Users QA · stress-test pipeline" },
+  { num: "03", label: "Service records · methodology specimens" },
 ] as const;
+
+/** Bottom Contact strip — aligned with COPY-home.md Tier 1 */
+export const homeV2Contact = {
+  subhead: "Senior design leadership roles. Healthcare preferred.",
+} as const;
 
 /** Preserved viz mapping: prototype paths → repo dashboard components */
 export const preservedVizNote =
