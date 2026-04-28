@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useReducedMotion } from "framer-motion";
 import { Fragment, useEffect, useRef, useState } from "react";
 import {
   DashboardFineGridOverlay,
@@ -40,6 +41,9 @@ function TickerTrack() {
 export function HomePagePort() {
   const rootRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const reducedMotion = useReducedMotion();
+  /** Viz components gate motion on `isHovered`; port passed false, so animations never ran. */
+  const vizAnimOn = reducedMotion !== true;
 
   useEffect(() => {
     document.body.classList.toggle("nav-open", menuOpen);
@@ -328,7 +332,7 @@ export function HomePagePort() {
             <div className="card__viz card__viz--live relative !block min-h-[180px] !p-2">
               <DashboardFineGridOverlay />
               <div className="relative z-[1] flex min-h-[140px] w-full items-center justify-center">
-                <JourneyFlowViz isHovered={false} />
+                <JourneyFlowViz isHovered={vizAnimOn} />
               </div>
             </div>
 
@@ -424,7 +428,7 @@ export function HomePagePort() {
             <div className="card__viz card__viz--live relative !block min-h-[180px] !p-2">
               <DashboardFineGridOverlay />
               <div className="relative z-[1] flex min-h-[140px] w-full items-center justify-center">
-                <TowerConvergenceViz isHovered={false} />
+                <TowerConvergenceViz isHovered={vizAnimOn} />
               </div>
             </div>
 
@@ -489,7 +493,7 @@ export function HomePagePort() {
             <div className="card__viz card__viz--live relative !block min-h-[180px] !p-2">
               <DashboardFineGridOverlay />
               <div className="relative z-[1] flex min-h-[140px] w-full items-center justify-center">
-                <OrchestrationTimelineViz isHovered={false} />
+                <OrchestrationTimelineViz isHovered={vizAnimOn} />
               </div>
             </div>
 
