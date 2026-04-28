@@ -109,7 +109,7 @@ PROBLEMS SOLVED
 01 · Turned Autodesk's post-purchase support into a $50M revenue motion
 02 · Unified Wipro's six ITIL towers into one operating model for Estée Lauder
 03 · De-politicized vaccination engagement across Georgia — CDC national best practice
-04 · Cut MTTR by 31% across 16,000 annual cases
+04 · Cut MTTR by 31% — 13K annual lockouts eliminated
 05 · Built a global CX practice from zero at an enterprise consultancy
 06 · Made synthetic users a research method with documented QA pipeline
 ```
