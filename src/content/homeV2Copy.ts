@@ -64,6 +64,23 @@ export const homeV2Dashboard = {
   ctaHref: "/impact",
 } as const;
 
+/** Centaur featured card — COPY-home.md Case 01 meta + artifact pointers */
+export const homeV2CentaurMeta = [
+  { label: "Tools", value: "Cursor · Claude · Claude Design · Vercel" },
+  { label: "Mode", value: "Centaur, human in the saddle" },
+  { label: "Method", value: "Design a system, then use models for variation, critique, and scaffolding" },
+  {
+    label: "Output",
+    value: "Coherent portfolio system, reusable build pipeline, and a review trace you can inspect",
+  },
+] as const;
+
+export const homeV2CentaurArtifacts = [
+  "Build telemetry · six-week decision trace",
+  "Synthetic Users QA · stress-test pipeline",
+  "Service records · methodology specimens",
+] as const;
+
 /** Preserved viz mapping: prototype paths → repo dashboard components */
 export const preservedVizNote =
   "Prototype referenced AutodeskConstellation / WiproRadial / EYGeorgiaMap — repo uses JourneyFlowViz · TowerConvergenceViz · OrchestrationTimelineViz.";

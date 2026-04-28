@@ -14,6 +14,8 @@ import { HeroCanvasLazy } from "@/components/home-sections/HeroCanvasLazy";
 import { YouTubeInline } from "@/components/home-sections/YouTubeInline";
 import { logoPaths } from "@/content/logos";
 import {
+  homeV2CentaurArtifacts,
+  homeV2CentaurMeta,
   homeV2Dashboard,
   homeV2Hero,
   homeV2LedgerIntent,
@@ -618,6 +620,22 @@ export function HomePagePort() {
               Six weeks, four tools, one portfolio. Centaur practice — human in the saddle, AI as a
               serious collaborator.
             </p>
+            <dl className="case__meta">
+              {homeV2CentaurMeta.map((row) => (
+                <div key={row.label}>
+                  <dt>{row.label}</dt>
+                  <dd>{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="case__artifacts">
+              <p className="case__artifacts-label">Artifacts</p>
+              <ul className="case__artifacts-list">
+                {homeV2CentaurArtifacts.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
             <span className="case__open">
               Open case <span aria-hidden="true">→</span>
             </span>

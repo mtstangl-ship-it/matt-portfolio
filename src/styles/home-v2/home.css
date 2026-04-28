@@ -854,6 +854,35 @@
   color: var(--ink);
   margin: 0;
 }
+.case__artifacts {
+  margin: 0;
+  padding: 0.65rem 0 0;
+}
+.case__artifacts-label {
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 0.45rem;
+}
+.case__artifacts-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.case__artifacts-list li {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  color: var(--ink-2);
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--accent-line);
+}
 .case__open {
   font-family: var(--mono);
   font-size: 0.8125rem;
@@ -902,6 +931,11 @@
   .cases__support, .cases__secondary-grid { grid-template-columns: 1fr; }
   .case--featured .case__h { font-size: clamp(1.4rem, 6vw, 1.85rem); }
   .case__meta { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .case--featured .case__meta {
+    display: none;
+  }
 }
 
 /* ====================== SIGNAL → STORY ====================== */
