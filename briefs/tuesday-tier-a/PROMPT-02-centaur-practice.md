@@ -100,8 +100,9 @@ When the prototype is complete and ready for review, report:
 1. **HTML prototype delivered** — provide the prototype (inline in chat, or as downloadable file structure)
 2. **Decisions you made on the brief's Section 08 "Decisions Open" items** — list each open decision and what you chose
 3. **Layout issues that required flagging** — anywhere copy didn't fit and you needed Matt's input
-4. **Cross-page implications** — anything you noticed that affects other Tier A pages
-5. **Handoff zip status** — once Matt approves the prototype, package as a handoff zip with component-organized files for Cursor port. Confirm zip structure when delivered.
+4. **Verification:** Confirm display name "Centaur Practice" appears throughout the prototype — no "AI Workflow" residue. Confirm service records cluster together (not interspersed with prose). Confirm Decision Ledger shows at least 3 specific override moments (not vague platitudes).
+5. **Cross-page implications** — anything you noticed that affects other Tier A pages
+6. **Handoff zip status** — once Matt approves the prototype, package as a handoff zip with component-organized files for Cursor port. Confirm zip structure when delivered.
 
 ## DO NOT PROCEED to Impact or any other page after this build. Stop after Centaur Practice and report. Matt reviews before next build starts.
 ```

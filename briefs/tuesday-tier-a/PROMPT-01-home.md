@@ -99,8 +99,12 @@ When the prototype is complete and ready for review, report:
 1. **HTML prototype delivered** — provide the prototype (inline in chat, or as downloadable file structure)
 2. **Decisions you made on the brief's Section 08 "Decisions Open" items** — list each open decision and what you chose
 3. **Layout issues that required flagging** — anywhere copy didn't fit and you needed Matt's input
-4. **Cross-page implications** — anything you noticed that affects other Tier A pages
-5. **Handoff zip status** — once Matt approves the prototype, package as a handoff zip with component-organized files for Cursor port. Confirm zip structure when delivered.
+4. **Verification:** Confirm all 6 Problem Ledger pairings render correctly per locked logic (see /briefs/brief-home.md Section 07 for pairing table)
+5. **Verification:** Confirm all 12 Dashboard counters animate (4 per card × 3 cards: Autodesk, Wipro, EY) with staggered firing on scroll-into-view
+6. **Verification:** Confirm fiche grammar applied with RESTRAINT — Home reads as synthesis page, NOT as case study
+7. **Verification:** Confirm Case Studies preview exposes all 5 case studies (3 featured + 2 secondary row)
+8. **Cross-page implications** — anything you noticed that affects other Tier A pages
+9. **Handoff zip status** — once Matt approves the prototype, package as a handoff zip with component-organized files for Cursor port. Confirm zip structure when delivered.
 
 ## DO NOT PROCEED to Centaur Practice or any other page after this build. Stop after Home and report. Matt reviews before next build starts.
 ```
