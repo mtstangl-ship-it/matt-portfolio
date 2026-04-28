@@ -572,7 +572,7 @@ Let's talk.
 
 **Subhead**
 ```
-Senior design leadership roles. Journey redesign. Experience strategy. Operational transformation. Healthcare preferred.
+Senior design leadership roles. Healthcare preferred.
 ```
 
 **CTA**
@@ -583,7 +583,7 @@ Get in touch  →  mtstangl@gmail.com
 ### Tier 2 — Tight version
 ```
 HEADLINE: Let's talk.
-SUBHEAD: Senior design leadership · journey redesign · healthcare preferred.
+SUBHEAD: Senior design leadership roles · healthcare preferred.
 ```
 
 ### Cut priority
