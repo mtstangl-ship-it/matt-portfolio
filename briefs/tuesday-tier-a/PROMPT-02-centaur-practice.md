@@ -20,6 +20,17 @@ Centaur Practice is the portfolio's methodology proof — how Matt works, framed
 
 This is a meta-case-study: the portfolio is evidence of itself. Build with that frame.
 
+## WORKFLOW — DELIVERABLE FORMAT
+
+Your deliverable is a self-contained HTML/CSS prototype that Matt reviews iteratively, NOT direct commits to the matt-portfolio repo.
+
+Workflow:
+1. You produce the rebuilt page as a self-contained HTML/CSS prototype (single file with embedded styles is fine, or organized files if structure helps)
+2. Matt reviews the prototype in our chat — we iterate together until it's right
+3. When approved, you package the final result as a handoff zip with component-organized files (clear class naming, separable sections) so Cursor can port to the Next.js stack on the tier-a-rebuild branch
+
+You have GitHub READ access to the matt-portfolio repo on branch tier-a-rebuild. You can read all referenced files. You do NOT commit directly to the repo. The handoff zip is the bridge between your design output and Cursor's implementation.
+
 ## REQUIRED READING — READ IN THIS ORDER, FULLY, BEFORE TOUCHING ANY CODE
 
 Foundational (read before any page-specific work):
@@ -84,20 +95,13 @@ Touch ONLY Centaur Practice case study component files. Do not edit other pages.
 
 ## REPORT BACK
 
-When done, report:
+When the prototype is complete and ready for review, report:
 
-1. **Components touched:** list every file path you modified
-2. **Decisions you made on the brief's Section 08 "Decisions Open" items:**
-   - Service Records count: 3 or 4 (Synthetic + Deployment Diff + Decision Ledger required; Cost & Time Receipts optional)
-   - Deployment Diff layout (side-by-side desktop / stacked mobile vs. stacked all widths with toggle)
-   - Decision Ledger visualization (table / timeline / ledger card)
-   - Methodology four-tool stack treatment (cards vs. diagram)
-   - Service record figure stamp positioning (top-right corner vs. inset header)
-   - Synthetic Users link treatment (embed-style preview vs. plain text)
-3. **Verification:** Confirm display name "Centaur Practice" appears throughout — no "AI Workflow" residue
-4. **Layout issues that required flagging**
-5. **Cross-page implications** for Impact build (page 3 of 3)
-6. **Build sequence:** Centaur Practice is page 2 of 3 in Tier A. Next: Impact. Confirm you are stopping here for Matt's review before proceeding to Impact.
+1. **HTML prototype delivered** — provide the prototype (inline in chat, or as downloadable file structure)
+2. **Decisions you made on the brief's Section 08 "Decisions Open" items** — list each open decision and what you chose
+3. **Layout issues that required flagging** — anywhere copy didn't fit and you needed Matt's input
+4. **Cross-page implications** — anything you noticed that affects other Tier A pages
+5. **Handoff zip status** — once Matt approves the prototype, package as a handoff zip with component-organized files for Cursor port. Confirm zip structure when delivered.
 
 ## DO NOT PROCEED to Impact or any other page after this build. Stop after Centaur Practice and report. Matt reviews before next build starts.
 ```

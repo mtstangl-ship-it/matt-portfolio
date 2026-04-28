@@ -20,6 +20,17 @@ CRITICAL FRAMING: Impact already exists in functional form on the live site. You
 
 Audience: Marc S. (systems purist) and John M. (metrics skeptic). Both will scan for unsupported claims and inconsistent numbers across surfaces.
 
+## WORKFLOW — DELIVERABLE FORMAT
+
+Your deliverable is a self-contained HTML/CSS prototype that Matt reviews iteratively, NOT direct commits to the matt-portfolio repo.
+
+Workflow:
+1. You produce the rebuilt page as a self-contained HTML/CSS prototype (single file with embedded styles is fine, or organized files if structure helps)
+2. Matt reviews the prototype in our chat — we iterate together until it's right
+3. When approved, you package the final result as a handoff zip with component-organized files (clear class naming, separable sections) so Cursor can port to the Next.js stack on the tier-a-rebuild branch
+
+You have GitHub READ access to the matt-portfolio repo on branch tier-a-rebuild. You can read all referenced files. You do NOT commit directly to the repo. The handoff zip is the bridge between your design output and Cursor's implementation.
+
 ## REQUIRED READING — READ IN THIS ORDER, FULLY, BEFORE TOUCHING ANY CODE
 
 Foundational (read before any page-specific work):
@@ -120,11 +131,11 @@ Touch ONLY Impact page component files. Do not edit other pages. Do not edit /CO
 
 ## REPORT BACK
 
-When done, report:
+When the prototype is complete and ready for review, report:
 
-1. **Components touched:** list every file path you modified
+1. **HTML prototype delivered** — provide the prototype (inline in chat, or as downloadable file structure)
 
-2. **Decisions you made on the brief's Section 08 "Decisions Open" items:**
+2. **Decisions you made on the brief's Section 08 "Decisions Open" items** — list each open decision and what you chose:
    - Wipro tab visual treatments chosen (any of: six-to-three collapse, tier ladder exploded-axonometric, Before/After diagram, counter staggering pattern)
    - Autodesk tab visual treatments chosen (any of: progressive tier depth, chip differentiation, revenue motion arc, service-card hover-to-reveal)
    - Methodology footnote treatment (kicker + paragraph vs. kicker + bullets vs. expandable)
@@ -139,11 +150,13 @@ When done, report:
 
 4. **Preservation verification:** Confirm EY Georgia map is intact and refined (not redesigned)
 
-5. **Layout issues that required flagging**
+5. **Layout issues that required flagging** — anywhere copy didn't fit and you needed Matt's input
 
-6. **Cross-page implications** — anything you noticed that affects Wipro, EY, or Autodesk case studies (those build later in the week)
+6. **Cross-page implications** — anything you noticed that affects other Tier A pages or Wipro, EY, or Autodesk case studies (those build later in the week)
 
-7. **Build sequence:** Impact is page 3 of 3 in Tier A. Tuesday primary block complete. Report final state.
+7. **Handoff zip status** — once Matt approves the prototype, package as a handoff zip with component-organized files for Cursor port. Confirm zip structure when delivered.
+
+8. **Build sequence:** Impact is page 3 of 3 in Tier A. Tuesday primary block complete. Report final prototype state.
 
 ## TUESDAY TIER A IS COMPLETE AFTER THIS BUILD.
 

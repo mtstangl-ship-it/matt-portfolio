@@ -18,6 +18,17 @@ You are rebuilding the Home page for matt-portfolio. This is page 1 of 3 in Tues
 
 This is the most consequential single rebuild in the project. Build it correctly the first time.
 
+## WORKFLOW — DELIVERABLE FORMAT
+
+Your deliverable is a self-contained HTML/CSS prototype that Matt reviews iteratively, NOT direct commits to the matt-portfolio repo.
+
+Workflow:
+1. You produce the rebuilt page as a self-contained HTML/CSS prototype (single file with embedded styles is fine, or organized files if structure helps)
+2. Matt reviews the prototype in our chat — we iterate together until it's right
+3. When approved, you package the final result as a handoff zip with component-organized files (clear class naming, separable sections) so Cursor can port to the Next.js stack on the tier-a-rebuild branch
+
+You have GitHub READ access to the matt-portfolio repo on branch tier-a-rebuild. You can read all referenced files. You do NOT commit directly to the repo. The handoff zip is the bridge between your design output and Cursor's implementation.
+
 ## REQUIRED READING — READ IN THIS ORDER, FULLY, BEFORE TOUCHING ANY CODE
 
 Foundational (read before any page-specific work):
@@ -51,7 +62,7 @@ Touch ONLY Home page component files. Do not edit other pages. Do not edit /COPY
 
 ## CRITICAL CONSTRAINTS
 
-1. **Home v2 must work as a screenshot reference for Centaur Practice.** When you finish, capture the post-build state at 1280px desktop width and 390px mobile width. These screenshots become the Thursday capture target.
+1. **Home v2 must work as a screenshot reference for Centaur Practice.** When the prototype is approved and ported to Next.js, capture screenshots of the live preview deployment at 1280px and 390px for the Thursday Deployment Diff capture.
 
 2. **Mobile hero must end with role line + contact links visible without scroll** at 390px viewport. This is the single most-tested mobile constraint.
 
@@ -83,27 +94,13 @@ Touch ONLY Home page component files. Do not edit other pages. Do not edit /COPY
 
 ## REPORT BACK
 
-When done, report:
+When the prototype is complete and ready for review, report:
 
-1. **Components touched:** list every file path you modified
-2. **Decisions you made on the brief's Section 08 "Decisions Open" items:**
-   - Portrait integration treatment (halftone between columns vs. figure stamp in corner)
-   - Dashboard cards progressive reveal logic (across all three cards: Autodesk, Wipro, EY)
-   - Logos / proof strip ordering and density
-   - Pair rotation pacing (target 5-7s per pair)
-   - Stanford credential placement (standalone vs. grouped)
-   - Counter animation stagger pattern (which number fires first within each card; offset between cards)
-   - Desktop hover-invitation cue specifics (pulse / dimension marks / leader line draw)
-   - Mobile sticky nav treatment
-   - Case Studies preview secondary row layout (2-up desktop / stack mobile vs. compressed inline)
-3. **Verification:** Confirm all 6 Problem Ledger pairings render correctly per locked logic
-4. **Verification:** Confirm all 12 Dashboard counters animate (4 per card × 3 cards) with staggered firing
-5. **Verification:** Confirm fiche grammar applied with restraint — Home does NOT read as a case study
-6. **Verification:** Confirm Case Studies preview exposes all 5 case studies (3 featured + 2 secondary)
-7. **Layout issues that required flagging** — anywhere copy didn't fit and you needed Matt's input
-8. **Cross-page implications** — anything you noticed that affects Centaur Practice or Impact builds
-9. **Screenshots captured for Centaur Practice Deployment Diff** — confirm 1280px desktop and 390px mobile captures are saved
-10. **Build sequence:** Home is page 1 of 3 in Tier A. Next: Centaur Practice. Confirm you are stopping here for Matt's review before proceeding to Centaur.
+1. **HTML prototype delivered** — provide the prototype (inline in chat, or as downloadable file structure)
+2. **Decisions you made on the brief's Section 08 "Decisions Open" items** — list each open decision and what you chose
+3. **Layout issues that required flagging** — anywhere copy didn't fit and you needed Matt's input
+4. **Cross-page implications** — anything you noticed that affects other Tier A pages
+5. **Handoff zip status** — once Matt approves the prototype, package as a handoff zip with component-organized files for Cursor port. Confirm zip structure when delivered.
 
 ## DO NOT PROCEED to Centaur Practice or any other page after this build. Stop after Home and report. Matt reviews before next build starts.
 ```
