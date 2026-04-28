@@ -35,7 +35,7 @@ export const impactPage = {
       healthcare: [
         { label: "Vaccinations driven", value: "715" },
         { label: "Public health engagements", value: "4.57M" },
-        { label: "Partnership scale", value: "10+" },
+        { label: "Partnership scale", value: "24+" },
       ],
     },
   },

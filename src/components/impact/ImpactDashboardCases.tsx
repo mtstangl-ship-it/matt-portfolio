@@ -61,7 +61,9 @@ function HeroMetric({
         )}
       </div>
       <div className="font-mono text-xs font-medium uppercase tracking-[0.1em] text-accent-signal">{lbl}</div>
+      {unit ? (
       <div className="font-mono text-xs tracking-[0.06em] text-dashboard-ink-muted whitespace-nowrap">{unit}</div>
+      ) : null}
     </div>
   );
 }
@@ -315,12 +317,9 @@ function HealthGeoCase() {
               strokeWidth={1.5}
             />
             <g stroke="rgb(34 211 199)" strokeOpacity={0.14} strokeWidth={1} strokeDasharray="3 4" fill="none">
-              <line x1="70" y1="96" x2="229.6" y2="121.6" />
-              <line x1="70" y1="96" x2="140" y2="176" />
+              <line x1="70" y1="96" x2="120" y2="72" />
               <line x1="70" y1="96" x2="246" y2="224" />
-              <line x1="229.6" y1="121.6" x2="140" y2="176" />
-              <line x1="229.6" y1="121.6" x2="246" y2="224" />
-              <line x1="140" y1="176" x2="246" y2="224" />
+              <line x1="120" y1="72" x2="246" y2="224" />
             </g>
             {h.cities.map((c) => {
               const on = highlight === c.id;
@@ -390,6 +389,7 @@ function HealthGeoCase() {
               </button>
             );
           })}
+          {h.partners.length > 0 ? (
           <div className="mt-2 grid grid-cols-1 gap-3 border-t border-dashboard-border pt-4 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-dashboard-ink-muted sm:grid-cols-3">
             {h.partners.map((p) => (
               <span key={p.b}>
@@ -400,6 +400,7 @@ function HealthGeoCase() {
               </span>
             ))}
           </div>
+          ) : null}
         </div>
       </div>
     </>

@@ -23,7 +23,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 type TabId = "revenue" | "ops" | "health";
 type TierId = "business" | "pro" | "included";
-type CityId = "atlanta" | "augusta" | "macon" | "savannah";
+type CityId = "atlanta" | "athens" | "savannah";
 
 const STORAGE_KEY = "stangl-impact-tab";
 const TAB_ORDER: TabId[] = ["revenue", "ops", "health"];
@@ -102,7 +102,7 @@ export function ImpactShell() {
   // a small delay so the map reads like a radar sweep, not a flash.
   useEffect(() => {
     if (activeTab !== "health") return;
-    const order: CityId[] = ["atlanta", "augusta", "macon", "savannah"];
+    const order: CityId[] = ["atlanta", "athens", "savannah"];
     const timers: number[] = [];
     order.forEach((id, i) => {
       const t = window.setTimeout(() => {
@@ -145,15 +145,10 @@ export function ImpactShell() {
       <section className="identity" aria-labelledby="impact-h1">
         <div>
           <div className="mono teal" style={{ marginBottom: "var(--sp-4)" }}>
-            — Live Impact Briefing · Q1 2026
+            IMPACT · 2020–2026
           </div>
-          <h1 id="impact-h1">
-            Enterprise design, <span>measured at altitude.</span>
-          </h1>
-          <p className="sub">
-            Three enterprise transformations. One leader. This is what the work returned, in
-            revenue, resolution speed, and reach, after it shipped.
-          </p>
+          <h1 id="impact-h1">Three enterprise transformations. In numbers.</h1>
+          <p className="sub">What shipped, what moved, what carried.</p>
         </div>
         <aside className="id-card" aria-label="operator">
           <div className="row">
@@ -173,10 +168,6 @@ export function ImpactShell() {
           <div className="row">
             <span className="k">Scope</span>
             <span className="v">Practice building · Service transformation · Ecosystem design</span>
-          </div>
-          <div className="row">
-            <span className="k">Window</span>
-            <span className="v">0→1 practice builds · 1→2 experience delivery</span>
           </div>
         </aside>
       </section>
@@ -368,42 +359,32 @@ export function ImpactShell() {
             </div>
             <h2>I unified six service towers into one operating model.</h2>
             <p className="role">
-              At Wipro, I led transformation across <b>six ITIL service towers</b> for Estée
-              Lauder and Takeda, building the frameworks, metrics, and delivery model that
-              improved NPS past goal and secured an eight-figure renewal.
+              At Wipro, I led transformation across <b>six ITIL service towers</b> for Estée Lauder,
+              building the frameworks, metrics, and delivery model that improved NPS past goal.
             </p>
           </div>
           <div className="hero-metric">
             <div className="num">
-              <em>15</em>%+
+              <em>13</em>%+
             </div>
             <div className="lbl">NPS goal exceeded</div>
-            <div className="unit">Eight-figure renewal secured</div>
           </div>
         </div>
 
-        <div className="metrics">
-          <div className="metric">
-            <div className="v">
-              16,000<small>+</small>
-            </div>
-            <div className="k">Cases routed</div>
-          </div>
-          <div className="metric">
+        <div className="metrics metrics-3" role="list">
+          <div className="metric" role="listitem">
             <div className="v">
               30<small>+</small>
             </div>
             <div className="k">Outcomes shipped</div>
           </div>
-          <div className="metric">
+          <div className="metric" role="listitem">
             <div className="v">3</div>
             <div className="k">Handoff tiers</div>
           </div>
-          <div className="metric">
-            <div className="v">
-              +15<small>%</small>
-            </div>
-            <div className="k">NPS over goal</div>
+          <div className="metric" role="listitem">
+            <div className="v">13K</div>
+            <div className="k">Annual lockouts eliminated</div>
           </div>
         </div>
 
@@ -442,7 +423,7 @@ export function ImpactShell() {
             </div>
           </div>
           <div className="delta">
-            <span>Delta across 16k cases</span>
+            <span>Delta across all routed cases</span>
             <span>
               <b>−31% MTTR</b> · ≈ 2.1 days returned per case
             </span>
@@ -527,29 +508,29 @@ export function ImpactShell() {
               <em>4.57</em>M
             </div>
             <div className="lbl">Engagements delivered</div>
-            <div className="unit">Across 4 cities · 10+ partners</div>
+            <div className="unit">Across 3 cities · 24+ partners</div>
           </div>
         </div>
 
         <div className="metrics">
-          <div className="metric">
+          <div className="metric" role="listitem">
             <div className="v">
               4.57<small>M</small>
             </div>
             <div className="k">Engagements</div>
           </div>
-          <div className="metric">
+          <div className="metric" role="listitem">
             <div className="v">715</div>
             <div className="k">Vaccinations</div>
           </div>
-          <div className="metric">
+          <div className="metric" role="listitem">
             <div className="v">
-              10<small>+</small>
+              24<small>+</small>
             </div>
             <div className="k">Delivery partners</div>
           </div>
-          <div className="metric">
-            <div className="v">4</div>
+          <div className="metric" role="listitem">
+            <div className="v">3</div>
             <div className="k">City hubs</div>
           </div>
         </div>
@@ -560,7 +541,7 @@ export function ImpactShell() {
         </div>
 
         <div className="geo">
-          <div className="map" aria-label="Map of Georgia with four delivery hubs">
+          <div className="map" aria-label="Map of Georgia with three delivery hubs">
             <svg
               viewBox="-10 -10 300 340"
               preserveAspectRatio="xMidYMid meet"
@@ -591,19 +572,15 @@ export function ImpactShell() {
                 strokeDasharray="3 4"
                 fill="none"
               >
-                <line x1="70" y1="96" x2="229.6" y2="121.6" />
-                <line x1="70" y1="96" x2="140" y2="176" />
+                <line x1="70" y1="96" x2="120" y2="72" />
                 <line x1="70" y1="96" x2="246" y2="224" />
-                <line x1="229.6" y1="121.6" x2="140" y2="176" />
-                <line x1="229.6" y1="121.6" x2="246" y2="224" />
-                <line x1="140" y1="176" x2="246" y2="224" />
+                <line x1="120" y1="72" x2="246" y2="224" />
               </g>
 
               {(
                 [
                   { id: "atlanta", cx: 70, cy: 96, r: 10, rInner: 4.5, label: "ATLANTA", labelY: 80 },
-                  { id: "augusta", cx: 229.6, cy: 121.6, r: 7.5, rInner: 3, label: "AUGUSTA", labelY: 108 },
-                  { id: "macon", cx: 140, cy: 176, r: 7, rInner: 2.8, label: "MACON", labelY: 163 },
+                  { id: "athens", cx: 120, cy: 72, r: 7.5, rInner: 3, label: "ATHENS", labelY: 56 },
                   { id: "savannah", cx: 246, cy: 224, r: 6.5, rInner: 2.5, label: "SAVANNAH", labelY: 245 },
                 ] as const
               ).map((c) => {
@@ -675,31 +652,23 @@ export function ImpactShell() {
                   name: "Atlanta",
                   sub: "Metro hub · anchor partner sites",
                   metric: "2.41M",
-                  metricSub: "engagements · 412 vaccines",
+                  metricSub: "engagements · 452 vaccines",
                 },
                 {
-                  id: "augusta",
+                  id: "athens",
                   num: "02",
-                  name: "Augusta",
-                  sub: "Regional health system · rural reach",
-                  metric: "0.94M",
-                  metricSub: "engagements · 168 vaccines",
-                },
-                {
-                  id: "macon",
-                  num: "03",
-                  name: "Macon",
-                  sub: "Community pathway pilot",
-                  metric: "0.71M",
-                  metricSub: "engagements · 89 vaccines",
+                  name: "Athens",
+                  sub: "Twilight Criterium · UGA Athletics partnership",
+                  metric: "1.65M",
+                  metricSub: "engagements · 175 vaccines",
                 },
                 {
                   id: "savannah",
-                  num: "04",
+                  num: "03",
                   name: "Savannah",
                   sub: "Coastal delivery · mobile teams",
                   metric: "0.51M",
-                  metricSub: "engagements · 46 vaccines",
+                  metricSub: "engagements · 88 vaccines",
                 },
               ] as const
             ).map((c) => (
@@ -726,18 +695,6 @@ export function ImpactShell() {
                 </span>
               </button>
             ))}
-
-            <div className="partners geo-stats">
-              <span>
-                <b>715</b> vaccines administered
-              </span>
-              <span>
-                <b>4.57M</b> engagements
-              </span>
-              <span>
-                <b>10+</b> partners
-              </span>
-            </div>
           </div>
         </div>
       </section>
@@ -751,10 +708,7 @@ export function ImpactShell() {
 
       <section className="handoff-cta">
         <div className="mono teal">Handoff · deeper narrative</div>
-        <h3>
-          Want the full story behind each transformation? The case studies walk through
-          constraints, craft, and outcomes in more depth.
-        </h3>
+        <h3>The work behind the numbers, in case study form.</h3>
         <a href="/case-studies/autodesk">
           Open case studies <span aria-hidden>→</span>
         </a>

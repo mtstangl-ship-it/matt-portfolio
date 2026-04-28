@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 // Georgia outline (from GeoJSON) with metro nodes radiating like radar
-// Metros: Atlanta, Augusta, Savannah, Columbus, Macon
+// Metros: Atlanta, Athens, Savannah (Say YES Summer footprint)
 
 // Georgia from US Census GeoJSON, equal x/y scale to preserve proportions
 const georgiaPath =
@@ -11,10 +11,8 @@ const georgiaPath =
 
 const metros = [
   { x: 53, y: 57, name: "Atlanta" },
-  { x: 130, y: 63, name: "Augusta" },
+  { x: 88, y: 48, name: "Athens" },
   { x: 158, y: 108, name: "Savannah" },
-  { x: 34, y: 95, name: "Columbus" },
-  { x: 79, y: 86, name: "Macon" },
 ];
 
 const accentFill = "#22d3c7";

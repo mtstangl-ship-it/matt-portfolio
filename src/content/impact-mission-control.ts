@@ -35,7 +35,7 @@ export const impactMissionControl = {
   /** Mode-specific floating numerals, Revenue excludes ops/health/global rollups */
   ambientMetricsByMode: {
     all: [
-      "27%", "106%", "31%", "16k", "50M", "4.57M", "715", "10+", "30+",
+      "27%", "106%", "31%", "16k", "50M", "4.57M", "715", "24+", "30+",
       "Q1", "QoQ", "YoY", "NRR", "AOV", "MTTR", "NPS", "R/O/H",
       "0→1→2", "3 systems", "8-fig",
     ],
@@ -49,7 +49,7 @@ export const impactMissionControl = {
       "Q1", "QoQ", "50M", "▲", "CX", "EX",
     ],
     healthcare: [
-      "715", "4.57M", "10+", "vacc", "reach", "partners", "state",
+      "715", "4.57M", "24+", "vacc", "reach", "partners", "state",
       "Q1", "engagement", "access", "▲",
     ],
   } as const satisfies Record<ImpactOutcomeMode, readonly string[]>,
@@ -69,7 +69,7 @@ export const impactMissionControl = {
     healthcare: {
       title: "Healthcare",
       narrative: "Engagement · access · care uptake",
-      stats: ["10+ partners", "715 vacc", "4.57M reach", "multi-state"],
+      stats: ["24+ partners", "715 vacc", "4.57M reach", "multi-state"],
       signals: ["EY activation", "EY access", "Ecosystem"],
     },
   } as const,
@@ -96,7 +96,7 @@ export const impactMissionControl = {
       { value: "+13%", label: "NPS" },
     ],
     healthcare: [
-      { value: "10+", label: "partners" },
+      { value: "24+", label: "partners" },
       { value: "715", label: "vaccinations" },
       { value: "4.57M", label: "engagements" },
     ],
@@ -113,7 +113,7 @@ export const impactMissionControl = {
     all: [
       "0.02", "1.4k", "99.2%", "▲", "●", "│", "├", "◆", "→", "·",
       "RSS", "OK", "PING", "LAT", "Q1", "QoQ", "NRR", "AOV",
-      "3→", "106", "31", "715", "4.57M", "50M", "16k", "10+",
+      "3→", "106", "31", "715", "4.57M", "50M", "16k", "24+",
     ],
     revenue: [
       "0.02", "99.2%", "▲", "●", "→", "·", "Q1", "QoQ", "NRR", "AOV",
@@ -124,7 +124,7 @@ export const impactMissionControl = {
       "16k", "50M", "cases", "NPS", "OK", "LAT",
     ],
     healthcare: [
-      "0.02", "99.2%", "▲", "●", "→", "·", "715", "4.57M", "10+", "vacc", "reach",
+      "0.02", "99.2%", "▲", "●", "→", "·", "715", "4.57M", "24+", "vacc", "reach",
     ],
   } as const satisfies Record<ImpactOutcomeMode, readonly string[]>,
 
@@ -239,7 +239,7 @@ export const impactMissionControl = {
       outcomes: [
         { value: "715", label: "vaccinations" },
         { value: "4.57M", label: "engagements" },
-        { value: "10+", label: "partners" },
+        { value: "24+", label: "partners" },
       ],
     },
   } as const,

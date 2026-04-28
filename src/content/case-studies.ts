@@ -2,7 +2,7 @@
  * Case Studies — canonical catalogue.
  *
  * Per the handoff brief, the site carries exactly five cases (in order):
- *   1. AI Workflow, 2. Synthetic Users, 3. Autodesk, 4. Wipro, 5. EY.
+ *   1. Centaur Practice, 2. Synthetic Users, 3. Autodesk, 4. Wipro, 5. EY.
  *
  * Each case's long-form body + bespoke artifacts live in its own component
  * under `src/components/case-studies/cases/<slug>.tsx`. This file holds only
@@ -12,7 +12,7 @@
 
 export const caseStudiesPage = {
   eyebrow: "Selected work",
-  title: "Proof in flight.",
+  title: "Selected work.",
   subhead:
     "Five missions where strategy left the hangar. What shipped, what moved, and the trajectory each one actually traced.",
 } as const;
@@ -29,7 +29,7 @@ export type CaseStudyEntry = {
   tag: string;
   /** 1-based position. Used for "CASE 01 OF 05" meta. */
   caseNumber: number;
-  /** Short label for the case picker, e.g. "AI Workflow", "EY Healthcare". */
+  /** Short label for the case picker, e.g. "Centaur Practice", "EY Healthcare". */
   shortName: string;
 
   // ------- Index + home tile metadata (existing schema) -------
@@ -49,10 +49,10 @@ export const caseStudyEntries: CaseStudyEntry[] = [
     title: "I built this portfolio with AI, and kept the decisions human.",
     oneLine:
       "Six weeks. Four tools. One lesson I'll use for the rest of my career: AI raises the floor. Taste raises the ceiling.",
-    tag: "AI WORKFLOW",
+    tag: "CENTAUR PRACTICE",
     caseNumber: 1,
-    shortName: "AI Workflow",
-    panelLabel: "AI WORKFLOW",
+    shortName: "Centaur Practice",
+    panelLabel: "CENTAUR PRACTICE",
     teaserLine:
       "Six weeks, four tools, one portfolio. What AI did, what it got wrong, and the decisions that stayed mine.",
     tools: "Cursor · Claude · Claude Design · Vercel",

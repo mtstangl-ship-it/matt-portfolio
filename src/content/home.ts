@@ -48,9 +48,9 @@ export const problemLedger = {
     eyebrow: "PROBLEMS SOLVED",
     items: [
       "Turned Autodesk's post-purchase support into a $50M revenue motion",
-      "Unified Wipro's six ITIL towers into one operating model for Estée Lauder and Takeda",
+      "Unified Wipro's six ITIL towers into one operating model for Estée Lauder",
       "De-politicized vaccination engagement across Georgia — CDC national best practice",
-      "Cut MTTR by 31% across 16,000 annual cases",
+      "Cut MTTR by 31% — 13K annual lockouts eliminated",
       "Built a global CX practice from zero at an enterprise consultancy",
       "Made synthetic users a research method with documented QA pipeline",
     ],
@@ -117,7 +117,7 @@ export const transformationDashboard = {
       narrative:
         "Led public health experience strategy for Georgia Department of Public Health and multi-state initiatives, designing engagement models that increased vaccine uptake across diverse populations. Aligned state agencies, healthcare providers, and partner organizations to reduce barriers to access, improve navigation into care, and translate outreach into real vaccinations. Delivered measurable outcomes across patient, provider, and system levels in high-pressure public health conditions.",
       kpis: [
-        { value: "10+", label: "statewide healthcare & brand partnerships" },
+        { value: "24+", label: "statewide healthcare & brand partnerships" },
         { value: "4.57M → 715", label: "engagements (awareness layer) to vaccinations (activation layer) — two stages, one program. The gap is the design, not a conversion failure." },
         { value: "8-figure", label: "renewal driven by program performance" },
       ],

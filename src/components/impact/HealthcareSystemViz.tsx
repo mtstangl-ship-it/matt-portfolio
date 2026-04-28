@@ -10,7 +10,7 @@ const accent = "#22d3c7";
 const georgiaOutline =
   "M 180 45 L 310 55 L 345 95 L 340 180 L 300 245 L 200 250 L 95 220 L 55 150 L 70 80 Z";
 
-type MetroKey = "atlanta" | "savannah" | "augusta" | "macon";
+type MetroKey = "atlanta" | "savannah" | "athens";
 
 const metroData: Record<
   MetroKey,
@@ -18,22 +18,20 @@ const metroData: Record<
 > = {
   atlanta: { label: "Atlanta", x: 200, y: 95, cx: 200, cy: 95 },
   savannah: { label: "Savannah", x: 280, y: 195, cx: 280, cy: 195 },
-  augusta: { label: "Augusta", x: 235, y: 130, cx: 235, cy: 130 },
-  macon: { label: "Macon", x: 185, y: 165, cx: 185, cy: 165 },
+  athens: { label: "Athens", x: 230, y: 75, cx: 230, cy: 75 },
 };
 
 // Connection lines between metros (faint)
 const connections: [MetroKey, MetroKey][] = [
-  ["atlanta", "augusta"],
-  ["atlanta", "macon"],
-  ["macon", "savannah"],
-  ["augusta", "savannah"],
+  ["atlanta", "athens"],
+  ["atlanta", "savannah"],
+  ["athens", "savannah"],
 ];
 
 const sharedMetrics = [
   "715 vaccinations (targeted activation)",
   "4.57M public health engagements",
-  "10+ healthcare & brand partnerships",
+  "24+ healthcare & brand partnerships",
   "8-figure renewal impact",
 ];
 
@@ -157,7 +155,7 @@ export function HealthcareSystemViz() {
                   duration: 2,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: (["atlanta", "savannah", "augusta", "macon"].indexOf(key) * 0.3),
+                  delay: (["atlanta", "savannah", "athens"].indexOf(key) * 0.3),
                 }}
               />
               <text
