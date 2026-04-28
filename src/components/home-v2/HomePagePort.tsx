@@ -104,11 +104,15 @@ export function HomePagePort() {
       </nav>
 
       {/* ============ 01 · HERO ============ */}
-      <header id="hero" className="hero" data-screen-label="01 Hero">
+      <header id="hero" className="hero hero--pointillism" data-screen-label="01 Hero">
         <span className="margin-note">DRAWING 01</span>
         <span className="fig-stamp">DRAWING 01</span>
 
-        <div className="hero__inner">
+        <div className="hero__canvas" aria-hidden="true">
+          <HeroCanvasLazy />
+        </div>
+
+        <div className="hero__overlay">
           <div className="hero__copy">
             <p className="kicker">{homeV2Hero.kicker}</p>
             <h1 className="hero__h1">
@@ -136,11 +140,26 @@ export function HomePagePort() {
               ))}
             </ul>
           </div>
-
-          <div className="hero__preserve" aria-hidden="true">
-            <HeroCanvasLazy />
-          </div>
         </div>
+
+        <aside className="hero__identity" aria-label="Drawing identification">
+          <div className="hero__identity-row">
+            <span>PART NO.</span>
+            <b>01</b>
+          </div>
+          <div className="hero__identity-row">
+            <span>BASED</span>
+            <b>ATL · REMOTE</b>
+          </div>
+          <div className="hero__identity-row">
+            <span>ROLE</span>
+            <b>EXPERIENCE DESIGN</b>
+          </div>
+          <div className="hero__identity-row">
+            <span>REV.</span>
+            <b>02 · TIER A</b>
+          </div>
+        </aside>
 
         <div className="proof">
           <span className="proof__label">SELECTED CLIENTS &amp; CREDENTIALS</span>

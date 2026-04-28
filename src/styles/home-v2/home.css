@@ -79,6 +79,85 @@
   padding-bottom: 0;
   position: relative;
 }
+
+/* Home v2 — full-bleed pointillism + overlay copy (HeroCanvasLazy; Hero.tsx unchanged) */
+.hero--pointillism {
+  isolation: isolate;
+  min-height: min(92vh, 780px);
+  padding-bottom: 0;
+}
+.hero--pointillism .hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero--pointillism .hero__canvas > * {
+  height: 100%;
+  min-height: min(85vh, 720px);
+}
+.hero__overlay {
+  position: relative;
+  z-index: 2;
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  padding-top: clamp(7rem, 12vh, 9rem);
+  pointer-events: none;
+}
+.hero__overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(244, 241, 234, 0.94) 0%,
+    rgba(244, 241, 234, 0.82) min(52%, 28rem),
+    rgba(244, 241, 234, 0.38) 72%,
+    transparent min(92%, 100%)
+  );
+  pointer-events: none;
+}
+.hero--pointillism .hero__copy {
+  pointer-events: auto;
+  position: relative;
+  max-width: min(36rem, 58vw);
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.hero__identity {
+  position: absolute;
+  top: clamp(4.75rem, 9vh, 6rem);
+  right: var(--gutter);
+  z-index: 6;
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--bg-2);
+  border: 1px solid var(--ink-line);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  max-width: min(260px, 42vw);
+  pointer-events: none;
+}
+.hero__identity-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.hero__identity-row b {
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+.hero--pointillism .proof {
+  position: relative;
+  z-index: 3;
+}
 .hero__inner {
   max-width: var(--col-wide);
   margin: 0 auto;
@@ -240,12 +319,24 @@
   .hero__stamp { display: none; }
   .hero__h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
   .hero__sub { font-size: 1rem; }
+  .hero--pointillism .hero__copy {
+    max-width: 100%;
+  }
+  .hero__overlay::before {
+    background: rgba(244, 241, 234, 0.92);
+  }
+  .hero__identity {
+    display: none;
+  }
 }
 @media (max-width: 480px) {
   .proof__stanford { display: none; }
   .proof__list li:nth-last-child(2) { display: none; } /* trailing sep */
   /* Mobile: hero ends with role line + contacts visible */
   .hero__scatter { display: none; }
+  .hero--pointillism .hero__canvas {
+    display: none;
+  }
 }
 
 /* ====================== CLIENT TICKER ====================== */
