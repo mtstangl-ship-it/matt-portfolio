@@ -36,18 +36,15 @@ I'm a design leader who can also write the spot, cut the film, and tell the stor
 
 ### Tier 2 — Tight version
 ```
-EYEBROW:
-TITLE:
-INTRO:
+EYEBROW: Ongoing archive
+TITLE: Signal → Story
+INTRO: A design leader who can also write the spot, cut the film, tell the story.
 ```
 
 ### Cut priority
-1. 
-2. 
-3. 
-
-### Design decision flags
-- [ ] 
+1. Drop EYEBROW at 320px — TITLE alone carries the page identity
+2. Compress INTRO to title-only at 320px if needed — page header is the title
+3. INTRO line is the page's positioning claim; never drop entirely
 
 ---
 
@@ -61,13 +58,13 @@ I'm a design leader who can also write the spot, cut the film, and tell the stor
 
 ### Tier 2 — Tight version
 ```
-FRAMING LINE:
+FRAMING LINE: A design leader who can write the spot, cut the film, tell the story.
 ```
 
 ### Cut priority
-1. 
-2. 
-3. 
+1. Compress to "Design leader. Spot, film, story." at 320px if extreme density required
+2. Drop framing line entirely at 320px if film grid alone needs the room — the films speak
+3. Default: keep tighter Tier 2 framing line above film grid at 390px
 
 ### Design decision flags
 - [ ] Mobile autoplay behavior — film previews play as a loop without hover or touch interaction (logged in DESIGN-NOTES.md)
