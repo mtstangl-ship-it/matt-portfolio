@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter_Tight, JetBrains_Mono } from "next/font/google";
-import { Nav, Footer } from "@/components/layout";
+import { ConditionalSiteChrome } from "@/components/layout/ConditionalSiteChrome";
 import "./globals.css";
 
 const interTight = Inter_Tight({
@@ -31,9 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${interTight.variable} ${jetbrainsMono.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
-        <Nav />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ConditionalSiteChrome>{children}</ConditionalSiteChrome>
       </body>
     </html>
   );
