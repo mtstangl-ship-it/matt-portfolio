@@ -111,12 +111,14 @@
   position: absolute;
   inset: 0;
   z-index: -1;
+  /* Dark left vignette — readable copy on the left, pointillism open on the right */
   background: linear-gradient(
     90deg,
-    rgba(244, 241, 234, 0.94) 0%,
-    rgba(244, 241, 234, 0.82) min(52%, 28rem),
-    rgba(244, 241, 234, 0.38) 72%,
-    transparent min(92%, 100%)
+    var(--bg) 0%,
+    rgba(10, 15, 14, 0.92) 30%,
+    rgba(10, 15, 14, 0.65) 50%,
+    rgba(10, 15, 14, 0.25) 70%,
+    transparent 90%
   );
   pointer-events: none;
 }
@@ -323,7 +325,14 @@
     max-width: 100%;
   }
   .hero__overlay::before {
-    background: rgba(244, 241, 234, 0.92);
+    /* Stacked copy: stronger top scrim, lighter toward bottom */
+    background: linear-gradient(
+      180deg,
+      rgba(10, 15, 14, 0.96) 0%,
+      rgba(10, 15, 14, 0.78) 42%,
+      rgba(10, 15, 14, 0.35) 72%,
+      transparent 100%
+    );
   }
   .hero__identity {
     display: none;
