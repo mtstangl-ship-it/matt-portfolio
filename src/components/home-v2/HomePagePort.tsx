@@ -229,11 +229,6 @@ export function HomePagePort() {
             <figure className="ledger__stamp">
               <svg viewBox="0 0 80 80" width={80} height={80}>
                 <title>M. Stangl portrait stamp</title>
-                <defs>
-                  <pattern id="ledger-portrait-halftone" width={3} height={3} patternUnits="userSpaceOnUse">
-                    <circle cx="1.5" cy="1.5" r={0.7} fill="var(--accent)" />
-                  </pattern>
-                </defs>
                 <image
                   href="/portrait-matt-stangl.png"
                   x={0}
@@ -241,14 +236,6 @@ export function HomePagePort() {
                   width={80}
                   height={80}
                   preserveAspectRatio="xMidYMid slice"
-                  opacity={0.85}
-                />
-                <rect
-                  width={80}
-                  height={80}
-                  fill="url(#ledger-portrait-halftone)"
-                  opacity={0.65}
-                  style={{ mixBlendMode: "screen" }}
                 />
                 <rect
                   x={0.5}
