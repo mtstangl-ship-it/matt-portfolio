@@ -72,6 +72,12 @@ const lineOpacityLooped = [0, 0, 0.35, 0.38, 0, 0];
 const blockTimes = [0, 0.42, 0.44, 0.48, 0.52, 0.62, 1];
 const blockOpacityKeyframes = [0, 0, 0, 0, 1, 1, 1];
 
+/** Centers the three-bar cluster horizontally in the viewBox (was ~8u right of frame center). */
+const VIEWBOX_W = 240;
+const shiftBarsCenterX =
+  VIEWBOX_W / 2 -
+  (blocks[0].x + blocks[blocks.length - 1].x + blocks[blocks.length - 1].w) / 2;
+
 export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = {}) {
   const phase = useCyclePhase(isHovered, cycleMs);
   const barLabelOpacity = isHovered
@@ -81,10 +87,11 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center">
       <svg
-        viewBox="0 0 240 48"
+        viewBox={`0 0 ${VIEWBOX_W} 48`}
         className="mx-auto h-auto w-full max-w-[min(100%,280px)] min-h-0 flex-1"
         preserveAspectRatio="xMidYMid meet"
       >
+        <g transform={`translate(${shiftBarsCenterX}, 0)`}>
         {[
           [0, 2], [1, 2], [2, 4], [3, 4], [4, 5], [4, 6], [5, 7], [2, 7],
         ].map(([a, b]) => {
@@ -167,6 +174,7 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
           const opacity = isHovered ? sampleKeyframes(opKeys, dotTimes, phase) : 0.5;
           return <circle key={i} r={2.2} cx={cx} cy={cy} fill={accent} opacity={opacity} />;
         })}
+        </g>
       </svg>
     </div>
   );
