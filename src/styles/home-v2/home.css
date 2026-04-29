@@ -312,6 +312,36 @@
     grid-template-columns: 1fr;
     gap: 0;
   }
+  /* Home v2 — stack pointillism above copy; copy no longer overlaps canvas */
+  .hero--pointillism {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+  }
+  .hero--pointillism .hero__canvas {
+    position: relative;
+    inset: auto;
+    z-index: 0;
+    width: 100%;
+    height: min(48vh, 460px);
+    min-height: min(42vh, 400px);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .hero--pointillism .hero__canvas > * {
+    min-height: 100%;
+    height: 100%;
+  }
+  .hero__overlay {
+    flex: 1 1 auto;
+    padding-top: 1.25rem;
+    max-width: none;
+    width: 100%;
+  }
+  .hero__overlay::before {
+    display: none;
+  }
   .hero__scatter {
     grid-row: 2;
     margin: 1.5rem auto 0;
@@ -324,16 +354,6 @@
   .hero--pointillism .hero__copy {
     max-width: 100%;
   }
-  .hero__overlay::before {
-    /* Stacked copy: stronger top scrim, lighter toward bottom */
-    background: linear-gradient(
-      180deg,
-      rgba(10, 15, 14, 0.96) 0%,
-      rgba(10, 15, 14, 0.78) 42%,
-      rgba(10, 15, 14, 0.35) 72%,
-      transparent 100%
-    );
-  }
   .hero__identity {
     display: none;
   }
@@ -343,9 +363,6 @@
   .proof__list li:nth-last-child(2) { display: none; } /* trailing sep */
   /* Mobile: hero ends with role line + contacts visible */
   .hero__scatter { display: none; }
-  .hero--pointillism .hero__canvas {
-    display: none;
-  }
 }
 
 /* ====================== CLIENT TICKER ====================== */
