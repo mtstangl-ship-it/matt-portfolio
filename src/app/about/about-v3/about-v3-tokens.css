@@ -1,0 +1,74 @@
+/* About v3 · scoped tokens (body class toggled only on /about) */
+body.about-v3-active {
+  /* Surfaces */
+  --bg: #0a0f0e;
+  --bg-2: #0d1413;
+  --bg-3: #11191a;
+  --bg-grid: rgba(255, 255, 255, 0.025);
+
+  /* Ink */
+  --ink: #e8efee;
+  --ink-2: #aab5b3;
+  --ink-3: #6c7a78;
+  --ink-4: #3c4847;
+  --ink-line: rgba(232, 239, 238, 0.1);
+
+  /* Accents */
+  --accent: #1dcfaa;
+  --accent-soft: rgba(29, 207, 170, 0.12);
+  --accent-line: rgba(29, 207, 170, 0.45);
+  --accent-glow: rgba(29, 207, 170, 0.2);
+
+  --warn: #d97757;
+  --warn-soft: rgba(217, 119, 87, 0.1);
+
+  /* Type — Next.js font CSS variables from root layout */
+  --sans: var(--font-inter-tight), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: var(--font-jetbrains), "SF Mono", ui-monospace, Menlo, monospace;
+
+  --t-mono: 0.6875rem;
+  --t-meta: 0.8125rem;
+  --t-body: 1rem;
+  --t-lead: 1.125rem;
+  --t-h4: 1.25rem;
+  --t-h3: clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
+  --t-h2: clamp(1.875rem, 1.4rem + 2vw, 3rem);
+  --t-h1: clamp(2.25rem, 1.6rem + 3.4vw, 4.5rem);
+  --t-display: clamp(3rem, 2rem + 4.5vw, 5.5rem);
+
+  --gutter: clamp(1.25rem, 0.5rem + 2vw, 2.5rem);
+  --col-max: 1280px;
+  --col-wide: 1440px;
+  --rule: 1px;
+  --tick: 6px;
+
+  --ease: cubic-bezier(0.2, 0.6, 0.15, 1);
+  --d-fast: 240ms;
+  --d-base: 480ms;
+  --d-slow: 900ms;
+  --d-rotate: 1500ms;
+  --pair-hold: 6500ms;
+
+  background:
+    radial-gradient(1200px 800px at 20% -10%, rgba(29, 207, 170, 0.04), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color-scheme: dark;
+}
+
+body.about-v3-active ::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.about-v3-active * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
