@@ -64,25 +64,24 @@ const clusterTargets = signalDots.map((_, i) => {
   return [cx + ox, cy + oy] as [number, number];
 });
 
-const vbW = 240;
-const labels = [
-  { xf: (24 + blockW / 2) / vbW, label: "Signals" },
-  { xf: (24 + blockW + gap + blockW / 2) / vbW, label: "Offering" },
-  { xf: (24 + (blockW + gap) * 2 + blockW / 2) / vbW, label: "Growth" },
-];
+const labels = ["Signals", "Offering", "Growth"];
 
 const lineTimes = [0, 0.2, 0.36, 0.42, 0.44, 1];
 const lineOpacityLooped = [0, 0, 0.35, 0.38, 0, 0];
 
 const blockTimes = [0, 0.42, 0.44, 0.48, 0.52, 0.62, 1];
+const blockOpacityKeyframes = [0, 0, 0, 0, 1, 1, 1];
 
 export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = {}) {
   const phase = useCyclePhase(isHovered, cycleMs);
+  const barLabelOpacity = isHovered
+    ? sampleKeyframes(blockOpacityKeyframes, blockTimes, phase)
+    : 0;
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center">
       <svg
-        viewBox="0 0 240 42"
+        viewBox="0 0 240 48"
         className="mx-auto h-auto w-full max-w-[min(100%,280px)] min-h-0 flex-1"
         preserveAspectRatio="xMidYMid meet"
       >
@@ -110,7 +109,6 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
         })}
 
         {blocks.map((block, i) => {
-          const opacityKeyframes = [0, 0, 0, 0, 1, 1, 1];
           const yKeyframes = [
             block.y,
             block.y,
@@ -120,7 +118,7 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
             block.y - 4,
             block.y - 4,
           ];
-          const opacity = isHovered ? sampleKeyframes(opacityKeyframes, blockTimes, phase) : 0;
+          const opacity = isHovered ? sampleKeyframes(blockOpacityKeyframes, blockTimes, phase) : 0;
           const y = isHovered ? sampleKeyframes(yKeyframes, blockTimes, phase) : block.y;
           return (
             <rect
@@ -139,6 +137,24 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
           );
         })}
 
+        {blocks.map((block, i) => (
+          <text
+            key={`lbl-${labels[i]}`}
+            x={block.x + block.w / 2}
+            y={block.y + block.h + 8}
+            textAnchor="middle"
+            fill="currentColor"
+            className="text-dashboard-ink-light"
+            fontSize={5.25}
+            fontWeight={600}
+            letterSpacing="0.06em"
+            opacity={barLabelOpacity}
+            style={{ textTransform: "uppercase" }}
+          >
+            {labels[i]}
+          </text>
+        ))}
+
         {signalDots.map(([sx, sy], i) => {
           const [nx, ny] = networkPositions[i] ?? [sx, sy];
           const [tx, ty] = clusterTargets[i];
@@ -152,21 +168,6 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
           return <circle key={i} r={2.2} cx={cx} cy={cy} fill={accent} opacity={opacity} />;
         })}
       </svg>
-
-      <div className="relative mx-auto mt-0 w-full max-w-[min(100%,280px)] shrink-0 px-0 pt-1.5">
-        {labels.map(({ xf, label }) => (
-          <span
-            key={label}
-            className="absolute text-[0.5rem] font-semibold uppercase tracking-wider text-dashboard-ink-light"
-            style={{
-              left: `${xf * 100}%`,
-              transform: "translateX(-50%)",
-            }}
-          >
-            {label}
-          </span>
-        ))}
-      </div>
     </div>
   );
 }

@@ -15,19 +15,31 @@ const metros = [
 const accentFill = "#22d3c7";
 const cycleMs = 4000;
 
-/** One expanding ripple per metro per third of the cycle (phase 0→1). */
-function rippleForMetro(mi: number, metroCount: number, phase: number) {
+/** Concentric rings per metro: staggered sine pulses so multiple pings trail outward. */
+const RINGS_PER_METRO = 5;
+
+function rippleRing(
+  mi: number,
+  ringIdx: number,
+  metroCount: number,
+  phase: number,
+  ringCount: number
+) {
   const seg = 1 / metroCount;
   const start = mi * seg;
   const local = (phase - start) / seg;
   if (local <= 0 || local >= 1) {
-    return { r: 12, opacity: 0, strokeWidth: 1 };
+    return { r: 10 + ringIdx * 5, opacity: 0, strokeWidth: 0.5 };
   }
-  const bell = Math.sin(Math.PI * local);
+  const stagger = (ringIdx / ringCount) * 0.62;
+  const denom = Math.max(0.08, 1 - stagger);
+  const t = Math.max(0, Math.min(1, (local - stagger) / denom));
+  const bell = Math.sin(Math.PI * t);
+  const base = 9 + ringIdx * 8;
   return {
-    r: 12 + bell * 34,
-    opacity: 0.07 + bell * 0.34,
-    strokeWidth: 1 + bell * 0.22,
+    r: base + bell * 26,
+    opacity: 0.05 + bell * (0.26 - ringIdx * 0.035),
+    strokeWidth: 0.5 + bell * (0.45 + ringIdx * 0.05),
   };
 }
 
@@ -43,24 +55,26 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
       >
         <path d={georgiaPath} fill="currentColor" className="text-dashboard-ink-muted/15" />
 
-        {metros.map((metro, mi) => {
-          const live = isHovered ? rippleForMetro(mi, metros.length, phase) : null;
-          const r = live?.r ?? 12;
-          const opacity = live ? live.opacity : 0.18;
-          const strokeWidth = live?.strokeWidth ?? 0.85;
-          return (
-            <circle
-              key={`ripple-${metro.name}`}
-              cx={metro.x}
-              cy={metro.y}
-              r={r}
-              fill="none"
-              stroke={accentFill}
-              strokeWidth={strokeWidth}
-              opacity={opacity}
-            />
-          );
-        })}
+        {metros.flatMap((metro, mi) =>
+          Array.from({ length: RINGS_PER_METRO }, (_, ringIdx) => {
+            const live = isHovered ? rippleRing(mi, ringIdx, metros.length, phase, RINGS_PER_METRO) : null;
+            const r = live?.r ?? 12 + ringIdx * 4;
+            const opacity = live ? live.opacity : ringIdx === 0 ? 0.12 : 0;
+            const strokeWidth = live?.strokeWidth ?? 0.65;
+            return (
+              <circle
+                key={`ripple-${metro.name}-${ringIdx}`}
+                cx={metro.x}
+                cy={metro.y}
+                r={r}
+                fill="none"
+                stroke={accentFill}
+                strokeWidth={strokeWidth}
+                opacity={opacity}
+              />
+            );
+          })
+        )}
 
         <path
           d={georgiaPath}
