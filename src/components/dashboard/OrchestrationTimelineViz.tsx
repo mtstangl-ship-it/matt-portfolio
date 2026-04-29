@@ -17,8 +17,34 @@ const metros = [
 
 const accentFill = "#22d3c7";
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
-const ringsPerMetro = 2;
-const cycleDuration = 3;
+const cycleDuration = 4;
+
+/** Full-cycle keyframes so each metro pulses once per loop (delay-only transitions don't repeat in FM). */
+function metroRippleMotion(mi: number, metroCount: number) {
+  const lo = mi / metroCount;
+  const hi = (mi + 1) / metroCount;
+  const peak = lo + (hi - lo) * 0.42;
+  const mid = lo + (hi - lo) * 0.2;
+  /** Avoid duplicate 0 in times (Framer requires strictly increasing). */
+  const tAfterIdle = mi === 0 ? 0.02 : lo;
+  const tMid = Math.min(mid, peak - 0.02);
+  const tFade = Math.max(hi - 0.04, peak + 0.02);
+  const hiClamped = Math.min(hi, 0.999);
+  return {
+    animate: {
+      r: [12, 12, 22, 46, 16, 12, 12],
+      opacity: [0, 0, 0.28, 0.38, 0.1, 0, 0],
+      strokeWidth: [1, 1, 1.15, 0.65, 0.45, 1, 1],
+    },
+    transition: {
+      duration: cycleDuration,
+      repeat: Infinity,
+      repeatType: "loop" as const,
+      ease,
+      times: [0, tAfterIdle, tMid, peak, tFade, hiClamped, 1],
+    },
+  };
+}
 
 export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: boolean } = {}) {
   return (
@@ -31,45 +57,30 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
         {/* 1 — Landmass fill (below radar) */}
         <path d={georgiaPath} fill="currentColor" className="text-dashboard-ink-muted/15" />
 
-        {/* 2 — Radar ripples (must paint above fill so rings aren't covered) */}
-        {metros.map((metro, mi) =>
-          Array.from({ length: ringsPerMetro }).map((_, ri) => (
+        {/* 2 — Radar ripples (above fill; full-cycle keyframes per metro for infinite loop) */}
+        {metros.map((metro, mi) => {
+          const spec = metroRippleMotion(mi, metros.length);
+          return (
             <motion.circle
-              key={`${mi}-${ri}`}
+              key={metro.name}
               cx={metro.x}
               cy={metro.y}
-              r={12 + ri * 14}
               fill="none"
               stroke={accentFill}
-              strokeWidth={1}
               initial={false}
               animate={
                 isHovered
-                  ? {
-                      r: [12 + ri * 14, 28 + ri * 16, 28 + ri * 16, 12 + ri * 14],
-                      opacity: [0.45, 0.22, 0.06, 0.45],
-                      strokeWidth: [1.2, 0.65, 0.45, 1.2],
-                    }
+                  ? spec.animate
                   : {
-                      r: 12 + ri * 14,
+                      r: 12,
                       opacity: 0.18,
-                      strokeWidth: 0.8,
+                      strokeWidth: 0.85,
                     }
               }
-              transition={
-                isHovered
-                  ? {
-                      duration: cycleDuration,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                      ease: "easeOut",
-                      delay: mi * 0.55 + ri * 0.4,
-                    }
-                  : { duration: 0.3 }
-              }
+              transition={isHovered ? spec.transition : { duration: 0.25 }}
             />
-          ))
-        )}
+          );
+        })}
 
         {/* 3 — State outline stroke */}
         <path
@@ -84,7 +95,7 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
         {/* 4 — Metro pins on top */}
         {metros.map((metro) => (
           <motion.circle
-            key={metro.name}
+            key={`pin-${metro.name}`}
             cx={metro.x}
             cy={metro.y}
             r={3}
@@ -94,8 +105,8 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
             animate={{
               opacity: isHovered ? 1 : 0.75,
               scale: isHovered ? 1.15 : 1,
-              transition: { duration: 0.3, ease },
             }}
+            transition={{ duration: 0.3, ease }}
             style={{
               filter: isHovered ? "drop-shadow(0 0 5px rgb(34 211 199 / 0.5))" : undefined,
             }}

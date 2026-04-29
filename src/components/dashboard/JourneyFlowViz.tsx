@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 // Signals (scattered) → Offering (packaged blocks) → Growth (expand)
 
 const accent = "#22d3c7";
-const cycleDuration = 4;
+const cycleDuration = 5;
 
 // Phase 1: Scattered signal dots (scaled to fit graphic area)
 const signalDots: [number, number][] = [
@@ -71,11 +71,12 @@ const clusterTargets = signalDots.map((_, i) => {
   return [cx + ox, cy + oy] as [number, number];
 });
 
-// Labels, x as % to align with block centers
+const vbW = 240;
+// Labels — block centers as fraction of viewBox width (align under each bar)
 const labels = [
-  { x: (24 + blockW / 2) / 240, label: "Signals" },
-  { x: (24 + blockW + gap + blockW / 2) / 240, label: "Offering" },
-  { x: (24 + (blockW + gap) * 2 + blockW / 2) / 240, label: "Growth" },
+  { xf: (24 + blockW / 2) / vbW, label: "Signals" },
+  { xf: (24 + blockW + gap + blockW / 2) / vbW, label: "Offering" },
+  { xf: (24 + (blockW + gap) * 2 + blockW / 2) / vbW, label: "Growth" },
 ];
 
 export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = {}) {
@@ -89,7 +90,7 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
         {/* Phase 1–2: Connecting lines, form network, fade as dots cluster */}
         {[
           [0, 2], [1, 2], [2, 4], [3, 4], [4, 5], [4, 6], [5, 7], [2, 7],
-        ].map(([a, b], i) => {
+        ].map(([a, b]) => {
           const [ax, ay] = networkPositions[a];
           const [bx, by] = networkPositions[b];
           return (
@@ -157,27 +158,25 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
           />
         ))}
 
-        {/* Phase 1–3: Signal dots, scattered → network → cluster → crossfade to blocks */}
+        {/* Phase 1–3: Signal dots — translate on <g> so Framer repeats reliably (SVG cx/cy loops were flaky) */}
         {signalDots.map(([sx, sy], i) => {
           const [nx, ny] = networkPositions[i] ?? [sx, sy];
           const [tx, ty] = clusterTargets[i];
           return (
-            <motion.circle
+            <motion.g
               key={i}
-              r={2.2}
-              fill={accent}
               initial={false}
               animate={
                 isHovered
                   ? {
-                      cx: [sx, nx, nx, tx, tx],
-                      cy: [sy, ny, ny, ty, ty],
+                      x: [sx, nx, nx, tx, tx],
+                      y: [sy, ny, ny, ty, ty],
                       opacity: [0.55, 0.85, 0.85, 0.9, 0],
                       scale: [1, 1.05, 1.05, 0.9, 0.9],
                     }
                   : {
-                      cx: sx,
-                      cy: sy,
+                      x: sx,
+                      y: sy,
                       opacity: 0.5,
                       scale: 1,
                     }
@@ -193,17 +192,23 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
                     }
                   : {}
               }
-            />
+            >
+              <circle r={2.2} cx={0} cy={0} fill={accent} />
+            </motion.g>
           );
         })}
-
       </svg>
-      <div className="relative shrink-0 pt-1.5 min-h-[0.875rem]">
-        {labels.map(({ x, label }) => (
+
+      {/* Full-width row so % positions resolve against graphic width (was 0-width → stacked labels) */}
+      <div className="relative mx-auto mt-0 w-full max-w-[min(100%,280px)] shrink-0 px-0 pt-1.5">
+        {labels.map(({ xf, label }) => (
           <span
             key={label}
-            className="absolute  text-[0.5rem] font-semibold uppercase tracking-wider text-dashboard-ink-light"
-            style={{ left: `${x * 100}%`, transform: "translateX(-50%)" }}
+            className="absolute text-[0.5rem] font-semibold uppercase tracking-wider text-dashboard-ink-light"
+            style={{
+              left: `${xf * 100}%`,
+              transform: "translateX(-50%)",
+            }}
           >
             {label}
           </span>
