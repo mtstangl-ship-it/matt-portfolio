@@ -1085,14 +1085,15 @@
   align-items: center;
   justify-content: center;
   gap: 0.85rem;
-  padding: 1.1rem 1.5rem;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 1rem;
   background: var(--accent);
   color: var(--bg);
   font-family: var(--mono);
   font-size: 0.9375rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  min-height: 56px;
+  min-height: 44px;
   font-weight: 500;
   transition: filter var(--d-fast) var(--ease);
 }
@@ -1101,7 +1102,7 @@
 .contact__arrow { font-size: 1.1em; }
 .contact__alt {
   display: flex; gap: 1.5rem; justify-content: center;
-  margin-top: 2rem;
+  margin-top: 1.25rem;
   font-family: var(--mono);
   font-size: 0.8125rem;
   letter-spacing: 0.06em;
@@ -1110,5 +1111,5 @@
 .contact__alt a:hover { color: var(--accent); }
 
 @media (max-width: 480px) {
-  .contact__cta { font-size: 0.8125rem; padding: 1rem; }
+  .contact__cta { font-size: 0.8125rem; padding: 0.65rem 1rem; }
 }
