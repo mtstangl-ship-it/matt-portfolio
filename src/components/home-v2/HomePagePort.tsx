@@ -231,34 +231,34 @@ export function HomePagePort() {
                 <title>M. Stangl portrait stamp</title>
                 <defs>
                   <pattern id="ledger-portrait-halftone" width={3} height={3} patternUnits="userSpaceOnUse">
-                    <circle cx="1.5" cy="1.5" r={0.85} fill="var(--accent)" />
+                    <circle cx="1.5" cy="1.5" r={0.7} fill="var(--accent)" />
                   </pattern>
-                  <clipPath id="ledger-portrait-mask">
-                    <ellipse cx="40" cy="32" rx="14" ry="16" />
-                    <path d="M16 78 C 16 56, 64 56, 64 78 Z" />
-                  </clipPath>
                 </defs>
-                <g clipPath="url(#ledger-portrait-mask)">
-                  <image
-                    href="/portrait-matt-stangl.png"
-                    width={96}
-                    height={96}
-                    x={-10}
-                    y={-10}
-                    preserveAspectRatio="xMidYMid slice"
-                    opacity={0.88}
-                  />
-                  <rect
-                    width={80}
-                    height={80}
-                    fill="url(#ledger-portrait-halftone)"
-                    opacity={0.52}
-                    style={{ mixBlendMode: "multiply" }}
-                  />
-                  <rect width={80} height={80} fill="rgba(244, 241, 234, 0.14)" />
-                </g>
-                <ellipse cx="40" cy="32" rx="14" ry="16" fill="none" stroke="var(--ink-2)" strokeWidth={0.55} />
-                <path d="M16 78 C 16 56, 64 56, 64 78" fill="none" stroke="var(--ink-2)" strokeWidth={0.55} />
+                <image
+                  href="/portrait-matt-stangl.png"
+                  x={0}
+                  y={0}
+                  width={80}
+                  height={80}
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity={0.85}
+                />
+                <rect
+                  width={80}
+                  height={80}
+                  fill="url(#ledger-portrait-halftone)"
+                  opacity={0.65}
+                  style={{ mixBlendMode: "screen" }}
+                />
+                <rect
+                  x={0.5}
+                  y={0.5}
+                  width={79}
+                  height={79}
+                  fill="none"
+                  stroke="var(--ink-2)"
+                  strokeWidth={0.6}
+                />
               </svg>
               <figcaption>
                 M. STANGL
