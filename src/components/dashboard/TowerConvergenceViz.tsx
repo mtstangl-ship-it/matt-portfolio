@@ -23,10 +23,10 @@ const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
 export function TowerConvergenceViz({ isHovered = false }: { isHovered?: boolean } = {}) {
   return (
-    <div className="relative h-32 w-full">
+    <div className="relative flex h-32 w-full items-center justify-center">
       <svg
         viewBox="10 2 180 72"
-        className="h-full w-full"
+        className="mx-auto h-full max-h-[132px] w-full"
         preserveAspectRatio="xMidYMid meet"
       >
         {/* Input nodes and convergence paths */}
@@ -60,14 +60,26 @@ export function TowerConvergenceViz({ isHovered = false }: { isHovered?: boolean
                 strokeLinecap="round"
                 className="text-accent-signal"
                 initial={{ pathLength: 0, opacity: 0 }}
-                animate={{
-                  pathLength: isHovered ? 1 : 0.6,
-                  opacity: isHovered ? 0.85 : 0.5,
-                  transition: {
-                    pathLength: { duration: 0.5, delay: i * 0.05, ease },
-                    opacity: { duration: 0.3 },
-                  },
-                }}
+                animate={
+                  isHovered
+                    ? {
+                        pathLength: [0, 1, 1, 0],
+                        opacity: [0.35, 0.92, 0.92, 0.35],
+                      }
+                    : { pathLength: 0.6, opacity: 0.5 }
+                }
+                transition={
+                  isHovered
+                    ? {
+                        duration: 2.8,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        ease,
+                        delay: i * 0.12,
+                        times: [0, 0.38, 0.62, 1],
+                      }
+                    : { duration: 0.35, ease }
+                }
               />
 
               {/* Flow indicator, only when hovered */}
@@ -118,8 +130,8 @@ export function TowerConvergenceViz({ isHovered = false }: { isHovered?: boolean
           animate={{
             opacity: isHovered ? 1 : 0.7,
             scale: isHovered ? 1.1 : 1,
-            transition: { duration: 0.35, ease },
           }}
+          transition={{ duration: 0.35, ease }}
           style={{
             filter: isHovered ? "drop-shadow(0 0 12px rgb(34 211 199 / 0.5))" : undefined,
           }}

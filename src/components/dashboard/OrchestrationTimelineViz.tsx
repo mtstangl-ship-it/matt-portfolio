@@ -18,17 +18,20 @@ const metros = [
 const accentFill = "#22d3c7";
 const ease = [0.25, 0.46, 0.45, 0.94] as const;
 const ringsPerMetro = 2;
-const cycleDuration = 2;
+const cycleDuration = 3;
 
 export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: boolean } = {}) {
   return (
-    <div className="relative h-32 w-full">
+    <div className="relative flex h-32 w-full items-center justify-center">
       <svg
         viewBox="0 0 200 190"
-        className="h-full w-full"
+        className="mx-auto h-full max-h-[132px] w-full"
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* Radar rings from each metro */}
+        {/* 1 — Landmass fill (below radar) */}
+        <path d={georgiaPath} fill="currentColor" className="text-dashboard-ink-muted/15" />
+
+        {/* 2 — Radar ripples (must paint above fill so rings aren't covered) */}
         {metros.map((metro, mi) =>
           Array.from({ length: ringsPerMetro }).map((_, ri) => (
             <motion.circle
@@ -44,8 +47,8 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
                 isHovered
                   ? {
                       r: [12 + ri * 14, 28 + ri * 16, 28 + ri * 16, 12 + ri * 14],
-                      opacity: [0.45, 0.18, 0.04, 0.45],
-                      strokeWidth: [1.2, 0.6, 0.4, 1.2],
+                      opacity: [0.45, 0.22, 0.06, 0.45],
+                      strokeWidth: [1.2, 0.65, 0.45, 1.2],
                     }
                   : {
                       r: 12 + ri * 14,
@@ -58,8 +61,9 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
                   ? {
                       duration: cycleDuration,
                       repeat: Infinity,
+                      repeatType: "loop",
                       ease: "easeOut",
-                      delay: mi * 0.18 + ri * 0.45,
+                      delay: mi * 0.55 + ri * 0.4,
                     }
                   : { duration: 0.3 }
               }
@@ -67,12 +71,7 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
           ))
         )}
 
-        {/* Georgia outline */}
-        <path
-          d={georgiaPath}
-          fill="currentColor"
-          className="text-dashboard-ink-muted/15"
-        />
+        {/* 3 — State outline stroke */}
         <path
           d={georgiaPath}
           fill="none"
@@ -82,7 +81,7 @@ export function OrchestrationTimelineViz({ isHovered = false }: { isHovered?: bo
           opacity={isHovered ? 0.85 : 0.55}
         />
 
-        {/* Metro nodes */}
+        {/* 4 — Metro pins on top */}
         {metros.map((metro) => (
           <motion.circle
             key={metro.name}

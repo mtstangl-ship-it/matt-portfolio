@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 // Signals (scattered) → Offering (packaged blocks) → Growth (expand)
 
 const accent = "#22d3c7";
-const cycleDuration = 3;
+const cycleDuration = 4;
 
 // Phase 1: Scattered signal dots (scaled to fit graphic area)
 const signalDots: [number, number][] = [
@@ -80,10 +80,10 @@ const labels = [
 
 export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = {}) {
   return (
-    <div className="relative flex h-full w-full flex-col">
+    <div className="relative flex h-full w-full flex-col items-center justify-center">
       <svg
         viewBox="0 0 240 42"
-        className="min-h-0 flex-1"
+        className="mx-auto h-auto w-full max-w-[min(100%,280px)] min-h-0 flex-1"
         preserveAspectRatio="xMidYMid meet"
       >
         {/* Phase 1–2: Connecting lines, form network, fade as dots cluster */}
@@ -103,18 +103,17 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
               strokeWidth={0.6}
               strokeLinecap="round"
               initial={false}
-              animate={
+              animate={isHovered ? { opacity: [0, 0, 0.35, 0.38, 0] } : { opacity: 0 }}
+              transition={
                 isHovered
                   ? {
-                      opacity: [0, 0, 0.35, 0.38, 0],
-                      transition: {
-                        duration: cycleDuration,
-                        repeat: Infinity,
-                        ease: "linear",
-                        times: [0, 0.2, 0.36, 0.42, 0.44],
-                      },
+                      duration: cycleDuration,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      ease: "linear",
+                      times: [0, 0.2, 0.36, 0.42, 0.44],
                     }
-                  : { opacity: 0 }
+                  : {}
               }
             />
           );
@@ -141,14 +140,19 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
                     opacity: [0, 0, 0, 0, 1, 1, 1],
                     scale: [1, 1, 1, 1, 1, 1.12, 1.12],
                     y: [block.y, block.y, block.y, block.y, block.y, block.y - 4, block.y - 4],
-                    transition: {
-                      duration: cycleDuration,
-                      repeat: Infinity,
-                      ease: "linear",
-                      times: [0, 0.42, 0.44, 0.48, 0.52, 0.62, 1],
-                    },
                   }
                 : { opacity: 0, scale: 1 }
+            }
+            transition={
+              isHovered
+                ? {
+                    duration: cycleDuration,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "linear",
+                    times: [0, 0.42, 0.44, 0.48, 0.52, 0.62, 1],
+                  }
+                : {}
             }
           />
         ))}
@@ -170,12 +174,6 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
                       cy: [sy, ny, ny, ty, ty],
                       opacity: [0.55, 0.85, 0.85, 0.9, 0],
                       scale: [1, 1.05, 1.05, 0.9, 0.9],
-                      transition: {
-                        duration: cycleDuration,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        times: [0, 0.32, 0.38, 0.5, 0.54],
-                      },
                     }
                   : {
                       cx: sx,
@@ -183,6 +181,17 @@ export function JourneyFlowViz({ isHovered = false }: { isHovered?: boolean } = 
                       opacity: 0.5,
                       scale: 1,
                     }
+              }
+              transition={
+                isHovered
+                  ? {
+                      duration: cycleDuration,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      ease: "easeInOut",
+                      times: [0, 0.32, 0.38, 0.5, 0.54],
+                    }
+                  : {}
               }
             />
           );
