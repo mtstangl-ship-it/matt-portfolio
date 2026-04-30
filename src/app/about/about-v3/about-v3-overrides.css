@@ -168,18 +168,3 @@
   margin-top: 0.35rem;
   justify-content: center;
 }
-
-.riding__header-row--photo-only {
-  grid-template-columns: 1fr;
-}
-
-.riding__header-row--photo-only .riding__photo {
-  justify-self: end;
-}
-
-@media (max-width: 880px) {
-  .riding__header-row--photo-only .riding__photo {
-    justify-self: start;
-  }
-}
-

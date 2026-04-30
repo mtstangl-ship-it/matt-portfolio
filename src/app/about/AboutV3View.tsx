@@ -452,25 +452,22 @@ export function AboutV3View() {
         </header>
 
         <div className="riding__inner">
-          {/* Editorial: About.html intro (“Four conditions…”) omitted — not present in COPY-about.md */}
-          <div className="riding__header-row riding__header-row--photo-only">
-            <div className="riding__photo">
-              <HalftonePhoto
-                src="/about/photos/matt-in-window-with-alice.jpg"
-                alt="Matt in shop window reflection with Alice"
-                treatment="HALFTONE · TEAL"
-                subject="Matt in window with Alice"
-                cap={
-                  <>
-                    MATT + <b>ALICE</b> · 1978 R100/7 · SHOP WINDOW
-                  </>
-                }
-              />
-              <p className="photo-caption">
-                MATT + <b>ALICE</b> · SHOP WINDOW
-              </p>
-            </div>
-          </div>
+          <figure className="riding__photo-wide">
+            <HalftonePhoto
+              src="/about/photos/matt-shadow-ayda.jpg"
+              alt="Shadow shot from saddle of Ayda — POV from the rider"
+              treatment="HALFTONE · TEAL"
+              subject="Shadow · POV · Ayda · Road"
+              cap={
+                <>
+                  SHADOW · POV · <b>AYDA</b> · ROAD
+                </>
+              }
+            />
+            <figcaption className="photo-caption">
+              SHADOW · POV · <b>AYDA</b> · ROAD
+            </figcaption>
+          </figure>
 
           <div className="riding__grid">
             <article className="riding__item">

@@ -117,9 +117,6 @@
   display: block;
   flex-shrink: 0;
 }
-.riding__header-row .compass-rose {
-  margin-top: 0.5rem;
-}
 
 .instrument-cluster {
   width: 100%;

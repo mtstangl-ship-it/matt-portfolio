@@ -742,22 +742,22 @@
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
-.riding__header-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: clamp(1.5rem, 3vw, 3rem);
-  align-items: end;
+/* Wide landscape punctuation between section head and 2×2 grid */
+.riding__photo-wide {
   margin: clamp(2rem, 4vw, 3rem) 0 0;
-}
-.riding__photo {
   width: 100%;
-  max-width: 360px;
-  justify-self: end;
 }
-.riding__photo .photo-halftone-placeholder { aspect-ratio: 9 / 16; }
+.riding__photo-wide .photo-halftone-placeholder {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+}
+.riding__photo-wide figcaption {
+  margin-top: 0.55rem;
+}
 @media (max-width: 880px) {
-  .riding__header-row { grid-template-columns: 1fr; }
-  .riding__photo { justify-self: start; max-width: 280px; }
+  .riding__photo-wide .photo-halftone-placeholder {
+    aspect-ratio: 16 / 9;
+  }
 }
 
 /* 2x2 grid of items, no card boxes, hairline rules */
