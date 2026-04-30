@@ -88,7 +88,7 @@ export function AboutV3View() {
           <dd>02 · TIER A</dd>
         </dl>
 
-        <div className="about-hero__inner">
+        <div className="about-hero__inner about-hero__inner--garage-photo">
           <div className="about-hero__copy">
             <p className="kicker">ABOUT · MATT STANGL · CX, PRODUCT &amp; SERVICE DESIGN LEADER</p>
             <h1 className="about-hero__h1">
@@ -101,20 +101,20 @@ export function AboutV3View() {
             </p>
           </div>
 
-          <div className="about-hero__photo">
+          <div className="about-hero__photo about-hero__photo--large">
             <HalftonePhoto
-              src="/about/photos/ayda-and-asylum.jpg"
-              alt="Ayda parked in front of abandoned brick asylum"
+              src="/about/photos/garage.jpg"
+              alt="Alice and Ayda parked in the garage"
               treatment="HALFTONE · TEAL"
-              subject="Ayda + asylum"
+              subject="Garage · Alice &amp; Ayda"
               cap={
                 <>
-                  <b>AYDA</b> · 1977 R75/7 · ASYLUM
+                  <b>GARAGE</b> · ALICE &amp; AYDA
                 </>
               }
             />
             <p className="photo-caption">
-              FIG · <b>AYDA</b> · ASYLUM
+              GARAGE · <b>ALICE &amp; AYDA</b>
             </p>
           </div>
         </div>
