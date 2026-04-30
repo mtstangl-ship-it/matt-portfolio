@@ -1,0 +1,143 @@
+/* =========================================================
+   ABOUT — DENSITY (v3 LAYER A + B + C)
+   Section metadata stamps · inline annotations · SVG illustrations.
+   Adds drafting fiche density to the base About styles.
+   ========================================================= */
+
+/* ====================== V3 · LAYER A · SECTION METADATA STAMPS ====================== */
+.section-stamp {
+  position: absolute;
+  top: 3.5rem;
+  right: 1rem;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.3rem 1rem;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border: 1px solid var(--ink-line);
+  padding: 0.5rem 0.7rem;
+  background: var(--bg-2);
+  z-index: 5;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.section-stamp dt { color: var(--ink-3); }
+.section-stamp dd {
+  color: var(--ink-2);
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+@media (max-width: 1180px) {
+  .section-stamp { display: none; }
+}
+
+/* ====================== V3 · LAYER B · INLINE ANNOTATIONS ====================== */
+.ref-code {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border: 1px solid var(--ink-line);
+  vertical-align: middle;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.precision-tag {
+  margin-top: 0.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px dotted var(--ink-line);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  opacity: 0.85;
+}
+.precision-tag b {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+.phase-label { display: none; }
+@media (min-width: 1024px) {
+  .phase-label {
+    display: block;
+    position: absolute;
+    left: -3.5rem;
+    top: 0;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    opacity: 0.7;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+}
+
+/* ====================== V3 · LAYER C · SVG ILLUSTRATIONS ====================== */
+.hero-bmw-silhouette {
+  position: absolute;
+  bottom: 5%;
+  left: -5%;
+  width: 70%;
+  height: auto;
+  opacity: 0.17;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 880px) {
+  .hero-bmw-silhouette { display: none; }
+}
+.about-hero { position: relative; }
+.about-hero__inner { position: relative; z-index: 1; }
+
+.decision-diagram {
+  width: 220px;
+  height: auto;
+  margin: 1rem 0 0;
+  display: block;
+}
+
+.compass-rose {
+  width: 160px;
+  height: 160px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.instrument-cluster {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  margin: clamp(2rem, 4vw, 3rem) auto;
+  display: block;
+}
+
+/* Tick-mark scale bars under dimension callouts */
+.dim-with-scale {
+  margin: 0 auto;
+  max-width: var(--col-wide);
+  padding: 0 var(--gutter);
+}
+.dim-with-scale .dim {
+  margin: 0;
+}
+.dim-scale {
+  display: block;
+  width: 100%;
+  height: 20px;
+  margin-top: 0.4rem;
+}
