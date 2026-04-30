@@ -5,7 +5,6 @@ import {
   DecisionDiagram,
   DIM_SCALE_MAJOR_X,
   DIM_SCALE_MINOR_X,
-  GarageLayout,
   HeroBmwSilhouette,
   InstrumentCluster,
 } from "./AboutV3Svgs";
@@ -618,24 +617,22 @@ export function AboutV3View() {
               Off the clock: I write, ride Alice and Ayda, and stay close to people who matter. The work matters to me — but
               it&apos;s not the only thing. That balance shows up in how I think, how I lead, and what I build.
             </p>
-
-            <GarageLayout />
           </div>
 
           <figure className="off-shift__photo" style={{ margin: 0 }}>
             <HalftonePhoto
-              src="/about/photos/garage.jpg"
-              alt="Alice and Ayda parked in the garage, day done"
+              src="/about/photos/matt-in-window-with-alice.jpg"
+              alt="Matt in shop window reflection with Alice"
               treatment="HALFTONE · TEAL"
-              subject="The garage, day done"
+              subject="Matt in window with Alice"
               cap={
                 <>
-                  <b>ALICE &amp; AYDA</b> · GARAGE · OFF-SHIFT
+                  MATT + <b>ALICE</b> · 1978 R100/7 · SHOP WINDOW
                 </>
               }
             />
             <figcaption className="photo-caption">
-              <b>ALICE &amp; AYDA</b> · GARAGE
+              MATT + <b>ALICE</b> · 1978 R100/7 · SHOP WINDOW
             </figcaption>
           </figure>
         </div>

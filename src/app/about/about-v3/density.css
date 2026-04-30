@@ -126,14 +126,6 @@
   display: block;
 }
 
-.garage-layout {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  margin-top: 1rem;
-  display: block;
-}
-
 /* Tick-mark scale bars under dimension callouts */
 .dim-with-scale {
   margin: 0 auto;

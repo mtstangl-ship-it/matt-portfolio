@@ -891,9 +891,9 @@
   margin: 0 auto;
   padding: 0 var(--gutter);
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
   gap: clamp(2rem, 4vw, 4rem);
-  align-items: center;
+  align-items: start;
 }
 .off-shift__copy {
   display: flex;
@@ -919,13 +919,24 @@
 }
 .off-shift__photo {
   width: 100%;
-  max-width: 320px;
-  justify-self: end;
+  max-width: none;
+  justify-self: stretch;
 }
-.off-shift__photo .photo-halftone-placeholder { aspect-ratio: 4 / 3; }
+.off-shift__photo .photo-halftone-placeholder {
+  aspect-ratio: 9 / 16;
+  width: 100%;
+  max-height: min(760px, 90vh);
+}
 @media (max-width: 880px) {
   .off-shift__inner { grid-template-columns: 1fr; }
-  .off-shift__photo { justify-self: start; max-width: 280px; }
+  .off-shift__photo {
+    justify-self: stretch;
+    max-width: none;
+  }
+  .off-shift__photo .photo-halftone-placeholder {
+    max-height: none;
+    max-width: min(420px, 100%);
+  }
 }
 
 /* ====================== SECTION HEAD overrides for About ====================== */
