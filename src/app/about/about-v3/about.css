@@ -166,31 +166,31 @@
 /* Hero · large garage punctuation — fills right-column negative space without shifting copy column */
 @media (min-width: 881px) {
   .about-hero__inner--garage-photo {
-    grid-template-columns: minmax(0, 1.08fr) minmax(260px, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 1.22fr);
     align-items: end;
   }
   .about-hero__photo--large {
     width: 100%;
-    max-width: min(620px, 48vw);
-    margin-top: clamp(4.25rem, 9vw, 7rem);
+    max-width: min(820px, 58vw);
+    margin-top: clamp(3.75rem, 8vw, 6.5rem);
     align-self: end;
     justify-self: end;
   }
   .about-hero__photo--large .photo-halftone-placeholder {
     width: 100%;
-    aspect-ratio: 5 / 4;
-    min-height: clamp(280px, 34vh, 460px);
+    aspect-ratio: 3 / 2;
+    min-height: clamp(320px, 42vh, 560px);
   }
 }
 @media (max-width: 880px) {
   .about-hero__photo { justify-self: start; width: 200px; margin-top: 0; }
   .about-hero__photo--large {
     width: 100%;
-    max-width: min(100%, 440px);
+    max-width: 100%;
     justify-self: stretch;
   }
   .about-hero__photo--large .photo-halftone-placeholder {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 3 / 2;
     min-height: 0;
   }
 }

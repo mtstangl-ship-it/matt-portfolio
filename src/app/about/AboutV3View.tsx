@@ -102,8 +102,8 @@ export function AboutV3View() {
 
           <div className="about-hero__photo about-hero__photo--large">
             <HalftonePhoto
-              src="/about/photos/garage.jpg"
-              alt="Alice and Ayda parked in the garage"
+              src="/about/photos/garage-hero.png"
+              alt="BMW airhead on the center stand in the garage, mid-service"
               treatment="HALFTONE · TEAL"
               subject="Garage · Alice &amp; Ayda"
               cap={

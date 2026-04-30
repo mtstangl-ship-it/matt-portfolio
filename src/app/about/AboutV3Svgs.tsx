@@ -3,18 +3,18 @@
 export function HeroBmwSilhouette() {
   return (
     <svg className="hero-bmw-silhouette" viewBox="0 0 800 400" aria-hidden xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" stroke="var(--ink-3)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+      <g fill="none" stroke="var(--ink-2)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
         <line x1="40" y1="310" x2="760" y2="310" strokeDasharray="4 6" strokeWidth="0.5" />
         <circle cx="180" cy="260" r="60" />
         <circle cx="180" cy="260" r="22" strokeWidth="0.5" />
-        <circle cx="180" cy="260" r="3" fill="var(--ink-3)" />
+        <circle cx="180" cy="260" r="3" fill="var(--ink-2)" />
         <line x1="180" y1="200" x2="180" y2="320" strokeWidth="0.4" />
         <line x1="120" y1="260" x2="240" y2="260" strokeWidth="0.4" />
         <line x1="137" y1="217" x2="223" y2="303" strokeWidth="0.4" />
         <line x1="137" y1="303" x2="223" y2="217" strokeWidth="0.4" />
         <circle cx="620" cy="260" r="60" />
         <circle cx="620" cy="260" r="22" strokeWidth="0.5" />
-        <circle cx="620" cy="260" r="3" fill="var(--ink-3)" />
+        <circle cx="620" cy="260" r="3" fill="var(--ink-2)" />
         <line x1="620" y1="200" x2="620" y2="320" strokeWidth="0.4" />
         <line x1="560" y1="260" x2="680" y2="260" strokeWidth="0.4" />
         <line x1="577" y1="217" x2="663" y2="303" strokeWidth="0.4" />
@@ -44,7 +44,7 @@ export function HeroBmwSilhouette() {
           fontFamily="ui-monospace, var(--font-jetbrains), monospace"
           fontSize="11"
           letterSpacing="2"
-          fill="var(--ink-3)"
+          fill="var(--ink-2)"
         >
           BMW · R-SERIES · AIRHEAD
         </text>
@@ -57,7 +57,7 @@ export function HeroBmwSilhouette() {
           fontFamily="ui-monospace, monospace"
           fontSize="9"
           letterSpacing="1.5"
-          fill="var(--ink-3)"
+          fill="var(--ink-2)"
           textAnchor="middle"
         >
           WHEELBASE
