@@ -159,21 +159,21 @@ export function AboutV3View() {
             </p>
           </div>
 
-          <figure className="photo-break">
+          <figure className="photo-break photo-break--trade-anchor">
             <HalftonePhoto
-              src="/about/photos/matt-shadow-ayda.jpg"
-              alt="Shadow shot from saddle of Ayda — POV from the rider"
+              src="/about/photos/ayda-and-asylum.jpg"
+              alt="Ayda parked in front of abandoned brick asylum"
               treatment="HALFTONE · TEAL"
-              aspectRatio="16/9"
-              subject="Shadow from the saddle"
+              aspectRatio="16/10"
+              subject="Ayda · abandoned asylum"
               cap={
                 <>
-                  POV · <b>AYDA</b> · ROAD
+                  <b>AYDA</b> · 1977 R75/7 · ABANDONED ASYLUM
                 </>
               }
             />
             <figcaption className="photo-caption">
-              POV · <b>AYDA</b> · ROAD
+              <b>AYDA</b> · 1977 R75/7 · ABANDONED ASYLUM
             </figcaption>
           </figure>
 

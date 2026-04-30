@@ -378,12 +378,28 @@
 }
 .fiche-break .factory-diagram-placeholder { aspect-ratio: 4 / 3; }
 
-/* Photo break (POV shadow shot — Trade-offs visual punctuation) */
+/* Photo break (Trade-offs anchor — large punctuation under Clarity statement) */
 .photo-break {
   margin: clamp(2.5rem, 5vw, 4.5rem) auto;
   max-width: 460px;
 }
 .photo-break .photo-halftone-placeholder { width: 100%; }
+
+.photo-break--trade-anchor {
+  max-width: min(1120px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+.photo-break--trade-anchor .photo-halftone-placeholder {
+  min-height: clamp(240px, 42vw, 520px);
+  aspect-ratio: 16 / 10;
+}
+@media (max-width: 880px) {
+  .photo-break--trade-anchor .photo-halftone-placeholder {
+    min-height: 0;
+    aspect-ratio: 16 / 11;
+  }
+}
 
 /* Statements 02-05 — typographic only, hairline rules */
 .statement-list {
