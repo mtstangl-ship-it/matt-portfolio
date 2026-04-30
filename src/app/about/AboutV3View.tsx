@@ -391,7 +391,6 @@ export function AboutV3View() {
                 src="/about/photos/cylinder-head.png"
                 alt="Cylinder head detail · Alice"
                 treatment="HALFTONE · TEAL"
-                aspectRatio="4/3"
                 subject="Cylinder head detail"
                 cap={
                   <>
@@ -409,7 +408,6 @@ export function AboutV3View() {
                 src="/about/photos/matt-handling-electronics.jpg"
                 alt="Matt handling ignition electronics on Alice"
                 treatment="HALFTONE · TEAL"
-                aspectRatio="4/3"
                 subject="Matt handling electronics"
                 cap={
                   <>
