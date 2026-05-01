@@ -1,81 +1,9 @@
 /* =========================================================
    ABOUT — section styles
    Inherits tokens.css + grammar.css + density.css.
-   Personal posture page · motorcycle metaphor · type-first.
-   v3 density layer extracted to density.css.
+   Shared `.nav` lives in `styles/tier-a/fiche-nav.css`.
    ========================================================= */
 
-
-/* ====================== NAV (inherited from Home v2) ====================== */
-.nav {
-  position: fixed;
-  top: 14px; left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
-  background: rgba(13, 20, 19, 0.85);
-  border: 1px solid var(--ink-line);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 999px;
-  font-family: var(--mono);
-  font-size: var(--t-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  max-width: calc(100vw - 28px);
-}
-.nav__brand {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  color: var(--ink);
-  white-space: nowrap;
-}
-.nav__brand-text { white-space: nowrap; }
-.nav__brand-mark {
-  display: inline-grid; place-items: center;
-  width: 22px; height: 22px;
-  border: 1px solid var(--accent-line);
-  color: var(--accent);
-  font-family: var(--mono);
-}
-.nav__list {
-  display: flex; gap: 1.1rem;
-  color: var(--ink-2);
-}
-.nav__list li { white-space: nowrap; }
-.nav__list a { padding: 0.4rem 0; white-space: nowrap; }
-.nav__list a:hover { color: var(--accent); }
-.nav__list a[aria-current="page"] {
-  color: var(--accent);
-  border-bottom: 1px solid var(--accent-line);
-}
-.nav__cta {
-  display: inline-flex; align-items: center;
-  padding: 0.55rem 0.9rem;
-  background: var(--accent);
-  color: var(--bg);
-  border-radius: 999px;
-  font-weight: 500;
-}
-.nav__cta:hover { filter: brightness(1.08); }
-.nav__menu { display: none; }
-@media (max-width: 880px) {
-  .nav { gap: 0.75rem; padding: 0.4rem 0.4rem 0.4rem 0.85rem; }
-  .nav__list, .nav__cta { display: none; }
-  .nav__menu {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    width: 36px; height: 36px;
-    border: 1px solid var(--ink-line);
-    border-radius: 999px;
-    align-items: center;
-  }
-  .nav__menu span { width: 14px; height: 1px; background: var(--ink); display: block; }
-}
 
 /* ====================== ABOUT HERO ====================== */
 .about-hero {

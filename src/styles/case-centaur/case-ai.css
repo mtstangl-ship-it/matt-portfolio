@@ -56,7 +56,7 @@
     right: var(--gutter);
     z-index: 14;
   }
-  .case-centaur-portfolio .hero .hero__id-strip {
+  .case-centaur-portfolio .hero__plate .hero__id-strip {
     top: calc(1rem + var(--layer-a-fig-h) + 0.65rem);
     right: var(--gutter);
     z-index: 13;
@@ -69,86 +69,13 @@
   }
 }
 
-/* Fiche mobile drawer toggle must not leak onto desktop (Tailwind / cascade). */
-@media (min-width: 881px) {
-  .tier-a-case-root .nav__menu {
-    display: none !important;
-    visibility: hidden !important;
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    border: 0 !important;
-    padding: 0 !important;
-    pointer-events: none !important;
-  }
+/* §03 / §04: beat grammar `section[data-screen-label]` padding specificity */
+.case-centaur-portfolio section.centaur[data-screen-label] {
+  padding-top: clamp(3rem, 5.5vw, 5.25rem);
+  padding-bottom: clamp(0.55rem, 1.15vw, 1rem);
 }
-
-/* ====================== NAV (inherited from Home v2 / About) ====================== */
-.nav {
-  position: fixed;
-  top: 14px; left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
-  background: rgba(13, 20, 19, 0.85);
-  border: 1px solid var(--ink-line);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 999px;
-  font-family: var(--mono);
-  font-size: var(--t-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  max-width: calc(100vw - 28px);
-}
-.nav__brand { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--ink); white-space: nowrap; }
-.nav__brand-text { white-space: nowrap; }
-.nav__brand-mark {
-  display: inline-grid; place-items: center;
-  width: 22px; height: 22px;
-  border: 1px solid var(--accent-line);
-  color: var(--accent);
-  font-family: var(--mono);
-}
-.nav__list { display: flex; gap: 1.1rem; color: var(--ink-2); list-style: none; padding: 0; margin: 0; }
-.nav__list li { white-space: nowrap; }
-.nav__list a { padding: 0.4rem 0; white-space: nowrap; color: inherit; text-decoration: none; }
-.nav__list a:hover { color: var(--accent); }
-.nav__list a[aria-current="page"] {
-  color: var(--accent);
-  border-bottom: 1px solid var(--accent-line);
-}
-.nav__cta {
-  display: inline-flex; align-items: center;
-  padding: 0.55rem 0.9rem;
-  background: var(--accent);
-  color: var(--bg);
-  border-radius: 999px;
-  font-weight: 500;
-  text-decoration: none;
-}
-.nav__cta:hover { filter: brightness(1.08); }
-.nav__menu { display: none; }
-@media (max-width: 880px) {
-  .nav { gap: 0.75rem; padding: 0.4rem 0.4rem 0.4rem 0.85rem; }
-  .nav__list, .nav__cta { display: none; }
-  .nav__menu {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    width: 36px; height: 36px;
-    border: 1px solid var(--ink-line);
-    border-radius: 999px;
-    align-items: center;
-  }
-  .nav__menu span { width: 14px; height: 1px; background: var(--ink); display: block; }
+.case-centaur-portfolio section.records[data-screen-label] {
+  padding-top: clamp(0.55rem, 1.15vw, 1rem);
 }
 
 /* ====================== SHARED SECTION HEAD ====================== */
@@ -196,40 +123,50 @@
 .hero {
   position: relative;
   padding-top: clamp(7rem, 12vh, 9rem);
-  padding-bottom: clamp(4rem, 8vh, 6rem);
+  padding-bottom: clamp(1rem, 2vw, 1.75rem);
   padding-inline: var(--gutter);
-  overflow: hidden;
+  overflow: visible;
   isolation: isolate;
   background: var(--bg);
 }
 
-/* ---- Full-bleed photo background ---- */
-.hero__bgphoto {
+/* Photo + headline plate — meta strip renders below, not over the motorcycle */
+.hero__plate {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(58vh, 560px);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(223, 233, 230, 0.18);
+}
+
+/* ---- Full-bleed photo inside plate ---- */
+.hero__plate .hero__bgphoto {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
 }
-.hero__bgphoto-img {
+.hero__plate .hero__bgphoto-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 50%;
+  object-position: center 42%;
   /* Plate is already halftoned + duotoned in PNG — just nudge tone toward the page palette */
   filter: url(#hero-duotone) contrast(1.04) brightness(0.95);
 }
 /* Halftone screen — disabled (baked into the PNG plate to avoid moiré). Kept as a hook. */
-.hero__bgphoto-halftone {
+.hero__plate .hero__bgphoto-halftone {
   position: absolute;
   inset: 0;
   background-image: none;
   opacity: 0;
 }
 /* Film grain — keeps the photo from looking like marketing */
-.hero__bgphoto-grain {
+.hero__plate .hero__bgphoto-grain {
   position: absolute;
   inset: 0;
   background-image:
@@ -239,7 +176,7 @@
   opacity: 0.6;
 }
 /* Left-anchored scrim — gives the type column a legible canvas without crushing the photo */
-.hero__bgphoto-scrim {
+.hero__plate .hero__bgphoto-scrim {
   position: absolute;
   inset: 0;
   background:
@@ -258,15 +195,15 @@
       rgba(10,17,16,0.30) 100%);
 }
 /* Bottom fade — terminate hero cleanly into the page bg */
-.hero__bgphoto-fadebottom {
+.hero__plate .hero__bgphoto-fadebottom {
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 140px;
   background: linear-gradient(180deg, transparent 0%, var(--bg) 100%);
 }
 @media (max-width: 720px) {
-  .hero__bgphoto-img { object-position: center 30%; }
-  .hero__bgphoto-scrim {
+  .hero__plate .hero__bgphoto-img { object-position: center 30%; }
+  .hero__plate .hero__bgphoto-scrim {
     background:
       linear-gradient(180deg,
         rgba(10,17,16,0.92) 0%,
@@ -280,10 +217,9 @@
   max-width: var(--col-wide);
   margin-left: 0;
   margin-right: auto;
-  padding: 0 var(--gutter) clamp(3rem, 5vw, 5rem);
+  padding: 0 var(--gutter) clamp(1.75rem, 4vw, 3rem);
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid rgba(223, 233, 230, 0.18);
 }
 .hero__tag {
   font-family: var(--mono);
@@ -327,17 +263,18 @@
 }
 .hero .hero__sub b { color: #f4f1ea; }
 
-/* Meta strip — under subhead, table-like.
-   Sits at the bottom of hero where the photo fades to bg, but adds its own
-   backplate so it reads cleanly even where the photo bleeds through. */
+/* Meta strip — below photo plate (Issue 4: no overlap with motorcycle) */
 .hero__meta {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
   border-top: 1px solid rgba(223, 233, 230, 0.22);
   border-bottom: 1px solid rgba(223, 233, 230, 0.22);
-  margin-top: 1.5rem;
-  background: rgba(10, 17, 16, 0.55);
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
+  margin-left: 0;
+  margin-right: auto;
+  width: min(100%, var(--col-wide));
+  background: rgba(10, 17, 16, 0.92);
   backdrop-filter: blur(2px);
 }
 .hero__meta-cell {
@@ -419,7 +356,7 @@
 }
 
 /* Hero watermark — split silhouette / circuit-like division of labor */
-.hero__watermark {
+.hero__plate .hero__watermark {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -429,12 +366,12 @@
   align-items: center;
   justify-content: center;
 }
-.hero__watermark svg {
+.hero__plate .hero__watermark svg {
   width: min(100%, 1100px);
   height: auto;
 }
 @media (max-width: 880px) {
-  .hero__watermark { opacity: 0.07; }
+  .hero__plate .hero__watermark { opacity: 0.07; }
 }
 
 /* ====================== BUILD TELEMETRY (gauge cluster) ====================== */
@@ -905,10 +842,8 @@
 }
 
 .centaur__pivot {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 2rem;
-  align-items: start;
+  position: relative;
+  display: block;
   margin: 0.85rem 0 0;
   padding: 1rem 0 0;
   border-top: 1px dashed var(--ink-line);
@@ -919,6 +854,11 @@
   max-width: min(62ch, 65%);
   text-wrap: pretty;
   margin: 0;
+}
+@media (min-width: 881px) {
+  .centaur__pivot > p {
+    padding-right: 4.25rem;
+  }
 }
 .centaur__pivot b { color: var(--ink); font-weight: 500; }
 .centaur__pivot em { font-style: italic; color: var(--accent); }
@@ -932,18 +872,21 @@
   color: var(--ink-3);
   border-left: 1px solid var(--ink-line);
   padding: 0 0 0 0.85rem;
-  align-self: start;
-  position: sticky;
-  top: 5.5rem;
   display: flex;
   align-items: flex-start;
   gap: 1.2em;
   white-space: nowrap;
 }
+@media (min-width: 881px) {
+  .centaur__pivot-marg {
+    position: absolute;
+    top: 1rem;
+    right: 0;
+  }
+}
 .centaur__pivot-marg b { color: #e86c54; font-weight: 500; letter-spacing: 0.32em; }
 @media (max-width: 880px) {
-  .centaur__pivot { grid-template-columns: 1fr; }
-  .centaur__pivot > p { max-width: none; }
+  .centaur__pivot > p { max-width: none; padding-right: 0; }
   .centaur__pivot-marg { display: none; }
 }
 

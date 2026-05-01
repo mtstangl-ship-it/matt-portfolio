@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
-/** Dark pill nav matching Home v2 / About fiche grammar (`home.css` / `about.css` `.nav`). */
+/** Dark pill nav — shared by Home v2, About v3, and Tier A case shells. */
 export function FicheNav() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -22,22 +24,26 @@ export function FicheNav() {
       </Link>
       <ul className="nav__list">
         <li>
-          <Link href="/impact" onClick={() => setMenuOpen(false)}>
+          <Link href="/impact" aria-current={pathname === "/impact" ? "page" : undefined} onClick={() => setMenuOpen(false)}>
             Impact
           </Link>
         </li>
         <li>
-          <Link href="/case-studies" onClick={() => setMenuOpen(false)}>
+          <Link
+            href="/case-studies"
+            aria-current={pathname === "/case-studies" || pathname.startsWith("/case-studies/") ? "page" : undefined}
+            onClick={() => setMenuOpen(false)}
+          >
             Case Studies
           </Link>
         </li>
         <li>
-          <Link href="/signal-story" onClick={() => setMenuOpen(false)}>
+          <Link href="/signal-story" aria-current={pathname === "/signal-story" ? "page" : undefined} onClick={() => setMenuOpen(false)}>
             Signal → Story
           </Link>
         </li>
         <li>
-          <Link href="/about" onClick={() => setMenuOpen(false)}>
+          <Link href="/about" aria-current={pathname === "/about" ? "page" : undefined} onClick={() => setMenuOpen(false)}>
             About
           </Link>
         </li>

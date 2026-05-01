@@ -36,79 +36,81 @@ export function CaseHero({
       <span className="margin-note">{marginNote}</span>
       <span className="fig-stamp">{figStamp}</span>
 
-      <div className="hero__bgphoto" aria-hidden="true">
-        <svg width={0} height={0} style={{ position: "absolute" }} aria-hidden="true">
-          <defs>
-            <filter id="hero-duotone" colorInterpolationFilters="sRGB">
-              <feColorMatrix
-                type="matrix"
-                values="
+      <div className="hero__plate">
+        <div className="hero__bgphoto" aria-hidden="true">
+          <svg width={0} height={0} style={{ position: "absolute" }} aria-hidden="true">
+            <defs>
+              <filter id="hero-duotone" colorInterpolationFilters="sRGB">
+                <feColorMatrix
+                  type="matrix"
+                  values="
               0.299 0.587 0.114 0 0
               0.299 0.587 0.114 0 0
               0.299 0.587 0.114 0 0
               0     0     0     1 0"
-              />
-              <feComponentTransfer>
-                <feFuncR tableValues="0.028 0.92" />
-                <feFuncG tableValues="0.055 0.95" />
-                <feFuncB tableValues="0.050 0.93" />
-              </feComponentTransfer>
-            </filter>
-          </defs>
-        </svg>
-        {/* eslint-disable-next-line @next/next/no-img-element -- hero plate matches prototype filter pipeline */}
-        <img
-          className="hero__bgphoto-img"
-          src="/case-studies/centaur-literal.png"
-          alt=""
-          decoding="async"
-          fetchPriority="high"
-        />
-        <div className="hero__bgphoto-halftone" aria-hidden="true" />
-        <div className="hero__bgphoto-grain" aria-hidden="true" />
-        <div className="hero__bgphoto-scrim" aria-hidden="true" />
-        <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
-      </div>
+                />
+                <feComponentTransfer>
+                  <feFuncR tableValues="0.028 0.92" />
+                  <feFuncG tableValues="0.055 0.95" />
+                  <feFuncB tableValues="0.050 0.93" />
+                </feComponentTransfer>
+              </filter>
+            </defs>
+          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element -- hero plate matches prototype filter pipeline */}
+          <img
+            className="hero__bgphoto-img"
+            src="/case-studies/centaur-literal.png"
+            alt=""
+            decoding="async"
+            fetchPriority="high"
+          />
+          <div className="hero__bgphoto-halftone" aria-hidden="true" />
+          <div className="hero__bgphoto-grain" aria-hidden="true" />
+          <div className="hero__bgphoto-scrim" aria-hidden="true" />
+          <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
+        </div>
 
-      <div className="hero__watermark" aria-hidden="true" hidden>
-        {/* Fallback watermark SVG omitted — prototype ships hidden */}
-      </div>
+        <div className="hero__watermark" aria-hidden="true" hidden>
+          {/* Fallback watermark SVG omitted — prototype ships hidden */}
+        </div>
 
-      <dl className="hero__id-strip" aria-label="Identity">
-        <dt>CASE NO.</dt>
-        <dd>{idStripCase}</dd>
-        <dt>BASED</dt>
-        <dd>DEN · REMOTE</dd>
-        <dt>ROLE</dt>
-        <dd>DESIGN &amp; BUILD</dd>
-        <dt>REV.</dt>
-        <dd>v2026.04</dd>
-      </dl>
-
-      <div className="hero__inner">
-        <p className="hero__tag">{tag}</p>
-        <h1 className="hero__h1">{headline}</h1>
-        <p className="hero__sub">{subhead}</p>
-
-        <dl className="hero__meta">
-          <div className="hero__meta-cell">
-            <dt>Role</dt>
-            <dd>{meta.role}</dd>
-          </div>
-          <div className="hero__meta-cell">
-            <dt>Timeline</dt>
-            <dd>{meta.timeline}</dd>
-          </div>
-          <div className="hero__meta-cell">
-            <dt>Stack</dt>
-            <dd>{meta.stack}</dd>
-          </div>
-          <div className="hero__meta-cell">
-            <dt>Model</dt>
-            <dd>{meta.model}</dd>
-          </div>
+        <dl className="hero__id-strip" aria-label="Identity">
+          <dt>CASE NO.</dt>
+          <dd>{idStripCase}</dd>
+          <dt>BASED</dt>
+          <dd>DEN · REMOTE</dd>
+          <dt>ROLE</dt>
+          <dd>DESIGN &amp; BUILD</dd>
+          <dt>REV.</dt>
+          <dd>v2026.04</dd>
         </dl>
+
+        <div className="hero__inner">
+          <p className="hero__tag">{tag}</p>
+          <h1 className="hero__h1">{headline}</h1>
+          <p className="hero__sub">{subhead}</p>
+        </div>
       </div>
+
+      <dl className="hero__meta">
+        <div className="hero__meta-cell">
+          <dt>Role</dt>
+          <dd>{meta.role}</dd>
+        </div>
+        <div className="hero__meta-cell">
+          <dt>Timeline</dt>
+          <dd>{meta.timeline}</dd>
+        </div>
+        <div className="hero__meta-cell">
+          <dt>Stack</dt>
+          <dd>{meta.stack}</dd>
+        </div>
+        <div className="hero__meta-cell">
+          <dt>Model</dt>
+          <dd>{meta.model}</dd>
+        </div>
+      </dl>
     </section>
   );
 }

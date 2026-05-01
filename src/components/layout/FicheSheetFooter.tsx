@@ -1,7 +1,7 @@
 /** Site-level sheet strip after Tier A case content (matches Home `footer.sheet` pattern). */
 export function FicheSheetFooter() {
   return (
-    <footer className="sheet sheet--site-fiche" aria-label="Site sheet">
+    <footer className="sheet" aria-label="Site sheet">
       <div className="sheet__cell">
         <span>SHEET</span>
         <b>SITE</b>

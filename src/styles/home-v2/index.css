@@ -1,6 +1,7 @@
 /* Home v2 prototype styles — bundled for Next.js import on Home route only */
 @import "./tokens.css";
 @import "./grammar.css";
+@import "../tier-a/fiche-nav.css";
 @import "./home.css";
 @import "./v2.css";
 
@@ -13,29 +14,5 @@ body:has(.home-v2-root) .site-primary-footer {
 @media (prefers-reduced-motion: reduce) {
   .home-v2-root .ticker__track {
     animation: none !important;
-  }
-}
-
-/* From prototype scripts/nav.js — drawer when body.nav-open (nav lives inside .home-v2-root so vars resolve) */
-@media (max-width: 880px) {
-  body.nav-open .home-v2-root .nav__list,
-  body.nav-open .home-v2-root .nav__cta {
-    display: flex !important;
-    position: fixed;
-    top: 70px;
-    left: 14px;
-    right: 14px;
-    background: var(--bg-2);
-    border: 1px solid var(--ink-line);
-    flex-direction: column;
-    padding: 1rem 1.25rem;
-    gap: 1rem;
-    z-index: 99;
-  }
-  body.nav-open .home-v2-root .nav__cta {
-    top: auto;
-    bottom: 90px;
-    justify-content: center;
-    padding: 1rem;
   }
 }
