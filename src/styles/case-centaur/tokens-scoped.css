@@ -1,0 +1,116 @@
+/* Fiche tokens scoped to Centaur (and future Tier A case shells).
+   Does not replace site-wide editorial tokens on other routes. */
+.case-centaur-portfolio {
+  --sans: var(--font-inter, "Inter"), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: var(--font-jetbrains), "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+  --font-mono: var(--mono);
+
+  --bg: #0a0f0e;
+  --bg-2: #0d1413;
+  --bg-3: #11191a;
+  --bg-grid: rgba(255, 255, 255, 0.025);
+
+  --ink: #e8efee;
+  --ink-2: #aab5b3;
+  --ink-3: #6c7a78;
+  --ink-4: #3c4847;
+  --ink-line: rgba(232, 239, 238, 0.1);
+
+  --accent: #1dcfaa;
+  --accent-soft: rgba(29, 207, 170, 0.12);
+  --accent-line: rgba(29, 207, 170, 0.45);
+  --accent-glow: rgba(29, 207, 170, 0.2);
+
+  --warn: #d97757;
+  --warn-soft: rgba(217, 119, 87, 0.1);
+
+  --t-mono: 0.6875rem;
+  --t-meta: 0.8125rem;
+  --t-body: 1rem;
+  --t-lead: 1.125rem;
+  --t-h4: 1.25rem;
+  --t-h3: clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
+  --t-h2: clamp(1.875rem, 1.4rem + 2vw, 3rem);
+  --t-h1: clamp(2.25rem, 1.6rem + 3.4vw, 4.5rem);
+  --t-display: clamp(3rem, 2rem + 4.5vw, 5.5rem);
+
+  --gutter: clamp(1.25rem, 0.5rem + 2vw, 2.5rem);
+  --col-max: 1280px;
+  --col-wide: 1440px;
+  --rule: 1px;
+  --tick: 6px;
+
+  --ease: cubic-bezier(0.2, 0.6, 0.15, 1);
+  --d-fast: 240ms;
+  --d-base: 480ms;
+  --d-slow: 900ms;
+  --d-rotate: 1500ms;
+  --pair-hold: 6500ms;
+
+  box-sizing: border-box;
+  background:
+    radial-gradient(1200px 800px at 20% -10%, rgba(29, 207, 170, 0.04), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color-scheme: dark;
+}
+
+.case-centaur-portfolio *,
+.case-centaur-portfolio *::before,
+.case-centaur-portfolio *::after {
+  box-sizing: border-box;
+}
+
+.case-centaur-portfolio img,
+.case-centaur-portfolio svg,
+.case-centaur-portfolio canvas,
+.case-centaur-portfolio video {
+  display: block;
+  max-width: 100%;
+}
+
+.case-centaur-portfolio a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.case-centaur-portfolio button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.case-centaur-portfolio ul,
+.case-centaur-portfolio ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.case-centaur-portfolio em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.case-centaur-portfolio ::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.case-centaur-portfolio code {
+  font-family: var(--mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-centaur-portfolio * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

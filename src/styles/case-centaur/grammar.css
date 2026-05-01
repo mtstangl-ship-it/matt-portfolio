@@ -1,0 +1,347 @@
+/* =========================================================
+   GRAMMAR — fiche primitives, used across the page.
+   Mono kickers, dimension rules, figure stamps, sheet footer.
+   ========================================================= */
+
+/* ---- Layout container ---- */
+.section-head {
+  max-width: var(--col-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.section-head--split {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--gutter);
+  flex-wrap: wrap;
+}
+.section-head h2 {
+  font-family: var(--sans);
+  font-size: var(--t-h2);
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  line-height: 1.05;
+  margin: 0.25em 0 0.4em;
+  text-wrap: pretty;
+}
+.section-head__sub {
+  color: var(--ink-2);
+  font-size: var(--t-lead);
+  max-width: 56ch;
+  margin: 0;
+}
+
+/* ---- Mono kicker ---- */
+.kicker {
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+/* ---- CTA ---- */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 0.65em 0.9em;
+  border: 1px solid var(--accent-line);
+  background: transparent;
+  transition: background var(--d-fast) var(--ease), border-color var(--d-fast) var(--ease);
+  min-height: 44px;
+}
+.cta:hover, .cta:focus-visible { background: var(--accent-soft); border-color: var(--accent); }
+.cta--quiet { color: var(--ink-2); border-color: var(--ink-line); }
+.cta--quiet:hover { color: var(--accent); border-color: var(--accent-line); }
+
+/* ---- Sheet footer ---- */
+.sheet {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-top: 1px solid var(--ink-line);
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--bg);
+}
+.sheet__cell {
+  padding: 1rem var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  border-right: 1px solid var(--ink-line);
+}
+.sheet__cell:last-child { border-right: 0; }
+.sheet__cell span { color: var(--ink-3); }
+.sheet__cell b { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 720px) {
+  .sheet { grid-template-columns: repeat(2, 1fr); }
+  .sheet__cell:nth-child(2n) { border-right: 0; }
+  .sheet__cell { border-bottom: 1px solid var(--ink-line); }
+}
+
+/* ---- Section common spacing ---- */
+section[data-screen-label] {
+  padding-block: clamp(3rem, 4vw + 1rem, 6rem);
+  position: relative;
+}
+
+/* Faint grid backplate (very subtle) */
+section[data-screen-label]::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, black, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black, black 80%, transparent);
+  opacity: 0.6;
+}
+section > * { position: relative; }
+
+
+/* =========================================================
+   v2 ADDITIVE FICHE GRAMMAR
+   Section dimension callouts, FIG stamps, marginalia, crosshair fade,
+   placeholder boxes, KPI helpers. Originally from v2.css.
+   ========================================================= */
+
+/* v2.css — additive fiche grammar layer over home.css.
+   Adds: section dimension callouts, FIG stamps, drafting marginalia (desktop-only),
+   crosshair fade extensions, card viz/logo placeholder boxes, KPI span helper. */
+
+/* ============ 5A · SECTION DIMENSION CALLOUTS ============ */
+.dim {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 0.65rem 1.5rem;
+  margin: 0;
+  position: relative;
+}
+.dim::before, .dim::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--ink-line);
+  max-width: 80px;
+  margin: 0 12px;
+  opacity: 0.6;
+}
+
+/* ============ 5B · FIG STAMPS (corner) ============ */
+.fig-stamp {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border: 1px solid var(--ink-line);
+  padding: 4px 8px;
+  background: var(--bg, #f4f1ea);
+  z-index: 5;
+  pointer-events: none;
+}
+.hero, .ledger, .cases { position: relative; }
+
+/* ============ 5C · DRAFTING MARGINALIA (DESKTOP ONLY) ============ */
+.margin-note {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .margin-note {
+    display: block;
+    position: absolute;
+    left: 0.6rem;
+    top: 1.5rem;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-4, #b3aea4);
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 4;
+  }
+}
+
+/* enable margin-note positioning on parent sections */
+#hero, #ledger, #impact, .cred, #cases, #signal, .telemetry {
+  position: relative;
+}
+
+/* ============ 5D · CROSSHAIR FADE EXTENSIONS ============ */
+.xhair {
+  position: absolute;
+  width: 12px; height: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 480ms var(--ease, ease-out), color 240ms ease;
+  color: var(--ink-3);
+}
+.xhair::before, .xhair::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.xhair::before { left: 0; right: 0; top: 50%; height: 1px; }
+.xhair::after  { top: 0; bottom: 0; left: 50%; width: 1px; }
+.xhair-tl { top: -6px; left: -6px; }
+.xhair-tr { top: -6px; right: -6px; }
+.xhair-bl { bottom: -6px; left: -6px; }
+.xhair-br { bottom: -6px; right: -6px; }
+.xhair-on .xhair { opacity: 1; transition-delay: 400ms; }
+.case:hover .xhair, .cred__card:hover .xhair, .tile:hover .xhair {
+  color: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .xhair { opacity: 1 !important; transition: none !important; }
+}
+.case, .cred__card, .tile { position: relative; }
+
+/* ============ P2 · CARD VISUALIZATION + LOGO PLACEHOLDERS ============ */
+.card__head {
+  /* override v1 head to fit logo on left, FIG stamp on right */
+  align-items: center;
+  gap: 0.75rem;
+}
+.card__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 28px;
+}
+.card__logo-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 10px;
+  border: 1px dashed var(--ink-3);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: rgba(0,0,0,0.02);
+}
+.card__viz {
+  position: relative;
+  margin: 1.1rem 0 1.25rem;
+  border: 1px dashed var(--ink-3);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0 6px,
+      rgba(0,0,0,0.025) 6px 7px
+    );
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  text-align: center;
+}
+.card__viz-label {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 0.4rem;
+}
+.card__viz-name {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink-1);
+  margin: 0 0 0.3rem;
+}
+.card__viz-src {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  color: var(--ink-3);
+  margin: 0;
+  word-break: break-all;
+}
+
+/* ============ HERO PRESERVE PLACEHOLDER ============ */
+.hero__preserve {
+  position: relative;
+  aspect-ratio: 13 / 16;
+  width: 100%;
+  max-width: 520px;
+  justify-self: end;
+  border: 1px dashed var(--accent, #1dcfaa);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 8px,
+      rgba(29,207,170,0.06) 8px 9px
+    );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+.hero__preserve-label {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent, #1dcfaa);
+  margin: 0 0 0.6rem;
+}
+.hero__preserve-name {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 14px;
+  color: var(--ink-1);
+  margin: 0 0 0.4rem;
+}
+.hero__preserve-src {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  color: var(--ink-3);
+  margin: 0.15rem 0;
+  word-break: break-all;
+}
+.hero__preserve .hero__stamp {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
+@media (max-width: 720px) {
+  .hero__preserve { display: none; }
+}
+
+/* ============ C2 · KPI SPAN HELPER (Autodesk 0→1→2) ============ */
+.kpi--span2 { grid-column: 1 / -1; }
+
+/* ============ SIGNAL TILE HOVER PULSE ============ */
+.tile:hover .tile__crop { color: var(--accent); }

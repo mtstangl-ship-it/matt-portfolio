@@ -42,6 +42,12 @@
   }
 }
 
+/* Tier A React case ports bring fiche nav + sheet footer; hide legacy editorial chrome */
+body:has(.tier-a-case-root) .site-primary-nav,
+body:has(.tier-a-case-root) .site-primary-footer {
+  display: none !important;
+}
+
 /* ============================================================
    Case accent system — per-case CSS variables scoped to the
    article root. Bug fix: these MUST live on the article, not

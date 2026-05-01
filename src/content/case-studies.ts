@@ -19,6 +19,13 @@ export const caseStudiesPage = {
 
 export type CaseSlug = "ai" | "synthetic" | "autodesk" | "wipro" | "ey";
 
+/** Canonical URL for case picker + deep links (static `/ai`, editorial `/synthetic-users` alias). */
+export function caseStudyDetailHref(slug: CaseSlug): string {
+  if (slug === "ai") return "/case-studies/ai";
+  if (slug === "synthetic") return "/case-studies/synthetic-users";
+  return `/case-studies/${slug}`;
+}
+
 export type CaseStudyEntry = {
   slug: CaseSlug;
   /** Full hero headline as shown on /case-studies/[slug]. */

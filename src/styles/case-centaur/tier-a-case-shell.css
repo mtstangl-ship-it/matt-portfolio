@@ -1,0 +1,29 @@
+/* Tier A React case ports — shell spacing + mobile nav drawer for fixed fiche nav */
+.tier-a-case-root {
+  min-height: 100vh;
+  padding-top: clamp(3.75rem, 8vw, 4.75rem);
+}
+
+/* Mobile drawer — mirrors `styles/home-v2/index.css` when body.nav-open */
+@media (max-width: 880px) {
+  body.nav-open .tier-a-case-root .nav__list,
+  body.nav-open .tier-a-case-root .nav__cta {
+    display: flex !important;
+    position: fixed;
+    top: 70px;
+    left: 14px;
+    right: 14px;
+    background: var(--bg-2);
+    border: 1px solid var(--ink-line);
+    flex-direction: column;
+    padding: 1rem 1.25rem;
+    gap: 1rem;
+    z-index: 99;
+  }
+  body.nav-open .tier-a-case-root .nav__cta {
+    top: auto;
+    bottom: 90px;
+    justify-content: center;
+    padding: 1rem;
+  }
+}
