@@ -21,6 +21,71 @@
   letter-spacing: 0.12em;
 }
 
+/* ----- Centaur portfolio: Layer A stamp reserve + vertical FIG / metadata stack ----- */
+.case-centaur-portfolio {
+  --layer-a-stamp-reserve: clamp(10rem, 24vw, 15rem);
+  --layer-a-hero-id-reserve: clamp(11rem, 28vw, 14rem);
+  /* FIG stamp block height (mono 9px + padding + border) + gap before section metadata */
+  --layer-a-fig-h: 2.625rem;
+  --layer-a-stamp-stack-top: calc(1rem + var(--layer-a-fig-h) + 1rem);
+}
+
+@media (min-width: 1181px) {
+  .case-centaur-portfolio .fig-stamp {
+    top: 1rem;
+    right: 1rem;
+    z-index: 14;
+  }
+  .case-centaur-portfolio .section-stamp {
+    top: var(--layer-a-stamp-stack-top);
+    right: 1rem;
+    z-index: 13;
+  }
+  .case-centaur-portfolio .telemetry__inner,
+  .case-centaur-portfolio .centaur__inner,
+  .case-centaur-portfolio .records__inner,
+  .case-centaur-portfolio .bulletin__inner,
+  .case-centaur-portfolio .handoff__inner {
+    padding-right: calc(var(--gutter) + var(--layer-a-stamp-reserve));
+  }
+}
+
+@media (min-width: 881px) {
+  .case-centaur-portfolio .hero .fig-stamp {
+    top: 1rem;
+    right: var(--gutter);
+    z-index: 14;
+  }
+  .case-centaur-portfolio .hero .hero__id-strip {
+    top: calc(1rem + var(--layer-a-fig-h) + 0.65rem);
+    right: var(--gutter);
+    z-index: 13;
+  }
+}
+
+@media (min-width: 1181px) {
+  .case-centaur-portfolio .centaur__head .case-schematic {
+    margin-top: calc(var(--layer-a-stamp-stack-top) + 0.35rem);
+  }
+}
+
+/* Fiche mobile drawer toggle must not leak onto desktop (Tailwind / cascade). */
+@media (min-width: 881px) {
+  .tier-a-case-root .nav__menu {
+    display: none !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+  }
+}
+
 /* ====================== NAV (inherited from Home v2 / About) ====================== */
 .nav {
   position: fixed;
@@ -213,7 +278,8 @@
 
 .hero__inner {
   max-width: var(--col-wide);
-  margin: 0 auto;
+  margin-left: 0;
+  margin-right: auto;
   padding: 0 var(--gutter) clamp(3rem, 5vw, 5rem);
   position: relative;
   z-index: 2;
@@ -235,13 +301,13 @@
   letter-spacing: -0.025em;
   margin: 0 0 1.5rem;
   text-wrap: balance;
-  max-width: 22ch;
+  max-width: min(75%, clamp(26rem, 52vw, 44rem));
 }
 .hero__h1 em { font-style: italic; color: var(--accent); }
 .hero__sub {
   color: var(--ink-2);
   font-size: var(--t-lead);
-  max-width: 60ch;
+  max-width: min(75%, clamp(34rem, 58vw, 52rem));
   margin: 0 0 2.5rem;
   text-wrap: pretty;
 }
@@ -307,6 +373,12 @@
   .hero__meta { grid-template-columns: 1fr; }
   .hero__meta-cell { border-right: 0; border-bottom: 1px solid rgba(223, 233, 230, 0.18); }
   .hero__meta-cell:last-child { border-bottom: 0; }
+}
+
+@media (min-width: 881px) {
+  .case-centaur-portfolio .hero__inner {
+    padding-right: calc(var(--gutter) + var(--layer-a-hero-id-reserve));
+  }
 }
 
 /* Hero identity strip — top-right */
@@ -627,7 +699,7 @@
 .centaur {
   position: relative;
   padding-top: clamp(4.5rem, 7vw, 7rem);
-  padding-bottom: clamp(2rem, 3.8vw, 3.25rem);
+  padding-bottom: clamp(1rem, 2vw, 1.65rem);
   border-bottom: 1px solid var(--ink-line);
 }
 .centaur__inner {
@@ -860,7 +932,9 @@
   color: var(--ink-3);
   border-left: 1px solid var(--ink-line);
   padding: 0 0 0 0.85rem;
-  align-self: stretch;
+  align-self: start;
+  position: sticky;
+  top: 5.5rem;
   display: flex;
   align-items: flex-start;
   gap: 1.2em;
@@ -876,7 +950,7 @@
 /* ====================== SERVICE RECORDS (cluster) ====================== */
 .records {
   position: relative;
-  padding-top: clamp(2rem, 3.5vw, 3.25rem);
+  padding-top: clamp(1.35rem, 2.4vw, 2rem);
   padding-bottom: clamp(4rem, 7vw, 7rem);
   border-bottom: 1px solid var(--ink-line);
 }
@@ -1543,6 +1617,11 @@
   margin-bottom: 1.75rem;
   padding-right: 140px;
 }
+@media (min-width: 1181px) {
+  .case-centaur-portfolio .bulletin__head {
+    padding-right: calc(140px + var(--layer-a-stamp-reserve));
+  }
+}
 @media (max-width: 720px) {
   .bulletin__head { padding-right: 0; }
 }
@@ -1562,13 +1641,6 @@
   right: 0;
   width: 110px;
   height: auto;
-}
-/* On desktop, the section-stamp pins to the top-right of the section itself
-   (≥1180 only). Push the bulletin badge down past it so they don't collide. */
-@media (min-width: 1180px) {
-  .bulletin__badge {
-    top: 110px;
-  }
 }
 @media (max-width: 720px) {
   .bulletin__badge {
@@ -1724,12 +1796,6 @@
   text-transform: uppercase;
 }
 
-/* Override section-stamp for case-ai (4 sections, not 6) */
-.case-ai-body .section-stamp {
-  /* Inherits from density.css. No override needed — just confirms scope. */
-}
-
-/* Reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .timeline__node--live .timeline__dot,
   .signal-entry--live .signal-entry__dot,

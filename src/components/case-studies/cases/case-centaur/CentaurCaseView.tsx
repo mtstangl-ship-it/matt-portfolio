@@ -104,9 +104,9 @@ export function CentaurCaseView() {
 
       <DeclarationCentaur />
 
-      <DimBetween label="↓ ARTIFACTS · PROOF FOLLOWS" compact />
-
       <section className="records" id="records" aria-label="Service Records" data-screen-label="04 Service Records">
+        <DimBetween label="↓ ARTIFACTS · PROOF FOLLOWS" compact />
+
         <span className="margin-note">DRAWING 04</span>
         <span className="fig-stamp">FIG. 04 · ARTIFACTS</span>
 
