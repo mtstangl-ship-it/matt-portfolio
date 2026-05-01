@@ -1,0 +1,129 @@
+/* Scoped tokens — only descendants of .home-v2-root (does not hijack site-wide :root) */
+
+.home-v2-root {
+  /* Surfaces */
+  --bg:        #0a0f0e;
+  --bg-2:      #0d1413;
+  --bg-3:      #11191a;
+  --bg-grid:   rgba(255, 255, 255, 0.025);
+
+  --ink:       #e8efee;
+  --ink-2:     #aab5b3;
+  --ink-3:     #6c7a78;
+  --ink-4:     #3c4847;
+  --ink-line:  rgba(232, 239, 238, 0.10);
+
+  --accent:        #1dcfaa;
+  --accent-soft:   rgba(29, 207, 170, 0.12);
+  --accent-line:   rgba(29, 207, 170, 0.45);
+  --accent-glow:   rgba(29, 207, 170, 0.20);
+
+  --warn:          #d97757;
+  --warn-soft:     rgba(217, 119, 87, 0.10);
+
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+  --t-mono:    0.6875rem;
+  --t-meta:    0.8125rem;
+  --t-body:    1rem;
+  --t-lead:    1.125rem;
+  --t-h4:      1.25rem;
+  --t-h3:      clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
+  --t-h2:      clamp(1.875rem, 1.4rem + 2vw, 3rem);
+  --t-h1:      clamp(2.25rem, 1.6rem + 3.4vw, 4.5rem);
+  --t-display: clamp(3rem, 2rem + 4.5vw, 5.5rem);
+
+  --gutter:    clamp(1.25rem, 0.5rem + 2vw, 2.5rem);
+  --col-max:   1280px;
+  --col-wide:  1440px;
+  --rule:      1px;
+  --tick:      6px;
+
+  --ease:      cubic-bezier(.2,.6,.15,1);
+  --d-fast:    240ms;
+  --d-base:    480ms;
+  --d-slow:    900ms;
+  --d-rotate:  1500ms;
+  --pair-hold: 6500ms;
+
+  color-scheme: dark;
+  background:
+    radial-gradient(1200px 800px at 20% -10%, rgba(29,207,170,0.04), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.home-v2-root *,
+.home-v2-root *::before,
+.home-v2-root *::after {
+  box-sizing: border-box;
+}
+
+.home-v2-root img,
+.home-v2-root svg,
+.home-v2-root canvas,
+.home-v2-root video {
+  display: block;
+  max-width: 100%;
+}
+
+.home-v2-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-v2-root button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.home-v2-root ul,
+.home-v2-root ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.home-v2-root em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.home-v2-root ::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.home-v2-root .skip {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  background: var(--bg-3);
+  color: var(--ink);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ink-line);
+  z-index: 1000;
+  transition: top var(--d-fast) var(--ease);
+}
+
+.home-v2-root .skip:focus {
+  top: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-v2-root *,
+  .home-v2-root *::before,
+  .home-v2-root *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

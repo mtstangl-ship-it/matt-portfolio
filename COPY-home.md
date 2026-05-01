@@ -28,7 +28,7 @@ CX, Product & Service Design Leader · Director / Senior Manager
 
 **Headline**
 ```
-I turn fragmented experiences into flow-state customer value.
+I turn fragmented CX into flow.
 ```
 
 **Subhead**
@@ -55,7 +55,7 @@ Autodesk · Wipro · EY · Discovery Communications · Stanford AI Certified
 ### Tier 2 — Tight version
 ```
 TAGLINE: CX, Product & Service Design Leader
-HEADLINE: I turn fragmented experiences into flow-state customer value.
+HEADLINE: I turn fragmented CX into flow.
 SUBHEAD: For enterprises where the journey has splintered.
 AVAILABILITY: Available · senior design leadership · healthcare focus
 ```
@@ -572,7 +572,7 @@ Let's talk.
 
 **Subhead**
 ```
-Senior design leadership roles. Journey redesign. Experience strategy. Operational transformation. Healthcare preferred.
+Senior design leadership roles. Healthcare preferred.
 ```
 
 **CTA**
@@ -583,7 +583,7 @@ Get in touch  →  mtstangl@gmail.com
 ### Tier 2 — Tight version
 ```
 HEADLINE: Let's talk.
-SUBHEAD: Senior design leadership · journey redesign · healthcare preferred.
+SUBHEAD: Senior design leadership roles · healthcare preferred.
 ```
 
 ### Cut priority
@@ -619,7 +619,7 @@ Inaccuracies in current copy that must not return:
 - "15+ services shipped" — output metric, not outcome. Replaced with practice build / NRR vision / RR / AOV metric stack.
 - "16k annual reduction in lockout cases" — incorrect. Correct number is 13k annual reduction.
 - EY metrics without bridge — 4.57M and 715 side-by-side looked like a broken funnel.
-- "I lead CX, product, and service transformation" — was a category claim, not a seniority claim. Now: "I turn fragmented experiences into flow-state customer value."
+- "I lead CX, product, and service transformation" — was a category claim, not a seniority claim. Now: "I turn fragmented CX into flow."
 - Contact email previously wrong — must be mtstangl@gmail.com everywhere.
 - Hero tagline must end "Director / Senior Manager" not "Director" alone.
 - Problem Ledger item 02 must NOT include Takeda — Wipro engagement is Estée Lauder only.

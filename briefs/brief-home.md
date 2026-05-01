@@ -102,7 +102,7 @@ From /DESIGN-NOTES.md, Home section:
 Do not relitigate Tuesday morning:
 
 - **Title everywhere:** "CX, Product & Service Design Leader · Director / Senior Manager"
-- **Hero H1:** "I turn fragmented experiences into flow-state customer value."
+- **Hero H1:** "I turn fragmented CX into flow."
 - **Hero subhead:** "For enterprises where the journey has splintered across operational silos."
 - **Brand thesis section was REPLACED** with Problem Ledger (diptych Solved | Want to solve). Don't revert to old framing.
 - **Problem Ledger items locked** in COPY-home.md — six items per column

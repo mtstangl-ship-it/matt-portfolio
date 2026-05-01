@@ -6,7 +6,8 @@ import { getPointillismPoints } from "@/lib/portraitPointillism";
 // Hero-scale view, big, immersive pointillism
 const VIEW_W = 2200;
 const VIEW_H = 780;
-const FACE_OFFSET_X = 160; // Portrait left of right edge, keeps full face in frame on desktop
+/** Horizontal shift so resolved portrait centers ~75% from left (was ~57% with 160). */
+const FACE_OFFSET_X = 550;
 const SRC_W = 1200;
 const SRC_H = 420;
 
@@ -158,7 +159,7 @@ export function HeroAtmosphereBackground() {
   const [isStacked, setIsStacked] = useState(false);
 
   useEffect(() => {
-    const check = () => setIsStacked(window.innerWidth < 768);
+    const check = () => setIsStacked(window.innerWidth < 880);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
