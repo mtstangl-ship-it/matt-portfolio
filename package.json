@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "kill": "pkill -f 'next dev' 2>/dev/null; pkill -f 'next start' 2>/dev/null; (lsof -ti:1000 | xargs kill -9 2>/dev/null); (lsof -ti:3000 | xargs kill -9 2>/dev/null); (lsof -ti:3001 | xargs kill -9 2>/dev/null); (lsof -ti:3002 | xargs kill -9 2>/dev/null); sleep 2; echo 'Ports cleared'",
-    "refresh": "npm run kill && npm run build && sleep 1 && npx next start -p 3002",
+    "refresh": "npm run kill && rm -rf .next && npm run build && sleep 1 && npx next start -p 3002",
     "dev:clean": "npm run kill && next dev -p 3000",
     "lint": "next lint",
     "extract:pointillism": "node scripts/extract-pointillism.mjs"
