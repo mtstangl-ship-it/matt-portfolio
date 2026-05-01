@@ -103,17 +103,17 @@ export function AboutV3View() {
           <div className="about-hero__photo about-hero__photo--large">
             <HalftonePhoto
               src="/about/photos/garage-hero.png"
-              alt="BMW airhead on the center stand in the garage, mid-service"
+              alt="Ayda — BMW R75/7 in the garage with top end apart, work light on the engine"
               treatment="HALFTONE · TEAL"
-              subject="Garage · Alice &amp; Ayda"
+              subject="Garage · Ayda"
               cap={
                 <>
-                  <b>GARAGE</b> · ALICE &amp; AYDA
+                  <b>GARAGE</b> · AYDA · R75/7
                 </>
               }
             />
             <p className="photo-caption">
-              GARAGE · <b>ALICE &amp; AYDA</b>
+              GARAGE · <b>AYDA</b> · R75/7
             </p>
           </div>
         </div>
@@ -161,18 +161,18 @@ export function AboutV3View() {
           <figure className="photo-break photo-break--trade-anchor">
             <HalftonePhoto
               src="/about/photos/ayda-and-asylum.jpg"
-              alt="Ayda parked in front of abandoned brick asylum"
+              alt="Ayda parked at Glenn Dale Sanatorium"
               treatment="HALFTONE · TEAL"
               aspectRatio="16/10"
-              subject="Ayda · abandoned asylum"
+              subject="Ayda · Glenn Dale Sanatorium"
               cap={
                 <>
-                  <b>AYDA</b> · 1977 R75/7 · ABANDONED ASYLUM
+                  <b>AYDA</b> · 1977 R75/7 · GLENN DALE SANATORIUM
                 </>
               }
             />
             <figcaption className="photo-caption">
-              <b>AYDA</b> · 1977 R75/7 · ABANDONED ASYLUM
+              <b>AYDA</b> · 1977 R75/7 · GLENN DALE SANATORIUM
             </figcaption>
           </figure>
 
@@ -405,17 +405,17 @@ export function AboutV3View() {
             <figure className="sm-photos__support" style={{ margin: 0 }}>
               <HalftonePhoto
                 src="/about/photos/matt-handling-electronics.jpg"
-                alt="Matt handling ignition electronics on Alice"
+                alt="Ignition electronics · Ayda"
                 treatment="HALFTONE · TEAL"
-                subject="Matt handling electronics"
+                subject="Ignition electronics · Ayda"
                 cap={
                   <>
-                    MATT · <b>IGNITION ELECTRONICS</b> · ALICE
+                    FIG · <b>IGNITION ELECTRONICS</b> · AYDA
                   </>
                 }
               />
               <figcaption className="photo-caption">
-                MATT · <b>IGNITION ELECTRONICS</b> · ALICE
+                FIG · <b>IGNITION ELECTRONICS</b> · AYDA
               </figcaption>
             </figure>
           </div>
@@ -454,17 +454,17 @@ export function AboutV3View() {
           <figure className="riding__photo-wide">
             <HalftonePhoto
               src="/about/photos/matt-shadow-ayda.jpg"
-              alt="Shadow shot from saddle of Ayda — POV from the rider"
+              alt="Riding line — open road ahead from the saddle"
               treatment="HALFTONE · TEAL"
-              subject="Shadow · POV · Ayda · Road"
+              subject="One way · horizon · commitment"
               cap={
                 <>
-                  SHADOW · POV · <b>AYDA</b> · ROAD
+                  MATT + <b>ALICE</b> · ONE WAY · DC → DEN
                 </>
               }
             />
             <figcaption className="photo-caption">
-              SHADOW · POV · <b>AYDA</b> · ROAD
+              MATT + <b>ALICE</b> · ONE WAY · DC → DEN
             </figcaption>
           </figure>
 
