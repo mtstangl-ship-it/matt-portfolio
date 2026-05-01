@@ -120,6 +120,12 @@
 }
 
 /* ====================== HERO ====================== */
+/* Tier-A React cases: first hero hugs case picker (shared CaseHero pattern). */
+.tier-a-case-root .tier-a-react-case section.hero:first-of-type {
+  margin-top: -0.35rem;
+  padding-top: clamp(0.35rem, 1.2vw, 1rem);
+}
+
 .hero {
   position: relative;
   padding-top: clamp(7rem, 12vh, 9rem);
@@ -135,7 +141,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: min(58vh, 560px);
+  min-height: min(70vh, 680px);
   padding-bottom: clamp(2rem, 5vw, 4rem);
   border-bottom: 1px solid rgba(223, 233, 230, 0.18);
 }
@@ -154,9 +160,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 42%;
-  /* Plate is already halftoned + duotoned in PNG — just nudge tone toward the page palette */
-  filter: url(#hero-duotone) contrast(1.04) brightness(0.95);
+  object-position: center 38%;
+  /* PNG carries halftone plate; keep CSS light so mechanical detail reads */
+  filter: contrast(1.06) saturate(1.12) brightness(1.04);
 }
 /* Halftone screen — disabled (baked into the PNG plate to avoid moiré). Kept as a hook. */
 .hero__plate .hero__bgphoto-halftone {
@@ -173,26 +179,24 @@
     repeating-radial-gradient(circle at 23% 41%, rgba(255,255,255,0.025) 0 0.4px, transparent 0.4px 1.6px),
     repeating-radial-gradient(circle at 71% 67%, rgba(0,0,0,0.04) 0 0.4px, transparent 0.4px 1.4px);
   mix-blend-mode: overlay;
-  opacity: 0.6;
+  opacity: 0.16;
 }
 /* Left-anchored scrim — gives the type column a legible canvas without crushing the photo */
 .hero__plate .hero__bgphoto-scrim {
   position: absolute;
   inset: 0;
   background:
-    /* Localized darken behind text column (left ~46%) */
     linear-gradient(90deg,
-      rgba(10,17,16,0.78) 0%,
-      rgba(10,17,16,0.70) 22%,
-      rgba(10,17,16,0.40) 46%,
-      rgba(10,17,16,0.10) 70%,
+      rgba(10,17,16,0.68) 0%,
+      rgba(10,17,16,0.48) 24%,
+      rgba(10,17,16,0.16) 48%,
+      rgba(10,17,16,0.04) 72%,
       rgba(10,17,16,0.00) 100%),
-    /* Light vignette on top edge so margin notes read */
     linear-gradient(180deg,
-      rgba(10,17,16,0.35) 0%,
-      rgba(10,17,16,0.00) 18%,
-      rgba(10,17,16,0.00) 70%,
-      rgba(10,17,16,0.30) 100%);
+      rgba(10,17,16,0.22) 0%,
+      rgba(10,17,16,0.00) 20%,
+      rgba(10,17,16,0.00) 72%,
+      rgba(10,17,16,0.24) 100%);
 }
 /* Bottom fade — terminate hero cleanly into the page bg */
 .hero__plate .hero__bgphoto-fadebottom {
@@ -380,6 +384,10 @@
   padding-top: clamp(2.25rem, 4.5vw, 3.75rem);
   padding-bottom: clamp(4rem, 7vw, 6.5rem);
   border-bottom: 1px solid var(--ink-line);
+}
+/* Tier-A React flow: shorter jump from hero/meta strip into §02 */
+.tier-a-case-root .tier-a-react-case section.telemetry {
+  padding-top: clamp(1.5rem, 3.2vw, 2.75rem);
 }
 .telemetry__inner {
   max-width: var(--col-wide);

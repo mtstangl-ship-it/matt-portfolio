@@ -38,25 +38,6 @@ export function CaseHero({
 
       <div className="hero__plate">
         <div className="hero__bgphoto" aria-hidden="true">
-          <svg width={0} height={0} style={{ position: "absolute" }} aria-hidden="true">
-            <defs>
-              <filter id="hero-duotone" colorInterpolationFilters="sRGB">
-                <feColorMatrix
-                  type="matrix"
-                  values="
-              0.299 0.587 0.114 0 0
-              0.299 0.587 0.114 0 0
-              0.299 0.587 0.114 0 0
-              0     0     0     1 0"
-                />
-                <feComponentTransfer>
-                  <feFuncR tableValues="0.028 0.92" />
-                  <feFuncG tableValues="0.055 0.95" />
-                  <feFuncB tableValues="0.050 0.93" />
-                </feComponentTransfer>
-              </filter>
-            </defs>
-          </svg>
           {/* eslint-disable-next-line @next/next/no-img-element -- hero plate matches prototype filter pipeline */}
           <img
             className="hero__bgphoto-img"

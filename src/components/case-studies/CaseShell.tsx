@@ -101,7 +101,9 @@ export function CaseShell({
 
   const shell = (
     <article data-case={entry.slug as CaseSlug} className="impact-console relative min-h-screen">
-      <div className="mx-auto flex max-w-[960px] flex-col gap-5 px-6 pt-10">
+      <div
+        className={`mx-auto flex max-w-[960px] flex-col px-6 ${children ? "tier-a-case-shell-head gap-4 pt-6 md:pt-7" : "gap-5 pt-10"}`}
+      >
         <div className="mono flex items-center gap-2 text-[var(--muted)]">
           <span aria-hidden className="inline-block h-[7px] w-[7px] rounded-full bg-[var(--teal)]" />
           <span>CASE STUDY</span>
@@ -115,7 +117,9 @@ export function CaseShell({
       </div>
 
       <main className={mainClassName}>
-        <div ref={bodyRef}>{children ?? <div dangerouslySetInnerHTML={{ __html: body ?? "" }} />}</div>
+        <div ref={bodyRef} className={children ? "tier-a-react-case" : undefined}>
+          {children ?? <div dangerouslySetInnerHTML={{ __html: body ?? "" }} />}
+        </div>
       </main>
     </article>
   );

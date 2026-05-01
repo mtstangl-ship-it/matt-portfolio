@@ -15,7 +15,7 @@
   column-gap: clamp(0.65rem, 1.8vw, 1.35rem);
   row-gap: 0.35rem;
   padding: 0.5rem 0.65rem 0.5rem 1rem;
-  background: rgba(13, 20, 19, 0.85);
+  background: rgba(13, 20, 19, 0.94);
   border: 1px solid var(--ink-line);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
