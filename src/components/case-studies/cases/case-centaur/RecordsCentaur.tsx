@@ -155,14 +155,15 @@ export function ReviewTerminalCentaur() {
   return (
     <article className="record record--terminal" id="record-review">
       <header className="record__head">
-        <p className="record__eyebrow">
-          <span className="ribbon">CLICK PILLS TO FILTER</span>
-        </p>
         <h3 className="record__title">Design Review Terminal</h3>
         <p className="record__lede">
           Two critique passes, thirteen findings — <b>tap a pill</b> to narrow the log.
         </p>
       </header>
+
+      <p className="record__eyebrow">
+        <span className="ribbon">CLICK PILLS TO FILTER</span>
+      </p>
 
       <div className="review-console" id="review-console">
         <header className="review-console__head">
@@ -291,17 +292,18 @@ export function DeploymentDiffCentaur() {
   return (
     <article className="record" id="record-diff">
       <header className="record__head">
-        <p className="record__eyebrow">
-          <span className="ribbon">DRAG SLIDER</span>
-          <span>COMPARE V1 → V2 · TWO WEEKS APART</span>
-        </p>
         <h3 className="record__title">Deployment Diff — Home Hero</h3>
         <p className="record__caption">
-          Drag the handle · commit{" "}
+          Commit{" "}
           <code style={{ fontFamily: "var(--mono)", color: "var(--accent)" }}>4a3f2c</code> →{" "}
           <code style={{ fontFamily: "var(--mono)", color: "var(--accent)" }}>9e1ab7</code> · two weeks apart
         </p>
       </header>
+
+      <p className="record__eyebrow">
+        <span className="ribbon">DRAG SLIDER</span>
+        <span>COMPARE V1 → V2 · TWO WEEKS APART</span>
+      </p>
 
       <div className="diff" id="diff-slider" style={{ "--diff-pos": `${pos}%` } as CSSProperties}>
         <header className="diff__head">
@@ -396,7 +398,7 @@ export function DeploymentDiffCentaur() {
               v2 decisions · <b>3</b>
             </span>
           </span>
-          <span className="hint">Drag handle · ← → arrow keys</span>
+          <span className="hint">← → arrow keys</span>
         </footer>
       </div>
 
@@ -502,11 +504,12 @@ export function SignalTelemetryCentaur() {
   return (
     <article className="record record--signal" id="record-signal">
       <header className="record__head record__head--signal">
-        <p className="record__eyebrow">
-          <span className="ribbon">TAP A ROW</span>
-        </p>
         <h3 className="record__title">Signal Telemetry</h3>
       </header>
+
+      <p className="record__eyebrow">
+        <span className="ribbon">TAP A ROW</span>
+      </p>
 
       <div className="signal-log" id="signal-log">
         <header className="signal-log__head">
