@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import type { CaseStudyEntry, CaseSlug } from "@/content/case-studies";
 import { FicheNav } from "@/components/layout/FicheNav";
-import { FicheSheetFooter } from "@/components/layout/FicheSheetFooter";
 import { CasePicker } from "./CasePicker";
 
 /**
@@ -140,7 +139,6 @@ export function CaseShell({
       <div className="tier-a-case-root">
         <FicheNav />
         {shell}
-        <FicheSheetFooter />
       </div>
     );
   }
