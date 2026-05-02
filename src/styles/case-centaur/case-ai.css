@@ -1040,10 +1040,30 @@
   color: var(--accent);
   background: rgba(29,207,170,0.08);
 }
-.record__eyebrow .ribbon::before {
+/* Affordance chip ▸ only — undo global `cases.css` `.ribbon::before` journey-rail bar
+   (position + teal gradient) which otherwise leaks onto these spans. */
+.case-centaur-portfolio .record__eyebrow .ribbon::before {
   content: "▸";
+  position: static;
+  display: inline;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  background: none;
+  z-index: auto;
   font-size: 10px;
 }
+
+/* Space affordance chip → title (~1–1.5rem) once journey-rail ::before bar is gone */
+.case-centaur-portfolio .record__head .record__eyebrow {
+  margin-bottom: clamp(0.85rem, 1.5vw, 1.15rem);
+}
+
 .record__title {
   font-family: var(--sans);
   font-weight: 500;
