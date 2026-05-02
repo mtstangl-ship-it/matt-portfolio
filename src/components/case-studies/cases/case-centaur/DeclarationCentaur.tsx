@@ -32,9 +32,9 @@ export function DeclarationCentaur() {
             </g>
             {/* Human / drafts */}
             <g transform="translate(96 58)">
-              <circle r="32" fill="none" stroke="var(--accent)" strokeWidth="1.2" />
-              <circle r="22" fill="none" stroke="var(--accent)" strokeWidth="0.5" strokeDasharray="2 3" />
-              <circle r="3" fill="var(--accent)" />
+              <circle cx="0" cy="0" r="32" fill="none" stroke="var(--accent)" strokeWidth="1.2" />
+              <circle cx="0" cy="0" r="22" fill="none" stroke="var(--accent)" strokeWidth="0.5" strokeDasharray="2 3" />
+              <circle cx="0" cy="0" r="3" fill="var(--accent)" />
             </g>
             {/* AI / grid */}
             <g transform="translate(224 58)">
