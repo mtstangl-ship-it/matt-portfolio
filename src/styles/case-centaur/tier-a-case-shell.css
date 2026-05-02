@@ -1,0 +1,41 @@
+/* Tier A React case ports — chrome tokens (nav/footer sit OUTSIDE .case-centaur-portfolio) +
+   shell spacing + mobile nav drawer */
+
+/* Editorial body defaults stay cream; Tier-A ports need the same black sheet as Home / About
+   (otherwise semi-transparent nav + padding reveal rgb(242,239,234) as a “white bar”). */
+body:has(.tier-a-case-root) {
+  background-color: #0a0f0e;
+  background-image: radial-gradient(1200px 800px at 20% -10%, rgba(29, 207, 170, 0.04), transparent 60%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #e8efee;
+  color-scheme: dark;
+}
+
+.tier-a-case-root {
+  min-height: 100vh;
+  /* Nav is fixed and overlays content; top padding would gap the hero photo from the viewport */
+  padding-top: env(safe-area-inset-top, 0px);
+  background:
+    radial-gradient(1200px 800px at 20% -10%, rgba(29, 207, 170, 0.04), transparent 60%),
+    var(--bg);
+
+  /* Mirror scoped fiche tokens so `.nav__cta` / `.sheet` resolve on Centaur */
+  --sans: var(--font-inter, "Inter"), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: var(--font-jetbrains), "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+  --bg: #0a0f0e;
+  --bg-2: #0d1413;
+  --bg-3: #11191a;
+  --ink: #e8efee;
+  --ink-2: #aab5b3;
+  --ink-3: #6c7a78;
+  --ink-line: rgba(232, 239, 238, 0.1);
+  --accent: #1dcfaa;
+  --accent-line: rgba(29, 207, 170, 0.45);
+  --accent-soft: rgba(29, 207, 170, 0.12);
+  --t-mono: 0.6875rem;
+  --gutter: clamp(1.25rem, 0.5rem + 2vw, 2.5rem);
+  --col-wide: 1440px;
+}
+
+/* Case picker + “CASE STUDY” chrome live inside CaseHero on Tier-A routes (see CaseHero + CentaurCaseView). */

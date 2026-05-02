@@ -1,5 +1,6 @@
 @import "./about-v3-tokens.css";
 @import "./grammar.css";
+@import "../../../styles/tier-a/fiche-nav.css";
 @import "./about.css";
 @import "./density.css";
 @import "./about-v3-overrides.css";

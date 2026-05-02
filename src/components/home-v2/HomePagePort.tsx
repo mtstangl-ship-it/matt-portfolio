@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useReducedMotion } from "framer-motion";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import {
   DashboardFineGridOverlay,
   JourneyFlowViz,
@@ -26,6 +26,7 @@ import {
   homeV2TickerClients,
 } from "@/content/homeV2Copy";
 import { attachHomeV2Animations } from "@/lib/home-v2/effects";
+import { FicheNav } from "@/components/layout/FicheNav";
 
 function TickerTrack() {
   const pool = [...homeV2TickerClients, ...homeV2TickerClients];
@@ -43,15 +44,9 @@ function TickerTrack() {
 
 export function HomePagePort() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const reducedMotion = useReducedMotion();
   /** Viz components gate motion on `isHovered`; port passed false, so animations never ran. */
   const vizAnimOn = reducedMotion !== true;
-
-  useEffect(() => {
-    document.body.classList.toggle("nav-open", menuOpen);
-    return () => document.body.classList.remove("nav-open");
-  }, [menuOpen]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -65,50 +60,7 @@ export function HomePagePort() {
         Skip to content
       </a>
 
-      <nav className="nav" aria-label="Primary">
-        <Link className="nav__brand" href="/">
-          <span className="nav__brand-mark" aria-hidden="true">
-            +
-          </span>
-          <span className="nav__brand-text">M. STANGL</span>
-        </Link>
-        <ul className="nav__list">
-          <li>
-            <Link href="/impact" onClick={() => setMenuOpen(false)}>
-              Impact
-            </Link>
-          </li>
-          <li>
-            <Link href="/case-studies" onClick={() => setMenuOpen(false)}>
-              Case Studies
-            </Link>
-          </li>
-          <li>
-            <Link href="/signal-story" onClick={() => setMenuOpen(false)}>
-              Signal → Story
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" onClick={() => setMenuOpen(false)}>
-              About
-            </Link>
-          </li>
-        </ul>
-        <a className="nav__cta" href="mailto:mtstangl@gmail.com">
-          Contact
-        </a>
-        <button
-          className="nav__menu"
-          type="button"
-          aria-label="Open menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </nav>
+      <FicheNav />
 
       {/* ============ 01 · HERO ============ */}
       <header id="hero" className="hero hero--pointillism" data-screen-label="01 Hero">

@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
-import { Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { ConditionalSiteChrome } from "@/components/layout/ConditionalSiteChrome";
 import "./globals.css";
+
+/** Canonical sans for Tier A fiche case shells (README specifies Inter 400/500/600). */
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
@@ -29,7 +37,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${interTight.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${interTight.variable} ${jetbrainsMono.variable}`}
+    >
       <body className="flex min-h-screen flex-col antialiased">
         <ConditionalSiteChrome>{children}</ConditionalSiteChrome>
       </body>

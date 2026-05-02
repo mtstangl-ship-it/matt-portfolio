@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { AboutNav } from "./AboutNav";
+import { FicheNav } from "@/components/layout/FicheNav";
 import {
   CompassRose,
   DecisionDiagram,
@@ -65,7 +65,7 @@ function HalftonePhoto({
 export function AboutV3View() {
   return (
     <div id="about-v3">
-      <AboutNav />
+      <FicheNav />
       <a href="#hero" className="skip">
         Skip to content
       </a>
