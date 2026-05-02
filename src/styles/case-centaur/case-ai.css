@@ -61,18 +61,18 @@
     right: var(--gutter);
     z-index: 13;
   }
-  /* Tier-A shell: nav overlays the plate — drop stamps below the pill */
+  /* Tier-A shell: nav + in-hero case picker — stamps sit below the picker band */
   .tier-a-case-root .case-centaur-portfolio .hero .fig-stamp {
-    top: clamp(3.45rem, 7vw, 4.85rem);
+    top: clamp(10.5rem, 22vw, 14rem);
   }
   .tier-a-case-root .case-centaur-portfolio .hero__plate .hero__id-strip {
-    top: clamp(3.85rem, 8vw, 5.35rem);
+    top: clamp(11rem, 22vw, 14.75rem);
   }
 }
 
 @media (min-width: 1024px) {
   .tier-a-case-root .case-centaur-portfolio .hero .margin-note {
-    top: clamp(3.25rem, 6vw, 4.45rem);
+    top: clamp(9.75rem, 17vw, 12.5rem);
   }
 }
 
@@ -82,7 +82,17 @@
   }
 }
 
-/* §03 / §04: beat grammar `section[data-screen-label]` padding specificity */
+/* Tight §03 → §04 transition (Centaur Practice only — case-ai-body) */
+.case-centaur-portfolio.case-ai-body section.centaur#centaur[data-screen-label] {
+  padding-top: clamp(2.25rem, 4vw, 3.75rem);
+  padding-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+.case-centaur-portfolio.case-ai-body section.records#records[data-screen-label] {
+  padding-top: clamp(1rem, 2vw, 1.75rem);
+  padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
+}
+
+/* §03 / §04: beat grammar `section[data-screen-label]` padding specificity (non-Round-3 pages) */
 .case-centaur-portfolio section.centaur[data-screen-label] {
   padding-top: clamp(3rem, 5.5vw, 5.25rem);
   padding-bottom: clamp(0.55rem, 1.15vw, 1rem);
@@ -139,7 +149,7 @@
   text-wrap: pretty;
   max-width: 48ch;
 }
-@media (max-width: 880px) {
+@media (max-width: 767px) {
   .case-section-head { grid-template-columns: 1fr; gap: 1rem; }
 }
 
@@ -149,9 +159,10 @@
   margin-top: 0;
   padding-top: 0;
 }
-/* Keep headline column below the floating nav pill */
+/* Zone 3 — copy block: breathe away from case-picker band + fixed nav */
 .tier-a-case-root .tier-a-react-case section.hero:first-of-type .hero__plate .hero__inner {
-  padding-top: clamp(3.5rem, 9vw, 5.25rem);
+  margin-top: clamp(3.5rem, 5.5vw, 5.75rem);
+  padding-top: clamp(2.25rem, 4vw, 3.75rem);
 }
 
 .hero {
@@ -172,6 +183,48 @@
   min-height: min(70vh, 680px);
   padding-bottom: clamp(2rem, 5vw, 4rem);
   border-bottom: 1px solid rgba(223, 233, 230, 0.18);
+}
+
+/* Tier-A · case picker on the photo plate (zone 2) */
+.hero__plate-picker {
+  position: relative;
+  z-index: 3;
+  padding: clamp(4.75rem, 4.25rem + 6vw, 6.75rem) var(--gutter) clamp(1.25rem, 2.5vw, 1.75rem);
+  background: linear-gradient(180deg, rgba(10, 17, 16, 0.9) 0%, rgba(10, 17, 16, 0.42) 52%, transparent 100%);
+}
+.tier-a-case-root .hero__plate-picker .case-picker-hint--label {
+  color: var(--ink-3);
+  font-size: clamp(9px, 0.62rem + 0.1vw, 11px);
+  letter-spacing: 0.16em;
+}
+.tier-a-case-root .hero__plate-picker .case-picker {
+  gap: 0.5rem 0.45rem;
+}
+
+/* Photo composition + scrim (Tier-A Centaur hero only) */
+.tier-a-case-root .case-centaur-portfolio .hero__plate {
+  min-height: min(78vh, 820px);
+}
+.tier-a-case-root .case-centaur-portfolio .hero__plate .hero__bgphoto-img {
+  object-position: 42% 20%;
+}
+.tier-a-case-root .case-centaur-portfolio .hero__plate .hero__bgphoto-scrim {
+  background:
+    linear-gradient(90deg,
+      rgba(10,17,16,0.68) 0%,
+      rgba(10,17,16,0.48) 24%,
+      rgba(10,17,16,0.16) 48%,
+      rgba(10,17,16,0.04) 72%,
+      rgba(10,17,16,0.00) 100%),
+    linear-gradient(180deg,
+      rgba(10,17,16,0.14) 0%,
+      rgba(10,17,16,0.00) 30%,
+      rgba(10,17,16,0.00) 80%,
+      rgba(10,17,16,0.09) 100%);
+}
+.tier-a-case-root .case-centaur-portfolio .hero__plate .hero__bgphoto-fadebottom {
+  height: 56px;
+  background: linear-gradient(180deg, transparent 0%, rgba(10,17,16,0.18) 45%, var(--bg) 100%);
 }
 
 /* ---- Full-bleed photo inside plate ---- */
@@ -921,7 +974,28 @@
   }
 }
 .centaur__pivot-marg b { color: #e86c54; font-weight: 500; letter-spacing: 0.32em; }
-@media (max-width: 880px) {
+@media (min-width: 768px) {
+  .case-centaur-portfolio.case-ai-body .centaur__pivot > p {
+    padding-right: 0;
+    max-width: min(70ch, 100%);
+  }
+  .case-centaur-portfolio.case-ai-body .centaur__pivot-marg {
+    position: static;
+    writing-mode: horizontal-tb;
+    transform: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    white-space: normal;
+    margin-top: 0.85rem;
+    padding: 0.65rem 0 0;
+    border-left: 0;
+    border-top: 1px dashed var(--ink-line);
+    gap: 0.5rem 1.25rem;
+    max-width: 48rem;
+  }
+}
+@media (max-width: 767px) {
   .centaur__pivot > p { max-width: none; padding-right: 0; }
   .centaur__pivot-marg { display: none; }
 }
@@ -1013,7 +1087,7 @@
 .record__note--column {
   max-width: min(62ch, 65%);
 }
-@media (max-width: 880px) {
+@media (max-width: 767px) {
   .record__note--column {
     max-width: none;
   }
@@ -1713,6 +1787,21 @@
   text-wrap: pretty;
 }
 .tell em { font-style: italic; color: #e86c54; }
+
+/* ----- Round 3 · Centaur only: single affordance pattern (ribbon box), no competing rails ----- */
+.tier-a-case-root .case-centaur-portfolio .record__eyebrow {
+  color: var(--ink-3);
+}
+.tier-a-case-root .case-centaur-portfolio .review-console__head {
+  border-bottom: none;
+  padding-bottom: 0.85rem;
+}
+.tier-a-case-root .case-centaur-portfolio .diff .diff__head {
+  display: none;
+}
+.tier-a-case-root .case-centaur-portfolio .signal-log__head {
+  border-bottom: none;
+}
 
 /* ====================== HANDOFF / FOOTER ====================== */
 .handoff {

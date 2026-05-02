@@ -16,6 +16,8 @@ export type CaseHeroProps = {
   headline: ReactNode;
   subhead: ReactNode;
   meta: CaseHeroMeta;
+  /** Case study picker (Tier-A) — rendered on the photo plate below site nav. */
+  picker?: ReactNode;
 };
 
 /** Shared halftone hero shell for Tier A case studies (Cases 01–05). Photo plate is fixed. */
@@ -28,6 +30,7 @@ export function CaseHero({
   headline,
   subhead,
   meta,
+  picker,
 }: CaseHeroProps) {
   const idStripCase = `${caseNumber} / ${String(totalCases).padStart(2, "0")}`;
 
@@ -51,6 +54,12 @@ export function CaseHero({
           <div className="hero__bgphoto-scrim" aria-hidden="true" />
           <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
         </div>
+
+        {picker ? (
+          <div className="hero__plate-picker" data-zone="case-picker">
+            {picker}
+          </div>
+        ) : null}
 
         <div className="hero__watermark" aria-hidden="true" hidden>
           {/* Fallback watermark SVG omitted — prototype ships hidden */}

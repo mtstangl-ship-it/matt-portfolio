@@ -38,28 +38,4 @@ body:has(.tier-a-case-root) {
   --col-wide: 1440px;
 }
 
-/* Mobile drawer — mirrors Home / About (`styles/tier-a/fiche-nav.css` patterns) */
-@media (max-width: 880px) {
-  body.nav-open .tier-a-case-root .nav__list,
-  body.nav-open .tier-a-case-root .nav__cta {
-    display: flex !important;
-    position: fixed;
-    top: 70px;
-    left: 14px;
-    right: 14px;
-    background: var(--bg-2);
-    border: 1px solid var(--ink-line);
-    flex-direction: column;
-    padding: 1rem 1.25rem;
-    gap: 1rem;
-    z-index: 99;
-  }
-  body.nav-open .tier-a-case-root .nav__cta {
-    top: auto;
-    bottom: 90px;
-    justify-content: center;
-    padding: 1rem;
-  }
-}
-
-/* Case picker strip sits below the hero on Tier-A routes (see CaseShell). */
+/* Case picker + “CASE STUDY” chrome live inside CaseHero on Tier-A routes (see CaseHero + CentaurCaseView). */

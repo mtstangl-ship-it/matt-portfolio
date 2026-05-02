@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { CaseHero } from "../../CaseHero";
+import { CasePicker } from "../../CasePicker";
 import { DeclarationCentaur } from "./DeclarationCentaur";
 import { DeploymentDiffCentaur, ReviewTerminalCentaur, SignalTelemetryCentaur } from "./RecordsCentaur";
 import { TelemetryCentaur } from "./TelemetryCentaur";
@@ -65,6 +66,7 @@ export function CentaurCaseView() {
       </a>
 
       <CaseHero
+        picker={<CasePicker activeSlug="ai" />}
         caseNumber="01"
         totalCases={5}
         marginNote="DRAWING 01"

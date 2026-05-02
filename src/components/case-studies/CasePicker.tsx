@@ -8,7 +8,7 @@ import { caseStudyDetailHref, caseStudyEntries, type CaseSlug } from "@/content/
 export function CasePicker({ activeSlug }: { activeSlug: CaseSlug }) {
   return (
     <div className="case-picker-wrap">
-      <p className="case-picker-hint mono mb-2 text-[10px] uppercase tracking-[0.14em] text-[var(--muted)]">
+      <p className="case-picker-hint case-picker-hint--label mono mb-2 text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
         ↓ NAVIGATE CASES
       </p>
       <nav aria-label="Case study picker" className="case-picker flex flex-wrap gap-2">
