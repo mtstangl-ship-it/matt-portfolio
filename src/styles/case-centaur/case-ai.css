@@ -139,7 +139,6 @@
   line-height: 1;
   letter-spacing: -0.02em;
   margin: 0.65rem 0 0;
-  text-wrap: balance;
 }
 .case-section-head h2 em { font-style: italic; color: var(--accent); }
 .case-section-head__sub {
@@ -321,7 +320,6 @@
   line-height: 1.03;
   letter-spacing: -0.025em;
   margin: 0 0 clamp(1.35rem, 3vw, 1.75rem);
-  text-wrap: balance;
   max-width: min(75%, clamp(26rem, 52vw, 44rem));
 }
 .hero__h1 em { font-style: italic; color: var(--accent); }
@@ -1330,7 +1328,6 @@
   font-weight: 500;
   color: var(--ink);
   margin: 0.1rem 0 0.2rem;
-  text-wrap: balance;
   letter-spacing: -0.005em;
 }
 .diff__pane-caption {
@@ -1589,7 +1586,6 @@
   letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0;
-  text-wrap: balance;
 }
 .signal-entry__quote {
   font-family: var(--mono);
@@ -1704,7 +1700,6 @@
   line-height: 1;
   letter-spacing: -0.02em;
   margin: 0.5rem 0 0;
-  text-wrap: balance;
 }
 .bulletin__h2 em { font-style: italic; color: #e86c54; }
 .bulletin__badge {
@@ -1846,7 +1841,6 @@
   line-height: 1;
   letter-spacing: -0.02em;
   margin: 0 0 2rem;
-  text-wrap: balance;
   max-width: 22ch;
 }
 .handoff__h em { font-style: italic; color: var(--accent); }
