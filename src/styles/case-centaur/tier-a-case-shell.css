@@ -14,7 +14,8 @@ body:has(.tier-a-case-root) {
 
 .tier-a-case-root {
   min-height: 100vh;
-  padding-top: clamp(3.75rem, 8vw, 4.75rem);
+  /* Nav is fixed and overlays content; top padding would gap the hero photo from the viewport */
+  padding-top: env(safe-area-inset-top, 0px);
   background:
     radial-gradient(1200px 800px at 20% -10%, rgba(29, 207, 170, 0.04), transparent 60%),
     var(--bg);
@@ -61,7 +62,4 @@ body:has(.tier-a-case-root) {
   }
 }
 
-/* Tighter chrome under fixed nav for React Tier-A pages (case picker → hero continuity). */
-.tier-a-case-shell-head {
-  padding-bottom: 0;
-}
+/* Case picker strip sits below the hero on Tier-A routes (see CaseShell). */

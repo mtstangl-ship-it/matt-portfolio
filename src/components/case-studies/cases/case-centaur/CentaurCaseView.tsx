@@ -122,7 +122,7 @@ export function CentaurCaseView() {
         </dl>
 
         <div className="records__inner">
-          <header className="case-section-head" style={{ marginBottom: "1.35rem" }}>
+          <header className="case-section-head">
             <div>
               <p className="kicker">04 · SERVICE RECORDS</p>
               <h2>

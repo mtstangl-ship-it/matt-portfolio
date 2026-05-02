@@ -99,28 +99,44 @@ export function CaseShell({
 
   const mainClassName = children ? "w-full max-w-none px-0" : "shell";
 
+  const caseStudyChrome = (
+    <>
+      <div className="mono flex items-center gap-2 text-[var(--muted)]">
+        <span aria-hidden className="inline-block h-[7px] w-[7px] rounded-full bg-[var(--teal)]" />
+        <span>CASE STUDY</span>
+        <span aria-hidden className="text-[var(--line-2)]">
+          /
+        </span>
+        <span className="text-[var(--teal)]">{entry.shortName.toUpperCase()}</span>
+      </div>
+      <div className="h-px w-full bg-[var(--line)]" />
+      <CasePicker activeSlug={entry.slug} />
+    </>
+  );
+
   const shell = (
     <article data-case={entry.slug as CaseSlug} className="impact-console relative min-h-screen">
-      <div
-        className={`mx-auto flex max-w-[960px] flex-col px-6 ${children ? "tier-a-case-shell-head gap-4 pt-6 md:pt-7" : "gap-5 pt-10"}`}
-      >
-        <div className="mono flex items-center gap-2 text-[var(--muted)]">
-          <span aria-hidden className="inline-block h-[7px] w-[7px] rounded-full bg-[var(--teal)]" />
-          <span>CASE STUDY</span>
-          <span aria-hidden className="text-[var(--line-2)]">
-            /
-          </span>
-          <span className="text-[var(--teal)]">{entry.shortName.toUpperCase()}</span>
-        </div>
-        <div className="h-px w-full bg-[var(--line)]" />
-        <CasePicker activeSlug={entry.slug} />
-      </div>
-
-      <main className={mainClassName}>
-        <div ref={bodyRef} className={children ? "tier-a-react-case" : undefined}>
-          {children ?? <div dangerouslySetInnerHTML={{ __html: body ?? "" }} />}
-        </div>
-      </main>
+      {children ? (
+        <>
+          <main className={mainClassName}>
+            <div ref={bodyRef} className="tier-a-react-case">
+              {children}
+            </div>
+          </main>
+          <div className="tier-a-case-shell-head mx-auto flex max-w-[960px] flex-col gap-4 border-t border-[var(--ink-line)] px-6 pb-6 pt-8 md:pb-8 md:pt-10">
+            {caseStudyChrome}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="mx-auto flex max-w-[960px] flex-col gap-5 px-6 pt-10">{caseStudyChrome}</div>
+          <main className={mainClassName}>
+            <div ref={bodyRef}>
+              <div dangerouslySetInnerHTML={{ __html: body ?? "" }} />
+            </div>
+          </main>
+        </>
+      )}
     </article>
   );
 

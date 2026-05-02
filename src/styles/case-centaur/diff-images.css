@@ -38,10 +38,13 @@
 
 .case-centaur-portfolio .diff__pane--v1 .diff__pane-card::before {
   background-image: url("/case-studies/centaur/diff/home-hero-v1.png");
+  /* Crop dead band above capture so frame reads flush like v2 */
+  background-position: center 22%;
 }
 
 .case-centaur-portfolio .diff__pane--v2 .diff__pane-card::before {
   background-image: url("/case-studies/centaur/diff/home-hero-v2.png");
+  background-position: center 18%;
 }
 
 .case-centaur-portfolio .diff__pane--v1 .diff__pane-label,

@@ -154,9 +154,9 @@
 }
 
 .dim-with-scale--compact .dim {
-  padding: 0.35rem 1rem;
+  padding: 0.65rem 1rem;
 }
 .dim-with-scale--compact .dim-scale {
   height: 14px;
-  margin-top: 0.2rem;
+  margin-top: 0.45rem;
 }
