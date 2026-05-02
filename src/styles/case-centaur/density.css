@@ -2,10 +2,7 @@
    ABOUT — DENSITY (v3 LAYER A + B + C)
    Section metadata stamps · inline annotations · SVG illustrations.
    Adds drafting fiche density to the base About styles.
-   ========================================================= */
-
-/* ====================== V3 · LAYER A · SECTION METADATA STAMPS ====================== */
-.section-stamp {
+   ========================================================= *//* ====================== V3 · LAYER A · SECTION METADATA STAMPS ====================== */.case-centaur-portfolio .section-stamp {
   position: absolute;
   top: 3.5rem;
   right: 1rem;
@@ -24,19 +21,17 @@
   pointer-events: none;
   white-space: nowrap;
 }
-.section-stamp dt { color: var(--ink-3); }
-.section-stamp dd {
+.case-centaur-portfolio .section-stamp dt { color: var(--ink-3); }
+.case-centaur-portfolio .section-stamp dd {
   color: var(--ink-2);
   margin: 0;
   font-weight: 500;
   letter-spacing: 0.06em;
 }
 @media (max-width: 1180px) {
-  .section-stamp { display: none; }
-}
-
-/* ====================== V3 · LAYER B · INLINE ANNOTATIONS ====================== */
-.ref-code {
+  .case-centaur-portfolio .section-stamp { display: none; }
+}/* ====================== V3 · LAYER B · INLINE ANNOTATIONS ====================== */
+.case-centaur-portfolio .ref-code {
   display: inline-block;
   margin-left: 0.5rem;
   padding: 0.2rem 0.5rem;
@@ -51,7 +46,7 @@
   white-space: nowrap;
 }
 
-.precision-tag {
+.case-centaur-portfolio .precision-tag {
   margin-top: 0.6rem;
   padding-top: 0.5rem;
   border-top: 1px dotted var(--ink-line);
@@ -62,14 +57,14 @@
   color: var(--ink-3);
   opacity: 0.85;
 }
-.precision-tag b {
+.case-centaur-portfolio .precision-tag b {
   color: var(--ink-2);
   font-weight: 500;
 }
 
-.phase-label { display: none; }
+.case-centaur-portfolio .phase-label { display: none; }
 @media (min-width: 1024px) {
-  .phase-label {
+  .case-centaur-portfolio .phase-label {
     display: block;
     position: absolute;
     left: -3.5rem;
@@ -85,10 +80,8 @@
     pointer-events: none;
     white-space: nowrap;
   }
-}
-
-/* ====================== V3 · LAYER C · SVG ILLUSTRATIONS ====================== */
-.hero-bmw-silhouette {
+}/* ====================== V3 · LAYER C · SVG ILLUSTRATIONS ====================== */
+.case-centaur-portfolio .hero-bmw-silhouette {
   position: absolute;
   bottom: 5%;
   left: -5%;
@@ -99,29 +92,29 @@
   z-index: 0;
 }
 @media (max-width: 880px) {
-  .hero-bmw-silhouette { display: none; }
+  .case-centaur-portfolio .hero-bmw-silhouette { display: none; }
 }
-.about-hero { position: relative; }
-.about-hero__inner { position: relative; z-index: 1; }
+.case-centaur-portfolio .about-hero { position: relative; }
+.case-centaur-portfolio .about-hero__inner { position: relative; z-index: 1; }
 
-.decision-diagram {
+.case-centaur-portfolio .decision-diagram {
   width: 220px;
   height: auto;
   margin: 1rem 0 0;
   display: block;
 }
 
-.compass-rose {
+.case-centaur-portfolio .compass-rose {
   width: 160px;
   height: 160px;
   display: block;
   flex-shrink: 0;
 }
-.riding__header-row .compass-rose {
+.case-centaur-portfolio .riding__header-row .compass-rose {
   margin-top: 0.5rem;
 }
 
-.instrument-cluster {
+.case-centaur-portfolio .instrument-cluster {
   width: 100%;
   max-width: 720px;
   height: auto;
@@ -129,34 +122,32 @@
   display: block;
 }
 
-.garage-layout {
+.case-centaur-portfolio .garage-layout {
   width: 100%;
   max-width: 320px;
   height: auto;
   margin-top: 1rem;
   display: block;
-}
-
-/* Tick-mark scale bars under dimension callouts */
-.dim-with-scale {
+}/* Tick-mark scale bars under dimension callouts */
+.case-centaur-portfolio .dim-with-scale {
   margin: 0 auto;
   max-width: var(--col-wide);
   padding: 0 var(--gutter);
 }
-.dim-with-scale .dim {
+.case-centaur-portfolio .dim-with-scale .dim {
   margin: 0;
 }
-.dim-scale {
+.case-centaur-portfolio .dim-scale {
   display: block;
   width: 100%;
   height: 20px;
   margin-top: 0.4rem;
 }
 
-.dim-with-scale--compact .dim {
+.case-centaur-portfolio .dim-with-scale--compact .dim {
   padding: 0.65rem 1rem;
 }
-.dim-with-scale--compact .dim-scale {
+.case-centaur-portfolio .dim-with-scale--compact .dim-scale {
   height: 14px;
   margin-top: 0.45rem;
 }
