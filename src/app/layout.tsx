@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { ConditionalSiteChrome } from "@/components/layout/ConditionalSiteChrome";
 import "./globals.css";
-import "@/styles/home-v2/index.css";
-import "@/styles/case-centaur/index.css";
 
 /** Canonical sans for Tier A fiche case shells (README specifies Inter 400/500/600). */
 const inter = Inter({
