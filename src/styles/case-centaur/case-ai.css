@@ -165,7 +165,7 @@
   padding-top: clamp(2.25rem, 4vw, 3.75rem);
 }
 
-.hero {
+.tier-a-case-root .hero {
   position: relative;
   padding-top: clamp(7rem, 12vh, 9rem);
   padding-bottom: clamp(1rem, 2vw, 1.75rem);
@@ -176,7 +176,7 @@
 }
 
 /* Photo + headline plate — meta strip renders below, not over the motorcycle */
-.hero__plate {
+.tier-a-case-root .hero__plate {
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -186,7 +186,7 @@
 }
 
 /* Tier-A · case picker on the photo plate (zone 2) */
-.hero__plate-picker {
+.tier-a-case-root .hero__plate-picker {
   position: relative;
   z-index: 3;
   padding: clamp(4.75rem, 4.25rem + 6vw, 6.75rem) var(--gutter) clamp(1.25rem, 2.5vw, 1.75rem);
@@ -228,14 +228,14 @@
 }
 
 /* ---- Full-bleed photo inside plate ---- */
-.hero__plate .hero__bgphoto {
+.tier-a-case-root .hero__plate .hero__bgphoto {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
 }
-.hero__plate .hero__bgphoto-img {
+.tier-a-case-root .hero__plate .hero__bgphoto-img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -246,14 +246,14 @@
   filter: contrast(1.06) saturate(1.12) brightness(1.04);
 }
 /* Halftone screen — disabled (baked into the PNG plate to avoid moiré). Kept as a hook. */
-.hero__plate .hero__bgphoto-halftone {
+.tier-a-case-root .hero__plate .hero__bgphoto-halftone {
   position: absolute;
   inset: 0;
   background-image: none;
   opacity: 0;
 }
 /* Film grain — keeps the photo from looking like marketing */
-.hero__plate .hero__bgphoto-grain {
+.tier-a-case-root .hero__plate .hero__bgphoto-grain {
   position: absolute;
   inset: 0;
   background-image:
@@ -263,7 +263,7 @@
   opacity: 0.16;
 }
 /* Left-anchored scrim — gives the type column a legible canvas without crushing the photo */
-.hero__plate .hero__bgphoto-scrim {
+.tier-a-case-root .hero__plate .hero__bgphoto-scrim {
   position: absolute;
   inset: 0;
   background:
@@ -280,15 +280,15 @@
       rgba(10,17,16,0.24) 100%);
 }
 /* Bottom fade — terminate hero cleanly into the page bg */
-.hero__plate .hero__bgphoto-fadebottom {
+.tier-a-case-root .hero__plate .hero__bgphoto-fadebottom {
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 140px;
   background: linear-gradient(180deg, transparent 0%, var(--bg) 100%);
 }
 @media (max-width: 720px) {
-  .hero__plate .hero__bgphoto-img { object-position: center 30%; }
-  .hero__plate .hero__bgphoto-scrim {
+  .tier-a-case-root .hero__plate .hero__bgphoto-img { object-position: center 30%; }
+  .tier-a-case-root .hero__plate .hero__bgphoto-scrim {
     background:
       linear-gradient(180deg,
         rgba(10,17,16,0.92) 0%,
@@ -298,7 +298,7 @@
   }
 }
 
-.hero__inner {
+.tier-a-case-root .hero__inner {
   max-width: var(--col-wide);
   margin-left: 0;
   margin-right: auto;
@@ -306,7 +306,7 @@
   position: relative;
   z-index: 2;
 }
-.hero__tag {
+.tier-a-case-root .hero__tag {
   font-family: var(--mono);
   font-size: var(--t-mono);
   letter-spacing: 0.16em;
@@ -314,7 +314,7 @@
   color: var(--accent);
   margin: 0 0 1.5rem;
 }
-.hero__h1 {
+.tier-a-case-root .hero__h1 {
   font-family: var(--sans);
   font-weight: 500;
   font-size: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
@@ -324,32 +324,32 @@
   text-wrap: balance;
   max-width: min(75%, clamp(26rem, 52vw, 44rem));
 }
-.hero__h1 em { font-style: italic; color: var(--accent); }
-.hero__sub {
+.tier-a-case-root .hero__h1 em { font-style: italic; color: var(--accent); }
+.tier-a-case-root .hero__sub {
   color: var(--ink-2);
   font-size: var(--t-lead);
   max-width: min(75%, clamp(34rem, 58vw, 52rem));
   margin: 0 0 2.5rem;
   text-wrap: pretty;
 }
-.hero__sub b { color: var(--ink); font-weight: 500; }
+.tier-a-case-root .hero__sub b { color: var(--ink); font-weight: 500; }
 
 /* Hero text gets stepped-up legibility against the photo background.
    Tokens elsewhere stay the same; we only override INSIDE .hero. */
-.hero .hero__tag { color: #5fe6c2; text-shadow: 0 1px 6px rgba(10,17,16,0.85); }
-.hero .hero__h1 {
+.tier-a-case-root .hero .hero__tag { color: #5fe6c2; text-shadow: 0 1px 6px rgba(10,17,16,0.85); }
+.tier-a-case-root .hero .hero__h1 {
   color: #f4f1ea;
   text-shadow: 0 2px 10px rgba(10,17,16,0.65);
 }
-.hero .hero__h1 em { color: #5fe6c2; }
-.hero .hero__sub {
+.tier-a-case-root .hero .hero__h1 em { color: #5fe6c2; }
+.tier-a-case-root .hero .hero__sub {
   color: #d2dad7;
   text-shadow: 0 1px 6px rgba(10,17,16,0.7);
 }
-.hero .hero__sub b { color: #f4f1ea; }
+.tier-a-case-root .hero .hero__sub b { color: #f4f1ea; }
 
 /* Meta strip — below photo plate (Issue 4: no overlap with motorcycle) */
-.hero__meta {
+.tier-a-case-root .hero__meta {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
@@ -362,15 +362,15 @@
   background: rgba(10, 17, 16, 0.92);
   backdrop-filter: blur(2px);
 }
-.hero__meta-cell {
+.tier-a-case-root .hero__meta-cell {
   padding: 1.15rem 1.35rem;
   border-right: 1px solid rgba(223, 233, 230, 0.18);
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
-.hero__meta-cell:last-child { border-right: 0; }
-.hero__meta-cell dt {
+.tier-a-case-root .hero__meta-cell:last-child { border-right: 0; }
+.tier-a-case-root .hero__meta-cell dt {
   font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 0.16em;
@@ -378,23 +378,23 @@
   color: #9ca8a4;
   margin: 0;
 }
-.hero__meta-cell dd {
+.tier-a-case-root .hero__meta-cell dd {
   margin: 0;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.04em;
   color: #e6ebe9;
 }
-.hero__meta-cell dd b { color: #5fe6c2; font-weight: 500; }
+.tier-a-case-root .hero__meta-cell dd b { color: #5fe6c2; font-weight: 500; }
 @media (max-width: 880px) {
-  .hero__meta { grid-template-columns: 1fr 1fr; }
-  .hero__meta-cell:nth-child(2) { border-right: 0; }
-  .hero__meta-cell:nth-child(1), .hero__meta-cell:nth-child(2) { border-bottom: 1px solid rgba(223, 233, 230, 0.18); }
+  .tier-a-case-root .hero__meta { grid-template-columns: 1fr 1fr; }
+  .tier-a-case-root .hero__meta-cell:nth-child(2) { border-right: 0; }
+  .tier-a-case-root .hero__meta-cell:nth-child(1), .tier-a-case-root .hero__meta-cell:nth-child(2) { border-bottom: 1px solid rgba(223, 233, 230, 0.18); }
 }
 @media (max-width: 560px) {
-  .hero__meta { grid-template-columns: 1fr; }
-  .hero__meta-cell { border-right: 0; border-bottom: 1px solid rgba(223, 233, 230, 0.18); }
-  .hero__meta-cell:last-child { border-bottom: 0; }
+  .tier-a-case-root .hero__meta { grid-template-columns: 1fr; }
+  .tier-a-case-root .hero__meta-cell { border-right: 0; border-bottom: 1px solid rgba(223, 233, 230, 0.18); }
+  .tier-a-case-root .hero__meta-cell:last-child { border-bottom: 0; }
 }
 
 @media (min-width: 881px) {
@@ -404,7 +404,7 @@
 }
 
 /* Hero identity strip — top-right */
-.hero__id-strip {
+.tier-a-case-root .hero__id-strip {
   position: absolute;
   top: clamp(5rem, 10vh, 7rem);
   right: var(--gutter);
@@ -421,19 +421,19 @@
   z-index: 4;
   white-space: nowrap;
 }
-.hero__id-strip dt {
+.tier-a-case-root .hero__id-strip dt {
   margin: 0;
   letter-spacing: 0.16em;
   color: var(--ink-3);
 }
-.hero__id-strip dd {
+.tier-a-case-root .hero__id-strip dd {
   color: var(--ink);
   margin: 0;
   font-weight: 500;
   letter-spacing: 0.05em;
 }
 @media (max-width: 880px) {
-  .hero__id-strip {
+  .tier-a-case-root .hero__id-strip {
     position: static;
     margin: 0 auto 1.25rem;
     max-width: max-content;
@@ -441,7 +441,7 @@
 }
 
 /* Hero watermark — split silhouette / circuit-like division of labor */
-.hero__plate .hero__watermark {
+.tier-a-case-root .hero__plate .hero__watermark {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -451,12 +451,12 @@
   align-items: center;
   justify-content: center;
 }
-.hero__plate .hero__watermark svg {
+.tier-a-case-root .hero__plate .hero__watermark svg {
   width: min(100%, 1100px);
   height: auto;
 }
 @media (max-width: 880px) {
-  .hero__plate .hero__watermark { opacity: 0.07; }
+  .tier-a-case-root .hero__plate .hero__watermark { opacity: 0.07; }
 }
 
 /* ====================== BUILD TELEMETRY (gauge cluster) ====================== */

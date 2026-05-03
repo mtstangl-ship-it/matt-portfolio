@@ -5,7 +5,7 @@
    ========================================================= */
 
 /* ====================== HERO ====================== */
-.hero {
+.home-v2-root .hero {
   padding-top: clamp(7rem, 12vh, 9rem);
   padding-bottom: 0;
   position: relative;
@@ -91,7 +91,7 @@
   position: relative;
   z-index: 3;
 }
-.hero__inner {
+.home-v2-root .hero__inner {
   max-width: var(--col-wide);
   margin: 0 auto;
   padding: 0 var(--gutter);
@@ -100,7 +100,7 @@
   gap: clamp(2rem, 4vw, 5rem);
   align-items: center;
 }
-.hero__h1 {
+.home-v2-root .hero__h1 {
   font-family: var(--sans);
   font-weight: 500;
   font-size: var(--t-h1);
@@ -109,7 +109,7 @@
   margin: 0.6rem 0 1rem;
   text-wrap: balance;
 }
-.hero__sub {
+.home-v2-root .hero__sub {
   color: var(--ink-2);
   font-size: var(--t-lead);
   max-width: 38ch;
@@ -238,8 +238,8 @@
 }
 
 @media (max-width: 880px) {
-  .hero { padding-top: 5.5rem; }
-  .hero__inner {
+  .home-v2-root .hero { padding-top: 5.5rem; }
+  .home-v2-root .hero__inner {
     grid-template-columns: 1fr;
     gap: 0;
   }
@@ -280,8 +280,8 @@
     aspect-ratio: 13/16;
   }
   .hero__stamp { display: none; }
-  .hero__h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
-  .hero__sub { font-size: 1rem; }
+  .home-v2-root .hero__h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+  .home-v2-root .hero__sub { font-size: 1rem; }
   .hero--pointillism .hero__copy {
     max-width: 100%;
   }
@@ -329,7 +329,7 @@
 }
 
 /* ====================== PROBLEM LEDGER ====================== */
-.ledger { padding-block: clamp(4rem, 7vw, 8rem); }
+.home-v2-root .ledger { padding-block: clamp(4rem, 7vw, 8rem); }
 .ledger__diptych {
   max-width: var(--col-wide);
   margin: 2.5rem auto 1.5rem;
@@ -731,7 +731,7 @@
 }
 
 /* ====================== CASE STUDIES PREVIEW ====================== */
-.cases { padding-block: clamp(4rem, 6vw, 7rem); }
+.home-v2-root .cases { padding-block: clamp(4rem, 6vw, 7rem); }
 .cases__featured {
   max-width: var(--col-wide);
   margin: 2.5rem auto 0;
