@@ -3,9 +3,9 @@ import { NextResponse } from "next/server";
 
 /**
  * Request pathname for the root layout’s server-rendered chrome decision.
- * `usePathname()` is null during SSR of Client Components; without this, Tier-A
- * routes (/, /about, /case-studies/ai) get legacy Nav/main/footer on the server
- * and bare children after hydration — visible hero layout shift.
+ * `usePathname()` is null during SSR of Client Components; this header keeps
+ * `ConditionalSiteChrome` aligned on Tier-A shells (`/`, `/about`,
+ * `/case-studies/ai`, `/case-studies/ey`) so the first paint matches hydration.
  */
 export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);

@@ -18,7 +18,8 @@ export function ConditionalSiteChromeClient({
 }) {
   const pathname = usePathname();
   const path = pathname ?? serverPathname;
-  const hideLegacyChrome = path === "/" || path === "/about" || path === "/case-studies/ai";
+  const hideLegacyChrome =
+    path === "/" || path === "/about" || path === "/case-studies/ai" || path === "/case-studies/ey";
 
   if (hideLegacyChrome) {
     return <>{children}</>;

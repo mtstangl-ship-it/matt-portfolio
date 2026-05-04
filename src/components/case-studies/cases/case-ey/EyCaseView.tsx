@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
 import { TrustCurrencyDiagram } from "./TrustCurrencyDiagram";
@@ -23,37 +22,8 @@ function DimBetween({ label, compact }: { label: string; compact?: boolean }) {
 }
 
 export function EyCaseView() {
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const nodes = root.querySelectorAll(".case-ey-reveal");
-    if (!("IntersectionObserver" in window)) {
-      nodes.forEach((el) => el.classList.add("is-revealed"));
-      return;
-    }
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      nodes.forEach((el) => el.classList.add("is-revealed"));
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-revealed");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.06, rootMargin: "0px 0px -10% 0px" },
-    );
-    nodes.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-
   return (
-    <div ref={rootRef} className="case-ey-portfolio case-ey-body">
+    <div className="case-ey-portfolio case-ey-body">
       <a href="#hero" className="skip">
         Skip to content
       </a>
