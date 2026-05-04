@@ -18,6 +18,12 @@ export type CaseHeroProps = {
   meta: CaseHeroMeta;
   /** Case study picker (Tier-A) — rendered on the photo plate below site nav. */
   picker?: ReactNode;
+  /** Override identity strip (default DEN · REMOTE). */
+  basedLine?: string;
+  /** Override identity strip role line (default DESIGN & BUILD). */
+  roleLine?: string;
+  /** Optional brief paragraph below subhead inside the hero plate (e.g. EY). */
+  heroBrief?: ReactNode;
 };
 
 /** Shared halftone hero shell for Tier A case studies (Cases 01–05). Photo plate is fixed. */
@@ -31,6 +37,9 @@ export function CaseHero({
   subhead,
   meta,
   picker,
+  basedLine = "DEN · REMOTE",
+  roleLine = "DESIGN & BUILD",
+  heroBrief,
 }: CaseHeroProps) {
   const idStripCase = `${caseNumber} / ${String(totalCases).padStart(2, "0")}`;
 
@@ -69,9 +78,9 @@ export function CaseHero({
           <dt>CASE NO.</dt>
           <dd>{idStripCase}</dd>
           <dt>BASED</dt>
-          <dd>DEN · REMOTE</dd>
+          <dd>{basedLine}</dd>
           <dt>ROLE</dt>
-          <dd>DESIGN &amp; BUILD</dd>
+          <dd>{roleLine}</dd>
           <dt>REV.</dt>
           <dd>v2026.04</dd>
         </dl>
@@ -80,6 +89,7 @@ export function CaseHero({
           <p className="hero__tag">{tag}</p>
           <h1 className="hero__h1">{headline}</h1>
           <p className="hero__sub">{subhead}</p>
+          {heroBrief ? <div className="hero__brief">{heroBrief}</div> : null}
         </div>
       </div>
 

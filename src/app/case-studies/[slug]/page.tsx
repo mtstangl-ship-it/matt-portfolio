@@ -6,8 +6,8 @@ import { caseStudyEntries, type CaseSlug } from "@/content/case-studies";
 type Props = { params: { slug: string } };
 
 export function generateStaticParams() {
-  /** `/case-studies/ai` is handled by `case-studies/ai/page.tsx` (Centaur layout imports CSS). */
-  return caseStudyEntries.filter((cs) => cs.slug !== "ai").map((cs) => ({ slug: cs.slug }));
+  /** Static routes under `case-studies/<slug>/` own CSS + layout (Centaur, EY Tier A). */
+  return caseStudyEntries.filter((cs) => cs.slug !== "ai" && cs.slug !== "ey").map((cs) => ({ slug: cs.slug }));
 }
 
 export function generateMetadata({ params }: Props): Metadata {

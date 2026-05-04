@@ -1,8 +1,11 @@
 import type { CaseStudyEntry } from "@/content/case-studies";
-import { loadCaseHtml } from "@/content/cases/loader";
 import { CaseShell } from "../CaseShell";
+import { EyCaseView } from "./case-ey/EyCaseView";
 
 export function EyCase({ entry }: { entry: CaseStudyEntry }) {
-  const body = loadCaseHtml("ey");
-  return <CaseShell entry={entry} body={body} />;
+  return (
+    <CaseShell entry={entry}>
+      <EyCaseView />
+    </CaseShell>
+  );
 }

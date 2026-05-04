@@ -1,0 +1,655 @@
+/* =========================================================
+   EY HEALTHCARE · Tier A case surface (scoped — soft-nav safe)
+   ========================================================= */
+
+.tier-a-case-root .case-ey-portfolio {
+  --ey-glow: rgba(29, 207, 170, 0.14);
+  --layer-a-stamp-reserve: clamp(10rem, 24vw, 15rem);
+  --layer-a-fig-h: 2.625rem;
+  --layer-a-stamp-stack-top: calc(1rem + var(--layer-a-fig-h) + 1rem);
+}
+
+/* ----- Hero brief (Tier A extension) ----- */
+.tier-a-case-root .case-ey-portfolio .hero__brief {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  max-width: min(52rem, 92%);
+  font-size: var(--t-lead);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.tier-a-case-root .case-ey-portfolio .hero__brief p {
+  margin: 0;
+}
+.tier-a-case-root .case-ey-portfolio .hero__h1-line2 {
+  display: block;
+  margin-top: 0.2em;
+}
+
+/* ----- Scroll reveals ----- */
+.tier-a-case-root .case-ey-portfolio .case-ey-reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tier-a-case-root .case-ey-portfolio .case-ey-reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tier-a-case-root .case-ey-portfolio .case-ey-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ----- Shared section shells ----- */
+.tier-a-case-root .case-ey-portfolio .diagnosis,
+.tier-a-case-root .case-ey-portfolio .approach,
+.tier-a-case-root .case-ey-portfolio .tour,
+.tier-a-case-root .case-ey-portfolio .delta,
+.tier-a-case-root .case-ey-portfolio .lesson {
+  position: relative;
+  padding-block: clamp(3.5rem, 6vw, 5.5rem);
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.tier-a-case-root .case-ey-portfolio .diagnosis__inner,
+.tier-a-case-root .case-ey-portfolio .approach__inner,
+.tier-a-case-root .case-ey-portfolio .tour__inner,
+.tier-a-case-root .case-ey-portfolio .delta__inner,
+.tier-a-case-root .case-ey-portfolio .lesson__inner {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.tier-a-case-root .case-ey-portfolio .ey-prose p {
+  margin: 0;
+  font-size: var(--t-lead);
+  line-height: 1.58;
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+
+/* ----- Approach · partner strip ----- */
+.tier-a-case-root .case-ey-portfolio .approach__cats {
+  list-style: none;
+  margin: clamp(1.75rem, 3vw, 2.5rem) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 720px) {
+  .tier-a-case-root .case-ey-portfolio .approach__cats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+.tier-a-case-root .case-ey-portfolio .approach__cats li {
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tier-a-case-root .case-ey-portfolio .approach__cats li:hover {
+  border-color: rgba(29, 207, 170, 0.45);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--ey-glow);
+  transform: translateY(-2px);
+}
+.tier-a-case-root .case-ey-portfolio .approach__cat-k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.tier-a-case-root .case-ey-portfolio .approach__cat-v {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.tier-a-case-root .case-ey-portfolio .approach__cat-sub {
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.45;
+}
+
+/* ----- Trust diagram ----- */
+.tier-a-case-root .case-ey-portfolio .trust-diagram {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  border: 1px solid var(--ink-line);
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 0%, rgba(29, 207, 170, 0.06), transparent 55%),
+    var(--bg-2);
+  padding: 1.25rem 1rem 1.5rem;
+}
+.tier-a-case-root .case-ey-portfolio .trust-diagram__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--ink-line);
+}
+.tier-a-case-root .case-ey-portfolio .trust-diagram__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.tier-a-case-root .case-ey-portfolio .trust-diagram__cap {
+  margin: 1rem 0 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+@keyframes ey-event-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.tier-a-case-root .case-ey-portfolio .trust-diagram__event-ring {
+  transform-origin: 0px 0px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tier-a-case-root .case-ey-portfolio .trust-diagram__event-ring {
+    animation: ey-event-orbit 14s linear infinite;
+  }
+}
+
+/* ----- Tour intro ----- */
+.tier-a-case-root .case-ey-portfolio .tour__intro {
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* ----- Poster artifact ----- */
+.tier-a-case-root .case-ey-portfolio .poster {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--ink-line);
+  background: linear-gradient(155deg, rgba(14, 22, 20, 0.97) 0%, rgba(8, 12, 11, 1) 55%, rgba(10, 15, 14, 1) 100%);
+  box-shadow:
+    0 32px 100px rgba(0, 0, 0, 0.58),
+    0 0 0 1px rgba(29, 207, 170, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease;
+}
+.tier-a-case-root .case-ey-portfolio .poster:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 40px 120px rgba(0, 0, 0, 0.62),
+    0 0 0 1px rgba(29, 207, 170, 0.14),
+    0 0 48px rgba(29, 207, 170, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.tier-a-case-root .case-ey-portfolio .poster__head {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--ink-line);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.tier-a-case-root .case-ey-portfolio .poster__head-accent {
+  color: var(--accent);
+  letter-spacing: 0.2em;
+}
+@media (max-width: 640px) {
+  .tier-a-case-root .case-ey-portfolio .poster__head {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tier-a-case-root .case-ey-portfolio .poster__stops {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 900px) {
+  .tier-a-case-root .case-ey-portfolio .poster__stops {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tier-a-case-root .case-ey-portfolio .poster-stop {
+  position: relative;
+  padding: 1.35rem 1.25rem 1.75rem;
+  min-height: 100%;
+}
+.tier-a-case-root .case-ey-portfolio .poster-stop:not(:first-child) {
+  border-left: 1px solid var(--ink-line);
+}
+@media (max-width: 900px) {
+  .tier-a-case-root .case-ey-portfolio .poster-stop:not(:first-child) {
+    border-left: 0;
+    border-top: 1px solid var(--ink-line);
+  }
+}
+
+.tier-a-case-root .case-ey-portfolio .poster-stop__rule {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(29, 207, 170, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.tier-a-case-root .case-ey-portfolio .poster-stop__date {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.85rem;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 0.75rem;
+}
+.tier-a-case-root .case-ey-portfolio .poster-stop__date b {
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+}
+.tier-a-case-root .case-ey-portfolio .poster-stop__num {
+  opacity: 0.75;
+}
+.tier-a-case-root .case-ey-portfolio .poster-stop__wk {
+  opacity: 0.65;
+  font-size: 9px;
+}
+
+.tier-a-case-root .case-ey-portfolio .poster-stop__city {
+  font-family: var(--sans);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.35rem;
+  color: var(--ink);
+}
+.tier-a-case-root .case-ey-portfolio .poster-stop__meta {
+  margin: 0 0 1rem;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-4, #6b7773);
+}
+.tier-a-case-root .case-ey-portfolio .poster-stop__venue,
+.tier-a-case-root .case-ey-portfolio .poster-stop__crowd {
+  margin: 0 0 0.65rem;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.tier-a-case-root .case-ey-portfolio .poster-stop__moment {
+  margin: 1rem 0 0;
+  padding: 0.85rem 0.95rem;
+  border-left: 2px solid var(--accent);
+  background: rgba(29, 207, 170, 0.06);
+  font-size: 13px;
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--ink);
+}
+.tier-a-case-root .case-ey-portfolio .poster-stop__moment-k {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-style: normal;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 0.45rem;
+}
+
+.tier-a-case-root .case-ey-portfolio .poster__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--ink-line);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.tier-a-case-root .case-ey-portfolio .tour__reconcile {
+  margin: clamp(1.25rem, 2.5vw, 2rem) 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+}
+
+/* ----- Delta outcomes grid ----- */
+.tier-a-case-root .case-ey-portfolio .outcomes {
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+}
+.tier-a-case-root .case-ey-portfolio .outcomes__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ink-line);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.tier-a-case-root .case-ey-portfolio .outcomes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+@media (max-width: 720px) {
+  .tier-a-case-root .case-ey-portfolio .outcomes__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .tier-a-case-root .case-ey-portfolio .outcomes__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tier-a-case-root .case-ey-portfolio .outcome {
+  padding: 1.25rem 1rem;
+  border-right: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
+  transition: background 0.25s ease;
+}
+.tier-a-case-root .case-ey-portfolio .outcome:hover {
+  background: rgba(29, 207, 170, 0.04);
+}
+.tier-a-case-root .case-ey-portfolio .outcome:nth-child(3n) {
+  border-right: 0;
+}
+@media (max-width: 720px) {
+  .tier-a-case-root .case-ey-portfolio .outcome:nth-child(3n) {
+    border-right: 1px solid var(--ink-line);
+  }
+  .tier-a-case-root .case-ey-portfolio .outcome:nth-child(2n) {
+    border-right: 0;
+  }
+}
+@media (max-width: 480px) {
+  .tier-a-case-root .case-ey-portfolio .outcome {
+    border-right: 0;
+  }
+}
+
+.tier-a-case-root .case-ey-portfolio .outcome--hero {
+  grid-column: 1 / -1;
+  border-right: 0;
+  background:
+    radial-gradient(ellipse 90% 120% at 12% 40%, rgba(29, 207, 170, 0.09), transparent 55%),
+    var(--bg-3);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto auto auto;
+  align-items: start;
+  gap: 0.35rem 1.5rem;
+  padding: 1.5rem 1.25rem;
+}
+@media (min-width: 640px) {
+  .tier-a-case-root .case-ey-portfolio .outcome--hero {
+    grid-template-columns: minmax(0, 1fr) 200px;
+  }
+}
+.tier-a-case-root .case-ey-portfolio .outcome--hero .outcome__label {
+  grid-column: 1;
+}
+.tier-a-case-root .case-ey-portfolio .outcome--hero .outcome__value {
+  grid-column: 1;
+  font-size: clamp(2.75rem, 8vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  margin: 0;
+  line-height: 1;
+}
+.tier-a-case-root .case-ey-portfolio .outcome--hero .outcome__value-underline {
+  grid-column: 1;
+  width: min(220px, 55%);
+  height: 14px;
+  margin-top: -2px;
+}
+.tier-a-case-root .case-ey-portfolio .outcome--hero .outcome__caption {
+  grid-column: 1;
+}
+.tier-a-case-root .case-ey-portfolio .outcome--hero .outcome__claim {
+  grid-column: 2;
+  grid-row: 2 / span 3;
+  align-self: end;
+  margin: 0;
+}
+
+.tier-a-case-root .case-ey-portfolio .outcome__label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0;
+}
+.tier-a-case-root .case-ey-portfolio .outcome__value {
+  font-family: var(--sans);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0.35rem 0;
+}
+.tier-a-case-root .case-ey-portfolio .outcome__caption {
+  font-size: 12px;
+  color: var(--ink-3);
+  margin: 0;
+}
+.tier-a-case-root .case-ey-portfolio .outcome__claim {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  max-width: 14rem;
+  line-height: 1.45;
+}
+
+/* ----- Lesson · learning cards ----- */
+.tier-a-case-root .case-ey-portfolio .learnings {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+@media (min-width: 860px) {
+  .tier-a-case-root .case-ey-portfolio .learnings {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tier-a-case-root .case-ey-portfolio .learning {
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  padding: 1.25rem 1.35rem;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tier-a-case-root .case-ey-portfolio .learning:hover {
+  border-color: rgba(29, 207, 170, 0.35);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--ey-glow);
+  transform: translateY(-2px);
+}
+
+.tier-a-case-root .case-ey-portfolio .learning__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.65rem;
+}
+.tier-a-case-root .case-ey-portfolio .learning__num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.tier-a-case-root .case-ey-portfolio .learning__cat {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+}
+.tier-a-case-root .case-ey-portfolio .learning__fig {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--ink-4, #6b7773);
+}
+.tier-a-case-root .case-ey-portfolio .learning__title {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.tier-a-case-root .case-ey-portfolio .learning__body {
+  margin: 0 0 0.85rem;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.tier-a-case-root .case-ey-portfolio .learning__impl {
+  margin: 0;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--ink-line);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.tier-a-case-root .case-ey-portfolio .learning__impl-eyebrow {
+  display: block;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.tier-a-case-root .case-ey-portfolio .lesson__close {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: 1.25rem 1.35rem;
+  border-left: 3px solid var(--accent);
+  background: rgba(29, 207, 170, 0.06);
+  font-size: var(--t-lead);
+  line-height: 1.55;
+  color: var(--ink);
+}
+.tier-a-case-root .case-ey-portfolio .lesson__close-eyebrow {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+/* ----- Handoff ----- */
+.tier-a-case-root .case-ey-portfolio section.handoff {
+  position: relative;
+}
+
+/* ----- Signature ----- */
+.tier-a-case-root .case-ey-portfolio .signature-line {
+  max-width: var(--col-wide);
+  margin: 2rem auto 3rem;
+  padding: 0 var(--gutter);
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+@media (min-width: 1181px) {
+  .tier-a-case-root .case-ey-portfolio .fig-stamp {
+    top: 1rem;
+    right: 1rem;
+    z-index: 14;
+  }
+  .tier-a-case-root .case-ey-portfolio .section-stamp {
+    top: var(--layer-a-stamp-stack-top);
+    right: 1rem;
+    z-index: 13;
+  }
+  .tier-a-case-root .case-ey-portfolio .diagnosis__inner,
+  .tier-a-case-root .case-ey-portfolio .approach__inner,
+  .tier-a-case-root .case-ey-portfolio .tour__inner,
+  .tier-a-case-root .case-ey-portfolio .delta__inner,
+  .tier-a-case-root .case-ey-portfolio .lesson__inner,
+  .tier-a-case-root .case-ey-portfolio .handoff__inner {
+    padding-right: calc(var(--gutter) + var(--layer-a-stamp-reserve));
+  }
+}
+
+@media (min-width: 881px) {
+  .tier-a-case-root .case-ey-portfolio .hero .fig-stamp {
+    top: 1rem;
+    right: var(--gutter);
+    z-index: 14;
+  }
+  .tier-a-case-root .case-ey-portfolio .hero__plate .hero__id-strip {
+    top: calc(1rem + var(--layer-a-fig-h) + 0.65rem);
+    right: var(--gutter);
+    z-index: 13;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tier-a-case-root .case-ey-portfolio .hero .margin-note {
+    top: clamp(9.75rem, 17vw, 12.5rem);
+  }
+}
