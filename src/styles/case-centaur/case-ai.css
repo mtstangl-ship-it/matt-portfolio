@@ -113,13 +113,13 @@
   align-items: start;
 }
 
-/* ====================== SECTION SHELL (unscoped — TODO: portfolio-scope like EY) ====================== */
-.case-section {
+/* ====================== SECTION SHELL (Centaur Practice — Tier-A dual scope) ====================== */
+.tier-a-case-root .case-centaur-portfolio .case-section {
   position: relative;
   padding-block: clamp(4.5rem, 8vw, 7.5rem);
   border-bottom: 1px solid var(--ink-line);
 }
-.case-section__inner {
+.tier-a-case-root .case-centaur-portfolio .case-section__inner {
   max-width: var(--col-wide);
   margin: 0 auto;
   padding: 0 var(--gutter);
