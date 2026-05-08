@@ -370,14 +370,6 @@
  
 .tier-a-case-root .case-ey-portfolio .delta{ position: relative; padding-block: clamp(4.5rem, 7vw, 7rem); border-bottom: 1px solid var(--ink-line); }
 .tier-a-case-root .case-ey-portfolio .delta__inner{ max-width: var(--col-wide); margin: 0 auto; padding: 0 var(--gutter); }
-.tier-a-case-root .case-ey-portfolio .delta__body{
-  font-size: var(--t-lead); color: var(--ink-2);
-  max-width: 62ch; text-wrap: pretty; margin: 1.5rem 0 2rem;
-}
-.tier-a-case-root .case-ey-portfolio .delta__body p{ margin: 0 0 1rem; }
-.tier-a-case-root .case-ey-portfolio .delta__body p:last-child{ margin: 0; }
-.tier-a-case-root .case-ey-portfolio .delta__body b{ color: var(--ink); font-weight: 500; }
-.tier-a-case-root .case-ey-portfolio .delta__body em{ color: var(--accent); font-style: italic; }
 
  
 .tier-a-case-root .case-ey-portfolio .outcomes{
@@ -470,7 +462,7 @@
   margin: 1rem 0 0;
   padding: 0.85rem 1.25rem;
   border-left: 2px solid var(--accent);
-  background: var(--bg-3);
+  background: transparent;
   font-family: var(--mono); font-size: 11px;
   letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--ink-2);
@@ -642,30 +634,6 @@
     align-self: start;
     margin-top: 0.25rem;
     max-width: 38ch;
-  }
-}
-
- 
-@media (min-width: 1024px){
-  .tier-a-case-root .case-ey-portfolio .delta__inner{
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-    column-gap: 4rem;
-    align-items: start;
-  }
-  .tier-a-case-root .case-ey-portfolio .delta__inner > .case-section-head{ grid-column: 1 / -1; }
-  .tier-a-case-root .case-ey-portfolio .delta__body{ grid-column: 1 / 2; grid-row: 2 / 3; }
-  .tier-a-case-root .case-ey-portfolio .monument{
-    grid-column: 2 / 3;
-    grid-row: 2 / 4;
-    align-self: start;
-    margin-top: 0 !important;
-  }
-  .tier-a-case-root .case-ey-portfolio .strip{ grid-column: 1 / -1; grid-row: 4 / 5; }
-  .tier-a-case-root .case-ey-portfolio .delta__cdc{ grid-column: 1 / -1; grid-row: 5 / 6; }
-  .tier-a-case-root .case-ey-portfolio .monument__num{
-    font-size: clamp(180px, 18vw, 280px) !important;
-    line-height: 0.82 !important;
   }
 }
 
@@ -1170,15 +1138,6 @@
   color: var(--accent);
   margin-top: -0.25rem;
 }
-.tier-a-case-root .case-ey-portfolio .monument__claim{
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  margin: 0.85rem 0 0;
-}
-.tier-a-case-root .case-ey-portfolio .monument__claim b{ color: var(--ink); font-weight: 500; }
 
 .tier-a-case-root .case-ey-portfolio .monument__marg{
   list-style: none;
@@ -1208,8 +1167,6 @@
 }
 .tier-a-case-root .case-ey-portfolio .monument__marg-item--tl{ top: 1rem; right: 0; }
 .tier-a-case-root .case-ey-portfolio .monument__marg-item--tr{ top: 3.5rem; right: 0; }
-.tier-a-case-root .case-ey-portfolio .monument__marg-item--br{ bottom: 0.5rem; right: 0; }
-.tier-a-case-root .case-ey-portfolio .monument__marg-item--br::before{ background: var(--accent); }
 
 @media (max-width: 760px){
   .tier-a-case-root .case-ey-portfolio .monument__marg{ position: static; display: flex; flex-direction: column; gap: 0.4rem; margin-top: 1rem; }

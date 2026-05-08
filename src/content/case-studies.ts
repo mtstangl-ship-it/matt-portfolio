@@ -123,7 +123,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
     shortName: "EY Healthcare",
     panelLabel: "HEALTHCARE · COMMUNITY",
     teaserLine:
-      "Community-led field activation: 4.57M engagements and 715 vaccinations across Georgia.",
+      "Community-led field activation: 715 vaccinations across Georgia.",
     tools: "Field Activation · Community Design · Public Health",
     mode: "Awareness + activation, one program design",
     supportingMeta: "SCOPE: Georgia DPH · Say YES Summer Tour",

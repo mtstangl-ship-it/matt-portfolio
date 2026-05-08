@@ -347,11 +347,16 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ delta · what 715 actually means" />
+      <DimRibbon label="↓ EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS" />
 
-      <section className="delta" id="delta" aria-label="Delta — what 715 means" data-screen-label="05 Delta">
-        <span className="margin-note">DRAWING 05 · DELTA</span>
-        <span className="fig-stamp">FIG. 05 · DELTA</span>
+      <section
+        className="delta"
+        id="delta"
+        aria-label="External validation — what 715 means"
+        data-screen-label="05 External validation"
+      >
+        <span className="margin-note">DRAWING 05 · EXTERNAL VALIDATION</span>
+        <span className="fig-stamp">FIG. 05 · EXTERNAL VALIDATION</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
@@ -366,22 +371,14 @@ export function EyCaseView() {
 
         <div className="delta__inner">
           <header className="case-section-head">
-            <p className="kicker">05 · DELTA · WHAT 715 ACTUALLY MEANS</p>
+            <p className="kicker">05 · EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS</p>
             <h2>
               715 is small on a dashboard. <em>Enormous</em> against a hesitancy baseline.
             </h2>
           </header>
 
-          <div className="delta__body">
-            <p>
-              Mass marketing produced awareness, sometimes resistance, <em>rarely conversion</em> in this audience. Say YES Summer produced{" "}
-              <b>715 actual conversions in 40 live hours</b> — trust-building no digital campaign could match. The 4.57M impressions and 350K site visits were{" "}
-              <b>scaffolding, not conversion.</b>
-            </p>
-          </div>
-
           <div className="monument" aria-label="715 vaccinations">
-            <p className="monument__label">Vaccinations · in arms</p>
+            <p className="monument__label">VACCINATIONS · IN ARMS</p>
             <div className="monument__stack">
               <p className="monument__num" aria-label="715">
                 715
@@ -398,35 +395,12 @@ export function EyCaseView() {
                 <line x1="596" y1="18" x2="596" y2="8" stroke="currentColor" strokeWidth="1" />
               </svg>
             </div>
-            <p className="monument__claim">↑ load-bearing claim · hesitancy baseline</p>
 
             <ul className="monument__marg" aria-label="Context">
               <li className="monument__marg-item monument__marg-item--tl">40 live hours</li>
               <li className="monument__marg-item monument__marg-item--tr">3 cities</li>
-              <li className="monument__marg-item monument__marg-item--br">CDC national best practice</li>
             </ul>
           </div>
-
-          <ul className="strip" aria-label="Scaffolding metrics">
-            <li className="strip__cell">
-              <span className="strip__num">4.57M</span>
-              <span className="strip__lbl">Impressions · social</span>
-            </li>
-            <li className="strip__cell">
-              <span className="strip__num">350K</span>
-              <span className="strip__lbl">Site visits · sayyessummer.com</span>
-            </li>
-            <li className="strip__cell">
-              <span className="strip__num">
-                24<span className="strip__plus">+</span>
-              </span>
-              <span className="strip__lbl">Partners · 3 categories</span>
-            </li>
-            <li className="strip__cell">
-              <span className="strip__num">10</span>
-              <span className="strip__lbl">Events · across the series</span>
-            </li>
-          </ul>
 
           <p className="delta__cdc">
             ↗ EXTERNAL VALIDATION · <b>CDC NATIONAL BEST PRACTICE</b> · GA DPH adopted the four field-learning takeaways as operating principles for every regional expansion{" "}
