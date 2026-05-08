@@ -1,18 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { CaseHero } from "../../CaseHero";
-import { CasePicker } from "../../CasePicker";
-import { TrustCurrencyDiagram } from "./TrustCurrencyDiagram";
+import { Fragment, useEffect, useId, useRef } from "react";
+import { caseStudyDetailHref, caseStudyEntries, type CaseSlug } from "@/content/case-studies";
+import { EyCaseTallyFigure } from "./EyCaseTally";
 
-function DimBetween({ label, compact }: { label: string; compact?: boolean }) {
+const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
+
+function DimRibbon({ label }: { label: string }) {
   return (
-    <div className={compact ? "dim-with-scale dim-with-scale--compact" : "dim-with-scale"}>
+    <div className="dim-with-scale">
       <p className="dim">{label}</p>
       <svg className="dim-scale" viewBox="0 0 800 20" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
         <line x1="0" y1="4" x2="800" y2="4" stroke="var(--ink-line)" strokeWidth="1" />
         <g stroke="var(--ink-3)" strokeWidth="1">
-          {[0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800].map((x) => (
+          {DIM_TICKS.map((x) => (
             <line key={x} x1={x} y1="4" x2={x} y2="14" />
           ))}
         </g>
@@ -21,101 +23,217 @@ function DimBetween({ label, compact }: { label: string; compact?: boolean }) {
   );
 }
 
+function EyCasePickerTabs({ activeSlug }: { activeSlug: CaseSlug }) {
+  return (
+    <div className="case-picker" aria-label="Case studies">
+      {caseStudyEntries.map((c, idx) => (
+        <Fragment key={c.slug}>
+          {idx > 0 ? (
+            <span className="case-picker__sep" aria-hidden="true">
+              ·
+            </span>
+          ) : null}
+          <Link
+            href={caseStudyDetailHref(c.slug)}
+            className="case-picker__tab"
+            aria-current={c.slug === activeSlug ? "page" : undefined}
+          >
+            <b>{String(c.caseNumber).padStart(2, "0")}</b> · {c.shortName.toUpperCase()}
+          </Link>
+        </Fragment>
+      ))}
+    </div>
+  );
+}
+
 export function EyCaseView() {
+  const filterUid = useId().replace(/:/g, "");
+  const duotoneId = `ey-hero-duotone-${filterUid}`;
+  const tallyRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const tally = tallyRef.current;
+    if (!tally) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      tally.classList.add("is-counting");
+      return;
+    }
+    if (!("IntersectionObserver" in window)) {
+      tally.classList.add("is-counting");
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            tally.classList.add("is-counting");
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.35 },
+    );
+    io.observe(tally);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <div className="case-ey-portfolio case-ey-body">
       <a href="#hero" className="skip">
         Skip to content
       </a>
 
-      <CaseHero
-        picker={<CasePicker activeSlug="ey" />}
-        caseNumber="05"
-        totalCases={5}
-        marginNote="CASE 05 · EY · GEORGIA DPH"
-        figStamp="FIG. 01 · HERO"
-        basedLine="ATL · GA DPH"
-        roleLine="EXPERIENCE DESIGN"
-        tag="01 · BRIEF · CASE 05 OF 05"
-        headline={
-          <>
+      <EyCasePickerTabs activeSlug="ey" />
+
+      <section className="hero" id="hero" aria-label="Hero" data-screen-label="01 Hero">
+        <span className="margin-note">CASE 05 · EY · GEORGIA DPH</span>
+        <span className="fig-stamp">FIG. 01 · HERO</span>
+
+        <div className="hero__bgphoto" aria-hidden="true">
+          <svg width={0} height={0} style={{ position: "absolute" }} aria-hidden="true">
+            <defs>
+              <filter id={duotoneId} colorInterpolationFilters="sRGB">
+                <feColorMatrix
+                  type="matrix"
+                  values="
+              0.72  0.18  0.05  0 0
+              0.10  0.50  0.18  0 0
+              0.14  0.36  0.34  0 0
+              0     0     0     1 0"
+                />
+                <feComponentTransfer>
+                  <feFuncR type="table" tableValues="0.05 0.96" />
+                  <feFuncG type="table" tableValues="0.10 0.90" />
+                  <feFuncB type="table" tableValues="0.10 0.85" />
+                </feComponentTransfer>
+              </filter>
+            </defs>
+          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element -- full-bleed hero plate matches V4 prototype */}
+          <img
+            className="hero__bgphoto-img"
+            src="/images/case-ey/core-booth-hero.jpg"
+            alt=""
+            decoding="async"
+            fetchPriority="high"
+            style={{ filter: `url(#${duotoneId}) contrast(1.06) brightness(0.78) saturate(0.85)` }}
+          />
+          <div className="hero__bgphoto-halftone" aria-hidden="true" />
+          <div className="hero__bgphoto-grain" aria-hidden="true" />
+          <div className="hero__bgphoto-scrim" aria-hidden="true" />
+          <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
+        </div>
+
+        <dl className="hero__id-strip" aria-label="Identity">
+          <dt>CASE NO.</dt>
+          <dd>05 / 05</dd>
+          <dt>BASED</dt>
+          <dd>ATL · GA DPH</dd>
+          <dt>ROLE</dt>
+          <dd>EXPERIENCE DESIGN</dd>
+          <dt>REV.</dt>
+          <dd>v2026.04</dd>
+        </dl>
+
+        <div className="hero__inner">
+          <p className="hero__tag">01 · BRIEF · CASE 05 OF 05</p>
+          <h1 className="hero__h1">
             Vaccine hesitancy isn&apos;t a comms problem.
             <span className="hero__h1-line2">
               It&apos;s a <em>showing-up</em> problem.
             </span>
-          </>
-        }
-        subhead={
-          <>
-            <strong>Say YES Summer:</strong> 3 cities, 10 events, 24+ partners — <strong>715 vaccinations</strong> where mass media couldn&apos;t land.
-          </>
-        }
-        heroBrief={
-          <p>
-            EY recruited me to lead experience design on Georgia DPH&apos;s COVID-19 engagement. Mass marketing wasn&apos;t converting — in some audiences it
-            was amplifying resistance. The design question: where does trust live, and how does a public-health program show up inside it without colonizing it?
+          </h1>
+          <p className="hero__sub">
+            <b>Say YES Summer:</b> three cities, ten events — <b>715 vaccinations</b> where mass media couldn&apos;t land.
           </p>
-        }
-        meta={{
-          role: "Experience design lead",
-          timeline: "Aug 2021 · 10-event series · 40 live hours",
-          stack: (
-            <>
-              EY <b>·</b> Georgia DPH <b>·</b> CORE <b>·</b> Living Walls
-            </>
-          ),
-          model: <>Field activation · Say YES Summer</>,
-        }}
-      />
 
-      <DimBetween label="↓ proof · 16px clearance" />
+          <dl className="hero__meta">
+            <div className="hero__meta-cell">
+              <dt>Part No.</dt>
+              <dd>EY-DPH-01</dd>
+            </div>
+            <div className="hero__meta-cell">
+              <dt>Window</dt>
+              <dd>AUG 2021 · 10-event series · 40 live hours</dd>
+            </div>
+            <div className="hero__meta-cell">
+              <dt>Client</dt>
+              <dd>EY · Georgia DPH</dd>
+            </div>
+            <div className="hero__meta-cell">
+              <dt>Program</dt>
+              <dd>Say YES Summer · pop-up art + vaccination</dd>
+            </div>
+            <div className="hero__meta-cell">
+              <dt>Scope</dt>
+              <dd>
+                3 cities · 10 events · <b>24+ partners</b>
+              </dd>
+            </div>
+            <div className="hero__meta-cell">
+              <dt>Rev.</dt>
+              <dd>02 · CURRENT</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
 
-      <section className="diagnosis case-ey-reveal" id="diagnosis" aria-label="Diagnosis" data-screen-label="02 Diagnosis">
+      <DimRibbon label="↓ proof · 16px clearance" />
+
+      <section className="diagnosis" id="diagnosis" aria-label="Diagnosis" data-screen-label="02 Diagnosis">
         <span className="margin-note">DRAWING 02 · DIAGNOSIS</span>
         <span className="fig-stamp">FIG. 02 · DIAGNOSIS</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
           <dd>02 / 06</dd>
+          <dt>TOPIC</dt>
+          <dd>WHERE TRUST LIVES</dd>
           <dt>RUNTIME</dt>
-          <dd>~3 MIN</dd>
-          <dt>REVISION</dt>
-          <dd>v2026.04</dd>
-          <dt>STATUS</dt>
-          <dd>CURRENT</dd>
+          <dd>AUG 2021</dd>
+          <dt>LAST REV.</dt>
+          <dd>04/26</dd>
         </dl>
 
         <div className="diagnosis__inner">
           <header className="case-section-head">
             <p className="kicker">02 · DIAGNOSIS · WHERE THE WORK ACTUALLY LIVED</p>
             <h2>
-              The brief said vaccination rates. The real problem was <em>trust</em>.
+              The brief said vaccination rates. The real problem was <em>trust</em> — and where trust lives.
             </h2>
           </header>
-          <div className="diagnosis__body ey-prose">
+
+          <div className="diagnosis__body">
             <p>
-              Mass marketing was hitting its ceiling — in some audiences, amplifying resistance. The reframe: not how to communicate the vaccine better.
-              Where does trust live, and how does a public-health program show up inside it without colonizing it?
+              By August 2021, the audiences that hadn&apos;t converted weren&apos;t ignorant of the vaccine; they were saturated by competing voices about it.{" "}
+              <b>Mass-channel marketing was hitting its ceiling</b> — in some segments, amplifying resistance.
             </p>
           </div>
+
+          <aside className="diagnosis__pull">
+            <span className="diagnosis__pull-eyebrow">THE REFRAME</span>
+            The institutional voice was the wrong voice. The design call was <em>structural</em>, not communicational — where the vaccine showed up, who delivered it,
+            what the booth was next to.
+          </aside>
         </div>
       </section>
 
-      <DimBetween label="↘ pivot · diagnosis → field" compact />
+      <DimRibbon label="↘ pivot · diagnosis → field" />
 
-      <section className="approach case-ey-reveal" id="approach" aria-label="Approach" data-screen-label="03 Approach">
+      <section className="approach" id="approach" aria-label="Approach" data-screen-label="03 Approach">
         <span className="margin-note">DRAWING 03 · APPROACH</span>
         <span className="fig-stamp">FIG. 03 · APPROACH</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
           <dd>03 / 06</dd>
-          <dt>RUNTIME</dt>
-          <dd>~4 MIN</dd>
-          <dt>REVISION</dt>
-          <dd>v2026.04</dd>
-          <dt>STATUS</dt>
-          <dd>CURRENT</dd>
+          <dt>FRAMEWORK</dt>
+          <dd>CONFIDENCE → AWARENESS → ACCESS</dd>
+          <dt>PARTNERS</dt>
+          <dd>24+ · 3 CATEGORIES</dd>
+          <dt>LAST REV.</dt>
+          <dd>04/26</dd>
         </dl>
 
         <div className="approach__inner">
@@ -126,51 +244,72 @@ export function EyCaseView() {
             </h2>
           </header>
 
-          <div className="approach__body ey-prose">
+          <div className="approach__body">
             <p>
-              Three goals sequenced, not stacked. Make the vaccine available — don&apos;t make it the reason people show up. People came for the Bananas, the
-              Twilight festival, the Aquarium. The vaccine was on the same block. Three partner categories: vaccination delivery, community presence, public health
-              conversation. <strong>24+ partners</strong>. <strong>10 events</strong>. Every event had at least three things to do besides vaccinate.
+              Say YES Summer was framed against three goals — <b>sequenced, not stacked</b>. Confidence had to come before awareness. Awareness had to come before
+              access. A person who didn&apos;t trust the vaccine wouldn&apos;t convert no matter how visible the booth was.
             </p>
+            <p>
+              The structural design call: <em>make the vaccine available — don&apos;t make it the reason people show up.</em> People came for the Savannah Bananas home game.
+              They came for the Twilight Criterium festival in Athens. They came for the Georgia Aquarium in Atlanta. The vaccine was on the same block. The vaccine was
+              always available. <b>The vaccine was never the first thing asked of you.</b>
+            </p>
+            <p>Three partner categories carried different trust currencies:</p>
           </div>
 
-          <ul className="approach__cats">
-            <li>
-              <span className="approach__cat-k">VACCINATION</span>
-              <span className="approach__cat-v">CORE Georgia · local Health Districts</span>
-              <span className="approach__cat-sub">On-site clinical delivery · Pfizer + J&amp;J, choice preserved</span>
-            </li>
-            <li>
-              <span className="approach__cat-k">COMMUNITY</span>
-              <span className="approach__cat-v">Living Walls · local artists · musicians</span>
-              <span className="approach__cat-sub">Murals, live art, bluegrass — reasons to stay</span>
-            </li>
-            <li>
-              <span className="approach__cat-k">PUBLIC HEALTH</span>
-              <span className="approach__cat-v">Georgia DPH · CORE personnel on-site</span>
-              <span className="approach__cat-sub">Conversations, not campaigns · facts on request</span>
-            </li>
-          </ul>
+          <div className="partners" role="list" aria-label="Three partner categories">
+            <div className="partners__cell" role="listitem">
+              <div className="partners__head">
+                <span className="partners__num">CAT 01</span>
+                <span className="partners__label">VACCINATION</span>
+              </div>
+              <p className="partners__body">
+                CORE Georgia and local Health Districts handled clinical delivery. <b>Pfizer and Johnson &amp; Johnson on offer.</b> Choice preserved.
+              </p>
+            </div>
+            <div className="partners__cell" role="listitem">
+              <div className="partners__head">
+                <span className="partners__num">CAT 02</span>
+                <span className="partners__label">COMMUNITY</span>
+              </div>
+              <p className="partners__body">
+                Living Walls, local artists, local musicians. <b>Murals being painted.</b> Live bluegrass. Bystanders had reasons to stay that weren&apos;t the vaccine.
+              </p>
+            </div>
+            <div className="partners__cell" role="listitem">
+              <div className="partners__head">
+                <span className="partners__num">CAT 03</span>
+                <span className="partners__label">PUBLIC HEALTH</span>
+              </div>
+              <p className="partners__body">
+                Georgia DPH and CORE personnel on-site for <b>conversation, not pitch</b>. Questions answered with facts when asked. <b>The booth replaced the algorithm.</b>
+              </p>
+            </div>
+          </div>
 
-          <TrustCurrencyDiagram />
+          <EyCaseTallyFigure ref={tallyRef} />
+
+          <p className="approach__close">
+            40 live hours. 24+ partners. <b>Three currencies, one program.</b>
+          </p>
         </div>
       </section>
 
-      <DimBetween label="↓ field · the three-city tour" />
+      <DimRibbon label="↓ field · the three-city tour" />
 
-      <section className="tour case-ey-reveal" id="tour" aria-label="Design — three-city tour" data-screen-label="04 Design">
-        <span className="margin-note">DRAWING 04-A</span>
+      <section className="tour" id="tour" aria-label="Design — three-city tour" data-screen-label="04 Design">
+        <span className="margin-note">DRAWING 04 · TOUR</span>
         <span className="fig-stamp">FIG. 04 · TOUR</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
           <dd>04 / 06</dd>
           <dt>ARTIFACT</dt>
-          <dd>TOUR POSTER</dd>
-          <dt>REVISION</dt>
-          <dd>v2026.04</dd>
-          <dt>STATUS</dt>
-          <dd>CURRENT</dd>
+          <dd>SAY YES SUMMER POSTER</dd>
+          <dt>STOPS</dt>
+          <dd>03 · ATL · ATH · SAV</dd>
+          <dt>LAST REV.</dt>
+          <dd>04/26</dd>
         </dl>
 
         <div className="tour__inner">
@@ -181,12 +320,8 @@ export function EyCaseView() {
             </h2>
           </header>
 
-          <div className="tour__intro ey-prose">
-            <p>
-              Savannah · Forsyth Market, Bananas home game. Mayor Van Johnson visits — vaccination becomes a Saturday in August. Athens · UGA campus, Twilight
-              Criterium (20K spectators). Bluegrass plays; students queuing for bands get shots at the same booth. Atlanta · Georgia Aquarium, Pemberton Place.
-              Civil rights iconography anchors the final weekend.
-            </p>
+          <div className="tour__body">
+            <p>Three cities anchored Say YES Summer — chosen because each represented a different way trust mediates public health in Georgia.</p>
           </div>
 
           <figure className="poster" aria-label="Say YES Summer tour poster">
@@ -195,83 +330,63 @@ export function EyCaseView() {
                 <b>FIG. 04-A</b> · SAY YES SUMMER · TOUR POSTER
               </span>
               <span>3 STOPS · 10 EVENTS · 40 LIVE HOURS</span>
-              <span className="poster__head-accent">AUG 2021</span>
+              <span className="accent">AUG 2021</span>
             </header>
 
             <div className="poster__stops">
-              <article className="poster-stop">
-                <div className="poster-stop__rule" aria-hidden="true">
-                  <span>01</span>
-                </div>
-                <p className="poster-stop__date">
-                  <span className="poster-stop__num">01 / 03</span>
-                  <b>AUG 14</b>
-                  <span className="poster-stop__wk">SAT</span>
+              <article className="stop">
+                <p className="stop__date">
+                  <span className="stop__num">AUG&nbsp;7</span>
+                  <b>SAT · COASTAL</b>
                 </p>
-                <h3 className="poster-stop__city">Savannah</h3>
-                <p className="poster-stop__meta">Coastal Georgia</p>
-                <p className="poster-stop__venue">
-                  <b>Forsyth Farmers&apos; Market</b> · largest public park in Savannah
+                <h3 className="stop__city">Savannah</h3>
+                <p className="stop__region">CHATHAM CO. · COASTAL GEORGIA</p>
+                <p className="stop__venue">
+                  <b>Forsyth Farmers&apos; Market</b> · The largest and oldest public park in Savannah.
                 </p>
-                <p className="poster-stop__crowd">
-                  <b>Bananas</b> home game · <strong>150 sell-outs</strong> since 2016
+                <p className="stop__crowd">
+                  <b>Savannah Bananas</b> home game · 150 sell-outs since 2016
                 </p>
-                <p className="poster-stop__moment">
-                  <span className="poster-stop__moment-k">MOMENT</span>
-                  Mayor Van Johnson visits the site; local press picks it up. Vaccination stops being a government program and starts being a{" "}
-                  <em>Saturday in August</em>.
+                <p className="stop__moment">
+                  <b>Mayor Van Johnson visited the site;</b> local press picked it up. Vaccination stopped being a government program and started being a Saturday in August.
                 </p>
               </article>
 
-              <article className="poster-stop">
-                <div className="poster-stop__rule" aria-hidden="true">
-                  <span>02</span>
-                </div>
-                <p className="poster-stop__date">
-                  <span className="poster-stop__num">02 / 03</span>
-                  <b>
-                    AUG 19<small>–21</small>
-                  </b>
-                  <span className="poster-stop__wk">THU–SAT</span>
+              <article className="stop">
+                <p className="stop__date">
+                  <span className="stop__num">AUG&nbsp;14</span>
+                  <b>SAT · CAMPUS</b>
                 </p>
-                <h3 className="poster-stop__city">Athens</h3>
-                <p className="poster-stop__meta">Back-to-school</p>
-                <p className="poster-stop__venue">
-                  <b>UGA Vaccine Ambassadors</b> · campus campaign
+                <h3 className="stop__city">Athens</h3>
+                <p className="stop__region">CLARKE CO. · BACK-TO-SCHOOL</p>
+                <p className="stop__venue">
+                  <b>UGA Vaccine Ambassadors</b> led the campus campaign.
                 </p>
-                <p className="poster-stop__crowd">
-                  <b>Twilight Criterium</b> · <strong>20K spectators</strong> · downtown
+                <p className="stop__crowd">
+                  <b>Twilight Criterium festival</b> · 20K spectators · downtown streets
                 </p>
-                <p className="poster-stop__moment">
-                  <span className="poster-stop__moment-k">MOMENT</span>
-                  Local <em>bluegrass</em>. Students queue for bands, get a shot at the same booth. <em>Multiple levels of engagement</em> become the operating
+                <p className="stop__moment">
+                  Local <b>bluegrass played</b>. Students queuing for bands found they could get a shot at the same booth. Multiple levels of engagement became the operating
                   principle.
                 </p>
               </article>
 
-              <article className="poster-stop">
-                <div className="poster-stop__rule" aria-hidden="true">
-                  <span>03</span>
-                </div>
-                <p className="poster-stop__date">
-                  <span className="poster-stop__num">03 / 03</span>
-                  <b>
-                    AUG 28<small>–29</small>
-                  </b>
-                  <span className="poster-stop__wk">SAT–SUN</span>
+              <article className="stop">
+                <p className="stop__date">
+                  <span className="stop__num">AUG&nbsp;28</span>
+                  <b>SAT · METRO</b>
                 </p>
-                <h3 className="poster-stop__city">Atlanta</h3>
-                <p className="poster-stop__meta">Metro anchor</p>
-                <p className="poster-stop__venue">
-                  <b>Georgia Aquarium</b> · largest in the U.S.
+                <h3 className="stop__city">Atlanta</h3>
+                <p className="stop__region">FULTON CO. · METRO ANCHOR</p>
+                <p className="stop__venue">
+                  <b>Georgia Aquarium</b> · the largest in the U.S.
                 </p>
-                <p className="poster-stop__crowd">
-                  <strong>2.4M</strong> visitors/yr · <b>Pemberton Place</b> · Civil &amp; Human Rights adjacent
+                <p className="stop__crowd">
+                  2.4M annual visitors · adjacent to <b>Pemberton Place</b> &amp; World of Coca-Cola
                 </p>
-                <p className="poster-stop__moment">
-                  <span className="poster-stop__moment-k">MOMENT</span>
-                  Final weekend anchored on public art. Vaccinations in front of <em>civil rights iconography</em> — American public health contested on moral
-                  grounds.
+                <p className="stop__moment">
+                  Public art display anchored the program&apos;s final weekend. <b>Vaccinations ran in front of civil rights iconography</b> at the National Center for Civil
+                  &amp; Human Rights — the last geography of American public health contested on moral grounds.
                 </p>
               </article>
             </div>
@@ -285,15 +400,15 @@ export function EyCaseView() {
             </footer>
           </figure>
 
-          <p className="tour__reconcile">
-            Per-city: <b>Atlanta 452</b> · <b>Athens 175</b> · <b>Savannah 88</b> = <strong>715</strong> program-attributed.
+          <p className="tour__close">
+            Per-city: <b>Atlanta 452</b> · <b>Athens 175</b> · <b>Savannah 88</b> = 715 vaccinations program-attributed across the series.
           </p>
         </div>
       </section>
 
-      <DimBetween label="↓ delta · what 715 actually means" compact />
+      <DimRibbon label="↓ delta · what 715 actually means" />
 
-      <section className="delta case-ey-reveal" id="delta" aria-label="Delta" data-screen-label="05 Delta">
+      <section className="delta" id="delta" aria-label="Delta — what 715 means" data-screen-label="05 Delta">
         <span className="margin-note">DRAWING 05 · DELTA</span>
         <span className="fig-stamp">FIG. 05 · DELTA</span>
 
@@ -301,11 +416,11 @@ export function EyCaseView() {
           <dt>DRAWING NO.</dt>
           <dd>05 / 06</dd>
           <dt>CLAIM</dt>
-          <dd>715 · PROGRAM</dd>
-          <dt>REVISION</dt>
-          <dd>v2026.04</dd>
-          <dt>STATUS</dt>
-          <dd>CURRENT</dd>
+          <dd>715 · PROGRAM-ATTRIBUTED</dd>
+          <dt>BASELINE</dt>
+          <dd>HESITANCY · NOT POPULATION</dd>
+          <dt>LAST REV.</dt>
+          <dd>04/26</dd>
         </dl>
 
         <div className="delta__inner">
@@ -316,78 +431,84 @@ export function EyCaseView() {
             </h2>
           </header>
 
-          <div className="delta__body ey-prose">
+          <div className="delta__body">
             <p>
-              The number that mattered didn&apos;t exist yet: what does it cost to convert a vaccine-hesitant person through mass channels? Most estimates: we
-              couldn&apos;t. Say YES Summer produced <strong>715 conversions</strong> in 40 live hours — each in the presence of music, art, a mayor, or a campus.
-              None in front of a screen. <strong>CDC named the program a national best practice.</strong>
+              Mass marketing produced awareness, sometimes resistance, <em>rarely conversion</em> in this audience. Say YES Summer produced{" "}
+              <b>715 actual conversions in 40 live hours</b> — trust-building no digital campaign could match. The 4.57M impressions and 350K site visits were{" "}
+              <b>scaffolding, not conversion.</b>
             </p>
           </div>
 
-          <figure className="outcomes" aria-label="Program outcomes">
-            <figcaption className="outcomes__head">
-              <span>
-                <b>FIG. 05-A</b> · OUTCOMES · MEASURED SEPARATELY
-              </span>
-              <span>6 METRICS · 2 LAYERS</span>
-            </figcaption>
-            <div className="outcomes__grid">
-              <div className="outcome outcome--hero">
-                <p className="outcome__label">Vaccinations</p>
-                <p className="outcome__value">715</p>
-                <svg className="outcome__value-underline" viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M 2 8 Q 50 2, 100 7 T 198 6" stroke="var(--accent)" strokeWidth="1.2" fill="none" />
-                  <line x1="2" y1="11" x2="2" y2="6" stroke="var(--accent)" strokeWidth="0.8" />
-                  <line x1="198" y1="11" x2="198" y2="6" stroke="var(--accent)" strokeWidth="0.8" />
-                </svg>
-                <p className="outcome__caption">40 live hours · 3 cities</p>
-                <p className="outcome__claim">↑ load-bearing claim · hesitancy baseline</p>
-              </div>
-              <div className="outcome">
-                <p className="outcome__label">Impressions</p>
-                <p className="outcome__value">4.57M</p>
-                <p className="outcome__caption">Social · scaffolding</p>
-              </div>
-              <div className="outcome">
-                <p className="outcome__label">Site visits</p>
-                <p className="outcome__value">350K</p>
-                <p className="outcome__caption">sayyessummer.com</p>
-              </div>
-              <div className="outcome">
-                <p className="outcome__label">Partners</p>
-                <p className="outcome__value">24+</p>
-                <p className="outcome__caption">3 categories</p>
-              </div>
-              <div className="outcome">
-                <p className="outcome__label">Events</p>
-                <p className="outcome__value">10</p>
-                <p className="outcome__caption">Across the series</p>
-              </div>
-              <div className="outcome">
-                <p className="outcome__label">Recognition</p>
-                <p className="outcome__value">1</p>
-                <p className="outcome__caption">CDC best practice</p>
-              </div>
+          <div className="monument" aria-label="715 vaccinations">
+            <p className="monument__label">Vaccinations · in arms</p>
+            <div className="monument__stack">
+              <p className="monument__num" aria-label="715">
+                715
+              </p>
+              <svg className="monument__underline" viewBox="0 0 600 22" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M 4 14 Q 100 4, 200 11 T 400 9 T 596 12"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  fill="none"
+                  strokeLinecap="round"
+                />
+                <line x1="4" y1="18" x2="4" y2="8" stroke="currentColor" strokeWidth="1" />
+                <line x1="596" y1="18" x2="596" y2="8" stroke="currentColor" strokeWidth="1" />
+              </svg>
             </div>
-          </figure>
+            <p className="monument__claim">↑ load-bearing claim · hesitancy baseline</p>
+
+            <ul className="monument__marg" aria-label="Context">
+              <li className="monument__marg-item monument__marg-item--tl">40 live hours</li>
+              <li className="monument__marg-item monument__marg-item--tr">3 cities</li>
+              <li className="monument__marg-item monument__marg-item--br">CDC national best practice</li>
+            </ul>
+          </div>
+
+          <ul className="strip" aria-label="Scaffolding metrics">
+            <li className="strip__cell">
+              <span className="strip__num">4.57M</span>
+              <span className="strip__lbl">Impressions · social</span>
+            </li>
+            <li className="strip__cell">
+              <span className="strip__num">350K</span>
+              <span className="strip__lbl">Site visits · sayyessummer.com</span>
+            </li>
+            <li className="strip__cell">
+              <span className="strip__num">
+                24<span className="strip__plus">+</span>
+              </span>
+              <span className="strip__lbl">Partners · 3 categories</span>
+            </li>
+            <li className="strip__cell">
+              <span className="strip__num">10</span>
+              <span className="strip__lbl">Events · across the series</span>
+            </li>
+          </ul>
+
+          <p className="delta__cdc">
+            ↗ EXTERNAL VALIDATION · <b>CDC NATIONAL BEST PRACTICE</b> · GA DPH adopted the four field-learning takeaways as operating principles for every regional expansion
+            that followed.
+          </p>
         </div>
       </section>
 
-      <DimBetween label="↓ lesson · four mechanisms" />
+      <DimRibbon label="↓ lesson · four mechanisms a dashboard couldn't have produced" />
 
-      <section className="lesson case-ey-reveal" id="lesson" aria-label="Lesson" data-screen-label="06 Lesson">
+      <section className="lesson" id="lesson" aria-label="Lesson — field learnings" data-screen-label="06 Lesson">
         <span className="margin-note">DRAWING 06 · LESSON</span>
         <span className="fig-stamp">FIG. 06 · LESSON</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
           <dd>06 / 06</dd>
-          <dt>RUNTIME</dt>
-          <dd>~5 MIN</dd>
-          <dt>REVISION</dt>
-          <dd>v2026.04</dd>
-          <dt>STATUS</dt>
-          <dd>CURRENT</dd>
+          <dt>LEARNINGS</dt>
+          <dd>04 · FIELD-OBSERVED</dd>
+          <dt>SOURCE</dt>
+          <dd>ON-SITE · 10 EVENTS</dd>
+          <dt>LAST REV.</dt>
+          <dd>04/26</dd>
         </dl>
 
         <div className="lesson__inner">
@@ -398,84 +519,62 @@ export function EyCaseView() {
             </h2>
           </header>
 
-          <div className="learnings">
-            <article className="learning">
+          <div className="learnings" role="list" aria-label="Four field learnings">
+            <article className="learning" role="listitem">
               <header className="learning__head">
                 <span className="learning__num">01</span>
                 <span className="learning__cat">WHO PEOPLE TRUSTED</span>
-                <span className="learning__fig">FIG. 06-A</span>
               </header>
               <h3 className="learning__title">Loved ones were the deciders.</h3>
               <p className="learning__body">
-                Many attendees arrived with a <strong>family member or friend</strong> — the loved one had decided before they got there.
-              </p>
-              <p className="learning__impl">
-                <span className="learning__impl-eyebrow">DESIGN IMPLICATION</span>
-                Make it easy to bring someone — never design for the hesitant alone.
+                Attendees arrived <b>brought by someone who had already decided for them.</b> Never design for the hesitant individual in isolation.
               </p>
             </article>
 
-            <article className="learning">
+            <article className="learning" role="listitem">
               <header className="learning__head">
                 <span className="learning__num">02</span>
                 <span className="learning__cat">WHY PEOPLE STALLED</span>
-                <span className="learning__fig">FIG. 06-B</span>
               </header>
               <h3 className="learning__title">Information noise wasn&apos;t pro- or anti-. It was paralyzing.</h3>
               <p className="learning__body">
-                Hesitant attendees cited <em>&quot;a lot of information from both sides&quot;</em> — overload, not conviction.
-              </p>
-              <p className="learning__impl">
-                <span className="learning__impl-eyebrow">DESIGN IMPLICATION</span>
-                On-site conversation, not pitch — booth replaced the algorithm.
+                Hesitancy was overload, not conviction — <em>&quot;too much information from both sides.&quot;</em> The booth replaced the algorithm.
               </p>
             </article>
 
-            <article className="learning">
+            <article className="learning" role="listitem">
               <header className="learning__head">
                 <span className="learning__num">03</span>
                 <span className="learning__cat">WHAT AGENCY PRODUCED</span>
-                <span className="learning__fig">FIG. 06-C</span>
               </header>
               <h3 className="learning__title">Choice was reassurance.</h3>
               <p className="learning__body">
-                Pfizer <strong>and</strong> J&amp;J — their pick — converted people who wouldn&apos;t budge on a single option.
-              </p>
-              <p className="learning__impl">
-                <span className="learning__impl-eyebrow">DESIGN IMPLICATION</span>
-                Multiple manufacturers on every field event — optionality as respect.
+                Offering Pfizer or J&amp;J converted people a single option wouldn&apos;t. <b>Optionality read as respect</b> — &quot;the vaccine&quot; stopped being monolithic.
               </p>
             </article>
 
-            <article className="learning">
+            <article className="learning" role="listitem">
               <header className="learning__head">
                 <span className="learning__num">04</span>
                 <span className="learning__cat">WHY THE ART MATTERED</span>
-                <span className="learning__fig">FIG. 06-D</span>
               </header>
               <h3 className="learning__title">Multiple engagement levels let people reconsider.</h3>
               <p className="learning__body">
-                Murals, live art, music — <strong>time and distance</strong> to reconsider without committing upfront.
-              </p>
-              <p className="learning__impl">
-                <span className="learning__impl-eyebrow">DESIGN IMPLICATION</span>
-                At least three non-vaccine reasons to stay at every event.
+                Live art, music, murals — <b>not decoration.</b> They gave bystanders distance to reconsider without having to commit. Reconsideration led to more shots in arms.
               </p>
             </article>
           </div>
 
           <aside className="lesson__close">
             <span className="lesson__close-eyebrow">CLOSING</span>
-            Public health works <em>where the public lives.</em> The vaccine was always available. <strong>The vaccine was never the point.</strong>
+            Public health works <em>where the public lives.</em> The vaccine was always available. <b>The vaccine was never the point.</b>
           </aside>
         </div>
       </section>
 
-      <DimBetween label="↘ handoff · operations sibling" compact />
+      <DimRibbon label="↘ handoff · the larger story" />
 
-      <section className="handoff case-ey-reveal" aria-label="Handoff" data-screen-label="07 Handoff">
-        <span className="margin-note">DRAWING 07</span>
-        <span className="fig-stamp">FIG. 07 · HANDOFF</span>
+      <section className="handoff" aria-label="Handoff" data-screen-label="07 Handoff">
         <div className="handoff__inner">
           <p className="handoff__eyebrow">Handoff · the larger story</p>
           <h2 className="handoff__h">
@@ -487,7 +586,7 @@ export function EyCaseView() {
           <p className="handoff__alt">
             Or —{" "}
             <Link className="handoff__back-all" href="/impact">
-              View Impact dashboard
+              view Impact dashboard
             </Link>
           </p>
         </div>
@@ -495,32 +594,32 @@ export function EyCaseView() {
 
       <footer className="sheet" aria-label="Sheet metadata">
         <div className="sheet__cell">
-          <span>SHEET</span>
+          <span>Sheet</span>
           <b>05 / 05</b>
         </div>
         <div className="sheet__cell">
-          <span>DRAWN</span>
-          <b>M. STANGL</b>
+          <span>Drawn</span>
+          <b>M. Stangl</b>
         </div>
         <div className="sheet__cell">
-          <span>BASED</span>
-          <b>DEN · REMOTE</b>
+          <span>Based</span>
+          <b>ATL · REMOTE</b>
         </div>
         <div className="sheet__cell">
-          <span>SCALE</span>
+          <span>Scale</span>
           <b>1 : 1</b>
         </div>
         <div className="sheet__cell">
-          <span>REV.</span>
+          <span>Rev.</span>
           <b>v2026.04</b>
         </div>
         <div className="sheet__cell">
-          <span>PAGE</span>
-          <b>CASE 05 · EY HEALTHCARE</b>
+          <span>Page</span>
+          <b>Case 05 · EY Healthcare</b>
         </div>
       </footer>
 
-      <p className="signature-line">Matt Stangl · CX, Product &amp; Service Design · Denver, CO</p>
+      <p className="signature-line">Matt Stangl · CX, Service Design &amp; AI Experience · Atlanta, GA</p>
     </div>
   );
 }

@@ -15,7 +15,8 @@
     "dev:clean": "npm run kill && next dev -p 3000",
     "lint": "next lint",
     "export:centaur-html": "node scripts/export-centaur-html.mjs",
-    "extract:pointillism": "node scripts/extract-pointillism.mjs"
+    "extract:pointillism": "node scripts/extract-pointillism.mjs",
+    "build:ey-css": "node scripts/build-ey-v4-css.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.36.0",

@@ -1,0 +1,26 @@
+/* Centaur-sibling hero plate: mechanical halftone screen over photo (EY CORE booth).
+ * Loaded after generated ey-case.css; scoped per BUILD-NOTES. */
+
+.tier-a-case-root .case-ey-portfolio .hero__bgphoto-halftone {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.42;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(13, 20, 19, 0.92) 0 1px, transparent 1px 3px),
+    radial-gradient(circle at 25% 35%, rgba(29, 207, 170, 0.06) 0 1px, transparent 1px 3px);
+  background-size:
+    4px 4px,
+    4px 4px;
+  background-position:
+    0 0,
+    2px 2px;
+}
+
+@media (max-width: 720px) {
+  .tier-a-case-root .case-ey-portfolio .hero__bgphoto-halftone {
+    opacity: 0.32;
+  }
+}

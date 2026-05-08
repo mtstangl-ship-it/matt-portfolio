@@ -8,3 +8,4 @@ out
 .env.production.local
 .DS_Store
 tmp_py/
+.v4-extract/
