@@ -377,43 +377,43 @@ export function EyCaseView() {
       <DimRibbon label="↓ EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS" />
 
       <section
-        className="delta"
-        id="delta"
+        className="external-validation"
+        id="external-validation"
         aria-label="External validation — what 715 means"
-        data-screen-label="05 External validation"
+        data-screen-label="05 External Validation"
       >
         <span className="margin-note">DRAWING 05 · EXTERNAL VALIDATION</span>
         <span className="fig-stamp">FIG. 05 · EXTERNAL VALIDATION</span>
 
-        <div className="delta__inner">
-          <div className="delta__main">
+        <dl className="section-stamp" aria-label="Section metadata">
+          <dt>DRAWING NO.</dt>
+          <dd>05 / 06</dd>
+          <dt>CLAIM</dt>
+          <dd>715 · PROGRAM-ATTRIBUTED</dd>
+          <dt>BASELINE</dt>
+          <dd>HESITANCY · NOT POPULATION</dd>
+          <dt>LAST REV.</dt>
+          <dd>04/26</dd>
+        </dl>
+
+        <div className="external-validation__inner">
+          <div className="external-validation__main">
             <header className="case-section-head">
               <p className="kicker">05 · EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS</p>
               <h2>
                 715 is small on a dashboard. <em>Enormous</em> against a hesitancy baseline.
               </h2>
             </header>
-            <p className="delta__subhead">
+            <p className="external-validation__subhead">
               ↗{" "}
-              <strong className="delta__subhead-kicker">CDC NATIONAL BEST PRACTICE</strong>
+              <strong className="external-validation__subhead-kicker">CDC NATIONAL BEST PRACTICE</strong>
               {" "}
               · GA DPH adopted the four field-learning takeaways as operating principles for every regional expansion that followed.
             </p>
           </div>
 
-          <aside className="delta__aside" aria-label="715 landmark and section metadata">
-            <dl className="section-stamp section-stamp--delta-inflow" aria-label="Section metadata">
-              <dt>DRAWING NO.</dt>
-              <dd>05 / 06</dd>
-              <dt>CLAIM</dt>
-              <dd>715 · PROGRAM-ATTRIBUTED</dd>
-              <dt>BASELINE</dt>
-              <dd>HESITANCY · NOT POPULATION</dd>
-              <dt>LAST REV.</dt>
-              <dd>04/26</dd>
-            </dl>
-
-            <div className="monument monument--delta" aria-label="715 vaccinations">
+          <aside className="external-validation__aside" aria-label="715 landmark">
+            <div className="monument monument--external-validation" aria-label="715 vaccinations">
               <p className="monument__label">VACCINATIONS · IN ARMS</p>
               <div className="monument__stack">
                 <p className="monument__num" aria-label="715">

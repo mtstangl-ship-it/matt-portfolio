@@ -367,59 +367,31 @@
 }
 .tier-a-case-root .case-ey-portfolio .tour__close b{ color: var(--ink); font-weight: 500; }
 
- 
-.tier-a-case-root .case-ey-portfolio .delta{
+.tier-a-case-root .case-ey-portfolio .external-validation{
   position: relative;
   padding-block: clamp(4.5rem, 7vw, 7rem);
-  /* Reset src/app/cases.css `.delta` (Wipro handoff) — global import; leaks onto EY §05 */
-  display: block;
-  grid-template-columns: none;
-  gap: unset;
-  margin: 0;
-  border: 0;
   border-bottom: 1px solid var(--ink-line);
-  background: transparent;
 }
-.tier-a-case-root .case-ey-portfolio .delta__inner{
+.tier-a-case-root .case-ey-portfolio .external-validation__inner{
   max-width: var(--col-wide);
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 @media (min-width: 900px){
-  .tier-a-case-root .case-ey-portfolio .delta__inner{
+  .tier-a-case-root .case-ey-portfolio .external-validation__inner{
     display: grid;
     grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
     column-gap: clamp(1.75rem, 3.5vw, 3rem);
     align-items: start;
   }
 }
-.tier-a-case-root .case-ey-portfolio .delta__aside{
+.tier-a-case-root .case-ey-portfolio .external-validation__aside{
   display: flex;
   flex-direction: column;
   align-items: stretch;
   min-width: 0;
 }
-/* In-flow metadata stamp (§05 right column) — overrides density.css absolute + mobile hide */
-.tier-a-case-root .case-ey-portfolio .section-stamp--delta-inflow{
-  position: static !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  left: auto !important;
-  z-index: auto !important;
-  margin: 0 0 1.25rem auto !important;
-  pointer-events: none;
-  white-space: normal !important;
-  width: max-content !important;
-  max-width: 100% !important;
-  display: grid !important;
-}
-@media (max-width: 1180px){
-  .tier-a-case-root .case-ey-portfolio .section-stamp--delta-inflow{
-    margin-left: 0 !important;
-  }
-}
-.tier-a-case-root .case-ey-portfolio .delta__subhead{
+.tier-a-case-root .case-ey-portfolio .external-validation__subhead{
   font-family: var(--sans);
   font-size: var(--t-lead);
   line-height: 1.55;
@@ -430,13 +402,12 @@
   letter-spacing: normal;
   text-transform: none;
 }
-.tier-a-case-root .case-ey-portfolio .delta__subhead-kicker{
+.tier-a-case-root .case-ey-portfolio .external-validation__subhead-kicker{
   color: var(--accent);
   font-weight: 500;
   letter-spacing: 0.06em;
 }
 
- 
 .tier-a-case-root .case-ey-portfolio .outcomes{
   border: 1px solid var(--ink-line);
   background: var(--bg-2);
@@ -1044,7 +1015,7 @@
   .tier-a-case-root .case-ey-portfolio .hero__brief{ font-size: 0.95rem !important; line-height: 1.55 !important; }
   .tier-a-case-root .case-ey-portfolio .case-section-head h2{ font-size: clamp(1.5rem, 6.5vw, 2rem) !important; line-height: 1.15 !important; }
   .tier-a-case-root .case-ey-portfolio p{ text-wrap: pretty; }
-  .tier-a-case-root .case-ey-portfolio .monument:not(.monument--delta) .monument__num{ font-size: clamp(140px, 28vw, 220px) !important; }
+  .tier-a-case-root .case-ey-portfolio .monument:not(.monument--external-validation) .monument__num{ font-size: clamp(140px, 28vw, 220px) !important; }
   .tier-a-case-root .case-ey-portfolio .strip__num{ font-size: clamp(24px, 7vw, 32px); }
   .tier-a-case-root .case-ey-portfolio .tally__head, .tier-a-case-root .case-ey-portfolio .tally__yields, .tier-a-case-root .case-ey-portfolio .tally__col-name{ font-size: 10px; }
 }
@@ -1220,23 +1191,23 @@
   }
 }
 
-.tier-a-case-root .case-ey-portfolio .monument--delta{
+.tier-a-case-root .case-ey-portfolio .monument--external-validation{
   margin: 0;
   padding: 0.35rem 0 1.5rem;
   width: 100%;
   min-width: 0;
 }
-.tier-a-case-root .case-ey-portfolio .monument--delta .monument__stack{
+.tier-a-case-root .case-ey-portfolio .monument--external-validation .monument__stack{
   display: block;
   width: 100%;
   max-width: 100%;
 }
-.tier-a-case-root .case-ey-portfolio .monument--delta .monument__num{
+.tier-a-case-root .case-ey-portfolio .monument--external-validation .monument__num{
   font-size: clamp(56px, 18vw, 132px);
   line-height: 0.88;
 }
 @media (min-width: 900px){
-  .tier-a-case-root .case-ey-portfolio .monument--delta .monument__num{
+  .tier-a-case-root .case-ey-portfolio .monument--external-validation .monument__num{
     font-size: clamp(72px, 8.25vw, 148px);
   }
 }
@@ -1358,10 +1329,10 @@
 
  
 @media (min-width: 1024px){
-  .tier-a-case-root .case-ey-portfolio #diagnosis, .tier-a-case-root .case-ey-portfolio #approach, .tier-a-case-root .case-ey-portfolio #tour, .tier-a-case-root .case-ey-portfolio #delta, .tier-a-case-root .case-ey-portfolio #lesson, .tier-a-case-root .case-ey-portfolio .handoff{
+  .tier-a-case-root .case-ey-portfolio #diagnosis, .tier-a-case-root .case-ey-portfolio #approach, .tier-a-case-root .case-ey-portfolio #tour, .tier-a-case-root .case-ey-portfolio #external-validation, .tier-a-case-root .case-ey-portfolio #lesson, .tier-a-case-root .case-ey-portfolio .handoff{
     position: relative;
   }
-  .tier-a-case-root .case-ey-portfolio #diagnosis > .margin-note, .tier-a-case-root .case-ey-portfolio #approach > .margin-note, .tier-a-case-root .case-ey-portfolio #tour > .margin-note, .tier-a-case-root .case-ey-portfolio #delta > .margin-note, .tier-a-case-root .case-ey-portfolio #lesson > .margin-note{
+  .tier-a-case-root .case-ey-portfolio #diagnosis > .margin-note, .tier-a-case-root .case-ey-portfolio #approach > .margin-note, .tier-a-case-root .case-ey-portfolio #tour > .margin-note, .tier-a-case-root .case-ey-portfolio #external-validation > .margin-note, .tier-a-case-root .case-ey-portfolio #lesson > .margin-note{
     display: block;
     position: absolute;
     top: 50%;
@@ -1382,7 +1353,7 @@
 
  
 @media (min-width: 1180px){
-  .tier-a-case-root .case-ey-portfolio #diagnosis > .section-stamp, .tier-a-case-root .case-ey-portfolio #approach > .section-stamp, .tier-a-case-root .case-ey-portfolio #tour > .section-stamp, .tier-a-case-root .case-ey-portfolio #lesson > .section-stamp{
+  .tier-a-case-root .case-ey-portfolio #diagnosis > .section-stamp, .tier-a-case-root .case-ey-portfolio #approach > .section-stamp, .tier-a-case-root .case-ey-portfolio #tour > .section-stamp, .tier-a-case-root .case-ey-portfolio #external-validation > .section-stamp, .tier-a-case-root .case-ey-portfolio #lesson > .section-stamp{
     top: 4rem;
     right: 2.25rem;
   }
@@ -1411,7 +1382,7 @@
   }
 
    
-  .tier-a-case-root .case-ey-portfolio .diagnosis, .tier-a-case-root .case-ey-portfolio .approach, .tier-a-case-root .case-ey-portfolio .tour, .tier-a-case-root .case-ey-portfolio .delta, .tier-a-case-root .case-ey-portfolio .lesson{
+  .tier-a-case-root .case-ey-portfolio .diagnosis, .tier-a-case-root .case-ey-portfolio .approach, .tier-a-case-root .case-ey-portfolio .tour, .tier-a-case-root .case-ey-portfolio .external-validation, .tier-a-case-root .case-ey-portfolio .lesson{
     padding-block: clamp(2.75rem, 8vw, 4rem) !important;
   }
   .tier-a-case-root .case-ey-portfolio .hero{
@@ -1442,7 +1413,7 @@
   .tier-a-case-root .case-ey-portfolio .poster{
     margin: 1.25rem 0 !important;
   }
-  .tier-a-case-root .case-ey-portfolio .monument:not(.monument--delta){
+  .tier-a-case-root .case-ey-portfolio .monument:not(.monument--external-validation){
     margin: 1.5rem 0 1.25rem !important;
     padding: 1rem 0 1.25rem !important;
   }

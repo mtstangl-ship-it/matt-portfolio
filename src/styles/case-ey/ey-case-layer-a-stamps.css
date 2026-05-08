@@ -31,7 +31,7 @@
   .tier-a-case-root .case-ey-portfolio .diagnosis__inner,
   .tier-a-case-root .case-ey-portfolio .approach__inner,
   .tier-a-case-root .case-ey-portfolio .tour__inner,
-  .tier-a-case-root .case-ey-portfolio .delta__inner,
+  .tier-a-case-root .case-ey-portfolio .external-validation__inner,
   .tier-a-case-root .case-ey-portfolio .lesson__inner {
     padding-right: calc(var(--gutter) + var(--layer-a-stamp-reserve));
   }
