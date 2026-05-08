@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment, useEffect, useId, useRef } from "react";
-import { caseStudyDetailHref, caseStudyEntries, type CaseSlug } from "@/content/case-studies";
+import { useEffect, useId, useRef } from "react";
+import { CaseHero } from "../../CaseHero";
+import { CasePicker } from "../../CasePicker";
 import { EyCaseTallyFigure } from "./EyCaseTally";
 
 const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
@@ -19,29 +20,6 @@ function DimRibbon({ label }: { label: string }) {
           ))}
         </g>
       </svg>
-    </div>
-  );
-}
-
-function EyCasePickerTabs({ activeSlug }: { activeSlug: CaseSlug }) {
-  return (
-    <div className="case-picker" aria-label="Case studies">
-      {caseStudyEntries.map((c, idx) => (
-        <Fragment key={c.slug}>
-          {idx > 0 ? (
-            <span className="case-picker__sep" aria-hidden="true">
-              ·
-            </span>
-          ) : null}
-          <Link
-            href={caseStudyDetailHref(c.slug)}
-            className="case-picker__tab"
-            aria-current={c.slug === activeSlug ? "page" : undefined}
-          >
-            <b>{String(c.caseNumber).padStart(2, "0")}</b> · {c.shortName.toUpperCase()}
-          </Link>
-        </Fragment>
-      ))}
     </div>
   );
 }
@@ -84,100 +62,88 @@ export function EyCaseView() {
         Skip to content
       </a>
 
-      <EyCasePickerTabs activeSlug="ey" />
-
-      <section className="hero" id="hero" aria-label="Hero" data-screen-label="01 Hero">
-        <span className="margin-note">CASE 05 · EY · GEORGIA DPH</span>
-        <span className="fig-stamp">FIG. 01 · HERO</span>
-
-        <div className="hero__bgphoto" aria-hidden="true">
-          <svg width={0} height={0} style={{ position: "absolute" }} aria-hidden="true">
-            <defs>
-              <filter id={duotoneId} colorInterpolationFilters="sRGB">
-                <feColorMatrix
-                  type="matrix"
-                  values="
+      <CaseHero
+        picker={<CasePicker activeSlug="ey" />}
+        caseNumber="05"
+        totalCases={5}
+        marginNote="DRAWING 01 · HERO"
+        figStamp="FIG. 01 · HERO"
+        tag="01 · BRIEF · CASE 05 OF 05"
+        basedLine="ATL · GA DPH"
+        roleLine="EXPERIENCE DESIGN"
+        headline={
+          <>
+            Vaccine hesitancy isn&apos;t a comms problem. It&apos;s a <em>showing-up</em> problem.
+          </>
+        }
+        subhead={
+          <>
+            <b>Say YES Summer:</b> three cities, ten events — <b>715 vaccinations</b> where mass media couldn&apos;t land.
+          </>
+        }
+        heroBgphotoSlot={
+          <>
+            <svg width={0} height={0} style={{ position: "absolute" }} aria-hidden="true">
+              <defs>
+                <filter id={duotoneId} colorInterpolationFilters="sRGB">
+                  <feColorMatrix
+                    type="matrix"
+                    values="
               0.72  0.18  0.05  0 0
               0.10  0.50  0.18  0 0
               0.14  0.36  0.34  0 0
               0     0     0     1 0"
-                />
-                <feComponentTransfer>
-                  <feFuncR type="table" tableValues="0.05 0.96" />
-                  <feFuncG type="table" tableValues="0.10 0.90" />
-                  <feFuncB type="table" tableValues="0.10 0.85" />
-                </feComponentTransfer>
-              </filter>
-            </defs>
-          </svg>
-          {/* eslint-disable-next-line @next/next/no-img-element -- full-bleed hero plate matches V4 prototype */}
-          <img
-            className="hero__bgphoto-img"
-            src="/images/case-ey/core-booth-hero.jpg"
-            alt=""
-            decoding="async"
-            fetchPriority="high"
-            style={{ filter: `url(#${duotoneId}) contrast(1.06) brightness(0.78) saturate(0.85)` }}
-          />
-          <div className="hero__bgphoto-halftone" aria-hidden="true" />
-          <div className="hero__bgphoto-grain" aria-hidden="true" />
-          <div className="hero__bgphoto-scrim" aria-hidden="true" />
-          <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
-        </div>
-
-        <dl className="hero__id-strip" aria-label="Identity">
-          <dt>CASE NO.</dt>
-          <dd>05 / 05</dd>
-          <dt>BASED</dt>
-          <dd>ATL · GA DPH</dd>
-          <dt>ROLE</dt>
-          <dd>EXPERIENCE DESIGN</dd>
-          <dt>REV.</dt>
-          <dd>v2026.04</dd>
-        </dl>
-
-        <div className="hero__inner">
-          <p className="hero__tag">01 · BRIEF · CASE 05 OF 05</p>
-          <h1 className="hero__h1">
-            Vaccine hesitancy isn&apos;t a comms problem.{" "}
-            <span className="hero__h1-line2">
-              It&apos;s a <em>showing-up</em> problem.
-            </span>
-          </h1>
-          <p className="hero__sub">
-            <b>Say YES Summer:</b> three cities, ten events — <b>715 vaccinations</b> where mass media couldn&apos;t land.
-          </p>
-
-          <dl className="hero__meta">
+                  />
+                  <feComponentTransfer>
+                    <feFuncR type="table" tableValues="0.05 0.96" />
+                    <feFuncG type="table" tableValues="0.10 0.90" />
+                    <feFuncB type="table" tableValues="0.10 0.85" />
+                  </feComponentTransfer>
+                </filter>
+              </defs>
+            </svg>
+            {/* eslint-disable-next-line @next/next/no-img-element -- full-bleed hero plate matches V4 prototype */}
+            <img
+              className="hero__bgphoto-img"
+              src="/images/case-ey/core-booth-hero.jpg"
+              alt=""
+              decoding="async"
+              fetchPriority="high"
+              style={{ filter: `url(#${duotoneId}) contrast(1.06) brightness(0.78) saturate(0.85)` }}
+            />
+            <div className="hero__bgphoto-halftone" aria-hidden="true" />
+            <div className="hero__bgphoto-grain" aria-hidden="true" />
+            <div className="hero__bgphoto-scrim" aria-hidden="true" />
+            <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
+          </>
+        }
+        metaSlot={
+          <>
             <div className="hero__meta-cell">
-              <dt>Part No.</dt>
+              <dt>PART NO.</dt>
               <dd>EY-DPH-01</dd>
             </div>
             <div className="hero__meta-cell">
-              <dt>Window</dt>
-              <dd>AUG 2021 · 10-event series · 40 live hours</dd>
+              <dt>WINDOW</dt>
+              <dd>AUG 2021 · 10-EVENT SERIES · 40 LIVE HOURS</dd>
             </div>
             <div className="hero__meta-cell">
-              <dt>Client</dt>
-              <dd>EY · Georgia DPH</dd>
+              <dt>CLIENT</dt>
+              <dd>EY · GEORGIA DPH</dd>
             </div>
             <div className="hero__meta-cell">
-              <dt>Program</dt>
-              <dd>Say YES Summer · pop-up art + vaccination</dd>
+              <dt>PROGRAM</dt>
+              <dd>SAY YES SUMMER · POP-UP ART + VACCINATION</dd>
             </div>
             <div className="hero__meta-cell">
-              <dt>Scope</dt>
+              <dt>SCOPE</dt>
               <dd>
-                3 cities · 10 events · <b>24+ partners</b>
+                3 CITIES · 10 EVENTS · <b>24+ PARTNERS</b>
               </dd>
             </div>
-            <div className="hero__meta-cell">
-              <dt>Rev.</dt>
-              <dd>02 · CURRENT</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       <DimRibbon label="↓ proof · 16px clearance" />
 
@@ -595,28 +561,28 @@ export function EyCaseView() {
 
       <footer className="sheet" aria-label="Sheet metadata">
         <div className="sheet__cell">
-          <span>Sheet</span>
+          <span>SHEET</span>
           <b>05 / 05</b>
         </div>
         <div className="sheet__cell">
-          <span>Drawn</span>
-          <b>M. Stangl</b>
+          <span>DRAWN</span>
+          <b>M. STANGL</b>
         </div>
         <div className="sheet__cell">
-          <span>Based</span>
+          <span>BASED</span>
           <b>ATL · REMOTE</b>
         </div>
         <div className="sheet__cell">
-          <span>Scale</span>
+          <span>SCALE</span>
           <b>1 : 1</b>
         </div>
         <div className="sheet__cell">
-          <span>Rev.</span>
+          <span>REV.</span>
           <b>v2026.04</b>
         </div>
         <div className="sheet__cell">
-          <span>Page</span>
-          <b>Case 05 · EY Healthcare</b>
+          <span>PAGE</span>
+          <b>CASE 05 · EY HEALTHCARE</b>
         </div>
       </footer>
 

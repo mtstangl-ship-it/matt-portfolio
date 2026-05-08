@@ -1,7 +1,7 @@
 export function DeclarationCentaur() {
   return (
     <section className="centaur" id="centaur" aria-label="Centaur Declaration" data-screen-label="03 Centaur Declaration">
-      <span className="margin-note">DRAWING 03</span>
+      <span className="margin-note">DRAWING 03 · METHOD</span>
       <span className="fig-stamp">FIG. 03 · METHOD</span>
 
       <dl className="section-stamp" aria-label="Section metadata">

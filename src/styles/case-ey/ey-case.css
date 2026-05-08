@@ -16,40 +16,6 @@
 }
 
  
-.tier-a-case-root .case-ey-portfolio .case-picker{
-  position: relative;
-  z-index: 3;
-  max-width: var(--col-wide);
-  margin: 0 auto;
-  padding: clamp(4.5rem, 9vh, 6rem) var(--gutter) 0.75rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.tier-a-case-root .case-ey-portfolio .case-picker__tab{
-  color: var(--ink-3);
-  padding: 0.4rem 0.6rem 0.4rem 0;
-  border-bottom: 1px solid transparent;
-  white-space: nowrap;
-  text-decoration: none;
-}
-.tier-a-case-root .case-ey-portfolio .case-picker__tab:hover{ color: var(--ink-2); }
-.tier-a-case-root .case-ey-portfolio .case-picker__tab[aria-current="page"]{
-  color: var(--accent);
-  border-bottom-color: var(--accent-line);
-}
-.tier-a-case-root .case-ey-portfolio .case-picker__tab b{ color: inherit; font-weight: 500; }
-.tier-a-case-root .case-ey-portfolio .case-picker__sep{ color: var(--ink-4); align-self: center; }
-@media (max-width: 880px){
-  .tier-a-case-root .case-ey-portfolio .case-picker{ font-size: 9px; gap: 0.4rem 0.75rem; padding-top: clamp(4.25rem, 8vh, 5.5rem); }
-  .tier-a-case-root .case-ey-portfolio .case-picker__sep{ display: none; }
-}
-
- 
 .tier-a-case-root .case-ey-portfolio .hero{
   position: relative;
   padding-top: clamp(5rem, 8vh, 7rem);
@@ -103,7 +69,6 @@
   margin: 0 auto;
   padding: 0 var(--gutter) clamp(3rem, 5vw, 5rem);
   position: relative; z-index: 2;
-  border-bottom: 1px solid rgba(223, 233, 230, 0.18);
 }
 .tier-a-case-root .case-ey-portfolio .hero__tag{
   font-family: var(--mono); font-size: var(--t-mono);
@@ -144,7 +109,7 @@
  
 .tier-a-case-root .case-ey-portfolio .hero__meta{
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 0;
   border-top: 1px solid rgba(223, 233, 230, 0.22);
   border-bottom: 1px solid rgba(223, 233, 230, 0.22);

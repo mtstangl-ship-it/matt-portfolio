@@ -7,7 +7,7 @@ export type CaseHeroMeta = {
   model: ReactNode;
 };
 
-export type CaseHeroProps = {
+type CaseHeroPropsBase = {
   caseNumber: string;
   totalCases: number;
   marginNote: string;
@@ -15,7 +15,6 @@ export type CaseHeroProps = {
   tag: string;
   headline: ReactNode;
   subhead: ReactNode;
-  meta: CaseHeroMeta;
   /** Case study picker (Tier-A) — rendered on the photo plate below site nav. */
   picker?: ReactNode;
   /** Override identity strip (default DEN · REMOTE). */
@@ -24,7 +23,12 @@ export type CaseHeroProps = {
   roleLine?: string;
   /** Optional brief paragraph below subhead inside the hero plate (e.g. EY). */
   heroBrief?: ReactNode;
+  /** Replace default motorcycle plate layers (e.g. EY booth + duotone filter). */
+  heroBgphotoSlot?: ReactNode;
 };
+
+export type CaseHeroProps = CaseHeroPropsBase &
+  ({ meta: CaseHeroMeta; metaSlot?: undefined } | { meta?: undefined; metaSlot: ReactNode });
 
 /** Shared halftone hero shell for Tier A case studies (Cases 01–05). Photo plate is fixed. */
 export function CaseHero({
@@ -36,12 +40,37 @@ export function CaseHero({
   headline,
   subhead,
   meta,
+  metaSlot,
   picker,
   basedLine = "DEN · REMOTE",
   roleLine = "DESIGN & BUILD",
   heroBrief,
+  heroBgphotoSlot,
 }: CaseHeroProps) {
   const idStripCase = `${caseNumber} / ${String(totalCases).padStart(2, "0")}`;
+
+  const metaDl =
+    metaSlot ??
+    (meta ? (
+      <>
+        <div className="hero__meta-cell">
+          <dt>Role</dt>
+          <dd>{meta.role}</dd>
+        </div>
+        <div className="hero__meta-cell">
+          <dt>Timeline</dt>
+          <dd>{meta.timeline}</dd>
+        </div>
+        <div className="hero__meta-cell">
+          <dt>Stack</dt>
+          <dd>{meta.stack}</dd>
+        </div>
+        <div className="hero__meta-cell">
+          <dt>Model</dt>
+          <dd>{meta.model}</dd>
+        </div>
+      </>
+    ) : null);
 
   return (
     <section className="hero" id="hero" aria-label="Hero" data-screen-label="01 Hero">
@@ -50,18 +79,22 @@ export function CaseHero({
 
       <div className="hero__plate">
         <div className="hero__bgphoto" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element -- hero plate matches prototype filter pipeline */}
-          <img
-            className="hero__bgphoto-img"
-            src="/case-studies/centaur-literal.png"
-            alt=""
-            decoding="async"
-            fetchPriority="high"
-          />
-          <div className="hero__bgphoto-halftone" aria-hidden="true" />
-          <div className="hero__bgphoto-grain" aria-hidden="true" />
-          <div className="hero__bgphoto-scrim" aria-hidden="true" />
-          <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
+          {heroBgphotoSlot ?? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element -- hero plate matches prototype filter pipeline */}
+              <img
+                className="hero__bgphoto-img"
+                src="/case-studies/centaur-literal.png"
+                alt=""
+                decoding="async"
+                fetchPriority="high"
+              />
+              <div className="hero__bgphoto-halftone" aria-hidden="true" />
+              <div className="hero__bgphoto-grain" aria-hidden="true" />
+              <div className="hero__bgphoto-scrim" aria-hidden="true" />
+              <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
+            </>
+          )}
         </div>
 
         {picker ? (
@@ -93,24 +126,7 @@ export function CaseHero({
         </div>
       </div>
 
-      <dl className="hero__meta">
-        <div className="hero__meta-cell">
-          <dt>Role</dt>
-          <dd>{meta.role}</dd>
-        </div>
-        <div className="hero__meta-cell">
-          <dt>Timeline</dt>
-          <dd>{meta.timeline}</dd>
-        </div>
-        <div className="hero__meta-cell">
-          <dt>Stack</dt>
-          <dd>{meta.stack}</dd>
-        </div>
-        <div className="hero__meta-cell">
-          <dt>Model</dt>
-          <dd>{meta.model}</dd>
-        </div>
-      </dl>
+      <dl className="hero__meta">{metaDl}</dl>
     </section>
   );
 }
