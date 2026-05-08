@@ -88,7 +88,6 @@
 .tier-a-case-root .case-ey-portfolio .hero__meta-cell dd{
   margin: 0; font-family: var(--mono); font-size: 11px;
   letter-spacing: 0.04em; color: #e6ebe9;
-  text-transform: uppercase;
   text-wrap: pretty; line-height: 1.4;
 }
 .tier-a-case-root .case-ey-portfolio .hero__meta-cell dd b{ color: #5fe6c2; font-weight: 500; }

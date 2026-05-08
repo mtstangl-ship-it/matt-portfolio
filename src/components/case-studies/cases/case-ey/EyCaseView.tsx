@@ -99,20 +99,20 @@ export function EyCaseView() {
           <>
             <div className="hero__meta-cell">
               <dt>WINDOW</dt>
-              <dd>AUG 2021 · 10-EVENT SERIES · 40 LIVE HOURS</dd>
+              <dd>Aug 2021 · 10-event series · 40 live hours</dd>
             </div>
             <div className="hero__meta-cell">
               <dt>CLIENT</dt>
-              <dd>EY · GEORGIA DPH</dd>
+              <dd>EY · Georgia DPH</dd>
             </div>
             <div className="hero__meta-cell">
               <dt>PROGRAM</dt>
-              <dd>SAY YES SUMMER · POP-UP ART + VACCINATION</dd>
+              <dd>Say YES Summer · Pop-up art + vaccination</dd>
             </div>
             <div className="hero__meta-cell">
               <dt>SCOPE</dt>
               <dd>
-                3 CITIES · 10 EVENTS · <b>24+ PARTNERS</b>
+                3 cities · 10 events · <b>24+ partners</b>
               </dd>
             </div>
           </>
