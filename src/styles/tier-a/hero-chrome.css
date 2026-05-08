@@ -10,9 +10,31 @@
   padding-top: 0;
 }
 
-/* Zone 3 — copy block: breathe away from case-picker band + fixed nav */
+/* Photo + headline plate — meta strip renders below the plate (CaseHero shell, all Tier-A cases) */
+.tier-a-case-root .hero__plate {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(70vh, 680px);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(223, 233, 230, 0.18);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Headline column — Centaur baseline; bottom-anchored in plate via flex + margin-top: auto */
+.tier-a-case-root .hero__inner {
+  max-width: var(--col-wide);
+  margin-left: 0;
+  margin-right: auto;
+  padding: 0 var(--gutter) clamp(1.75rem, 4vw, 3rem);
+  position: relative;
+  z-index: 2;
+}
+
+/* Zone 3 — copy sits at bottom of plate under picker band + fixed nav */
 .tier-a-case-root .tier-a-react-case section.hero:first-of-type .hero__plate .hero__inner {
-  margin-top: clamp(3.5rem, 5.5vw, 5.75rem);
+  margin-top: auto;
   padding-top: clamp(2.25rem, 4vw, 3.75rem);
 }
 

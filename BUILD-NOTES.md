@@ -158,6 +158,11 @@ Trigger: after all Tier A work is complete and ready for final merge.
 - Auto-run enabled — can execute end-to-end without manual confirmation gates
 - Limitations: no real browser. Code-only verification. See "Verification Discipline" above.
 
+### Case EY bundled CSS (`npm run build:ey-css`)
+- Generator: `scripts/build-ey-v4-css.mjs` merges `.v4-extract/case-ey/v4-handoff/styles/case-ey*.css` into scoped `src/styles/case-ey/ey-case.css`.
+- The handoff source intentionally omits legacy standalone `.case-picker` rules and duplicate CaseHero chrome (identity strip, `.hero__inner` layout); the script strips the NAV block through the start of the HERO section so old picker markup cannot creep back in.
+- After editing handoff CSS or the generator, run `npm run build:ey-css` and commit the regenerated file so output stays deterministic.
+
 ### Claude (orchestration)
 - Used for project orchestration, brief writing, code review, planning
 - Reads Vercel preview HTML via web_fetch when URLs provided by Matt
