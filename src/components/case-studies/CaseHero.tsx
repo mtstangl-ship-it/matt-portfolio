@@ -7,7 +7,7 @@ export type CaseHeroMeta = {
   model: ReactNode;
 };
 
-export type CaseHeroProps = {
+type CaseHeroPropsBase = {
   caseNumber: string;
   totalCases: number;
   marginNote: string;
@@ -15,10 +15,20 @@ export type CaseHeroProps = {
   tag: string;
   headline: ReactNode;
   subhead: ReactNode;
-  meta: CaseHeroMeta;
   /** Case study picker (Tier-A) — rendered on the photo plate below site nav. */
   picker?: ReactNode;
+  /** Override identity strip (default DEN · REMOTE). */
+  basedLine?: string;
+  /** Override identity strip role line (default DESIGN & BUILD). */
+  roleLine?: string;
+  /** Optional brief paragraph below subhead inside the hero plate (e.g. EY). */
+  heroBrief?: ReactNode;
+  /** Replace default motorcycle plate layers (e.g. EY booth + duotone filter). */
+  heroBgphotoSlot?: ReactNode;
 };
+
+export type CaseHeroProps = CaseHeroPropsBase &
+  ({ meta: CaseHeroMeta; metaSlot?: undefined } | { meta?: undefined; metaSlot: ReactNode });
 
 /** Shared halftone hero shell for Tier A case studies (Cases 01–05). Photo plate is fixed. */
 export function CaseHero({
@@ -30,60 +40,19 @@ export function CaseHero({
   headline,
   subhead,
   meta,
+  metaSlot,
   picker,
+  basedLine = "DEN · REMOTE",
+  roleLine = "DESIGN & BUILD",
+  heroBrief,
+  heroBgphotoSlot,
 }: CaseHeroProps) {
   const idStripCase = `${caseNumber} / ${String(totalCases).padStart(2, "0")}`;
 
-  return (
-    <section className="hero" id="hero" aria-label="Hero" data-screen-label="01 Hero">
-      <span className="margin-note">{marginNote}</span>
-      <span className="fig-stamp">{figStamp}</span>
-
-      <div className="hero__plate">
-        <div className="hero__bgphoto" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element -- hero plate matches prototype filter pipeline */}
-          <img
-            className="hero__bgphoto-img"
-            src="/case-studies/centaur-literal.png"
-            alt=""
-            decoding="async"
-            fetchPriority="high"
-          />
-          <div className="hero__bgphoto-halftone" aria-hidden="true" />
-          <div className="hero__bgphoto-grain" aria-hidden="true" />
-          <div className="hero__bgphoto-scrim" aria-hidden="true" />
-          <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
-        </div>
-
-        {picker ? (
-          <div className="hero__plate-picker" data-zone="case-picker">
-            {picker}
-          </div>
-        ) : null}
-
-        <div className="hero__watermark" aria-hidden="true" hidden>
-          {/* Fallback watermark SVG omitted — prototype ships hidden */}
-        </div>
-
-        <dl className="hero__id-strip" aria-label="Identity">
-          <dt>CASE NO.</dt>
-          <dd>{idStripCase}</dd>
-          <dt>BASED</dt>
-          <dd>DEN · REMOTE</dd>
-          <dt>ROLE</dt>
-          <dd>DESIGN &amp; BUILD</dd>
-          <dt>REV.</dt>
-          <dd>v2026.04</dd>
-        </dl>
-
-        <div className="hero__inner">
-          <p className="hero__tag">{tag}</p>
-          <h1 className="hero__h1">{headline}</h1>
-          <p className="hero__sub">{subhead}</p>
-        </div>
-      </div>
-
-      <dl className="hero__meta">
+  const metaDl =
+    metaSlot ??
+    (meta ? (
+      <>
         <div className="hero__meta-cell">
           <dt>Role</dt>
           <dd>{meta.role}</dd>
@@ -100,7 +69,64 @@ export function CaseHero({
           <dt>Model</dt>
           <dd>{meta.model}</dd>
         </div>
-      </dl>
+      </>
+    ) : null);
+
+  return (
+    <section className="hero" id="hero" aria-label="Hero" data-screen-label="01 Hero">
+      <span className="margin-note">{marginNote}</span>
+      <span className="fig-stamp">{figStamp}</span>
+
+      <div className="hero__plate">
+        <div className="hero__bgphoto" aria-hidden="true">
+          {heroBgphotoSlot ?? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element -- hero plate matches prototype filter pipeline */}
+              <img
+                className="hero__bgphoto-img"
+                src="/case-studies/centaur-literal.png"
+                alt=""
+                decoding="async"
+                fetchPriority="high"
+              />
+              <div className="hero__bgphoto-halftone" aria-hidden="true" />
+              <div className="hero__bgphoto-grain" aria-hidden="true" />
+              <div className="hero__bgphoto-scrim" aria-hidden="true" />
+              <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
+            </>
+          )}
+        </div>
+
+        {picker ? (
+          <div className="hero__plate-picker" data-zone="case-picker">
+            {picker}
+          </div>
+        ) : null}
+
+        <div className="hero__watermark" aria-hidden="true" hidden>
+          {/* Fallback watermark SVG omitted — prototype ships hidden */}
+        </div>
+
+        <dl className="hero__id-strip" aria-label="Identity">
+          <dt>CASE NO.</dt>
+          <dd>{idStripCase}</dd>
+          <dt>BASED</dt>
+          <dd>{basedLine}</dd>
+          <dt>ROLE</dt>
+          <dd>{roleLine}</dd>
+          <dt>REV.</dt>
+          <dd>v2026.04</dd>
+        </dl>
+
+        <div className="hero__inner">
+          <p className="hero__tag">{tag}</p>
+          <h1 className="hero__h1">{headline}</h1>
+          <p className="hero__sub">{subhead}</p>
+          {heroBrief ? <div className="hero__brief">{heroBrief}</div> : null}
+        </div>
+      </div>
+
+      <dl className="hero__meta">{metaDl}</dl>
     </section>
   );
 }

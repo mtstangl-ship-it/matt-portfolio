@@ -1,7 +1,7 @@
 export function TelemetryCentaur() {
   return (
     <section className="telemetry" aria-label="Build Telemetry" data-screen-label="02 Build Telemetry">
-      <span className="margin-note">DRAWING 02</span>
+      <span className="margin-note">DRAWING 02 · TELEMETRY</span>
       <span className="fig-stamp">FIG. 02 · TELEMETRY</span>
 
       <dl className="section-stamp" aria-label="Section metadata">

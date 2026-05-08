@@ -1,6 +1,7 @@
 /* =========================================================
    CASE-AI — Centaur Practice case study
-   Inherits tokens.css + grammar.css + density.css.
+   Inherits tokens-scoped + grammar + density + tier-a-case-shell +
+   ../tier-a/hero-chrome (shared CaseHero picker + id strip).
    ========================================================= */
 
 /* ====================== SKIP LINK ====================== */
@@ -22,7 +23,7 @@
 }
 
 /* ----- Centaur portfolio: Layer A stamp reserve + vertical FIG / metadata stack ----- */
-.case-centaur-portfolio {
+.tier-a-case-root .case-centaur-portfolio {
   --layer-a-stamp-reserve: clamp(10rem, 24vw, 15rem);
   --layer-a-hero-id-reserve: clamp(11rem, 28vw, 14rem);
   /* FIG stamp block height (mono 9px + padding + border) + gap before section metadata */
@@ -31,32 +32,32 @@
 }
 
 @media (min-width: 1181px) {
-  .case-centaur-portfolio .fig-stamp {
+  .tier-a-case-root .case-centaur-portfolio .fig-stamp {
     top: 1rem;
     right: 1rem;
     z-index: 14;
   }
-  .case-centaur-portfolio .section-stamp {
+  .tier-a-case-root .case-centaur-portfolio .section-stamp {
     top: var(--layer-a-stamp-stack-top);
     right: 1rem;
     z-index: 13;
   }
-  .case-centaur-portfolio .telemetry__inner,
-  .case-centaur-portfolio .centaur__inner,
-  .case-centaur-portfolio .records__inner,
-  .case-centaur-portfolio .bulletin__inner,
-  .case-centaur-portfolio .handoff__inner {
+  .tier-a-case-root .case-centaur-portfolio .telemetry__inner,
+  .tier-a-case-root .case-centaur-portfolio .centaur__inner,
+  .tier-a-case-root .case-centaur-portfolio .records__inner,
+  .tier-a-case-root .case-centaur-portfolio .bulletin__inner,
+  .tier-a-case-root .case-centaur-portfolio .handoff__inner {
     padding-right: calc(var(--gutter) + var(--layer-a-stamp-reserve));
   }
 }
 
 @media (min-width: 881px) {
-  .case-centaur-portfolio .hero .fig-stamp {
+  .tier-a-case-root .case-centaur-portfolio .hero .fig-stamp {
     top: 1rem;
     right: var(--gutter);
     z-index: 14;
   }
-  .case-centaur-portfolio .hero__plate .hero__id-strip {
+  .tier-a-case-root .case-centaur-portfolio .hero__plate .hero__id-strip {
     top: calc(1rem + var(--layer-a-fig-h) + 0.65rem);
     right: var(--gutter);
     z-index: 13;
@@ -77,93 +78,70 @@
 }
 
 @media (min-width: 1181px) {
-  .case-centaur-portfolio .centaur__head .case-schematic {
+  .tier-a-case-root .case-centaur-portfolio .centaur__head .case-schematic {
     margin-top: calc(var(--layer-a-stamp-stack-top) + 0.35rem);
   }
 }
 
 /* Tight §03 → §04 transition (Centaur Practice only — case-ai-body) */
-.case-centaur-portfolio.case-ai-body section.centaur#centaur[data-screen-label] {
+.tier-a-case-root .case-centaur-portfolio.case-ai-body section.centaur#centaur[data-screen-label] {
   padding-top: clamp(2.25rem, 4vw, 3.75rem);
   padding-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
 }
-.case-centaur-portfolio.case-ai-body section.records#records[data-screen-label] {
+.tier-a-case-root .case-centaur-portfolio.case-ai-body section.records#records[data-screen-label] {
   padding-top: clamp(1rem, 2vw, 1.75rem);
   padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
 }
 
 /* §03 / §04: beat grammar `section[data-screen-label]` padding specificity (non-Round-3 pages) */
-.case-centaur-portfolio section.centaur[data-screen-label] {
+.tier-a-case-root .case-centaur-portfolio section.centaur[data-screen-label] {
   padding-top: clamp(3rem, 5.5vw, 5.25rem);
   padding-bottom: clamp(0.55rem, 1.15vw, 1rem);
 }
-.case-centaur-portfolio section.records[data-screen-label] {
+.tier-a-case-root .case-centaur-portfolio section.records[data-screen-label] {
   padding-top: clamp(1.25rem, 2.5vw, 2rem);
   padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
 }
 
-.case-centaur-portfolio section.records > .dim-with-scale {
+.tier-a-case-root .case-centaur-portfolio section.records > .dim-with-scale {
   margin-bottom: clamp(1.25rem, 2.8vw, 2.25rem);
 }
 
-.case-centaur-portfolio section.records .records__inner > header.case-section-head {
+.tier-a-case-root .case-centaur-portfolio section.records .records__inner > header.case-section-head {
   gap: clamp(2rem, 4vw, 3.5rem);
   margin-bottom: clamp(2rem, 4vw, 3rem);
   align-items: start;
 }
 
-/* ====================== SHARED SECTION HEAD ====================== */
-.case-section {
+/* ====================== SECTION SHELL (Centaur Practice — Tier-A dual scope) ====================== */
+.tier-a-case-root .case-centaur-portfolio .case-section {
   position: relative;
   padding-block: clamp(4.5rem, 8vw, 7.5rem);
   border-bottom: 1px solid var(--ink-line);
 }
-.case-section__inner {
+.tier-a-case-root .case-centaur-portfolio .case-section__inner {
   max-width: var(--col-wide);
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
-.case-section-head {
-  max-width: var(--col-wide);
-  margin: 0 auto 2.5rem;
+
+/* Two-column section header — Centaur Records markup only (title column wrapped in one cell). */
+.tier-a-case-root .case-centaur-portfolio .case-section-head {
   padding: 0 var(--gutter);
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: clamp(1.5rem, 3vw, 3rem);
   align-items: end;
 }
-.case-section-head h2 {
-  font-family: var(--sans);
-  font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  margin: 0.65rem 0 0;
-  text-wrap: balance;
-}
-.case-section-head h2 em { font-style: italic; color: var(--accent); }
-.case-section-head__sub {
-  color: var(--ink-2);
-  font-size: var(--t-lead);
-  margin: 0;
-  text-wrap: pretty;
-  max-width: 48ch;
-}
+
 @media (max-width: 767px) {
-  .case-section-head { grid-template-columns: 1fr; gap: 1rem; }
+  .tier-a-case-root .case-centaur-portfolio .case-section-head {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 /* ====================== HERO ====================== */
-/* Tier-A React: hero is first under fixed nav — plate bleeds to viewport top */
-.tier-a-case-root .tier-a-react-case section.hero:first-of-type {
-  margin-top: 0;
-  padding-top: 0;
-}
-/* Zone 3 — copy block: breathe away from case-picker band + fixed nav */
-.tier-a-case-root .tier-a-react-case section.hero:first-of-type .hero__plate .hero__inner {
-  margin-top: clamp(3.5rem, 5.5vw, 5.75rem);
-  padding-top: clamp(2.25rem, 4vw, 3.75rem);
-}
 
 .tier-a-case-root .hero {
   position: relative;
@@ -175,137 +153,11 @@
   background: var(--bg);
 }
 
-/* Photo + headline plate — meta strip renders below, not over the motorcycle */
-.tier-a-case-root .hero__plate {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  min-height: min(70vh, 680px);
-  padding-bottom: clamp(2rem, 5vw, 4rem);
-  border-bottom: 1px solid rgba(223, 233, 230, 0.18);
-}
-
-/* Tier-A · case picker on the photo plate (zone 2) */
-.tier-a-case-root .hero__plate-picker {
-  position: relative;
-  z-index: 3;
-  padding: clamp(4.75rem, 4.25rem + 6vw, 6.75rem) var(--gutter) clamp(1.25rem, 2.5vw, 1.75rem);
-  background: linear-gradient(180deg, rgba(10, 17, 16, 0.9) 0%, rgba(10, 17, 16, 0.42) 52%, transparent 100%);
-}
-.tier-a-case-root .hero__plate-picker .case-picker-hint--label {
-  color: var(--ink-3);
-  font-size: clamp(9px, 0.62rem + 0.1vw, 11px);
-  letter-spacing: 0.16em;
-}
-.tier-a-case-root .hero__plate-picker .case-picker {
-  gap: 0.5rem 0.45rem;
-}
-
-/* Photo composition + scrim (Tier-A Centaur hero only) */
-.tier-a-case-root .case-centaur-portfolio .hero__plate {
-  min-height: min(78vh, 820px);
-}
+/* Case 01 · motorcycle crop only — hero treatment pipeline lives in hero-chrome.css */
 .tier-a-case-root .case-centaur-portfolio .hero__plate .hero__bgphoto-img {
   object-position: 42% 20%;
 }
-.tier-a-case-root .case-centaur-portfolio .hero__plate .hero__bgphoto-scrim {
-  background:
-    linear-gradient(90deg,
-      rgba(10,17,16,0.68) 0%,
-      rgba(10,17,16,0.48) 24%,
-      rgba(10,17,16,0.16) 48%,
-      rgba(10,17,16,0.04) 72%,
-      rgba(10,17,16,0.00) 100%),
-    linear-gradient(180deg,
-      rgba(10,17,16,0.14) 0%,
-      rgba(10,17,16,0.00) 30%,
-      rgba(10,17,16,0.00) 80%,
-      rgba(10,17,16,0.09) 100%);
-}
-.tier-a-case-root .case-centaur-portfolio .hero__plate .hero__bgphoto-fadebottom {
-  height: 56px;
-  background: linear-gradient(180deg, transparent 0%, rgba(10,17,16,0.18) 45%, var(--bg) 100%);
-}
 
-/* ---- Full-bleed photo inside plate ---- */
-.tier-a-case-root .hero__plate .hero__bgphoto {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-.tier-a-case-root .hero__plate .hero__bgphoto-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 38%;
-  /* PNG carries halftone plate; keep CSS light so mechanical detail reads */
-  filter: contrast(1.06) saturate(1.12) brightness(1.04);
-}
-/* Halftone screen — disabled (baked into the PNG plate to avoid moiré). Kept as a hook. */
-.tier-a-case-root .hero__plate .hero__bgphoto-halftone {
-  position: absolute;
-  inset: 0;
-  background-image: none;
-  opacity: 0;
-}
-/* Film grain — keeps the photo from looking like marketing */
-.tier-a-case-root .hero__plate .hero__bgphoto-grain {
-  position: absolute;
-  inset: 0;
-  background-image:
-    repeating-radial-gradient(circle at 23% 41%, rgba(255,255,255,0.025) 0 0.4px, transparent 0.4px 1.6px),
-    repeating-radial-gradient(circle at 71% 67%, rgba(0,0,0,0.04) 0 0.4px, transparent 0.4px 1.4px);
-  mix-blend-mode: overlay;
-  opacity: 0.16;
-}
-/* Left-anchored scrim — gives the type column a legible canvas without crushing the photo */
-.tier-a-case-root .hero__plate .hero__bgphoto-scrim {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg,
-      rgba(10,17,16,0.68) 0%,
-      rgba(10,17,16,0.48) 24%,
-      rgba(10,17,16,0.16) 48%,
-      rgba(10,17,16,0.04) 72%,
-      rgba(10,17,16,0.00) 100%),
-    linear-gradient(180deg,
-      rgba(10,17,16,0.22) 0%,
-      rgba(10,17,16,0.00) 20%,
-      rgba(10,17,16,0.00) 72%,
-      rgba(10,17,16,0.24) 100%);
-}
-/* Bottom fade — terminate hero cleanly into the page bg */
-.tier-a-case-root .hero__plate .hero__bgphoto-fadebottom {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 140px;
-  background: linear-gradient(180deg, transparent 0%, var(--bg) 100%);
-}
-@media (max-width: 720px) {
-  .tier-a-case-root .hero__plate .hero__bgphoto-img { object-position: center 30%; }
-  .tier-a-case-root .hero__plate .hero__bgphoto-scrim {
-    background:
-      linear-gradient(180deg,
-        rgba(10,17,16,0.92) 0%,
-        rgba(10,17,16,0.62) 35%,
-        rgba(10,17,16,0.45) 65%,
-        rgba(10,17,16,0.85) 100%);
-  }
-}
-
-.tier-a-case-root .hero__inner {
-  max-width: var(--col-wide);
-  margin-left: 0;
-  margin-right: auto;
-  padding: 0 var(--gutter) clamp(1.75rem, 4vw, 3rem);
-  position: relative;
-  z-index: 2;
-}
 .tier-a-case-root .hero__tag {
   font-family: var(--mono);
   font-size: var(--t-mono);
@@ -398,45 +250,8 @@
 }
 
 @media (min-width: 881px) {
-  .case-centaur-portfolio .hero__inner {
+  .tier-a-case-root .case-centaur-portfolio .hero__inner {
     padding-right: calc(var(--gutter) + var(--layer-a-hero-id-reserve));
-  }
-}
-
-/* Hero identity strip — top-right */
-.tier-a-case-root .hero__id-strip {
-  position: absolute;
-  top: clamp(5rem, 10vh, 7rem);
-  right: var(--gutter);
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 0.5rem 1.35rem;
-  font-family: var(--mono);
-  font-size: var(--t-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 1px solid var(--ink-line);
-  background: var(--bg-2);
-  padding: 0.85rem 1rem;
-  z-index: 4;
-  white-space: nowrap;
-}
-.tier-a-case-root .hero__id-strip dt {
-  margin: 0;
-  letter-spacing: 0.16em;
-  color: var(--ink-3);
-}
-.tier-a-case-root .hero__id-strip dd {
-  color: var(--ink);
-  margin: 0;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-@media (max-width: 880px) {
-  .tier-a-case-root .hero__id-strip {
-    position: static;
-    margin: 0 auto 1.25rem;
-    max-width: max-content;
   }
 }
 
@@ -975,11 +790,11 @@
 }
 .centaur__pivot-marg b { color: #e86c54; font-weight: 500; letter-spacing: 0.32em; }
 @media (min-width: 768px) {
-  .case-centaur-portfolio.case-ai-body .centaur__pivot > p {
+  .tier-a-case-root .case-centaur-portfolio.case-ai-body .centaur__pivot > p {
     padding-right: 0;
     max-width: min(70ch, 100%);
   }
-  .case-centaur-portfolio.case-ai-body .centaur__pivot-marg {
+  .tier-a-case-root .case-centaur-portfolio.case-ai-body .centaur__pivot-marg {
     position: static;
     writing-mode: horizontal-tb;
     transform: none;
@@ -1042,7 +857,7 @@
 }
 /* Affordance chip ▸ only — undo global `cases.css` `.ribbon::before` journey-rail bar
    (position + teal gradient) which otherwise leaks onto these spans. */
-.case-centaur-portfolio .record__eyebrow .ribbon::before {
+.tier-a-case-root .case-centaur-portfolio .record__eyebrow .ribbon::before {
   content: "▸";
   position: static;
   display: inline;
@@ -1060,10 +875,10 @@
 }
 
 /* Affordance row sits below title/lede, directly above the artifact */
-.case-centaur-portfolio .record .record__head {
+.tier-a-case-root .case-centaur-portfolio .record .record__head {
   margin-bottom: clamp(0.65rem, 1.2vw, 1rem);
 }
-.case-centaur-portfolio .record > .record__eyebrow {
+.tier-a-case-root .case-centaur-portfolio .record > .record__eyebrow {
   margin-top: 0;
   margin-bottom: clamp(0.45rem, 1vw, 0.65rem);
 }
@@ -1690,7 +1505,7 @@
   padding-right: 140px;
 }
 @media (min-width: 1181px) {
-  .case-centaur-portfolio .bulletin__head {
+  .tier-a-case-root .case-centaur-portfolio .bulletin__head {
     padding-right: calc(140px + var(--layer-a-stamp-reserve));
   }
 }

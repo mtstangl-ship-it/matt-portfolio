@@ -110,7 +110,10 @@
   -webkit-mask-image: linear-gradient(to bottom, black, black 80%, transparent);
   opacity: 0.6;
 }
-.tier-a-case-root section > * { position: relative; }
+/* Exclude Layer-A stamps — they need position:absolute from density.css / grammar fig-stamp */
+.tier-a-case-root section > *:not(.section-stamp):not(.fig-stamp):not(.margin-note) {
+  position: relative;
+}
 
 
 /* =========================================================

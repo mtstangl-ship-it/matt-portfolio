@@ -11,7 +11,16 @@ The Centaur Practice case study (`/case-studies/ai`) is the locked architectural
 ### Locked architecture (does not change per case)
 
 - **Three-zone hero:** site nav at top, case picker tabs below nav, hero copy at bottom (with generous breathing room between zones)
-- **Hero photo plate:** `centaur-literal.png` (motorcycle photo) is the shared hero image across all 5 case studies — not configurable per case
+
+> **Per-case hero imagery** — each case study uses its own hero photograph. The shared element across cases is the treatment pipeline (halftone + duotone + scrim + fade), applied identically to every case study's hero photo. This was originally locked as a shared motorcycle photo across all 5 cases but was revised during EY V3 review to allow per-case imagery as long as the treatment pipeline matches Centaur's exactly.
+>
+> Examples:
+> - Case 01 · Centaur Practice — `centaur-literal.png` (motorcycle photo)
+> - Case 05 · EY Healthcare — CORE booth photo
+> - Cases 02–04 — TBD when those case studies are briefed
+>
+> The treatment pipeline is the binding contract, not the photo. Any case can use any photo as long as the halftone density, scrim opacity, duotone color anchor, and fade match Centaur's reference implementation.
+
 - **Six-section structure:** Hero → Telemetry/equivalent → Method/Pivot → Records/Artifacts → Bulletin/Reversal → Handoff
 - **Affordance pattern:** opacity box only (no companion divider lines, no competing accent strokes)
 - **Visual grammar:** fiche kickers, FIG stamps, dimension callouts, marginalia, metadata stamps per section, sheet footer
@@ -20,6 +29,7 @@ The Centaur Practice case study (`/case-studies/ai`) is the locked architectural
 ### Per-case variation (changes per case study)
 
 - `caseNumber`, `totalCases`
+- Hero plate photograph / asset (unique per case; shared treatment pipeline — see Locked architecture above)
 - `headline`, `subhead`
 - `tag` (eyebrow text), `marginNote`, `figStamp`
 - `meta` strip values (Role, Timeline, Stack, Model)
@@ -157,6 +167,11 @@ Trigger: after all Tier A work is complete and ready for final merge.
 - Used for porting Claude Design HTML prototypes into the Next.js codebase
 - Auto-run enabled — can execute end-to-end without manual confirmation gates
 - Limitations: no real browser. Code-only verification. See "Verification Discipline" above.
+
+### Case EY bundled CSS (`npm run build:ey-css`)
+- Generator: `scripts/build-ey-v4-css.mjs` merges `.v4-extract/case-ey/v4-handoff/styles/case-ey*.css` into scoped `src/styles/case-ey/ey-case.css`.
+- The handoff source intentionally omits legacy standalone `.case-picker` rules and duplicate CaseHero chrome (identity strip, `.hero__inner` layout); the script strips the NAV block through the start of the HERO section so old picker markup cannot creep back in.
+- After editing handoff CSS or the generator, run `npm run build:ey-css` and commit the regenerated file so output stays deterministic.
 
 ### Claude (orchestration)
 - Used for project orchestration, brief writing, code review, planning

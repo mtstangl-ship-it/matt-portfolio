@@ -1,0 +1,231 @@
+/* =========================================================
+   TIER-A SHARED HERO CHROME — CaseHero shell (all Tier-A cases)
+   Scoped under .tier-a-case-root only. Per-case overrides live in
+   case-ai.css / ey-case.css etc. under .tier-a-case-root .case-{slug}-portfolio.
+   ========================================================= */
+
+/* Tier-A React: hero is first under fixed nav — plate bleeds to viewport top */
+.tier-a-case-root .tier-a-react-case section.hero:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Photo + headline plate — meta strip renders below the plate (CaseHero shell, all Tier-A cases) */
+.tier-a-case-root .hero__plate {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* Match Case 01 visible plate height (was centaur-only min-height override). */
+  min-height: min(78vh, 820px);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(223, 233, 230, 0.18);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Tier-A hero photo stack (binding pipeline — shared across cases 01–05) ----
+ * Centaur's literal halftone is baked into centaur-literal.png; CSS halftone hook stays off.
+ * Duotone is photographic correction only (no per-case SVG filter matrix). */
+.tier-a-case-root .hero__plate .hero__bgphoto {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.tier-a-case-root .hero__plate .hero__bgphoto-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  filter: contrast(1.06) saturate(1.12) brightness(1.04);
+}
+
+/* Halftone screen — disabled (baked into Centaur PNG; keep hook for consistency). */
+.tier-a-case-root .hero__plate .hero__bgphoto-halftone {
+  position: absolute;
+  inset: 0;
+  background-image: none;
+  opacity: 0;
+}
+
+/* Film grain — same mechanical noise layer on every case hero */
+.tier-a-case-root .hero__plate .hero__bgphoto-grain {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-radial-gradient(circle at 23% 41%, rgba(255, 255, 255, 0.025) 0 0.4px, transparent 0.4px 1.6px),
+    repeating-radial-gradient(circle at 71% 67%, rgba(0, 0, 0, 0.04) 0 0.4px, transparent 0.4px 1.4px);
+  mix-blend-mode: overlay;
+  opacity: 0.16;
+}
+
+/* Left-anchored scrim + vignette — values aligned with Case 01 shipped hero */
+.tier-a-case-root .hero__plate .hero__bgphoto-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10, 17, 16, 0.68) 0%,
+      rgba(10, 17, 16, 0.48) 24%,
+      rgba(10, 17, 16, 0.16) 48%,
+      rgba(10, 17, 16, 0.04) 72%,
+      rgba(10, 17, 16, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(10, 17, 16, 0.14) 0%,
+      rgba(10, 17, 16, 0) 30%,
+      rgba(10, 17, 16, 0) 80%,
+      rgba(10, 17, 16, 0.09) 100%
+    );
+}
+
+/* Bottom fade — Case 01 height + tint into page bg */
+.tier-a-case-root .hero__plate .hero__bgphoto-fadebottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 17, 16, 0.18) 45%, var(--bg) 100%);
+}
+
+@media (max-width: 720px) {
+  .tier-a-case-root .hero__plate .hero__bgphoto-img {
+    object-position: center 30%;
+  }
+
+  .tier-a-case-root .case-ey-portfolio .hero__plate .hero__bgphoto-img {
+    object-position: center 30%;
+  }
+
+  .tier-a-case-root .case-centaur-portfolio .hero__plate .hero__bgphoto-img {
+    object-position: center 30%;
+  }
+
+  .tier-a-case-root .hero__plate .hero__bgphoto-scrim {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(10, 17, 16, 0.92) 0%,
+        rgba(10, 17, 16, 0.62) 35%,
+        rgba(10, 17, 16, 0.45) 65%,
+        rgba(10, 17, 16, 0.85) 100%
+      );
+  }
+}
+
+/* Case 05 · booth framing only — treatment pipeline stays identical */
+.tier-a-case-root .case-ey-portfolio .hero__plate .hero__bgphoto-img {
+  object-position: 38% 52%;
+}
+
+/* Headline column — Centaur baseline; bottom-anchored in plate via flex + margin-top: auto */
+.tier-a-case-root .hero__inner {
+  max-width: var(--col-wide);
+  margin-left: 0;
+  margin-right: auto;
+  padding: 0 var(--gutter) clamp(1.75rem, 4vw, 3rem);
+  position: relative;
+  z-index: 2;
+}
+
+/* Zone 3 — copy sits at bottom of plate under picker band + fixed nav */
+.tier-a-case-root .tier-a-react-case section.hero:first-of-type .hero__plate .hero__inner {
+  margin-top: auto;
+  padding-top: clamp(2.25rem, 4vw, 3.75rem);
+}
+
+/* Tier-A · case picker on the photo plate (zone 2) */
+.tier-a-case-root .hero__plate-picker {
+  position: relative;
+  z-index: 3;
+  padding: clamp(4.75rem, 4.25rem + 6vw, 6.75rem) var(--gutter) clamp(1.25rem, 2.5vw, 1.75rem);
+  background: linear-gradient(180deg, rgba(10, 17, 16, 0.9) 0%, rgba(10, 17, 16, 0.42) 52%, transparent 100%);
+}
+
+.tier-a-case-root .hero__plate-picker .case-picker-hint--label {
+  color: var(--ink-3);
+  font-size: clamp(9px, 0.62rem + 0.1vw, 11px);
+  letter-spacing: 0.16em;
+}
+
+.tier-a-case-root .hero__plate-picker .case-picker {
+  gap: 0.5rem 0.45rem;
+}
+
+/* Hero identity strip — top-right (CaseHero) */
+.tier-a-case-root .hero__id-strip {
+  position: absolute;
+  top: clamp(5rem, 10vh, 7rem);
+  right: var(--gutter);
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.5rem 1.35rem;
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  padding: 0.85rem 1rem;
+  z-index: 4;
+  white-space: nowrap;
+}
+
+.tier-a-case-root .hero__id-strip dt {
+  margin: 0;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+}
+
+.tier-a-case-root .hero__id-strip dd {
+  color: var(--ink);
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 880px) {
+  .tier-a-case-root .hero__id-strip {
+    position: static;
+    margin: 0 auto 1.25rem;
+    max-width: max-content;
+  }
+}
+
+/* ---- Tier-A shared section head baseline (no grid — per-case layouts opt in) ---- */
+.tier-a-case-root .case-section-head {
+  box-sizing: border-box;
+  max-width: var(--col-wide);
+  margin-inline: auto;
+  margin-bottom: 2.5rem;
+}
+
+.tier-a-case-root .case-section-head h2 {
+  font-family: var(--sans);
+  font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0.65rem 0 0;
+  text-wrap: balance;
+}
+
+.tier-a-case-root .case-section-head h2 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.tier-a-case-root .case-section-head__sub {
+  color: var(--ink-2);
+  font-size: var(--t-lead);
+  margin: 0;
+  text-wrap: pretty;
+  max-width: 48ch;
+}

@@ -69,9 +69,9 @@ export function CentaurCaseView() {
         picker={<CasePicker activeSlug="ai" />}
         caseNumber="01"
         totalCases={5}
-        marginNote="DRAWING 01"
+        marginNote="DRAWING 01 · HERO"
         figStamp="FIG. 01 · HERO"
-        tag="CENTAUR PRACTICE · CASE 01 OF 05"
+        tag="01 · BUILD · CASE 01 OF 05"
         headline={
           <>
             I built this portfolio with AI, and kept the decisions <em>human.</em>
@@ -109,7 +109,7 @@ export function CentaurCaseView() {
       <section className="records" id="records" aria-label="Service Records" data-screen-label="04 Service Records">
         <DimBetween label="↓ ARTIFACTS · PROOF FOLLOWS" compact />
 
-        <span className="margin-note">DRAWING 04</span>
+        <span className="margin-note">DRAWING 04 · ARTIFACTS</span>
         <span className="fig-stamp">FIG. 04 · ARTIFACTS</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
@@ -145,7 +145,7 @@ export function CentaurCaseView() {
       <DimBetween label="↓ BULLETIN · WHERE I PAID" />
 
       <section className="bulletin" id="bulletin" aria-label="Service Bulletin" data-screen-label="05 Service Bulletin">
-        <span className="margin-note">DRAWING 05</span>
+        <span className="margin-note">DRAWING 05 · BULLETIN</span>
         <span className="fig-stamp">FIG. 05 · BULLETIN</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
@@ -228,7 +228,7 @@ export function CentaurCaseView() {
       <DimBetween label="↓ HANDOFF · THE LARGER STORY" />
 
       <section className="handoff" aria-label="Handoff" data-screen-label="06 Handoff">
-        <span className="margin-note">DRAWING 06</span>
+        <span className="margin-note">DRAWING 06 · HANDOFF</span>
         <span className="fig-stamp">FIG. 06 · HANDOFF</span>
 
         <div className="handoff__inner">
@@ -250,7 +250,7 @@ export function CentaurCaseView() {
       <footer className="sheet" aria-label="Sheet metadata">
         <div className="sheet__cell">
           <span>SHEET</span>
-          <b>04 / 04</b>
+          <b>01 / 05</b>
         </div>
         <div className="sheet__cell">
           <span>DRAWN</span>
@@ -262,7 +262,7 @@ export function CentaurCaseView() {
         </div>
         <div className="sheet__cell">
           <span>SCALE</span>
-          <b>1:1</b>
+          <b>1 : 1</b>
         </div>
         <div className="sheet__cell">
           <span>REV.</span>
