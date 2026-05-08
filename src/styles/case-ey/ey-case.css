@@ -26,44 +26,6 @@
   isolation: isolate;
   background: var(--bg);
 }
-.tier-a-case-root .case-ey-portfolio .hero__bgphoto{ position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.tier-a-case-root .case-ey-portfolio .hero__bgphoto-img{
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: 22% 45%;
-  filter: url(#hero-duotone) contrast(1.06) brightness(0.78) saturate(0.85);
-}
-.tier-a-case-root .case-ey-portfolio .hero__bgphoto-grain{
-  position: absolute; inset: 0;
-  background-image:
-    repeating-radial-gradient(circle at 23% 41%, rgba(255,255,255,0.030) 0 0.5px, transparent 0.5px 1.4px),
-    repeating-radial-gradient(circle at 71% 67%, rgba(0,0,0,0.06) 0 0.5px, transparent 0.5px 1.3px),
-    radial-gradient(circle at 50% 50%, rgba(0,0,0,0.0) 0 60%, rgba(0,0,0,0.25) 100%);
-  mix-blend-mode: overlay; opacity: 0.7;
-}
-.tier-a-case-root .case-ey-portfolio .hero__bgphoto-scrim{
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(90deg,
-      rgba(10,17,16,0.88) 0%, rgba(10,17,16,0.78) 18%,
-      rgba(10,17,16,0.55) 38%, rgba(10,17,16,0.30) 60%,
-      rgba(10,17,16,0.18) 100%),
-    linear-gradient(180deg,
-      rgba(10,17,16,0.45) 0%, rgba(10,17,16,0.05) 22%,
-      rgba(10,17,16,0.05) 60%, rgba(10,17,16,0.55) 100%);
-}
-.tier-a-case-root .case-ey-portfolio .hero__bgphoto-fadebottom{
-  position: absolute; left: 0; right: 0; bottom: 0; height: 140px;
-  background: linear-gradient(180deg, transparent 0%, var(--bg) 100%);
-}
-@media (max-width: 720px){
-  .tier-a-case-root .case-ey-portfolio .hero__bgphoto-img{ object-position: center 30%; }
-  .tier-a-case-root .case-ey-portfolio .hero__bgphoto-scrim{
-    background:
-      linear-gradient(180deg,
-        rgba(10,17,16,0.92) 0%, rgba(10,17,16,0.62) 35%,
-        rgba(10,17,16,0.45) 65%, rgba(10,17,16,0.85) 100%);
-  }
-}
 
 .tier-a-case-root .case-ey-portfolio .hero__tag{
   font-family: var(--mono); font-size: var(--t-mono);
@@ -1339,10 +1301,6 @@
  
 
  
-.tier-a-case-root .case-ey-portfolio .hero__bgphoto-img{
-   
-  object-position: 38% 52% !important;
-}
 
  
 @media (min-width: 1024px){

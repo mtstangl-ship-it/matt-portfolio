@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
 import { EyCaseTallyFigure } from "./EyCaseTally";
@@ -25,8 +25,6 @@ function DimRibbon({ label }: { label: string }) {
 }
 
 export function EyCaseView() {
-  const filterUid = useId().replace(/:/g, "");
-  const duotoneId = `ey-hero-duotone-${filterUid}`;
   const tallyRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -83,33 +81,13 @@ export function EyCaseView() {
         }
         heroBgphotoSlot={
           <>
-            <svg width={0} height={0} style={{ position: "absolute" }} aria-hidden="true">
-              <defs>
-                <filter id={duotoneId} colorInterpolationFilters="sRGB">
-                  <feColorMatrix
-                    type="matrix"
-                    values="
-              0.72  0.18  0.05  0 0
-              0.10  0.50  0.18  0 0
-              0.14  0.36  0.34  0 0
-              0     0     0     1 0"
-                  />
-                  <feComponentTransfer>
-                    <feFuncR type="table" tableValues="0.05 0.96" />
-                    <feFuncG type="table" tableValues="0.10 0.90" />
-                    <feFuncB type="table" tableValues="0.10 0.85" />
-                  </feComponentTransfer>
-                </filter>
-              </defs>
-            </svg>
-            {/* eslint-disable-next-line @next/next/no-img-element -- full-bleed hero plate matches V4 prototype */}
+            {/* eslint-disable-next-line @next/next/no-img-element -- Tier-A shared hero pipeline (hero-chrome.css) */}
             <img
               className="hero__bgphoto-img"
               src="/images/case-ey/core-booth-hero.jpg"
               alt=""
               decoding="async"
               fetchPriority="high"
-              style={{ filter: `url(#${duotoneId}) contrast(1.06) brightness(0.78) saturate(0.85)` }}
             />
             <div className="hero__bgphoto-halftone" aria-hidden="true" />
             <div className="hero__bgphoto-grain" aria-hidden="true" />
