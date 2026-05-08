@@ -139,7 +139,7 @@ export function EyCaseView() {
         <div className="hero__inner">
           <p className="hero__tag">01 · BRIEF · CASE 05 OF 05</p>
           <h1 className="hero__h1">
-            Vaccine hesitancy isn&apos;t a comms problem.
+            Vaccine hesitancy isn&apos;t a comms problem.{" "}
             <span className="hero__h1-line2">
               It&apos;s a <em>showing-up</em> problem.
             </span>
@@ -213,8 +213,8 @@ export function EyCaseView() {
 
           <aside className="diagnosis__pull">
             <span className="diagnosis__pull-eyebrow">THE REFRAME</span>
-            The institutional voice was the wrong voice. The design call was <em>structural</em>, not communicational — where the vaccine showed up, who delivered it,
-            what the booth was next to.
+            The institutional voice was the wrong voice. The design call was <em>structural</em>, not communicational — where the vaccine showed up, who delivered it, what
+            the booth was next to.
           </aside>
         </div>
       </section>
@@ -250,9 +250,9 @@ export function EyCaseView() {
               access. A person who didn&apos;t trust the vaccine wouldn&apos;t convert no matter how visible the booth was.
             </p>
             <p>
-              The structural design call: <em>make the vaccine available — don&apos;t make it the reason people show up.</em> People came for the Savannah Bananas home game.
-              They came for the Twilight Criterium festival in Athens. They came for the Georgia Aquarium in Atlanta. The vaccine was on the same block. The vaccine was
-              always available. <b>The vaccine was never the first thing asked of you.</b>
+              The structural design call: <em>make the vaccine available — don&apos;t make it the reason people show up.</em> People came for the Savannah Bananas home game.{" "}
+              They came for the Twilight Criterium festival in Athens. They came for the Georgia Aquarium in Atlanta. The vaccine was on the same block. The vaccine was always
+              available. <b>The vaccine was never the first thing asked of you.</b>
             </p>
             <p>Three partner categories carried different trust currencies:</p>
           </div>
@@ -366,7 +366,7 @@ export function EyCaseView() {
                   <b>Twilight Criterium festival</b> · 20K spectators · downtown streets
                 </p>
                 <p className="stop__moment">
-                  Local <b>bluegrass played</b>. Students queuing for bands found they could get a shot at the same booth. Multiple levels of engagement became the operating
+                  Local <b>bluegrass played</b>. Students queuing for bands found they could get a shot at the same booth. Multiple levels of engagement became the operating{" "}
                   principle.
                 </p>
               </article>
@@ -386,6 +386,7 @@ export function EyCaseView() {
                 </p>
                 <p className="stop__moment">
                   Public art display anchored the program&apos;s final weekend. <b>Vaccinations ran in front of civil rights iconography</b> at the National Center for Civil
+                  {" "}
                   &amp; Human Rights — the last geography of American public health contested on moral grounds.
                 </p>
               </article>
@@ -488,7 +489,7 @@ export function EyCaseView() {
           </ul>
 
           <p className="delta__cdc">
-            ↗ EXTERNAL VALIDATION · <b>CDC NATIONAL BEST PRACTICE</b> · GA DPH adopted the four field-learning takeaways as operating principles for every regional expansion
+            ↗ EXTERNAL VALIDATION · <b>CDC NATIONAL BEST PRACTICE</b> · GA DPH adopted the four field-learning takeaways as operating principles for every regional expansion{" "}
             that followed.
           </p>
         </div>
@@ -536,7 +537,7 @@ export function EyCaseView() {
                 <span className="learning__num">02</span>
                 <span className="learning__cat">WHY PEOPLE STALLED</span>
               </header>
-              <h3 className="learning__title">Information noise wasn&apos;t pro- or anti-. It was paralyzing.</h3>
+              <h3 className="learning__title">Information noise wasn&apos;t pro- or anti-.{" "}It was paralyzing.</h3>
               <p className="learning__body">
                 Hesitancy was overload, not conviction — <em>&quot;too much information from both sides.&quot;</em> The booth replaced the algorithm.
               </p>

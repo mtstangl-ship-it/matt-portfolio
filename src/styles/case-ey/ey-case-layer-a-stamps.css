@@ -1,0 +1,60 @@
+/* ============================================================
+   EY · Layer A stamp stack (Centaur parity)
+   grammar.css sets `.tier-a-case-root section > * { position: relative }`
+   which beats density.css `.section-stamp { position: absolute }`.
+   Centaur fixes via `.case-centaur-portfolio .section-stamp`; EY needs the
+   same pattern under `.case-ey-portfolio` only — no bleed to other routes.
+   ============================================================ */
+
+.tier-a-case-root .case-ey-portfolio {
+  --layer-a-stamp-reserve: clamp(10rem, 24vw, 15rem);
+  --layer-a-fig-h: 2.625rem;
+  --layer-a-stamp-stack-top: calc(1rem + var(--layer-a-fig-h) + 1rem);
+}
+
+@media (min-width: 1181px) {
+  .tier-a-case-root .case-ey-portfolio .fig-stamp {
+    top: 1rem;
+    right: 1rem;
+    z-index: 14;
+  }
+
+  .tier-a-case-root .case-ey-portfolio section[data-screen-label]:not(#hero) > dl.section-stamp {
+    position: absolute !important;
+    top: var(--layer-a-stamp-stack-top) !important;
+    right: 1rem !important;
+    z-index: 13 !important;
+    width: max-content;
+    max-width: min(100%, 24rem);
+    display: grid !important;
+  }
+
+  .tier-a-case-root .case-ey-portfolio .diagnosis__inner,
+  .tier-a-case-root .case-ey-portfolio .approach__inner,
+  .tier-a-case-root .case-ey-portfolio .tour__inner,
+  .tier-a-case-root .case-ey-portfolio .delta__inner,
+  .tier-a-case-root .case-ey-portfolio .lesson__inner {
+    padding-right: calc(var(--gutter) + var(--layer-a-stamp-reserve));
+  }
+}
+
+/* Nav + case-picker band — hero chrome offsets (matches Centaur tier-a shell) */
+@media (min-width: 881px) {
+  .tier-a-case-root .case-ey-portfolio .hero .fig-stamp {
+    top: clamp(10.5rem, 22vw, 14rem);
+    right: var(--gutter);
+    z-index: 14;
+  }
+
+  .tier-a-case-root .case-ey-portfolio .hero .hero__id-strip {
+    top: clamp(11rem, 22vw, 14.75rem);
+    right: var(--gutter);
+    z-index: 13;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tier-a-case-root .case-ey-portfolio .hero .margin-note {
+    top: clamp(9.75rem, 17vw, 12.5rem);
+  }
+}
