@@ -84,7 +84,7 @@ export function EyCaseView() {
             {/* eslint-disable-next-line @next/next/no-img-element -- Tier-A shared hero pipeline (hero-chrome.css) */}
             <img
               className="hero__bgphoto-img"
-              src="/images/case-ey/core-booth-hero.jpg"
+              src="/case-studies/ey-core-halftone.png"
               alt=""
               decoding="async"
               fetchPriority="high"
@@ -97,10 +97,6 @@ export function EyCaseView() {
         }
         metaSlot={
           <>
-            <div className="hero__meta-cell">
-              <dt>PART NO.</dt>
-              <dd>EY-DPH-01</dd>
-            </div>
             <div className="hero__meta-cell">
               <dt>WINDOW</dt>
               <dd>AUG 2021 · 10-EVENT SERIES · 40 LIVE HOURS</dd>
