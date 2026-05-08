@@ -368,8 +368,73 @@
 .tier-a-case-root .case-ey-portfolio .tour__close b{ color: var(--ink); font-weight: 500; }
 
  
-.tier-a-case-root .case-ey-portfolio .delta{ position: relative; padding-block: clamp(4.5rem, 7vw, 7rem); border-bottom: 1px solid var(--ink-line); }
-.tier-a-case-root .case-ey-portfolio .delta__inner{ max-width: var(--col-wide); margin: 0 auto; padding: 0 var(--gutter); }
+.tier-a-case-root .case-ey-portfolio .delta{
+  position: relative;
+  padding-block: clamp(4.5rem, 7vw, 7rem);
+  /* Reset src/app/cases.css `.delta` (Wipro handoff) — global import; leaks onto EY §05 */
+  display: block;
+  grid-template-columns: none;
+  gap: unset;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--ink-line);
+  background: transparent;
+}
+.tier-a-case-root .case-ey-portfolio .delta__inner{
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+@media (min-width: 900px){
+  .tier-a-case-root .case-ey-portfolio .delta__inner{
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    column-gap: clamp(1.75rem, 3.5vw, 3rem);
+    align-items: start;
+  }
+}
+.tier-a-case-root .case-ey-portfolio .delta__aside{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+}
+/* In-flow metadata stamp (§05 right column) — overrides density.css absolute + mobile hide */
+.tier-a-case-root .case-ey-portfolio .section-stamp--delta-inflow{
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  left: auto !important;
+  z-index: auto !important;
+  margin: 0 0 1.25rem auto !important;
+  pointer-events: none;
+  white-space: normal !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  display: grid !important;
+}
+@media (max-width: 1180px){
+  .tier-a-case-root .case-ey-portfolio .section-stamp--delta-inflow{
+    margin-left: 0 !important;
+  }
+}
+.tier-a-case-root .case-ey-portfolio .delta__subhead{
+  font-family: var(--sans);
+  font-size: var(--t-lead);
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 1.35rem 0 0;
+  max-width: 62ch;
+  text-wrap: pretty;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.tier-a-case-root .case-ey-portfolio .delta__subhead-kicker{
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
 
  
 .tier-a-case-root .case-ey-portfolio .outcomes{
@@ -458,16 +523,7 @@
   .tier-a-case-root .case-ey-portfolio .outcome:nth-child(6n){ border-right: 0; }
 }
 
-.tier-a-case-root .case-ey-portfolio .delta__cdc{
-  margin: 1rem 0 0;
-  padding: 0.85rem 1.25rem;
-  border-left: 2px solid var(--accent);
-  background: transparent;
-  font-family: var(--mono); font-size: 11px;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--ink-2);
-}
-.tier-a-case-root .case-ey-portfolio .delta__cdc b{ color: var(--accent); font-weight: 500; letter-spacing: 0.18em; }
+
 
  
 .tier-a-case-root .case-ey-portfolio .lesson{ position: relative; padding-block: clamp(4.5rem, 7vw, 7rem); border-bottom: 1px solid var(--ink-line); }
@@ -988,7 +1044,7 @@
   .tier-a-case-root .case-ey-portfolio .hero__brief{ font-size: 0.95rem !important; line-height: 1.55 !important; }
   .tier-a-case-root .case-ey-portfolio .case-section-head h2{ font-size: clamp(1.5rem, 6.5vw, 2rem) !important; line-height: 1.15 !important; }
   .tier-a-case-root .case-ey-portfolio p{ text-wrap: pretty; }
-  .tier-a-case-root .case-ey-portfolio .monument__num{ font-size: clamp(140px, 28vw, 220px) !important; }
+  .tier-a-case-root .case-ey-portfolio .monument:not(.monument--delta) .monument__num{ font-size: clamp(140px, 28vw, 220px) !important; }
   .tier-a-case-root .case-ey-portfolio .strip__num{ font-size: clamp(24px, 7vw, 32px); }
   .tier-a-case-root .case-ey-portfolio .tally__head, .tier-a-case-root .case-ey-portfolio .tally__yields, .tier-a-case-root .case-ey-portfolio .tally__col-name{ font-size: 10px; }
 }
@@ -1138,6 +1194,52 @@
   color: var(--accent);
   margin-top: -0.25rem;
 }
+.tier-a-case-root .case-ey-portfolio .monument__underline-curve{
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+.tier-a-case-root .case-ey-portfolio .monument__underline--drawn .monument__underline-curve{
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.05s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.tier-a-case-root .case-ey-portfolio .monument__underline-cap{
+  opacity: 0;
+}
+.tier-a-case-root .case-ey-portfolio .monument__underline--drawn .monument__underline-cap{
+  opacity: 1;
+  transition: opacity 0.22s ease 0.92s;
+}
+@media (prefers-reduced-motion: reduce){
+  .tier-a-case-root .case-ey-portfolio .monument__underline-curve{
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+  .tier-a-case-root .case-ey-portfolio .monument__underline-cap{
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}
+
+.tier-a-case-root .case-ey-portfolio .monument--delta{
+  margin: 0;
+  padding: 0.35rem 0 1.5rem;
+  width: 100%;
+  min-width: 0;
+}
+.tier-a-case-root .case-ey-portfolio .monument--delta .monument__stack{
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+.tier-a-case-root .case-ey-portfolio .monument--delta .monument__num{
+  font-size: clamp(56px, 18vw, 132px);
+  line-height: 0.88;
+}
+@media (min-width: 900px){
+  .tier-a-case-root .case-ey-portfolio .monument--delta .monument__num{
+    font-size: clamp(72px, 8.25vw, 148px);
+  }
+}
 
 .tier-a-case-root .case-ey-portfolio .monument__marg{
   list-style: none;
@@ -1280,7 +1382,7 @@
 
  
 @media (min-width: 1180px){
-  .tier-a-case-root .case-ey-portfolio #diagnosis > .section-stamp, .tier-a-case-root .case-ey-portfolio #approach > .section-stamp, .tier-a-case-root .case-ey-portfolio #tour > .section-stamp, .tier-a-case-root .case-ey-portfolio #delta > .section-stamp, .tier-a-case-root .case-ey-portfolio #lesson > .section-stamp{
+  .tier-a-case-root .case-ey-portfolio #diagnosis > .section-stamp, .tier-a-case-root .case-ey-portfolio #approach > .section-stamp, .tier-a-case-root .case-ey-portfolio #tour > .section-stamp, .tier-a-case-root .case-ey-portfolio #lesson > .section-stamp{
     top: 4rem;
     right: 2.25rem;
   }
@@ -1340,7 +1442,7 @@
   .tier-a-case-root .case-ey-portfolio .poster{
     margin: 1.25rem 0 !important;
   }
-  .tier-a-case-root .case-ey-portfolio .monument{
+  .tier-a-case-root .case-ey-portfolio .monument:not(.monument--delta){
     margin: 1.5rem 0 1.25rem !important;
     padding: 1rem 0 1.25rem !important;
   }

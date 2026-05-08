@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
 import { EyCaseTallyFigure } from "./EyCaseTally";
@@ -26,6 +26,8 @@ function DimRibbon({ label }: { label: string }) {
 
 export function EyCaseView() {
   const tallyRef = useRef<HTMLElement | null>(null);
+  const monumentUnderlineRef = useRef<SVGSVGElement | null>(null);
+  const [monumentUnderlineDrawn, setMonumentUnderlineDrawn] = useState(false);
 
   useEffect(() => {
     const tally = tallyRef.current;
@@ -53,6 +55,31 @@ export function EyCaseView() {
     io.observe(tally);
     return () => io.disconnect();
   }, []);
+
+  useEffect(() => {
+    const svg = monumentUnderlineRef.current;
+    if (!svg || monumentUnderlineDrawn) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      setMonumentUnderlineDrawn(true);
+      return;
+    }
+    if (!("IntersectionObserver" in window)) {
+      setMonumentUnderlineDrawn(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setMonumentUnderlineDrawn(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(svg);
+    return () => io.disconnect();
+  }, [monumentUnderlineDrawn]);
 
   return (
     <div className="case-ey-portfolio case-ey-body">
@@ -358,54 +385,84 @@ export function EyCaseView() {
         <span className="margin-note">DRAWING 05 · EXTERNAL VALIDATION</span>
         <span className="fig-stamp">FIG. 05 · EXTERNAL VALIDATION</span>
 
-        <dl className="section-stamp" aria-label="Section metadata">
-          <dt>DRAWING NO.</dt>
-          <dd>05 / 06</dd>
-          <dt>CLAIM</dt>
-          <dd>715 · PROGRAM-ATTRIBUTED</dd>
-          <dt>BASELINE</dt>
-          <dd>HESITANCY · NOT POPULATION</dd>
-          <dt>LAST REV.</dt>
-          <dd>04/26</dd>
-        </dl>
-
         <div className="delta__inner">
-          <header className="case-section-head">
-            <p className="kicker">05 · EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS</p>
-            <h2>
-              715 is small on a dashboard. <em>Enormous</em> against a hesitancy baseline.
-            </h2>
-          </header>
-
-          <div className="monument" aria-label="715 vaccinations">
-            <p className="monument__label">VACCINATIONS · IN ARMS</p>
-            <div className="monument__stack">
-              <p className="monument__num" aria-label="715">
-                715
-              </p>
-              <svg className="monument__underline" viewBox="0 0 600 22" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M 4 14 Q 100 4, 200 11 T 400 9 T 596 12"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-                <line x1="4" y1="18" x2="4" y2="8" stroke="currentColor" strokeWidth="1" />
-                <line x1="596" y1="18" x2="596" y2="8" stroke="currentColor" strokeWidth="1" />
-              </svg>
-            </div>
-
-            <ul className="monument__marg" aria-label="Context">
-              <li className="monument__marg-item monument__marg-item--tl">40 live hours</li>
-              <li className="monument__marg-item monument__marg-item--tr">3 cities</li>
-            </ul>
+          <div className="delta__main">
+            <header className="case-section-head">
+              <p className="kicker">05 · EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS</p>
+              <h2>
+                715 is small on a dashboard. <em>Enormous</em> against a hesitancy baseline.
+              </h2>
+            </header>
+            <p className="delta__subhead">
+              ↗{" "}
+              <strong className="delta__subhead-kicker">CDC NATIONAL BEST PRACTICE</strong>
+              {" "}
+              · GA DPH adopted the four field-learning takeaways as operating principles for every regional expansion that followed.
+            </p>
           </div>
 
-          <p className="delta__cdc">
-            ↗ EXTERNAL VALIDATION · <b>CDC NATIONAL BEST PRACTICE</b> · GA DPH adopted the four field-learning takeaways as operating principles for every regional expansion{" "}
-            that followed.
-          </p>
+          <aside className="delta__aside" aria-label="715 landmark and section metadata">
+            <dl className="section-stamp section-stamp--delta-inflow" aria-label="Section metadata">
+              <dt>DRAWING NO.</dt>
+              <dd>05 / 06</dd>
+              <dt>CLAIM</dt>
+              <dd>715 · PROGRAM-ATTRIBUTED</dd>
+              <dt>BASELINE</dt>
+              <dd>HESITANCY · NOT POPULATION</dd>
+              <dt>LAST REV.</dt>
+              <dd>04/26</dd>
+            </dl>
+
+            <div className="monument monument--delta" aria-label="715 vaccinations">
+              <p className="monument__label">VACCINATIONS · IN ARMS</p>
+              <div className="monument__stack">
+                <p className="monument__num" aria-label="715">
+                  715
+                </p>
+                <svg
+                  ref={monumentUnderlineRef}
+                  className={`monument__underline${monumentUnderlineDrawn ? " monument__underline--drawn" : ""}`}
+                  viewBox="0 0 600 22"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    className="monument__underline-curve"
+                    pathLength="100"
+                    d="M 4 14 Q 100 4, 200 11 T 400 9 T 596 12"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    className="monument__underline-cap monument__underline-cap--l"
+                    x1="4"
+                    y1="18"
+                    x2="4"
+                    y2="8"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                  />
+                  <line
+                    className="monument__underline-cap monument__underline-cap--r"
+                    x1="596"
+                    y1="18"
+                    x2="596"
+                    y2="8"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                  />
+                </svg>
+              </div>
+
+              <ul className="monument__marg" aria-label="Context">
+                <li className="monument__marg-item monument__marg-item--tl">40 live hours</li>
+                <li className="monument__marg-item monument__marg-item--tr">3 cities</li>
+              </ul>
+            </div>
+          </aside>
         </div>
       </section>
 
