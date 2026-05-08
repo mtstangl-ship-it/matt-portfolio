@@ -113,7 +113,7 @@
   align-items: start;
 }
 
-/* ====================== SHARED SECTION HEAD ====================== */
+/* ====================== SECTION SHELL (unscoped — TODO: portfolio-scope like EY) ====================== */
 .case-section {
   position: relative;
   padding-block: clamp(4.5rem, 8vw, 7.5rem);
@@ -124,34 +124,21 @@
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
-.case-section-head {
-  max-width: var(--col-wide);
-  margin: 0 auto 2.5rem;
+
+/* Two-column section header — Centaur Records markup only (title column wrapped in one cell). */
+.tier-a-case-root .case-centaur-portfolio .case-section-head {
   padding: 0 var(--gutter);
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: clamp(1.5rem, 3vw, 3rem);
   align-items: end;
 }
-.case-section-head h2 {
-  font-family: var(--sans);
-  font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  margin: 0.65rem 0 0;
-  text-wrap: balance;
-}
-.case-section-head h2 em { font-style: italic; color: var(--accent); }
-.case-section-head__sub {
-  color: var(--ink-2);
-  font-size: var(--t-lead);
-  margin: 0;
-  text-wrap: pretty;
-  max-width: 48ch;
-}
+
 @media (max-width: 767px) {
-  .case-section-head { grid-template-columns: 1fr; gap: 1rem; }
+  .tier-a-case-root .case-centaur-portfolio .case-section-head {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 /* ====================== HERO ====================== */

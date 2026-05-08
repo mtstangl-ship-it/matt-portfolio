@@ -198,3 +198,34 @@
     max-width: max-content;
   }
 }
+
+/* ---- Tier-A shared section head baseline (no grid — per-case layouts opt in) ---- */
+.tier-a-case-root .case-section-head {
+  box-sizing: border-box;
+  max-width: var(--col-wide);
+  margin-inline: auto;
+  margin-bottom: 2.5rem;
+}
+
+.tier-a-case-root .case-section-head h2 {
+  font-family: var(--sans);
+  font-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0.65rem 0 0;
+  text-wrap: balance;
+}
+
+.tier-a-case-root .case-section-head h2 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.tier-a-case-root .case-section-head__sub {
+  color: var(--ink-2);
+  font-size: var(--t-lead);
+  margin: 0;
+  text-wrap: pretty;
+  max-width: 48ch;
+}
