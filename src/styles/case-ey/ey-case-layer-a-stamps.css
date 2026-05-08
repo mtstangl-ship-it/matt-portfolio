@@ -1,9 +1,8 @@
 /* ============================================================
    EY · Layer A stamp stack (Centaur parity)
-   grammar.css sets `.tier-a-case-root section > * { position: relative }`
-   which beats density.css `.section-stamp { position: absolute }`.
-   Centaur fixes via `.case-centaur-portfolio .section-stamp`; EY needs the
-   same pattern under `.case-ey-portfolio` only — no bleed to other routes.
+   grammar.css uses `section > *:not(.section-stamp):not(.fig-stamp):not(.margin-note)`
+   so density `.section-stamp { position: absolute }` applies to stamps on Tier-A routes.
+   EY reinforces stacking offsets here under `.case-ey-portfolio` only — no bleed.
    ============================================================ */
 
 .tier-a-case-root .case-ey-portfolio {

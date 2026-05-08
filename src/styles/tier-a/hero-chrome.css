@@ -1,0 +1,75 @@
+/* =========================================================
+   TIER-A SHARED HERO CHROME — CaseHero shell (all Tier-A cases)
+   Scoped under .tier-a-case-root only. Per-case overrides live in
+   case-ai.css / ey-case.css etc. under .tier-a-case-root .case-{slug}-portfolio.
+   ========================================================= */
+
+/* Tier-A React: hero is first under fixed nav — plate bleeds to viewport top */
+.tier-a-case-root .tier-a-react-case section.hero:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Zone 3 — copy block: breathe away from case-picker band + fixed nav */
+.tier-a-case-root .tier-a-react-case section.hero:first-of-type .hero__plate .hero__inner {
+  margin-top: clamp(3.5rem, 5.5vw, 5.75rem);
+  padding-top: clamp(2.25rem, 4vw, 3.75rem);
+}
+
+/* Tier-A · case picker on the photo plate (zone 2) */
+.tier-a-case-root .hero__plate-picker {
+  position: relative;
+  z-index: 3;
+  padding: clamp(4.75rem, 4.25rem + 6vw, 6.75rem) var(--gutter) clamp(1.25rem, 2.5vw, 1.75rem);
+  background: linear-gradient(180deg, rgba(10, 17, 16, 0.9) 0%, rgba(10, 17, 16, 0.42) 52%, transparent 100%);
+}
+
+.tier-a-case-root .hero__plate-picker .case-picker-hint--label {
+  color: var(--ink-3);
+  font-size: clamp(9px, 0.62rem + 0.1vw, 11px);
+  letter-spacing: 0.16em;
+}
+
+.tier-a-case-root .hero__plate-picker .case-picker {
+  gap: 0.5rem 0.45rem;
+}
+
+/* Hero identity strip — top-right (CaseHero) */
+.tier-a-case-root .hero__id-strip {
+  position: absolute;
+  top: clamp(5rem, 10vh, 7rem);
+  right: var(--gutter);
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.5rem 1.35rem;
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  padding: 0.85rem 1rem;
+  z-index: 4;
+  white-space: nowrap;
+}
+
+.tier-a-case-root .hero__id-strip dt {
+  margin: 0;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+}
+
+.tier-a-case-root .hero__id-strip dd {
+  color: var(--ink);
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 880px) {
+  .tier-a-case-root .hero__id-strip {
+    position: static;
+    margin: 0 auto 1.25rem;
+    max-width: max-content;
+  }
+}
