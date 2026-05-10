@@ -30,5 +30,20 @@ How it manifests: Each film tile gets a fiche-style corner crop mark (⌐) that 
 Where it applies: Case Studies hub, each card
 How it manifests: Each card gets a figure stamp (FIG. 01-A) with a tiny inline sparkline, pulse, or tier indicator. On tap, the glyph animates into the hero element of the next page.
 
+## Technical pattern for scroll-triggered moves
+
+Several of the seven moves are scroll-triggered (counter rises on entry, tier ladder draws construction lines on scroll, six-column collapse animates on scroll, case card glyph animates on click-through). The technical pattern is shared across all of them:
+
+- **Trigger:** IntersectionObserver. Fire once when the element first enters the viewport.
+- **No re-trigger:** scrolling up and back down does not replay the animation. The element renders in its final state once triggered.
+- **Reduced motion:** if the user has `prefers-reduced-motion: reduce`, render the final state immediately. Skip the animation, do not hide the content.
+- **Single-fire principle:** no looping ambient motion. Every move runs once and stops at its end state. (Hover-triggered moves like Move 06 film preview are the exception — they replay on hover.)
+
+Working reference implementation: EY Section 5 underline (`monument__underline--drawn` class toggled by an IntersectionObserver after the monument enters viewport, paired with CSS `stroke-dasharray` animation respecting `prefers-reduced-motion`).
+
+Apply this pattern to every new scroll-triggered move unless a brief explicitly calls for different behavior.
+
+---
+
 ## How to use this file
 When writing each brief, pull ONLY the moves relevant to that page. Don't paste all seven into every brief.
