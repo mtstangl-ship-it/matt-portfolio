@@ -212,6 +212,60 @@ On mobile, video previews must play as a loop without requiring hover or touch i
 
 ---
 
+## STANDING VISUAL CONVENTIONS
+
+### Hero structure (case studies)
+
+Tier A case studies share `CaseHero` (`section.hero`, `.hero__plate`, photo stack, picker zone, identity strip, meta strip). Shared layout and photo finishing layer live in `src/styles/tier-a/hero-chrome.css`. Case-specific typography, accents, and hero photo framing overrides load via each route's stylesheet bundle (e.g. `src/styles/case-centaur/index.css`, `src/styles/case-ey/index.css`).
+
+### Hero photograph treatment
+
+Each case study uses its own hero photograph. Photos are **pre-processed halftoned PNGs** committed to the repo. CSS in `src/styles/tier-a/hero-chrome.css` provides the finishing layer (filter, scrim, fade, grain) — not the halftone itself.
+
+**Visual aesthetic for the halftoned photo:**
+- Cool monochrome / desaturated
+- Deep blacks, mid-tone falloff
+- Visible dot pattern at native resolution
+- Tonal range that lets the CSS finishing layer push the photo into the background as texture, not foreground
+
+**Working examples:** `centaur-literal.png` (Case 01), `ey-core-halftone.png` (Case 05).
+
+**Halftone processing:** ImageMagick can produce a serviceable halftone from a raw photo (`-ordered-dither h4x4a` is the working starting point). Photoshop with a saved action produces closer fidelity to Centaur's reference. The image processing pipeline is upstream of Claude Design — the halftoned source image is the input, not the output.
+
+### Per-photo object-position tuning
+
+Hero photos render with `object-fit: cover` on a viewport-wide plate. As the viewport gets wider, the plate's aspect ratio gets wider, and the photo gets cropped more aggressively from top and bottom. Without explicit `object-position`, the key visual content of the photo gets cropped away at extreme aspect ratios (ultra-wide displays).
+
+Every case study's hero photo needs an `object-position` value tuned to where the key subject sits in the source image. The value lives in `src/styles/case-{slug}/index.css` (or per-case stylesheet that loads after the auto-generated CSS, to survive regeneration).
+
+**How to choose the value:**
+
+`object-position` takes two percentages — horizontal and vertical anchor points. The first percentage is left-to-right (0% = left edge, 100% = right edge, 50% = horizontal center). The second is top-to-bottom (0% = top edge, 100% = bottom edge).
+
+When the plate gets cropped, the anchor stays visible. So if the key content is in the lower-third of the source image, anchor near the bottom (e.g. `50% 75%` or `50% 90%`). If the key content is upper-left, anchor toward upper-left (e.g. `30% 25%`).
+
+**Working examples:**
+- Case 01 · Centaur Practice: `object-position: 50% 90%` (motorcycle in lower third of source image; anchor near bottom keeps motorcycle visible at all viewport widths)
+- Case 05 · EY Healthcare: `object-position: 38% 52%` (handshake center-horizontal, slightly below middle)
+
+**Tuning process per case:**
+1. Identify where the key visual content sits in the source image
+2. Apply a starting `object-position` value
+3. Verify at three viewport widths: ~1200px, ~1600px, ~2200px+
+4. Tune until the key content is visible at every tested width
+
+This is per-photo work. There is no universal `object-position` value that works across all case studies.
+
+### Hero plate sizing
+
+The hero plate uses `min-height: min(78vh, 820px)` in `src/styles/tier-a/hero-chrome.css`. This was tuned to give the hero proper vertical presence relative to the site nav. Don't change this without a specific design reason — it cascades into how every case study's hero photo crops and reads.
+
+### Six-section case study structure
+
+Tier A case studies follow the six-section narrative discipline (hero → telemetry/equivalent → method/pivot → records/artifacts → bulletin/reversal → handoff). Exact section labels vary by case; canonical reference: `BUILD-NOTES.md`.
+
+---
+
 ## ACCESSIBILITY & MOBILE HEURISTICS (apply everywhere)
 - 44px minimum tap target on all interactive elements
 - No text below 14px (mono labels can be 11px if uppercase + tracked)
