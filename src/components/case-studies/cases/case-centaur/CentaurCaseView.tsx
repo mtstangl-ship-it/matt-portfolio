@@ -270,7 +270,7 @@ export function CentaurCaseView() {
         </div>
         <div className="sheet__cell">
           <span>PAGE</span>
-          <b>CASE 01 · CENTAUR</b>
+          <b>CASE 01 · CENTAUR PRACTICE</b>
         </div>
       </footer>
     </div>
