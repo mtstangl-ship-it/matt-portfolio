@@ -12,14 +12,7 @@ The Centaur Practice case study (`/case-studies/ai`) is the locked architectural
 
 - **Three-zone hero:** site nav at top, case picker tabs below nav, hero copy at bottom (with generous breathing room between zones)
 
-> **Per-case hero imagery** — each case study uses its own hero photograph. The shared element across cases is the treatment pipeline (halftone + duotone + scrim + fade), applied identically to every case study's hero photo. This was originally locked as a shared motorcycle photo across all 5 cases but was revised during EY V3 review to allow per-case imagery as long as the treatment pipeline matches Centaur's exactly.
->
-> Examples:
-> - Case 01 · Centaur Practice — `centaur-literal.png` (motorcycle photo)
-> - Case 05 · EY Healthcare — CORE booth photo
-> - Cases 02–04 — TBD when those case studies are briefed
->
-> The treatment pipeline is the binding contract, not the photo. Any case can use any photo as long as the halftone density, scrim opacity, duotone color anchor, and fade match Centaur's reference implementation.
+- **Per-case hero imagery:** each case uses its own hero photograph, pre-processed as a halftoned PNG. The treatment pipeline is the binding contract across cases. See `DESIGN-NOTES.md` for the visual standard.
 
 - **Six-section structure:** Hero → Telemetry/equivalent → Method/Pivot → Records/Artifacts → Bulletin/Reversal → Handoff
 - **Affordance pattern:** opacity box only (no companion divider lines, no competing accent strokes)
@@ -82,6 +75,8 @@ These class names are used by both home-v2 and case studies. They MUST be scoped
 - `.dim`, `.fig-stamp`, `.margin-note`
 - `.cred`, `.case`, `.tile`
 - `.xhair` and all variants
+- `.case-section`, `.case-section__inner`, `.case-section-head`, `.case-section-head__sub`
+- Any class name generic enough to plausibly be reused on another page (e.g. `.delta`, `.split`, `.timeline`, `.outcomes`, `.ribbon`)
 
 ### Class names that are safe global
 
@@ -91,6 +86,19 @@ Some class names are unique to either home-v2 or case studies and don't need sco
 - Home-only: `.home-v2-root`, `.problem-ledger-*`, `.dash__*`
 
 When in doubt, scope it. Over-scoping is safe; under-scoping reintroduces the soft-nav bug.
+
+### Generic-named class collision risk
+
+`src/app/cases.css` and Centaur's `case-ai.css` (instrument classes like `.gauge*`, `.timeline*`, `.split*`, `.review-console*`, `.diff*`, `.signal-log*`, `.tell*`, `.ribbon`) contain unscoped or under-scoped rules that will bleed into any case study using overlapping class names.
+
+The Section 5 of EY case study originally used `section.delta`, which collided with an unscoped `.delta { display: grid; background: var(--line); ... }` rule in `cases.css` (Wipro UI work). The collision rendered the section as a grid of gray cells instead of a normal block-flow section. Diagnosed only after a full evidence-gathering round.
+
+The rule: any case-specific class name that's likely to be reused (`.delta`, `.split`, `.timeline`, etc.) must be **case-prefixed in its name**, not just dual-scoped in CSS. For example, `.ey-external-validation` instead of `.delta`. This eliminates the collision risk entirely rather than relying on cascade specificity.
+
+When introducing a new section or component class:
+- If the class name is generic enough that another page could plausibly use it, prefix it with the case slug
+- Search `src/app/cases.css` and `src/styles/case-centaur/case-ai.css` for the proposed class name before committing
+- If found unscoped, either rename your class or scope the existing rule before proceeding
 
 ---
 
@@ -123,6 +131,34 @@ When Cursor finishes work that requires visual verification, it must:
 1. Explicitly state which verifications were done (code-only vs visual)
 2. Flag what remains unverified
 3. Identify what Matt needs to check on Vercel preview before declaring done
+
+### Three-state visual verification gate
+
+Before declaring a case study round done, the affected page must be verified on Vercel preview in three states. Cursor cannot perform these checks; they're Matt's responsibility before merge:
+
+1. **Direct load** — paste the URL fresh into a browser tab. The page renders correctly without prior context.
+2. **Soft navigation** — arrive at the page from another route within the site (Home → Case Studies → target case). The page renders correctly with previously-loaded CSS chunks in memory.
+3. **Hard refresh** — Cmd+Shift+R (or Ctrl+Shift+R) on the page. The page renders correctly after cache invalidation.
+
+If any of the three states differs from the others, there's a CSS scoping or chunk-loading bug. The fix is to scope the offending rule, not to debug rendering order.
+
+Plus a regression check: open the OTHER currently-shipped case study in any state. Confirm no unintended changes from the work just done.
+
+### Diagnostic-first when fixes don't land
+
+When a Cursor round reports "done" but the rendered output doesn't reflect the fix, do not send another speculative fix. Send a diagnostic prompt that gathers evidence:
+
+- What file did the edit land in?
+- Is that file actually in the import chain of the route?
+- Is the edited rule winning the cascade?
+- Does the rule the prompt described actually exist in source?
+
+The Centaur saga (10+ rounds in March 2026) and the EY Section 5 redo demonstrated that speculative fixes compound interpretation errors. Evidence-first rounds converge faster.
+
+This applies whenever:
+- A Cursor "done" report doesn't match visual output on Vercel
+- Two consecutive fixes don't resolve the same symptom
+- A fix produces unexpected new symptoms
 
 Default to flagging when visual verification is needed but not possible from Cursor's environment. Don't say "fixed and verified" if only build verification was done.
 
@@ -192,6 +228,28 @@ These are locked design decisions from earlier project conversations. They do no
 - **"Selected work."** is the locked title for the Case Studies hub.
 - **Matt is in Denver (DEN), not Atlanta.** Personal pages use DEN. Case studies that are factually about Atlanta-based work (EY Healthcare for Georgia DPH) keep ATL where factually accurate.
 - **Em-dash sweep deferred** to end-of-build (see above).
+
+---
+
+## Tier A Debt
+
+Deferred work tracked here. Cleared as items ship. Distinct from Tier B/C polish — these items are foundation issues that will eventually need addressing, just not in the current build round.
+
+### CSS hygiene
+- Audit and dual-scope `src/app/cases.css`. Known collision: `.delta` (resolved by renaming EY section). Likely other unscoped generic-named rules.
+- Audit and dual-scope Centaur instrument classes in `case-ai.css`: `.gauge*`, `.timeline*`, `.split*`, `.review-console*`, `.diff*`, `.signal-log*`, `.tell*`, `.ribbon`
+- Remove orphaned EY CSS (unused class definitions surfaced in pre-merge audit): `outcomes*`, `trust-diagram*`, `sheet-footer*`, `learning__*`, `hero__bgphoto-img--flip`, `hero__h1-line2`, `tally__total-plus`
+
+### Visual parity
+- EY hero plate height vs Centaur (slight difference, defer until both photos are in final state)
+- EY hero photo treatment doesn't fully match Centaur (ImageMagick halftone approximation; Photoshop pass with saved action would produce closer parity)
+
+### Code identifier consistency
+- Confirm Section 5 of EY received code-identifier rename (not just visible labels) when class was renamed from `delta` to `external-validation`. If only labels were renamed, complete the code rename.
+
+### End of build
+- Em-dash sweep across entire repo (already documented above)
+- Consolidated merge `tier-a-rebuild` → `main`
 
 ---
 
