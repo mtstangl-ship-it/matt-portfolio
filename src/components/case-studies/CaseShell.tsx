@@ -125,7 +125,7 @@ export function CaseShell({
         <>
           <div className="mx-auto flex max-w-[960px] flex-col gap-5 px-6 pt-10">{legacyCaseChrome}</div>
           <main className={mainClassName}>
-            <div ref={bodyRef}>
+            <div ref={bodyRef} className="case-legacy-root">
               <div dangerouslySetInnerHTML={{ __html: body ?? "" }} />
             </div>
           </main>
