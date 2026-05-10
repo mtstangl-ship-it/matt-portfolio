@@ -248,7 +248,15 @@
 .tier-a-case-root .case-ey-portfolio .approach__close b{ color: var(--ink); font-weight: 500; }
 
  
-.tier-a-case-root .case-ey-portfolio .tour{ position: relative; padding-block: clamp(4.5rem, 7vw, 7rem); border-bottom: 1px solid var(--ink-line); }
+.tier-a-case-root .case-ey-portfolio .tour{
+  position: relative;
+  padding-block: clamp(4.5rem, 7vw, 7rem);
+  border-bottom: 1px solid var(--ink-line);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 720px;
+}
 .tier-a-case-root .case-ey-portfolio .tour__inner{ max-width: var(--col-wide); margin: 0 auto; padding: 0 var(--gutter); }
 .tier-a-case-root .case-ey-portfolio .tour__body{
   font-size: var(--t-lead); color: var(--ink-2);
@@ -284,9 +292,27 @@
   position: relative;
   padding: 1.5rem 1.5rem 1.75rem;
   border-right: 1px solid var(--ink-line);
-  display: flex; flex-direction: column; gap: 0.65rem;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-height: 160px;
+  transition: background 200ms;
 }
-.tier-a-case-root .case-ey-portfolio .stop:last-child{ border-right: 0; }
+.tier-a-case-root .case-ey-portfolio .stop:last-child{
+  border-right: 0;
+  border-bottom: 0;
+}
+.tier-a-case-root .case-ey-portfolio .stop:hover{
+  background: oklch(0.175 0.015 220 / 0.5);
+}
+.tier-a-case-root .case-ey-portfolio .stop > *{
+  padding: 18px 14px;
+  border-right: 1px dashed var(--line);
+}
+.tier-a-case-root .case-ey-portfolio .stop > *:last-child{
+  border-right: 0;
+}
 .tier-a-case-root .case-ey-portfolio .stop__date{
   font-family: var(--mono); font-size: 10px;
   letter-spacing: 0.18em; text-transform: uppercase;
@@ -366,6 +392,15 @@
   max-width: 62ch; text-wrap: pretty; margin: 2.5rem 0 0;
 }
 .tier-a-case-root .case-ey-portfolio .tour__close b{ color: var(--ink); font-weight: 500; }
+
+@media (max-width: 960px){
+  .tier-a-case-root .case-ey-portfolio .tour{ min-width: 0; }
+  .tier-a-case-root .case-ey-portfolio .stop > *{
+    border-right: 0;
+    border-bottom: 1px dashed var(--line);
+    padding: 12px 14px;
+  }
+}
 
 .tier-a-case-root .case-ey-portfolio .external-validation{
   position: relative;

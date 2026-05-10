@@ -1,7 +1,6 @@
 /* Phase 2 hygiene pass — see reference/cases-css-phase1-audit.md and BUILD-NOTES.md Tier A Debt section.
  * Removed dead rules: .topnav, .submenu, .tweaks-panel, .next
- * Scoped legacy-only rules under .case-legacy-root
- * .tour / .stop deliberately left unscoped in this round; handled separately in Step 2.
+ * Scoped legacy-only rules under .case-legacy-root (incl. .tour / .stop tour strip — Step 2).
  */
 
 /* ---------- masthead ---------- */
@@ -1156,69 +1155,69 @@ article[data-case="ey"]{--ey-red: oklch(0.62 0.21 25); --ey-blue: oklch(0.55 0.1
   opacity:.8;
 }
 
-.tour{display:flex;flex-direction:column;gap:0;min-width:720px}
-.tour-masthead{
+.case-legacy-root .tour{display:flex;flex-direction:column;gap:0;min-width:720px}
+.case-legacy-root .tour-masthead{
   display:grid;grid-template-columns:1fr 1.6fr;gap:24px;
   padding:16px 18px 20px;border-bottom:2px solid var(--line-2);
   background:oklch(0.175 0.015 220);
 }
-.tm-lockup{display:flex;flex-direction:column;gap:4px}
-.tm-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--muted);font-weight:600}
-.tm-org{font-size:15px;color:var(--ink);font-weight:500;letter-spacing:-.005em;line-height:1.3}
-.tm-goals{display:flex;flex-direction:column;gap:4px;padding-left:20px;border-left:1px solid var(--line)}
-.tm-g{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2);line-height:1.5}
-.tm-g em{font-style:normal;color:var(--ey-yellow);font-weight:600;margin-right:6px}
+.case-legacy-root .tm-lockup{display:flex;flex-direction:column;gap:4px}
+.case-legacy-root .tm-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--muted);font-weight:600}
+.case-legacy-root .tm-org{font-size:15px;color:var(--ink);font-weight:500;letter-spacing:-.005em;line-height:1.3}
+.case-legacy-root .tm-goals{display:flex;flex-direction:column;gap:4px;padding-left:20px;border-left:1px solid var(--line)}
+.case-legacy-root .tm-g{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2);line-height:1.5}
+.case-legacy-root .tm-g em{font-style:normal;color:var(--ey-yellow);font-weight:600;margin-right:6px}
 
-.stop{
+.case-legacy-root .stop{
   display:grid;grid-template-columns: 108px 1fr 1.3fr 1fr;
   gap:0;border-bottom:1px solid var(--line);
   min-height:160px;align-items:stretch;
   transition:background 200ms;
 }
-.stop:hover{background:oklch(0.175 0.015 220 / .5)}
-.stop:last-child{border-bottom:0}
-.stop > *{padding:18px 14px;border-right:1px dashed var(--line)}
-.stop > *:last-child{border-right:0}
+.case-legacy-root .stop:hover{background:oklch(0.175 0.015 220 / .5)}
+.case-legacy-root .stop:last-child{border-bottom:0}
+.case-legacy-root .stop > *{padding:18px 14px;border-right:1px dashed var(--line)}
+.case-legacy-root .stop > *:last-child{border-right:0}
 
-.stop-date{
+.case-legacy-root .stop-date{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   background:oklch(0.175 0.015 220);gap:0;
   font-variant-numeric:tabular-nums;
 }
-.sd-mo{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ey-yellow);font-weight:600}
-.sd-day{font-size:42px;font-weight:300;line-height:.9;letter-spacing:-.03em;color:var(--ink);margin:4px 0}
-.sd-day small{font-size:.5em;color:var(--muted);font-weight:400;letter-spacing:-.01em;margin-left:1px}
-.sd-wk{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted)}
+.case-legacy-root .sd-mo{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ey-yellow);font-weight:600}
+.case-legacy-root .sd-day{font-size:42px;font-weight:300;line-height:.9;letter-spacing:-.03em;color:var(--ink);margin:4px 0}
+.case-legacy-root .sd-day small{font-size:.5em;color:var(--muted);font-weight:400;letter-spacing:-.01em;margin-left:1px}
+.case-legacy-root .sd-wk{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted)}
 
-.stop-city{display:flex;flex-direction:column;gap:6px;justify-content:center}
-.stop-city h3{
+.case-legacy-root .stop-city{display:flex;flex-direction:column;gap:6px;justify-content:center}
+.case-legacy-root .stop-city h3{
   margin:0;font-weight:500;letter-spacing:-.025em;
   font-size:clamp(28px, 4vw, 40px);color:var(--ink);line-height:1;
 }
-.stop-city .stop-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.case-legacy-root .stop-city .stop-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 
-.stop-venues{display:flex;flex-direction:column;gap:10px;justify-content:center}
-.sv{display:flex;flex-direction:column;gap:2px}
-.sv-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ey-red);font-weight:600}
-.sv-v{font-size:13px;color:var(--ink);font-weight:500;letter-spacing:-.005em;line-height:1.3}
-.sv-sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;color:var(--muted);line-height:1.45}
+.case-legacy-root .stop-venues{display:flex;flex-direction:column;gap:10px;justify-content:center}
+.case-legacy-root .sv{display:flex;flex-direction:column;gap:2px}
+.case-legacy-root .sv-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ey-red);font-weight:600}
+.case-legacy-root .sv-v{font-size:13px;color:var(--ink);font-weight:500;letter-spacing:-.005em;line-height:1.3}
+.case-legacy-root .sv-sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;color:var(--muted);line-height:1.45}
 
-.stop-moment{display:flex;flex-direction:column;gap:6px;background:oklch(0.175 0.015 220 / .6);border-left:2px solid var(--ey-yellow)}
-.sm-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ey-yellow);font-weight:600}
-.stop-moment p{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.5;max-width:34ch}
-.stop-moment p em{font-style:italic;color:var(--ink);font-weight:500}
+.case-legacy-root .stop-moment{display:flex;flex-direction:column;gap:6px;background:oklch(0.175 0.015 220 / .6);border-left:2px solid var(--ey-yellow)}
+.case-legacy-root .sm-k{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ey-yellow);font-weight:600}
+.case-legacy-root .stop-moment p{margin:0;font-size:12.5px;color:var(--ink-2);line-height:1.5;max-width:34ch}
+.case-legacy-root .stop-moment p em{font-style:italic;color:var(--ink);font-weight:500}
 
 @media (max-width:960px){
-  .tour{min-width:0}
-  .tour-masthead{grid-template-columns:1fr}
-  .tm-goals{padding-left:0;border-left:0;border-top:1px solid var(--line);padding-top:12px;margin-top:8px}
-  .stop{grid-template-columns:82px 1fr;gap:0}
-  .stop > *{border-right:0;border-bottom:1px dashed var(--line);padding:12px 14px}
-  .stop-date{grid-row:span 3;border-right:1px dashed var(--line);border-bottom:0;min-height:100%}
-  .stop-city{grid-column:2}
-  .stop-venues{grid-column:2}
-  .stop-moment{grid-column:2}
-  .sd-day{font-size:32px}
+  .case-legacy-root .tour{min-width:0}
+  .case-legacy-root .tour-masthead{grid-template-columns:1fr}
+  .case-legacy-root .tm-goals{padding-left:0;border-left:0;border-top:1px solid var(--line);padding-top:12px;margin-top:8px}
+  .case-legacy-root .stop{grid-template-columns:82px 1fr;gap:0}
+  .case-legacy-root .stop > *{border-right:0;border-bottom:1px dashed var(--line);padding:12px 14px}
+  .case-legacy-root .stop-date{grid-row:span 3;border-right:1px dashed var(--line);border-bottom:0;min-height:100%}
+  .case-legacy-root .stop-city{grid-column:2}
+  .case-legacy-root .stop-venues{grid-column:2}
+  .case-legacy-root .stop-moment{grid-column:2}
+  .case-legacy-root .sd-day{font-size:32px}
 }
 /* ============ /EY TOUR ============ */
 
