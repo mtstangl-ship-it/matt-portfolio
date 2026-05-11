@@ -649,7 +649,7 @@ export function HomePagePort() {
               <span className="xhair xhair-bl" aria-hidden="true" />
               <span className="xhair xhair-br" aria-hidden="true" />
               <p className="kicker">04 · WIPRO</p>
-              <h3 className="case__h">Password lockouts were the symptom. Six towers were the disease.</h3>
+              <h3 className="case__h">Lockouts: From 27 Hour MTTR to 22 minutes</h3>
               <p className="case__teaser">
                 Estée Lauder&apos;s service desk was taking 3,515 password-reset tickets a month.
               </p>

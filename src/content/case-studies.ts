@@ -100,15 +100,15 @@ export const caseStudyEntries: CaseStudyEntry[] = [
   },
   {
     slug: "wipro",
-    title: "Password lockouts were the symptom. Six towers were the disease.",
+    title: "Lockouts: From 27 Hour MTTR to 22 minutes",
     oneLine:
-      "A $12M service-desk leak diagnosed in six weeks, fixed by redesigning the handoff between six support towers. ITIL compliant. Behavioral at the core.",
+      "Estée Lauder's service desk was taking 3,515 password-reset tickets a month — and escalating 42.6% of them. I led the transformation that unified the experience across six towers.",
     tag: "OPERATIONS · ITIL",
     caseNumber: 4,
-    shortName: "Wipro",
+    shortName: "Wipro · ITIL",
     panelLabel: "OPERATIONS · ITIL",
     teaserLine:
-      "Diagnosed a $12M leak; fixed the handoff between six support towers.",
+      "Diagnosed a 42.6% escalation tax; redesigned the handoff between six ITIL towers into three tiers.",
     tools: "Service Design · ITIL · Case Flow",
     mode: "Diagnostic sprint · Operations reset",
     supportingMeta: "SCOPE: Service desk · Six towers · Handoff redesign",

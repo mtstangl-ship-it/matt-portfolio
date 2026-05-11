@@ -1,8 +1,11 @@
 import type { CaseStudyEntry } from "@/content/case-studies";
-import { loadCaseHtml } from "@/content/cases/loader";
 import { CaseShell } from "../CaseShell";
+import { WiproCaseView } from "./case-wipro/WiproCaseView";
 
 export function WiproCase({ entry }: { entry: CaseStudyEntry }) {
-  const body = loadCaseHtml("wipro");
-  return <CaseShell entry={entry} body={body} />;
+  return (
+    <CaseShell entry={entry}>
+      <WiproCaseView />
+    </CaseShell>
+  );
 }

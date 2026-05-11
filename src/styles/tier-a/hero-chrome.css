@@ -1,8 +1,22 @@
 /* =========================================================
    TIER-A SHARED HERO CHROME — CaseHero shell (all Tier-A cases)
    Scoped under .tier-a-case-root only. Per-case overrides live in
-   case-ai.css / ey-case.css etc. under .tier-a-case-root .case-{slug}-portfolio.
+   case-{slug}.css under .tier-a-case-root .case-{slug}-portfolio.
+
+   Headline / subhead / meta typography lives HERE so routes that import
+   hero-chrome without case-ai.css (e.g. Wipro) still match Centaur/EY scale.
    ========================================================= */
+
+/* Tier-A hero section — baseline shell (first hero padding-top zeroed below) */
+.tier-a-case-root .hero {
+  position: relative;
+  padding-top: clamp(7rem, 12vh, 9rem);
+  padding-bottom: clamp(1rem, 2vw, 1.75rem);
+  padding-inline: var(--gutter);
+  overflow: visible;
+  isolation: isolate;
+  background: var(--bg);
+}
 
 /* Tier-A React: hero is first under fixed nav — plate bleeds to viewport top */
 .tier-a-case-root .tier-a-react-case section.hero:first-of-type {
@@ -139,6 +153,129 @@
 .tier-a-case-root .tier-a-react-case section.hero:first-of-type .hero__plate .hero__inner {
   margin-top: auto;
   padding-top: clamp(2.25rem, 4vw, 3.75rem);
+}
+
+/* ---- Tier-A hero copy stack (shared type scale — do not duplicate in case-ai only) ---- */
+.tier-a-case-root .hero__tag {
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1.5rem;
+}
+.tier-a-case-root .hero__h1 {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+  margin: 0 0 clamp(1.35rem, 3vw, 1.75rem);
+  text-wrap: balance;
+  max-width: min(75%, clamp(26rem, 52vw, 44rem));
+}
+.tier-a-case-root .hero__h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.tier-a-case-root .hero__sub {
+  color: var(--ink-2);
+  font-size: var(--t-lead);
+  max-width: min(75%, clamp(34rem, 58vw, 52rem));
+  margin: 0 0 2.5rem;
+  text-wrap: pretty;
+}
+.tier-a-case-root .hero__sub b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* Photo-plate legibility — same values as legacy case-ai hero treatment */
+.tier-a-case-root .hero .hero__tag {
+  color: #5fe6c2;
+  text-shadow: 0 1px 6px rgba(10, 17, 16, 0.85);
+}
+.tier-a-case-root .hero .hero__h1 {
+  color: #f4f1ea;
+  text-shadow: 0 2px 10px rgba(10, 17, 16, 0.65);
+}
+.tier-a-case-root .hero .hero__h1 em {
+  color: #5fe6c2;
+}
+.tier-a-case-root .hero .hero__sub {
+  color: #d2dad7;
+  text-shadow: 0 1px 6px rgba(10, 17, 16, 0.7);
+}
+.tier-a-case-root .hero .hero__sub b {
+  color: #f4f1ea;
+}
+
+/* Meta strip — below photo plate */
+.tier-a-case-root .hero__meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(223, 233, 230, 0.22);
+  border-bottom: 1px solid rgba(223, 233, 230, 0.22);
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
+  margin-left: 0;
+  margin-right: auto;
+  width: min(100%, var(--col-wide));
+  background: rgba(10, 17, 16, 0.92);
+  backdrop-filter: blur(2px);
+}
+.tier-a-case-root .hero__meta-cell {
+  padding: 1.15rem 1.35rem;
+  border-right: 1px solid rgba(223, 233, 230, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.tier-a-case-root .hero__meta-cell:last-child {
+  border-right: 0;
+}
+.tier-a-case-root .hero__meta-cell dt {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9ca8a4;
+  margin: 0;
+}
+.tier-a-case-root .hero__meta-cell dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #e6ebe9;
+}
+.tier-a-case-root .hero__meta-cell dd b {
+  color: #5fe6c2;
+  font-weight: 500;
+}
+@media (max-width: 880px) {
+  .tier-a-case-root .hero__meta {
+    grid-template-columns: 1fr 1fr;
+  }
+  .tier-a-case-root .hero__meta-cell:nth-child(2) {
+    border-right: 0;
+  }
+  .tier-a-case-root .hero__meta-cell:nth-child(1),
+  .tier-a-case-root .hero__meta-cell:nth-child(2) {
+    border-bottom: 1px solid rgba(223, 233, 230, 0.18);
+  }
+}
+@media (max-width: 560px) {
+  .tier-a-case-root .hero__meta {
+    grid-template-columns: 1fr;
+  }
+  .tier-a-case-root .hero__meta-cell {
+    border-right: 0;
+    border-bottom: 1px solid rgba(223, 233, 230, 0.18);
+  }
+  .tier-a-case-root .hero__meta-cell:last-child {
+    border-bottom: 0;
+  }
 }
 
 /* Tier-A · case picker on the photo plate (zone 2) */
