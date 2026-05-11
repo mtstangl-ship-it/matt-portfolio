@@ -82,7 +82,7 @@ export function WiproCaseView() {
         totalCases={5}
         marginNote="DRAWING 01 · HERO"
         figStamp="FIG. 01 · HERO"
-        tag="04 · BRIEF · CASE 04 OF 05"
+        tag="01 · BRIEF · CASE 01 OF 05"
         basedLine="DEN · REMOTE"
         roleLine="CX & EX TRANSFORMATION"
         headline={
