@@ -1,0 +1,11 @@
+/* Wipro Tier-A case shell — shares Centaur/EY chrome (tokens, grammar, hero pipe).
+ * Per BUILD-NOTES, all Wipro-specific rules live in the hand-maintained
+ * `case-wipro.css` (no auto-generated layer like `ey-case.css`).
+ */
+@import "../case-centaur/tokens-scoped.css";
+@import "../case-centaur/grammar.css";
+@import "../tier-a/fiche-nav.css";
+@import "../case-centaur/density.css";
+@import "../case-centaur/tier-a-case-shell.css";
+@import "../tier-a/hero-chrome.css";
+@import "./case-wipro.css";
