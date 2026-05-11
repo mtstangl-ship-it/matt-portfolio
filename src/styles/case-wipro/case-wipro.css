@@ -305,6 +305,12 @@
 .tier-a-case-root .case-wipro-portfolio .monument-card__label .accent {
   color: var(--accent);
 }
+.tier-a-case-root .case-wipro-portfolio .monument-card__label--sentence {
+  text-transform: none;
+  letter-spacing: 0.06em;
+  font-size: 12px;
+  font-weight: 500;
+}
 .tier-a-case-root .case-wipro-portfolio .monument-card__big {
   margin-top: 18px;
   display: flex;
@@ -321,6 +327,9 @@
   letter-spacing: -0.04em;
   line-height: 0.82;
   color: var(--ink);
+}
+.tier-a-case-root .case-wipro-portfolio .monument-card--decimal-pct .monument-card__big .num {
+  font-size: clamp(140px, 28vw, 420px);
 }
 .tier-a-case-root .case-wipro-portfolio .monument-card__big .pct {
   font-family: var(--sans);
@@ -418,6 +427,9 @@
   }
   .tier-a-case-root .case-wipro-portfolio .monument-card__big .num {
     font-size: 38vw;
+  }
+  .tier-a-case-root .case-wipro-portfolio .monument-card--decimal-pct .monument-card__big .num {
+    font-size: 28vw;
   }
   .tier-a-case-root .case-wipro-portfolio .monument-card__big .pct {
     font-size: 18vw;

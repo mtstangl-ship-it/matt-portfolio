@@ -5,7 +5,8 @@ import { Nav } from "./Nav";
 import { Footer } from "./Footer";
 
 /**
- * Tier-A Home (`/`), About v3, and Centaur (`/case-studies/ai`) ship their own chrome.
+ * Tier-A Home (`/`), About v3, and Tier-A case studies (`/case-studies/ai`, `/ey`, `/wipro`)
+ * ship their own chrome.
  * `usePathname()` is null during SSR — parent passes `serverPathname` from
  * `middleware` + `headers()` so the first HTML matches the hydrated tree.
  */
@@ -18,8 +19,9 @@ export function ConditionalSiteChromeClient({
 }) {
   const pathname = usePathname();
   const path = pathname ?? serverPathname;
-  const hideLegacyChrome =
-    path === "/" || path === "/about" || path === "/case-studies/ai" || path === "/case-studies/ey";
+  /** Tier-A routes ship FicheNav / CaseShell chrome — omit global Nav + Footer. */
+  const tierACaseRoutes = new Set(["/case-studies/ai", "/case-studies/ey", "/case-studies/wipro"]);
+  const hideLegacyChrome = path === "/" || path === "/about" || tierACaseRoutes.has(path);
 
   if (hideLegacyChrome) {
     return <>{children}</>;

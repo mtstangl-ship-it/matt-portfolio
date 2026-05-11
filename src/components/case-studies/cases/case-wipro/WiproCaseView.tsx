@@ -179,23 +179,26 @@ export function WiproCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ delta · MTTR reduction · same population, same intake" />
+      <DimRibbon label="↓ delta · MTTR reduction for lockouts" />
 
       {/* Section 02 · Delta · MONUMENT */}
       <section className="delta" aria-label="Delta" data-screen-label="02 Delta">
         <span className="margin-note">DRAWING 02 · DELTA</span>
-        <span className="fig-stamp">FIG. 02 · MTTR REDUCTION</span>
+        <span className="fig-stamp">FIG. 02 · MTTR REDUCTION FOR LOCKOUTS</span>
 
         <div className="delta__inner case-section__inner">
           <p className="delta__kicker">02 · DELTA</p>
 
-          <figure className="monument-card" aria-label="31% MTTR reduction">
-            <p className="monument-card__label">
-              <span className="accent">MTTR REDUCTION</span> · SAME POPULATION · SAME INTAKE
+          <figure
+            className="monument-card monument-card--decimal-pct"
+            aria-label="98.64% MTTR reduction for lockouts"
+          >
+            <p className="monument-card__label monument-card__label--sentence">
+              <span className="accent">MTTR Reduction for Lockouts</span>
             </p>
 
             <div className="monument-card__big" aria-hidden="true">
-              <span className="num">31</span>
+              <span className="num">98.64</span>
               <span className="pct">%</span>
             </div>
 
@@ -405,7 +408,7 @@ export function WiproCaseView() {
           <dt>DRAWING NO.</dt>
           <dd>04 / 05</dd>
           <dt>CLAIM</dt>
-          <dd>6.8D → 22MIN · SAME TICKET</dd>
+          <dd>27H → 22MIN · SAME TICKET</dd>
           <dt>BASELINE</dt>
           <dd>4 HANDOFFS · 3 RESTARTS</dd>
           <dt>LAST REV.</dt>
@@ -467,7 +470,7 @@ export function WiproCaseView() {
                 </span>
               </article>
               <article className="flow-step">
-                <span className="flow-step__time">Day 2</span>
+                <span className="flow-step__time">Hour 8</span>
                 <span className="flow-step__dot flow-step__dot--bad" />
                 <span className="flow-step__body">
                   <span className="flow-step__role flow-step__role--bad">AD Tower · T2</span>
@@ -476,7 +479,7 @@ export function WiproCaseView() {
                 </span>
               </article>
               <article className="flow-step">
-                <span className="flow-step__time">Day 3</span>
+                <span className="flow-step__time">Hour 19</span>
                 <span className="flow-step__dot flow-step__dot--bad" />
                 <span className="flow-step__body">
                   <span className="flow-step__role flow-step__role--bad">Endpoint Tower</span>
@@ -485,7 +488,7 @@ export function WiproCaseView() {
                 </span>
               </article>
               <article className="flow-step">
-                <span className="flow-step__time">Day 5</span>
+                <span className="flow-step__time">Hour 25</span>
                 <span className="flow-step__dot flow-step__dot--bad" />
                 <span className="flow-step__body">
                   <span className="flow-step__role flow-step__role--bad">Network Tower</span>
@@ -493,7 +496,7 @@ export function WiproCaseView() {
                 </span>
               </article>
               <article className="flow-step">
-                <span className="flow-step__time">Day 6.8</span>
+                <span className="flow-step__time">Hour 27</span>
                 <span className="flow-step__dot flow-step__dot--ok" />
                 <span className="flow-step__body">
                   <span className="flow-step__role flow-step__role--ok">Resolved</span>
@@ -504,7 +507,7 @@ export function WiproCaseView() {
 
               <div className="flow__totals" aria-label="Before totals">
                 <div className="cell">
-                  <span className="v">6.8d</span>
+                  <span className="v">27 hours</span>
                   <span className="l">MTTR</span>
                 </div>
                 <div className="cell">
