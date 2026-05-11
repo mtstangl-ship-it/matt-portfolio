@@ -132,11 +132,12 @@
 }
 .tier-a-case-root .case-wipro-portfolio .hero .hero__h1 {
   color: #f4f1ea;
-  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.04;
   text-shadow: 0 2px 10px rgba(10, 17, 16, 0.65);
-  max-width: 22ch;
+  /* Tighter measure than shared Tier-A clamp — phrase-led headline */
+  max-width: min(26ch, 92vw);
+  text-wrap: balance;
 }
 .tier-a-case-root .case-wipro-portfolio .hero .hero__h1 em {
   color: var(--accent);

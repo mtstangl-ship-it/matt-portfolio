@@ -86,14 +86,12 @@ export function WiproCaseView() {
         basedLine="DEN · REMOTE"
         roleLine="CX & EX TRANSFORMATION"
         headline={
-          <>
-            Password lockouts were the symptom. <em>Six towers</em> were the disease.
-          </>
+          <>Password Lockouts went from an MTTR of 27 hrs to 22 minutes</>
         }
         subhead={
           <>
-            Estée Lauder&apos;s service desk was taking <b>3,515 password-reset tickets a month</b> — and escalating <b>42.6% of them</b>.{" "}
-            <em>I led the transformation that unified the experience across six towers.</em>
+            Estée Lauder&apos;s service desk was taking <b>3,515 password-reset tickets a month</b> — and escalating{" "}
+            <b>42.6% of them</b>. I <em>led the transformation</em> that unified the experience.
           </>
         }
         heroBgphotoSlot={
