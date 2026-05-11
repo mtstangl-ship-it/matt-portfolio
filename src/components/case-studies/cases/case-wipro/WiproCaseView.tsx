@@ -86,7 +86,9 @@ export function WiproCaseView() {
         basedLine="DEN · REMOTE"
         roleLine="CX & EX TRANSFORMATION"
         headline={
-          <>Password Lockouts went from an MTTR of 27 hrs to 22 minutes</>
+          <>
+            Lockouts: From 27 Hour MTTR to <em>22 minutes</em>
+          </>
         }
         subhead={
           <>

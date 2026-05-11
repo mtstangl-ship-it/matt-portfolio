@@ -100,7 +100,7 @@ export const caseStudyEntries: CaseStudyEntry[] = [
   },
   {
     slug: "wipro",
-    title: "Password lockouts were the symptom. Six towers were the disease.",
+    title: "Lockouts: From 27 Hour MTTR to 22 minutes",
     oneLine:
       "Estée Lauder's service desk was taking 3,515 password-reset tickets a month — and escalating 42.6% of them. I led the transformation that unified the experience across six towers.",
     tag: "OPERATIONS · ITIL",
