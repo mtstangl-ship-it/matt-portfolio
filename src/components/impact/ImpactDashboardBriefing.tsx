@@ -180,7 +180,9 @@ export function ImpactDashboardBriefing() {
       </section>
 
       <footer className="mt-10 grid grid-cols-1 gap-3 border-t border-dashboard-border pt-8 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-dashboard-ink-muted md:grid-cols-3">
-        <div>Matt Stangl · Product & Service Design Leader</div>
+        <div>
+          {impactBriefingTop.sigName} · {impactBriefingTop.sigRole}
+        </div>
         <div className="md:text-center">Impact Console · v2026.04</div>
         <div className="md:text-right">
           <a href="#top" className="text-dashboard-ink-light/90 underline-offset-4 hover:text-accent-signal hover:underline">

@@ -137,7 +137,7 @@ export function ImpactShell() {
         </div>
         <div className="sig">
           <b>Matt Stangl</b>
-          <em>Product &amp; Service Design Leader</em>
+          <em>CX, Product &amp; Service Design Leader</em>
         </div>
       </header>
 
@@ -159,7 +159,7 @@ export function ImpactShell() {
           </div>
           <div className="row">
             <span className="k">Role</span>
-            <span className="v">Product &amp; Service Design Leader</span>
+            <span className="v">CX, Product &amp; Service Design Leader</span>
           </div>
           <div className="row">
             <span className="k">Engagements</span>
@@ -228,11 +228,10 @@ export function ImpactShell() {
               <span className="bar" />
               <span>01 · Autodesk · Revenue</span>
             </div>
-            <h2>I built Autodesk&apos;s global Service Design practice from zero.</h2>
+            <h2>My team designed Autodesk&apos;s new Post-Purchase Model.</h2>
             <p className="role">
-              I led the strategy, design, and launch of a{" "}
-              <b>tiered post-purchase model, Business, Professional, Included</b>, that turned
-              customer success into a revenue engine.
+              I led strategy, design direction, and experience reviews on the new{" "}
+              <b>post-purchase service model</b>.
             </p>
             <p className="attribution">
               $50M+ in incremental AOV, year-over-year, 12-month post-launch window. I was the
@@ -374,17 +373,19 @@ export function ImpactShell() {
         <div className="metrics metrics-3" role="list">
           <div className="metric" role="listitem">
             <div className="v">
-              30<small>+</small>
+              31<small>%</small>
             </div>
-            <div className="k">Outcomes shipped</div>
+            <div className="k">MTTR REDUCTION ACROSS TOWERS</div>
           </div>
           <div className="metric" role="listitem">
-            <div className="v">3</div>
-            <div className="k">Handoff tiers</div>
+            <div className="v">
+              30<small>+</small>
+            </div>
+            <div className="k">OUTCOMES SHIPPED</div>
           </div>
           <div className="metric" role="listitem">
             <div className="v">13K</div>
-            <div className="k">Annual lockouts eliminated</div>
+            <div className="k">ANNUAL LOCKOUTS ELIMINATED</div>
           </div>
         </div>
 
@@ -527,7 +528,7 @@ export function ImpactShell() {
             <div className="v">
               24<small>+</small>
             </div>
-            <div className="k">Delivery partners</div>
+            <div className="k">Partners</div>
           </div>
           <div className="metric" role="listitem">
             <div className="v">3</div>
@@ -715,7 +716,7 @@ export function ImpactShell() {
       </section>
 
       <footer className="foot">
-        <div>Matt Stangl · Product &amp; Service Design Leader</div>
+        <div>Matt Stangl · CX, Product &amp; Service Design Leader</div>
         <div style={{ textAlign: "center" }}>Impact Console · v2026.04</div>
         <div style={{ textAlign: "right" }}>
           <a href="#top">Back to top ↑</a>

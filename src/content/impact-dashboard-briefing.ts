@@ -11,7 +11,7 @@ export const impactBriefingTop = {
   crumbLead: "CONSOLE",
   crumbMid: "Impact",
   sigName: "Matt Stangl",
-  sigRole: "Product & Service Design Leader",
+  sigRole: "CX, Product & Service Design Leader",
 } as const;
 
 export const impactBriefingIdentity = {
@@ -21,7 +21,7 @@ export const impactBriefingIdentity = {
   sub: "What shipped, what moved, what carried.",
   card: [
     { k: "Operator", v: "Matt Stangl", vBold: true as const },
-    { k: "Role", v: "Product & Service Design Leader" },
+    { k: "Role", v: "CX, Product & Service Design Leader" },
     { k: "Engagements", v: "Autodesk · Wipro · EY", teal: true as const },
     { k: "Scope", v: "Practice building · Service transformation · Ecosystem design" },
   ],
@@ -77,10 +77,10 @@ export type LadderTier = {
 
 export const impactCaseRevenue = {
   tag: "01 · Autodesk · Revenue",
-  title: "I built Autodesk's global Service Design practice from zero.",
-  roleLead: "I led the strategy, design, and launch of a ",
-  roleBold: "tiered post-purchase model — Business, Professional, Included",
-  roleTrail: " — that turned customer success into a revenue engine.",
+  title: "My team designed Autodesk's new Post-Purchase Model.",
+  roleLead: "I led strategy, design direction, and experience reviews on the new ",
+  roleBold: "post-purchase service model",
+  roleTrail: ".",
   hero: { kind: "aov" as const, em: "50" },
   heroLbl: "Incremental AOV",
   heroUnit: "Monetized AOV engine · 12 mo",
@@ -164,9 +164,9 @@ export const impactCaseOps = {
   heroLbl: "NPS goal exceeded",
   heroUnit: "",
   metrics: [
-    { v: "30", vSmall: "+", k: "Outcomes shipped" },
-    { v: "3", vSmall: "", k: "Handoff tiers" },
-    { v: "13K", vSmall: "", k: "Annual lockouts eliminated" },
+    { v: "31", vSmall: "%", k: "MTTR REDUCTION ACROSS TOWERS" },
+    { v: "30", vSmall: "+", k: "OUTCOMES SHIPPED" },
+    { v: "13K", vSmall: "", k: "ANNUAL LOCKOUTS ELIMINATED" },
   ],
   compareTitle: "Before vs. after — unified service delivery",
   compareHint: "Normalized across ticket classes",
@@ -229,7 +229,7 @@ export const impactCaseHealth = {
   metrics: [
     { v: "4.57", vSmall: "M", k: "Engagements" },
     { v: "715", vSmall: "", k: "Vaccinations" },
-    { v: "24", vSmall: "+", k: "Delivery partners" },
+    { v: "24", vSmall: "+", k: "Partners" },
     { v: "3", vSmall: "", k: "City hubs" },
   ],
   geoTitle: "Georgia delivery footprint",
