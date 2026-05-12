@@ -345,33 +345,81 @@ export function AutodeskCaseView() {
             </h2>
           </header>
 
-          <ol className="autodesk-rationale" aria-label="Design rationale notes">
-            <li className="autodesk-rationale-note">
-              <span className="autodesk-rationale-k">
-                01 · TRADEOFF · Differentiated experience vs. scalable delivery.
-              </span>
-              <p>
-                Two tiers share one journey. Growth Plus runs 1:few, high-touch. Nurture Plus runs
-                1:many, digital-guided. Same phases &mdash; different delivery assembly.
-              </p>
+          <ol className="autodesk-marginalia" aria-label="Design rationale notes">
+            <li className="autodesk-marginalia-note">
+              <div className="autodesk-marginalia-body">
+                <span className="autodesk-marginalia-k">
+                  <em>Note 01</em> · TRADEOFF
+                </span>
+                <h3 className="autodesk-marginalia-h">
+                  Differentiated experience vs. scalable delivery.
+                </h3>
+                <p>
+                  Two tiers share one journey. Growth Plus runs 1:few, high-touch. Nurture Plus
+                  runs 1:many, digital-guided. Same phases &mdash; different delivery assembly.
+                </p>
+              </div>
+              <dl className="autodesk-marginalia-stamp" aria-label="Note metadata">
+                <dt>NOTE NO.</dt>
+                <dd>01 / 03</dd>
+                <dt>CLAIM</dt>
+                <dd>ONE JOURNEY · TWO TIERS</dd>
+                <dt>RATIO</dt>
+                <dd>
+                  GROWTH+ : NURTURE+
+                  <small>700–1000 : 400–600</small>
+                </dd>
+                <dt>DELIVERY</dt>
+                <dd>1:FEW / 1:MANY</dd>
+              </dl>
             </li>
-            <li className="autodesk-rationale-note">
-              <span className="autodesk-rationale-k">02 · SYSTEM · Backstage did the work.</span>
-              <p>
-                Customers saw five phases. The design lived in the backstage &mdash; enabled people,
-                shared process, platform telemetry across Gainsight and SFDC.
-              </p>
+            <li className="autodesk-marginalia-note">
+              <div className="autodesk-marginalia-body">
+                <span className="autodesk-marginalia-k">
+                  <em>Note 02</em> · SYSTEM
+                </span>
+                <h3 className="autodesk-marginalia-h">Backstage did the work.</h3>
+                <p>
+                  Customers saw five phases. The design lived in the backstage &mdash; enabled
+                  people, shared process, platform telemetry across Gainsight and SFDC.
+                </p>
+              </div>
+              <dl className="autodesk-marginalia-stamp" aria-label="Note metadata">
+                <dt>NOTE NO.</dt>
+                <dd>02 / 03</dd>
+                <dt>CLAIM</dt>
+                <dd>DESIGN LIVED IN BACKSTAGE</dd>
+                <dt>LAYERS</dt>
+                <dd>PEOPLE · PROCESS · PLATFORM</dd>
+                <dt>SURFACES</dt>
+                <dd>GAINSIGHT · SFDC</dd>
+              </dl>
             </li>
-            <li className="autodesk-rationale-note">
-              <span className="autodesk-rationale-k">
-                03 · OUTCOME · The investment was the validation.
-              </span>
-              <p>
-                The org&apos;s response to the design &mdash; <b>100+ outcomes</b> prioritized,{" "}
-                <b>8-figure tech modernization</b> initiated, <b>5 program areas</b> mobilized
-                &mdash; was the proof the design worked. The 106% NRR path now has the
-                infrastructure to be delivered against.
-              </p>
+            <li className="autodesk-marginalia-note">
+              <div className="autodesk-marginalia-body">
+                <span className="autodesk-marginalia-k">
+                  <em>Note 03</em> · OUTCOME
+                </span>
+                <h3 className="autodesk-marginalia-h">The investment was the validation.</h3>
+                <p>
+                  The org&apos;s response to the design &mdash; <b>100+ outcomes</b> prioritized,{" "}
+                  <b>8-figure tech modernization</b> initiated, <b>5 program areas</b> mobilized
+                  &mdash; was the proof the design worked. The 106% NRR path now has the
+                  infrastructure to be delivered against.
+                </p>
+              </div>
+              <dl className="autodesk-marginalia-stamp" aria-label="Note metadata">
+                <dt>NOTE NO.</dt>
+                <dd>03 / 03</dd>
+                <dt>CLAIM</dt>
+                <dd>ORG MOBILIZATION AS PROOF</dd>
+                <dt>PRIORITIZED</dt>
+                <dd>100+ CX/EX OUTCOMES</dd>
+                <dt>INITIATED</dt>
+                <dd>8-FIGURE MODERNIZATION</dd>
+                <dt>MOBILIZED</dt>
+                <dd>5 PROGRAM AREAS</dd>
+              </dl>
             </li>
           </ol>
         </div>
