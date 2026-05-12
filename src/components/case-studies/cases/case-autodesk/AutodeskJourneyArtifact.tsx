@@ -21,7 +21,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 type ActKind = "star" | "normal" | "help";
 type Activity = { kind: ActKind; text: string; superDollar?: boolean };
-type TierContent = { sub: string; acts: Activity[] };
+type TierContent = { sub: string; preview: string; acts: Activity[] };
 type BackstageRow = { label: "People" | "Process" | "Platform"; text: string };
 type Phase = {
   idx: string;
@@ -39,6 +39,7 @@ const PHASES: Phase[] = [
     dek: "Establish trust. Inform & inspire decision-makers. Align & prioritize outcomes.",
     growth: {
       sub: "High-touch · ADSK & Partner-led",
+      preview: "Executive programs · Innovation & thought-leadership · Business alignment · EBRs",
       acts: [
         { kind: "star", text: "Executive programs (1:few)" },
         { kind: "normal", text: "Innovation & thought-leadership" },
@@ -48,6 +49,7 @@ const PHASES: Phase[] = [
     },
     nurture: {
       sub: "Medium-touch · digital-guided",
+      preview: "Executive engagements · QBR · Outcome alignment workshops",
       acts: [
         { kind: "star", text: "Executive engagements (1:many)" },
         { kind: "normal", text: "QBR · outcomes & value review" },
@@ -66,6 +68,7 @@ const PHASES: Phase[] = [
     dek: "Assess current state. Design & validate new solutions. Create & present the business case.",
     growth: {
       sub: "High-touch · ADSK & Partner-led",
+      preview: "Capability assessment · Technical demos · Custom solution design · Pilots & business case",
       acts: [
         { kind: "star", text: "Capability & workflow assessment" },
         { kind: "normal", text: "Technical demonstrations" },
@@ -75,6 +78,7 @@ const PHASES: Phase[] = [
     },
     nurture: {
       sub: "Medium-touch · digital-guided",
+      preview: "Coordinated solution evaluation · Trial validation · Capability assessment",
       acts: [
         { kind: "star", text: "Coordinated solution evaluation" },
         { kind: "normal", text: "Test & validate in trial" },
@@ -93,6 +97,7 @@ const PHASES: Phase[] = [
     dek: "Define milestones, metrics, R&R. Prioritize & schedule. Source & customize content.",
     growth: {
       sub: "High-touch · ADSK & Partner-led",
+      preview: "Success planning · Value planning · Implementation planning · Custom training",
       acts: [
         { kind: "star", text: "Success planning workshops" },
         { kind: "normal", text: "Value planning workshops" },
@@ -102,6 +107,7 @@ const PHASES: Phase[] = [
     },
     nurture: {
       sub: "Medium-touch · digital-guided",
+      preview: "Guided roll-out · Reference plans · Value planning",
       acts: [
         { kind: "star", text: "Guided roll-out planning" },
         { kind: "normal", text: "Reference plans & learning paths" },
@@ -120,6 +126,7 @@ const PHASES: Phase[] = [
     dek: "Inspire & upskill users. Support project adoption. Track progress & update plan.",
     growth: {
       sub: "High-touch · ADSK & Partner-led",
+      preview: "Initiative check-ins · Deployment assistance · Project training · Health reviews",
       acts: [
         { kind: "star", text: "Frequent initiative check-ins" },
         { kind: "normal", text: "Deployment assistance", superDollar: true },
@@ -129,6 +136,7 @@ const PHASES: Phase[] = [
     },
     nurture: {
       sub: "Medium-touch · digital-guided",
+      preview: "QBR · Health monitoring · Deployment · Coaching",
       acts: [
         { kind: "star", text: "QBR · outcomes & value review" },
         { kind: "normal", text: "Monitor health · escalate issues" },
@@ -147,6 +155,7 @@ const PHASES: Phase[] = [
     dek: "Track & measure value realized. Communicate achievements. Optimize solution value.",
     growth: {
       sub: "High-touch · ADSK & Partner-led",
+      preview: "QBRs · Roadmap review · Case studies & roadmap sessions",
       acts: [
         { kind: "star", text: "QBRs · review outcomes & value" },
         { kind: "normal", text: "Roadmap & feature request review" },
@@ -155,6 +164,7 @@ const PHASES: Phase[] = [
     },
     nurture: {
       sub: "Medium-touch · digital-guided",
+      preview: "QBR · Product roadmap reviews · Case studies",
       acts: [
         { kind: "star", text: "QBR · outcomes & value review" },
         { kind: "normal", text: "Product roadmap reviews" },
@@ -292,9 +302,17 @@ function PhaseColumn({
         <span className="autodesk-bp-idx">{phase.idx}</span>
         <span className="autodesk-bp-ttl">{phase.title}</span>
         <span className="autodesk-bp-sub">{phase.dek}</span>
+        {!isOpen ? (
+          <span className="autodesk-bp-preview" key={`${phase.idx}-${tier}`}>
+            <span className="autodesk-bp-preview-list">{phase[tier].preview}</span>
+          </span>
+        ) : null}
         {!alwaysExpanded ? (
-          <span className="autodesk-bp-chevron-slot" aria-hidden="true">
+          <span className="autodesk-bp-expand-row" aria-hidden="true">
             <Chevron open={isOpen} />
+            <span className="autodesk-bp-expand-hint">
+              {isOpen ? "↑ collapse" : "↓ expand for full detail"}
+            </span>
           </span>
         ) : null}
       </button>
