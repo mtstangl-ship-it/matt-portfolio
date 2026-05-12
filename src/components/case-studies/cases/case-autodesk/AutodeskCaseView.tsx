@@ -73,10 +73,9 @@ export function AutodeskCaseView() {
         }
         heroBrief={
           <p>
-            Autodesk put a <b>$10B revenue target</b> on the wall. Outcome-and-value-led customer
-            planning became top-priority modernization. The <b>106% NRR projection</b> inside that
-            target meant customer outcomes and Autodesk&apos;s revenue had to be the same line. The
-            work was to design that line.
+            Autodesk put a <b>$10B revenue target</b> on the wall. A <b>106% NRR projection</b>{" "}
+            inside it meant customer outcomes and Autodesk&apos;s revenue had to be the same line.
+            The work was to design that line.
           </p>
         }
         heroBgphotoSlot={
@@ -98,26 +97,30 @@ export function AutodeskCaseView() {
         metaSlot={
           <>
             <div className="hero__meta-cell">
-              <dt>PART NO.</dt>
-              <dd>ADSK-SVC-01</dd>
-            </div>
-            <div className="hero__meta-cell">
               <dt>WINDOW</dt>
-              <dd>FY22 – FY24</dd>
+              <dd>
+                FY22 – FY24 <small>post-purchase model launch</small>
+              </dd>
             </div>
             <div className="hero__meta-cell">
-              <dt>PRIORITY</dt>
+              <dt>CLIENT</dt>
               <dd>
-                <b>$10B</b> revenue strategic priority
+                Autodesk <small>Customer Success org</small>
               </dd>
             </div>
             <div className="hero__meta-cell">
               <dt>SCOPE</dt>
-              <dd>Customer Planning · Outcome &amp; Value Selling</dd>
+              <dd>
+                <b>Customer planning · 5-phase journey</b>
+                <small>Outcome &amp; value selling</small>
+              </dd>
             </div>
             <div className="hero__meta-cell">
-              <dt>REV.</dt>
-              <dd>02 · CURRENT</dd>
+              <dt>POPULATION</dt>
+              <dd>
+                <b>~1,400 enterprise accounts</b>
+                <small>Growth+ &amp; Nurture+ tiers</small>
+              </dd>
             </div>
           </>
         }
