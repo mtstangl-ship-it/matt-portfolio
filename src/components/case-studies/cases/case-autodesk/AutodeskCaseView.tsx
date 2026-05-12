@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
 import { AutodeskJourneyArtifact } from "./AutodeskJourneyArtifact";
+import { AutodeskOpportunitiesMatrix } from "./AutodeskOpportunitiesMatrix";
 
 const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
 
@@ -238,33 +239,14 @@ export function AutodeskCaseView() {
           <p className="autodesk-prose">
             A CSXD{" "}
             <span className="autodesk-prose-paren">(Customer Strategy &amp; Experience Design)</span>{" "}
-            design sprint produced the journey above. Two service tiers &mdash; Growth Plus
-            (~700&ndash;1,000 accounts, high-touch) and Nurture Plus (~400&ndash;600, digital-guided)
-            &mdash; split delivery without splitting the journey.
+            design sprint produced the journey above. The research surfaced{" "}
+            <b>five opportunity areas</b> &mdash; prioritized by CX/EX value to Autodesk&apos;s
+            customers &mdash; that the journey design had to deliver against.
           </p>
+        </div>
 
-          <ol className="autodesk-sprint-cells" aria-label="CSXD sprint phases">
-            <li className="autodesk-sprint-cell">
-              <span className="autodesk-sprint-cell-idx">01</span>
-              <span className="autodesk-sprint-cell-ttl">UNDERSTAND</span>
-              <span className="autodesk-sprint-cell-sub">37 GTM employees</span>
-            </li>
-            <li className="autodesk-sprint-cell">
-              <span className="autodesk-sprint-cell-idx">02</span>
-              <span className="autodesk-sprint-cell-ttl">DEFINE</span>
-              <span className="autodesk-sprint-cell-sub">288 employees surveyed</span>
-            </li>
-            <li className="autodesk-sprint-cell">
-              <span className="autodesk-sprint-cell-idx">03</span>
-              <span className="autodesk-sprint-cell-ttl">DEVELOP</span>
-              <span className="autodesk-sprint-cell-sub">34 customers prototyped</span>
-            </li>
-            <li className="autodesk-sprint-cell">
-              <span className="autodesk-sprint-cell-idx">04</span>
-              <span className="autodesk-sprint-cell-ttl">DELIVER</span>
-              <span className="autodesk-sprint-cell-sub">25 manager prototypes</span>
-            </li>
-          </ol>
+        <div className="autodesk-opps-wrap">
+          <AutodeskOpportunitiesMatrix />
         </div>
       </section>
 

@@ -285,63 +285,6 @@
   font-size: 0.92em;
 }
 
-/* CSXD sprint · 4-cell mono row (Section 04 · Approach) */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cells {
-  list-style: none;
-  margin: 1.75rem 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  border: 1px solid var(--ink-line);
-  background: var(--bg-2);
-  max-width: 64ch;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell {
-  padding: 0.85rem 1rem;
-  border-right: 1px solid var(--ink-line);
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell:last-child {
-  border-right: 0;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell-idx {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  color: var(--accent);
-  font-weight: 600;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell-ttl {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink);
-  font-weight: 500;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell-sub {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.02em;
-  color: var(--ink-3);
-  line-height: 1.4;
-}
-@media (max-width: 760px) {
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cells {
-    grid-template-columns: 1fr 1fr;
-  }
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell:nth-child(2n) {
-    border-right: 0;
-  }
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell:nth-child(1),
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell:nth-child(2) {
-    border-bottom: 1px solid var(--ink-line);
-  }
-}
-
 /* Pull quote · single piece of texture in Section 02 */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-pull {
   margin: 1.75rem 0 0;
@@ -1264,5 +1207,354 @@
     transition-duration: 0ms !important;
     animation-duration: 0ms !important;
     animation-delay: 0ms !important;
+  }
+}
+
+/* =========================================================================
+   Section 04 · Top 5 Opportunities matrix
+   Static 5-column × 3-band grid on desktop. Mobile becomes a scroll-snap
+   carousel mirroring the journey artifact's pattern, with a fullscreen
+   modal escape hatch. All selectors autodesk-opps- prefixed.
+   ========================================================================= */
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-wrap {
+  max-width: var(--col-wide);
+  margin: 2.5rem auto 0;
+  padding: 0 var(--gutter);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-matrix {
+  position: relative;
+  margin: 0;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-stamp {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  padding: 6px 10px;
+  margin-bottom: -1px;
+  position: relative;
+  z-index: 2;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-desktop { display: block; }
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-mobile { display: none; }
+@media (max-width: 768px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-desktop { display: none; }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-mobile { display: block; }
+}
+
+/* ---- Desktop grid ---- */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ink-line);
+  background: var(--bg);
+  overflow: hidden;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-band {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--ink-line);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-band:first-child {
+  border-top: 0;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-col {
+  padding: 1rem 1.1rem;
+  border-right: 1px solid var(--ink-line);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-col:last-child {
+  border-right: 0;
+}
+
+/* Header row */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-band--header .autodesk-opps-col {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  background: var(--bg-2);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-idx {
+  font-family: var(--mono);
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-weight: 600;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-ttl {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-dek {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+/* Band label tab — bordered cell breaking the divider line */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-band-label {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  background: var(--bg);
+  border-top: 1px solid var(--ink-line);
+  position: relative;
+  margin-top: 0;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-band-label span {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  padding: 5px 10px;
+  position: relative;
+  top: -10px;
+  margin-bottom: -10px;
+}
+
+/* Bullet lists inside bands */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-list li {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.45;
+  padding-left: 12px;
+  position: relative;
+  text-wrap: pretty;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-list li::before {
+  content: "·";
+  position: absolute;
+  left: 2px;
+  top: 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Evidence base mono strip */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-evidence {
+  margin: 1.25rem 0 0;
+  padding: 10px 12px;
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-evidence-k {
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-right: 10px;
+}
+
+/* ---- Mobile carousel ---- */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  touch-action: pan-x;
+  scrollbar-width: none;
+  gap: 0;
+  padding: 6px 0 4px;
+  margin: 0 -1rem;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-carousel::-webkit-scrollbar {
+  display: none;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-carousel-slide {
+  flex: 0 0 85vw;
+  max-width: 480px;
+  scroll-snap-align: center;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-carousel-slide > .autodesk-opps-header {
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  padding: 1rem 1.1rem;
+  border-radius: 2px;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-mobile-band {
+  border: 1px solid var(--ink-line);
+  background: var(--bg);
+  border-radius: 2px;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-mobile-band .autodesk-opps-band-label {
+  border-top: 0;
+  padding-left: 1rem;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-mobile-band .autodesk-opps-band-label span {
+  top: 0;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-mobile-band .autodesk-opps-list {
+  padding: 12px 14px 14px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-dots {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-line);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: background 180ms, transform 180ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-dots button[data-active="true"] {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-dots button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px auto 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--ink-line);
+  padding: 9px 14px;
+  cursor: pointer;
+  width: max-content;
+  transition: border-color 180ms, background 180ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-trigger:hover {
+  border-color: var(--accent);
+  background: oklch(0.20 0.04 200 / 0.3);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-mobile {
+  display: none;
+  flex-direction: column;
+}
+@media (max-width: 768px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-mobile {
+    display: flex;
+  }
+}
+
+/* ---- Fullscreen modal ---- */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 15, 14, 0.95);
+  display: flex;
+  padding: 1rem;
+  animation: autodesk-modal-fadein 180ms ease-out both;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-frame {
+  flex: 1;
+  border: 1px solid var(--ink-line);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--ink-line);
+  font-family: var(--mono);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-k {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-close {
+  font-family: var(--mono);
+  font-size: 14px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--ink-line);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 180ms, color 180ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-close:hover,
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-close:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-scroll {
+  flex: 1;
+  overflow: auto;
+  padding: 1rem;
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal *,
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal *::before,
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal *::after,
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-carousel,
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-dots button {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    scroll-behavior: auto !important;
   }
 }
