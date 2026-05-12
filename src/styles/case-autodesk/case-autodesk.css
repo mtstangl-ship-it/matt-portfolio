@@ -282,6 +282,63 @@
   font-size: 0.92em;
 }
 
+/* CSXD sprint · 4-cell mono row (Section 04 · Approach) */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cells {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  max-width: 64ch;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell {
+  padding: 0.85rem 1rem;
+  border-right: 1px solid var(--ink-line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell:last-child {
+  border-right: 0;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell-idx {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  font-weight: 600;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell-ttl {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 500;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell-sub {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+@media (max-width: 760px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cells {
+    grid-template-columns: 1fr 1fr;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell:nth-child(2n) {
+    border-right: 0;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell:nth-child(1),
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-sprint-cell:nth-child(2) {
+    border-bottom: 1px solid var(--ink-line);
+  }
+}
+
 /* Pull quote · single piece of texture in Section 02 */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-pull {
   margin: 1.75rem 0 0;
@@ -495,14 +552,28 @@
 }
 
 /* =========================================================================
-   Autodesk Journey Artifact · lifted from legacy `.adsk-hero`/`.blueprint`
-   (`src/content/cases/autodesk.html`). Class names autodesk- prefixed.
+   Autodesk Journey Artifact (v3) · interactive blueprint.
+   Per-phase click-to-expand, sliding-indicator tier toggle, backstage reveal,
+   mobile carousel + fullscreen modal. All transitions respect reduced motion
+   via the scoped override at the bottom of this block.
    ========================================================================= */
 
 .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-wrap {
   max-width: var(--col-wide);
   margin: 0 auto;
   padding: 0 var(--gutter);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-root {
+  position: relative;
+}
+
+/* Desktop / mobile visibility split at 768px */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-desktop { display: block; }
+.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-mobile { display: none; }
+@media (max-width: 768px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-desktop { display: none; }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-mobile { display: block; }
 }
 
 .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint {
@@ -534,18 +605,18 @@
   --autodesk-accent: oklch(0.70 0.18 280);
 }
 
-/* Head row */
+/* ---- Head row · title + tier toggle + backstage toggle ---- */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-head {
   display: flex;
   gap: 14px;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.1em;
   color: var(--ink-3);
   padding: 0 4px 14px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   border-bottom: 1px dashed var(--ink-line);
 }
 .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-head-k {
@@ -563,46 +634,134 @@
   flex: 1;
 }
 
-/* Tier toggle */
+/* ---- Tier toggle with sliding indicator ---- */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-tier-toggle {
+  position: relative;
   display: inline-flex;
   gap: 0;
   border: 1px solid var(--ink-line);
   overflow: hidden;
+  background: var(--bg);
+  isolation: isolate;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-tier-toggle-indicator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  background: oklch(0.78 0.16 150 / 0.18);
+  border-right: 1px solid oklch(0.78 0.16 150 / 0.5);
+  transform: translateX(0%);
+  transition: transform 240ms cubic-bezier(.4,.2,.2,1), background 240ms, border-color 240ms;
+  z-index: 0;
+  pointer-events: none;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint[data-tier="nurture"] .autodesk-tier-toggle-indicator {
+  transform: translateX(100%);
+  background: oklch(0.70 0.18 280 / 0.18);
+  border-right: 0;
+  border-left: 1px solid oklch(0.70 0.18 280 / 0.5);
 }
 .tier-a-case-root .case-autodesk-portfolio .autodesk-tier-toggle button {
+  position: relative;
+  z-index: 1;
   font-family: var(--mono);
   font-size: 10.5px;
   letter-spacing: 0.08em;
-  padding: 6px 12px;
+  padding: 7px 14px;
   color: var(--ink-3);
-  background: var(--bg);
+  background: transparent;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   border: 0;
-  border-right: 1px solid var(--ink-line);
   cursor: pointer;
-  transition: background 160ms, color 160ms;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-tier-toggle button:last-child {
-  border-right: 0;
+  transition: color 180ms;
+  flex: 1 0 auto;
 }
 .tier-a-case-root .case-autodesk-portfolio .autodesk-tier-toggle button small {
-  color: var(--ink-3);
+  color: inherit;
+  opacity: 0.6;
   font-size: 9px;
   letter-spacing: 0.06em;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-tier-toggle button[data-tier="growth"][aria-checked="true"] {
-  color: oklch(0.82 0.16 150);
-  background: oklch(0.78 0.16 150 / 0.1);
+.tier-a-case-root .case-autodesk-portfolio .autodesk-tier-toggle button[data-active="true"] {
+  color: var(--ink);
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-tier-toggle button[data-tier="nurture"][aria-checked="true"] {
-  color: oklch(0.78 0.18 280);
-  background: oklch(0.70 0.18 280 / 0.1);
+.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint[data-tier="growth"] .autodesk-tier-toggle button[data-tier="growth"] {
+  color: oklch(0.86 0.15 150);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint[data-tier="nurture"] .autodesk-tier-toggle button[data-tier="nurture"] {
+  color: oklch(0.84 0.16 280);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-tier-toggle button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
-/* Stage + grid */
+/* ---- Backstage toggle ---- */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-backstage-toggle {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  color: var(--ink-3);
+  background: var(--bg);
+  border: 1px solid var(--ink-line);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 180ms, background 180ms, border-color 180ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-backstage-toggle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--ink-line);
+  transition: background 180ms, border-color 180ms, box-shadow 180ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-backstage-toggle[aria-pressed="true"] {
+  color: var(--ink);
+  background: oklch(0.20 0.04 200 / 0.4);
+  border-color: var(--accent);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-backstage-toggle[aria-pressed="true"] .autodesk-backstage-toggle-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-backstage-toggle:hover {
+  color: var(--ink);
+  border-color: var(--ink-2);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-backstage-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- Tier summary line ---- */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-tier-summary {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 14px;
+  padding: 0 4px;
+  transition: color 220ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint[data-tier="growth"] .autodesk-tier-summary {
+  color: oklch(0.78 0.13 150);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint[data-tier="nurture"] .autodesk-tier-summary {
+  color: oklch(0.78 0.14 280);
+}
+
+/* ---- Stage + grid (desktop) ---- */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-stage {
   position: relative;
   padding: 4px 4px 10px;
@@ -611,102 +770,76 @@
   scrollbar-width: thin;
   scrollbar-color: var(--ink-line) transparent;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-stage::-webkit-scrollbar {
-  height: 4px;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-stage::-webkit-scrollbar-thumb {
-  background: var(--ink-line);
-}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-stage::-webkit-scrollbar { height: 4px; }
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-stage::-webkit-scrollbar-thumb { background: var(--ink-line); }
 
 .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-grid {
   display: grid;
-  grid-template-columns: 124px repeat(5, minmax(165px, 1fr));
-  grid-auto-rows: min-content;
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
   gap: 0;
-  min-width: 1024px;
+  min-width: 940px;
   border: 1px solid var(--ink-line);
   background: var(--bg);
+  align-items: start;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-col {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-col {
   border-right: 1px solid var(--ink-line);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  transition: background 200ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-col:last-child { border-right: 0; }
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-col.is-expanded {
+  background: oklch(0.20 0.015 220);
+}
+
+/* ---- Phase header (clickable) ---- */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-header {
+  appearance: none;
+  background: transparent;
+  border: 0;
   border-bottom: 1px solid var(--ink-line);
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-height: 0;
+  padding: 12px 14px;
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "idx chev"
+    "ttl ttl"
+    "sub sub";
+  row-gap: 4px;
+  column-gap: 8px;
+  color: var(--ink);
+  font: inherit;
+  transition: background 180ms;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-col:nth-child(6n) {
-  border-right: 0;
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-header:hover {
+  background: oklch(0.22 0.015 220);
 }
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-axis {
-  background: oklch(0.18 0.015 220);
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-header:hover .autodesk-bp-chevron {
+  color: var(--accent);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-header:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-header:disabled {
+  cursor: default;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-header .autodesk-bp-idx {
+  grid-area: idx;
   font-family: var(--mono);
-  justify-content: flex-start;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-rail-k {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: var(--autodesk-accent);
-  font-weight: 600;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-rail-sub {
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  color: var(--ink-3);
-  line-height: 1.35;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-rail-sub[data-tier-show] {
-  display: none;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint[data-tier="growth"] .autodesk-bp-rail-sub[data-tier-show="growth"],
-.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint[data-tier="nurture"] .autodesk-bp-rail-sub[data-tier-show="nurture"] {
-  display: block;
-}
-
-/* Backstage columns */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-col--backstage {
-  background: oklch(0.175 0.015 220);
-  padding: 12px;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-col--backstage .autodesk-bp-bs {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--ink-2);
-  letter-spacing: 0.02em;
-  line-height: 1.45;
-  padding: 4px 0;
-  border-bottom: 1px solid oklch(0.20 0.015 220);
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-col--backstage .autodesk-bp-bs:last-child {
-  border-bottom: 0;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-col--backstage .autodesk-bp-bs b {
-  color: var(--autodesk-accent);
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 9.5px;
+  font-size: 14px;
   letter-spacing: 0.1em;
-  margin-right: 4px;
-}
-
-/* Phase headers */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-bottom: 4px;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-idx {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
   color: var(--autodesk-accent);
   font-weight: 600;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-ttl {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-header .autodesk-bp-ttl {
+  grid-area: ttl;
+  font-family: var(--sans);
   font-size: 14px;
   font-weight: 500;
   color: var(--ink);
@@ -714,37 +847,76 @@
   line-height: 1.2;
   text-wrap: balance;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-sub {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-phase-header .autodesk-bp-sub {
+  grid-area: sub;
   font-family: var(--mono);
   font-size: 10px;
   color: var(--ink-3);
   letter-spacing: 0.02em;
   line-height: 1.45;
 }
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-chevron-slot {
+  grid-area: chev;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-chevron {
+  color: var(--ink-2);
+  transition: transform 220ms cubic-bezier(.4,.2,.2,1), color 220ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-chevron.is-open {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
 
-/* Frontstage activity lists · tier-varying */
+/* ---- Collapsible panel · acts list + backstage ---- */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-panel {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding: 0 14px;
+  transition: max-height 280ms cubic-bezier(.4,.2,.2,1), opacity 220ms, padding 240ms;
+  background: oklch(0.18 0.015 220);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-panel[data-open="true"] {
+  max-height: 1200px;
+  opacity: 1;
+  padding: 12px 14px 14px;
+}
+
+/* ---- Frontstage acts list (tier-varying, animates on tier swap) ---- */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-acts-wrap {
+  animation: autodesk-tier-fadein 220ms cubic-bezier(.4,.2,.2,1) both;
+}
+@keyframes autodesk-tier-fadein {
+  0%   { opacity: 0; transform: translateY(3px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-acts-wrap .autodesk-bp-rail-sub {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
 .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-acts {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-acts[data-tier-show] {
-  display: none;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint[data-tier="growth"] .autodesk-bp-acts[data-tier-show="growth"],
-.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint[data-tier="nurture"] .autodesk-bp-acts[data-tier-show="nurture"] {
-  display: flex;
+  gap: 5px;
 }
 .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-acts li {
   font-family: var(--mono);
   font-size: 10.5px;
   color: var(--ink-2);
   letter-spacing: 0.02em;
-  line-height: 1.35;
-  padding-left: 10px;
+  line-height: 1.4;
+  padding-left: 12px;
   position: relative;
 }
 .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-acts li::before {
@@ -779,56 +951,276 @@
   margin-left: 2px;
 }
 
-/* Counter strip */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-foot {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 18px;
-  padding: 14px 4px 0;
-  margin-top: 10px;
-  border-top: 1px dashed var(--ink-line);
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: var(--ink-3);
+/* ---- Backstage block (only when toggle on) ---- */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-backstage {
+  margin-top: 14px;
+  padding-top: 12px;
+  background: oklch(0.175 0.015 220);
+  border-top: 1px solid oklch(0.22 0.015 220);
+  margin-left: -14px;
+  margin-right: -14px;
+  margin-bottom: -14px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-bottom: 14px;
+  animation: autodesk-backstage-reveal 280ms cubic-bezier(.4,.2,.2,1) both;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-counter {
+@keyframes autodesk-backstage-reveal {
+  0%   { opacity: 0; transform: translateY(-4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-backstage-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--autodesk-accent);
+  margin-bottom: 8px;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-backstage-divider::before,
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-backstage-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--ink-line);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-backstage.is-just-revealed .autodesk-bp-backstage-divider {
+  animation: autodesk-backstage-flash 700ms ease-out both;
+}
+@keyframes autodesk-backstage-flash {
+  0%   { color: var(--autodesk-accent); filter: brightness(1.4); }
+  40%  { color: var(--autodesk-accent); filter: brightness(1.6); }
+  100% { color: var(--autodesk-accent); filter: brightness(1); }
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-backstage-rows {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-counter-v {
-  font-family: var(--sans);
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: -0.01em;
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-bs {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-2);
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  padding: 3px 0;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-counter-v em {
-  font-style: normal;
-  color: var(--accent);
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-bs b {
+  color: var(--autodesk-accent);
   font-weight: 600;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-counter-k {
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-3);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  margin-right: 4px;
 }
 
-@media (max-width: 860px) {
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-head {
+/* =========================================================================
+   Mobile carousel (≤ 768px)
+   ========================================================================= */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-head--mobile {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "title title"
+    "tier  backstage";
+  gap: 10px 8px;
+  align-items: center;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-head--mobile .autodesk-bp-head-k {
+  grid-area: title;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-head--mobile .autodesk-tier-toggle {
+  grid-area: tier;
+  width: 100%;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-head--mobile .autodesk-backstage-toggle {
+  grid-area: backstage;
+  white-space: nowrap;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  touch-action: pan-x;
+  scrollbar-width: none;
+  gap: 0;
+  padding: 6px 0 4px;
+  margin: 0 -1rem;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-carousel::-webkit-scrollbar {
+  display: none;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-carousel-slide {
+  flex: 0 0 85vw;
+  max-width: 480px;
+  scroll-snap-align: center;
+  padding: 0 0.5rem;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-carousel-slide .autodesk-bp-phase-col {
+  border: 1px solid var(--ink-line);
+  background: oklch(0.20 0.015 220);
+  border-radius: 2px;
+  height: 100%;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-carousel-slide .autodesk-bp-phase-header {
+  cursor: default;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-carousel-dots {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-carousel-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-line);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: background 180ms, transform 180ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-carousel-dots button[data-active="true"] {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-carousel-dots button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px auto 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--ink-line);
+  padding: 9px 14px;
+  cursor: pointer;
+  align-self: center;
+  width: max-content;
+  transition: border-color 180ms, background 180ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-trigger:hover {
+  border-color: var(--accent);
+  background: oklch(0.20 0.04 200 / 0.3);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-trigger span {
+  font-size: 14px;
+  line-height: 1;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint--carousel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================================================
+   Fullscreen modal
+   ========================================================================= */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 15, 14, 0.95);
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 1rem;
+  animation: autodesk-modal-fadein 180ms ease-out both;
+}
+@keyframes autodesk-modal-fadein {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-frame {
+  flex: 1;
+  border: 1px solid var(--ink-line);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--ink-line);
+  font-family: var(--mono);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-k {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-close {
+  font-family: var(--mono);
+  font-size: 14px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--ink-line);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 180ms, color 180ms;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-close:hover,
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-close:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-scroll {
+  flex: 1;
+  overflow: auto;
+  padding: 1rem;
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal-scroll .autodesk-blueprint {
+  min-width: 1100px;
+}
+
+/* =========================================================================
+   Responsive head row reflow
+   ========================================================================= */
+@media (max-width: 960px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-desktop .autodesk-bp-head {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    align-items: stretch;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-desktop .autodesk-bp-head-spacer {
+    display: none;
   }
 }
-@media (max-width: 640px) {
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-foot {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-counter-v {
-    font-size: 18px;
+
+/* =========================================================================
+   Reduced motion · scoped override
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-root *,
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-root *::before,
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-root *::after,
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal *,
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal *::before,
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-bp-modal *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
   }
 }
