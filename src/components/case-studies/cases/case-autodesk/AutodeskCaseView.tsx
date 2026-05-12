@@ -30,12 +30,19 @@ function DimRibbon({ label }: { label: string }) {
 }
 
 /**
- * Tier-A port of the Autodesk case study.
- * Mirrors `WiproCaseView` structure: margin-note + fig-stamp + (optional)
- * section-stamp per section, kicker + h2 + case-section__inner, sheet footer.
- * Furniture density matches Wipro (single short marginalia per section).
- * Body copy renders the "Tier 2 — Tight version" blocks from
- * COPY-case-autodesk.md; locked stage labels and headlines render as written.
+ * Tier-A port of the Autodesk case study (v3).
+ *
+ * Section order is deliberately argument-led, not canonical Tier A:
+ *   01 BRIEF (hero)          — context, NRR claim
+ *   02 DESIGN (artifact)     — the load-bearing visual, immediately after hero
+ *   03 DIAGNOSIS             — what the artifact solved
+ *   04 APPROACH              — how the artifact was built (compressed)
+ *   05 DELTA                 — what the design pulled into motion
+ *   06 LESSON                — three notes from the design rationale
+ *
+ * Every fiche stamp (FIG.) and section-stamp DRAWING NO. follows this order,
+ * /06 total. Sheet footer "03 / 05" refers to the case study's picker position
+ * (case 3 of 5), not the section count, so it stays.
  */
 export function AutodeskCaseView() {
   return (
@@ -49,7 +56,7 @@ export function AutodeskCaseView() {
         caseNumber="03"
         totalCases={5}
         marginNote="DRAWING 01 · HERO"
-        figStamp="FIG. 03 · AUTODESK / CUSTOMER VALUE JOURNEY"
+        figStamp="FIG. 01 · AUTODESK / CUSTOMER VALUE JOURNEY"
         tag="01 · BRIEF · CASE 03 OF 05"
         basedLine="DEN · REMOTE"
         roleLine="SERVICE DESIGN · REVENUE"
@@ -116,16 +123,55 @@ export function AutodeskCaseView() {
         }
       />
 
-      <DimRibbon label="↓ diagnosis · what the NRR target asked for" />
+      <DimRibbon label="↓ design · five-phase service assembly" />
 
-      {/* Section 02 · Diagnosis */}
-      <section className="diagnosis" aria-label="Diagnosis" data-screen-label="02 Diagnosis">
-        <span className="margin-note">DRAWING 02 · DIAGNOSIS</span>
-        <span className="fig-stamp">FIG. 02 · SALES-SUCCESS FULCRUM</span>
+      {/* Section 02 · DESIGN — load-bearing artifact, lifted to top */}
+      <section className="design" aria-label="Design" data-screen-label="02 Design">
+        <span className="margin-note">DRAWING 02 · DESIGN</span>
+        <span className="fig-stamp">FIG. 02 · SERVICE ASSEMBLY</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>02 / 05</dd>
+          <dd>02 / 06</dd>
+          <dt>CLAIM</dt>
+          <dd>5 PHASES · 2 TIERS · 1 JOURNEY</dd>
+          <dt>BASELINE</dt>
+          <dd>FRONTSTAGE / BACKSTAGE SPLIT</dd>
+          <dt>LAST REV.</dt>
+          <dd>04/26</dd>
+        </dl>
+
+        <div className="design__inner case-section__inner">
+          <header className="case-section-head">
+            <p className="kicker">02 · DESIGN · THE FIVE-PHASE SERVICE ASSEMBLY</p>
+            <h2>
+              Five phases. Two tiers. <em>One journey.</em>
+            </h2>
+            <p className="case-section-head__sub">
+              Five phases of customer planning &mdash; identify outcomes, evaluate solutions, create a
+              plan, execute, assess value &mdash; exploded into frontstage and backstage. Customers see
+              workshops, check-ins, QBRs. The design lived in the backstage system that made those
+              run: enabled people, standard processes, shared platform.
+            </p>
+          </header>
+        </div>
+
+        {/* Lifted artifact (legacy `.adsk-hero` block, scoped + React-toggled) */}
+        <div className="autodesk-blueprint-wrap">
+          <AutodeskJourneyArtifact />
+        </div>
+      </section>
+
+      <DimRibbon label="↓ diagnosis · what the NRR target asked for" />
+
+      {/* Section 03 · DIAGNOSIS — what the artifact solved */}
+      <section className="diagnosis" aria-label="Diagnosis" data-screen-label="03 Diagnosis">
+        <span className="margin-note">DRAWING 03 · DIAGNOSIS</span>
+        <span className="fig-stamp">FIG. 03 · SALES-SUCCESS FULCRUM</span>
+
+        <dl className="section-stamp" aria-label="Section metadata">
+          <dt>DRAWING NO.</dt>
+          <dd>03 / 06</dd>
           <dt>CLAIM</dt>
           <dd>SALES-SUCCESS FULCRUM</dd>
           <dt>BASELINE</dt>
@@ -136,7 +182,7 @@ export function AutodeskCaseView() {
 
         <div className="diagnosis__inner case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">02 · DIAGNOSIS · WHAT THE NRR TARGET ACTUALLY ASKED FOR</p>
+            <p className="kicker">03 · DIAGNOSIS · WHAT THE NRR TARGET ACTUALLY ASKED FOR</p>
             <h2>
               Growing legacy VIPs means breaking down the <em>sales-success fulcrum.</em>
             </h2>
@@ -162,14 +208,14 @@ export function AutodeskCaseView() {
 
       <DimRibbon label="↓ approach · design as directional clarity" />
 
-      {/* Section 03 · Approach */}
-      <section className="approach" aria-label="Approach" data-screen-label="03 Approach">
-        <span className="margin-note">DRAWING 03 · APPROACH</span>
-        <span className="fig-stamp">FIG. 03 · CSXD SPRINT</span>
+      {/* Section 04 · APPROACH — compressed: 2 sentences + 4-cell CSXD mono row */}
+      <section className="approach" aria-label="Approach" data-screen-label="04 Approach">
+        <span className="margin-note">DRAWING 04 · APPROACH</span>
+        <span className="fig-stamp">FIG. 04 · CSXD SPRINT</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>03 / 05</dd>
+          <dd>04 / 06</dd>
           <dt>CLAIM</dt>
           <dd>DIRECTIONAL DOCUMENT</dd>
           <dt>BASELINE</dt>
@@ -180,59 +226,42 @@ export function AutodeskCaseView() {
 
         <div className="approach__inner case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">03 · APPROACH · DESIGN AS DIRECTIONAL CLARITY</p>
+            <p className="kicker">04 · APPROACH · DESIGN AS DIRECTIONAL CLARITY</p>
             <h2>
               We didn&apos;t design a workflow. We designed the <em>directional document.</em>
             </h2>
           </header>
 
           <p className="autodesk-prose">
-            CSXD <span className="autodesk-prose-paren">(Customer Strategy &amp; Experience Design)</span>{" "}
-            design sprint: Understand, Define, Develop, Deliver. Interviewed 37 GTM employees,
-            prototyped with 34 customers, surveyed 288 employees. Output: an end-to-end journey
-            across five phases &mdash; identify outcomes, evaluate solutions, create a plan, execute,
-            assess value. Two service tiers (Growth Plus 700&ndash;1,000 accounts, Nurture Plus
-            400&ndash;600) split delivery without splitting the journey.
+            A CSXD{" "}
+            <span className="autodesk-prose-paren">(Customer Strategy &amp; Experience Design)</span>{" "}
+            design sprint produced the journey above. Two service tiers &mdash; Growth Plus
+            (~700&ndash;1,000 accounts, high-touch) and Nurture Plus (~400&ndash;600, digital-guided)
+            &mdash; split delivery without splitting the journey.
           </p>
-        </div>
-      </section>
 
-      <DimRibbon label="↓ design · five-phase service assembly" />
-
-      {/* Section 04 · Design — load-bearing artifact */}
-      <section className="design" aria-label="Design" data-screen-label="04 Design">
-        <span className="margin-note">DRAWING 04 · DESIGN</span>
-        <span className="fig-stamp">FIG. 04 · SERVICE ASSEMBLY</span>
-
-        <dl className="section-stamp" aria-label="Section metadata">
-          <dt>DRAWING NO.</dt>
-          <dd>04 / 05</dd>
-          <dt>CLAIM</dt>
-          <dd>5 PHASES · 2 TIERS · 1 JOURNEY</dd>
-          <dt>BASELINE</dt>
-          <dd>FRONTSTAGE / BACKSTAGE SPLIT</dd>
-          <dt>LAST REV.</dt>
-          <dd>04/26</dd>
-        </dl>
-
-        <div className="design__inner case-section__inner">
-          <header className="case-section-head">
-            <p className="kicker">04 · DESIGN · THE FIVE-PHASE SERVICE ASSEMBLY</p>
-            <h2>
-              Five phases. Two tiers. <em>One journey.</em>
-            </h2>
-            <p className="case-section-head__sub">
-              Five phases of customer planning &mdash; identify outcomes, evaluate solutions, create a
-              plan, execute, assess value &mdash; exploded into frontstage and backstage. Customers see
-              workshops, check-ins, QBRs. The design lived in the backstage system that made those
-              run: enabled people, standard processes, shared platform.
-            </p>
-          </header>
-        </div>
-
-        {/* Lifted artifact (legacy `.adsk-hero` block, scoped + React-toggled) */}
-        <div className="autodesk-blueprint-wrap">
-          <AutodeskJourneyArtifact />
+          <ol className="autodesk-sprint-cells" aria-label="CSXD sprint phases">
+            <li className="autodesk-sprint-cell">
+              <span className="autodesk-sprint-cell-idx">01</span>
+              <span className="autodesk-sprint-cell-ttl">UNDERSTAND</span>
+              <span className="autodesk-sprint-cell-sub">37 GTM employees</span>
+            </li>
+            <li className="autodesk-sprint-cell">
+              <span className="autodesk-sprint-cell-idx">02</span>
+              <span className="autodesk-sprint-cell-ttl">DEFINE</span>
+              <span className="autodesk-sprint-cell-sub">288 employees surveyed</span>
+            </li>
+            <li className="autodesk-sprint-cell">
+              <span className="autodesk-sprint-cell-idx">03</span>
+              <span className="autodesk-sprint-cell-ttl">DEVELOP</span>
+              <span className="autodesk-sprint-cell-sub">34 customers prototyped</span>
+            </li>
+            <li className="autodesk-sprint-cell">
+              <span className="autodesk-sprint-cell-idx">04</span>
+              <span className="autodesk-sprint-cell-ttl">DELIVER</span>
+              <span className="autodesk-sprint-cell-sub">25 manager prototypes</span>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -245,7 +274,7 @@ export function AutodeskCaseView() {
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>05 / 05</dd>
+          <dd>05 / 06</dd>
           <dt>CLAIM</dt>
           <dd>DESIGN PULLED MODERNIZATION</dd>
           <dt>BASELINE</dt>
@@ -311,6 +340,17 @@ export function AutodeskCaseView() {
       <section className="lesson-autodesk" aria-label="Lesson" data-screen-label="06 Lesson">
         <span className="margin-note">DRAWING 06 · LESSON</span>
         <span className="fig-stamp">FIG. 06 · DESIGN RATIONALE</span>
+
+        <dl className="section-stamp" aria-label="Section metadata">
+          <dt>DRAWING NO.</dt>
+          <dd>06 / 06</dd>
+          <dt>CLAIM</dt>
+          <dd>THREE DESIGN-RATIONALE NOTES</dd>
+          <dt>BASELINE</dt>
+          <dd>TRADEOFF · SYSTEM · OUTCOME</dd>
+          <dt>LAST REV.</dt>
+          <dd>04/26</dd>
+        </dl>
 
         <div className="lesson-autodesk__inner case-section__inner">
           <header className="case-section-head">
