@@ -336,6 +336,15 @@
   }
 }
 
+/* ---- Mobile · hide case picker (shared component class; only renders on Tier A
+   case pages, so a shared rule is safe). Reclaims ~120px above the fold; the
+   Handoff CTA at the bottom of each case handles forward navigation. ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .hero__plate-picker {
+    display: none !important;
+  }
+}
+
 /* ---- Tier-A shared section head baseline (no grid — per-case layouts opt in) ---- */
 .tier-a-case-root .case-section-head {
   box-sizing: border-box;
