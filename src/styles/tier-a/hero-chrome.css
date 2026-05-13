@@ -353,8 +353,8 @@
   }
 }
 
-/* ---- Mobile (≤768px) · case picker as horizontal scroll-snap strip (desktop
-   picker layout unchanged from Tailwind / flex-wrap above this breakpoint). ---- */
+/* ---- Mobile / small tablet (≤768px) · case picker: phones = scroll-snap strip;
+   large phone / small tablet = wrapped chips (desktop wrap resumes >768px). ---- */
 @media (max-width: 768px) {
   /* Flex column children default min-width:auto — without this the picker row can
      force the whole hero plate wider than the viewport (horizontal page scroll). */
@@ -379,32 +379,20 @@
     margin-bottom: 0.45rem !important;
   }
 
+  /* Shared nav shell — wrap vs scroll set in ≤480px vs 481–768px blocks below */
   .tier-a-case-root .hero__plate-picker nav.case-picker {
     display: flex !important;
-    flex-wrap: nowrap !important;
     align-items: stretch;
     gap: 0.45rem;
     width: 100%;
     max-width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 0;
     padding: 0 0 0.45rem;
     margin-inline: 0;
-    touch-action: pan-x;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
   }
 
-  /* Stay below viewport width: clamp() used a 17.25rem floor which exceeded 78vw
-     on phones (~320–360px), blowing out the flex row. Cap with vw + rem ceiling. */
   .tier-a-case-root .hero__plate-picker nav.case-picker > a {
-    flex: 0 0 min(260px, min(76vw, calc(100vw - 4.5rem)));
-    max-width: min(260px, calc(100vw - 4.5rem));
-    scroll-snap-align: center;
     box-sizing: border-box;
     text-align: center;
     line-height: 1.38;
@@ -416,6 +404,45 @@
     background: rgba(95, 230, 194, 0.14) !important;
     color: var(--accent) !important;
     box-shadow: 0 0 0 1px rgba(95, 230, 194, 0.38);
+  }
+}
+
+/* ≤480px · true phone — horizontal scroll-snap, ~70vw chips */
+@media (max-width: 480px) {
+  .tier-a-case-root .hero__plate-picker nav.case-picker {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    justify-content: flex-start;
+  }
+
+  .tier-a-case-root .hero__plate-picker nav.case-picker > a {
+    flex: 0 0 min(70vw, 280px);
+    max-width: min(70vw, 280px);
+    scroll-snap-align: center;
+  }
+}
+
+/* 481–768px · large phone / small tablet — wrap so 2–3+ chips fit per row */
+@media (min-width: 481px) and (max-width: 768px) {
+  .tier-a-case-root .hero__plate-picker nav.case-picker {
+    flex-wrap: wrap !important;
+    justify-content: center;
+    overflow-x: visible;
+    overscroll-behavior-x: auto;
+    scroll-snap-type: none;
+    touch-action: manipulation;
+  }
+
+  .tier-a-case-root .hero__plate-picker nav.case-picker > a {
+    flex: 0 0 min(45vw, 240px);
+    max-width: min(45vw, 240px);
+    scroll-snap-align: none;
   }
 }
 
