@@ -278,6 +278,15 @@
   }
 }
 
+/* Tier-A · hero FIG. stamp (direct child of section.hero) clears fixed nav band */
+@media (min-width: 769px) {
+  .tier-a-case-root .hero > .fig-stamp {
+    top: clamp(10.5rem, 22vw, 14rem);
+    right: var(--gutter);
+    z-index: 14;
+  }
+}
+
 /* Tier-A · case picker on the photo plate (zone 2) */
 .tier-a-case-root .hero__plate-picker {
   position: relative;
