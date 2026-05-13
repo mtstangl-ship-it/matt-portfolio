@@ -336,6 +336,14 @@
   }
 }
 
+/* ---- Intermediate (769–1199px) · hide hero identity strip — redundant with
+   hero__meta (WINDOW / CLIENT / …) which reads better at tablet widths. ---- */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .tier-a-case-root .hero__id-strip {
+    display: none !important;
+  }
+}
+
 /* ---- Mobile · hide case picker (shared component class; only renders on Tier A
    case pages, so a shared rule is safe). Reclaims ~120px above the fold; the
    Handoff CTA at the bottom of each case handles forward navigation. ---- */
