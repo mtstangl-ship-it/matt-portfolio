@@ -59,6 +59,13 @@
   }
 }
 
+/* ---- Mobile · hide FIG. stamps (hero + section) to reclaim vertical space ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-centaur-portfolio .fig-stamp {
+    display: none !important;
+  }
+}
+
 @media (min-width: 881px) {
   .tier-a-case-root .case-centaur-portfolio .hero .fig-stamp {
     top: 1rem;

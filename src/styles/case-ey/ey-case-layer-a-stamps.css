@@ -65,3 +65,10 @@
     display: none !important;
   }
 }
+
+/* ---- Mobile · hide FIG. stamps (hero + section) to reclaim vertical space ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-ey-portfolio .fig-stamp {
+    display: none !important;
+  }
+}
