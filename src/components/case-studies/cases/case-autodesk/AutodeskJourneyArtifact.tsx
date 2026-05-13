@@ -1,22 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import type { KeyboardEvent } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 /* =========================================================================
- * Service Assembly · five-phase customer-planning blueprint with interactivity.
- *
- * v3 upgrades from v2 (legacy lift):
- *   1. Phase click-to-expand (one expanded at a time; Phase 01 default).
- *   2. Backstage toggle (SHOW BACKSTAGE / HIDE BACKSTAGE) — dramatizes the
- *      central argument that "the design lived in the backstage".
- *   3. Visibly transforming tier swap — sliding-indicator pill + crossfade
- *      on the frontstage list of every expanded phase.
- *   4. Mobile carousel (scroll-snap) at ≤ 768px; each slide = one phase,
- *      always expanded. Dot indicators + "View full blueprint" escape hatch
- *      that opens a fullscreen modal containing the desktop blueprint.
- *
- * All transitions wrapped in `@media (prefers-reduced-motion: reduce)` via
- * scoped CSS overrides (see case-autodesk.css).
+ * Autodesk Journey Artifact · guided carousel (single phase at a time).
+ * Tier + backstage toggles preserved; phase data co-located in PHASES.
  * ========================================================================= */
 
 type ActKind = "star" | "normal" | "help";
@@ -186,46 +175,21 @@ const TIER_LABELS = {
 
 type Tier = "growth" | "nurture";
 
-/* -------------------------------------------------------------------------
- *  Inner blueprint primitives — used by desktop grid AND by fullscreen modal
- *  so the legacy 5-column layout always exists somewhere on the page.
- * ----------------------------------------------------------------------- */
-
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg
-      className={`autodesk-bp-chevron${open ? " is-open" : ""}`}
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M3 5l4 4 4-4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function ActsList({ tier, phase, animKey }: { tier: Tier; phase: Phase; animKey: string }) {
+function ActsList({ tier, phase }: { tier: Tier; phase: Phase }) {
   const content = phase[tier];
   return (
-    <div className="autodesk-bp-acts-wrap" key={animKey}>
-      <span className="autodesk-bp-rail-sub">{content.sub}</span>
-      <ul className="autodesk-bp-acts">
+    <div className="autodesk-journey-tier-crossfade">
+      <span className="autodesk-journey-frontstage-k">FRONTSTAGE</span>
+      <span className="autodesk-journey-rail-sub">{content.sub}</span>
+      <ul className="autodesk-journey-acts">
         {content.acts.map((a) => (
           <li
             key={a.text}
             className={
               a.kind === "star"
-                ? "autodesk-bp-acts-star"
+                ? "autodesk-journey-act-star"
                 : a.kind === "help"
-                  ? "autodesk-bp-acts-help"
+                  ? "autodesk-journey-act-help"
                   : undefined
             }
           >
@@ -238,18 +202,15 @@ function ActsList({ tier, phase, animKey }: { tier: Tier; phase: Phase; animKey:
   );
 }
 
-function BackstageBlock({ rows, justRevealed }: { rows: BackstageRow[]; justRevealed: boolean }) {
+function BackstageBlock({ rows }: { rows: BackstageRow[] }) {
   return (
-    <div
-      className={`autodesk-bp-backstage${justRevealed ? " is-just-revealed" : ""}`}
-      aria-label="Backstage row"
-    >
-      <span className="autodesk-bp-backstage-divider" aria-hidden="true">
+    <div className="autodesk-journey-backstage" aria-label="Backstage row">
+      <span className="autodesk-journey-backstage-divider" aria-hidden="true">
         <span>↓ backstage</span>
       </span>
-      <div className="autodesk-bp-backstage-rows">
+      <div className="autodesk-journey-backstage-rows">
         {rows.map((r) => (
-          <span key={r.label} className="autodesk-bp-bs">
+          <span key={r.label} className="autodesk-journey-bs">
             <b>{r.label}</b> · {r.text}
           </span>
         ))}
@@ -258,333 +219,87 @@ function BackstageBlock({ rows, justRevealed }: { rows: BackstageRow[]; justReve
   );
 }
 
-function PhaseColumn({
+function PhaseSlideCard({
   phase,
-  expanded,
-  onToggle,
   tier,
   showBackstage,
-  backstageJustRevealed,
-  alwaysExpanded = false,
-  panelId,
+  slideProps,
 }: {
   phase: Phase;
-  expanded: boolean;
-  onToggle: () => void;
   tier: Tier;
   showBackstage: boolean;
-  backstageJustRevealed: boolean;
-  alwaysExpanded?: boolean;
-  panelId: string;
-}) {
-  const isOpen = alwaysExpanded || expanded;
-  const handleKey = (e: React.KeyboardEvent) => {
-    if (alwaysExpanded) return;
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      onToggle();
-    }
+  slideProps: {
+    role: "group";
+    "aria-roledescription": string;
+    "aria-label": string;
+    id?: string;
   };
-  return (
-    <div
-      className={`autodesk-bp-col autodesk-bp-phase-col${isOpen ? " is-expanded" : ""}`}
-      data-phase={phase.idx}
-    >
-      <button
-        type="button"
-        className="autodesk-bp-phase-header"
-        aria-expanded={isOpen}
-        aria-controls={panelId}
-        onClick={onToggle}
-        onKeyDown={handleKey}
-        disabled={alwaysExpanded}
-      >
-        <span className="autodesk-bp-idx">{phase.idx}</span>
-        <span className="autodesk-bp-ttl">{phase.title}</span>
-        <span className="autodesk-bp-sub">{phase.dek}</span>
-        {!isOpen ? (
-          <span className="autodesk-bp-preview" key={`${phase.idx}-${tier}`}>
-            <span className="autodesk-bp-preview-list">{phase[tier].preview}</span>
-          </span>
-        ) : null}
-        {!alwaysExpanded ? (
-          <span className="autodesk-bp-expand-row" aria-hidden="true">
-            <Chevron open={isOpen} />
-            <span className="autodesk-bp-expand-hint">
-              {isOpen ? "↑ collapse" : "↓ expand for full detail"}
-            </span>
-          </span>
-        ) : null}
-      </button>
-      <div
-        className="autodesk-bp-panel"
-        id={panelId}
-        role="region"
-        aria-hidden={!isOpen}
-        data-open={isOpen ? "true" : "false"}
-      >
-        <ActsList tier={tier} phase={phase} animKey={`${phase.idx}-${tier}`} />
-        {showBackstage ? (
-          <BackstageBlock rows={phase.backstage} justRevealed={backstageJustRevealed} />
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
-function BlueprintShell({
-  tier,
-  setTier,
-  showBackstage,
-  setShowBackstage,
-  expandedIdx,
-  setExpandedIdx,
-  backstageJustRevealed,
-  mode,
-  idBase,
-}: {
-  tier: Tier;
-  setTier: (t: Tier) => void;
-  showBackstage: boolean;
-  setShowBackstage: (b: boolean) => void;
-  expandedIdx: number;
-  setExpandedIdx: (i: number) => void;
-  backstageJustRevealed: boolean;
-  mode: "grid" | "carousel" | "modal";
-  idBase: string;
 }) {
-  const phaseCols = PHASES.map((phase, i) => (
-    <PhaseColumn
-      key={phase.idx}
-      phase={phase}
-      expanded={expandedIdx === i}
-      onToggle={() => setExpandedIdx(expandedIdx === i ? -1 : i)}
-      tier={tier}
-      showBackstage={showBackstage}
-      backstageJustRevealed={backstageJustRevealed && expandedIdx === i}
-      alwaysExpanded={mode === "carousel"}
-      panelId={`${idBase}-panel-${i}`}
-    />
-  ));
-
   return (
-    <section
-      className={`autodesk-blueprint autodesk-blueprint--${mode}`}
-      data-tier={tier}
-      data-backstage={showBackstage ? "on" : "off"}
-      aria-label="Future journey and backstage blueprint"
-    >
-      <div className="autodesk-bp-head">
-        <span className="autodesk-bp-head-k">FUTURE.JOURNEY + BACKSTAGE</span>
-        <span className="autodesk-bp-head-t">
-          End-to-end post-purchase experience · one journey, two service tiers
-        </span>
-        <span className="autodesk-bp-head-spacer" />
-
-        <span className="autodesk-tier-toggle" role="radiogroup" aria-label="Service tier">
-          <span className="autodesk-tier-toggle-indicator" aria-hidden="true" />
-          <button
-            type="button"
-            role="radio"
-            aria-checked={tier === "growth"}
-            data-tier="growth"
-            data-active={tier === "growth"}
-            onClick={() => setTier("growth")}
-          >
-            ● GROWTH PLUS <small>~700–1000</small>
-          </button>
-          <button
-            type="button"
-            role="radio"
-            aria-checked={tier === "nurture"}
-            data-tier="nurture"
-            data-active={tier === "nurture"}
-            onClick={() => setTier("nurture")}
-          >
-            ● NURTURE PLUS <small>~400–600</small>
-          </button>
-        </span>
-
-        <button
-          type="button"
-          className="autodesk-backstage-toggle"
-          aria-pressed={showBackstage}
-          onClick={() => setShowBackstage(!showBackstage)}
+    <div className="autodesk-journey-slide-inner" {...slideProps}>
+      <header className="autodesk-journey-slide-head">
+        <span className="autodesk-journey-slide-idx">{phase.idx}</span>
+        <span className="autodesk-journey-slide-ttl">{phase.title}</span>
+        <p className="autodesk-journey-slide-dek">{phase.dek}</p>
+      </header>
+      <div className="autodesk-journey-slide-panel">
+        <ActsList key={`${phase.idx}-${tier}`} tier={tier} phase={phase} />
+        <div
+          className="autodesk-journey-backstage-shell"
+          data-open={showBackstage ? "true" : "false"}
+          aria-hidden={!showBackstage}
         >
-          <span className="autodesk-backstage-toggle-dot" aria-hidden="true" />
-          {showBackstage ? "HIDE BACKSTAGE" : "SHOW BACKSTAGE"}
-        </button>
-      </div>
-
-      <p className="autodesk-tier-summary" data-tier={tier}>
-        {TIER_LABELS[tier]}
-      </p>
-
-      <div className="autodesk-bp-stage">
-        <div className="autodesk-bp-grid">{phaseCols}</div>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------------------------------------------------------------
- *  Mobile carousel — scroll-snap, dot indicators, fullscreen escape hatch
- * ----------------------------------------------------------------------- */
-
-function CarouselDots({
-  count,
-  active,
-  onSelect,
-}: {
-  count: number;
-  active: number;
-  onSelect: (i: number) => void;
-}) {
-  return (
-    <ol className="autodesk-bp-carousel-dots" aria-label="Phase indicators">
-      {Array.from({ length: count }, (_, i) => (
-        <li key={i}>
-          <button
-            type="button"
-            aria-label={`Show phase ${String(i + 1).padStart(2, "0")}`}
-            aria-current={i === active ? "step" : undefined}
-            data-active={i === active}
-            onClick={() => onSelect(i)}
-          />
-        </li>
-      ))}
-    </ol>
-  );
-}
-
-/* -------------------------------------------------------------------------
- *  Fullscreen modal — desktop blueprint inside scrollable / zoomable container
- * ----------------------------------------------------------------------- */
-
-function FullscreenModal({
-  open,
-  onClose,
-  tier,
-  setTier,
-  showBackstage,
-  setShowBackstage,
-  expandedIdx,
-  setExpandedIdx,
-  backstageJustRevealed,
-  returnFocusRef,
-}: {
-  open: boolean;
-  onClose: () => void;
-  tier: Tier;
-  setTier: (t: Tier) => void;
-  showBackstage: boolean;
-  setShowBackstage: (b: boolean) => void;
-  expandedIdx: number;
-  setExpandedIdx: (i: number) => void;
-  backstageJustRevealed: boolean;
-  returnFocusRef: React.RefObject<HTMLButtonElement>;
-}) {
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    closeBtnRef.current?.focus();
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-      returnFocusRef.current?.focus();
-    };
-  }, [open, onClose, returnFocusRef]);
-
-  if (!open) return null;
-
-  return (
-    <div
-      className="autodesk-bp-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Full blueprint"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className="autodesk-bp-modal-frame">
-        <header className="autodesk-bp-modal-bar">
-          <span className="autodesk-bp-modal-k">FULL BLUEPRINT · pinch-zoom &amp; pan supported</span>
-          <button
-            type="button"
-            className="autodesk-bp-modal-close"
-            ref={closeBtnRef}
-            onClick={onClose}
-            aria-label="Close full blueprint"
-          >
-            ✕
-          </button>
-        </header>
-        <div className="autodesk-bp-modal-scroll">
-          <BlueprintShell
-            tier={tier}
-            setTier={setTier}
-            showBackstage={showBackstage}
-            setShowBackstage={setShowBackstage}
-            expandedIdx={expandedIdx}
-            setExpandedIdx={setExpandedIdx}
-            backstageJustRevealed={backstageJustRevealed}
-            mode="modal"
-            idBase="autodesk-bp-modal"
-          />
+          <div className="autodesk-journey-backstage-shell-inner">
+            <BackstageBlock rows={phase.backstage} />
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-/* -------------------------------------------------------------------------
- *  Top-level artifact — picks desktop vs. mobile, owns interaction state.
- * ----------------------------------------------------------------------- */
-
 export function AutodeskJourneyArtifact() {
   const [tier, setTier] = useState<Tier>("growth");
-  const [showBackstage, setShowBackstage] = useState<boolean>(false);
-  const [expandedIdx, setExpandedIdx] = useState<number>(0);
-  const [backstageJustRevealed, setBackstageJustRevealed] = useState<boolean>(false);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [carouselIdx, setCarouselIdx] = useState<number>(0);
+  const [showBackstage, setShowBackstage] = useState(false);
+  const [phaseIndex, setPhaseIndex] = useState(0);
+  const [isWide, setIsWide] = useState(true);
 
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const modalTriggerRef = useRef<HTMLButtonElement>(null);
-  const idBase = useId().replace(/:/g, "");
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Flash backstage "↓ backstage" indicator for ~600ms after reveal.
   useEffect(() => {
-    if (!showBackstage) {
-      setBackstageJustRevealed(false);
-      return;
-    }
-    setBackstageJustRevealed(true);
-    const t = window.setTimeout(() => setBackstageJustRevealed(false), 700);
-    return () => window.clearTimeout(t);
-  }, [showBackstage]);
+    const mq = window.matchMedia("(min-width: 1025px)");
+    const sync = () => setIsWide(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
-  // Sync carousel scroll position → active dot
+  const navigatePhase = useCallback(
+    (next: number, scrollMobile: "smooth" | "instant" = "smooth") => {
+      const len = PHASES.length;
+      const i = ((next % len) + len) % len;
+      setPhaseIndex(i);
+      const el = scrollRef.current;
+      if (!isWide && el) {
+        const w = el.clientWidth;
+        el.scrollTo({ left: w * i, behavior: scrollMobile === "instant" ? "auto" : "smooth" });
+      }
+    },
+    [isWide],
+  );
+
   useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
+    const el = scrollRef.current;
+    if (!el || isWide) return;
     let raf = 0;
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        const slideW = el.clientWidth * 0.85;
-        const idx = Math.round(el.scrollLeft / slideW);
+        const w = el.clientWidth;
+        if (w <= 0) return;
+        const idx = Math.round(el.scrollLeft / w);
         const clamped = Math.max(0, Math.min(PHASES.length - 1, idx));
-        setCarouselIdx(clamped);
+        setPhaseIndex((prev) => (prev === clamped ? prev : clamped));
       });
     };
     el.addEventListener("scroll", onScroll, { passive: true });
@@ -592,122 +307,161 @@ export function AutodeskJourneyArtifact() {
       el.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [isWide]);
 
-  const scrollToSlide = useCallback((i: number) => {
-    const el = carouselRef.current;
-    if (!el) return;
-    const slideW = el.clientWidth * 0.85;
-    el.scrollTo({ left: slideW * i, behavior: "smooth" });
-  }, []);
+  useEffect(() => {
+    if (isWide || !scrollRef.current) return;
+    const el = scrollRef.current;
+    const w = el.clientWidth;
+    el.scrollTo({ left: w * phaseIndex, behavior: "auto" });
+  }, [isWide]);
+
+  const onRegionKeyDown = (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      navigatePhase(phaseIndex - 1);
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      navigatePhase(phaseIndex + 1);
+    }
+  };
+
+  const phase = PHASES[phaseIndex];
 
   return (
-    <div className="autodesk-blueprint-root">
-      {/* Desktop grid · visible ≥ 769px */}
-      <div className="autodesk-blueprint-desktop">
-        <BlueprintShell
-          tier={tier}
-          setTier={setTier}
-          showBackstage={showBackstage}
-          setShowBackstage={setShowBackstage}
-          expandedIdx={expandedIdx}
-          setExpandedIdx={setExpandedIdx}
-          backstageJustRevealed={backstageJustRevealed}
-          mode="grid"
-          idBase={`${idBase}-desk`}
-        />
-      </div>
+    <div className="autodesk-journey-root">
+      <section
+        tabIndex={0}
+        className="autodesk-journey-carousel autodesk-blueprint"
+        data-tier={tier}
+        data-backstage={showBackstage ? "on" : "off"}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Customer Value Journey"
+        onKeyDown={onRegionKeyDown}
+      >
+        <div className="autodesk-journey-intro">
+          <span className="autodesk-journey-intro-k">FUTURE.JOURNEY + BACKSTAGE</span>
+          <span className="autodesk-journey-intro-t">
+            End-to-end post-purchase experience · one journey, two service tiers
+          </span>
+        </div>
 
-      {/* Mobile carousel · visible ≤ 768px */}
-      <div className="autodesk-blueprint-mobile">
-        <section
-          className="autodesk-blueprint autodesk-blueprint--carousel"
-          data-tier={tier}
-          data-backstage={showBackstage ? "on" : "off"}
-          aria-label="Future journey and backstage blueprint (mobile)"
-        >
-          <div className="autodesk-bp-head autodesk-bp-head--mobile">
-            <span className="autodesk-bp-head-k">FUTURE.JOURNEY + BACKSTAGE</span>
-            <span className="autodesk-tier-toggle" role="radiogroup" aria-label="Service tier">
-              <span className="autodesk-tier-toggle-indicator" aria-hidden="true" />
-              <button
-                type="button"
-                role="radio"
-                aria-checked={tier === "growth"}
-                data-tier="growth"
-                data-active={tier === "growth"}
-                onClick={() => setTier("growth")}
-              >
-                ● GROWTH
-              </button>
-              <button
-                type="button"
-                role="radio"
-                aria-checked={tier === "nurture"}
-                data-tier="nurture"
-                data-active={tier === "nurture"}
-                onClick={() => setTier("nurture")}
-              >
-                ● NURTURE
-              </button>
-            </span>
+        <div className="autodesk-journey-toolbar">
+          <div className="autodesk-journey-tier-toggle">
+            <span className="autodesk-journey-tier-indicator" aria-hidden="true" />
             <button
               type="button"
-              className="autodesk-backstage-toggle"
-              aria-pressed={showBackstage}
-              onClick={() => setShowBackstage(!showBackstage)}
+              className="autodesk-journey-tier-toggle-btn"
+              aria-pressed={tier === "growth"}
+              data-tier="growth"
+              data-active={tier === "growth"}
+              onClick={() => setTier("growth")}
             >
-              <span className="autodesk-backstage-toggle-dot" aria-hidden="true" />
-              {showBackstage ? "HIDE BACKSTAGE" : "SHOW BACKSTAGE"}
+              ● GROWTH PLUS <small>~700–1000</small>
+            </button>
+            <button
+              type="button"
+              className="autodesk-journey-tier-toggle-btn"
+              aria-pressed={tier === "nurture"}
+              data-tier="nurture"
+              data-active={tier === "nurture"}
+              onClick={() => setTier("nurture")}
+            >
+              ● NURTURE PLUS <small>~400–600</small>
             </button>
           </div>
 
-          <p className="autodesk-tier-summary" data-tier={tier}>
-            {TIER_LABELS[tier]}
-          </p>
+          <button
+            type="button"
+            className="autodesk-journey-backstage-toggle"
+            aria-pressed={showBackstage}
+            onClick={() => setShowBackstage((v) => !v)}
+          >
+            <span className="autodesk-journey-backstage-dot" aria-hidden="true" />
+            {showBackstage ? "HIDE BACKSTAGE" : "SHOW BACKSTAGE"}
+          </button>
+        </div>
 
-          <div className="autodesk-bp-carousel" ref={carouselRef}>
-            {PHASES.map((phase, i) => (
-              <div className="autodesk-bp-carousel-slide" key={phase.idx}>
-                <PhaseColumn
-                  phase={phase}
-                  expanded
-                  onToggle={() => {}}
-                  tier={tier}
-                  showBackstage={showBackstage}
-                  backstageJustRevealed={backstageJustRevealed}
-                  alwaysExpanded
-                  panelId={`${idBase}-mob-panel-${i}`}
-                />
-              </div>
-            ))}
+        <p className="autodesk-journey-tier-summary" data-tier={tier}>
+          {TIER_LABELS[tier]}
+        </p>
+
+        {isWide ? (
+          <div className="autodesk-journey-viewport autodesk-journey-viewport--desktop">
+            <div className="autodesk-journey-desktop-pane" key={phaseIndex}>
+              <PhaseSlideCard
+                phase={phase}
+                tier={tier}
+                showBackstage={showBackstage}
+                slideProps={{
+                  role: "group",
+                  "aria-roledescription": "slide",
+                  "aria-label": `Phase ${phase.idx}: ${phase.title}`,
+                }}
+              />
+            </div>
           </div>
+        ) : (
+          <div className="autodesk-journey-viewport autodesk-journey-viewport--scroll" ref={scrollRef}>
+            <div className="autodesk-journey-track">
+              {PHASES.map((p) => (
+                <div className="autodesk-journey-slide" key={p.idx}>
+                  <PhaseSlideCard
+                    phase={p}
+                    tier={tier}
+                    showBackstage={showBackstage}
+                    slideProps={{
+                      role: "group",
+                      "aria-roledescription": "slide",
+                      "aria-label": `Phase ${p.idx}: ${p.title}`,
+                      id: `autodesk-journey-slide-${p.idx}`,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
-          <CarouselDots count={PHASES.length} active={carouselIdx} onSelect={scrollToSlide} />
+        <div className="autodesk-journey-controls">
+          <button
+            type="button"
+            className="autodesk-journey-prev"
+            aria-label="Previous phase"
+            onClick={() => navigatePhase(phaseIndex - 1)}
+          >
+            ← prev
+          </button>
+
+          <div className="autodesk-journey-progress">
+            <div className="autodesk-journey-dots-row" role="presentation">
+              {PHASES.map((p, i) => (
+                <button
+                  key={p.idx}
+                  type="button"
+                  className={`autodesk-journey-dot${i === phaseIndex ? " autodesk-journey-dot--active" : ""}`}
+                  aria-label={`Go to phase ${p.idx}`}
+                  aria-current={i === phaseIndex ? "true" : undefined}
+                  onClick={() => navigatePhase(i, "smooth")}
+                />
+              ))}
+            </div>
+            <span className="autodesk-journey-progress-label">
+              {phase.idx} · {phase.title}
+            </span>
+          </div>
 
           <button
             type="button"
-            className="autodesk-bp-modal-trigger"
-            ref={modalTriggerRef}
-            onClick={() => setModalOpen(true)}
+            className="autodesk-journey-next"
+            aria-label="Next phase"
+            onClick={() => navigatePhase(phaseIndex + 1)}
           >
-            <span aria-hidden="true">⤢</span> View full blueprint
+            next →
           </button>
-        </section>
-      </div>
-
-      <FullscreenModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        tier={tier}
-        setTier={setTier}
-        showBackstage={showBackstage}
-        setShowBackstage={setShowBackstage}
-        expandedIdx={expandedIdx}
-        setExpandedIdx={setExpandedIdx}
-        backstageJustRevealed={backstageJustRevealed}
-        returnFocusRef={modalTriggerRef}
-      />
+        </div>
+      </section>
     </div>
   );
 }
