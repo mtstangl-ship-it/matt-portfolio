@@ -9,3 +9,9 @@ out
 .DS_Store
 tmp_py/
 .v4-extract/
+
+# Local reference snapshots (HTML exports for external design tools, not source)
+reference/html-export/
+
+# Cursor session backup files
+*.cursor-local.bak
