@@ -353,12 +353,60 @@
   }
 }
 
-/* ---- Mobile · hide case picker (shared component class; only renders on Tier A
-   case pages, so a shared rule is safe). Reclaims ~120px above the fold; the
-   Handoff CTA at the bottom of each case handles forward navigation. ---- */
+/* ---- Mobile (≤768px) · case picker as horizontal scroll-snap strip (desktop
+   picker layout unchanged from Tailwind / flex-wrap above this breakpoint). ---- */
 @media (max-width: 768px) {
   .tier-a-case-root .hero__plate-picker {
-    display: none !important;
+    padding-top: clamp(4rem, 3.75rem + 4vw, 5.75rem);
+    padding-bottom: clamp(0.75rem, 2vw, 1.25rem);
+    padding-inline: var(--gutter);
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-wrap {
+    max-width: 100%;
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-hint--label {
+    margin-bottom: 0.45rem !important;
+  }
+
+  .tier-a-case-root .hero__plate-picker nav.case-picker {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch;
+    gap: 0.45rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    padding: 0 0 0.45rem;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .tier-a-case-root .hero__plate-picker nav.case-picker > a {
+    flex: 0 0 clamp(17.25rem, 78vw, 280px);
+    scroll-snap-align: center;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 1.38;
+    white-space: normal !important;
+  }
+
+  .tier-a-case-root .hero__plate-picker nav.case-picker > a[aria-current="page"] {
+    border-color: var(--accent) !important;
+    background: rgba(95, 230, 194, 0.14) !important;
+    color: var(--accent) !important;
+    box-shadow: 0 0 0 1px rgba(95, 230, 194, 0.38);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tier-a-case-root .hero__plate-picker nav.case-picker {
+    scroll-snap-type: none !important;
   }
 }
 
