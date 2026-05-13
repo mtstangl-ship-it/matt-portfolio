@@ -175,6 +175,90 @@ const TIER_LABELS = {
 
 type Tier = "growth" | "nurture";
 
+const SEQUENCE_STEPS = [
+  { full: "IDENTIFY", short: "IDENT" },
+  { full: "EVALUATE", short: "EVAL" },
+  { full: "PLAN", short: "PLAN" },
+  { full: "EXECUTE", short: "EXEC" },
+  { full: "ASSESS", short: "ASSESS" },
+] as const;
+
+const SLIDE_FOOTER_META: Record<Tier, Record<number, readonly string[]>> = {
+  growth: {
+    1: ["TIER · GROWTH PLUS", "CADENCE · 1:FEW", "OWNER · SALES + CSM", "KPI · CBI ALIGNED"],
+    2: ["TIER · GROWTH PLUS", "CADENCE · 1:FEW", "OWNER · TECH SALES + PARTNERS", "KPI · BUSINESS CASE"],
+    3: ["TIER · GROWTH PLUS", "CADENCE · 1:FEW", "OWNER · VALUE CONSULTANTS", "KPI · PLAN COMMITMENT"],
+    4: ["TIER · GROWTH PLUS", "CADENCE · 1:FEW", "OWNER · CSM + PARTNERS", "KPI · ADOPTION"],
+    5: ["TIER · GROWTH PLUS", "CADENCE · 1:FEW", "OWNER · CSM + PARTNERS", "KPI · VALUE REALIZED"],
+  },
+  nurture: {
+    1: ["TIER · NURTURE PLUS", "CADENCE · 1:MANY", "OWNER · CSM (DIGITAL)", "KPI · CBI ALIGNED"],
+    2: ["TIER · NURTURE PLUS", "CADENCE · 1:MANY", "OWNER · PARTNERS", "KPI · TRIAL VALIDATED"],
+    3: ["TIER · NURTURE PLUS", "CADENCE · 1:MANY", "OWNER · CSM (DIGITAL)", "KPI · PLAN PUBLISHED"],
+    4: ["TIER · NURTURE PLUS", "CADENCE · 1:MANY", "OWNER · CSM + PARTNERS", "KPI · HEALTH SCORE"],
+    5: ["TIER · NURTURE PLUS", "CADENCE · 1:MANY", "OWNER · CSM (DIGITAL)", "KPI · VALUE REPORTED"],
+  },
+};
+
+function JourneySequenceBar({
+  phaseIndexActive,
+  navigatePhase,
+}: {
+  phaseIndexActive: number;
+  navigatePhase: (next: number, scrollMobile?: "smooth" | "instant") => void;
+}) {
+  return (
+    <div className="autodesk-journey-sequence-bar">
+      {SEQUENCE_STEPS.map((step, i) => {
+        const isActive = i === phaseIndexActive;
+        const phaseLabel = PHASES[i]?.idx ?? String(i + 1).padStart(2, "0");
+        return (
+          <button
+            key={PHASES[i].idx}
+            type="button"
+            className={`autodesk-journey-sequence-segment${isActive ? " autodesk-journey-sequence-segment--active" : ""}`}
+            aria-label={`Go to phase ${phaseLabel}`}
+            aria-current={isActive ? "true" : undefined}
+            onClick={() => navigatePhase(i, "smooth")}
+          >
+            <span className="autodesk-journey-sequence-label">
+              <span className="autodesk-journey-sequence-label-full">{step.full}</span>
+              <span className="autodesk-journey-sequence-label-short">{step.short}</span>
+            </span>
+            <span className="autodesk-journey-sequence-bar-fill" aria-hidden="true" />
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function SlideFooterBand({ tier, slideOrdinal }: { tier: Tier; slideOrdinal: number }) {
+  const lines = SLIDE_FOOTER_META[tier][slideOrdinal] ?? [];
+  return (
+    <div className="autodesk-journey-slide-footer-wrap">
+      <div className="autodesk-journey-slide-footer" role="presentation">
+        {lines.map((line, cellIdx) => {
+          const sep = line.indexOf(" · ");
+          const keyPart = sep >= 0 ? line.slice(0, sep) : line;
+          const valPart = sep >= 0 ? line.slice(sep + 3) : "";
+          const extended = cellIdx >= 2;
+          return (
+            <span
+              key={`${slideOrdinal}-${cellIdx}`}
+              className={`autodesk-journey-slide-footer-cell${extended ? " autodesk-journey-slide-footer-cell--extended" : ""}`}
+            >
+              <span className="autodesk-journey-slide-footer-key">{keyPart}</span>
+              <span className="autodesk-journey-slide-footer-sep-inner"> · </span>
+              <span className="autodesk-journey-slide-footer-val">{valPart}</span>
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function ActsList({ tier, phase }: { tier: Tier; phase: Phase }) {
   const content = phase[tier];
   return (
@@ -224,6 +308,9 @@ function PhaseSlideCard({
   tier,
   showBackstage,
   slideProps,
+  phaseIndexActive,
+  navigatePhase,
+  slideOrdinal,
 }: {
   phase: Phase;
   tier: Tier;
@@ -234,9 +321,13 @@ function PhaseSlideCard({
     "aria-label": string;
     id?: string;
   };
+  phaseIndexActive: number;
+  navigatePhase: (next: number, scrollMobile?: "smooth" | "instant") => void;
+  slideOrdinal: number;
 }) {
   return (
     <div className="autodesk-journey-slide-inner" {...slideProps}>
+      <JourneySequenceBar phaseIndexActive={phaseIndexActive} navigatePhase={navigatePhase} />
       <header className="autodesk-journey-slide-head">
         <span className="autodesk-journey-slide-idx">{phase.idx}</span>
         <span className="autodesk-journey-slide-ttl">{phase.title}</span>
@@ -254,6 +345,7 @@ function PhaseSlideCard({
           </div>
         </div>
       </div>
+      <SlideFooterBand key={`${tier}-${slideOrdinal}`} tier={tier} slideOrdinal={slideOrdinal} />
     </div>
   );
 }
@@ -327,6 +419,7 @@ export function AutodeskJourneyArtifact() {
   };
 
   const phase = PHASES[phaseIndex];
+  const ordinalForPhase = (p: Phase) => Number.parseInt(p.idx, 10);
 
   return (
     <div className="autodesk-journey-root">
@@ -394,6 +487,9 @@ export function AutodeskJourneyArtifact() {
                 phase={phase}
                 tier={tier}
                 showBackstage={showBackstage}
+                phaseIndexActive={phaseIndex}
+                navigatePhase={navigatePhase}
+                slideOrdinal={ordinalForPhase(phase)}
                 slideProps={{
                   role: "group",
                   "aria-roledescription": "slide",
@@ -411,6 +507,9 @@ export function AutodeskJourneyArtifact() {
                     phase={p}
                     tier={tier}
                     showBackstage={showBackstage}
+                    phaseIndexActive={phaseIndex}
+                    navigatePhase={navigatePhase}
+                    slideOrdinal={ordinalForPhase(p)}
                     slideProps={{
                       role: "group",
                       "aria-roledescription": "slide",
