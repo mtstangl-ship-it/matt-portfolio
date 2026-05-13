@@ -356,13 +356,22 @@
 /* ---- Mobile (≤768px) · case picker as horizontal scroll-snap strip (desktop
    picker layout unchanged from Tailwind / flex-wrap above this breakpoint). ---- */
 @media (max-width: 768px) {
+  /* Flex column children default min-width:auto — without this the picker row can
+     force the whole hero plate wider than the viewport (horizontal page scroll). */
   .tier-a-case-root .hero__plate-picker {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding-top: clamp(4rem, 3.75rem + 4vw, 5.75rem);
     padding-bottom: clamp(0.75rem, 2vw, 1.25rem);
     padding-inline: var(--gutter);
+    overflow-x: clip;
   }
 
   .tier-a-case-root .hero__plate-picker .case-picker-wrap {
+    min-width: 0;
+    width: 100%;
     max-width: 100%;
   }
 
@@ -375,20 +384,26 @@
     flex-wrap: nowrap !important;
     align-items: stretch;
     gap: 0.45rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--gutter);
+    scroll-padding-inline: 0;
     padding: 0 0 0.45rem;
-    margin-inline: calc(-1 * var(--gutter));
-    padding-inline: var(--gutter);
+    margin-inline: 0;
     touch-action: pan-x;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
   }
 
+  /* Stay below viewport width: clamp() used a 17.25rem floor which exceeded 78vw
+     on phones (~320–360px), blowing out the flex row. Cap with vw + rem ceiling. */
   .tier-a-case-root .hero__plate-picker nav.case-picker > a {
-    flex: 0 0 clamp(17.25rem, 78vw, 280px);
+    flex: 0 0 min(260px, min(76vw, calc(100vw - 4.5rem)));
+    max-width: min(260px, calc(100vw - 4.5rem));
     scroll-snap-align: center;
     box-sizing: border-box;
     text-align: center;
