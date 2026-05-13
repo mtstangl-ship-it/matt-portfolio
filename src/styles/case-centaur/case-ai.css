@@ -66,6 +66,13 @@
   }
 }
 
+/* ---- Mobile · hide hero CASE NO. / BASED / ROLE / REV. identity strip ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-centaur-portfolio .hero__id-strip {
+    display: none !important;
+  }
+}
+
 @media (min-width: 881px) {
   .tier-a-case-root .case-centaur-portfolio .hero .fig-stamp {
     top: 1rem;

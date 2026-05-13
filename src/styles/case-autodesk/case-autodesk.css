@@ -1639,3 +1639,10 @@
     display: none !important;
   }
 }
+
+/* ---- Mobile · hide hero CASE NO. / BASED / ROLE / REV. identity strip ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-autodesk-portfolio .hero__id-strip {
+    display: none !important;
+  }
+}
