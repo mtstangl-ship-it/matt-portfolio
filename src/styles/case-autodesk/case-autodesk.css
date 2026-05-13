@@ -1624,3 +1624,11 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ---- Mobile · hide section metadata stamps to reclaim vertical space ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-autodesk-portfolio dl.section-stamp,
+  .tier-a-case-root .case-autodesk-portfolio .section-stamp {
+    display: none !important;
+  }
+}
