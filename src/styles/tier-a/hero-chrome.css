@@ -345,19 +345,10 @@
   }
 }
 
-/* ---- Intermediate (769–1199px) · hide hero identity strip — redundant with
-   hero__meta (WINDOW / CLIENT / …) which reads better at tablet widths. ---- */
-@media (min-width: 769px) and (max-width: 1199px) {
-  .tier-a-case-root .hero__id-strip {
-    display: none !important;
-  }
-}
-
-/* ---- Mobile / small tablet (≤768px) · case picker: phones = scroll-snap strip;
-   large phone / small tablet = wrapped chips (desktop wrap resumes >768px). ---- */
-@media (max-width: 768px) {
-  /* Flex column children default min-width:auto — without this the picker row can
-     force the whole hero plate wider than the viewport (horizontal page scroll). */
+/* ---- Case picker · ≤1024px · inline dropdown (tablet→phone, no floating menu) ---- */
+@media (max-width: 1024px) {
+  /* Flex column children default min-width:auto — without this the picker can force
+     the hero plate wider than the viewport (horizontal page scroll). */
   .tier-a-case-root .hero__plate-picker {
     min-width: 0;
     width: 100%;
@@ -375,80 +366,46 @@
     max-width: 100%;
   }
 
-  .tier-a-case-root .hero__plate-picker .case-picker-hint--label {
-    margin-bottom: 0.45rem !important;
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown {
+    border: 1px solid var(--ink-line);
+    border-radius: 6px;
+    background: var(--bg-2);
+    overflow: hidden;
   }
 
-  /* Shared nav shell — wrap vs scroll set in ≤480px vs 481–768px blocks below */
-  .tier-a-case-root .hero__plate-picker nav.case-picker {
-    display: flex !important;
-    align-items: stretch;
-    gap: 0.45rem;
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown--open {
+    background: var(--bg-2);
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__trigger {
+    font-family: var(--mono);
+    color: var(--ink-2);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__trigger:hover {
+    background: rgba(95, 230, 194, 0.06);
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__panel {
+    border-top-color: var(--ink-line) !important;
+    background: var(--bg-2);
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__panel .case-picker-link {
     width: 100%;
-    max-width: 100%;
-    min-width: 0;
     box-sizing: border-box;
-    padding: 0 0 0.45rem;
-    margin-inline: 0;
-  }
-
-  .tier-a-case-root .hero__plate-picker nav.case-picker > a {
-    box-sizing: border-box;
-    text-align: center;
+    text-align: left;
     line-height: 1.38;
     white-space: normal !important;
   }
 
-  .tier-a-case-root .hero__plate-picker nav.case-picker > a[aria-current="page"] {
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__panel .case-picker-link[aria-current="page"] {
     border-color: var(--accent) !important;
     background: rgba(95, 230, 194, 0.14) !important;
     color: var(--accent) !important;
     box-shadow: 0 0 0 1px rgba(95, 230, 194, 0.38);
-  }
-}
-
-/* ≤480px · true phone — horizontal scroll-snap, ~70vw chips */
-@media (max-width: 480px) {
-  .tier-a-case-root .hero__plate-picker nav.case-picker {
-    flex-wrap: nowrap !important;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 0;
-    touch-action: pan-x;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    justify-content: flex-start;
-  }
-
-  .tier-a-case-root .hero__plate-picker nav.case-picker > a {
-    flex: 0 0 min(70vw, 280px);
-    max-width: min(70vw, 280px);
-    scroll-snap-align: center;
-  }
-}
-
-/* 481–768px · large phone / small tablet — wrap so 2–3+ chips fit per row */
-@media (min-width: 481px) and (max-width: 768px) {
-  .tier-a-case-root .hero__plate-picker nav.case-picker {
-    flex-wrap: wrap !important;
-    justify-content: center;
-    overflow-x: visible;
-    overscroll-behavior-x: auto;
-    scroll-snap-type: none;
-    touch-action: manipulation;
-  }
-
-  .tier-a-case-root .hero__plate-picker nav.case-picker > a {
-    flex: 0 0 min(45vw, 240px);
-    max-width: min(45vw, 240px);
-    scroll-snap-align: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tier-a-case-root .hero__plate-picker nav.case-picker {
-    scroll-snap-type: none !important;
   }
 }
 
