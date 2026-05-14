@@ -951,6 +951,13 @@
   stroke-linecap: round;
 }
 
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-fiche {
+  font-family: var(--mono);
+  font-size: 9px;
+  fill: var(--ink-3);
+  letter-spacing: 0.16em;
+}
+
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-stick-collar {
   fill: var(--accent);
 }

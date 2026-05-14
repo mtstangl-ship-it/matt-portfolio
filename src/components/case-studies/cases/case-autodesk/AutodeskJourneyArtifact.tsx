@@ -441,6 +441,9 @@ function JourneyShifter({
             <line x1={576} y1={232} x2={592} y2={232} />
             <line x1={592} y1={216} x2={592} y2={232} />
           </g>
+          <text className="autodesk-journey-shifter-fiche" x={32} y={18} textAnchor="start">
+            FIG. 02-A · 6-SPEED CUSTOMER VALUE GEARBOX
+          </text>
 
           {SHIFTER_LAYOUT.map((slot) => {
             const isRenewal = slot.role === "renewal";
