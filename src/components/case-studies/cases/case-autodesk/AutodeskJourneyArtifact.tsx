@@ -553,10 +553,15 @@ function JourneyShifter({
               const a = SHIFTER_LAYOUT[phaseIndex];
               const x = a.cx;
               const y = a.cy;
+              const gearTop = y - GEAR_INNER_R;
+              const collarY = gearTop - 4;
+              const shaftBottom = collarY;
+              const shaftTop = shaftBottom - 36;
               return (
                 <>
-                  <line x1={x} y1={y} x2={x} y2={y - 28} />
-                  <circle cx={x} cy={y - 28} r={5} />
+                  <rect className="autodesk-journey-shifter-stick-collar" x={x - 4} y={collarY} width={8} height={4} />
+                  <line x1={x} y1={shaftBottom} x2={x} y2={shaftTop} />
+                  <circle cx={x} cy={shaftTop} r={8} />
                 </>
               );
             })()}
