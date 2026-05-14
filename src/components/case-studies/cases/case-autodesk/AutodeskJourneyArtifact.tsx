@@ -485,6 +485,19 @@ function JourneyShifter({
               </g>
             );
           })}
+          <g className="autodesk-journey-shifter-stick" aria-hidden="true">
+            {(() => {
+              const a = SHIFTER_LAYOUT[phaseIndex];
+              const x = a.cx;
+              const y = a.cy;
+              return (
+                <>
+                  <line x1={x} y1={y} x2={x} y2={y - 28} />
+                  <circle cx={x} cy={y - 28} r={5} />
+                </>
+              );
+            })()}
+          </g>
         </svg>
       </nav>
     </div>

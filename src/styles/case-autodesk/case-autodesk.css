@@ -972,6 +972,16 @@
   border-radius: 50%;
 }
 
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-stick line {
+  stroke: var(--accent);
+  stroke-width: 2.5px;
+  stroke-linecap: round;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-stick circle {
+  fill: var(--accent);
+}
+
 /* Zone 3 · phase / renewal detail stack */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-card {
   border: 1px solid var(--ink-line);
