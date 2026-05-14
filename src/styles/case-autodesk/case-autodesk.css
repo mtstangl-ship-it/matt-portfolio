@@ -779,12 +779,58 @@
   color: oklch(0.78 0.14 280);
 }
 
+/* Journey artifact body · H-pattern left, copy right (stacks ≤1024px) */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-body {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  gap: 32px;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-body {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-left-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--ink-line);
+  padding-right: 24px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-left-column {
+    border-right: 0;
+    padding-right: 0;
+    align-items: stretch;
+    justify-content: stretch;
+  }
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-right-column {
+  min-width: 0;
+}
+
 /* Zone 2 · H-pattern shifter (static indicator ships Step B) */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter {
   width: 100%;
+  max-width: 460px;
+  height: auto;
   min-height: 280px;
   box-sizing: border-box;
   padding: 4px 4px 10px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-body .autodesk-journey-detail-stack {
+  margin-top: 0;
 }
 
 @media (max-width: 768px) {

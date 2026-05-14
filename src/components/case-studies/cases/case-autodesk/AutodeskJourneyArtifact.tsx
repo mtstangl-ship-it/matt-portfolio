@@ -579,42 +579,47 @@ export function AutodeskJourneyArtifact() {
           {TIER_LABELS[tier]}
         </p>
 
-        <JourneyShifter phaseIndex={phaseIndex} navigateToSlot={navigateToSlot} />
-
-        <div className="autodesk-journey-detail-stack">
-          <div
-            className={`autodesk-journey-detail-layer${renewalActive ? "" : " autodesk-journey-detail-layer--visible"}`}
-            aria-hidden={renewalActive}
-          >
-            {phase ? (
-              <div className="autodesk-journey-phase-card">
-                <header className="autodesk-journey-slide-head">
-                  <span className="autodesk-journey-slide-idx">{phase.idx}</span>
-                  <span className="autodesk-journey-slide-ttl">{phase.title}</span>
-                  <p className="autodesk-journey-slide-dek">{phase.dek}</p>
-                </header>
-                <div className="autodesk-journey-slide-panel">
-                  <ActsList key={`${phase.idx}-${tier}`} tier={tier} phase={phase} />
-                  <div
-                    className="autodesk-journey-backstage-shell"
-                    data-open={showBackstage ? "true" : "false"}
-                    aria-hidden={!showBackstage}
-                  >
-                    <div className="autodesk-journey-backstage-shell-inner">
-                      <BackstageBlock rows={phase.backstage} />
+        <div className="autodesk-journey-body">
+          <div className="autodesk-journey-left-column">
+            <JourneyShifter phaseIndex={phaseIndex} navigateToSlot={navigateToSlot} />
+          </div>
+          <div className="autodesk-journey-right-column">
+            <div className="autodesk-journey-detail-stack">
+              <div
+                className={`autodesk-journey-detail-layer${renewalActive ? "" : " autodesk-journey-detail-layer--visible"}`}
+                aria-hidden={renewalActive}
+              >
+                {phase ? (
+                  <div className="autodesk-journey-phase-card">
+                    <header className="autodesk-journey-slide-head">
+                      <span className="autodesk-journey-slide-idx">{phase.idx}</span>
+                      <span className="autodesk-journey-slide-ttl">{phase.title}</span>
+                      <p className="autodesk-journey-slide-dek">{phase.dek}</p>
+                    </header>
+                    <div className="autodesk-journey-slide-panel">
+                      <ActsList key={`${phase.idx}-${tier}`} tier={tier} phase={phase} />
+                      <div
+                        className="autodesk-journey-backstage-shell"
+                        data-open={showBackstage ? "true" : "false"}
+                        aria-hidden={!showBackstage}
+                      >
+                        <div className="autodesk-journey-backstage-shell-inner">
+                          <BackstageBlock rows={phase.backstage} />
+                        </div>
+                      </div>
                     </div>
                   </div>
+                ) : null}
+              </div>
+
+              <div
+                className={`autodesk-journey-detail-layer${renewalActive ? " autodesk-journey-detail-layer--visible" : ""}`}
+                aria-hidden={!renewalActive}
+              >
+                <div className="autodesk-journey-phase-card autodesk-journey-phase-card--renewal">
+                  <RenewalPanel />
                 </div>
               </div>
-            ) : null}
-          </div>
-
-          <div
-            className={`autodesk-journey-detail-layer${renewalActive ? " autodesk-journey-detail-layer--visible" : ""}`}
-            aria-hidden={!renewalActive}
-          >
-            <div className="autodesk-journey-phase-card autodesk-journey-phase-card--renewal">
-              <RenewalPanel />
             </div>
           </div>
         </div>
