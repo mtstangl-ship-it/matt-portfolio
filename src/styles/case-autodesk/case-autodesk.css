@@ -843,6 +843,29 @@
   stroke: var(--accent);
 }
 
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-tooth {
+  fill: var(--bg-2);
+  stroke: var(--ink-line);
+  stroke-width: 1px;
+  transition: fill 180ms, stroke 180ms;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-tooth--active {
+  fill: var(--accent);
+  stroke: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-slot:hover .autodesk-journey-shifter-tooth:not(.autodesk-journey-shifter-tooth--active) {
+  fill: var(--ink-line);
+  stroke: var(--accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-hub {
+  fill: var(--bg);
+  stroke: var(--ink-line);
+  stroke-width: 1px;
+}
+
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-number {
   font-family: var(--mono);
   font-size: 14px;

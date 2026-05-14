@@ -352,6 +352,42 @@ const SHIFTER_LAYOUT = [
   { role: "renewal" as const, slotIndex: 5, cx: 480, cy: 200, labelTop: false },
 ];
 
+const GEAR_INNER_R = 18;
+const TOOTH_HEIGHT = 5;
+const TOOTH_DELTA_DEG = 2;
+
+const RAD = Math.PI / 180;
+
+/** Clockwise degrees from 12 o'clock; SVG y-positive down. */
+function polarFromTop(cx: number, cy: number, r: number, degCwFromTop: number) {
+  const rad = degCwFromTop * RAD;
+  return { x: cx + r * Math.sin(rad), y: cy - r * Math.cos(rad) };
+}
+
+/** Triangular teeth; tip at radius + toothHeight (spec: 18 → 23). */
+function generateTeeth(cx: number, cy: number, radius: number, count: number, toothHeight: number): string[] {
+  const outerR = radius + toothHeight;
+  const step = 360 / count;
+  const polys: string[] = [];
+  for (let i = 0; i < count; i++) {
+    const c = i * step;
+    const b1 = polarFromTop(cx, cy, radius, c - TOOTH_DELTA_DEG);
+    const b2 = polarFromTop(cx, cy, radius, c + TOOTH_DELTA_DEG);
+    const tip = polarFromTop(cx, cy, outerR, c);
+    polys.push(`${b1.x},${b1.y} ${b2.x},${b2.y} ${tip.x},${tip.y}`);
+  }
+  return polys;
+}
+
+function innerHexHubPoints(cx: number, cy: number, vertexRadius: number): string {
+  return [0, 60, 120, 180, 240, 300]
+    .map((deg) => {
+      const p = polarFromTop(cx, cy, vertexRadius, deg);
+      return `${p.x},${p.y}`;
+    })
+    .join(" ");
+}
+
 function JourneyShifter({
   phaseIndex,
   navigateToSlot,
@@ -428,12 +464,39 @@ function JourneyShifter({
 
             const numberFillClass = `autodesk-journey-shifter-number${isActive ? " autodesk-journey-shifter-number--active" : ""}`;
 
+            const toothClass = [
+              "autodesk-journey-shifter-tooth",
+              isActive ? "autodesk-journey-shifter-tooth--active" : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+
+            const circleTeeth = !isRenewal
+              ? generateTeeth(cx, cy, GEAR_INNER_R, 12, TOOTH_HEIGHT)
+              : generateTeeth(cx, cy, GEAR_INNER_R, 6, TOOTH_HEIGHT);
+
             return (
               <g key={slot.slotIndex} className="autodesk-journey-shifter-slot">
                 {!isRenewal ? (
-                  <circle className={forwardNodeClass} cx={cx} cy={cy} r={18} pointerEvents="none" />
+                  <>
+                    {circleTeeth.map((pts, ti) => (
+                      <polygon key={`t-${ti}`} className={toothClass} points={pts} pointerEvents="none" />
+                    ))}
+                    <circle className={forwardNodeClass} cx={cx} cy={cy} r={GEAR_INNER_R} pointerEvents="none" />
+                    <circle className="autodesk-journey-shifter-hub" cx={cx} cy={cy} r={6} pointerEvents="none" />
+                  </>
                 ) : (
-                  <polygon className={renewalNodeClass} points={R_HEX_POINTS} pointerEvents="none" />
+                  <>
+                    {circleTeeth.map((pts, ti) => (
+                      <polygon key={`ht-${ti}`} className={toothClass} points={pts} pointerEvents="none" />
+                    ))}
+                    <polygon className={renewalNodeClass} points={R_HEX_POINTS} pointerEvents="none" />
+                    <polygon
+                      className="autodesk-journey-shifter-hub autodesk-journey-shifter-hub--hex"
+                      points={innerHexHubPoints(cx, cy, 6)}
+                      pointerEvents="none"
+                    />
+                  </>
                 )}
                 <text
                   className={`${numberFillClass}${isRenewal ? " autodesk-journey-shifter-number--renewal" : ""}`}
