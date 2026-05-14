@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 /* =========================================================================
  * Autodesk Journey Artifact · H-pattern shifter + Renewal (R) payoff slot.
- * Tier + backstage toggles preserved; PHASES co-located below.
+ * Tier toggle preserved; backstage always visible on phases 01–05.
  * ========================================================================= */
 
 type ActKind = "star" | "normal" | "help";
@@ -506,7 +506,6 @@ function JourneyShifter({
 
 export function AutodeskJourneyArtifact() {
   const [tier, setTier] = useState<Tier>("growth");
-  const [showBackstage, setShowBackstage] = useState(false);
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [lastPhaseIndex, setLastPhaseIndex] = useState(0);
   const [isWide, setIsWide] = useState(true);
@@ -538,7 +537,6 @@ export function AutodeskJourneyArtifact() {
       <section
         className="autodesk-journey-artifact autodesk-blueprint"
         data-tier={tier}
-        data-backstage={showBackstage ? "on" : "off"}
         data-renewal-active={renewalActive ? "true" : "false"}
         data-layout-wide={isWide ? "true" : "false"}
         aria-label="Customer Value Journey"
@@ -574,18 +572,6 @@ export function AutodeskJourneyArtifact() {
               ● NURTURE PLUS <small>~400–600</small>
             </button>
           </div>
-
-          <button
-            type="button"
-            className="autodesk-journey-backstage-toggle"
-            aria-pressed={showBackstage}
-            disabled={renewalActive}
-            aria-disabled={renewalActive}
-            onClick={() => setShowBackstage((v) => !v)}
-          >
-            <span className="autodesk-journey-backstage-dot" aria-hidden="true" />
-            {showBackstage ? "HIDE BACKSTAGE" : "SHOW BACKSTAGE"}
-          </button>
         </div>
 
         <p className="autodesk-journey-tier-summary" data-tier={tier}>
@@ -611,15 +597,7 @@ export function AutodeskJourneyArtifact() {
                     </header>
                     <div className="autodesk-journey-slide-panel">
                       <ActsList key={`${phase.idx}-${tier}`} tier={tier} phase={phase} />
-                      <div
-                        className="autodesk-journey-backstage-shell"
-                        data-open={showBackstage ? "true" : "false"}
-                        aria-hidden={!showBackstage}
-                      >
-                        <div className="autodesk-journey-backstage-shell-inner">
-                          <BackstageBlock rows={phase.backstage} />
-                        </div>
-                      </div>
+                      <BackstageBlock rows={phase.backstage} />
                     </div>
                   </div>
                 ) : null}

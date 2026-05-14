@@ -568,7 +568,7 @@
 
 /* =========================================================================
    Autodesk Journey Artifact · H-pattern shifter + Renewal (R).
-   Tier / backstage toggles; stroke-dash indicator ships Step B.
+   Tier toggle; backstage always visible on phases 01–05.
    Reduced motion: zero-duration transitions via journey-root rule below.
    ========================================================================= */
 
@@ -637,7 +637,7 @@
   font-size: 12.5px;
 }
 
-/* Toolbar · tier left · backstage right */
+/* Toolbar · tier toggle */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -711,57 +711,6 @@
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-tier-toggle-btn:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: -2px;
-}
-
-/* Backstage toggle */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-toggle {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 7px 14px;
-  color: var(--ink-3);
-  background: var(--bg);
-  border: 1px solid var(--ink-line);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: color 180ms, background 180ms, border-color 180ms;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: transparent;
-  border: 1px solid var(--ink-line);
-  transition: background 180ms, border-color 180ms, box-shadow 180ms;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-toggle[aria-pressed="true"] {
-  color: var(--ink);
-  background: oklch(0.20 0.04 200 / 0.4);
-  border-color: var(--accent);
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-toggle[aria-pressed="true"] .autodesk-journey-backstage-dot {
-  background: var(--accent);
-  border-color: var(--accent);
-  box-shadow: 0 0 8px var(--accent);
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-toggle:hover {
-  color: var(--ink);
-  border-color: var(--ink-2);
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-toggle:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-renewal-active="true"] .autodesk-journey-backstage-toggle {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-renewal-active="true"] .autodesk-journey-backstage-toggle:disabled {
-  pointer-events: none;
 }
 
 /* Tier summary */
@@ -1341,22 +1290,7 @@
   margin-left: 2px;
 }
 
-/* Backstage reveal shell */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-shell {
-  display: grid;
-  transition: grid-template-rows 240ms ease-out;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-shell[data-open="false"] {
-  grid-template-rows: 0fr;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-shell[data-open="true"] {
-  grid-template-rows: 1fr;
-}
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage-shell-inner {
-  overflow: hidden;
-  min-height: 0;
-}
-
+/* Backstage block (always visible on phases 01–05) */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-backstage {
   margin-top: 14px;
   padding-top: 12px;
