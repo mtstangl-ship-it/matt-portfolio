@@ -1,11 +1,11 @@
 "use client";
 
-import type { CSSProperties, KeyboardEvent } from "react";
+import type { KeyboardEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /* =========================================================================
- * Autodesk Journey Artifact · guided carousel (single phase at a time).
- * Tier + backstage toggles preserved; phase data co-located in PHASES.
+ * Autodesk Journey Artifact · H-pattern shifter + Renewal (R) payoff slot.
+ * Tier + backstage toggles preserved; PHASES co-located below.
  * ========================================================================= */
 
 type ActKind = "star" | "normal" | "help";
@@ -168,6 +168,9 @@ const PHASES: Phase[] = [
   },
 ];
 
+const POSITION_COUNT = PHASES.length + 1;
+const RENEWAL_SLOT = PHASES.length;
+
 const TIER_LABELS = {
   growth: "GROWTH PLUS · ~700–1000 accounts · high-touch",
   nurture: "NURTURE PLUS · ~400–600 accounts · digital-guided",
@@ -192,106 +195,49 @@ const SLIDE_FOOTER_META: Record<Tier, Record<number, readonly string[]>> = {
   },
 };
 
-function parseFooterKeyVal(line: string): { keyPart: string; valPart: string } {
-  const sep = line.indexOf(" · ");
-  if (sep < 0) return { keyPart: line, valPart: "" };
-  return { keyPart: line.slice(0, sep), valPart: line.slice(sep + 3) };
-}
+const RENEWAL_FOOTER_LINES = [
+  "PAYOFF · 106% NRR",
+  "SCALE · 8-FIGURE",
+  "OUTCOMES · 100+",
+  "AREAS · 5",
+] as const;
 
-function JourneyPhaseRail({
-  phaseIndexActive,
-  navigatePhase,
+/** Narrow screens: truncated shifter labels */
+const SHIFTER_LABEL_SHORT = [
+  "01 · IDEN",
+  "02 · EVAL",
+  "03 · CREA",
+  "04 · EXEC",
+  "05 · ASSE",
+  "R · RENEW",
+] as const;
+
+const R_HEX_POINTS = "480,182 495.59,191 495.59,209 480,218 464.41,209 464.41,191";
+
+const LOAD_BEARING_SENTENCE =
+  "I led the design. I earned the modernization work for my larger org. The design demanded it.";
+
+const RENEWAL_NARRATIVE =
+  "The journey returns to Identify with refined context: outcomes accumulated, platform telemetry deepened, partner coordination institutionalized. Same five phases. New starting altitude.";
+
+function SlideFooterBand({
+  tier,
+  slideOrdinal,
+  renewal,
+  layerKey,
 }: {
-  phaseIndexActive: number;
-  navigatePhase: (next: number, scrollMobile?: "smooth" | "instant") => void;
+  tier: Tier;
+  slideOrdinal: number;
+  renewal: boolean;
+  layerKey: string;
 }) {
-  const rowRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  const focusRow = useCallback((i: number) => {
-    const len = PHASES.length;
-    const j = ((i % len) + len) % len;
-    queueMicrotask(() => rowRefs.current[j]?.focus());
-  }, []);
-
-  const onRowKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
-      if (e.key === "ArrowUp") {
-        e.preventDefault();
-        navigatePhase(i - 1);
-        focusRow(i - 1);
-      } else if (e.key === "ArrowDown") {
-        e.preventDefault();
-        navigatePhase(i + 1);
-        focusRow(i + 1);
-      }
-    },
-    [navigatePhase, focusRow],
-  );
-
-  const railStyle = { "--rail-active": phaseIndexActive } as CSSProperties;
-
-  return (
-    <div className="autodesk-journey-phase-rail">
-      <div className="autodesk-journey-phase-rail-inner" style={railStyle}>
-        <div className="autodesk-journey-phase-rail-track-col" aria-hidden="true">
-          <span className="autodesk-journey-phase-rail-track" />
-          <span className="autodesk-journey-phase-rail-indicator" />
-        </div>
-        <div className="autodesk-journey-phase-rail-rows" role="list" aria-label="Journey phases">
-          {PHASES.map((p, i) => {
-            const isActive = i === phaseIndexActive;
-            return (
-              <div key={p.idx} className="autodesk-journey-phase-rail-row-li" role="listitem">
-                <button
-                  ref={(el) => {
-                    rowRefs.current[i] = el;
-                  }}
-                  type="button"
-                  className={`autodesk-journey-phase-row${isActive ? " autodesk-journey-phase-row--active" : ""}`}
-                  aria-current={isActive ? "true" : "false"}
-                  aria-label={`Phase ${p.idx}: ${p.title}`}
-                  onClick={() => navigatePhase(i, "smooth")}
-                  onKeyDown={(e) => onRowKeyDown(e, i)}
-                >
-                  <span className="autodesk-journey-phase-number">{p.idx}</span>
-                  <span className="autodesk-journey-phase-name">{p.title}</span>
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function JourneyKpiRail({ tier, slideOrdinal }: { tier: Tier; slideOrdinal: number }) {
-  const lines = SLIDE_FOOTER_META[tier][slideOrdinal] ?? [];
-  return (
-    <aside className="autodesk-journey-kpi-rail" aria-label="Phase KPI metadata">
-      <div key={`${tier}-${slideOrdinal}`} className="autodesk-journey-kpi-rail-inner">
-        {lines.map((line, cellIdx) => {
-          const { keyPart, valPart } = parseFooterKeyVal(line);
-          return (
-            <div key={`${tier}-${slideOrdinal}-strip-${cellIdx}`} className="autodesk-journey-kpi-strip">
-              <span className="autodesk-journey-kpi-strip-text">
-                <span className="autodesk-journey-kpi-strip-key">{keyPart}</span>
-                <span className="autodesk-journey-kpi-strip-sep"> · </span>
-                <span className="autodesk-journey-kpi-strip-value">{valPart}</span>
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </aside>
-  );
-}
-
-function SlideFooterBand({ tier, slideOrdinal }: { tier: Tier; slideOrdinal: number }) {
-  const lines = SLIDE_FOOTER_META[tier][slideOrdinal] ?? [];
+  const lines = renewal ? [...RENEWAL_FOOTER_LINES] : [...(SLIDE_FOOTER_META[tier][slideOrdinal] ?? [])];
   return (
     <div className="autodesk-journey-slide-footer-wrap">
-      <div className="autodesk-journey-slide-footer" role="presentation">
+      <div
+        className={`autodesk-journey-slide-footer${renewal ? " autodesk-journey-slide-footer--renewal" : ""}`}
+        role="presentation"
+      >
         {lines.map((line, cellIdx) => {
           const sep = line.indexOf(" · ");
           const keyPart = sep >= 0 ? line.slice(0, sep) : line;
@@ -299,7 +245,7 @@ function SlideFooterBand({ tier, slideOrdinal }: { tier: Tier; slideOrdinal: num
           const extended = cellIdx >= 2;
           return (
             <span
-              key={`${slideOrdinal}-${cellIdx}`}
+              key={`${layerKey}-${cellIdx}`}
               className={`autodesk-journey-slide-footer-cell${extended ? " autodesk-journey-slide-footer-cell--extended" : ""}`}
             >
               <span className="autodesk-journey-slide-footer-key">{keyPart}</span>
@@ -357,54 +303,190 @@ function BackstageBlock({ rows }: { rows: BackstageRow[] }) {
   );
 }
 
-function PhaseSlideCard({
-  phase,
-  tier,
-  showBackstage,
-  slideProps,
-  phaseIndexActive,
-  navigatePhase,
-  slideOrdinal,
-}: {
-  phase: Phase;
-  tier: Tier;
-  showBackstage: boolean;
-  slideProps: {
-    role: "group";
-    "aria-roledescription": string;
-    "aria-label": string;
-    id?: string;
-  };
-  phaseIndexActive: number;
-  navigatePhase: (next: number, scrollMobile?: "smooth" | "instant") => void;
-  slideOrdinal: number;
-}) {
+function RenewalPanel() {
   return (
-    <div className="autodesk-journey-slide-inner" {...slideProps}>
-      <div className="autodesk-journey-slide-desktop-grid">
-        <JourneyPhaseRail phaseIndexActive={phaseIndexActive} navigatePhase={navigatePhase} />
-        <div className="autodesk-journey-slide-main">
-          <header className="autodesk-journey-slide-head">
-            <span className="autodesk-journey-slide-idx">{phase.idx}</span>
-            <span className="autodesk-journey-slide-ttl">{phase.title}</span>
-            <p className="autodesk-journey-slide-dek">{phase.dek}</p>
-          </header>
-          <div className="autodesk-journey-slide-panel">
-            <ActsList key={`${phase.idx}-${tier}`} tier={tier} phase={phase} />
-            <div
-              className="autodesk-journey-backstage-shell"
-              data-open={showBackstage ? "true" : "false"}
-              aria-hidden={!showBackstage}
-            >
-              <div className="autodesk-journey-backstage-shell-inner">
-                <BackstageBlock rows={phase.backstage} />
-              </div>
-            </div>
-          </div>
+    <div className="autodesk-journey-renewal-panel">
+      <h3 className="autodesk-journey-renewal-header">R · RENEWAL</h3>
+      <p className="autodesk-journey-renewal-narrative">{RENEWAL_NARRATIVE}</p>
+      <div className="autodesk-journey-renewal-metrics" aria-label="Renewal outcome metrics">
+        <div className="autodesk-journey-renewal-metric">
+          <span className="autodesk-journey-renewal-metric-val">100+</span>
+          <span className="autodesk-journey-renewal-metric-lbl">
+            <span>OUTCOMES</span>
+            <span>PRIORITIZED</span>
+          </span>
         </div>
-        <JourneyKpiRail tier={tier} slideOrdinal={slideOrdinal} />
+        <div className="autodesk-journey-renewal-metric">
+          <span className="autodesk-journey-renewal-metric-val">8-fig</span>
+          <span className="autodesk-journey-renewal-metric-lbl">
+            <span>MODERNIZATION</span>
+            <span>INITIATED</span>
+          </span>
+        </div>
+        <div className="autodesk-journey-renewal-metric">
+          <span className="autodesk-journey-renewal-metric-val">5</span>
+          <span className="autodesk-journey-renewal-metric-lbl">
+            <span>PROGRAM</span>
+            <span>AREAS</span>
+          </span>
+        </div>
+        <div className="autodesk-journey-renewal-metric">
+          <span className="autodesk-journey-renewal-metric-val">106%</span>
+          <span className="autodesk-journey-renewal-metric-lbl">
+            <span>NRR</span>
+            <span>PATH</span>
+          </span>
+        </div>
       </div>
-      <SlideFooterBand key={`${tier}-${slideOrdinal}`} tier={tier} slideOrdinal={slideOrdinal} />
+      <p className="autodesk-journey-renewal-loadbearing">{LOAD_BEARING_SENTENCE}</p>
+    </div>
+  );
+}
+
+const SHIFTER_LAYOUT = [
+  { role: "phase" as const, slotIndex: 0, cx: 120, cy: 40, labelTop: true },
+  { role: "phase" as const, slotIndex: 1, cx: 120, cy: 200, labelTop: false },
+  { role: "phase" as const, slotIndex: 2, cx: 300, cy: 40, labelTop: true },
+  { role: "phase" as const, slotIndex: 3, cx: 300, cy: 200, labelTop: false },
+  { role: "phase" as const, slotIndex: 4, cx: 480, cy: 40, labelTop: true },
+  { role: "renewal" as const, slotIndex: 5, cx: 480, cy: 200, labelTop: false },
+];
+
+function JourneyShifter({
+  phaseIndex,
+  navigateToSlot,
+}: {
+  phaseIndex: number;
+  navigateToSlot: (slotIndex: number) => void;
+}) {
+  const btnRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const focusSlot = useCallback((i: number) => {
+    const j = ((i % POSITION_COUNT) + POSITION_COUNT) % POSITION_COUNT;
+    queueMicrotask(() => btnRefs.current[j]?.focus());
+  }, []);
+
+  const onNodeKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLButtonElement>, slotIndex: number) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        const next = (slotIndex + 1) % POSITION_COUNT;
+        navigateToSlot(next);
+        focusSlot(next);
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        const next = (slotIndex - 1 + POSITION_COUNT) % POSITION_COUNT;
+        navigateToSlot(next);
+        focusSlot(next);
+      }
+    },
+    [navigateToSlot, focusSlot],
+  );
+
+  const hStrokeD = [
+    "M 120 40 L 120 200",
+    "M 300 40 L 300 200",
+    "M 480 40 L 480 200",
+    "M 120 120 L 480 120",
+  ].join(" ");
+
+  return (
+    <div className="autodesk-journey-shifter">
+      <nav className="autodesk-journey-shifter-nav" aria-label="Customer Value Journey phases">
+        <svg className="autodesk-journey-shifter-svg" viewBox="0 0 600 240" aria-hidden="true">
+          <path className="autodesk-journey-shifter-stroke" d={hStrokeD} fill="none" />
+
+          {SHIFTER_LAYOUT.map((slot) => {
+            const isRenewal = slot.role === "renewal";
+            const phase = !isRenewal ? PHASES[slot.slotIndex] : null;
+            const isActive = phaseIndex === slot.slotIndex;
+            const fullLabel = isRenewal
+              ? "R · RENEWAL"
+              : `${phase!.idx} · ${phase!.title.toUpperCase()}`;
+            const shortLabel = SHIFTER_LABEL_SHORT[slot.slotIndex];
+            const labelY = slot.labelTop ? 14 : 228;
+            const labelAnchorClass = slot.labelTop
+              ? "autodesk-journey-shifter-label autodesk-journey-shifter-label--top"
+              : "autodesk-journey-shifter-label autodesk-journey-shifter-label--bottom";
+
+            const cx = slot.cx;
+            const cy = slot.cy;
+
+            const forwardNodeClass = [
+              "autodesk-journey-shifter-node",
+              isActive ? "autodesk-journey-shifter-node--active" : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+
+            const renewalNodeClass = [
+              "autodesk-journey-shifter-node--renewal",
+              isActive ? "autodesk-journey-shifter-node--active" : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+
+            const numberFillClass = `autodesk-journey-shifter-number${isActive ? " autodesk-journey-shifter-number--active" : ""}`;
+
+            return (
+              <g key={slot.slotIndex} className="autodesk-journey-shifter-slot">
+                {!isRenewal ? (
+                  <circle className={forwardNodeClass} cx={cx} cy={cy} r={18} pointerEvents="none" />
+                ) : (
+                  <polygon className={renewalNodeClass} points={R_HEX_POINTS} pointerEvents="none" />
+                )}
+                <text
+                  className={numberFillClass}
+                  x={cx}
+                  y={cy}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  pointerEvents="none"
+                >
+                  {isRenewal ? "R" : phase!.idx}
+                </text>
+                <text
+                  className={`${labelAnchorClass} autodesk-journey-shifter-label-full${isActive ? " autodesk-journey-shifter-label--active" : ""}`}
+                  x={cx}
+                  y={labelY}
+                  textAnchor="middle"
+                  dominantBaseline={slot.labelTop ? "auto" : "hanging"}
+                  pointerEvents="none"
+                >
+                  {fullLabel}
+                </text>
+                <text
+                  className={`${labelAnchorClass} autodesk-journey-shifter-label-short${isActive ? " autodesk-journey-shifter-label--active" : ""}`}
+                  x={cx}
+                  y={labelY}
+                  textAnchor="middle"
+                  dominantBaseline={slot.labelTop ? "auto" : "hanging"}
+                  pointerEvents="none"
+                >
+                  {shortLabel}
+                </text>
+                <foreignObject x={cx - 22} y={cy - 22} width="44" height="44">
+                  <div className="autodesk-journey-shifter-fo-root">
+                    <button
+                      ref={(el) => {
+                        btnRefs.current[slot.slotIndex] = el;
+                      }}
+                      type="button"
+                      className="autodesk-journey-shifter-hit"
+                      aria-current={isActive ? "true" : undefined}
+                      aria-label={
+                        isRenewal ? "Renewal: Renewal" : `Phase ${phase!.idx}: ${phase!.title}`
+                      }
+                      onClick={() => navigateToSlot(slot.slotIndex)}
+                      onKeyDown={(e) => onNodeKeyDown(e, slot.slotIndex)}
+                    />
+                  </div>
+                </foreignObject>
+              </g>
+            );
+          })}
+        </svg>
+      </nav>
     </div>
   );
 }
@@ -413,9 +495,8 @@ export function AutodeskJourneyArtifact() {
   const [tier, setTier] = useState<Tier>("growth");
   const [showBackstage, setShowBackstage] = useState(false);
   const [phaseIndex, setPhaseIndex] = useState(0);
+  const [lastPhaseIndex, setLastPhaseIndex] = useState(0);
   const [isWide, setIsWide] = useState(true);
-
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1025px)");
@@ -425,72 +506,29 @@ export function AutodeskJourneyArtifact() {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  const navigatePhase = useCallback(
-    (next: number, scrollMobile: "smooth" | "instant" = "smooth") => {
-      const len = PHASES.length;
-      const i = ((next % len) + len) % len;
-      setPhaseIndex(i);
-      const el = scrollRef.current;
-      if (!isWide && el) {
-        const w = el.clientWidth;
-        el.scrollTo({ left: w * i, behavior: scrollMobile === "instant" ? "auto" : "smooth" });
-      }
-    },
-    [isWide],
-  );
-
   useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || isWide) return;
-    let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const w = el.clientWidth;
-        if (w <= 0) return;
-        const idx = Math.round(el.scrollLeft / w);
-        const clamped = Math.max(0, Math.min(PHASES.length - 1, idx));
-        setPhaseIndex((prev) => (prev === clamped ? prev : clamped));
-      });
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      el.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf);
-    };
-  }, [isWide]);
+    if (phaseIndex < PHASES.length) setLastPhaseIndex(phaseIndex);
+  }, [phaseIndex]);
 
-  useEffect(() => {
-    if (isWide || !scrollRef.current) return;
-    const el = scrollRef.current;
-    const w = el.clientWidth;
-    el.scrollTo({ left: w * phaseIndex, behavior: "auto" });
-  }, [isWide]);
+  const navigateToSlot = useCallback((slotIndex: number) => {
+    const i = ((slotIndex % POSITION_COUNT) + POSITION_COUNT) % POSITION_COUNT;
+    setPhaseIndex(i);
+  }, []);
 
-  const onRegionKeyDown = (e: KeyboardEvent<HTMLElement>) => {
-    if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      navigatePhase(phaseIndex - 1);
-    } else if (e.key === "ArrowRight") {
-      e.preventDefault();
-      navigatePhase(phaseIndex + 1);
-    }
-  };
-
-  const phase = PHASES[phaseIndex];
-  const ordinalForPhase = (p: Phase) => Number.parseInt(p.idx, 10);
+  const phase = phaseIndex < PHASES.length ? PHASES[phaseIndex] : null;
+  const footerPhase = PHASES[lastPhaseIndex];
+  const slideOrdinal = Number.parseInt(footerPhase.idx, 10);
+  const renewalActive = phaseIndex === RENEWAL_SLOT;
 
   return (
     <div className="autodesk-journey-root">
       <section
-        tabIndex={0}
-        className="autodesk-journey-carousel autodesk-blueprint"
+        className="autodesk-journey-artifact autodesk-blueprint"
         data-tier={tier}
         data-backstage={showBackstage ? "on" : "off"}
-        role="region"
-        aria-roledescription="carousel"
+        data-renewal-active={renewalActive ? "true" : "false"}
+        data-layout-wide={isWide ? "true" : "false"}
         aria-label="Customer Value Journey"
-        onKeyDown={onRegionKeyDown}
       >
         <div className="autodesk-journey-intro">
           <span className="autodesk-journey-intro-k">FUTURE.JOURNEY + BACKSTAGE</span>
@@ -528,6 +566,8 @@ export function AutodeskJourneyArtifact() {
             type="button"
             className="autodesk-journey-backstage-toggle"
             aria-pressed={showBackstage}
+            disabled={renewalActive}
+            aria-disabled={renewalActive}
             onClick={() => setShowBackstage((v) => !v)}
           >
             <span className="autodesk-journey-backstage-dot" aria-hidden="true" />
@@ -539,85 +579,59 @@ export function AutodeskJourneyArtifact() {
           {TIER_LABELS[tier]}
         </p>
 
-        {isWide ? (
-          <div className="autodesk-journey-viewport autodesk-journey-viewport--desktop">
-            <div className="autodesk-journey-desktop-pane" key={phaseIndex}>
-              <PhaseSlideCard
-                phase={phase}
-                tier={tier}
-                showBackstage={showBackstage}
-                phaseIndexActive={phaseIndex}
-                navigatePhase={navigatePhase}
-                slideOrdinal={ordinalForPhase(phase)}
-                slideProps={{
-                  role: "group",
-                  "aria-roledescription": "slide",
-                  "aria-label": `Phase ${phase.idx}: ${phase.title}`,
-                }}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="autodesk-journey-viewport autodesk-journey-viewport--scroll" ref={scrollRef}>
-            <div className="autodesk-journey-track">
-              {PHASES.map((p) => (
-                <div className="autodesk-journey-slide" key={p.idx}>
-                  <PhaseSlideCard
-                    phase={p}
-                    tier={tier}
-                    showBackstage={showBackstage}
-                    phaseIndexActive={phaseIndex}
-                    navigatePhase={navigatePhase}
-                    slideOrdinal={ordinalForPhase(p)}
-                    slideProps={{
-                      role: "group",
-                      "aria-roledescription": "slide",
-                      "aria-label": `Phase ${p.idx}: ${p.title}`,
-                      id: `autodesk-journey-slide-${p.idx}`,
-                    }}
-                  />
+        <JourneyShifter phaseIndex={phaseIndex} navigateToSlot={navigateToSlot} />
+
+        <div className="autodesk-journey-detail-stack">
+          <div
+            className={`autodesk-journey-detail-layer${renewalActive ? "" : " autodesk-journey-detail-layer--visible"}`}
+            aria-hidden={renewalActive}
+          >
+            {phase ? (
+              <div className="autodesk-journey-phase-card">
+                <header className="autodesk-journey-slide-head">
+                  <span className="autodesk-journey-slide-idx">{phase.idx}</span>
+                  <span className="autodesk-journey-slide-ttl">{phase.title}</span>
+                  <p className="autodesk-journey-slide-dek">{phase.dek}</p>
+                </header>
+                <div className="autodesk-journey-slide-panel">
+                  <ActsList key={`${phase.idx}-${tier}`} tier={tier} phase={phase} />
+                  <div
+                    className="autodesk-journey-backstage-shell"
+                    data-open={showBackstage ? "true" : "false"}
+                    aria-hidden={!showBackstage}
+                  >
+                    <div className="autodesk-journey-backstage-shell-inner">
+                      <BackstageBlock rows={phase.backstage} />
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div className="autodesk-journey-controls">
-          <button
-            type="button"
-            className="autodesk-journey-prev"
-            aria-label="Previous phase"
-            onClick={() => navigatePhase(phaseIndex - 1)}
-          >
-            ← prev
-          </button>
-
-          <div className="autodesk-journey-progress">
-            <div className="autodesk-journey-dots-row" role="presentation">
-              {PHASES.map((p, i) => (
-                <button
-                  key={p.idx}
-                  type="button"
-                  className={`autodesk-journey-dot${i === phaseIndex ? " autodesk-journey-dot--active" : ""}`}
-                  aria-label={`Go to phase ${p.idx}`}
-                  aria-current={i === phaseIndex ? "true" : undefined}
-                  onClick={() => navigatePhase(i, "smooth")}
-                />
-              ))}
-            </div>
-            <span className="autodesk-journey-progress-label">
-              {phase.idx} · {phase.title}
-            </span>
+              </div>
+            ) : null}
           </div>
 
-          <button
-            type="button"
-            className="autodesk-journey-next"
-            aria-label="Next phase"
-            onClick={() => navigatePhase(phaseIndex + 1)}
+          <div
+            className={`autodesk-journey-detail-layer${renewalActive ? " autodesk-journey-detail-layer--visible" : ""}`}
+            aria-hidden={!renewalActive}
           >
-            next →
-          </button>
+            <div className="autodesk-journey-phase-card autodesk-journey-phase-card--renewal">
+              <RenewalPanel />
+            </div>
+          </div>
+        </div>
+
+        <div className="autodesk-journey-footer-stack">
+          <div
+            className={`autodesk-journey-footer-layer${renewalActive ? "" : " autodesk-journey-footer-layer--visible"}`}
+            aria-hidden={renewalActive}
+          >
+            <SlideFooterBand tier={tier} slideOrdinal={slideOrdinal} renewal={false} layerKey={`p-${tier}-${slideOrdinal}`} />
+          </div>
+          <div
+            className={`autodesk-journey-footer-layer${renewalActive ? " autodesk-journey-footer-layer--visible" : ""}`}
+            aria-hidden={!renewalActive}
+          >
+            <SlideFooterBand tier={tier} slideOrdinal={slideOrdinal} renewal layerKey={`r-${tier}`} />
+          </div>
         </div>
       </section>
     </div>

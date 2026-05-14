@@ -564,9 +564,9 @@
 }
 
 /* =========================================================================
-   Autodesk Journey Artifact · guided carousel (single phase at a time).
-   Prev/next + dots + keyboard; scroll-snap track ≤1024px; tier crossfade /
-   backstage slide per spec. Reduced motion: zero-duration transitions.
+   Autodesk Journey Artifact · H-pattern shifter + Renewal (R).
+   Tier / backstage toggles; stroke-dash indicator ships Step B.
+   Reduced motion: zero-duration transitions via journey-root rule below.
    ========================================================================= */
 
 .tier-a-case-root .case-autodesk-portfolio .autodesk-blueprint-wrap {
@@ -580,7 +580,7 @@
   position: relative;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-carousel.autodesk-blueprint {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact.autodesk-blueprint {
   margin: 0;
   border-top: 1px solid var(--ink-line);
   border-bottom: 1px solid var(--ink-line);
@@ -588,7 +588,7 @@
   padding: 1.25rem 1rem 1.5rem;
   position: relative;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-carousel.autodesk-blueprint::before {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact.autodesk-blueprint::before {
   content: "";
   position: absolute;
   top: -1px;
@@ -605,13 +605,8 @@
   );
   opacity: 0.7;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-carousel.autodesk-blueprint[data-tier="nurture"] {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact.autodesk-blueprint[data-tier="nurture"] {
   --autodesk-accent: oklch(0.70 0.18 280);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-carousel:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
 }
 
 /* Intro row */
@@ -672,7 +667,7 @@
   z-index: 0;
   pointer-events: none;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-carousel[data-tier="nurture"] .autodesk-journey-tier-indicator {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-tier="nurture"] .autodesk-journey-tier-indicator {
   transform: translateX(100%);
   background: oklch(0.70 0.18 280 / 0.18);
   border-right: 0;
@@ -704,10 +699,10 @@
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-tier-toggle-btn[data-active="true"] {
   color: var(--ink);
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-carousel[data-tier="growth"] .autodesk-journey-tier-toggle-btn[data-tier="growth"] {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-tier="growth"] .autodesk-journey-tier-toggle-btn[data-tier="growth"] {
   color: oklch(0.86 0.15 150);
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-carousel[data-tier="nurture"] .autodesk-journey-tier-toggle-btn[data-tier="nurture"] {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-tier="nurture"] .autodesk-journey-tier-toggle-btn[data-tier="nurture"] {
   color: oklch(0.84 0.16 280);
 }
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-tier-toggle-btn:focus-visible {
@@ -758,6 +753,14 @@
   outline-offset: 2px;
 }
 
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-renewal-active="true"] .autodesk-journey-backstage-toggle {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-renewal-active="true"] .autodesk-journey-backstage-toggle:disabled {
+  pointer-events: none;
+}
+
 /* Tier summary */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-tier-summary {
   font-family: var(--mono);
@@ -769,294 +772,291 @@
   padding: 0 4px;
   transition: color 220ms;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-carousel[data-tier="growth"] .autodesk-journey-tier-summary {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-tier="growth"] .autodesk-journey-tier-summary {
   color: oklch(0.78 0.13 150);
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-carousel[data-tier="nurture"] .autodesk-journey-tier-summary {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-tier="nurture"] .autodesk-journey-tier-summary {
   color: oklch(0.78 0.14 280);
 }
 
-/* Viewport · desktop single pane vs scroll-snap track */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-viewport {
+/* Zone 2 · H-pattern shifter (static indicator ships Step B) */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter {
   width: 100%;
-  min-width: 0;
+  min-height: 280px;
   box-sizing: border-box;
+  padding: 4px 4px 10px;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-viewport--desktop {
-  overflow: hidden;
+
+@media (max-width: 768px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter {
+    min-height: 220px;
+  }
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-viewport--scroll {
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  touch-action: pan-x;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-nav {
+  width: 100%;
 }
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-viewport--scroll::-webkit-scrollbar {
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-stroke {
+  stroke: var(--ink-line);
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-node {
+  fill: var(--bg-2);
+  stroke: var(--ink-line);
+  stroke-width: 1.5px;
+  transition: fill 180ms, stroke 180ms;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-node--active {
+  fill: var(--accent);
+  stroke: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-slot:hover .autodesk-journey-shifter-node:not(.autodesk-journey-shifter-node--active) {
+  fill: var(--ink-line);
+  stroke: var(--accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-node--renewal {
+  fill: var(--bg-2);
+  stroke: var(--ink-line);
+  stroke-width: 1.5px;
+  transition: fill 180ms, stroke 180ms;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-node--renewal.autodesk-journey-shifter-node--active {
+  fill: var(--accent);
+  stroke: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-slot:hover .autodesk-journey-shifter-node--renewal:not(.autodesk-journey-shifter-node--active) {
+  fill: var(--ink-line);
+  stroke: var(--accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-number {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-number--active {
+  fill: var(--bg);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: var(--ink-3);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-label--active {
+  fill: var(--ink);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-label-short {
   display: none;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-track {
-  display: flex;
+@media (max-width: 480px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-label-full {
+    display: none;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-label-short {
+    display: block;
+  }
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-fo-root {
   width: 100%;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide {
-  flex: 0 0 100%;
-  min-width: 0;
-  scroll-snap-align: center;
-  box-sizing: border-box;
-  padding: 0 2px;
-}
-
-@keyframes autodesk-journey-phase-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-desktop-pane {
-  animation: autodesk-journey-phase-in 320ms ease-out both;
-}
-
-/* Slide card */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-inner {
-  border: 1px solid var(--ink-line);
-  background: var(--bg);
   height: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Desktop 3-column grid · hidden rails on mobile via media query below */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-desktop-grid {
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-@media (min-width: 1025px) {
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-desktop-grid {
-    display: grid;
-    grid-template-columns: 25% 55% 20%;
-    gap: 24px;
-    align-items: stretch;
-  }
-}
-
-@media (max-width: 1024px) {
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-desktop-grid {
-    display: flex;
-    flex-direction: column;
-  }
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-rail,
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-kpi-rail {
-    display: none !important;
-  }
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-main {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
-  min-height: 0;
-}
-
-/* Phase rail (desktop) */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-rail {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  height: 100%;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-rail-inner {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-rail-track-col {
-  position: relative;
-  flex: 0 0 2px;
-  width: 2px;
-  align-self: stretch;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-rail-track {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--ink-line);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-rail-indicator {
-  position: absolute;
-  left: 50%;
-  z-index: 1;
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-hit {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: var(--accent);
-  transform: translateY(-50%);
-  transition: top 240ms ease-out;
-  top: calc((0.5 + var(--rail-active, 0)) * 20%);
-  pointer-events: none;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-rail-rows {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  padding-left: 22px;
-  margin: 0;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-rail-row-li {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-row {
-  flex: 1;
-  width: 100%;
-  margin: 0;
-  padding: 16px 0;
   border: 0;
+  padding: 0;
+  margin: 0;
   background: transparent;
   cursor: pointer;
-  text-align: left;
-  font: inherit;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-hit:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+/* Zone 3 · phase / renewal detail stack */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-card {
+  border: 1px solid var(--ink-line);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 4px;
-  color: inherit;
-  transition: color 180ms;
+  min-height: 0;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-row:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-detail-stack {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  margin-top: 8px;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-number {
+@media (max-width: 768px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-detail-stack {
+    min-height: 0;
+  }
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-detail-layer {
+  transition: opacity 320ms ease-out;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-detail-layer:not(.autodesk-journey-detail-layer--visible) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-detail-layer--visible {
+  position: relative;
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Zone 4 · footer crossfade */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-footer-stack {
+  position: relative;
+  width: 100%;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-footer-layer {
+  transition: opacity 320ms ease-out;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-footer-layer:not(.autodesk-journey-footer-layer--visible) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-footer-layer--visible {
+  position: relative;
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Renewal panel */
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-renewal-panel {
+  padding: 18px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: oklch(0.18 0.015 220);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-renewal-header {
+  margin: 0;
   font-family: var(--mono);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
   font-weight: 600;
-  line-height: 1;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-name {
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-renewal-narrative {
+  margin: 0;
   font-family: var(--sans);
-  line-height: 1.25;
-  text-wrap: balance;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 62ch;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-row--active .autodesk-journey-phase-number {
-  font-size: 22px;
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-renewal-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-renewal-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-renewal-metric {
+  border: 1px solid var(--ink-line);
+  background: var(--bg);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-renewal-metric-val {
+  font-family: var(--mono);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--accent);
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-row--active .autodesk-journey-phase-name {
-  font-size: 16px;
-  color: var(--ink);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-row:not(.autodesk-journey-phase-row--active) .autodesk-journey-phase-number {
-  font-size: 16px;
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-renewal-metric-lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--ink-3);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-row:not(.autodesk-journey-phase-row--active) .autodesk-journey-phase-name {
-  font-size: 14px;
-  color: var(--ink-2);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-row:not(.autodesk-journey-phase-row--active):hover .autodesk-journey-phase-number {
-  color: var(--ink-2);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-row:not(.autodesk-journey-phase-row--active):hover .autodesk-journey-phase-name {
-  color: var(--ink);
-}
-
-/* KPI rail · rotated marginalia strips */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-kpi-rail {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  min-width: 0;
-  min-height: 0;
+  gap: 2px;
+  line-height: 1.35;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-kpi-rail-inner {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 8px;
-  align-items: flex-start;
-  animation: autodesk-journey-tier-in 240ms ease-out both;
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-renewal-loadbearing {
+  margin: 1.25rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ink-line);
+  font-family: var(--sans);
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 52ch;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-kpi-strip {
-  flex: 0 0 30px;
-  width: 30px;
-  min-width: 0;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-kpi-strip-text {
-  display: inline-block;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-family: ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  white-space: nowrap;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-kpi-strip-key {
-  color: var(--ink-3);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-kpi-strip-sep {
-  color: var(--ink-3);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-kpi-strip-value {
-  color: var(--ink-2);
-}
-
-@media (min-width: 1025px) {
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-footer-wrap {
-    display: none;
-  }
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-footer {
-    display: none;
-  }
-}
-
-/* Slide footer band — tablet/mobile */
+/* Slide footer band — all breakpoints */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-footer-wrap {
   animation: autodesk-journey-tier-in 240ms ease-out both;
 }
@@ -1096,6 +1096,10 @@
 }
 @media (max-width: 768px) {
   .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-footer-cell--extended {
+    display: none;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-footer--renewal .autodesk-journey-slide-footer-cell:nth-child(2),
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-footer--renewal .autodesk-journey-slide-footer-cell:nth-child(4) {
     display: none;
   }
 }
@@ -1155,8 +1159,8 @@
 }
 
 @media (min-width: 1025px) {
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-viewport--desktop .autodesk-journey-slide-panel {
-    min-height: 560px;
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-phase-card .autodesk-journey-slide-panel {
+    min-height: 360px;
   }
 }
 
@@ -1322,102 +1326,6 @@
   margin-right: 4px;
 }
 
-/* Controls row */
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-controls {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 12px;
-  align-items: center;
-  margin-top: 16px;
-  padding: 0 4px;
-  min-width: 0;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-prev,
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-next {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: lowercase;
-  padding: 8px 12px;
-  border: 1px solid var(--ink-line);
-  background: var(--bg);
-  color: var(--ink-2);
-  cursor: pointer;
-  transition: border-color 180ms, color 180ms, background 180ms;
-  white-space: nowrap;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-prev:hover,
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-next:hover {
-  border-color: var(--accent);
-  color: var(--ink);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-prev:focus-visible,
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-next:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-progress {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-dots-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  padding: 0;
-  border: 0;
-  background: var(--ink-line);
-  cursor: pointer;
-  transition: background 180ms, transform 180ms;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-dot--active {
-  background: var(--accent);
-  transform: scale(1.25);
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-dot:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-progress-label {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  color: var(--ink-2);
-  text-align: center;
-  text-wrap: balance;
-}
-
-@media (max-width: 520px) {
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-controls {
-    grid-template-columns: 1fr;
-    justify-items: stretch;
-  }
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-prev,
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-next {
-    width: 100%;
-    text-align: center;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-root *,
   .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-root *::before,
@@ -1425,9 +1333,6 @@
     transition-duration: 0ms !important;
     animation-duration: 0ms !important;
     animation-delay: 0ms !important;
-  }
-  .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-viewport--scroll {
-    scroll-behavior: auto;
   }
 }
 
