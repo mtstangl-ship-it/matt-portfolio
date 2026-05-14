@@ -753,6 +753,7 @@
   align-items: center;
   justify-content: center;
   border-right: 1px solid var(--ink-line);
+  padding-left: 16px;
   padding-right: 24px;
   box-sizing: border-box;
   min-width: 0;
@@ -774,7 +775,7 @@
 /* Zone 2 · H-pattern shifter (static indicator ships Step B) */
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter {
   width: 100%;
-  max-width: 460px;
+  max-width: 720px;
   height: auto;
   min-height: 280px;
   box-sizing: border-box;
