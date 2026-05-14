@@ -10,6 +10,9 @@
   /* Tier accents — Growth = green, Nurture = purple (lifted from cases.css). */
   --autodesk-accent: oklch(0.78 0.16 150);
   --autodesk-accent-nurture: oklch(0.70 0.18 280);
+  /* Journey artifact phase-number inks (case-local only). */
+  --tier-growth: #d4a04a;
+  --tier-nurture: #9b8cc8;
 
   background: var(--bg);
   color: var(--ink);
@@ -894,11 +897,29 @@
   font-family: var(--mono);
   font-size: 14px;
   font-weight: 600;
-  fill: var(--accent);
+  transition: fill 240ms ease-out;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-tier="growth"]
+  .autodesk-journey-shifter-number:not(.autodesk-journey-shifter-number--active):not(.autodesk-journey-shifter-number--renewal) {
+  fill: var(--tier-growth);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-tier="nurture"]
+  .autodesk-journey-shifter-number:not(.autodesk-journey-shifter-number--active):not(.autodesk-journey-shifter-number--renewal) {
+  fill: var(--tier-nurture);
 }
 
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-number--active {
   fill: var(--bg);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-number--renewal {
+  fill: var(--accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-number--renewal.autodesk-journey-shifter-number--active {
+  fill: var(--accent);
 }
 
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-label {
@@ -1171,10 +1192,18 @@
   font-family: var(--mono);
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   letter-spacing: 0.08em;
-  color: var(--autodesk-accent);
   font-weight: 600;
   line-height: 1;
   margin-bottom: 8px;
+  transition: color 240ms ease-out;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-tier="growth"] .autodesk-journey-slide-idx {
+  color: var(--tier-growth);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-artifact[data-tier="nurture"] .autodesk-journey-slide-idx {
+  color: var(--tier-nurture);
 }
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-slide-ttl {
   display: block;

@@ -436,7 +436,7 @@ function JourneyShifter({
                   <polygon className={renewalNodeClass} points={R_HEX_POINTS} pointerEvents="none" />
                 )}
                 <text
-                  className={numberFillClass}
+                  className={`${numberFillClass}${isRenewal ? " autodesk-journey-shifter-number--renewal" : ""}`}
                   x={cx}
                   y={cy}
                   textAnchor="middle"
