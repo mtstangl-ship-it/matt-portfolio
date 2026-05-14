@@ -431,6 +431,16 @@ function JourneyShifter({
       <nav className="autodesk-journey-shifter-nav" aria-label="Customer Value Journey phases">
         <svg className="autodesk-journey-shifter-svg" viewBox="0 0 600 240" aria-hidden="true">
           <path className="autodesk-journey-shifter-stroke" d={hStrokeD} fill="none" />
+          <g className="autodesk-journey-shifter-registration" aria-hidden="true">
+            <line x1={8} y1={8} x2={24} y2={8} />
+            <line x1={8} y1={8} x2={8} y2={24} />
+            <line x1={576} y1={8} x2={592} y2={8} />
+            <line x1={592} y1={8} x2={592} y2={24} />
+            <line x1={8} y1={232} x2={24} y2={232} />
+            <line x1={8} y1={216} x2={8} y2={232} />
+            <line x1={576} y1={232} x2={592} y2={232} />
+            <line x1={592} y1={216} x2={592} y2={232} />
+          </g>
 
           {SHIFTER_LAYOUT.map((slot) => {
             const isRenewal = slot.role === "renewal";

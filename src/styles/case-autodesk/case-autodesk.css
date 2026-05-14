@@ -945,6 +945,12 @@
   border-radius: 50%;
 }
 
+.tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-registration line {
+  stroke: var(--ink-line);
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+}
+
 .tier-a-case-root .case-autodesk-portfolio .autodesk-journey-shifter-stick-collar {
   fill: var(--accent);
 }
