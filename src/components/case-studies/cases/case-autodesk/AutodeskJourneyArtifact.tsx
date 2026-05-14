@@ -1,6 +1,6 @@
 "use client";
 
-import type { KeyboardEvent } from "react";
+import type { CSSProperties, KeyboardEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /* =========================================================================
@@ -175,14 +175,6 @@ const TIER_LABELS = {
 
 type Tier = "growth" | "nurture";
 
-const SEQUENCE_STEPS = [
-  { full: "IDENTIFY", short: "IDENT" },
-  { full: "EVALUATE", short: "EVAL" },
-  { full: "PLAN", short: "PLAN" },
-  { full: "EXECUTE", short: "EXEC" },
-  { full: "ASSESS", short: "ASSESS" },
-] as const;
-
 const SLIDE_FOOTER_META: Record<Tier, Record<number, readonly string[]>> = {
   growth: {
     1: ["TIER · GROWTH PLUS", "CADENCE · 1:FEW", "OWNER · SALES + CSM", "KPI · CBI ALIGNED"],
@@ -200,36 +192,98 @@ const SLIDE_FOOTER_META: Record<Tier, Record<number, readonly string[]>> = {
   },
 };
 
-function JourneySequenceBar({
+function parseFooterKeyVal(line: string): { keyPart: string; valPart: string } {
+  const sep = line.indexOf(" · ");
+  if (sep < 0) return { keyPart: line, valPart: "" };
+  return { keyPart: line.slice(0, sep), valPart: line.slice(sep + 3) };
+}
+
+function JourneyPhaseRail({
   phaseIndexActive,
   navigatePhase,
 }: {
   phaseIndexActive: number;
   navigatePhase: (next: number, scrollMobile?: "smooth" | "instant") => void;
 }) {
+  const rowRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const focusRow = useCallback((i: number) => {
+    const len = PHASES.length;
+    const j = ((i % len) + len) % len;
+    queueMicrotask(() => rowRefs.current[j]?.focus());
+  }, []);
+
+  const onRowKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLButtonElement>, i: number) => {
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        navigatePhase(i - 1);
+        focusRow(i - 1);
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        navigatePhase(i + 1);
+        focusRow(i + 1);
+      }
+    },
+    [navigatePhase, focusRow],
+  );
+
+  const railStyle = { "--rail-active": phaseIndexActive } as CSSProperties;
+
   return (
-    <div className="autodesk-journey-sequence-bar">
-      {SEQUENCE_STEPS.map((step, i) => {
-        const isActive = i === phaseIndexActive;
-        const phaseLabel = PHASES[i]?.idx ?? String(i + 1).padStart(2, "0");
-        return (
-          <button
-            key={PHASES[i].idx}
-            type="button"
-            className={`autodesk-journey-sequence-segment${isActive ? " autodesk-journey-sequence-segment--active" : ""}`}
-            aria-label={`Go to phase ${phaseLabel}`}
-            aria-current={isActive ? "true" : undefined}
-            onClick={() => navigatePhase(i, "smooth")}
-          >
-            <span className="autodesk-journey-sequence-label">
-              <span className="autodesk-journey-sequence-label-full">{step.full}</span>
-              <span className="autodesk-journey-sequence-label-short">{step.short}</span>
-            </span>
-            <span className="autodesk-journey-sequence-bar-fill" aria-hidden="true" />
-          </button>
-        );
-      })}
+    <div className="autodesk-journey-phase-rail">
+      <div className="autodesk-journey-phase-rail-inner" style={railStyle}>
+        <div className="autodesk-journey-phase-rail-track-col" aria-hidden="true">
+          <span className="autodesk-journey-phase-rail-track" />
+          <span className="autodesk-journey-phase-rail-indicator" />
+        </div>
+        <div className="autodesk-journey-phase-rail-rows" role="list" aria-label="Journey phases">
+          {PHASES.map((p, i) => {
+            const isActive = i === phaseIndexActive;
+            return (
+              <div key={p.idx} className="autodesk-journey-phase-rail-row-li" role="listitem">
+                <button
+                  ref={(el) => {
+                    rowRefs.current[i] = el;
+                  }}
+                  type="button"
+                  className={`autodesk-journey-phase-row${isActive ? " autodesk-journey-phase-row--active" : ""}`}
+                  aria-current={isActive ? "true" : "false"}
+                  aria-label={`Phase ${p.idx}: ${p.title}`}
+                  onClick={() => navigatePhase(i, "smooth")}
+                  onKeyDown={(e) => onRowKeyDown(e, i)}
+                >
+                  <span className="autodesk-journey-phase-number">{p.idx}</span>
+                  <span className="autodesk-journey-phase-name">{p.title}</span>
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
+  );
+}
+
+function JourneyKpiRail({ tier, slideOrdinal }: { tier: Tier; slideOrdinal: number }) {
+  const lines = SLIDE_FOOTER_META[tier][slideOrdinal] ?? [];
+  return (
+    <aside className="autodesk-journey-kpi-rail" aria-label="Phase KPI metadata">
+      <div key={`${tier}-${slideOrdinal}`} className="autodesk-journey-kpi-rail-inner">
+        {lines.map((line, cellIdx) => {
+          const { keyPart, valPart } = parseFooterKeyVal(line);
+          return (
+            <div key={`${tier}-${slideOrdinal}-strip-${cellIdx}`} className="autodesk-journey-kpi-strip">
+              <span className="autodesk-journey-kpi-strip-text">
+                <span className="autodesk-journey-kpi-strip-key">{keyPart}</span>
+                <span className="autodesk-journey-kpi-strip-sep"> · </span>
+                <span className="autodesk-journey-kpi-strip-value">{valPart}</span>
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </aside>
   );
 }
 
@@ -327,23 +381,28 @@ function PhaseSlideCard({
 }) {
   return (
     <div className="autodesk-journey-slide-inner" {...slideProps}>
-      <JourneySequenceBar phaseIndexActive={phaseIndexActive} navigatePhase={navigatePhase} />
-      <header className="autodesk-journey-slide-head">
-        <span className="autodesk-journey-slide-idx">{phase.idx}</span>
-        <span className="autodesk-journey-slide-ttl">{phase.title}</span>
-        <p className="autodesk-journey-slide-dek">{phase.dek}</p>
-      </header>
-      <div className="autodesk-journey-slide-panel">
-        <ActsList key={`${phase.idx}-${tier}`} tier={tier} phase={phase} />
-        <div
-          className="autodesk-journey-backstage-shell"
-          data-open={showBackstage ? "true" : "false"}
-          aria-hidden={!showBackstage}
-        >
-          <div className="autodesk-journey-backstage-shell-inner">
-            <BackstageBlock rows={phase.backstage} />
+      <div className="autodesk-journey-slide-desktop-grid">
+        <JourneyPhaseRail phaseIndexActive={phaseIndexActive} navigatePhase={navigatePhase} />
+        <div className="autodesk-journey-slide-main">
+          <header className="autodesk-journey-slide-head">
+            <span className="autodesk-journey-slide-idx">{phase.idx}</span>
+            <span className="autodesk-journey-slide-ttl">{phase.title}</span>
+            <p className="autodesk-journey-slide-dek">{phase.dek}</p>
+          </header>
+          <div className="autodesk-journey-slide-panel">
+            <ActsList key={`${phase.idx}-${tier}`} tier={tier} phase={phase} />
+            <div
+              className="autodesk-journey-backstage-shell"
+              data-open={showBackstage ? "true" : "false"}
+              aria-hidden={!showBackstage}
+            >
+              <div className="autodesk-journey-backstage-shell-inner">
+                <BackstageBlock rows={phase.backstage} />
+              </div>
+            </div>
           </div>
         </div>
+        <JourneyKpiRail tier={tier} slideOrdinal={slideOrdinal} />
       </div>
       <SlideFooterBand key={`${tier}-${slideOrdinal}`} tier={tier} slideOrdinal={slideOrdinal} />
     </div>
