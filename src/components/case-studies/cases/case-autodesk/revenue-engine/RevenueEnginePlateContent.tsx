@@ -208,11 +208,14 @@ export function RevenueEnginePlateContent({
       <div className="re-r-art-wrap">
         <RStageSvg tier={tier} />
       </div>
-      <div className="re-r-overlay" aria-hidden="true">
+      <div className="re-r-meta">
         <div className="re-r-id">
           {RENEWAL.n}
           <span className="re-r-id-sub">{RENEWAL.subtitle}</span>
         </div>
+      </div>
+      <div className="re-r-divider" aria-hidden="true" />
+      <div className="re-r-metrics">
         <RenewalOutcomesRow outcomes={RENEWAL_OUTCOMES} variant="banner" />
       </div>
     </button>

@@ -10,9 +10,9 @@ export function RenewalOutcomeItem({ outcome, variant = "inspect" }: RenewalOutc
 
   return (
     <div className={`re-outcome ${isBanner ? "re-outcome--banner" : "re-outcome--inspect"}`}>
-      {outcome.caption ? (
-        <span className="re-outcome-caption">{outcome.caption}</span>
-      ) : null}
+      <span className="re-outcome-caption" aria-hidden={!outcome.caption}>
+        {outcome.caption || "\u00A0"}
+      </span>
       <div className="re-outcome-fig">{outcome.fig}</div>
       <div className="re-outcome-lbl">{outcome.lbl}</div>
     </div>

@@ -349,14 +349,10 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  border: 1px solid var(--re-ink-faint);
+  background: var(--re-accent);
+  border: 1px solid var(--re-accent);
   flex-shrink: 0;
   margin-top: 6px;
-}
-
-.tier-a-case-root .case-autodesk-portfolio .re-act--active .re-act-marker {
-  background: var(--re-accent);
-  border-color: var(--re-accent);
   box-shadow: 0 0 0 3px var(--re-accent-bg);
 }
 
@@ -366,7 +362,10 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-act--muted .re-act-marker {
-  border-style: dashed;
+  background: var(--re-accent);
+  border-color: var(--re-accent);
+  opacity: 0.5;
+  box-shadow: 0 0 0 3px var(--re-accent-bg);
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-act-footnote {
@@ -444,6 +443,13 @@
   color: var(--re-ink-dim);
   text-transform: uppercase;
   margin-bottom: 4px;
+  min-height: 1em;
+  display: block;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-outcome--inspect {
+  display: flex;
+  flex-direction: column;
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-r-block {
@@ -480,14 +486,28 @@
   position: relative;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .re-r-overlay {
+.tier-a-case-root .case-autodesk-portfolio .re-r-divider {
+  display: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-meta {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 36px;
+  pointer-events: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-metrics {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 36px;
-  gap: 18px;
   pointer-events: none;
 }
 
@@ -509,7 +529,7 @@
 .tier-a-case-root .case-autodesk-portfolio .re-r-out-row {
   display: flex;
   gap: 32px;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-outcome--banner {
@@ -531,6 +551,161 @@
 
 .tier-a-case-root .case-autodesk-portfolio .re-mobile-chips {
   display: none;
+}
+
+/* R-block · midpoint (700–1023px) */
+@media (min-width: 700px) and (max-width: 1023px) {
+  .tier-a-case-root .case-autodesk-portfolio .re-r-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 280px auto auto;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-art-wrap {
+    grid-row: 1;
+    grid-column: 1;
+    height: 280px;
+    aspect-ratio: auto;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-meta {
+    position: relative;
+    grid-row: 1;
+    grid-column: 1;
+    align-self: start;
+    justify-self: start;
+    padding: 20px 24px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-divider {
+    display: block;
+    grid-row: 2;
+    grid-column: 1;
+    border-top: 1px dashed var(--re-ink-faint);
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics {
+    position: relative;
+    grid-row: 3;
+    grid-column: 1;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    min-height: 120px;
+    padding: 16px 24px;
+    background: var(--re-accent-bg);
+    align-items: center;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-r-out-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome--banner {
+    align-items: center;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome--banner .re-outcome-fig {
+    font-size: 42px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome--banner .re-outcome-lbl {
+    font-size: 10px;
+    margin-top: 4px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome-caption {
+    font-size: 9px;
+  }
+}
+
+/* R-block · mobile (≤699px) */
+@media (max-width: 699px) {
+  .tier-a-case-root .case-autodesk-portfolio .re-r-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px auto auto;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-art-wrap {
+    grid-row: 1;
+    grid-column: 1;
+    height: 200px;
+    aspect-ratio: auto;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-meta {
+    position: relative;
+    grid-row: 1;
+    grid-column: 1;
+    align-self: start;
+    justify-self: start;
+    padding: 14px 16px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-block .re-r-id {
+    font-size: 32px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-block .re-r-id-sub {
+    font-size: 8.5px;
+    margin-top: 6px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-divider {
+    display: block;
+    grid-row: 2;
+    grid-column: 1;
+    border-top: 1px dashed var(--re-ink-faint);
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics {
+    position: relative;
+    grid-row: 3;
+    grid-column: 1;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    min-height: 120px;
+    padding: 14px 16px;
+    background: var(--re-accent-bg);
+    align-items: stretch;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-r-out-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    width: 100%;
+    gap: 12px 16px;
+    align-items: start;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome--banner:first-child {
+    grid-column: 1 / -1;
+    align-items: center;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome--banner:nth-child(n + 2) {
+    align-items: center;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome--banner:first-child .re-outcome-fig {
+    font-size: 36px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome--banner:nth-child(n + 2) .re-outcome-fig {
+    font-size: 24px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome--banner:nth-child(n + 2) .re-outcome-lbl {
+    font-size: 9px;
+    margin-top: 4px;
+  }
 }
 
 @media (max-width: 700px) {
