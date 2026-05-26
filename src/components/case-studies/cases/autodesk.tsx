@@ -1,8 +1,11 @@
 import type { CaseStudyEntry } from "@/content/case-studies";
-import { loadCaseHtml } from "@/content/cases/loader";
 import { CaseShell } from "../CaseShell";
+import { AutodeskCaseView } from "./case-autodesk/AutodeskCaseView";
 
 export function AutodeskCase({ entry }: { entry: CaseStudyEntry }) {
-  const body = loadCaseHtml("autodesk");
-  return <CaseShell entry={entry} body={body} />;
+  return (
+    <CaseShell entry={entry}>
+      <AutodeskCaseView />
+    </CaseShell>
+  );
 }

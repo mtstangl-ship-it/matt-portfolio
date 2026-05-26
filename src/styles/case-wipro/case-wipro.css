@@ -243,6 +243,20 @@
   }
 }
 
+/* ---- Mobile · hide FIG. stamps (hero + section) to reclaim vertical space ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-wipro-portfolio .fig-stamp {
+    display: none !important;
+  }
+}
+
+/* ---- Mobile · hide hero CASE NO. / BASED / ROLE / REV. identity strip ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-wipro-portfolio .hero__id-strip {
+    display: none !important;
+  }
+}
+
 /* ---- Section 01 · Brief · single paragraph ---- */
 .tier-a-case-root .case-wipro-portfolio .brief__lede {
   font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);

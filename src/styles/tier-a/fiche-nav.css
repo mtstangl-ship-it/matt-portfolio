@@ -61,8 +61,8 @@
   margin: 0;
   color: var(--ink-2);
 }
-/* Keep primary links on one row from tablet landscape up (avoids “stacked” nav at ~800–1024px). */
-@media (min-width: 768px) {
+/* Keep primary links on one row only when inline nav is visible (>1024px). */
+@media (min-width: 1025px) {
   .nav__list {
     flex-wrap: nowrap;
   }
@@ -73,7 +73,7 @@
   align-items: center;
   gap: 0.65rem;
 }
-@media (min-width: 768px) {
+@media (min-width: 1025px) {
   .nav__list li:not(:first-child)::before {
     content: "·";
     color: var(--ink-3);
@@ -117,7 +117,7 @@
   display: none;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .nav {
     grid-template-columns: auto 1fr auto;
     gap: 0.75rem;
@@ -151,7 +151,7 @@
 }
 
 /* Desktop: never show hamburger (defense vs cascade order / Tailwind). */
-@media (min-width: 768px) {
+@media (min-width: 1025px) {
   .nav__menu {
     display: none !important;
     visibility: hidden !important;
@@ -167,8 +167,8 @@
   }
 }
 
-/* Mobile drawer — Home v2 */
-@media (max-width: 767px) {
+/* Drawer — Home v2 (hamburger breakpoint) */
+@media (max-width: 1024px) {
   body.nav-open .home-v2-root .nav__list,
   body.nav-open .home-v2-root .nav__cta {
     display: flex !important;
@@ -191,8 +191,8 @@
   }
 }
 
-/* Mobile drawer — About v3 (replaces old .nav__panel sheet) */
-@media (max-width: 767px) {
+/* Drawer — About v3 (replaces old .nav__panel sheet) */
+@media (max-width: 1024px) {
   body.nav-open #about-v3 .nav__list,
   body.nav-open #about-v3 .nav__cta {
     display: flex !important;
@@ -215,8 +215,8 @@
   }
 }
 
-/* Mobile drawer — Tier-A Centaur case shell (FicheNav lives inside .tier-a-case-root) */
-@media (max-width: 767px) {
+/* Drawer — Tier-A case shell (FicheNav lives inside .tier-a-case-root) */
+@media (max-width: 1024px) {
   body.nav-open .tier-a-case-root .nav__list,
   body.nav-open .tier-a-case-root .nav__cta {
     display: flex !important;

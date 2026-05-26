@@ -278,6 +278,15 @@
   }
 }
 
+/* Tier-A · hero FIG. stamp (direct child of section.hero) clears fixed nav band */
+@media (min-width: 769px) {
+  .tier-a-case-root .hero > .fig-stamp {
+    top: clamp(10.5rem, 22vw, 14rem);
+    right: var(--gutter);
+    z-index: 14;
+  }
+}
+
 /* Tier-A · case picker on the photo plate (zone 2) */
 .tier-a-case-root .hero__plate-picker {
   position: relative;
@@ -333,6 +342,70 @@
     position: static;
     margin: 0 auto 1.25rem;
     max-width: max-content;
+  }
+}
+
+/* ---- Case picker · ≤1024px · inline dropdown (tablet→phone, no floating menu) ---- */
+@media (max-width: 1024px) {
+  /* Flex column children default min-width:auto — without this the picker can force
+     the hero plate wider than the viewport (horizontal page scroll). */
+  .tier-a-case-root .hero__plate-picker {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-top: clamp(4rem, 3.75rem + 4vw, 5.75rem);
+    padding-bottom: clamp(0.75rem, 2vw, 1.25rem);
+    padding-inline: var(--gutter);
+    overflow-x: clip;
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-wrap {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown {
+    border: 1px solid var(--ink-line);
+    border-radius: 6px;
+    background: var(--bg-2);
+    overflow: hidden;
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown--open {
+    background: var(--bg-2);
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__trigger {
+    font-family: var(--mono);
+    color: var(--ink-2);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__trigger:hover {
+    background: rgba(95, 230, 194, 0.06);
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__panel {
+    border-top-color: var(--ink-line) !important;
+    background: var(--bg-2);
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__panel .case-picker-link {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    line-height: 1.38;
+    white-space: normal !important;
+  }
+
+  .tier-a-case-root .hero__plate-picker .case-picker-dropdown__panel .case-picker-link[aria-current="page"] {
+    border-color: var(--accent) !important;
+    background: rgba(95, 230, 194, 0.14) !important;
+    color: var(--accent) !important;
+    box-shadow: 0 0 0 1px rgba(95, 230, 194, 0.38);
   }
 }
 

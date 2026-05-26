@@ -65,3 +65,17 @@
     display: none !important;
   }
 }
+
+/* ---- Mobile · hide FIG. stamps (hero + section) to reclaim vertical space ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-ey-portfolio .fig-stamp {
+    display: none !important;
+  }
+}
+
+/* ---- Mobile · hide hero CASE NO. / BASED / ROLE / REV. identity strip ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-ey-portfolio .hero__id-strip {
+    display: none !important;
+  }
+}

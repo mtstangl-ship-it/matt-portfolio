@@ -20,7 +20,12 @@ export function ConditionalSiteChromeClient({
   const pathname = usePathname();
   const path = pathname ?? serverPathname;
   /** Tier-A routes ship FicheNav / CaseShell chrome — omit global Nav + Footer. */
-  const tierACaseRoutes = new Set(["/case-studies/ai", "/case-studies/ey", "/case-studies/wipro"]);
+  const tierACaseRoutes = new Set([
+    "/case-studies/ai",
+    "/case-studies/ey",
+    "/case-studies/wipro",
+    "/case-studies/autodesk",
+  ]);
   const hideLegacyChrome = path === "/" || path === "/about" || tierACaseRoutes.has(path);
 
   if (hideLegacyChrome) {
