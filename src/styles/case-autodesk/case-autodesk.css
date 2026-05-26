@@ -287,14 +287,14 @@
 /* Section 03 · Diagnosis body + pull quote — mirrors §06 marginalia 7fr / 3fr rail */
 .tier-a-case-root .case-autodesk-portfolio .diagnosis__body {
   display: grid;
-  gap: 1.25rem;
+  gap: 2.5rem;
   align-items: start;
 }
 
 @media (min-width: 769px) {
   .tier-a-case-root .case-autodesk-portfolio .diagnosis__body {
     grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-    gap: 2rem;
+    gap: 4rem;
     align-items: start;
   }
 
