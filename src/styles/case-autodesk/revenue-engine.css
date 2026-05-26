@@ -13,6 +13,8 @@
   --re-accent-bg: rgba(181, 155, 214, 0.08);
   --re-ink-dim: var(--ink-2);
   --re-ink-faint: var(--ink-line);
+  --re-mono: var(--font-jetbrains, "JetBrains Mono"), "JetBrains Mono", "SF Mono", ui-monospace,
+    Menlo, monospace;
 
   position: relative;
   margin: 0;
@@ -20,7 +22,7 @@
   border-bottom: 1px solid var(--ink-line);
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--mono);
+  font-family: var(--re-mono);
   font-style: normal;
   font-size: 13px;
   line-height: 1.45;
@@ -182,13 +184,15 @@
   padding: 0;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .re-plate-title {
+.tier-a-case-root .case-autodesk-portfolio .re-plate-title,
+.tier-a-case-root .case-autodesk-portfolio h3.re-plate-title {
   margin: 0 0 18px;
-  font-family: var(--mono);
+  font-family: var(--re-mono);
   font-style: normal;
   font-weight: 400;
   font-size: 32px;
   line-height: 1;
+  letter-spacing: normal;
   color: var(--ink);
 }
 
@@ -217,6 +221,8 @@
   gap: 8px;
   background: rgba(232, 239, 237, 0.012);
   cursor: pointer;
+  font-family: var(--re-mono);
+  font-style: normal;
   transition: border-color 200ms, background 200ms, transform 200ms;
 }
 
@@ -239,6 +245,8 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  font-family: var(--re-mono);
+  font-style: normal;
   font-size: 9px;
   letter-spacing: 0.22em;
   color: var(--re-ink-dim);
@@ -262,7 +270,7 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-fig-name {
-  font-family: var(--mono);
+  font-family: var(--re-mono);
   font-style: normal;
   font-size: 16px;
   color: var(--ink);
@@ -286,6 +294,8 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-col-h {
+  font-family: var(--re-mono);
+  font-style: normal;
   font-size: 10px;
   letter-spacing: 0.24em;
   color: var(--re-accent);
@@ -293,6 +303,8 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-col-sub {
+  font-family: var(--re-mono);
+  font-style: normal;
   font-size: 9.5px;
   letter-spacing: 0.22em;
   color: var(--re-ink-dim);
@@ -300,7 +312,7 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-stage-name {
-  font-family: var(--mono);
+  font-family: var(--re-mono);
   font-style: normal;
   font-size: 24px;
   color: var(--ink);
@@ -309,6 +321,8 @@
 
 .tier-a-case-root .case-autodesk-portfolio .re-stage-intent {
   margin-top: 8px;
+  font-family: var(--re-mono);
+  font-style: normal;
   font-size: 11.5px;
   color: var(--re-ink-dim);
   line-height: 1.55;
@@ -382,7 +396,7 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-inspect--r .re-r-id {
-  font-family: var(--mono);
+  font-family: var(--re-mono);
   font-style: normal;
   font-size: 90px;
   color: var(--re-accent);
@@ -390,7 +404,7 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-r-id-sub {
-  font-family: var(--mono);
+  font-family: var(--re-mono);
   font-style: normal;
   font-size: 10px;
   letter-spacing: 0.24em;
@@ -406,7 +420,7 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-outcome-fig {
-  font-family: var(--mono);
+  font-family: var(--re-mono);
   font-style: normal;
   font-size: 52px;
   line-height: 1;
@@ -414,6 +428,8 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-outcome-lbl {
+  font-family: var(--re-mono);
+  font-style: normal;
   font-size: 9.5px;
   letter-spacing: 0.22em;
   color: var(--re-ink-dim);
@@ -421,6 +437,8 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-outcome-caption {
+  font-family: var(--re-mono);
+  font-style: normal;
   font-size: 9.5px;
   letter-spacing: 0.24em;
   color: var(--re-ink-dim);
@@ -474,7 +492,7 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-r-block .re-r-id {
-  font-family: var(--mono);
+  font-family: var(--re-mono);
   font-style: normal;
   font-size: 44px;
   color: var(--re-accent);
@@ -482,6 +500,8 @@
 }
 
 .tier-a-case-root .case-autodesk-portfolio .re-r-block .re-r-id-sub {
+  font-family: var(--re-mono);
+  font-style: normal;
   margin-top: 8px;
   font-size: 9.5px;
 }
@@ -558,7 +578,7 @@
   }
 
   .tier-a-case-root .case-autodesk-portfolio .re-mobile-chip {
-    font-family: var(--mono);
+    font-family: var(--re-mono);
     font-size: 10px;
     letter-spacing: 0.24em;
     color: var(--re-ink-dim);
@@ -575,7 +595,7 @@
   }
 
   .tier-a-case-root .case-autodesk-portfolio .re-mobile-chip-sep {
-    font-family: var(--mono);
+    font-family: var(--re-mono);
     font-size: 10px;
     color: var(--re-ink-faint);
     line-height: 1;
