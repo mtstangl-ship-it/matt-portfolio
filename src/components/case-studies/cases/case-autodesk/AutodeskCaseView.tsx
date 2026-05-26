@@ -84,7 +84,7 @@ export function AutodeskCaseView() {
             {/* eslint-disable-next-line @next/next/no-img-element -- Tier-A shared hero pipeline (hero-chrome.css) */}
             <img
               className="hero__bgphoto-img"
-              src="/case-studies/autodesk-journey-mapping-halftone.png"
+              src="/case-studies/autodesk-design-manufacturing-halftone.png"
               alt=""
               decoding="async"
               fetchPriority="high"
@@ -191,21 +191,23 @@ export function AutodeskCaseView() {
             </h2>
           </header>
 
-          <p className="autodesk-prose">
-            Sales owned acquisition. Success owned adoption. Each segment optimized; none optimized
-            for the journey. The diagnosis: a customer planning experience designed end-to-end
-            across the lifecycle &mdash; naming customer business outcomes, aligning solutions,
-            planning delivery, tracking value over time.
-          </p>
-
-          <blockquote className="autodesk-pull">
-            <p>
-              &ldquo;The higher the investment and/or change, the higher the required trust. But
-              trust is something personal. That is the reason people buy from people they
-              understand.&rdquo;
+          <div className="diagnosis__body">
+            <p className="autodesk-prose">
+              Sales owned acquisition. Success owned adoption. Each segment optimized; none optimized
+              for the journey. The diagnosis: a customer planning experience designed end-to-end
+              across the lifecycle &mdash; naming customer business outcomes, aligning solutions,
+              planning delivery, tracking value over time.
             </p>
-            <footer>ADSK Field Rep &middot; customer interview &middot; FY24 prototype testing</footer>
-          </blockquote>
+
+            <blockquote className="autodesk-pull">
+              <p>
+                &ldquo;The higher the investment and/or change, the higher the required trust. But
+                trust is something personal. That is the reason people buy from people they
+                understand.&rdquo;
+              </p>
+              <footer>ADSK Field Rep &middot; customer interview &middot; FY24 prototype testing</footer>
+            </blockquote>
+          </div>
         </div>
       </section>
 
@@ -229,9 +231,9 @@ export function AutodeskCaseView() {
 
         <div className="approach__inner case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">04 · APPROACH · DESIGN AS DIRECTIONAL CLARITY</p>
+            <p className="kicker">04 · APPROACH · DESIGN AS OP MODEL EVOLUTION</p>
             <h2>
-              We didn&apos;t design a workflow. We designed the <em>directional document.</em>
+              We didn&apos;t design a desire. We designed <em>the future.</em>
             </h2>
           </header>
 

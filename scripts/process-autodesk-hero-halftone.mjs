@@ -16,8 +16,8 @@ import sharp from "sharp";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(__dirname);
 
-const INPUT = path.join(ROOT, "public/case-studies/autodesk-journey-mapping.jpg");
-const OUTPUT = path.join(ROOT, "public/case-studies/autodesk-journey-mapping-halftone.png");
+const INPUT = path.join(ROOT, "public/case-studies/autodesk-design-manufacturing.jpg");
+const OUTPUT = path.join(ROOT, "public/case-studies/autodesk-design-manufacturing-halftone.png");
 
 /** Classic 8×8 Bayer matrix (0–63). */
 const BAYER8 = [
