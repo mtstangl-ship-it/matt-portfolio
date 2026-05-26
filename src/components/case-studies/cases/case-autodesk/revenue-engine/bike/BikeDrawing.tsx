@@ -85,7 +85,7 @@ function Wheel({
       <circle cx={cx} cy={cy} r={4.5} stroke={BIKE_INK} strokeWidth={sw} fill={BIKE_BG} />
       <circle cx={cx} cy={cy} r={1.8} stroke={BIKE_INK} strokeWidth={0.7} fill="none" />
       {motion ? (
-        <>
+        <g className="re-wheel-spin">
           {[r - 14, r - 18, r - 22].map((rr, i) => (
             <circle
               key={rr}
@@ -108,9 +108,9 @@ function Wheel({
             strokeLinecap="round"
             opacity={0.85}
           />
-        </>
+        </g>
       ) : (
-        spokes
+        <g>{spokes}</g>
       )}
     </g>
   );
@@ -684,8 +684,12 @@ export function BikeDrawing({
               />
             ))}
           </g>
-          <RotationArc cx={G.frontHub.x} cy={G.frontHub.y} r={G.wheelR - 12} color={accent} />
-          <RotationArc cx={G.rearHub.x} cy={G.rearHub.y} r={G.wheelR - 10} color={accent} />
+          <g className="re-wheel-spin">
+            <RotationArc cx={G.frontHub.x} cy={G.frontHub.y} r={G.wheelR - 12} color={accent} />
+          </g>
+          <g className="re-wheel-spin">
+            <RotationArc cx={G.rearHub.x} cy={G.rearHub.y} r={G.wheelR - 10} color={accent} />
+          </g>
         </>
       )}
     </>

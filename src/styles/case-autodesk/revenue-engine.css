@@ -847,6 +847,61 @@
   }
 }
 
+/* R-stage motion */
+.tier-a-case-root .case-autodesk-portfolio .re-wheel-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: re-wheel-spin 1.8s linear infinite;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-road-row {
+  animation: re-road-scroll 2.4s linear infinite;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-speed-sweep {
+  animation: re-speed-pulse 2s ease-in-out infinite;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-speed-sweep--0 {
+  animation-delay: 0ms;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-speed-sweep--1 {
+  animation-delay: 200ms;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-speed-sweep--2 {
+  animation-delay: 400ms;
+}
+
+@keyframes re-wheel-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes re-road-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * var(--re-road-cycle)));
+  }
+}
+
+@keyframes re-speed-pulse {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .tier-a-case-root .case-autodesk-portfolio .re-figures {
     scroll-behavior: smooth;

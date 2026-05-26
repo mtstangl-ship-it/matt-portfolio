@@ -52,21 +52,30 @@ export function RStageSvg({
         const y = horizonY + 4 + t * (vbH - horizonY - 10);
         const dashLen = 40 + t * 70;
         const gap = 40 - t * 16;
-        return Array.from({ length: 33 }, (_, i) => {
-          const x = (i - 3) * (dashLen + gap);
-          return (
-            <line
-              key={`${row}-${i}`}
-              x1={x}
-              y1={y}
-              x2={x + dashLen}
-              y2={y}
-              stroke="#e8efed"
-              strokeWidth={0.6 + t * 0.8}
-              opacity={0.18 + t * 0.65}
-            />
-          );
-        });
+        const cycle = dashLen + gap;
+        return (
+          <g
+            key={row}
+            className="re-road-row"
+            style={{ "--re-road-cycle": `${cycle}px` } as React.CSSProperties}
+          >
+            {Array.from({ length: 33 }, (_, i) => {
+              const x = (i - 3) * cycle;
+              return (
+                <line
+                  key={i}
+                  x1={x}
+                  y1={y}
+                  x2={x + dashLen}
+                  y2={y}
+                  stroke="#e8efed"
+                  strokeWidth={0.6 + t * 0.8}
+                  opacity={0.18 + t * 0.65}
+                />
+              );
+            })}
+          </g>
+        );
       })}
       <g transform={`translate(${tx} ${ty}) scale(${bikeScale})`}>
         <BikeDrawing parts={parts} tier={tier} accent={accent} motion rider ground={false} />
@@ -78,6 +87,7 @@ export function RStageSvg({
       ].map((s, i) => (
         <line
           key={s.x}
+          className={`re-speed-sweep re-speed-sweep--${i}`}
           x1={s.x}
           y1={horizonY + s.yOff}
           x2={s.x + s.len}
