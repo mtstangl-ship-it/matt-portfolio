@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
-import { AutodeskJourneyArtifact } from "./AutodeskJourneyArtifact";
+import { RevenueEnginePatentPlate } from "./revenue-engine/RevenueEnginePatentPlate";
 import { AutodeskOpportunitiesMatrix } from "./AutodeskOpportunitiesMatrix";
 
 const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
@@ -160,9 +160,8 @@ export function AutodeskCaseView() {
           </header>
         </div>
 
-        {/* Lifted artifact (legacy `.adsk-hero` block, scoped + React-toggled) */}
         <div className="autodesk-blueprint-wrap">
-          <AutodeskJourneyArtifact />
+          <RevenueEnginePatentPlate />
         </div>
       </section>
 

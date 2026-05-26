@@ -1,0 +1,661 @@
+/* =========================================================================
+   Revenue Engine · Patent Plate (Concept 01)
+   Scoped under .revenue-engine-patent-plate — Growth purple, Nurture green.
+   ========================================================================= */
+
+.tier-a-case-root .case-autodesk-portfolio .revenue-engine-patent-plate {
+  --re-purple: #b59bd6;
+  --re-purple-2: rgba(181, 155, 214, 0.5);
+  --re-green: #3dd17a;
+  --re-green-2: rgba(61, 209, 122, 0.5);
+  --re-accent: var(--re-purple);
+  --re-accent-2: var(--re-purple-2);
+  --re-accent-bg: rgba(181, 155, 214, 0.08);
+  --re-ink-dim: var(--ink-2);
+  --re-ink-faint: var(--ink-line);
+
+  position: relative;
+  margin: 0;
+  border-top: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .revenue-engine-patent-plate[data-tier="nurture"] {
+  --re-accent: var(--re-green);
+  --re-accent-2: var(--re-green-2);
+  --re-accent-bg: rgba(61, 209, 122, 0.08);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .revenue-engine-patent-plate button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+/* Header */
+.tier-a-case-root .case-autodesk-portfolio .re-app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--re-ink-faint);
+  padding: 14px 28px 12px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-header-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--re-ink-dim);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-pill {
+  border: 1px solid var(--re-ink-faint);
+  padding: 4px 8px;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-pill-accent {
+  color: var(--re-accent);
+  border-color: var(--re-accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-header-controls {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-cg {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--re-ink-faint);
+  align-items: stretch;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-cg-label {
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  color: var(--re-ink-dim);
+  padding: 0 14px;
+  border-right: 1px solid var(--re-ink-faint);
+  display: flex;
+  align-items: center;
+  background: rgba(232, 239, 237, 0.018);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-cg button {
+  padding: 10px 14px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--re-ink-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-right: 1px solid var(--re-ink-faint);
+  transition: color 200ms, background 200ms, border-color 200ms;
+  min-height: 38px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-cg button:last-child {
+  border-right: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-cg button:hover:not([data-active="true"]) {
+  color: var(--ink);
+  background: rgba(232, 239, 237, 0.025);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-cg button[data-active="true"] {
+  color: var(--re-accent);
+  background: var(--re-accent-bg);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-tier-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--re-ink-faint);
+}
+
+.tier-a-case-root
+  .case-autodesk-portfolio
+  .re-cg
+  button[data-tier="growth"][data-active="true"]
+  .re-tier-dot {
+  background: var(--re-purple);
+  box-shadow: 0 0 0 3px rgba(181, 155, 214, 0.22);
+}
+
+.tier-a-case-root
+  .case-autodesk-portfolio
+  .re-cg
+  button[data-tier="nurture"][data-active="true"]
+  .re-tier-dot {
+  background: var(--re-green);
+  box-shadow: 0 0 0 3px rgba(61, 209, 122, 0.22);
+}
+
+/* Body */
+.tier-a-case-root .case-autodesk-portfolio .re-plate-body {
+  padding: 18px 28px 24px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-bike-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Patent plate (Concept 01) */
+.tier-a-case-root .case-autodesk-portfolio .re-d1 {
+  padding: 0;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-plate-title {
+  margin: 0 0 18px;
+  font-family: inherit;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-figures-wrap {
+  position: relative;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-figures-fade {
+  display: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-figures {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+  scroll-behavior: auto;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-figure {
+  position: relative;
+  border: 1px solid var(--re-ink-faint);
+  padding: 12px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(232, 239, 237, 0.012);
+  cursor: pointer;
+  transition: border-color 200ms, background 200ms, transform 200ms;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-figure:hover {
+  border-color: var(--re-ink-dim);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-figure[data-active="true"] {
+  border-color: var(--re-accent);
+  background: var(--re-accent-bg);
+  transform: translateY(-2px);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-figure:focus-visible {
+  outline: 2px solid var(--re-accent);
+  outline-offset: 2px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-fig-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--re-ink-dim);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-fig-num {
+  color: var(--re-accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-fig-art {
+  width: 100%;
+  aspect-ratio: 400 / 220;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-fig-body {
+  padding-top: 8px;
+  border-top: 1px dashed var(--re-ink-faint);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-fig-name {
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-inspect {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 28px;
+  padding: 22px 24px;
+  border: 1px solid var(--re-accent-2);
+  background: var(--re-accent-bg);
+  margin-bottom: 20px;
+  align-items: start;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-inspect--r {
+  grid-template-columns: auto 1fr;
+  gap: 36px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-col-h {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--re-accent);
+  margin-bottom: 8px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-col-sub {
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--re-ink-dim);
+  margin-bottom: 8px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-stage-name {
+  font-family: inherit;
+  font-size: 24px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-stage-intent {
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: var(--re-ink-dim);
+  line-height: 1.55;
+  border-left: 1px solid var(--re-accent-2);
+  padding-left: 10px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-acts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-act {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-act-marker {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid var(--re-ink-faint);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-act--active .re-act-marker {
+  background: var(--re-accent);
+  border-color: var(--re-accent);
+  box-shadow: 0 0 0 3px var(--re-accent-bg);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-act--muted {
+  font-style: italic;
+  color: var(--re-ink-dim);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-act--muted .re-act-marker {
+  border-style: dashed;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-act-footnote {
+  color: var(--re-ink-dim);
+  font-size: 9.5px;
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-back-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-b-row {
+  font-size: 11.5px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-b-row-k {
+  color: var(--re-accent);
+  letter-spacing: 0.22em;
+  font-size: 9.5px;
+  margin-right: 8px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-inspect--r .re-r-id {
+  font-family: inherit;
+  font-style: normal;
+  font-size: 90px;
+  color: var(--re-accent);
+  line-height: 0.85;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-id-sub {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--re-ink-dim);
+  display: block;
+  margin-top: 10px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-inspect-o-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-outcome-fig {
+  font-family: inherit;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--re-accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-outcome-lbl {
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--re-ink-dim);
+  margin-top: 6px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-outcome-caption {
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  color: var(--re-ink-dim);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-block {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 1px solid var(--re-accent-2);
+  background: var(--re-accent-bg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 200ms;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-block--mobile {
+  display: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-block:hover {
+  border-color: var(--re-accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-block[data-active="true"] {
+  box-shadow: inset 0 0 0 1px var(--re-accent);
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-block:focus-visible {
+  outline: 2px solid var(--re-accent);
+  outline-offset: 2px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-art-wrap {
+  width: 100%;
+  aspect-ratio: 1600 / 360;
+  position: relative;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+  gap: 18px;
+  pointer-events: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-block .re-r-id {
+  font-family: inherit;
+  font-style: normal;
+  font-size: 44px;
+  color: var(--re-accent);
+  line-height: 1;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-block .re-r-id-sub {
+  margin-top: 8px;
+  font-size: 9.5px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-r-out-row {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-outcome--banner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-outcome--banner .re-outcome-fig {
+  font-size: 36px;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-outcome--banner .re-outcome-lbl {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  margin-top: 0;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-mobile-chips {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .tier-a-case-root .case-autodesk-portfolio .re-app-header {
+    padding: 12px 16px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-state {
+    justify-content: flex-start;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-plate-body {
+    padding: 16px 14px 20px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-d1 {
+    position: relative;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-plate-title {
+    font-size: 22px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-block--mobile {
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-block:not(.re-r-block--mobile) {
+    display: none;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-mobile-chips {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 6px 2px 12px;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed var(--re-ink-faint);
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-mobile-chip-group {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-mobile-chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    color: var(--re-ink-dim);
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    transition: color 200ms;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-mobile-chip[data-active="true"] {
+    color: var(--re-accent);
+    font-weight: 500;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-mobile-chip-sep {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--re-ink-faint);
+    line-height: 1;
+    padding: 0 2px;
+    user-select: none;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-figures {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 14px;
+    gap: 10px;
+    padding: 4px 14px 12px;
+    margin: 0 -14px 18px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-figures::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-figure {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    min-height: 0;
+    padding: 10px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-fig-art {
+    aspect-ratio: 400 / 200;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-figures-fade {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+      to right,
+      rgba(10, 15, 14, 0) 0%,
+      var(--bg) 100%
+    );
+    z-index: 1;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-inspect {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px 14px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-inspect--r {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-inspect--r .re-r-id {
+    font-size: 56px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-inspect-o-grid {
+    gap: 10px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-outcome--inspect .re-outcome-fig {
+    font-size: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tier-a-case-root .case-autodesk-portfolio .re-figures {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tier-a-case-root .case-autodesk-portfolio .revenue-engine-patent-plate *,
+  .tier-a-case-root .case-autodesk-portfolio .revenue-engine-patent-plate *::before,
+  .tier-a-case-root .case-autodesk-portfolio .revenue-engine-patent-plate *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+  }
+}
