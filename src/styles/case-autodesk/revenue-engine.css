@@ -463,10 +463,6 @@
   transition: border-color 200ms;
 }
 
-.tier-a-case-root .case-autodesk-portfolio .re-r-block--mobile {
-  display: none;
-}
-
 .tier-a-case-root .case-autodesk-portfolio .re-r-block:hover {
   border-color: var(--re-accent);
 }
@@ -551,6 +547,69 @@
 
 .tier-a-case-root .case-autodesk-portfolio .re-mobile-chips {
   display: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .re-d1 > .re-r-block {
+  margin-bottom: 32px;
+}
+
+@media (min-width: 700px) {
+  .tier-a-case-root .case-autodesk-portfolio .re-d1 > .re-r-block {
+    margin-bottom: 40px;
+  }
+}
+
+/* R-block · desktop overlay (≥1024px) */
+@media (min-width: 1024px) {
+  .tier-a-case-root .case-autodesk-portfolio .re-d1 > .re-r-block {
+    margin-bottom: 60px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-block {
+    display: block;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-art-wrap {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1600 / 440;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-meta {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    padding: 36px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    min-height: 0;
+    padding: 0 36px;
+    background: transparent;
+    align-items: center;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-divider {
+    display: none;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-r-out-row {
+    display: flex;
+    grid-template-columns: none;
+    width: auto;
+    gap: 32px;
+  }
+
+  .tier-a-case-root .case-autodesk-portfolio .re-r-metrics .re-outcome--banner {
+    align-items: flex-end;
+  }
 }
 
 /* R-block · midpoint (700–1023px) */
@@ -721,21 +780,8 @@
     padding: 16px 14px 20px;
   }
 
-  .tier-a-case-root .case-autodesk-portfolio .re-d1 {
-    position: relative;
-  }
-
   .tier-a-case-root .case-autodesk-portfolio .re-plate-title {
     font-size: 22px;
-  }
-
-  .tier-a-case-root .case-autodesk-portfolio .re-r-block--mobile {
-    display: block;
-    margin-bottom: 18px;
-  }
-
-  .tier-a-case-root .case-autodesk-portfolio .re-r-block:not(.re-r-block--mobile) {
-    display: none;
   }
 
   .tier-a-case-root .case-autodesk-portfolio .re-mobile-chips {

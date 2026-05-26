@@ -6,12 +6,9 @@ import {
   useRef,
   type KeyboardEvent,
 } from "react";
-import { RStageSvg } from "./bike/RStageSvg";
 import { StageBikeSvg } from "./bike/StageBikeSvg";
 import {
   isRenewalStage,
-  RENEWAL,
-  RENEWAL_OUTCOMES,
   RENEWAL_STAGE_INDEX,
   REVENUE_ENGINE_STAGES,
   type RevenueEngineTier,
@@ -22,8 +19,7 @@ import {
   parseStageFigureKey,
   RevenueEngineInspectPanel,
 } from "./RevenueEngineInspectPanel";
-import { RenewalOutcomesRow } from "./RenewalOutcomes";
-
+import { RenewalRBlock } from "./RenewalRBlock";
 type RevenueEnginePlateContentProps = {
   tier: RevenueEngineTier;
   stageIndex: number;
@@ -86,7 +82,7 @@ export function RevenueEnginePlateContent({
     [scrollRailToStage, selectStage],
   );
 
-  const handleRenewalBannerClick = useCallback(() => {
+  const handleRenewalSelect = useCallback(() => {
     selectStage(RENEWAL_STAGE_INDEX);
   }, [selectStage]);
 
@@ -196,34 +192,9 @@ export function RevenueEnginePlateContent({
     }
   }, []);
 
-  const renewalBanner = (className: string) => (
-    <button
-      type="button"
-      className={className}
-      data-active={isRenewalStage(stageIndex) ? "true" : "false"}
-      aria-pressed={isRenewalStage(stageIndex)}
-      aria-label="Select renewal stage"
-      onClick={handleRenewalBannerClick}
-    >
-      <div className="re-r-art-wrap">
-        <RStageSvg tier={tier} />
-      </div>
-      <div className="re-r-meta">
-        <div className="re-r-id">
-          {RENEWAL.n}
-          <span className="re-r-id-sub">{RENEWAL.subtitle}</span>
-        </div>
-      </div>
-      <div className="re-r-divider" aria-hidden="true" />
-      <div className="re-r-metrics">
-        <RenewalOutcomesRow outcomes={RENEWAL_OUTCOMES} variant="banner" />
-      </div>
-    </button>
-  );
-
   return (
     <div className="re-d1">
-      {renewalBanner("re-r-block re-r-block--mobile")}
+      <RenewalRBlock tier={tier} stageIndex={stageIndex} onSelect={handleRenewalSelect} />
 
       <h3 className="re-plate-title">Five figures &amp; the running machine.</h3>
 
@@ -291,8 +262,6 @@ export function RevenueEnginePlateContent({
       </div>
 
       <RevenueEngineInspectPanel stageIndex={stageIndex} tier={tier} />
-
-      {renewalBanner("re-r-block")}
     </div>
   );
 }

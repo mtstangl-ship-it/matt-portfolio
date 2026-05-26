@@ -191,23 +191,21 @@ export function AutodeskCaseView() {
             </h2>
           </header>
 
-          <div className="diagnosis__body">
-            <p className="autodesk-prose">
-              Sales owned acquisition. Success owned adoption. Each segment optimized; none optimized
-              for the journey. The diagnosis: a customer planning experience designed end-to-end
-              across the lifecycle &mdash; naming customer business outcomes, aligning solutions,
-              planning delivery, tracking value over time.
-            </p>
+          <p className="autodesk-prose">
+            Sales owned acquisition. Success owned adoption. Each segment optimized; none optimized
+            for the journey. The diagnosis: a customer planning experience designed end-to-end
+            across the lifecycle &mdash; naming customer business outcomes, aligning solutions,
+            planning delivery, tracking value over time.
+          </p>
 
-            <blockquote className="autodesk-pull">
-              <p>
-                &ldquo;The higher the investment and/or change, the higher the required trust. But
-                trust is something personal. That is the reason people buy from people they
-                understand.&rdquo;
-              </p>
-              <footer>ADSK Field Rep &middot; customer interview &middot; FY24 prototype testing</footer>
-            </blockquote>
-          </div>
+          <blockquote className="autodesk-pull">
+            <p>
+              &ldquo;The higher the investment and/or change, the higher the required trust. But
+              trust is something personal. That is the reason people buy from people they
+              understand.&rdquo;
+            </p>
+            <footer>ADSK Field Rep &middot; customer interview &middot; FY24 prototype testing</footer>
+          </blockquote>
         </div>
       </section>
 
