@@ -139,7 +139,7 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
     <>
       <div
         ref={profileRef}
-        className={`impact-profile p2${isAnim && !reduceMotion ? " is-anim" : ""}`}
+        className={`impact-profile impact-p2${isAnim && !reduceMotion ? " is-anim" : ""}`}
         id="profile"
       >
         <span className="impact-profile__corner">SHEET 02-A · NORMALIZED</span>

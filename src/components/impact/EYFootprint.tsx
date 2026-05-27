@@ -20,6 +20,8 @@ function toPercent(cx: number, cy: number): { left: string; top: string } {
 }
 
 const CITY_ORDER: CityId[] = ["atl", "ath", "sav", "sum"];
+/** Scroll-sync cities — summary panel excluded from IO until user scrolls to it. */
+const SCROLL_CITIES: CityId[] = ["atl", "ath", "sav"];
 
 const PROGRESS_LABELS: Record<CityId, string> = {
   atl: "1 / 3 · Atlanta",
@@ -77,14 +79,14 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
       ioEnabledRef.current = false;
       return;
     }
-    setActiveCityStable("atl");
+    activeCityRef.current = "atl";
     setActiveCity("atl");
     ioEnabledRef.current = false;
     const t = window.setTimeout(() => {
       ioEnabledRef.current = true;
     }, 200);
     return () => window.clearTimeout(t);
-  }, [tabActive, setActiveCityStable]);
+  }, [tabActive]);
 
   useEffect(() => {
     if (!tabActive) return;
@@ -93,24 +95,34 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
       if (!ioEnabledRef.current) return;
       const vh = window.innerHeight || 800;
       const line = vh * 0.25;
-      let bestEl: HTMLElement | undefined;
-      let bestScore = -Infinity;
+      const current = activeCityRef.current;
 
-      CITY_ORDER.forEach((id) => {
+      const crossed: CityId[] = [];
+      SCROLL_CITIES.forEach((id) => {
         const p = panelRefs.current[id];
         if (!p) return;
         const r = p.getBoundingClientRect();
         if (r.bottom < 0 || r.top > vh) return;
-        const score = -Math.abs(r.top - line);
-        if (score > bestScore) {
-          bestScore = score;
-          bestEl = p;
-        }
+        const center = r.top + r.height / 2;
+        if (center <= line) crossed.push(id);
       });
 
-      if (bestEl) {
-        const city = bestEl.getAttribute("data-city") as CityId | null;
-        if (city) setActiveCityStable(city);
+      let next: CityId | null = null;
+      if (crossed.length > 0) {
+        next = crossed[crossed.length - 1];
+      }
+
+      const sumPanel = panelRefs.current.sum;
+      if (sumPanel) {
+        const r = sumPanel.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        if (center <= line && r.top >= 0 && r.top < vh * 0.55) {
+          next = "sum";
+        }
+      }
+
+      if (next && next !== current) {
+        setActiveCityStable(next);
       }
     };
 
@@ -125,10 +137,13 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
       { rootMargin: "-25% 0px -50% 0px", threshold: [0, 0.2, 0.5, 1] },
     );
 
-    CITY_ORDER.forEach((id) => {
+    SCROLL_CITIES.forEach((id) => {
       const p = panelRefs.current[id];
       if (p) io.observe(p);
     });
+
+    const sumPanel = panelRefs.current.sum;
+    if (sumPanel) io.observe(sumPanel);
 
     return () => {
       io.disconnect();

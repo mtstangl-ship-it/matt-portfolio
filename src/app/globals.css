@@ -2,7 +2,6 @@
 @import './tokens-impact.css';
 @import './cases.css';
 @import './impact.css';
-@import '../styles/impact-visual-pass.css';
 @import './print.css';
 @tailwind base;
 @tailwind components;

@@ -232,7 +232,7 @@ export function ImpactShell() {
             </div>
             <div className="impact-hero__metric">
               <span className="v">
-                13<span className="unit">%+</span>
+                +13<span className="unit">%+</span>
               </span>
               <span className="lbl">NPS goal exceeded</span>
             </div>
