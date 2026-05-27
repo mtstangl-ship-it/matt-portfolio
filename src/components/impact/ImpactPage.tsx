@@ -11,7 +11,7 @@ import { ImpactShell } from "./ImpactShell";
  */
 export function ImpactPage() {
   return (
-    <div className="impact-console relative min-h-svh">
+    <div className="impact-console impact-shell relative min-h-svh">
       <SiteGrid tone="dark" opacity={0.45} />
       <ImpactShell />
     </div>
