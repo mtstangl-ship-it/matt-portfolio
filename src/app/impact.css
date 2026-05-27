@@ -263,6 +263,13 @@ body:has(.impact-console) {
   display:inline-flex; align-items:baseline; line-height:1;
 }
 .impact-metric-strip .v .u{ font-size:13px; color:var(--ink-2); font-family:var(--mono); margin-left:4px; }
+.impact-metric-strip .v .arr{
+  color:var(--ink-2);
+  font-weight:400;
+  font-size:0.55em;
+  font-family:var(--sans);
+  margin:0 0.12em;
+}
 .impact-metric-strip .l{
   margin-top:6px;
   font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
@@ -510,14 +517,63 @@ body:has(.impact-console) {
   overflow:hidden;
 }
 .impact-profile__corner{
-  position:absolute; top:14px; right:18px;
+  position:absolute; top:14px; left:18px;
   font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
   color:var(--ink-3); z-index:2;
+}
+.impact-profile__graph-wrap{
+  position:relative;
+}
+.impact-profile-run-toggle{
+  position:absolute;
+  top:0;
+  right:0;
+  z-index:3;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:6px;
+  max-width:100%;
+}
+.impact-profile-run-toggle__btn{
+  min-height:44px;
+  min-width:44px;
+  padding:0 12px;
+  border:1px solid var(--ink-3);
+  border-radius:999px;
+  background:transparent;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+  cursor:pointer;
+  transition:background 150ms ease, border-color 150ms ease, color 150ms ease, opacity 250ms ease;
+}
+.impact-profile-run-toggle__btn:hover{
+  border-color:var(--ink-2);
+  color:var(--ink-0);
+}
+.impact-profile-run-toggle__btn.is-active{
+  color:var(--ink-0);
+  border-color:var(--ink-2);
+  background:rgba(255,255,255,0.04);
+}
+.impact-profile-run-toggle__btn.is-active[data-run="run01"]{
+  color:var(--rev);
+  border-color:var(--rev);
+  background:rgba(196,113,85,0.08);
+}
+.impact-profile-run-toggle__btn.is-active[data-run="run02"]{
+  color:var(--teal);
+  border-color:var(--teal);
+  background:rgba(29,207,170,0.08);
 }
 .impact-profile__graph{
   position:relative;
   width:100%; aspect-ratio:1000 / 460;
   min-height:320px;
+  padding-top:52px;
 }
 .impact-profile__graph svg{ width:100%; height:100%; overflow:visible; display:block; }
 
@@ -579,6 +635,93 @@ body:has(.impact-console) {
 .impact-p2 .dim-sub{
   font-family:var(--mono); font-size:10px; letter-spacing:0.14em;
   fill:var(--ink-2); text-transform:uppercase;
+}
+
+/* Run isolation toggle — default BOTH hides overlapping annotations */
+.impact-profile[data-run-view="both"] .impact-p2 .restart,
+.impact-profile[data-run-view="both"] .impact-p2 .preserve,
+.impact-profile[data-run-view="both"] .impact-p2 .restart-line,
+.impact-profile[data-run-view="both"] .impact-p2 .preserve-line{
+  opacity:0 !important;
+  visibility:hidden;
+  animation:none !important;
+}
+.impact-profile[data-run-view="run01"] .impact-p2 .curve-after,
+.impact-profile[data-run-view="run01"] .impact-p2 .curve-before-shade,
+.impact-profile[data-run-view="run01"] .impact-p2 .lane-after,
+.impact-profile[data-run-view="run01"] .impact-p2 .endpoint.after,
+.impact-profile[data-run-view="run01"] .impact-p2 .stamp-box.after,
+.impact-profile[data-run-view="run01"] .impact-p2 .stamp.after,
+.impact-profile[data-run-view="run01"] .impact-p2 .preserve,
+.impact-profile[data-run-view="run01"] .impact-p2 .preserve-line{
+  opacity:0.25;
+}
+.impact-profile[data-run-view="run01"] .impact-p2 .restart,
+.impact-profile[data-run-view="run01"] .impact-p2 .restart-line{
+  opacity:1 !important;
+  visibility:visible;
+}
+.impact-profile[data-run-view="run01"] .impact-p2 .stamp.before,
+.impact-profile[data-run-view="run01"] .impact-p2 .stamp-box.before{
+  opacity:1;
+}
+.impact-profile[data-run-view="run01"] .impact-p2 .stamp.after,
+.impact-profile[data-run-view="run01"] .impact-p2 .stamp-box.after{
+  opacity:0.25;
+}
+.impact-profile[data-run-view="run02"] .impact-p2 .curve-before,
+.impact-profile[data-run-view="run02"] .impact-p2 .curve-before-shade,
+.impact-profile[data-run-view="run02"] .impact-p2 .lane-before,
+.impact-profile[data-run-view="run02"] .impact-p2 .endpoint.before,
+.impact-profile[data-run-view="run02"] .impact-p2 .stamp-box.before,
+.impact-profile[data-run-view="run02"] .impact-p2 .stamp.before,
+.impact-profile[data-run-view="run02"] .impact-p2 .restart,
+.impact-profile[data-run-view="run02"] .impact-p2 .restart-line{
+  opacity:0.25;
+}
+.impact-profile[data-run-view="run02"] .impact-p2 .preserve,
+.impact-profile[data-run-view="run02"] .impact-p2 .preserve-line{
+  opacity:1 !important;
+  visibility:visible;
+}
+.impact-profile[data-run-view="run02"] .impact-p2 .stamp.after,
+.impact-profile[data-run-view="run02"] .impact-p2 .stamp-box.after{
+  opacity:1;
+}
+.impact-profile[data-run-view="run02"] .impact-p2 .stamp.before,
+.impact-profile[data-run-view="run02"] .impact-p2 .stamp-box.before{
+  opacity:0.25;
+}
+.impact-profile .impact-p2 .curve-before,
+.impact-profile .impact-p2 .curve-after,
+.impact-profile .impact-p2 .curve-before-shade,
+.impact-profile .impact-p2 .lane-before,
+.impact-profile .impact-p2 .lane-after,
+.impact-profile .impact-p2 .restart,
+.impact-profile .impact-p2 .preserve,
+.impact-profile .impact-p2 .restart-line,
+.impact-profile .impact-p2 .preserve-line,
+.impact-profile .impact-p2 .stamp,
+.impact-profile .impact-p2 .stamp-box,
+.impact-profile .impact-p2 .endpoint{
+  transition:opacity 250ms ease, visibility 150ms ease;
+}
+@media (prefers-reduced-motion: reduce){
+  .impact-profile .impact-p2 .curve-before,
+  .impact-profile .impact-p2 .curve-after,
+  .impact-profile .impact-p2 .curve-before-shade,
+  .impact-profile .impact-p2 .lane-before,
+  .impact-profile .impact-p2 .lane-after,
+  .impact-profile .impact-p2 .restart,
+  .impact-profile .impact-p2 .preserve,
+  .impact-profile .impact-p2 .restart-line,
+  .impact-profile .impact-p2 .preserve-line,
+  .impact-profile .impact-p2 .stamp,
+  .impact-profile .impact-p2 .stamp-box,
+  .impact-profile .impact-p2 .endpoint,
+  .impact-profile-run-toggle__btn{
+    transition:none !important;
+  }
 }
 
 /* Animated states: draw stroke on enter */
@@ -735,14 +878,12 @@ body:has(.impact-console) {
 }
 .map-stage{
   position:relative;
-  border:1px solid var(--rule);
-  background:
-    radial-gradient(circle at 50% 55%, rgba(29,207,170,0.04), transparent 65%),
-    var(--plate);
-  padding:20px;
+  border:none;
+  background:transparent;
+  padding:0;
   aspect-ratio:1 / 1.05;
   max-height:80vh;
-  overflow:hidden;
+  overflow:visible;
 }
 .map-stage svg{ width:100%; height:100%; overflow:visible; display:block; }
 
@@ -1044,32 +1185,54 @@ body:has(.impact-console) {
   margin-top:20px;
   padding-top:14px;
   border-top:1px dashed var(--rule);
-  max-height:40px;
 }
 .impact-customer-scale__bar{
-  display:flex;
+  display:block;
   height:6px;
-  gap:2px;
   background:var(--ink-4);
 }
-.impact-customer-scale__seg{
+.impact-customer-scale__fill{
   display:block;
+  width:100%;
   height:100%;
   background:var(--teal);
   opacity:0.55;
 }
 .impact-customer-scale__labels{
-  display:flex;
-  justify-content:space-between;
-  margin-top:8px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:12px;
+}
+.impact-customer-scale__item:first-child{ text-align:left; }
+.impact-customer-scale__item:nth-child(2){ text-align:center; }
+.impact-customer-scale__item:last-child{ text-align:right; }
+.impact-customer-scale__stage{
+  display:block;
+  font-size:24px;
+  font-weight:500;
+  letter-spacing:-0.015em;
+  color:var(--ink-0);
+  line-height:1;
+}
+.impact-customer-scale__name{
+  display:block;
+  margin-top:4px;
   font-family:var(--mono);
   font-size:10px;
-  letter-spacing:0.12em;
+  letter-spacing:0.14em;
   text-transform:uppercase;
   color:var(--ink-2);
 }
-.impact-customer-scale__value{ color:var(--ink-0); display:block; }
-.impact-customer-scale__tier{ display:block; margin-top:2px; }
+.impact-customer-scale__date{
+  display:block;
+  margin-top:2px;
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+}
 
 .impact-drawing-notes{
   grid-column:1 / -1;

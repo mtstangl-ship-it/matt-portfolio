@@ -19,6 +19,14 @@ function getOrient(): GraphOrient {
   return "horizontal";
 }
 
+type RunView = "both" | "run01" | "run02";
+
+const RUN_TOGGLE: { id: RunView; label: string }[] = [
+  { id: "both", label: "BOTH" },
+  { id: "run01", label: "RUN 01" },
+  { id: "run02", label: "RUN 02" },
+];
+
 export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
   const profileRef = useRef<HTMLDivElement>(null);
   const graphHostRef = useRef<HTMLDivElement>(null);
@@ -26,6 +34,7 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
   const [isAnim, setIsAnim] = useState(false);
   const [profileFired, setProfileFired] = useState(false);
   const [popover, setPopover] = useState<string | null>(null);
+  const [runView, setRunView] = useState<RunView>("both");
   const reduceMotion =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -141,14 +150,35 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
         ref={profileRef}
         className={`impact-profile impact-p2${isAnim && !reduceMotion ? " is-anim" : ""}`}
         id="profile"
+        data-run-view={runView}
       >
         <span className="impact-profile__corner">SHEET 02-A · NORMALIZED</span>
-        <div
-          ref={graphHostRef}
-          className="impact-profile__graph"
-          id="profileGraph"
-          data-orient="horizontal"
-        />
+        <div className="impact-profile__graph-wrap">
+          <div
+            className="impact-profile-run-toggle"
+            role="group"
+            aria-label="Stress curve run isolation"
+          >
+            {RUN_TOGGLE.map(({ id, label }) => (
+              <button
+                key={id}
+                type="button"
+                className={`impact-profile-run-toggle__btn${runView === id ? " is-active" : ""}`}
+                data-run={id}
+                aria-pressed={runView === id}
+                onClick={() => setRunView(id)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <div
+            ref={graphHostRef}
+            className="impact-profile__graph"
+            id="profileGraph"
+            data-orient="horizontal"
+          />
+        </div>
         {popover && orient === "tablet" ? (
           <div className="impact-profile-popover" role="dialog" aria-live="polite">
             {PROFILE_ANNOTATION_LABELS[popover]}

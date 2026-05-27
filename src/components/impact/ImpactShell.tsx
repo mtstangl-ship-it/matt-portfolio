@@ -191,7 +191,15 @@ export function ImpactShell() {
           <MetricStrip>
             <MetricCell value={<>+27<span className="u">%</span></>} label="Revenue lift · Q1 post-launch" />
             <MetricCell value={<>106<span className="u">%</span></>} label="NRR path" />
-            <MetricCell value={<>75<span className="u">%+</span></>} label="Business Plan renewal · Q1" />
+            <MetricCell
+              value={
+                <>
+                  0 <span className="arr" aria-hidden>→</span> 1{" "}
+                  <span className="arr" aria-hidden>→</span> 2
+                </>
+              }
+              label="BUILD · LAUNCH · SCALE"
+            />
           </MetricStrip>
 
           <SectionBreak

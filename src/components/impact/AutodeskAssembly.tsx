@@ -60,10 +60,10 @@ const TIERS: TierConfig[] = [
   },
 ];
 
-const SCALE_SEGMENTS = [
-  { label: "T01", value: "950", logPct: 8 },
-  { label: "T02", value: "25K+", logPct: 28 },
-  { label: "T03", value: "1M+", logPct: 100 },
+const TIMELINE_ANCHORS = [
+  { stage: "0", name: "BUILD", date: "JAN 2025" },
+  { stage: "1", name: "LAUNCH", date: "JUL 2025" },
+  { stage: "2", name: "SCALE", date: "DEC 2025" },
 ] as const;
 
 function servicesForTier(tier: TierId, side: "L" | "R"): AutodeskService[] {
@@ -350,21 +350,16 @@ export function AutodeskAssembly() {
         })}
       </div>
 
-      <div className="impact-customer-scale" aria-label="Customer scale by tier">
+      <div className="impact-customer-scale" aria-label="12-month program timeline">
         <div className="impact-customer-scale__bar">
-          {SCALE_SEGMENTS.map((seg) => (
-            <span
-              key={seg.label}
-              className="impact-customer-scale__seg"
-              style={{ width: `${seg.logPct}%` }}
-            />
-          ))}
+          <span className="impact-customer-scale__fill" aria-hidden />
         </div>
         <div className="impact-customer-scale__labels">
-          {SCALE_SEGMENTS.map((seg) => (
-            <div key={seg.label} className="impact-customer-scale__item">
-              <span className="impact-customer-scale__value">{seg.value}</span>
-              <span className="impact-customer-scale__tier">{seg.label}</span>
+          {TIMELINE_ANCHORS.map((anchor) => (
+            <div key={anchor.stage} className="impact-customer-scale__item">
+              <span className="impact-customer-scale__stage">{anchor.stage}</span>
+              <span className="impact-customer-scale__name">{anchor.name}</span>
+              <span className="impact-customer-scale__date">{anchor.date}</span>
             </div>
           ))}
         </div>
