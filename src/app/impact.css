@@ -1616,6 +1616,7 @@ body:has(.impact-console) {
 .impact-tier-ladder__panel-body{
   display:grid;
   grid-template-columns:1fr 280px;
+  grid-template-rows:auto 1fr;
   gap:0;
   min-height:620px;
 }
@@ -1624,8 +1625,26 @@ body:has(.impact-console) {
   display:grid;
   place-items:center;
   padding:24px;
+  grid-column:1;
+  grid-row:1 / -1;
+  align-self:center;
+}
+.impact-tier-ladder__reveal{
+  grid-column:2;
+  grid-row:1;
+  min-height:80px;
+  padding:14px 22px;
+  border-bottom:1px solid var(--ink-4);
+  background:var(--bg-soft);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:0;
+  transition:opacity 200ms ease;
 }
 .impact-tier-ladder__stamps{
+  grid-column:2;
+  grid-row:2;
   border-left:1px solid var(--ink-4);
   padding:24px 22px;
   display:grid;
@@ -1880,17 +1899,6 @@ body:has(.impact-console) {
     linear-gradient(var(--teal), var(--teal)) center/1px 100% no-repeat;
 }
 
-.impact-tier-ladder__reveal{
-  min-height:80px;
-  padding:14px 22px;
-  border-top:1px solid var(--ink-4);
-  background:var(--bg-soft);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:0;
-  transition:opacity 200ms ease;
-}
 .impact-tier-ladder__reveal.is-pinned{
   gap:8px;
 }
@@ -1941,11 +1949,21 @@ body:has(.impact-console) {
   letter-spacing:-0.005em;
 }
 .impact-tier-ladder__reveal-line1 .cls{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
   font-family:var(--mono);
   font-size:10px;
   letter-spacing:0.14em;
   color:var(--ink-1);
   text-transform:uppercase;
+}
+.impact-tier-ladder__reveal-line1 .cls svg{
+  width:14px;
+  height:14px;
+  display:block;
+  color:var(--teal);
+  flex-shrink:0;
 }
 .impact-tier-ladder__reveal-line2{
   margin:0;
@@ -1996,9 +2014,20 @@ body:has(.impact-console) {
   }
   .impact-tier-ladder__panel-body{
     grid-template-columns:1fr;
+    grid-template-rows:auto auto auto;
     min-height:0;
   }
+  .impact-tier-ladder__stage{
+    grid-column:1;
+    grid-row:1;
+  }
+  .impact-tier-ladder__reveal{
+    grid-column:1;
+    grid-row:2;
+  }
   .impact-tier-ladder__stamps{
+    grid-column:1;
+    grid-row:3;
     border-left:none;
     border-top:1px solid var(--ink-4);
   }

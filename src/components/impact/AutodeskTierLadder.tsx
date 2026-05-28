@@ -10,12 +10,13 @@ import {
 } from "react";
 import { getServiceByPartNumber } from "@/content/impact-autodesk-services";
 import {
-  classificationGlyph,
   CLS_LABEL,
   DOT_LAYOUTS,
   formatServiceName,
   MATH_CALLOUT,
+  nativeTierFromPartNumber,
   OWNS,
+  RING_LABELS,
   RING_R,
   serviceAttribution,
   TIER_STAMPS,
@@ -23,7 +24,7 @@ import {
   type TierId,
 } from "./autodesk-tier-ladder-geometry";
 
-function LegendSwatch({ kind }: { kind: ClsKey }) {
+function ClassificationSwatch({ kind }: { kind: ClsKey }) {
   if (kind === "inn") {
     return (
       <svg viewBox="-9 -9 18 18" aria-hidden>
@@ -110,7 +111,8 @@ export function AutodeskTierLadder() {
 
   const revealAttribution = useMemo(() => {
     if (!pinned) return null;
-    return serviceAttribution(activeTier, pinned.tier);
+    const nativeTier = nativeTierFromPartNumber(pinned.partNumber);
+    return serviceAttribution(activeTier, nativeTier);
   }, [pinned, activeTier]);
 
   return (
@@ -177,13 +179,13 @@ export function AutodeskTierLadder() {
           </div>
           <div className="legend" aria-label="Classification legend">
             <span className="sw">
-              <LegendSwatch kind="inn" /> INNOVATED
+              <ClassificationSwatch kind="inn" /> INNOVATED
             </span>
             <span className="sw">
-              <LegendSwatch kind="opt" /> OPTIMIZED
+              <ClassificationSwatch kind="opt" /> OPTIMIZED
             </span>
             <span className="sw">
-              <LegendSwatch kind="rfn" /> REFINED
+              <ClassificationSwatch kind="rfn" /> REFINED
             </span>
           </div>
         </div>
@@ -242,7 +244,7 @@ export function AutodeskTierLadder() {
                 y="-220"
                 textAnchor="middle"
               >
-                T01 · OUTER · +6 ADDED
+                {RING_LABELS["01"]}
               </text>
               <text
                 className={`ring-lbl${litTiers.has("02") ? " lit" : ""}`}
@@ -250,7 +252,7 @@ export function AutodeskTierLadder() {
                 y="-150"
                 textAnchor="middle"
               >
-                T02 · MIDDLE · +4 ADDED
+                {RING_LABELS["02"]}
               </text>
               <text
                 className={`ring-lbl${litTiers.has("03") ? " lit" : ""}`}
@@ -258,7 +260,7 @@ export function AutodeskTierLadder() {
                 y="-80"
                 textAnchor="middle"
               >
-                T03 · INNER · +5 ADDED
+                {RING_LABELS["03"]}
               </text>
 
               <g className="dot-wedges">
@@ -333,6 +335,34 @@ export function AutodeskTierLadder() {
             </svg>
           </div>
 
+          <div
+            className={`impact-tier-ladder__reveal${pinned ? " is-pinned" : ""}${motionClass}`}
+            aria-live="polite"
+          >
+            {!pinned ? (
+              <p className="impact-tier-ladder__reveal-placeholder">
+                <span className="crosshair" aria-hidden>
+                  +
+                </span>
+                ↓ TAP ANY NODE FOR SERVICE DETAIL
+              </p>
+            ) : pinned && revealAttribution ? (
+              <>
+                <p className="impact-tier-ladder__reveal-line1">
+                  <span className="pn">{pinned.partNumber}</span>
+                  <span className="sep"> · </span>
+                  <span className="nm">{formatServiceName(pinned.name)}</span>
+                  <span className="sep"> · </span>
+                  <span className="cls">
+                    <ClassificationSwatch kind={clsKeyFromClassification(pinned.classification)} />
+                    {CLS_LABEL[clsKeyFromClassification(pinned.classification)]}
+                  </span>
+                </p>
+                <p className="impact-tier-ladder__reveal-line2">{revealAttribution}</p>
+              </>
+            ) : null}
+          </div>
+
           <aside className="impact-tier-ladder__stamps">
             {TIER_STAMPS.map((stamp, i) => (
               <button
@@ -360,34 +390,6 @@ export function AutodeskTierLadder() {
               </button>
             ))}
           </aside>
-        </div>
-
-        <div
-          className={`impact-tier-ladder__reveal${pinned ? " is-pinned" : ""}${motionClass}`}
-          aria-live="polite"
-        >
-          {!pinned ? (
-            <p className="impact-tier-ladder__reveal-placeholder">
-              <span className="crosshair" aria-hidden>
-                +
-              </span>
-              ↓ TAP ANY NODE FOR SERVICE DETAIL
-            </p>
-          ) : pinned && revealAttribution ? (
-            <>
-              <p className="impact-tier-ladder__reveal-line1">
-                <span className="pn">{pinned.partNumber}</span>
-                <span className="sep"> · </span>
-                <span className="nm">{formatServiceName(pinned.name)}</span>
-                <span className="sep"> · </span>
-                <span className="cls">
-                  {classificationGlyph(clsKeyFromClassification(pinned.classification))}{" "}
-                  {CLS_LABEL[clsKeyFromClassification(pinned.classification)]}
-                </span>
-              </p>
-              <p className="impact-tier-ladder__reveal-line2">{revealAttribution}</p>
-            </>
-          ) : null}
         </div>
 
         <div className="impact-tier-ladder__panel-foot">

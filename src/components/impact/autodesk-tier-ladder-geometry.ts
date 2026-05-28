@@ -125,15 +125,27 @@ export function classificationGlyph(cls: ClsKey): string {
   return "○";
 }
 
+export function nativeTierFromPartNumber(partNumber: string): TierId {
+  const prefix = partNumber.slice(0, 2);
+  if (prefix === "01" || prefix === "02" || prefix === "03") return prefix;
+  return "03";
+}
+
 export function serviceAttribution(activeTier: TierId, serviceTier: TierId): string {
-  if (serviceTier === activeTier) return `T${activeTier} NATIVE`;
+  if (serviceTier === activeTier) return `T${serviceTier} NATIVE`;
   return `INHERITED FROM T${serviceTier}`;
 }
 
 export const MATH_CALLOUT: Record<TierId, string> = {
   "01": "T01 · OWNS 15 · ADDS 6 · INHERITS 9 FROM T02 · T03",
   "02": "T02 · OWNS 9 · ADDS 4 · INHERITS 5 FROM T03",
-  "03": "T03 · OWNS 5 · INHERITS NOTHING",
+  "03": "T03 · OWNS 5",
+};
+
+export const RING_LABELS: Record<TierId, string> = {
+  "01": "T01 · BUSINESS · +6 ADDED",
+  "02": "T02 · PROFESSIONAL · +4 ADDED",
+  "03": "T03 · INCLUDED · 5",
 };
 
 export const TIER_STAMPS: {
