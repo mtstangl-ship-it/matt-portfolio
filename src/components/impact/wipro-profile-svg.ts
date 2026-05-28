@@ -18,27 +18,21 @@ export const VERTICAL_RESOLUTION = {
 
 function deltaSpanHorizontal(): string {
   const { before, after } = HORIZONTAL_RESOLUTION;
-  const mx = Math.round((before.x + after.x) / 2);
-  const my = Math.round((before.y + after.y) / 2) - 14;
   return `
   <g class="delta-span">
     <line class="delta-span-line" x1="${after.x}" y1="${after.y}" x2="${before.x}" y2="${before.y}"/>
     <line class="delta-span-tick" x1="${after.x}" y1="${after.y - 10}" x2="${after.x}" y2="${after.y + 10}"/>
     <line class="delta-span-tick" x1="${before.x}" y1="${before.y - 10}" x2="${before.x}" y2="${before.y + 10}"/>
-    <text class="delta-span-label" x="${mx}" y="${my}" text-anchor="middle">6.8 D → 4.7 D · −31% MTTR · ≈ 2.1 DAYS RETURNED PER CASE</text>
   </g>`;
 }
 
 function deltaSpanVertical(): string {
   const { before, after } = VERTICAL_RESOLUTION;
-  const mx = Math.round((before.x + after.x) / 2);
-  const my = Math.round((before.y + after.y) / 2);
   return `
   <g class="delta-span">
     <line class="delta-span-line" x1="${after.x}" y1="${after.y}" x2="${before.x}" y2="${before.y}"/>
     <line class="delta-span-tick" x1="${after.x - 10}" y1="${after.y}" x2="${after.x + 10}" y2="${after.y}"/>
     <line class="delta-span-tick" x1="${before.x - 10}" y1="${before.y}" x2="${before.x + 10}" y2="${before.y}"/>
-    <text class="delta-span-label delta-span-label--vertical" x="${mx}" y="${my + 28}" text-anchor="middle">6.8 D → 4.7 D · −31% MTTR · ≈ 2.1 DAYS RETURNED PER CASE</text>
   </g>`;
 }
 
@@ -148,7 +142,7 @@ export function buildVerticalSVG(compactLabels = false): string {
   <line class="axis" x1="60" y1="60" x2="440" y2="60"/>
 
   <text class="x-label x-label--calm" x="72"  y="48" text-anchor="start">↑ CALM</text>
-  <text class="x-label x-label--stress" x="420" y="48" text-anchor="end">DISTRESSED ↓</text>
+  <text class="x-label x-label--stress" x="420" y="48" text-anchor="end">DISTRESSED →</text>
   <text class="ax-label ax-label--time" x="22" y="500" text-anchor="middle" transform="rotate(-90 22 500)">TIME · DAYS POST-CASE-OPEN</text>
 
   <g class="day-tick">

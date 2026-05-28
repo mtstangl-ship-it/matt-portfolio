@@ -214,6 +214,12 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
             id="profileGraph"
             data-orient="horizontal"
           />
+          <p
+            className={`impact-profile-delta-caption${curveView === "delta" ? " is-visible" : ""}`}
+            aria-hidden={curveView !== "delta"}
+          >
+            6.8 D → 4.7 D · −31% MTTR · ≈ 2.1 DAYS RETURNED PER CASE
+          </p>
         </div>
 
         {popover && orient === "tablet" ? (

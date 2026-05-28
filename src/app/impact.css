@@ -550,6 +550,20 @@ body:has(.impact-console) {
 .impact-profile__graph-wrap{
   position:relative;
 }
+.impact-profile-delta-caption{
+  display:none;
+  margin:10px 0 0;
+  padding:10px 4px 2px;
+  border-top:1px solid var(--rule);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.1em;
+  line-height:1.55;
+  text-transform:uppercase;
+  color:var(--ink-1);
+  text-align:center;
+}
+.impact-profile-delta-caption.is-visible{ display:block; }
 .impact-profile-run-toggle{
   display:flex;
   flex-wrap:wrap;
@@ -650,13 +664,6 @@ body:has(.impact-console) {
 .impact-p2 .delta-span-tick{
   stroke:var(--ink-2);
   stroke-width:1.2;
-}
-.impact-p2 .delta-span-label{
-  font-family:var(--mono);
-  font-size:9px;
-  letter-spacing:0.1em;
-  fill:var(--ink-0);
-  text-transform:uppercase;
 }
 .impact-p2 .x-label,
 .impact-p2 .ax-label--time,
@@ -816,9 +823,10 @@ body:has(.impact-console) {
   .impact-profile__header .impact-profile-stamp{
     grid-row:3;
   }
-  .impact-p2 .delta-span-label{
-    font-size:7px;
-    letter-spacing:0.06em;
+  .impact-profile-delta-caption{
+    font-size:9px;
+    letter-spacing:0.08em;
+    padding-inline:6px;
   }
 }
 
