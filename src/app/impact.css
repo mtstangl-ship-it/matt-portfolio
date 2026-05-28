@@ -817,8 +817,8 @@ body:has(.impact-console) {
     grid-row:3;
   }
   .impact-p2 .delta-span-label{
-    font-size:8px;
-    letter-spacing:0.08em;
+    font-size:7px;
+    letter-spacing:0.06em;
   }
 }
 

@@ -31,14 +31,14 @@ function deltaSpanHorizontal(): string {
 
 function deltaSpanVertical(): string {
   const { before, after } = VERTICAL_RESOLUTION;
-  const mx = Math.round((before.x + after.x) / 2) + 18;
+  const mx = Math.round((before.x + after.x) / 2);
   const my = Math.round((before.y + after.y) / 2);
   return `
   <g class="delta-span">
     <line class="delta-span-line" x1="${after.x}" y1="${after.y}" x2="${before.x}" y2="${before.y}"/>
     <line class="delta-span-tick" x1="${after.x - 10}" y1="${after.y}" x2="${after.x + 10}" y2="${after.y}"/>
     <line class="delta-span-tick" x1="${before.x - 10}" y1="${before.y}" x2="${before.x + 10}" y2="${before.y}"/>
-    <text class="delta-span-label" x="${mx}" y="${my}" text-anchor="start" transform="rotate(90 ${mx} ${my})">6.8 D → 4.7 D · −31% MTTR · ≈ 2.1 DAYS RETURNED PER CASE</text>
+    <text class="delta-span-label delta-span-label--vertical" x="${mx}" y="${my + 28}" text-anchor="middle">6.8 D → 4.7 D · −31% MTTR · ≈ 2.1 DAYS RETURNED PER CASE</text>
   </g>`;
 }
 
