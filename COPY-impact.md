@@ -138,9 +138,9 @@ Kicker:  ↓ 12-MO ROLLOUT
 Title:   JAN → DEC 2025 · COMPLETE
 Fig:     FIG. 02-A · TIMELINE · SCENOGRAPHY
 Pegs:
-  JAN — T03 · IN MARKET · ALWAYS-ON
-  JUL — T01 · LAUNCH
-  DEC — T02 · LAUNCH · PROGRAM END
+  JAN — T03 · INCLUDED
+  JUL — T01 · BUSINESS
+  DEC — T02 · PROFESSIONAL
 ```
 
 **Ring panel (FIG. 02-B)**
@@ -163,10 +163,11 @@ Strategic intent (between name and meta):
   T02: Accelerated time-to-value for the mid-market via productized services and on-demand expertise.
   T03: Universal access to learning and self-serve resources at population scale.
 Dimension rule: Ø 480 · 15 SERVICES
-Reveal zone default: ↓ TAP ANY NODE FOR SERVICE DETAIL
-Reveal zone pinned: [part-no] · [SERVICE NAME] · [GLYPH CLASSIFICATION] / [T0X NATIVE | INHERITED FROM T0X]
-Panel foot hint: ↓ TAP A TIER FOR ITS SET · TAP A NODE FOR THE SERVICE
-Sheet stamp: SHEET · IMPACT · TIER LADDER · BUILD · V2026.05
+Reveal zone: blank default; pinned shows service detail
+Instruction hints:
+  Above reveal zone: ↓ TAP A NODE FOR THE SERVICE
+  Above tier stamps: ↓ TAP A TIER FOR ITS SET
+Panel foot: SHEET · IMPACT · TIER LADDER · BUILD · V2026.05 (sheet stamp only)
 ```
 
 **Tier 01 — Business (6 native services)**

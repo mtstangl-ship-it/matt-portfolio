@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
+  type ReactNode,
 } from "react";
 import { getServiceByPartNumber } from "@/content/impact-autodesk-services";
 import {
@@ -48,6 +49,17 @@ function ClassificationSwatch({ kind }: { kind: ClsKey }) {
     <svg viewBox="-9 -9 18 18" aria-hidden>
       <circle r="6" cx="0" cy="0" fill="none" stroke="currentColor" strokeWidth="1.2" />
     </svg>
+  );
+}
+
+function InstructionHint({ children, kind }: { children: ReactNode; kind: "node" | "tier" }) {
+  return (
+    <p className={`impact-tier-ladder__hint impact-tier-ladder__hint--${kind}`}>
+      <span className="crosshair" aria-hidden>
+        +
+      </span>
+      {children}
+    </p>
   );
 }
 
@@ -145,14 +157,14 @@ export function AutodeskTierLadder() {
             style={{ left: "0" }}
           >
             <span className="lbl">
-              <b>T03</b> · IN MARKET · ALWAYS-ON
+              <b>T03</b> · INCLUDED
             </span>
             <span className="dot dim" aria-hidden />
             <span className="when">JAN</span>
           </div>
           <div className="impact-tier-ladder__launch-event" style={{ left: "50%" }}>
             <span className="lbl">
-              <b>T01</b> · LAUNCH
+              <b>T01</b> · BUSINESS
             </span>
             <span className="dot" aria-hidden />
             <span className="when acc">JUL</span>
@@ -162,7 +174,7 @@ export function AutodeskTierLadder() {
             style={{ left: "100%" }}
           >
             <span className="lbl">
-              <b>T02</b> · LAUNCH · PROGRAM END
+              <b>T02</b> · PROFESSIONAL
             </span>
             <span className="dot dim" aria-hidden />
             <span className="when">DEC</span>
@@ -360,18 +372,13 @@ export function AutodeskTierLadder() {
             </svg>
           </div>
 
+          <InstructionHint kind="node">↓ TAP A NODE FOR THE SERVICE</InstructionHint>
+
           <div
             className={`impact-tier-ladder__reveal${pinned ? " is-pinned" : ""}${motionClass}`}
             aria-live="polite"
           >
-            {!pinned ? (
-              <p className="impact-tier-ladder__reveal-placeholder">
-                <span className="crosshair" aria-hidden>
-                  +
-                </span>
-                ↓ TAP ANY NODE FOR SERVICE DETAIL
-              </p>
-            ) : pinned && revealAttribution ? (
+            {pinned && revealAttribution ? (
               <>
                 <p className="impact-tier-ladder__reveal-line1">
                   <span className="pn">{pinned.partNumber}</span>
@@ -387,6 +394,8 @@ export function AutodeskTierLadder() {
               </>
             ) : null}
           </div>
+
+          <InstructionHint kind="tier">↓ TAP A TIER FOR ITS SET</InstructionHint>
 
           <aside className="impact-tier-ladder__stamps">
             {TIER_STAMPS.map((stamp, i) => (
@@ -419,7 +428,6 @@ export function AutodeskTierLadder() {
         </div>
 
         <div className="impact-tier-ladder__panel-foot">
-          <span className="hint">↓ TAP A TIER FOR ITS SET · TAP A NODE FOR THE SERVICE</span>
           <span className="sheet">
             <b>SHEET</b> · IMPACT · TIER LADDER · BUILD · V2026.05
           </span>

@@ -1402,11 +1402,6 @@ body:has(.impact-console) {
 /* ============================================================
    TIER LADDER — Autodesk cumulative inheritance (FIG. 02)
    ============================================================ */
-.impact-tier-ladder .impact-customer-scale{
-  margin-top:28px;
-  padding-top:14px;
-  border-top:1px solid var(--ink-4);
-}
 
 .impact-tier-ladder__launch{
   margin-top:28px;
@@ -1616,7 +1611,7 @@ body:has(.impact-console) {
 .impact-tier-ladder__panel-body{
   display:grid;
   grid-template-columns:1fr 280px;
-  grid-template-rows:auto 1fr;
+  grid-template-rows:auto auto auto auto;
   gap:0;
   min-height:620px;
 }
@@ -1629,12 +1624,36 @@ body:has(.impact-console) {
   grid-row:1 / -1;
   align-self:center;
 }
-.impact-tier-ladder__reveal{
+.impact-tier-ladder__hint{
+  margin:0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.18em;
+  color:var(--ink-3);
+  text-transform:uppercase;
+}
+.impact-tier-ladder__hint .crosshair{
+  font-size:12px;
+  line-height:1;
+  color:var(--ink-2);
+}
+.impact-tier-ladder__hint--node{
   grid-column:2;
   grid-row:1;
+  padding:14px 22px 0;
+  border-left:1px solid var(--ink-4);
+}
+.impact-tier-ladder__reveal{
+  grid-column:2;
+  grid-row:2;
   min-height:80px;
   padding:14px 22px;
+  border-top:1px solid var(--ink-4);
   border-bottom:1px solid var(--ink-4);
+  border-left:1px solid var(--ink-4);
   background:var(--bg-soft);
   display:flex;
   flex-direction:column;
@@ -1642,11 +1661,17 @@ body:has(.impact-console) {
   gap:0;
   transition:opacity 200ms ease;
 }
+.impact-tier-ladder__hint--tier{
+  grid-column:2;
+  grid-row:3;
+  padding:14px 22px 0;
+  border-left:1px solid var(--ink-4);
+}
 .impact-tier-ladder__stamps{
   grid-column:2;
-  grid-row:2;
+  grid-row:4;
   border-left:1px solid var(--ink-4);
-  padding:24px 22px;
+  padding:14px 22px 24px;
   display:grid;
   gap:14px;
   align-content:start;
@@ -1930,22 +1955,6 @@ body:has(.impact-console) {
 .impact-tier-ladder__reveal.is-reduced{
   transition:none;
 }
-.impact-tier-ladder__reveal-placeholder{
-  margin:0;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:0.18em;
-  color:var(--ink-3);
-  text-transform:uppercase;
-}
-.impact-tier-ladder__reveal-placeholder .crosshair{
-  font-size:12px;
-  line-height:1;
-  color:var(--ink-2);
-}
 .impact-tier-ladder__reveal-line1{
   margin:0;
   display:flex;
@@ -2003,9 +2012,8 @@ body:has(.impact-console) {
 
 .impact-tier-ladder__panel-foot{
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-end;
   align-items:center;
-  gap:16px;
   padding:12px 22px;
   border-top:1px solid var(--ink-4);
   font-family:var(--mono);
@@ -2013,9 +2021,6 @@ body:has(.impact-console) {
   letter-spacing:0.22em;
   color:var(--ink-3);
   text-transform:uppercase;
-}
-.impact-tier-ladder__panel-foot .hint{
-  color:var(--ink-2);
 }
 .impact-tier-ladder__panel-foot .sheet b{
   color:var(--ink-1);
@@ -2039,22 +2044,36 @@ body:has(.impact-console) {
   }
   .impact-tier-ladder__panel-body{
     grid-template-columns:1fr;
-    grid-template-rows:auto auto auto;
+    grid-template-rows:auto auto auto auto auto;
     min-height:0;
   }
   .impact-tier-ladder__stage{
     grid-column:1;
     grid-row:1;
   }
-  .impact-tier-ladder__reveal{
+  .impact-tier-ladder__hint--node{
     grid-column:1;
     grid-row:2;
+    border-left:none;
+    padding:14px 22px 0;
   }
-  .impact-tier-ladder__stamps{
+  .impact-tier-ladder__reveal{
     grid-column:1;
     grid-row:3;
     border-left:none;
+  }
+  .impact-tier-ladder__hint--tier{
+    grid-column:1;
+    grid-row:4;
+    border-left:none;
+    padding:14px 22px 0;
+  }
+  .impact-tier-ladder__stamps{
+    grid-column:1;
+    grid-row:5;
+    border-left:none;
     border-top:1px solid var(--ink-4);
+    padding:14px 22px 24px;
   }
 }
 @media (max-width:640px){
