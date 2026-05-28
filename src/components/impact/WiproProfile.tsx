@@ -173,8 +173,8 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
         data-curve-view={curveView}
         data-orient-layout={isVertical ? "vertical" : "horizontal"}
       >
-        <span className="impact-profile__corner">SHEET 02-A · NORMALIZED</span>
-        <div className="impact-profile__graph-wrap">
+        <div className="impact-profile__header">
+          <span className="impact-profile__corner">SHEET 02-A · NORMALIZED</span>
           <div
             className="impact-profile-run-toggle"
             role="group"
@@ -193,40 +193,27 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
               </button>
             ))}
           </div>
+          <p
+            className={`impact-profile-stamp impact-profile-stamp--before${curveView === "before" ? " is-visible" : ""}`}
+            aria-live="polite"
+          >
+            BEFORE · LEGACY · 6.8 DAYS
+          </p>
+          <p
+            className={`impact-profile-stamp impact-profile-stamp--after${curveView === "after" ? " is-visible" : ""}`}
+            aria-live="polite"
+          >
+            AFTER · REDESIGN · 4.7 DAYS
+          </p>
+        </div>
 
-          <div className="impact-profile-stamps" aria-live="polite">
-            <p
-              className={`impact-profile-stamp impact-profile-stamp--before${curveView === "before" ? " is-visible" : ""}`}
-            >
-              BEFORE · LEGACY · 6.8 DAYS
-            </p>
-            <p
-              className={`impact-profile-stamp impact-profile-stamp--after${curveView === "after" ? " is-visible" : ""}`}
-            >
-              AFTER · REDESIGN · 4.7 DAYS
-            </p>
-          </div>
-
+        <div className="impact-profile__graph-wrap">
           <div
             ref={graphHostRef}
             className="impact-profile__graph"
             id="profileGraph"
             data-orient="horizontal"
           />
-
-          <div
-            className={`impact-profile-delta${curveView === "delta" ? " is-visible" : ""}`}
-            aria-hidden={curveView !== "delta"}
-          >
-            <div className="impact-profile-delta__span" aria-hidden>
-              <span className="impact-profile-delta__tick impact-profile-delta__tick--after" />
-              <span className="impact-profile-delta__line" />
-              <span className="impact-profile-delta__tick impact-profile-delta__tick--before" />
-            </div>
-            <p className="impact-profile-delta__label">
-              6.8 D → 4.7 D · −31% MTTR · ≈ 2.1 DAYS RETURNED PER CASE
-            </p>
-          </div>
         </div>
 
         {popover && orient === "tablet" ? (
