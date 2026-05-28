@@ -205,13 +205,13 @@ export function ImpactShell() {
           <SectionBreak
             label={
               <>
-                <span className="arrow">↓</span> The three-tier service ladder · Tap a tier to open
+                <span className="arrow">↓</span> THE THREE-TIER SERVICE LADDER · TAP A TIER TO LIGHT
+                ITS SET
               </>
             }
             meta={
               <>
-                <span>FIG. 01-A · Assembly</span>
-                <span>Exploded view</span>
+                <span>FIG. 02 · TIER LADDER · CUMULATIVE INHERITANCE</span>
               </>
             }
           />

@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tier Ladder · Build · Impact / Autodesk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<template id="__bundler_thumbnail" data-bg-color="#0a0f0e">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(600,400)">
+      <circle r="300" fill="none" stroke="#2dd4b2" stroke-width="2" stroke-dasharray="6 8" opacity="0.85"/>
+      <circle r="200" fill="none" stroke="#2dd4b2" stroke-width="2" stroke-dasharray="6 8" opacity="0.7"/>
+      <circle r="100" fill="none" stroke="#1d8c75" stroke-width="2" stroke-dasharray="6 8" opacity="0.6"/>
+      <!-- T03 inner 5 -->
+      <circle cx="59" cy="-81" r="12" fill="#2dd4b2"/>
+      <circle cx="95" cy="31" r="12" fill="#2dd4b2"/>
+      <circle cx="0" cy="100" r="12" fill="none" stroke="#2dd4b2" stroke-width="2"/>
+      <circle cx="-95" cy="31" r="12" fill="none" stroke="#2dd4b2" stroke-width="2"/>
+      <circle cx="-59" cy="-81" r="12" fill="#2dd4b2"/>
+      <!-- T02 middle 4 -->
+      <circle cx="141" cy="141" r="12" fill="#2dd4b2"/>
+      <circle cx="-141" cy="141" r="12" fill="#2dd4b2"/>
+      <circle cx="-141" cy="-141" r="12" fill="none" stroke="#2dd4b2" stroke-width="2"/>
+      <circle cx="141" cy="-141" r="12" fill="#2dd4b2"/>
+      <!-- T01 outer 6 -->
+      <circle cx="260" cy="150" r="12" fill="#2dd4b2"/>
+      <circle cx="0" cy="300" r="12" fill="#2dd4b2"/>
+      <circle cx="-260" cy="150" r="12" fill="#2dd4b2"/>
+      <circle cx="-260" cy="-150" r="12" fill="none" stroke="#2dd4b2" stroke-width="2"/>
+      <circle cx="0" cy="-300" r="12" fill="#2dd4b2"/>
+      <circle cx="260" cy="-150" r="12" fill="none" stroke="#2dd4b2" stroke-width="2"/>
+    </g>
+    <text x="600" y="412" text-anchor="middle" fill="#6f7d78" font-family="monospace" font-size="22" letter-spacing="4">FIG. 02-B</text>
+  </svg>
+</template>
+<style>
+/* ============================================================
+   TOKENS — fiche register, Impact (Build).html lineage
+   ============================================================ */
+:root{
+  --bg:        #0a0f0e;
+  --bg-soft:   #0d1413;
+  --plate:     #0e1716;
+  --plate-2:   #11201d;
+  --ink-0:     #e8efec;
+  --ink-1:     #b6c2bd;
+  --ink-2:     #6f7d78;
+  --ink-3:     #3a4744;
+  --ink-4:     #1d2624;
+  --rule:      #1a2422;
+  --teal:      #2dd4b2;
+  --teal-dim:  #1d8c75;
+  --teal-low:  rgba(45,212,178,0.22);
+  --teal-vlow: rgba(45,212,178,0.08);
+  --rev:       #c47155;
+  --sans:      "Helvetica Neue","Helvetica",system-ui,-apple-system,sans-serif;
+  --mono:      "IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
+  --gutter:    clamp(20px, 4vw, 56px);
+  --maxw:      1280px;
+}
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; background:var(--bg); color:var(--ink-0); }
+body{
+  font-family:var(--sans); font-weight:400;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  line-height:1.5; letter-spacing:-0.005em;
+}
+::selection{ background:rgba(45,212,178,0.3); color:var(--ink-0); }
+
+.page{ max-width:var(--maxw); margin:0 auto; padding:36px var(--gutter) 56px; }
+
+/* ============================================================
+   SECTION BREAK
+   ============================================================ */
+.section-break{
+  display:flex; justify-content:space-between; align-items:baseline; gap:24px;
+  padding:14px 0;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-1);
+}
+.section-break .arr{ color:var(--teal); margin-right:8px; }
+.section-break .meta{ color:var(--ink-2); }
+.section-break .meta b{ color:var(--ink-0); font-weight:500; }
+
+/* ============================================================
+   LAUNCH STRIP — scenography, pinned above rings, subordinate
+   ============================================================ */
+.launch{
+  margin-top:28px;
+  padding:22px 28px 26px;
+  border:1px solid var(--ink-4);
+  background:var(--bg-soft);
+  display:grid;
+  grid-template-columns: 168px 1fr;
+  gap:32px;
+  align-items:center;
+  position:relative;
+}
+.launch__eyebrow{
+  display:grid; gap:6px;
+  font-family:var(--mono); text-transform:uppercase;
+}
+.launch__eyebrow .kicker{
+  font-size:10px; letter-spacing:0.22em; color:var(--ink-2);
+}
+.launch__eyebrow .title{
+  font-size:13px; letter-spacing:0.16em; color:var(--ink-1);
+}
+.launch__eyebrow .title b{ color:var(--ink-0); font-weight:500; }
+.launch__eyebrow .fig{
+  font-size:9px; letter-spacing:0.22em; color:var(--ink-3);
+  padding-top:6px; border-top:1px solid var(--ink-4);
+}
+
+.launch__axis{
+  position:relative;
+  height:84px;
+  padding:14px 12px 18px;
+}
+/* the time rule */
+.launch__rule{
+  position:absolute; top:50%; left:12px; right:12px;
+  height:1px; background:var(--ink-3);
+  transform:translateY(-50%);
+}
+/* tick marks under the rule for each visible label */
+.launch__tick{
+  position:absolute; top:50%; width:1px; height:10px;
+  background:var(--ink-2);
+  transform:translateY(-50%);
+}
+/* the always-on T03 underbar */
+.launch__always{
+  position:absolute; top:calc(50% + 8px); left:12px; right:12px;
+  height:2px;
+  background:var(--teal-dim);
+}
+/* T01 in-market range */
+.launch__t01range{
+  position:absolute; top:calc(50% - 10px);
+  height:2px; background:var(--teal);
+}
+/* event markers */
+.launch__event{
+  position:absolute; top:50%;
+  transform:translate(-50%, -50%);
+  display:grid; justify-items:center; gap:4px;
+  font-family:var(--mono); text-transform:uppercase;
+  z-index:2;
+}
+.launch__event .dot{
+  width:9px; height:9px; background:var(--teal); border-radius:50%;
+  box-shadow: 0 0 0 4px rgba(45,212,178,0.18);
+}
+.launch__event .dot.dim{
+  background:var(--teal-dim); box-shadow: 0 0 0 3px rgba(29,140,117,0.16);
+}
+.launch__event .lbl{
+  position:absolute; top:-32px;
+  left:50%; transform:translateX(-50%);
+  font-size:10px; letter-spacing:0.18em; color:var(--ink-1); white-space:nowrap;
+}
+.launch__event .lbl b{ color:var(--ink-0); font-weight:500; }
+.launch__event .when{
+  position:absolute; bottom:-22px;
+  left:50%; transform:translateX(-50%);
+  font-size:10px; letter-spacing:0.22em; color:var(--ink-2); white-space:nowrap;
+}
+/* edge events: anchor labels to the dot's edge so they don't overflow the axis */
+.launch__event.start .lbl,
+.launch__event.start .when{ left:0; transform:none; }
+.launch__event.end .lbl,
+.launch__event.end .when{ left:auto; right:0; transform:none; }
+.launch__event .when.acc{ color:var(--teal); }
+.launch__event.now .lbl{ color:var(--rev); }
+.launch__event.now .when{ color:var(--rev); font-weight:500; }
+.launch__event.now .dot{
+  background:var(--rev);
+  box-shadow: 0 0 0 4px rgba(196,113,85,0.18);
+}
+
+/* ============================================================
+   RING PANEL
+   ============================================================ */
+.panel{
+  margin-top:28px;
+  border:1px solid var(--ink-4);
+  background:var(--bg-soft);
+  position:relative;
+}
+
+/* panel head: title, legend, math callout */
+.panel__head{
+  display:grid; grid-template-columns: auto 1fr auto;
+  align-items:center; gap:24px;
+  padding:14px 22px;
+  border-bottom:1px solid var(--ink-4);
+}
+.panel__head .fig{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.22em; color:var(--ink-2); text-transform:uppercase;
+}
+.panel__head .fig b{ color:var(--ink-0); font-weight:500; }
+.panel__head .fig em{ color:var(--teal); font-style:normal; }
+.panel__head .math{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.16em; color:var(--ink-1); text-transform:uppercase;
+  display:flex; gap:10px; align-items:center; justify-self:center;
+  border:1px solid var(--teal); padding:6px 12px;
+  background:var(--bg);
+  min-width:520px; justify-content:center;
+  transition: border-color 200ms ease, background 200ms ease;
+}
+.panel__head .math .pn{ color:var(--teal); font-weight:500; }
+.panel__head .math .own{ color:var(--ink-0); font-weight:500; }
+.panel__head .math .sep{ color:var(--ink-3); }
+.panel__head .legend{
+  display:flex; gap:14px; align-items:center;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.16em; color:var(--ink-2); text-transform:uppercase;
+}
+.panel__head .legend .sw{ display:inline-flex; gap:6px; align-items:center; }
+.panel__head .legend .sw svg{ width:14px; height:14px; display:block; }
+
+/* panel body: two-col, rings on left, stamps on right */
+.panel__body{
+  display:grid; grid-template-columns: 1fr 280px;
+  gap:0;
+  min-height:620px;
+}
+.panel__stage{
+  position:relative;
+  display:grid; place-items:center;
+  padding:24px;
+}
+.panel__stamps{
+  border-left:1px solid var(--ink-4);
+  padding:24px 22px;
+  display:grid; gap:14px; align-content:start;
+}
+
+/* ============================================================
+   RING SVG STAGE
+   ============================================================ */
+.stage-svg{
+  width:100%; max-width:560px;
+  height:auto;
+  display:block;
+  overflow:visible;
+}
+/* construction lines */
+.stage-svg .cx{ stroke:rgba(180,200,195,0.06); stroke-width:1; fill:none; }
+/* ring outlines (dashed, faint) */
+.stage-svg .ring{
+  stroke:var(--teal-dim); stroke-width:1; fill:none;
+  stroke-dasharray: 3 4;
+  opacity:0.55;
+  transition: opacity 200ms ease, stroke 200ms ease;
+}
+.stage-svg .ring.lit{
+  stroke:var(--teal); opacity:0.85;
+}
+
+/* ring labels */
+.stage-svg .ring-lbl{
+  fill:var(--teal-dim); opacity:0.85;
+  font-family:"IBM Plex Mono", monospace; font-size:10px; letter-spacing:1.8px;
+  text-transform:uppercase;
+  transition: fill 200ms ease, opacity 200ms ease;
+}
+.stage-svg .ring-lbl.lit{ fill:var(--teal); opacity:1; }
+.stage-svg .core-lbl{
+  fill:var(--ink-3); font-family:"IBM Plex Mono", monospace; font-size:9px; letter-spacing:1.8px;
+  text-transform:uppercase;
+}
+
+/* dot bases */
+.dot{
+  cursor:pointer;
+  transition: opacity 200ms ease;
+}
+.dot .out{
+  stroke:var(--ink-3); stroke-width:1.2; fill:none;
+  transition: stroke 200ms ease;
+}
+.dot .fill{
+  fill:var(--ink-3); opacity:0; /* hidden until classification glyph adds it */
+  transition: fill 200ms ease, opacity 200ms ease;
+}
+.dot .half{
+  fill:var(--ink-3); opacity:0;
+  transition: fill 200ms ease, opacity 200ms ease;
+}
+
+/* classification visibility — these stay constant, only color reacts to lit */
+.dot.inn .fill{ opacity:1; }
+.dot.opt .half{ opacity:1; }
+/* .rfn shows only outline */
+
+/* part-number micro-labels (tiny, near each dot, only on the active tier) */
+.dot-pn{
+  fill:var(--ink-3); opacity:0;
+  font-family:"IBM Plex Mono", monospace; font-size:7.5px; letter-spacing:0.6px;
+  text-transform:uppercase; pointer-events:none;
+  transition: opacity 200ms ease, fill 200ms ease;
+}
+.dot.lit + .dot-pn,
+.dot.lit .dot-pn{ opacity:1; fill:var(--teal); }
+
+/* lit state — applied per dot */
+.dot.lit .out{ stroke:var(--teal); }
+.dot.lit.inn .fill{ fill:var(--teal); }
+.dot.lit.opt .half{ fill:var(--teal); }
+/* RFN lit = just the teal stroke */
+
+/* dim state when another tier is active */
+.dot.dim{ opacity:0.35; }
+
+/* hover ring */
+.dot:hover .out{ stroke:var(--ink-0); }
+.dot.lit:hover .out{ stroke:var(--ink-0); }
+
+/* ============================================================
+   TIER STAMPS (right column)
+   ============================================================ */
+.tier-stamp{
+  display:grid; gap:6px;
+  border:1px solid var(--ink-3);
+  padding:14px 16px;
+  background:var(--bg);
+  text-align:left;
+  cursor:pointer;
+  position:relative;
+  font-family:var(--sans);
+  transition: border-color 200ms ease, background 200ms ease;
+  outline:none;
+}
+.tier-stamp:focus-visible{ outline:1px solid var(--teal); outline-offset:2px; }
+.tier-stamp:hover{ border-color:var(--ink-2); }
+.tier-stamp.active{
+  border-color:var(--teal);
+  background:var(--plate-2);
+}
+.tier-stamp .pn{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.22em; color:var(--ink-2); text-transform:uppercase;
+}
+.tier-stamp .pn b{ color:var(--ink-0); font-weight:500; }
+.tier-stamp.active .pn b{ color:var(--teal); }
+.tier-stamp .name{
+  font-family:var(--sans); font-size:15px; font-weight:500; color:var(--ink-1); letter-spacing:-0.01em;
+}
+.tier-stamp.active .name{ color:var(--ink-0); }
+.tier-stamp .meta{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; color:var(--ink-3); text-transform:uppercase;
+  padding:6px 0; border-top:1px solid var(--ink-4);
+}
+.tier-stamp .count{
+  font-family:var(--sans); font-size:26px; font-weight:500; color:var(--ink-0); letter-spacing:-0.015em; line-height:1;
+  display:flex; align-items:baseline; gap:6px;
+}
+.tier-stamp.active .count{ color:var(--teal); }
+.tier-stamp .count .u{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.22em; color:var(--ink-2); text-transform:uppercase;
+}
+.tier-stamp .corner{
+  position:absolute; top:-4px; left:-4px; width:8px; height:8px;
+  background:
+    linear-gradient(var(--ink-3), var(--ink-3)) center/100% 1px no-repeat,
+    linear-gradient(var(--ink-3), var(--ink-3)) center/1px 100% no-repeat;
+  opacity:0;
+}
+.tier-stamp.active .corner{ opacity:1; background-image:
+  linear-gradient(var(--teal), var(--teal)),
+  linear-gradient(var(--teal), var(--teal)); }
+
+/* ============================================================
+   SERVICE NAME LEADER (tooltip)
+   ============================================================ */
+.svc-leader{
+  position:absolute; z-index:20;
+  font-family:var(--mono); text-transform:uppercase;
+  background:var(--bg);
+  border:1px solid var(--teal);
+  padding:8px 12px;
+  min-width:240px; max-width:300px;
+  pointer-events:none;
+  display:none;
+  transition: opacity 150ms ease;
+}
+.svc-leader.show{ display:block; }
+.svc-leader .pn{
+  font-size:10px; letter-spacing:0.22em; color:var(--teal); margin-bottom:3px;
+}
+.svc-leader .nm{
+  font-family:var(--sans); font-size:13px; letter-spacing:-0.005em; color:var(--ink-0); text-transform:none;
+  line-height:1.3;
+}
+.svc-leader .cls{
+  font-size:9px; letter-spacing:0.22em; color:var(--ink-2); margin-top:6px;
+  padding-top:6px; border-top:1px solid var(--ink-4);
+}
+.svc-leader .cls b{ color:var(--ink-1); font-weight:500; }
+.svc-leader::before{
+  /* fiche leader tick to dot */
+  content:""; position:absolute; top:-1px; left:-9px;
+  width:8px; height:1px; background:var(--teal);
+}
+
+/* ============================================================
+   PANEL FOOTER — small hint
+   ============================================================ */
+.panel__foot{
+  display:flex; justify-content:space-between; align-items:center; gap:16px;
+  padding:12px 22px;
+  border-top:1px solid var(--ink-4);
+  font-family:var(--mono); font-size:10px; letter-spacing:0.22em; color:var(--ink-3); text-transform:uppercase;
+}
+.panel__foot .hint{ color:var(--ink-2); }
+.panel__foot .sheet{ }
+.panel__foot .sheet b{ color:var(--ink-1); font-weight:500; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:980px){
+  .launch{ grid-template-columns:1fr; }
+  .panel__head{ grid-template-columns:1fr; gap:14px; }
+  .panel__head .math{ min-width:0; width:100%; }
+  .panel__head .legend{ justify-self:start; }
+  .panel__body{ grid-template-columns:1fr; }
+  .panel__stamps{ border-left:none; border-top:1px solid var(--ink-4); }
+}
+@media (max-width:640px){
+  .panel__head .math{ font-size:10px; flex-wrap:wrap; }
+  .launch__event .lbl{ font-size:9px; top:-26px; }
+  .launch__event .when{ font-size:9px; bottom:-18px; }
+}
+</style>
+</head>
+<body>
+
+<main class="page" data-screen-label="Tier Ladder Build">
+
+  <!-- ============ SECTION BREAK ============ -->
+  <div class="section-break">
+    <span><span class="arr">↓</span>The three-tier service ladder · Tap a tier to light its set</span>
+    <span class="meta">FIG. 02 · TIER LADDER · <b>CUMULATIVE INHERITANCE</b></span>
+  </div>
+
+  <!-- ============ LAUNCH STRIP ============ -->
+  <section class="launch" aria-label="12-month rollout">
+    <div class="launch__eyebrow">
+      <span class="kicker">↓ 12-MO ROLLOUT</span>
+      <span class="title">JAN <b>→</b> DEC 2025</span>
+      <span class="fig">FIG. 02-A · TIMELINE · SCENOGRAPHY</span>
+    </div>
+    <div class="launch__axis">
+      <div class="launch__rule"></div>
+      <!-- always-on bar under rule -->
+      <div class="launch__always"></div>
+      <!-- T01 in-market range: JUL → DEC. Axis spans 0% (JAN) to 100% (DEC). JUL=50%. -->
+      <div class="launch__t01range" style="left:50%; right:0;"></div>
+      <!-- ticks: JAN, JUL, DEC -->
+      <div class="launch__tick" style="left:0;"></div>
+      <div class="launch__tick" style="left:50%;"></div>
+      <div class="launch__tick" style="left:100%;"></div>
+      <!-- events -->
+      <div class="launch__event start" style="left:0;">
+        <span class="lbl"><b>T03</b> · IN MARKET · ALWAYS-ON</span>
+        <span class="dot dim"></span>
+        <span class="when">JAN</span>
+      </div>
+      <div class="launch__event" style="left:50%;">
+        <span class="lbl"><b>T01</b> · LAUNCH</span>
+        <span class="dot"></span>
+        <span class="when acc">JUL</span>
+      </div>
+      <div class="launch__event now end" style="left:100%;">
+        <span class="lbl"><b>T02</b> · LAUNCH · ALL THREE LIVE</span>
+        <span class="dot"></span>
+        <span class="when">DEC · NOW</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RING PANEL ============ -->
+  <section class="panel" aria-label="Cumulative inheritance ring diagram">
+
+    <div class="panel__head">
+      <span class="fig">FIG. 02-B · CUMULATIVE INHERITANCE · <em>5 → 9 → 15</em></span>
+
+      <div class="math" id="math">
+        <span class="pn">T01</span>
+        <span class="sep">·</span>
+        <span class="own">OWNS 15</span>
+        <span class="sep">·</span>
+        <span>ADDS 6</span>
+        <span class="sep">·</span>
+        <span>INHERITS 9 FROM T02 · T03</span>
+      </div>
+
+      <div class="legend">
+        <span class="sw">
+          <svg viewBox="-9 -9 18 18"><circle r="6" cx="0" cy="0" fill="#2dd4b2" stroke="#2dd4b2" stroke-width="1.2"/></svg>
+          INNOVATED
+        </span>
+        <span class="sw">
+          <svg viewBox="-9 -9 18 18">
+            <circle r="6" cx="0" cy="0" fill="none" stroke="#2dd4b2" stroke-width="1.2"/>
+            <path d="M 0,-6 A 6,6 0 0,1 0,6 Z" fill="#2dd4b2"/>
+          </svg>
+          OPTIMIZED
+        </span>
+        <span class="sw">
+          <svg viewBox="-9 -9 18 18"><circle r="6" cx="0" cy="0" fill="none" stroke="#2dd4b2" stroke-width="1.2"/></svg>
+          REFINED
+        </span>
+      </div>
+    </div>
+
+    <div class="panel__body">
+      <div class="panel__stage" id="stage">
+
+        <!-- the SVG ring composition -->
+        <svg class="stage-svg" id="ringSvg"
+             viewBox="-280 -280 560 560"
+             preserveAspectRatio="xMidYMid meet"
+             role="img"
+             aria-label="Three concentric rings: T01 outer (6 dots), T02 middle (4 dots), T03 inner (5 dots). Each dot is a service. Color glyph encodes classification.">
+
+          <!-- construction crosshair -->
+          <line class="cx" x1="-280" y1="0" x2="280" y2="0"/>
+          <line class="cx" x1="0" y1="-280" x2="0" y2="280"/>
+
+          <!-- rings -->
+          <circle class="ring" id="ring-t01" cx="0" cy="0" r="210"/>
+          <circle class="ring" id="ring-t02" cx="0" cy="0" r="140"/>
+          <circle class="ring" id="ring-t03" cx="0" cy="0" r="70"/>
+
+          <!-- ring labels -->
+          <text class="ring-lbl" id="lbl-t01" x="0" y="-220" text-anchor="middle">T01 · OUTER · +6 ADDED</text>
+          <text class="ring-lbl" id="lbl-t02" x="0" y="-150" text-anchor="middle">T02 · MIDDLE · +4 ADDED</text>
+          <text class="ring-lbl" id="lbl-t03" x="0" y="-80"  text-anchor="middle">T03 · INNER · +5 CORE</text>
+          <text class="core-lbl" x="0" y="6"  text-anchor="middle">CORE</text>
+
+          <!-- dots will be rendered by JS into this group -->
+          <g id="dotGroup"></g>
+
+          <!-- part-number labels will be rendered by JS into this group -->
+          <g id="pnGroup"></g>
+
+        </svg>
+
+        <!-- service name leader tooltip -->
+        <div class="svc-leader" id="leader" role="status" aria-live="polite">
+          <div class="pn"></div>
+          <div class="nm"></div>
+          <div class="cls"></div>
+        </div>
+
+      </div>
+
+      <aside class="panel__stamps">
+        <button class="tier-stamp active" data-tier="T01" type="button">
+          <span class="corner"></span>
+          <span class="pn">T01 · <b>BUSINESS</b> · PREMIUM</span>
+          <span class="name">Premium</span>
+          <span class="meta">LAUNCHED JUL 2025 · 950 ACCTS</span>
+          <span class="count">15<span class="u">SERV</span></span>
+        </button>
+        <button class="tier-stamp" data-tier="T02" type="button">
+          <span class="corner"></span>
+          <span class="pn">T02 · <b>PROFESSIONAL</b></span>
+          <span class="name">Professional</span>
+          <span class="meta">LAUNCHED DEC 2025 · 25K+ ACCTS</span>
+          <span class="count">9<span class="u">SERV</span></span>
+        </button>
+        <button class="tier-stamp" data-tier="T03" type="button">
+          <span class="corner"></span>
+          <span class="pn">T03 · <b>INCLUDED</b> · FOUNDATION</span>
+          <span class="name">Foundation</span>
+          <span class="meta">ALWAYS-ON · 1M+ ACCTS</span>
+          <span class="count">5<span class="u">SERV</span></span>
+        </button>
+      </aside>
+    </div>
+
+    <div class="panel__foot">
+      <span class="hint">↳ Tap a tier or any dot to light its inheritance set · Hover a dot for service detail</span>
+      <span class="sheet"><b>SHEET</b> · IMPACT · TIER LADDER · BUILD · v2026.05</span>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ============ DATA + INTERACTIVITY ============ -->
+<script>
+(function(){
+  'use strict';
+
+  // ============================================================
+  // SERVICE DATA
+  // Each service: tier, partNo, name, classification (inn/opt/rfn)
+  // ============================================================
+  const SERVICES = [
+    // T03 inner ring (5 dots) — angles in degrees, starting from 0° (east) going CW
+    { tier:'T03', pn:'03-A', nm:'Guided onboarding',        cls:'inn' },
+    { tier:'T03', pn:'03-B', nm:'Self-serve learning',      cls:'inn' },
+    { tier:'T03', pn:'03-C', nm:'Community',                cls:'opt' },
+    { tier:'T03', pn:'03-D', nm:'Knowledge base',           cls:'rfn' },
+    { tier:'T03', pn:'03-E', nm:'Telemetry',                cls:'rfn' },
+    // T02 middle ring (4 dots)
+    { tier:'T02', pn:'02-A', nm:'Deployment accelerators',  cls:'inn' },
+    { tier:'T02', pn:'02-B', nm:'Capability workshops',     cls:'opt' },
+    { tier:'T02', pn:'02-C', nm:'Integration advisory',     cls:'opt' },
+    { tier:'T02', pn:'02-D', nm:'On-demand expert hours',   cls:'rfn' },
+    // T01 outer ring (6 dots)
+    { tier:'T01', pn:'01-A', nm:'Strategic success planning', cls:'inn' },
+    { tier:'T01', pn:'01-B', nm:'Executive business review',  cls:'inn' },
+    { tier:'T01', pn:'01-C', nm:'Adoption roadmap',           cls:'inn' },
+    { tier:'T01', pn:'01-D', nm:'Named success manager',      cls:'opt' },
+    { tier:'T01', pn:'01-E', nm:'Quarterly health score',     cls:'opt' },
+    { tier:'T01', pn:'01-F', nm:'Priority escalation',        cls:'rfn' }
+  ];
+
+  const RING_R = { T01:210, T02:140, T03:70 };
+  // start angles (deg) — offset each ring so dots don't overlap visually,
+  // and so no inner-ring dot sits at top-center where the "T03 · INNER" label lives
+  const RING_START = { T01:30, T02:45, T03:36 };
+
+  const TIER_META = {
+    T01: { full:'BUSINESS · PREMIUM',  count:15, math:{ adds:6, inh:9, from:'T02 · T03' } },
+    T02: { full:'PROFESSIONAL',        count: 9, math:{ adds:4, inh:5, from:'T03' } },
+    T03: { full:'INCLUDED · FOUNDATION',count:5, math:{ adds:5, inh:0, from:null } }
+  };
+
+  // The cumulative containment: which tiers are inside each tier?
+  // T01 owns T01+T02+T03; T02 owns T02+T03; T03 owns T03.
+  const OWNS = {
+    T01: new Set(['T01','T02','T03']),
+    T02: new Set(['T02','T03']),
+    T03: new Set(['T03'])
+  };
+
+  // ============================================================
+  // RENDER DOTS into SVG
+  // ============================================================
+  const dotGroup = document.getElementById('dotGroup');
+  const pnGroup  = document.getElementById('pnGroup');
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  // group services by tier, in their listed order
+  const byTier = { T01:[], T02:[], T03:[] };
+  SERVICES.forEach(s => byTier[s.tier].push(s));
+
+  // build positions per service
+  const dotPositions = {}; // pn → {x,y,tier,cls,nm,pn,el}
+
+  Object.keys(byTier).forEach(tier => {
+    const arr = byTier[tier];
+    const r = RING_R[tier];
+    const startDeg = RING_START[tier];
+    const step = 360 / arr.length;
+
+    arr.forEach((svc, i) => {
+      const deg = startDeg + i * step;
+      const rad = (deg - 90) * Math.PI / 180; // -90 so 0° is "north" → going clockwise from top-right
+      const x = +(r * Math.cos(rad)).toFixed(2);
+      const y = +(r * Math.sin(rad)).toFixed(2);
+
+      // dot group
+      const g = document.createElementNS(SVG_NS, 'g');
+      g.setAttribute('class', 'dot ' + svc.cls);
+      g.setAttribute('transform', `translate(${x},${y})`);
+      g.setAttribute('data-tier', tier);
+      g.setAttribute('data-pn', svc.pn);
+      g.setAttribute('data-cls', svc.cls);
+      g.setAttribute('tabindex', '0');
+      g.setAttribute('role', 'button');
+      g.setAttribute('aria-label', `${svc.pn} ${svc.nm}, ${svc.cls.toUpperCase()}, tier ${tier}`);
+
+      // base outline circle
+      const out = document.createElementNS(SVG_NS, 'circle');
+      out.setAttribute('class','out');
+      out.setAttribute('r','7');
+      g.appendChild(out);
+
+      // full fill (for inn)
+      const fill = document.createElementNS(SVG_NS, 'circle');
+      fill.setAttribute('class','fill');
+      fill.setAttribute('r','6');
+      g.appendChild(fill);
+
+      // right-half fill (for opt)
+      const half = document.createElementNS(SVG_NS, 'path');
+      half.setAttribute('class','half');
+      half.setAttribute('d', 'M 0,-6 A 6,6 0 0,1 0,6 Z');
+      g.appendChild(half);
+
+      // expand the hit area with an invisible larger circle so taps are easy
+      const hit = document.createElementNS(SVG_NS, 'circle');
+      hit.setAttribute('r','18');
+      hit.setAttribute('fill','transparent');
+      hit.setAttribute('stroke','none');
+      hit.setAttribute('pointer-events','all');
+      g.appendChild(hit);
+
+      dotGroup.appendChild(g);
+
+      // a small part-number label outside the dot (radial-outward)
+      const labelOffset = 18;
+      const lx = +((r + labelOffset) * Math.cos(rad)).toFixed(2);
+      const ly = +((r + labelOffset) * Math.sin(rad)).toFixed(2);
+      const t = document.createElementNS(SVG_NS, 'text');
+      t.setAttribute('class','dot-pn');
+      t.setAttribute('x', lx);
+      t.setAttribute('y', ly + 3); // small visual baseline tweak
+      t.setAttribute('text-anchor', lx < -2 ? 'end' : lx > 2 ? 'start' : 'middle');
+      t.setAttribute('data-pn', svc.pn);
+      t.textContent = svc.pn;
+      pnGroup.appendChild(t);
+
+      dotPositions[svc.pn] = { x, y, tier, svc, el: g, pnEl: t };
+    });
+  });
+
+  // ============================================================
+  // STATE: which tier is active. Default T01.
+  // ============================================================
+  let activeTier = 'T01';
+
+  function applyActive(tier){
+    activeTier = tier;
+    const lit = OWNS[tier];
+
+    // dots
+    Object.values(dotPositions).forEach(({ el, pnEl, svc }) => {
+      const isLit = lit.has(svc.tier);
+      el.classList.toggle('lit', isLit);
+      el.classList.toggle('dim', !isLit);
+      pnEl.classList.toggle('lit', isLit);
+      pnEl.style.opacity = isLit ? '0.85' : '0';
+      pnEl.style.fill = isLit ? '#6f7d78' : 'transparent';
+    });
+
+    // rings + ring labels
+    ['T01','T02','T03'].forEach(t => {
+      const r = document.getElementById('ring-' + t.toLowerCase());
+      const l = document.getElementById('lbl-' + t.toLowerCase());
+      const isLit = lit.has(t);
+      r.classList.toggle('lit', isLit);
+      l.classList.toggle('lit', isLit);
+    });
+
+    // tier stamps
+    document.querySelectorAll('.tier-stamp').forEach(b => {
+      b.classList.toggle('active', b.dataset.tier === tier);
+    });
+
+    // math callout
+    renderMath(tier);
+  }
+
+  function renderMath(tier){
+    const m = TIER_META[tier];
+    const node = document.getElementById('math');
+    if (tier === 'T03'){
+      node.innerHTML = `
+        <span class="pn">T03</span>
+        <span class="sep">·</span>
+        <span class="own">OWNS 5</span>
+        <span class="sep">·</span>
+        <span>CORE TIER</span>
+        <span class="sep">·</span>
+        <span>INHERITS NOTHING</span>`;
+    } else {
+      node.innerHTML = `
+        <span class="pn">${tier}</span>
+        <span class="sep">·</span>
+        <span class="own">OWNS ${m.count}</span>
+        <span class="sep">·</span>
+        <span>ADDS ${m.math.adds}</span>
+        <span class="sep">·</span>
+        <span>INHERITS ${m.math.inh} FROM ${m.math.from}</span>`;
+    }
+  }
+
+  // ============================================================
+  // SERVICE NAME LEADER (tooltip)
+  // Positioned near the hovered dot in stage coordinates.
+  // ============================================================
+  const stageEl  = document.getElementById('stage');
+  const svgEl    = document.getElementById('ringSvg');
+  const leader   = document.getElementById('leader');
+  const leaderPn = leader.querySelector('.pn');
+  const leaderNm = leader.querySelector('.nm');
+  const leaderCls= leader.querySelector('.cls');
+
+  const CLS_LABEL = { inn:'INNOVATED', opt:'OPTIMIZED', rfn:'REFINED' };
+
+  function svgPointToStagePx(x, y){
+    // The SVG uses viewBox -280..280 → 560 wide.
+    // Get the actual rendered SVG box and scale.
+    const svgRect = svgEl.getBoundingClientRect();
+    const stageRect = stageEl.getBoundingClientRect();
+    const scaleX = svgRect.width  / 560;
+    const scaleY = svgRect.height / 560;
+    const px = (x + 280) * scaleX + (svgRect.left - stageRect.left);
+    const py = (y + 280) * scaleY + (svgRect.top  - stageRect.top);
+    return { px, py };
+  }
+
+  function showLeader(svc, el){
+    const pos = dotPositions[svc.pn];
+    if (!pos) return;
+    leaderPn.textContent = svc.pn;
+    leaderNm.textContent = svc.nm;
+    leaderCls.innerHTML = `CLASSIFICATION · <b>${CLS_LABEL[svc.cls]}</b>`;
+    leader.classList.add('show');
+    // measure for positioning
+    const { px, py } = svgPointToStagePx(pos.x, pos.y);
+    const stageRect = stageEl.getBoundingClientRect();
+    // default: leader to the right of dot
+    let lx = px + 22;
+    let ly = py - 14;
+    // clamp within stage
+    const lw = leader.offsetWidth;
+    const lh = leader.offsetHeight;
+    if (lx + lw + 12 > stageRect.width) {
+      lx = px - lw - 22;
+    }
+    if (ly + lh + 12 > stageRect.height) {
+      ly = stageRect.height - lh - 12;
+    }
+    if (ly < 8) ly = 8;
+    leader.style.left = Math.round(lx) + 'px';
+    leader.style.top  = Math.round(ly) + 'px';
+  }
+
+  function hideLeader(){ leader.classList.remove('show'); }
+
+  // ============================================================
+  // EVENT WIRING
+  // ============================================================
+  // dot hover / focus
+  document.querySelectorAll('.dot').forEach(g => {
+    const pn = g.dataset.pn;
+    const svc = SERVICES.find(s => s.pn === pn);
+
+    g.addEventListener('mouseenter', () => showLeader(svc, g));
+    g.addEventListener('mouseleave', hideLeader);
+    g.addEventListener('focus',      () => showLeader(svc, g));
+    g.addEventListener('blur',       hideLeader);
+
+    g.addEventListener('click', () => applyActive(g.dataset.tier));
+    g.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        applyActive(g.dataset.tier);
+      }
+    });
+  });
+
+  // tier stamps
+  document.querySelectorAll('.tier-stamp').forEach(b => {
+    b.addEventListener('click', () => applyActive(b.dataset.tier));
+    b.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        applyActive(b.dataset.tier);
+      }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown'){
+        e.preventDefault();
+        const all = Array.from(document.querySelectorAll('.tier-stamp'));
+        const i = all.indexOf(b);
+        const next = e.key === 'ArrowDown'
+          ? (i+1) % all.length
+          : (i-1+all.length) % all.length;
+        all[next].focus();
+        applyActive(all[next].dataset.tier);
+      }
+    });
+  });
+
+  // global escape closes the leader tooltip
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') hideLeader();
+  });
+
+  // re-position leader on resize (if it's open)
+  window.addEventListener('resize', () => {
+    if (!leader.classList.contains('show')) return;
+    const pn = leaderPn.textContent;
+    const svc = SERVICES.find(s => s.pn === pn);
+    if (svc) showLeader(svc, dotPositions[pn].el);
+  });
+
+  // ============================================================
+  // BOOT
+  // ============================================================
+  applyActive('T01');
+
+})();
+</script>
+
+</body>
+</html>

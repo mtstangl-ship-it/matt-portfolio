@@ -128,15 +128,47 @@ $50M  ·  Projected incremental revenue  ·  YoY after 2 quarters
 
 **Section head**
 ```
-The three-tier service ladder
-Tap a tier to open
+↓ THE THREE-TIER SERVICE LADDER · TAP A TIER TO LIGHT ITS SET
+FIG. 02 · TIER LADDER · CUMULATIVE INHERITANCE
 ```
 
-**Tier 01 — Business Plan (Premium)**
+**Launch strip (FIG. 02-A)**
 ```
-Name:    Business Plan
-Desc:    Strategic planning and coaching-heavy delivery. Designed to expand accounts.
-Lift:    950 customers · 6 services · coaching
+Kicker:  ↓ 12-MO ROLLOUT
+Title:   JAN → DEC 2025 · COMPLETE
+Fig:     FIG. 02-A · TIMELINE · SCENOGRAPHY
+Pegs:
+  JAN — T03 · IN MARKET · ALWAYS-ON
+  JUL — T01 · LAUNCH
+  DEC — T02 · LAUNCH · PROGRAM END
+```
+
+**Ring panel (FIG. 02-B)**
+```
+Fig title: FIG. 02-B · CUMULATIVE INHERITANCE · 5 → 9 → 15
+Math callout (swaps on active tier):
+  T01 — T01 · OWNS 15 · ADDS 6 · INHERITS 9 FROM T02 · T03
+  T02 — T02 · OWNS 9 · ADDS 4 · INHERITS 5 FROM T03
+  T03 — T03 · OWNS 5 · INHERITS NOTHING
+Ring labels:
+  T01 · OUTER · +6 ADDED
+  T02 · MIDDLE · +4 ADDED
+  T03 · INNER · +5 ADDED
+Tier stamps:
+  T01 · BUSINESS — Business — LAUNCHED JUL 2025 · 950 ACCTS — 15 serv
+  T02 · PROFESSIONAL — Professional — LAUNCHED DEC 2025 · 25K+ ACCTS — 9 serv
+  T03 · INCLUDED — Included — ALWAYS-ON · 1M+ ACCTS — 5 serv
+Reveal zone default: ↓ TAP ANY NODE FOR SERVICE DETAIL
+Reveal zone pinned: [part-no] · [SERVICE NAME] · [GLYPH CLASSIFICATION] / [T0X NATIVE | INHERITED FROM T0X]
+Panel foot hint: ↓ TAP A TIER FOR ITS SET · TAP A NODE FOR THE SERVICE
+Sheet stamp: SHEET · IMPACT · TIER LADDER · BUILD · V2026.05
+```
+
+**Tier 01 — Business (6 native services)**
+```
+Name:    Business
+Meta:    LAUNCHED JUL 2025 · 950 ACCTS
+Count:   15 (cumulative)
 Services:
   Strategic success planning    [innovated]
   Executive business review     [innovated]
@@ -146,11 +178,11 @@ Services:
   Priority escalation           [refined]
 ```
 
-**Tier 02 — Professional Plan (Targeted)**
+**Tier 02 — Professional (4 native services)**
 ```
-Name:    Professional Plan
-Desc:    Targeted engagements that accelerate deployment and close capability gaps.
-Lift:    25K+ customers · 4 services · attach
+Name:    Professional
+Meta:    LAUNCHED DEC 2025 · 25K+ ACCTS
+Count:   9 (cumulative)
 Services:
   Deployment accelerators       [innovated]
   Capability workshops          [optimized]
@@ -158,11 +190,11 @@ Services:
   On-demand expert hours        [refined]
 ```
 
-**Tier 03 — Included Plan (Foundational)**
+**Tier 03 — Included (5 native services)**
 ```
-Name:    Included Plan
-Desc:    Self-service and onboarding paths that feed customers upsell-ready into higher tiers.
-Lift:    1M+ customers · 5 services · retain
+Name:    Included
+Meta:    ALWAYS-ON · 1M+ ACCTS
+Count:   5
 Services:
   Guided onboarding             [innovated]
   Self-serve learning paths     [innovated]
