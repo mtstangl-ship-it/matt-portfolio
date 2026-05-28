@@ -1,4 +1,4 @@
-/** Stress-profile SVG strings ported from prototype/Impact (Build).html */
+/** Stress-profile SVG — curves and annotations only (stamps + delta live outside the canvas). */
 
 export function buildHorizontalSVG(compactLabels = false): string {
   const restart1 = compactLabels
@@ -30,8 +30,8 @@ export function buildHorizontalSVG(compactLabels = false): string {
   <line class="axis" x1="60"  y1="20"  x2="60"  y2="400"/>
   <line class="axis" x1="60"  y1="400" x2="940" y2="400"/>
 
-  <text class="y-label" x="30"  y="60"  text-anchor="start" transform="rotate(-90 30 60)">↑ CALM</text>
-  <text class="y-label" x="30"  y="380" text-anchor="end"   transform="rotate(-90 30 380)">↓ DISTRESSED</text>
+  <text class="y-label y-label--calm" x="18"  y="60"  text-anchor="start" transform="rotate(-90 18 60)">↑ CALM</text>
+  <text class="y-label y-label--stress" x="18"  y="380" text-anchor="end"   transform="rotate(-90 18 380)">↓ DISTRESSED</text>
   <text class="ax-label" x="500" y="436" text-anchor="middle">TIME · DAYS POST-CASE-OPEN</text>
 
   <g class="day-tick">
@@ -79,12 +79,12 @@ export function buildHorizontalSVG(compactLabels = false): string {
            C 800 130, 880 112, 916 110"/>
   <rect class="endpoint before" x="908" y="102" width="16" height="16"/>
 
-  <line class="restart-line" x1="270" y1="290" x2="270" y2="62"/>
-  <text class="restart" data-annotation="restart-1" x="276" y="66">${restart1}</text>
-  <line class="restart-line" x1="438" y1="300" x2="438" y2="76"/>
-  <text class="restart" data-annotation="restart-2" x="444" y="80">${restart2}</text>
-  <line class="restart-line" x1="690" y1="310" x2="690" y2="62"/>
-  <text class="restart" data-annotation="restart-3" x="696" y="66">${restart3}</text>
+  <line class="restart-line" x1="270" y1="290" x2="270" y2="72"/>
+  <text class="restart" data-annotation="restart-1" x="276" y="76">${restart1}</text>
+  <line class="restart-line" x1="438" y1="300" x2="438" y2="86"/>
+  <text class="restart" data-annotation="restart-2" x="444" y="90">${restart2}</text>
+  <line class="restart-line" x1="690" y1="310" x2="690" y2="72"/>
+  <text class="restart" data-annotation="restart-3" x="696" y="76">${restart3}</text>
 
   <path class="curve-after"
         d="M 60 130
@@ -101,19 +101,6 @@ export function buildHorizontalSVG(compactLabels = false): string {
   <text class="preserve" data-annotation="preserve-2" x="320" y="380">${preserve2}</text>
   <line class="preserve-line" x1="720" y1="110" x2="720" y2="356"/>
   <text class="preserve" data-annotation="preserve-3" x="640" y="380">${preserve3}</text>
-
-  <rect class="stamp-box before" x="624" y="74"  width="170" height="22"/>
-  <text class="stamp before" x="709" y="90" text-anchor="middle">RUN 01 · LEGACY</text>
-  <rect class="stamp-box after"  x="80" y="240" width="180" height="22"/>
-  <text class="stamp after" x="170" y="256" text-anchor="middle">RUN 02 · REDESIGN</text>
-
-  <line class="dim-line" x1="720" y1="60" x2="916" y2="60"/>
-  <polygon class="dim-arr" points="720,60 736,54 736,66"/>
-  <polygon class="dim-arr" points="916,60 900,54 900,66"/>
-  <line class="dim-line" x1="720" y1="110" x2="720" y2="60"/>
-  <line class="dim-line" x1="916" y1="110" x2="916" y2="60"/>
-  <text class="dim"     x="818" y="48"  text-anchor="middle">6.8 D → 4.7 D · −31% MTTR</text>
-  <text class="dim-sub" x="818" y="30"  text-anchor="middle">≈ 2.1 days returned per case</text>
 </svg>`;
 }
 
@@ -135,13 +122,13 @@ export function buildVerticalSVG(compactLabels = false): string {
   <line class="axis" x1="60" y1="60" x2="440" y2="60"/>
 
   <text class="ax-label" x="250" y="48" text-anchor="middle">← CALM        DISTRESSED →</text>
-  <text class="y-label" x="20" y="56" text-anchor="end">D0</text>
-  <text class="y-label" x="20" y="200" text-anchor="end">D2</text>
-  <text class="y-label" x="20" y="345" text-anchor="end">D3</text>
-  <text class="y-label" x="20" y="490" text-anchor="end">D4</text>
-  <text class="y-label" x="20" y="635" text-anchor="end">D5</text>
-  <text class="y-label" x="20" y="780" text-anchor="end">D6</text>
-  <text class="y-label" x="20" y="925" text-anchor="end">D7</text>
+  <text class="y-label" x="14" y="56" text-anchor="end">D0</text>
+  <text class="y-label" x="14" y="200" text-anchor="end">D2</text>
+  <text class="y-label" x="14" y="345" text-anchor="end">D3</text>
+  <text class="y-label" x="14" y="490" text-anchor="end">D4</text>
+  <text class="y-label" x="14" y="635" text-anchor="end">D5</text>
+  <text class="y-label" x="14" y="780" text-anchor="end">D6</text>
+  <text class="y-label" x="14" y="925" text-anchor="end">D7</text>
 
   <path class="curve-before"
         d="M 140 70
@@ -177,17 +164,6 @@ export function buildVerticalSVG(compactLabels = false): string {
   <text class="preserve" data-annotation="preserve-2" x="380" y="304" text-anchor="end">${compactLabels ? "✓" : "✓ CONTEXT PRESERVED · D2"}</text>
   <line class="preserve-line" x1="110" y1="720" x2="380" y2="720"/>
   <text class="preserve" data-annotation="preserve-3" x="380" y="712" text-anchor="end">${compactLabels ? "✓" : "✓ RESOLVED · D4.7"}</text>
-
-  <rect class="stamp-box before" x="234" y="600" width="170" height="22"/>
-  <text class="stamp before" x="319" y="616" text-anchor="middle">RUN 01 · LEGACY</text>
-  <rect class="stamp-box after" x="160" y="240" width="180" height="22"/>
-  <text class="stamp after" x="250" y="256" text-anchor="middle">RUN 02 · REDESIGN</text>
-
-  <line class="dim-line" x1="60" y1="720" x2="60" y2="916"/>
-  <polygon class="dim-arr" points="60,720 54,736 66,736"/>
-  <polygon class="dim-arr" points="60,916 54,900 66,900"/>
-  <text class="dim" x="92" y="822">6.8 D → 4.7 D · −31% MTTR</text>
-  <text class="dim-sub" x="92" y="840">≈ 2.1 days returned per case</text>
 </svg>`;
 }
 

@@ -10,6 +10,13 @@ import {
 } from "./wipro-profile-svg";
 
 type GraphOrient = "horizontal" | "vertical" | "tablet";
+type CurveView = "before" | "after" | "delta";
+
+const CURVE_TOGGLE: { id: CurveView; label: string }[] = [
+  { id: "before", label: "BEFORE" },
+  { id: "after", label: "AFTER" },
+  { id: "delta", label: "DELTA" },
+];
 
 function getOrient(): GraphOrient {
   if (typeof window === "undefined") return "horizontal";
@@ -19,14 +26,6 @@ function getOrient(): GraphOrient {
   return "horizontal";
 }
 
-type RunView = "both" | "run01" | "run02";
-
-const RUN_TOGGLE: { id: RunView; label: string }[] = [
-  { id: "both", label: "BOTH" },
-  { id: "run01", label: "RUN 01" },
-  { id: "run02", label: "RUN 02" },
-];
-
 export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
   const profileRef = useRef<HTMLDivElement>(null);
   const graphHostRef = useRef<HTMLDivElement>(null);
@@ -34,10 +33,13 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
   const [isAnim, setIsAnim] = useState(false);
   const [profileFired, setProfileFired] = useState(false);
   const [popover, setPopover] = useState<string | null>(null);
-  const [runView, setRunView] = useState<RunView>("both");
-  const reduceMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [curveView, setCurveView] = useState<CurveView>("before");
+  const [afterEnter, setAfterEnter] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    setReduceMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
 
   const renderGraph = useCallback(() => {
     const host = graphHostRef.current;
@@ -46,7 +48,7 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
     setOrient(o);
     const compact = o === "tablet";
     const preserve =
-      o === "tablet" ? 'xMidYMid meet' : o === "vertical" ? "none" : "none";
+      o === "tablet" ? "xMidYMid meet" : o === "vertical" ? "none" : "none";
     const svg =
       o === "vertical"
         ? buildVerticalSVG(compact)
@@ -66,6 +68,17 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
       });
     }
   }, []);
+
+  const selectCurveView = useCallback(
+    (view: CurveView) => {
+      setCurveView(view);
+      if (view === "after" && !reduceMotion) {
+        setAfterEnter(false);
+        requestAnimationFrame(() => setAfterEnter(true));
+      }
+    },
+    [reduceMotion],
+  );
 
   const startProfileIfNeeded = useCallback(() => {
     if (profileFired || !tabVisible) return;
@@ -143,42 +156,79 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
   }, []);
 
   const { handoffNodes, handoffLabel } = impactCaseOps;
+  const isVertical = orient === "vertical";
 
   return (
     <>
       <div
         ref={profileRef}
-        className={`impact-profile impact-p2${isAnim && !reduceMotion ? " is-anim" : ""}`}
+        className={[
+          "impact-profile impact-p2",
+          isAnim && !reduceMotion ? "is-anim" : "",
+          afterEnter && curveView === "after" && !reduceMotion ? "is-after-enter" : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
         id="profile"
-        data-run-view={runView}
+        data-curve-view={curveView}
+        data-orient-layout={isVertical ? "vertical" : "horizontal"}
       >
         <span className="impact-profile__corner">SHEET 02-A · NORMALIZED</span>
         <div className="impact-profile__graph-wrap">
           <div
             className="impact-profile-run-toggle"
             role="group"
-            aria-label="Stress curve run isolation"
+            aria-label="Stress curve comparison"
           >
-            {RUN_TOGGLE.map(({ id, label }) => (
+            {CURVE_TOGGLE.map(({ id, label }) => (
               <button
                 key={id}
                 type="button"
-                className={`impact-profile-run-toggle__btn${runView === id ? " is-active" : ""}`}
-                data-run={id}
-                aria-pressed={runView === id}
-                onClick={() => setRunView(id)}
+                className={`impact-profile-run-toggle__btn${curveView === id ? " is-active" : ""}`}
+                data-curve={id}
+                aria-pressed={curveView === id}
+                onClick={() => selectCurveView(id)}
               >
                 {label}
               </button>
             ))}
           </div>
+
+          <div className="impact-profile-stamps" aria-live="polite">
+            <p
+              className={`impact-profile-stamp impact-profile-stamp--before${curveView === "before" ? " is-visible" : ""}`}
+            >
+              BEFORE · LEGACY · 6.8 DAYS
+            </p>
+            <p
+              className={`impact-profile-stamp impact-profile-stamp--after${curveView === "after" ? " is-visible" : ""}`}
+            >
+              AFTER · REDESIGN · 4.7 DAYS
+            </p>
+          </div>
+
           <div
             ref={graphHostRef}
             className="impact-profile__graph"
             id="profileGraph"
             data-orient="horizontal"
           />
+
+          <div
+            className={`impact-profile-delta${curveView === "delta" ? " is-visible" : ""}`}
+            aria-hidden={curveView !== "delta"}
+          >
+            <div className="impact-profile-delta__span" aria-hidden>
+              <span className="impact-profile-delta__tick impact-profile-delta__tick--after" />
+              <span className="impact-profile-delta__line" />
+              <span className="impact-profile-delta__tick impact-profile-delta__tick--before" />
+            </div>
+            <p className="impact-profile-delta__label">
+              6.8 D → 4.7 D · −31% MTTR · ≈ 2.1 DAYS RETURNED PER CASE
+            </p>
+          </div>
         </div>
+
         {popover && orient === "tablet" ? (
           <div className="impact-profile-popover" role="dialog" aria-live="polite">
             {PROFILE_ANNOTATION_LABELS[popover]}

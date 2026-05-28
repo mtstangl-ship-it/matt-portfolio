@@ -262,7 +262,7 @@ export function ImpactShell() {
             meta={
               <>
                 <span>FIG. 02-A · Test bench</span>
-                <span>RUN 01 → RUN 02</span>
+                <span>BEFORE · AFTER · DELTA</span>
               </>
             }
           />
