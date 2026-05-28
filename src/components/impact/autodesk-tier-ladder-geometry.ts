@@ -2,8 +2,19 @@ import { autodeskServices, type AutodeskService } from "@/content/impact-autodes
 
 export type TierId = "01" | "02" | "03";
 
-export const RING_R: Record<TierId, number> = { "01": 210, "02": 140, "03": 70 };
+export const RING_R: Record<TierId, number> = { "01": 240, "02": 165, "03": 90 };
 export const RING_START: Record<TierId, number> = { "01": 30, "02": 45, "03": 36 };
+
+/** Ring label anchor: -(radius + 14) for breathing room above each ring. */
+export const RING_LABEL_Y: Record<TierId, number> = {
+  "01": -(RING_R["01"] + 14),
+  "02": -(RING_R["02"] + 14),
+  "03": -(RING_R["03"] + 14),
+};
+
+export const OUTER_RING_R = RING_R["01"];
+export const DIM_RULE_Y = -(OUTER_RING_R + 48);
+export const DIM_LABEL_Y = DIM_RULE_Y - 8;
 
 export const OWNS: Record<TierId, ReadonlySet<TierId>> = {
   "01": new Set<TierId>(["01", "02", "03"]),
@@ -152,6 +163,7 @@ export const TIER_STAMPS: {
   tier: TierId;
   pn: string;
   name: string;
+  intent: string;
   meta: string;
   count: number;
 }[] = [
@@ -159,6 +171,8 @@ export const TIER_STAMPS: {
     tier: "01",
     pn: "T01 · BUSINESS",
     name: "Business",
+    intent:
+      "Premium service motion for accounts where service quality drives renewal and expansion.",
     meta: "LAUNCHED JUL 2025 · 950 ACCTS",
     count: 15,
   },
@@ -166,6 +180,8 @@ export const TIER_STAMPS: {
     tier: "02",
     pn: "T02 · PROFESSIONAL",
     name: "Professional",
+    intent:
+      "Accelerated time-to-value for the mid-market via productized services and on-demand expertise.",
     meta: "LAUNCHED DEC 2025 · 25K+ ACCTS",
     count: 9,
   },
@@ -173,6 +189,7 @@ export const TIER_STAMPS: {
     tier: "03",
     pn: "T03 · INCLUDED",
     name: "Included",
+    intent: "Universal access to learning and self-serve resources at population scale.",
     meta: "ALWAYS-ON · 1M+ ACCTS",
     count: 5,
   },

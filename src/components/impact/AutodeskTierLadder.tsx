@@ -16,8 +16,12 @@ import {
   MATH_CALLOUT,
   nativeTierFromPartNumber,
   OWNS,
+  OUTER_RING_R,
   RING_LABELS,
+  RING_LABEL_Y,
   RING_R,
+  DIM_LABEL_Y,
+  DIM_RULE_Y,
   serviceAttribution,
   TIER_STAMPS,
   type ClsKey,
@@ -217,12 +221,24 @@ export function AutodeskTierLadder() {
               <line className="cx" x1="-280" y1="0" x2="280" y2="0" />
               <line className="cx" x1="0" y1="-280" x2="0" y2="280" />
 
-              <line className="dim-rule" x1="-210" y1="-258" x2="210" y2="-258" />
-              <line className="dim-tick" x1="-210" y1="-252" x2="-210" y2="-264" />
-              <line className="dim-tick" x1="0" y1="-252" x2="0" y2="-264" />
-              <line className="dim-tick" x1="210" y1="-252" x2="210" y2="-264" />
-              <text className="dim-label" x="0" y="-266" textAnchor="middle">
-                Ø 420 · 15 SERVICES
+              <line className="dim-rule" x1={-OUTER_RING_R} y1={DIM_RULE_Y} x2={OUTER_RING_R} y2={DIM_RULE_Y} />
+              <line
+                className="dim-tick"
+                x1={-OUTER_RING_R}
+                y1={DIM_RULE_Y + 6}
+                x2={-OUTER_RING_R}
+                y2={DIM_RULE_Y - 6}
+              />
+              <line className="dim-tick" x1="0" y1={DIM_RULE_Y + 6} x2="0" y2={DIM_RULE_Y - 6} />
+              <line
+                className="dim-tick"
+                x1={OUTER_RING_R}
+                y1={DIM_RULE_Y + 6}
+                x2={OUTER_RING_R}
+                y2={DIM_RULE_Y - 6}
+              />
+              <text className="dim-label" x="0" y={DIM_LABEL_Y} textAnchor="middle">
+                Ø 480 · 15 SERVICES
               </text>
 
               {(["01", "02", "03"] as TierId[]).map((tier) => {
@@ -241,7 +257,7 @@ export function AutodeskTierLadder() {
               <text
                 className={`ring-lbl${litTiers.has("01") ? " lit" : ""}`}
                 x="0"
-                y="-220"
+                y={RING_LABEL_Y["01"]}
                 textAnchor="middle"
               >
                 {RING_LABELS["01"]}
@@ -249,7 +265,7 @@ export function AutodeskTierLadder() {
               <text
                 className={`ring-lbl${litTiers.has("02") ? " lit" : ""}`}
                 x="0"
-                y="-150"
+                y={RING_LABEL_Y["02"]}
                 textAnchor="middle"
               >
                 {RING_LABELS["02"]}
@@ -257,7 +273,7 @@ export function AutodeskTierLadder() {
               <text
                 className={`ring-lbl${litTiers.has("03") ? " lit" : ""}`}
                 x="0"
-                y="-80"
+                y={RING_LABEL_Y["03"]}
                 textAnchor="middle"
               >
                 {RING_LABELS["03"]}
@@ -294,26 +310,35 @@ export function AutodeskTierLadder() {
                       .filter(Boolean)
                       .join(" ")}
                     transform={`translate(${dot.x},${dot.y})`}
-                    tabIndex={0}
-                    role="button"
-                    aria-label={`${dot.service.partNumber} ${dot.service.name}`}
-                    aria-pressed={isPinned}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      togglePin(dot.service.partNumber);
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
+                  >
+                    {isPinned ? <circle className="halo" r="14" aria-hidden /> : null}
+                    <circle className="focus-ring" r="9" aria-hidden />
+                    <circle
+                      className="out"
+                      r="7"
+                      tabIndex={0}
+                      role="button"
+                      aria-label={`${dot.service.partNumber} ${dot.service.name}`}
+                      aria-pressed={isPinned}
+                      onClick={(e) => {
                         e.stopPropagation();
                         togglePin(dot.service.partNumber);
-                      }
-                    }}
-                  >
-                    {isPinned ? <circle className="halo" r="14" /> : null}
-                    <circle className="out" r="7" />
-                    <circle className="fill" r="6" />
-                    <path className="half" d="M 0,-6 A 6,6 0 0,1 0,6 Z" />
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          togglePin(dot.service.partNumber);
+                        }
+                      }}
+                    />
+                    <circle className="fill" r="6" aria-hidden pointerEvents="none" />
+                    <path
+                      className="half"
+                      d="M 0,-6 A 6,6 0 0,1 0,6 Z"
+                      aria-hidden
+                      pointerEvents="none"
+                    />
                   </g>
                 );
               })}
@@ -382,6 +407,7 @@ export function AutodeskTierLadder() {
                   {stamp.pn.split(" · ")[0]} · <b>{stamp.pn.split(" · ").slice(1).join(" · ")}</b>
                 </span>
                 <span className="name">{stamp.name}</span>
+                <span className="intent">{stamp.intent}</span>
                 <span className="meta">{stamp.meta}</span>
                 <span className="count">
                   {stamp.count}

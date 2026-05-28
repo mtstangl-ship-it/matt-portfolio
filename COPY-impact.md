@@ -155,9 +155,14 @@ Ring labels:
   T02 · PROFESSIONAL · +4 ADDED
   T03 · INCLUDED · 5
 Tier stamps:
-  T01 · BUSINESS — Business — LAUNCHED JUL 2025 · 950 ACCTS — 15 serv
-  T02 · PROFESSIONAL — Professional — LAUNCHED DEC 2025 · 25K+ ACCTS — 9 serv
-  T03 · INCLUDED — Included — ALWAYS-ON · 1M+ ACCTS — 5 serv
+  T01 · BUSINESS — Business — [strategic intent] — LAUNCHED JUL 2025 · 950 ACCTS — 15 serv
+  T02 · PROFESSIONAL — Professional — [strategic intent] — LAUNCHED DEC 2025 · 25K+ ACCTS — 9 serv
+  T03 · INCLUDED — Included — [strategic intent] — ALWAYS-ON · 1M+ ACCTS — 5 serv
+Strategic intent (between name and meta):
+  T01: Premium service motion for accounts where service quality drives renewal and expansion.
+  T02: Accelerated time-to-value for the mid-market via productized services and on-demand expertise.
+  T03: Universal access to learning and self-serve resources at population scale.
+Dimension rule: Ø 480 · 15 SERVICES
 Reveal zone default: ↓ TAP ANY NODE FOR SERVICE DETAIL
 Reveal zone pinned: [part-no] · [SERVICE NAME] · [GLYPH CLASSIFICATION] / [T0X NATIVE | INHERITED FROM T0X]
 Panel foot hint: ↓ TAP A TIER FOR ITS SET · TAP A NODE FOR THE SERVICE

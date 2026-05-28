@@ -1716,16 +1716,30 @@ body:has(.impact-console) {
 .impact-tier-ladder__svg .dot{
   cursor:pointer;
   transition:opacity 200ms ease;
-  outline:none;
-}
-.impact-tier-ladder__svg .dot:focus-visible .out{
-  stroke:var(--ink-0);
 }
 .impact-tier-ladder__svg .dot .out{
   stroke:var(--ink-3);
   stroke-width:1.2;
   fill:none;
   transition:stroke 200ms ease;
+  cursor:pointer;
+}
+.impact-tier-ladder__svg .dot .out:focus,
+.impact-tier-ladder__svg .dot .out:focus-visible{
+  outline:none;
+}
+.impact-tier-ladder__svg .dot .focus-ring{
+  fill:none;
+  stroke:var(--teal);
+  stroke-width:1;
+  opacity:0;
+  pointer-events:none;
+}
+.impact-tier-ladder__svg .dot:has(.out:focus-visible) .focus-ring{
+  opacity:1;
+}
+.impact-tier-ladder__svg .dot:has(.out:focus-visible) .out{
+  stroke:var(--teal);
 }
 .impact-tier-ladder__svg .dot .fill{
   fill:var(--ink-3);
@@ -1849,6 +1863,17 @@ body:has(.impact-console) {
   letter-spacing:-0.01em;
 }
 .impact-tier-ladder__stamp.active .name{
+  color:var(--ink-0);
+}
+.impact-tier-ladder__stamp .intent{
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:400;
+  color:var(--ink-1);
+  letter-spacing:-0.005em;
+  line-height:1.4;
+}
+.impact-tier-ladder__stamp.active .intent{
   color:var(--ink-0);
 }
 .impact-tier-ladder__stamp .meta{

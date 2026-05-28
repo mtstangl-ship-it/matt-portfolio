@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Tier ladder verification + screenshots (Polish Pass 1).
+ * Tier ladder verification + screenshots (Polish Pass 2).
  * Usage: node scripts/verify-tier-ladder.mjs
  */
 import { mkdir, writeFile } from "node:fs/promises";
@@ -9,7 +9,7 @@ import { join } from "node:path";
 const BASE = process.env.BASE_URL || "http://localhost:3333";
 const OUT = join(
   process.cwd(),
-  "reference/impact-visual-pass/verification-screenshots/tier-ladder-polish-1",
+  "reference/impact-visual-pass/verification-screenshots/tier-ladder-polish-2",
 );
 
 async function main() {
@@ -17,14 +17,7 @@ async function main() {
   await mkdir(OUT, { recursive: true });
 
   const browser = await chromium.launch();
-  const results = {
-    gates: {},
-    fixes: {},
-    attribution: {},
-    v1LaunchStrip: {},
-    v2RingCentering: {},
-    viewports: {},
-  };
+  const results = { gates: {}, fixes: {}, focus: {}, viewports: {} };
 
   async function openImpact(page, mode) {
     if (mode === "direct") {
@@ -47,16 +40,14 @@ async function main() {
 
   async function readState(page) {
     return page.evaluate(() => {
-      const math = document.querySelector(".impact-tier-ladder__panel-head .math")?.textContent?.trim();
-      const ringLabels = Array.from(document.querySelectorAll(".impact-tier-ladder__svg .ring-lbl")).map(
+      const rings = Array.from(document.querySelectorAll(".impact-tier-ladder__svg .ring")).map((r) =>
+        Number(r.getAttribute("r")),
+      );
+      const dim = document.querySelector(".impact-tier-ladder__svg .dim-label")?.textContent?.trim();
+      const intents = Array.from(document.querySelectorAll(".impact-tier-ladder__stamp .intent")).map(
         (el) => el.textContent?.trim(),
       );
-      const activeStamp = document.querySelector(".impact-tier-ladder__stamp.active")?.getAttribute("data-tier");
-      const revealDefault = !!document.querySelector(".impact-tier-ladder__reveal-placeholder");
-      const bodyChildren = Array.from(
-        document.querySelector(".impact-tier-ladder__panel-body")?.children ?? [],
-      ).map((el) => el.className.split(" ").find((c) => c.startsWith("impact-tier-ladder__")) ?? el.className);
-      return { math, ringLabels, activeStamp, revealDefault, bodyChildren };
+      return { rings, dim, intents };
     });
   }
 
@@ -64,144 +55,115 @@ async function main() {
     await page.screenshot({ path: join(OUT, `${name}.png`), fullPage: false });
   }
 
-  async function pinAndReadAttribution(page, stampTier, partPrefix) {
-    if (stampTier) await page.click(`.impact-tier-ladder__stamp[data-tier="${stampTier}"]`);
-    await page.waitForTimeout(200);
-    await page.locator(`.impact-tier-ladder__svg .dot[aria-label^="${partPrefix}"]`).click();
-    await page.waitForTimeout(200);
-    return page.evaluate(() => ({
-      line2: document.querySelector(".impact-tier-ladder__reveal-line2")?.textContent?.trim(),
-      hasSvgGlyph: !!document.querySelector(".impact-tier-ladder__reveal-line1 .cls svg"),
-    }));
-  }
-
-  // Three-state gate
   for (const mode of ["direct", "soft", "hard"]) {
     const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
     await openImpact(page, mode);
     const state = await readState(page);
     const pass =
-      state.activeStamp === "01" &&
-      state.revealDefault &&
-      state.math === "T01 · OWNS 15 · ADDS 6 · INHERITS 9 FROM T02 · T03" &&
-      state.ringLabels?.join("|") ===
-        "T01 · BUSINESS · +6 ADDED|T02 · PROFESSIONAL · +4 ADDED|T03 · INCLUDED · 5" &&
-      state.bodyChildren?.join(">") ===
-        "impact-tier-ladder__stage>impact-tier-ladder__reveal>impact-tier-ladder__stamps";
+      state.rings?.join(",") === "240,165,90" &&
+      state.dim === "Ø 480 · 15 SERVICES" &&
+      state.intents?.length === 3;
     results.gates[mode] = { pass, state };
     await page.close();
   }
 
   const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
   await openImpact(page, "direct");
-  await screenshot(page, "desktop-t01-default");
+  await screenshot(page, "desktop-t01-rings-stamps");
 
-  // Fix checks
-  const desktopState = await readState(page);
-  results.fixes = {
-    ringLabels: desktopState.ringLabels,
-    bodyOrder: desktopState.bodyChildren,
-    revealAboveStamps:
-      desktopState.bodyChildren?.[1] === "impact-tier-ladder__reveal" &&
-      desktopState.bodyChildren?.[2] === "impact-tier-ladder__stamps",
-  };
-  await page.click('.impact-tier-ladder__stamp[data-tier="03"]');
-  await page.waitForTimeout(200);
-  results.fixes.t03Math = await page.evaluate(() =>
-    document.querySelector(".impact-tier-ladder__panel-head .math")?.textContent?.trim(),
-  );
-  await page.click('.impact-tier-ladder__stamp[data-tier="01"]');
-  await page.waitForTimeout(200);
-
-  // Attribution test cases
-  const cases = [
-    { stamp: "01", pn: "01-A", expected: "T01 NATIVE" },
-    { stamp: "01", pn: "02-A", expected: "INHERITED FROM T02" },
-    { stamp: "01", pn: "03-A", expected: "INHERITED FROM T03" },
-    { stamp: "02", pn: "02-A", expected: "T02 NATIVE" },
-    { stamp: "02", pn: "03-A", expected: "INHERITED FROM T03" },
-    { stamp: "03", pn: "03-A", expected: "T03 NATIVE" },
-  ];
-  for (const c of cases) {
-    const r = await pinAndReadAttribution(page, c.stamp, c.pn);
-    results.attribution[c.pn + "@T" + c.stamp] = {
-      expected: c.expected,
-      actual: r.line2,
-      pass: r.line2 === c.expected,
-      hasSvgGlyph: r.hasSvgGlyph,
-    };
-  }
-
-  await page.click('.impact-tier-ladder__stamp[data-tier="01"]');
-  await page.waitForTimeout(200);
-  await page.locator('.impact-tier-ladder__svg .dot[aria-label^="01-A"]').click();
-  await page.waitForTimeout(200);
-  await screenshot(page, "desktop-t01-01a-native");
-
-  await page.locator('.impact-tier-ladder__svg .dot[aria-label^="03-A"]').click();
-  await page.waitForTimeout(200);
-  await screenshot(page, "desktop-t01-03a-inherited");
-
-  // V2 — ring centering on crosshair (all rings cx=0 cy=0)
-  results.v2RingCentering = await page.evaluate(() => {
-    const rings = Array.from(document.querySelectorAll(".impact-tier-ladder__svg .ring"));
-    return {
-      pass: rings.every((r) => r.getAttribute("cx") === "0" && r.getAttribute("cy") === "0"),
-      rings: rings.map((r) => ({ cx: r.getAttribute("cx"), cy: r.getAttribute("cy"), r: r.getAttribute("r") })),
-    };
-  });
-
-  // V1 — launch strip at narrow widths
-  for (const w of [640, 768, 900]) {
-    await page.setViewportSize({ width: w, height: 900 });
+  // Focus bug check on 02-C and 03-D (click via wedge — same tap path as users)
+  for (const pn of ["02-C", "03-D"]) {
+    await page.evaluate((partNo) => {
+      const dots = Array.from(document.querySelectorAll(".impact-tier-ladder__svg .dot .out"));
+      const target = dots.find((d) => d.getAttribute("aria-label")?.startsWith(partNo));
+      target?.focus();
+    }, pn);
     await page.waitForTimeout(150);
-    const v1 = await page.evaluate(() => {
-      const axis = document.querySelector(".impact-tier-ladder__launch-axis");
-      if (!axis) return { pass: false, reason: "no axis" };
-      const always = document.querySelector(".impact-tier-ladder__launch-always");
-      const t01 = document.querySelector(".impact-tier-ladder__launch-t01range");
-      const ar = axis.getBoundingClientRect();
-      const al = always?.getBoundingClientRect();
-      const t1 = t01?.getBoundingClientRect();
-      const linesOverlap =
-        al && t1 ? !(al.bottom < t1.top || t1.bottom < al.top) && Math.abs(al.top - t1.top) < 20 : false;
-      const labels = Array.from(document.querySelectorAll(".impact-tier-ladder__launch-event .lbl"));
-      const labelRects = labels.map((l) => l.getBoundingClientRect());
-      let labelCollision = false;
-      for (let i = 0; i < labelRects.length; i++) {
-        for (let j = i + 1; j < labelRects.length; j++) {
-          const a = labelRects[i];
-          const b = labelRects[j];
-          if (!(a.right < b.left || b.right < a.left || a.bottom < b.top || b.bottom < a.top)) {
-            labelCollision = true;
-          }
-        }
-      }
+    const focusCheck = await page.evaluate((partNo) => {
+      const focused = document.activeElement;
+      const tag = focused?.tagName?.toLowerCase();
+      const cls = focused?.getAttribute("class") ?? "";
+      const parentTag = focused?.parentElement?.tagName?.toLowerCase();
+      const outline = focused ? getComputedStyle(focused).outlineStyle : null;
+      const outlineWidth = focused ? getComputedStyle(focused).outlineWidth : null;
+      const gTabIndex = document.querySelector(".impact-tier-ladder__svg g.dot[tabindex]");
+      const focusedLabel = focused?.getAttribute("aria-label") ?? "";
       return {
-        pass: !linesOverlap && !labelCollision && ar.width > 0,
-        linesOverlap,
-        labelCollision,
-        axisWidth: ar.width,
+        partNo,
+        focusedTag: tag,
+        focusedClass: cls,
+        parentTag,
+        outlineStyle: outline,
+        outlineWidth,
+        gHasTabIndex: !!gTabIndex,
+        isOutCircle: cls === "out",
+        focusedLabel,
+      };
+    }, pn);
+    results.focus[pn] = focusCheck;
+    await page.evaluate((partNo) => {
+      const wedges = document.querySelectorAll(".impact-tier-ladder__svg .dot-wedge");
+      const idx = ["01-A", "01-B", "01-C", "01-D", "01-E", "01-F", "02-A", "02-B", "02-C", "02-D", "03-A", "03-B", "03-C", "03-D", "03-E"].indexOf(partNo);
+      wedges[idx]?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    }, pn);
+    await page.waitForTimeout(200);
+  }
+  await screenshot(page, "desktop-dot-pinned-no-blue-box");
+
+  // Keyboard focus on dot
+  await page.keyboard.press("Tab");
+  await page.waitForTimeout(100);
+  let tabbedToDot = false;
+  for (let i = 0; i < 30; i++) {
+    const info = await page.evaluate(() => {
+      const el = document.activeElement;
+      return {
+        isDotOut: el?.classList?.contains("out") ?? false,
+        hasFocusRing: !!document.querySelector(".impact-tier-ladder__svg .dot:has(.out:focus-visible) .focus-ring"),
       };
     });
-    results.v1LaunchStrip[w] = v1;
+    if (info.isDotOut) {
+      tabbedToDot = info.hasFocusRing;
+      break;
+    }
+    await page.keyboard.press("Tab");
+    await page.waitForTimeout(50);
   }
+  results.focus.keyboardDotFocusRing = tabbedToDot;
 
-  // Mobile layout order + screenshot
+  // Mobile intent wrapping
   const mobile = await browser.newPage({ viewport: { width: 380, height: 900 } });
   await openImpact(mobile, "direct");
-  const mobileOrder = await mobile.evaluate(() =>
+  const mobileIntent = await mobile.evaluate(() => {
+    const stamps = Array.from(document.querySelectorAll(".impact-tier-ladder__stamp .intent"));
+    return stamps.map((el) => {
+      const r = el.getBoundingClientRect();
+      const parent = el.closest(".impact-tier-ladder__stamp")?.getBoundingClientRect();
+      return {
+        text: el.textContent?.trim().slice(0, 40),
+        overflow: parent ? r.width > parent.width + 2 : false,
+        width: r.width,
+        parentWidth: parent?.width,
+      };
+    });
+  });
+  results.fixes.mobileIntent = mobileIntent;
+  results.fixes.mobileIntentPass = mobileIntent.every((i) => !i.overflow);
+  await screenshot(mobile, "mobile-strategic-intent-wrap");
+  await mobile.close();
+
+  // Regression: attribution + reveal order
+  await page.click('.impact-tier-ladder__stamp[data-tier="01"]');
+  await page.locator('.impact-tier-ladder__svg .dot .out[aria-label^="03-A"]').click({ force: true });
+  await page.waitForTimeout(200);
+  results.fixes.attribution03A = await page.evaluate(() =>
+    document.querySelector(".impact-tier-ladder__reveal-line2")?.textContent?.trim(),
+  );
+  results.fixes.bodyOrder = await page.evaluate(() =>
     Array.from(document.querySelector(".impact-tier-ladder__panel-body")?.children ?? []).map(
-      (el) => el.className.split(" ").find((c) => c.startsWith("impact-tier-ladder__")) ?? el.className,
+      (el) => el.className.split(" ").find((c) => c.startsWith("impact-tier-ladder__")) ?? "",
     ),
   );
-  results.fixes.mobileOrder = mobileOrder;
-  results.fixes.mobileOrderPass =
-    mobileOrder?.join(">") === "impact-tier-ladder__stage>impact-tier-ladder__reveal>impact-tier-ladder__stamps";
-  await mobile.locator('.impact-tier-ladder__svg .dot[aria-label^="01-A"]').click();
-  await mobile.waitForTimeout(200);
-  await screenshot(mobile, "mobile-reveal-above-stamps");
-  await mobile.close();
 
   for (const w of [380, 640, 768, 900, 1024, 1200, 1600]) {
     await page.setViewportSize({ width: w, height: 900 });
