@@ -31,7 +31,7 @@ export const impactBriefingTabs = [
   {
     id: "revenue" as const,
     idx: "01 / Revenue",
-    name: "Service as revenue motion",
+    name: "Service design and management as revenue motion",
     client: "Autodesk",
   },
   {
@@ -160,13 +160,13 @@ export const impactCaseOps = {
   roleBold: "six ITIL service towers",
   roleTrail:
     " for Estée Lauder — building the frameworks, metrics, and delivery model that improved NPS past goal.",
-  hero: { kind: "plain" as const, em: "13", suffix: "%+" },
-  heroLbl: "NPS goal exceeded",
+  hero: { kind: "plain" as const, em: "31", suffix: "%" },
+  heroLbl: "MTTR REDUCTION · ACROSS ALL ROUTED CASES",
   heroUnit: "",
   metrics: [
-    { v: "31", vSmall: "%", k: "MTTR REDUCTION ACROSS TOWERS" },
     { v: "30", vSmall: "+", k: "OUTCOMES SHIPPED" },
-    { v: "13K", vSmall: "", k: "ANNUAL LOCKOUTS ELIMINATED" },
+    { v: "+13", vSmall: "%", k: "NPS GOAL EXCEEDED" },
+    { v: "13K", vSmall: "", k: "ANNUAL REDUCTION IN LOCKOUT CASES" },
   ],
   compareTitle: "Before vs. after — unified service delivery",
   compareHint: "Normalized across ticket classes",

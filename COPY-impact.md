@@ -75,7 +75,7 @@ EYEBROW: IMPACT · 2020–2026
 ## Tab Labels
 
 ```
-01 / Revenue   →  "Service as revenue motion"     →  Autodesk
+01 / Revenue   →  "Service design and management as revenue motion"     →  Autodesk
 02 / Operations →  "Six towers, one model"          →  Wipro
 03 / Healthcare →  "Care pathways, built for adoption" →  EY
 ```
@@ -116,7 +116,7 @@ I led strategy, design direction, and experience reviews on the new post-purchas
 
 **Hero metric**
 ```
-$50M+  ·  Projected incremental revenue  ·  YoY after 2 quarters
+$50M  ·  Projected incremental revenue  ·  YoY after 2 quarters
 ```
 
 **3 headline metrics**
@@ -184,7 +184,7 @@ ROLE LINE: Strategy, design direction, experience reviews on the new post-purcha
 4. Drop tier service lists entirely at 320px — tier names + lift metrics carry the structure
 
 ### Design decision flags
-- [ ] Hero metric ($50M+) is load-bearing — preserve at all viewport widths
+- [ ] Hero metric ($50M) is load-bearing — preserve at all viewport widths
 - [ ] Tier ladder visual punch welcome per locked brief-impact.md latitude posture — Claude Design has freedom on tier ladder treatment
 
 ---
@@ -208,14 +208,14 @@ At Wipro, I led transformation across six ITIL service towers for Estée Lauder,
 
 **Hero metric**
 ```
-13%+  ·  NPS goal exceeded
+−31%  ·  MTTR REDUCTION · ACROSS ALL ROUTED CASES
 ```
 
 **3 metrics**
 ```
 30+       Outcomes shipped
-3         Handoff tiers
-13k       Annual reduction in lockout cases
++13%      NPS goal exceeded
+13K       Annual reduction in lockout cases
 ```
 
 **Before / After section head**

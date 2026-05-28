@@ -182,7 +182,7 @@ export function ImpactShell() {
             </div>
             <div className="impact-hero__metric">
               <span className="v">
-                <span className="accent">+$</span>50<span className="unit">M+</span>
+                <span className="accent">+$</span>50<span className="unit">M</span>
               </span>
               <span className="lbl">Projected incremental revenue · YoY after 2 quarters</span>
             </div>
@@ -240,15 +240,15 @@ export function ImpactShell() {
             </div>
             <div className="impact-hero__metric">
               <span className="v">
-                +13<span className="unit">%+</span>
+                <span className="accent">−</span>31<span className="unit">%</span>
               </span>
-              <span className="lbl">NPS goal exceeded</span>
+              <span className="lbl">MTTR REDUCTION · ACROSS ALL ROUTED CASES</span>
             </div>
           </div>
 
           <MetricStrip>
             <MetricCell value={<>30<span className="u">+</span></>} label="Outcomes shipped" />
-            <MetricCell value="3" label="Handoff tiers" />
+            <MetricCell value={<>+13<span className="u">%</span></>} label="NPS goal exceeded" />
             <MetricCell value={<>13<span className="u">K</span></>} label="Annual reduction in lockout cases" />
           </MetricStrip>
 

@@ -283,6 +283,12 @@ export function AutodeskAssembly() {
               data-state={isActive ? "active" : "stowed"}
               role="listitem"
             >
+              {isActive ? (
+                <div className="impact-drawing-notes" aria-label="Drawing notes">
+                  <p>{tier.drawingNotes[0]}</p>
+                  <p>{tier.drawingNotes[1]}</p>
+                </div>
+              ) : null}
               <div className="impact-tier__chips impact-tier__chips--left">
                 {servicesForTier(tier.id, "L").map((svc, i) => (
                   <Chip
@@ -335,19 +341,25 @@ export function AutodeskAssembly() {
                 ))}
               </div>
               {isActive ? (
-                <>
-                  <p className="impact-tier__desc" id={`tier-${tier.id}-detail`}>
-                    {tier.desc}
-                  </p>
-                  <div className="impact-drawing-notes" aria-label="Drawing notes">
-                    <p>{tier.drawingNotes[0]}</p>
-                    <p>{tier.drawingNotes[1]}</p>
-                  </div>
-                </>
+                <p className="impact-tier__desc" id={`tier-${tier.id}-detail`}>
+                  {tier.desc}
+                </p>
               ) : null}
             </div>
           );
         })}
+      </div>
+
+      <div className="impact-cls-legend" aria-label="Classification legend">
+        <span className="item">
+          <span className="sw full" /> Innovated
+        </span>
+        <span className="item">
+          <span className="sw half" /> Optimized
+        </span>
+        <span className="item">
+          <span className="sw outline" /> Refined
+        </span>
       </div>
 
       <div className="impact-customer-scale" aria-label="12-month program timeline">
@@ -363,18 +375,6 @@ export function AutodeskAssembly() {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="impact-cls-legend" aria-label="Classification legend">
-        <span className="item">
-          <span className="sw full" /> Innovated
-        </span>
-        <span className="item">
-          <span className="sw half" /> Optimized
-        </span>
-        <span className="item">
-          <span className="sw outline" /> Refined
-        </span>
       </div>
     </div>
   );
