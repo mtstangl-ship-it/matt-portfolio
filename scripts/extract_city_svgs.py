@@ -1,8 +1,10 @@
 """
 Extract street-grid SVGs for Atlanta, Athens, Savannah from OpenStreetMap.
+Major arterials only (motorway through tertiary) for fiche draw-in animation.
 """
 
 import os
+import subprocess
 import osmnx as ox
 import matplotlib.pyplot as plt
 
@@ -27,13 +29,26 @@ CITIES = {
 TEAL = "#2dd4b2"
 BG = "#0a0f0e"
 
-EDGE_WIDTH = 0.6
+EDGE_WIDTH = 1.0
 EDGE_ALPHA = 0.85
 FIGURE_SIZE = (12, 12)
-NETWORK_TYPE = "drive"
+CUSTOM_FILTER = '["highway"~"motorway|trunk|primary|secondary|tertiary"]'
 
 OUT_DIR = "./public/maps/cities"
 os.makedirs(OUT_DIR, exist_ok=True)
+
+
+def optimize_svg(path: str) -> None:
+    result = subprocess.run(
+        ["npx", "--yes", "svgo", path, "--multipass", "-o", path],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        print(f"  WARN svgo: {result.stderr.strip() or result.stdout.strip()}")
+    else:
+        print(f"  Optimized → {path}")
+
 
 for code, cfg in CITIES.items():
     print(f"Processing {code.upper()} — {cfg['name']}")
@@ -42,7 +57,7 @@ for code, cfg in CITIES.items():
         G = ox.graph_from_point(
             cfg["point"],
             dist=cfg["dist"],
-            network_type=NETWORK_TYPE,
+            custom_filter=CUSTOM_FILTER,
             simplify=True,
         )
         print(f"  Fetched: {len(G.nodes)} nodes, {len(G.edges)} edges")
@@ -75,5 +90,7 @@ for code, cfg in CITIES.items():
     )
     plt.close(fig)
     print(f"  Saved → {out_path}")
+
+    optimize_svg(out_path)
 
 print("\nDone.")
