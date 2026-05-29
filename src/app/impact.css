@@ -1737,6 +1737,12 @@ body:has(.impact-console) {
   fill:transparent;
   stroke:none;
   cursor:pointer;
+  outline:none;
+  pointer-events:all;
+}
+.impact-tier-ladder__svg .dot-wedge:focus,
+.impact-tier-ladder__svg .dot-wedge:focus-visible{
+  outline:none;
 }
 .impact-tier-ladder__svg .dot{
   cursor:pointer;
@@ -1751,6 +1757,10 @@ body:has(.impact-console) {
 }
 .impact-tier-ladder__svg .dot .out:focus,
 .impact-tier-ladder__svg .dot .out:focus-visible{
+  outline:none;
+}
+.impact-tier-ladder__svg .dot:focus,
+.impact-tier-ladder__svg .dot:focus-visible{
   outline:none;
 }
 .impact-tier-ladder__svg .dot .focus-ring{

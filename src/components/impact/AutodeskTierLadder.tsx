@@ -297,11 +297,15 @@ export function AutodeskTierLadder() {
                     key={`wedge-${dot.service.partNumber}`}
                     className="dot-wedge"
                     d={dot.wedgePath}
-                    tabIndex={-1}
                     aria-hidden
+                    onMouseDown={(e) => e.preventDefault()}
                     onClick={(e) => {
                       e.stopPropagation();
                       togglePin(dot.service.partNumber);
+                      const out = stageRef.current?.querySelector(
+                        `.dot .out[aria-label^="${dot.service.partNumber}"]`,
+                      ) as SVGCircleElement | null;
+                      out?.focus({ preventScroll: true });
                     }}
                   />
                 ))}
@@ -335,6 +339,7 @@ export function AutodeskTierLadder() {
                       onClick={(e) => {
                         e.stopPropagation();
                         togglePin(dot.service.partNumber);
+                        (e.currentTarget as SVGCircleElement).focus({ preventScroll: true });
                       }}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === " ") {
