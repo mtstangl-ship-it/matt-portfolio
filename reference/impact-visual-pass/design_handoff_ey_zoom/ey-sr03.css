@@ -1,0 +1,316 @@
+/* ============================================================
+   EY TAB · SR-03 · ZOOM-INTO-CITY
+   Extends ey-sketch.css (tokens + shared chrome).
+   Link ey-sketch.css FIRST, then this file.
+   ============================================================ */
+
+/* Round banner reuses .var-banner; add a 4-col grid variant */
+.var-banner.sr03{
+  display:grid; grid-template-columns:auto 1fr auto auto; gap:18px; align-items:center;
+}
+@media (max-width:880px){
+  .var-banner.sr03{ grid-template-columns:1fr; gap:6px; }
+}
+
+/* ============================================================
+   STATE PAIR — default Georgia ↔ active city, side by side
+   ============================================================ */
+.state-pair{
+  display:grid;
+  grid-template-columns: 1fr 44px 1fr;
+  gap:0; align-items:stretch;
+  margin-top:4px;
+}
+.state-frame{
+  position:relative;
+  border:1px solid var(--ink-3);
+  background:var(--bg);
+  padding:34px 16px 16px;
+  min-width:0;
+}
+.state-frame__tab{
+  position:absolute; top:-1px; left:-1px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--ink-2);
+  background:var(--bg-soft); border:1px solid var(--ink-3);
+  padding:5px 10px;
+}
+.state-frame__tab.active{ color:var(--teal); border-color:var(--teal); }
+.state-frame__tab .n{ color:var(--ink-3); }
+.state-frame__tab.active .n{ color:var(--ink-0); }
+
+/* center transition gutter */
+.transition{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:8px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--teal);
+}
+.transition .glyph{
+  font-size:16px; color:var(--teal); line-height:1;
+}
+.transition .word{ writing-mode:vertical-rl; transform:rotate(180deg); color:var(--ink-2); letter-spacing:0.22em; }
+.transition .word b{ color:var(--teal); }
+
+@media (max-width:760px){
+  .state-pair{ grid-template-columns:1fr; }
+  .transition{ flex-direction:row; padding:10px 0; }
+  .transition .word{ writing-mode:horizontal-tb; transform:none; }
+}
+
+/* ============================================================
+   CITY MAP — the zoomed-in local geography placeholder
+   ============================================================ */
+.citymap{
+  position:relative;
+  width:100%;
+  aspect-ratio: 1 / 1;
+  border:1px solid var(--teal);
+  overflow:hidden;
+  background:#0a100f;
+}
+.citymap__cap{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--ink-2);
+  text-transform:uppercase; text-align:center; line-height:1.6;
+  background:rgba(10,15,14,0.78); border:1px dashed var(--ink-3);
+  padding:8px 12px; max-width:80%; z-index:4;
+}
+.citymap__cap b{ color:var(--ink-1); display:block; font-size:8px; letter-spacing:0.22em; margin-bottom:3px; }
+
+/* stylization variants — placeholder topology */
+/* grid: metro street grid (ATL) */
+.citymap--grid::before{
+  content:""; position:absolute; inset:0; z-index:1;
+  background-image:
+    linear-gradient(rgba(45,212,178,0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,178,0.16) 1px, transparent 1px),
+    linear-gradient(rgba(45,212,178,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,178,0.06) 1px, transparent 1px);
+  background-size: 64px 64px, 64px 64px, 16px 16px, 16px 16px;
+}
+.citymap--grid::after{
+  /* a couple of diagonal arterials */
+  content:""; position:absolute; inset:0; z-index:2;
+  background-image:
+    linear-gradient(28deg, transparent calc(50% - 1px), var(--teal-dim) 50%, transparent calc(50% + 1px)),
+    linear-gradient(-52deg, transparent calc(38% - 1px), var(--teal-dim) 38%, transparent calc(38% + 1px));
+  opacity:0.5;
+}
+
+/* coast: coastline + grid (SAV) */
+.citymap--coast::before{
+  content:""; position:absolute; inset:0; z-index:1;
+  background-image:
+    linear-gradient(rgba(45,212,178,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,178,0.10) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.citymap--coast::after{
+  /* water mass lower-right, hatched */
+  content:""; position:absolute; right:0; bottom:0; width:62%; height:58%; z-index:2;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 7px, rgba(45,212,178,0.12) 7px 8px);
+  border-top:1px solid var(--teal); border-left:1px solid var(--teal);
+  transform: skewX(-12deg); transform-origin:bottom right;
+}
+
+/* hatch: abstract arterials only (ATH) */
+.citymap--hatch::before{
+  content:""; position:absolute; inset:0; z-index:1;
+  background-image:
+    repeating-linear-gradient(60deg, transparent 0 22px, rgba(45,212,178,0.08) 22px 23px),
+    repeating-linear-gradient(-30deg, transparent 0 30px, rgba(45,212,178,0.06) 30px 31px);
+}
+
+/* fiche chrome sized down for city view */
+.citymap .map-stamp{ font-size:8px; padding:3px 6px; }
+.citymap .compass{ width:34px; height:34px; }
+.citymap .scalebar{ bottom:10px; left:10px; }
+.citymap .scalebar .ruler{ width:54px; }
+
+/* center reticle showing "you zoomed to here" */
+.citymap__reticle{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:54px; height:54px; z-index:3; pointer-events:none;
+}
+.citymap__reticle::before,.citymap__reticle::after{
+  content:""; position:absolute; background:var(--teal);
+}
+.citymap__reticle::before{ left:50%; top:0; bottom:0; width:1px; transform:translateX(-50%); opacity:0.4; }
+.citymap__reticle::after{ top:50%; left:0; right:0; height:1px; transform:translateY(-50%); opacity:0.4; }
+
+/* ============================================================
+   ZOOM-OUT / RETURN affordances
+   ============================================================ */
+.back-aff{
+  position:absolute; top:8px; left:8px; z-index:6;
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--teal);
+  background:rgba(10,15,14,0.85); border:1px solid var(--teal);
+  padding:5px 9px;
+}
+.back-aff .ar{ font-size:11px; }
+
+/* zoom-out stamp (var 2) */
+.zoomout-stamp{
+  position:absolute; top:8px; right:8px; z-index:6;
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-1);
+  background:rgba(10,15,14,0.85); border:1px solid var(--ink-3);
+  padding:5px 9px; cursor:pointer;
+}
+.zoomout-stamp .ic{ color:var(--teal); }
+
+/* ============================================================
+   OTHER-CITY AFFORDANCES
+   ============================================================ */
+/* breadcrumb register (1/3 ATL) */
+.breadcrumb{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-2);
+  background:rgba(10,15,14,0.85); border:1px solid var(--ink-3);
+  padding:5px 9px;
+}
+.breadcrumb .pos{ color:var(--teal); }
+.breadcrumb .city{ color:var(--ink-0); }
+.breadcrumb .track{ display:inline-flex; gap:4px; }
+.breadcrumb .track i{ width:6px; height:6px; border:1px solid var(--ink-3); display:inline-block; }
+.breadcrumb .track i.lit{ background:var(--teal); border-color:var(--teal); }
+
+/* stacked pin badges for other cities (var 1) */
+.pin-badges{
+  position:absolute; top:8px; right:8px; z-index:6;
+  display:grid; gap:6px; justify-items:end;
+}
+.pin-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ink-2);
+  background:rgba(10,15,14,0.85); border:1px solid var(--ink-3);
+  padding:4px 8px; cursor:pointer;
+}
+.pin-badge .dot{ width:7px; height:7px; border:1px solid var(--ink-2); border-radius:50%; }
+.pin-badge .n{ color:var(--ink-3); }
+.pin-badge.hd{ color:var(--ink-3); border-style:dashed; cursor:default; }
+
+/* ============================================================
+   VAR 1 · SPLIT-ZOOM active layout
+   city left, card right
+   ============================================================ */
+.split{
+  display:grid; grid-template-columns: 1.25fr 1fr; gap:12px; align-items:stretch;
+}
+.split .citymap{ aspect-ratio:auto; height:100%; min-height:300px; }
+.split .citycard{
+  width:auto; align-self:stretch;
+  display:grid; align-content:start; gap:8px;
+}
+.split-meta{
+  grid-column:1 / -1;
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+  margin-top:10px; padding-top:10px; border-top:1px dashed var(--ink-4);
+  font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3);
+}
+
+/* ============================================================
+   VAR 2 · DRAW-IN OVERLAY active layout
+   card overlays the city as a fiche callout
+   ============================================================ */
+.overlay-stage{ position:relative; }
+.overlay-stage .citymap{ aspect-ratio: 4 / 5; min-height:380px; }
+.overlay-stage .citycard{
+  position:absolute; left:14px; right:14px; bottom:14px; z-index:7;
+  width:auto;
+  background:rgba(10,15,14,0.94);
+}
+/* draw-in dashes hint */
+.drawin-hint{
+  position:absolute; top:8px; left:50%; transform:translateX(-50%); z-index:6;
+  font-family:var(--mono); font-size:8px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--ink-2);
+  border:1px dashed var(--teal); padding:3px 8px; background:rgba(10,15,14,0.7);
+}
+
+/* ============================================================
+   VAR 3 · CITY-TAB STACK
+   tab strip on top, city band, card below
+   ============================================================ */
+.city-tabs{
+  display:flex; gap:0; border:1px solid var(--ink-3); border-bottom:none;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase;
+}
+.city-tabs .tab{
+  flex:1; text-align:center; padding:7px 4px;
+  color:var(--ink-2); border-right:1px solid var(--ink-3);
+  cursor:pointer; background:var(--bg);
+}
+.city-tabs .tab:last-child{ border-right:none; }
+.city-tabs .tab.active{ color:var(--teal); background:var(--plate-2); border-bottom:1px solid var(--teal); }
+.city-tabs .tab.sum{ color:var(--rev); }
+.city-tabs .tab .n{ display:block; font-size:7px; color:var(--ink-3); margin-top:2px; }
+.city-tabs .tab.active .n{ color:var(--ink-1); }
+
+.stack .citymap{ aspect-ratio: 16 / 6; border-top:none; }
+.stack .citycard{
+  width:auto; border-top:none;
+  display:grid; grid-template-columns: 1.4fr 1fr; gap:6px 16px; align-items:start;
+}
+.stack .citycard .copy{ display:grid; gap:8px; }
+.stack .citycard .stats{ border-top:none; border-left:1px dashed var(--ink-4); padding-left:14px; padding-top:0; }
+
+/* ============================================================
+   ZOOM SPEC annotation block (in notes column)
+   ============================================================ */
+.zoomspec{
+  border:1px solid var(--ink-4); background:var(--bg);
+  padding:10px 12px; margin-bottom:14px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-2);
+  display:grid; gap:7px;
+}
+.zoomspec .r{ display:grid; grid-template-columns:54px 1fr; gap:8px; align-items:baseline; }
+.zoomspec .r .k{ color:var(--ink-3); font-size:8px; }
+.zoomspec .r .v{ font-family:var(--sans); font-size:11px; letter-spacing:-0.005em; text-transform:none; color:var(--ink-1); line-height:1.45; }
+.zoomspec .r .v b{ color:var(--ink-0); font-weight:500; }
+.zoomspec .r .v em{ color:var(--teal); font-style:normal; }
+
+/* ============================================================
+   MOBILE city pieces
+   ============================================================ */
+.mob-citymap{
+  position:relative; width:100%; aspect-ratio: 4/5;
+  border:1px solid var(--teal); overflow:hidden; background:#0a100f;
+}
+.mob-citymap .citymap__cap{ font-size:8px; }
+.mob-citymap.citymap--grid::before,
+.mob-citymap.citymap--coast::before,
+.mob-citymap.citymap--hatch::before{ position:absolute; inset:0; }
+
+.mob-back-bar{
+  display:flex; justify-content:space-between; align-items:center; gap:8px;
+  padding:6px 8px; border:1px solid var(--teal); border-bottom:none;
+  font-family:var(--mono); font-size:8px; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal);
+}
+.mob-back-bar .crumb{ color:var(--ink-2); }
+.mob-back-bar .crumb b{ color:var(--ink-0); }
+
+.mob-tabs{
+  display:flex; border:1px solid var(--ink-3); border-bottom:none;
+  font-family:var(--mono); font-size:8px; letter-spacing:0.12em; text-transform:uppercase;
+}
+.mob-tabs .t{ flex:1; text-align:center; padding:6px 2px; color:var(--ink-2); border-right:1px solid var(--ink-3); }
+.mob-tabs .t:last-child{ border-right:none; }
+.mob-tabs .t.active{ color:var(--teal); background:var(--plate-2); }
+.mob-tabs .t.sum{ color:var(--rev); }
+
+/* a small "freed space" annotation marker used in sketches */
+.freed{
+  position:absolute; z-index:5;
+  font-family:var(--mono); font-size:8px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--rev); border:1px dashed var(--rev); background:rgba(196,113,85,0.05);
+  padding:4px 7px; line-height:1.5; max-width:180px;
+}
+.freed b{ color:var(--ink-1); display:block; font-size:7px; letter-spacing:0.22em; margin-bottom:2px; }
