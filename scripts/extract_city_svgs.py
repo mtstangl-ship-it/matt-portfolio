@@ -29,7 +29,7 @@ CITIES = {
     },
 }
 
-TEAL = "#1dcfaa"
+TEAL = "#2dd4b2"
 BG = "#0a0f0e"
 
 EDGE_WIDTH = 1.0

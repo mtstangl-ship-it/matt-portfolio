@@ -314,7 +314,7 @@ export function ImpactShell() {
           <SectionBreak
             label={
               <>
-                <span className="arrow">↓</span> Georgia delivery footprint · Tap to inspect each hub
+                <span className="arrow">↓</span> Georgia delivery footprint · Scroll the cities
               </>
             }
             meta={
