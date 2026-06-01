@@ -14,15 +14,18 @@ const VIEW_H = 350;
 const VIEW_MIN_X = -10;
 const VIEW_MIN_Y = -10;
 
-/** Pin positions in Georgia SVG viewBox space (brief QA corrections). */
+/** Single source of truth: pin center (cx, cy) + label anchor (lx, ly) in viewBox space. */
 const PIN_LAYOUT: Record<
   CityView,
-  { cx: number; cy: number; lx: number; ly: number }
+  { cx: number; cy: number; lx: number; ly: number; labelAnchor: "start" | "middle" | "end" }
 > = {
-  ATL: { cx: 83, cy: 112.5, lx: 28, ly: 82 },
-  ATH: { cx: 120, cy: 95, lx: 120, ly: 48 },
-  SAV: { cx: 232, cy: 235, lx: 282, ly: 232 },
+  ATL: { cx: 83, cy: 112.5, lx: 24, ly: 82, labelAnchor: "end" },
+  ATH: { cx: 120, cy: 95, lx: 120, ly: 44, labelAnchor: "middle" },
+  SAV: { cx: 222, cy: 288, lx: 272, ly: 285, labelAnchor: "start" },
 };
+
+const PIN_R = 7;
+const PIN_HIT_R = 22;
 
 const CITY_SVG: Record<CityView, string> = {
   ATL: "/maps/cities/atl-grid.svg",
@@ -74,12 +77,6 @@ const CITY_CARDS: Record<CityView, CityCard> = {
   },
 };
 
-function toPercent(cx: number, cy: number): { left: string; top: string } {
-  const left = ((cx - VIEW_MIN_X) / VIEW_W) * 100;
-  const top = ((cy - VIEW_MIN_Y) / VIEW_H) * 100;
-  return { left: `${left}%`, top: `${top}%` };
-}
-
 function isCityView(view: View): view is CityView {
   return view === "ATL" || view === "ATH" || view === "SAV";
 }
@@ -110,22 +107,21 @@ function hidePaths(svg: SVGSVGElement): void {
 
 function CompassRose() {
   return (
-    <svg className="impact-ey-footprint__compass" viewBox="0 0 40 40" aria-hidden>
-      <circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" strokeWidth="1" />
-      <line x1="20" y1="4" x2="20" y2="36" stroke="currentColor" strokeWidth="0.75" />
-      <line x1="4" y1="20" x2="36" y2="20" stroke="currentColor" strokeWidth="0.75" />
-      <line x1="8" y1="8" x2="32" y2="32" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
-      <line x1="32" y1="8" x2="8" y2="32" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
-      <text x="20" y="11" textAnchor="middle" className="impact-ey-footprint__compass-label">
+    <svg className="impact-ey-footprint__compass" viewBox="0 0 36 36" aria-hidden>
+      <circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" strokeWidth="1" />
+      <line x1="18" y1="6" x2="18" y2="30" stroke="currentColor" strokeWidth="0.75" />
+      <line x1="6" y1="18" x2="30" y2="18" stroke="currentColor" strokeWidth="0.75" />
+      <polygon points="18,5 16,10 20,10" fill="currentColor" />
+      <text x="18" y="8" textAnchor="middle" className="impact-ey-footprint__compass-label">
         N
       </text>
-      <text x="33" y="22" textAnchor="middle" className="impact-ey-footprint__compass-label">
+      <text x="31" y="20" textAnchor="middle" className="impact-ey-footprint__compass-label">
         E
       </text>
-      <text x="20" y="35" textAnchor="middle" className="impact-ey-footprint__compass-label">
+      <text x="18" y="33" textAnchor="middle" className="impact-ey-footprint__compass-label">
         S
       </text>
-      <text x="7" y="22" textAnchor="middle" className="impact-ey-footprint__compass-label">
+      <text x="5" y="20" textAnchor="middle" className="impact-ey-footprint__compass-label">
         W
       </text>
     </svg>
@@ -139,7 +135,6 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
   const [reduceMotion, setReduceMotion] = useState(false);
   const [cityHtml, setCityHtml] = useState("");
   const [drawPhase, setDrawPhase] = useState<"idle" | "in" | "out">("idle");
-  const [activeCity, setActiveCity] = useState<CityView | null>(null);
 
   const cityMapRef = useRef<HTMLDivElement>(null);
   const svgCache = useRef<Partial<Record<CityView, string>>>({});
@@ -148,9 +143,8 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
   const cityMeta = impactCaseHealth.cities.map((c) => {
     const code = c.id === "atlanta" ? "ATL" : c.id === "athens" ? "ATH" : "SAV";
     const layout = PIN_LAYOUT[code as CityView];
-    const dot = toPercent(layout.cx, layout.cy);
-    const label = toPercent(layout.lx, layout.ly);
-    return { ...c, code: code as CityView, layout, dot, label };
+    const label = `${c.name.slice(0, 3).toUpperCase()} · Hub-${c.idLabel}`;
+    return { ...c, code: code as CityView, layout, label };
   });
 
   const clearTimers = useCallback(() => {
@@ -207,7 +201,6 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
       clearTimers();
       setAnimating(true);
       setCardVisible(false);
-      setActiveCity(city);
 
       const cached = svgCache.current[city];
       const html: string = cached ?? (await fetch(CITY_SVG[city]).then((r) => r.text()));
@@ -239,7 +232,6 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
 
     schedule(() => {
       setView("georgia");
-      setActiveCity(null);
       setCityHtml("");
       setDrawPhase("idle");
     }, reduceMotion ? 0 : RETURN_MS);
@@ -265,7 +257,6 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
       setCardVisible(false);
       setCityHtml("");
       setDrawPhase("idle");
-      setActiveCity(null);
     }
   }, [tabActive]);
 
@@ -279,7 +270,7 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
       className={`impact-ey-footprint${reduceMotion ? " is-reduced-motion" : ""}${animating ? " is-animating" : ""}`}
       data-view={view}
     >
-      <div className="impact-ey-footprint__stage overlay-stage">
+      <div className="impact-ey-footprint__stage">
         <div className="impact-ey-footprint__fig-stamp">{figStamp}</div>
         <div className="impact-ey-footprint__scale" aria-hidden>
           <span className="impact-ey-footprint__scale-bar" />
@@ -317,50 +308,72 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
           <svg
             viewBox={`${VIEW_MIN_X} ${VIEW_MIN_Y} ${VIEW_W} ${VIEW_H}`}
             preserveAspectRatio="xMidYMid meet"
-            aria-hidden
-            className="p3 impact-ey-footprint__georgia-svg"
+            aria-hidden={!georgiaVisible}
+            className="impact-ey-footprint__georgia-svg"
           >
-            <path className="outline" d={GEORGIA_PATH_D} />
-            <g className="impact-ey-footprint__pin-leaders">
-              {cityMeta.map((c) => (
-                <g key={c.code}>
-                  <line
-                    className="impact-ey-footprint__leader"
-                    x1={c.layout.cx}
-                    y1={c.layout.cy}
-                    x2={c.layout.lx}
-                    y2={c.layout.ly}
-                  />
-                  <g className="impact-ey-footprint__pin-tick" transform={`translate(${c.layout.cx} ${c.layout.cy})`}>
-                    <line x1="-5" y1="0" x2="5" y2="0" />
-                    <line x1="0" y1="-5" x2="0" y2="5" />
-                  </g>
-                </g>
-              ))}
-            </g>
-          </svg>
+            <path className="impact-ey-footprint__georgia-outline" d={GEORGIA_PATH_D} />
+            {georgiaVisible &&
+              cityMeta.map((c) => {
+                const { cx, cy, lx, ly, labelAnchor } = c.layout;
+                const labelW = c.label.length * 5.6 + 14;
+                const rectX =
+                  labelAnchor === "end"
+                    ? lx - labelW
+                    : labelAnchor === "start"
+                      ? lx
+                      : lx - labelW / 2;
+                const rectY = ly - 9;
 
-          {georgiaVisible &&
-            cityMeta.map((c) => (
-              <div key={c.code} className="impact-ey-footprint__pin-wrap">
-                <button
-                  type="button"
-                  className={`impact-ey-footprint__pin${activeCity === c.code ? " is-active" : ""}`}
-                  style={c.dot}
-                  onClick={() => void zoomIn(c.code)}
-                  aria-label={`Inspect ${c.name} hub`}
-                >
-                  <span className="dot" aria-hidden />
-                </button>
-                <span
-                  className="impact-ey-footprint__pin-label"
-                  style={c.label}
-                  aria-hidden
-                >
-                  <b>{c.name.slice(0, 3).toUpperCase()}</b> · Hub-{c.idLabel}
-                </span>
-              </div>
-            ))}
+                return (
+                  <g key={c.code} className="impact-ey-footprint__pin-group">
+                    <line
+                      className="impact-ey-footprint__leader"
+                      x1={lx}
+                      y1={ly}
+                      x2={cx}
+                      y2={cy}
+                    />
+                    <rect
+                      className="impact-ey-footprint__pin-label-box"
+                      x={rectX}
+                      y={rectY}
+                      width={labelW}
+                      height={18}
+                    />
+                    <text
+                      className="impact-ey-footprint__pin-label-text"
+                      x={labelAnchor === "end" ? lx - 6 : labelAnchor === "start" ? lx + 6 : lx}
+                      y={ly + 4}
+                      textAnchor={labelAnchor}
+                    >
+                      {c.label}
+                    </text>
+                    <circle
+                      className="impact-ey-footprint__pin-dot"
+                      cx={cx}
+                      cy={cy}
+                      r={PIN_R}
+                    />
+                    <circle
+                      className="impact-ey-footprint__pin-hit"
+                      cx={cx}
+                      cy={cy}
+                      r={PIN_HIT_R}
+                      tabIndex={0}
+                      role="button"
+                      aria-label={`Inspect ${c.name} hub`}
+                      onClick={() => void zoomIn(c.code)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          void zoomIn(c.code);
+                        }
+                      }}
+                    />
+                  </g>
+                );
+              })}
+          </svg>
         </div>
 
         {isCityView(view) && (
@@ -377,12 +390,12 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
             type="button"
             className="impact-ey-footprint__zoomout zoomout-stamp"
             onClick={() => void zoomOut()}
-            aria-label="Zoom out to Georgia footprint"
+            aria-label="Back to Georgia footprint"
           >
             <span className="ic" aria-hidden>
               ↺
             </span>{" "}
-            FIG. 03 · ZOOM OUT
+            BACK TO GEORGIA
           </button>
         )}
 
