@@ -25,7 +25,7 @@ CITIES = {
     "sav": {
         "name": "Savannah, GA",
         "point": (32.0809, -81.0912),
-        "dist": 3000,
+        "dist": 1500,
     },
 }
 

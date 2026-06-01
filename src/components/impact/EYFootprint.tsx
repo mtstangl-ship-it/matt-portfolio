@@ -6,33 +6,29 @@ import {
   impactCaseHealth,
 } from "@/content/impact-dashboard-briefing";
 
-type View = "georgia" | "ATL" | "ATH" | "SAV" | "summary";
+type View = "georgia" | "ATL" | "ATH" | "SAV";
 type CityView = "ATL" | "ATH" | "SAV";
-type BreadcrumbSlot = CityView | "SUM";
 
 const VIEW_W = 310;
 const VIEW_H = 350;
 const VIEW_MIN_X = -10;
 const VIEW_MIN_Y = -10;
 
+/** Pin positions in Georgia SVG viewBox space (brief QA corrections). */
+const PIN_LAYOUT: Record<
+  CityView,
+  { cx: number; cy: number; lx: number; ly: number }
+> = {
+  ATL: { cx: 83, cy: 112.5, lx: 28, ly: 82 },
+  ATH: { cx: 120, cy: 95, lx: 120, ly: 48 },
+  SAV: { cx: 232, cy: 235, lx: 282, ly: 232 },
+};
+
 const CITY_SVG: Record<CityView, string> = {
   ATL: "/maps/cities/atl-grid.svg",
   ATH: "/maps/cities/ath-grid.svg",
   SAV: "/maps/cities/sav-grid.svg",
 };
-
-const CITY_MAP: Record<CityView, "atl" | "ath" | "sav"> = {
-  ATL: "atl",
-  ATH: "ath",
-  SAV: "sav",
-};
-
-const BREADCRUMB: { slot: BreadcrumbSlot; label: string; view: View; index: number }[] = [
-  { slot: "ATL", label: "ATL", view: "ATL", index: 1 },
-  { slot: "ATH", label: "ATH", view: "ATH", index: 2 },
-  { slot: "SAV", label: "SAV", view: "SAV", index: 3 },
-  { slot: "SUM", label: "SUM", view: "summary", index: 4 },
-];
 
 const DRAW_MS = 600;
 const RETURN_MS = 450;
@@ -112,24 +108,49 @@ function hidePaths(svg: SVGSVGElement): void {
   });
 }
 
+function CompassRose() {
+  return (
+    <svg className="impact-ey-footprint__compass" viewBox="0 0 40 40" aria-hidden>
+      <circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" strokeWidth="1" />
+      <line x1="20" y1="4" x2="20" y2="36" stroke="currentColor" strokeWidth="0.75" />
+      <line x1="4" y1="20" x2="36" y2="20" stroke="currentColor" strokeWidth="0.75" />
+      <line x1="8" y1="8" x2="32" y2="32" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+      <line x1="32" y1="8" x2="8" y2="32" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+      <text x="20" y="11" textAnchor="middle" className="impact-ey-footprint__compass-label">
+        N
+      </text>
+      <text x="33" y="22" textAnchor="middle" className="impact-ey-footprint__compass-label">
+        E
+      </text>
+      <text x="20" y="35" textAnchor="middle" className="impact-ey-footprint__compass-label">
+        S
+      </text>
+      <text x="7" y="22" textAnchor="middle" className="impact-ey-footprint__compass-label">
+        W
+      </text>
+    </svg>
+  );
+}
+
 export function EYFootprint({ tabActive }: { tabActive: boolean }) {
   const [view, setView] = useState<View>("georgia");
-  const [inspected, setInspected] = useState<Set<CityView>>(() => new Set());
   const [animating, setAnimating] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [cityHtml, setCityHtml] = useState("");
   const [drawPhase, setDrawPhase] = useState<"idle" | "in" | "out">("idle");
-  const [ghostHtml, setGhostHtml] = useState<Partial<Record<CityView, string>>>({});
+  const [activeCity, setActiveCity] = useState<CityView | null>(null);
 
   const cityMapRef = useRef<HTMLDivElement>(null);
   const svgCache = useRef<Partial<Record<CityView, string>>>({});
   const timers = useRef<number[]>([]);
 
-  const cities = impactCaseHealth.cities;
-  const pinPositions = cities.map((c) => {
+  const cityMeta = impactCaseHealth.cities.map((c) => {
     const code = c.id === "atlanta" ? "ATL" : c.id === "athens" ? "ATH" : "SAV";
-    return { ...c, code: code as CityView, ...toPercent(c.cx, c.cy) };
+    const layout = PIN_LAYOUT[code as CityView];
+    const dot = toPercent(layout.cx, layout.cy);
+    const label = toPercent(layout.lx, layout.ly);
+    return { ...c, code: code as CityView, layout, dot, label };
   });
 
   const clearTimers = useCallback(() => {
@@ -180,110 +201,76 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
     [reduceMotion],
   );
 
-  const goToView = useCallback(
-    async (next: View) => {
-      if (animating || next === view) return;
+  const zoomIn = useCallback(
+    async (city: CityView) => {
+      if (animating || view !== "georgia") return;
       clearTimers();
       setAnimating(true);
       setCardVisible(false);
+      setActiveCity(city);
 
-      const fromCity = isCityView(view);
-      const toCity = isCityView(next);
-      const leavingDetail = view !== "georgia" && next === "georgia";
-      const swappingCity = fromCity && toCity && view !== next;
+      const cached = svgCache.current[city];
+      const html: string = cached ?? (await fetch(CITY_SVG[city]).then((r) => r.text()));
+      svgCache.current[city] = html;
+      setCityHtml(html);
+      setView(city);
 
-      if (leavingDetail || swappingCity) {
-        if (!reduceMotion && fromCity) {
-          await runDrawIn("out");
-        }
-        schedule(() => {
-          if (leavingDetail) {
-            setCityHtml("");
-            setDrawPhase("idle");
-          }
-        }, reduceMotion ? 0 : RETURN_MS);
-      }
-
-      const applyNext = async () => {
-        setView(next);
-
-        if (toCity) {
-          setInspected((prev) => new Set(prev).add(next));
-          const cached = svgCache.current[next];
-          const html: string =
-            cached ?? (await fetch(CITY_SVG[next]).then((r) => r.text()));
-          svgCache.current[next] = html;
-          setCityHtml(html);
-        } else if (next === "summary") {
-          setCityHtml("");
-          const ghosts: Partial<Record<CityView, string>> = {};
-          for (const city of ["ATL", "ATH", "SAV"] as CityView[]) {
-            ghosts[city] =
-              svgCache.current[city] ??
-              (await fetch(CITY_SVG[city]).then((r) => r.text()));
-            svgCache.current[city] = ghosts[city]!;
-          }
-          setGhostHtml(ghosts);
-        } else {
-          setCityHtml("");
-          setDrawPhase("idle");
-        }
-
-        if (toCity && !reduceMotion) {
-          schedule(() => void runDrawIn("in"), 50);
-        } else if (toCity && reduceMotion) {
-          setDrawPhase("in");
-        }
-
-        const cardDelay =
-          reduceMotion ? 80 : view === "georgia" || swappingCity ? CARD_DELAY_MS : 120;
-        schedule(() => setCardVisible(next !== "georgia"), cardDelay);
-
-        const animMs = reduceMotion
-          ? 180
-          : leavingDetail
-            ? RETURN_MS
-            : toCity || next === "summary"
-              ? DRAW_MS
-              : 200;
-
-        schedule(() => setAnimating(false), animMs);
-      };
-
-      if (leavingDetail || swappingCity) {
-        schedule(() => void applyNext(), reduceMotion ? 0 : RETURN_MS);
+      if (!reduceMotion) {
+        schedule(() => void runDrawIn("in"), 50);
       } else {
-        await applyNext();
+        setDrawPhase("in");
       }
+
+      schedule(() => setCardVisible(true), reduceMotion ? 80 : CARD_DELAY_MS);
+      schedule(() => setAnimating(false), reduceMotion ? 180 : DRAW_MS);
     },
     [animating, view, reduceMotion, runDrawIn, clearTimers, schedule],
   );
+
+  const zoomOut = useCallback(async () => {
+    if (animating || view === "georgia" || !isCityView(view)) return;
+    clearTimers();
+    setAnimating(true);
+    setCardVisible(false);
+
+    if (!reduceMotion) {
+      await runDrawIn("out");
+    }
+
+    schedule(() => {
+      setView("georgia");
+      setActiveCity(null);
+      setCityHtml("");
+      setDrawPhase("idle");
+    }, reduceMotion ? 0 : RETURN_MS);
+
+    schedule(() => setAnimating(false), reduceMotion ? 180 : RETURN_MS);
+  }, [animating, view, reduceMotion, runDrawIn, clearTimers, schedule]);
 
   useEffect(() => {
     if (!tabActive) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && view !== "georgia") {
-        void goToView("georgia");
+        void zoomOut();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [tabActive, view, goToView]);
+  }, [tabActive, view, zoomOut]);
 
   useEffect(() => {
     if (!tabActive) {
       setView("georgia");
-      setInspected(new Set());
       setAnimating(false);
       setCardVisible(false);
       setCityHtml("");
       setDrawPhase("idle");
+      setActiveCity(null);
     }
   }, [tabActive]);
 
-  const breadcrumbActive = BREADCRUMB.find((b) => b.view === view);
-  const showChrome = view !== "georgia";
-  const georgiaDimmed = view !== "georgia";
+  const georgiaVisible = view === "georgia";
+  const georgiaDimmed = !georgiaVisible;
   const figStamp = isCityView(view) ? "FIG. 03-B · 1 : 1" : "FIG. 03-A · 1 : 1";
   const scaleLabel = isCityView(view) ? "10 mi" : "100 mi";
 
@@ -298,17 +285,25 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
           <span className="impact-ey-footprint__scale-bar" />
           <span className="impact-ey-footprint__scale-label">{scaleLabel}</span>
         </div>
-        <svg className="impact-ey-footprint__compass" viewBox="0 0 24 24" aria-hidden>
-          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="1" />
-          <path
-            d="M12 4 L12 8 M12 16 L12 20 M4 12 L8 12 M16 12 L20 12"
-            stroke="currentColor"
-            strokeWidth="1"
-          />
-          <text x="12" y="7" textAnchor="middle" className="impact-ey-footprint__compass-n">
-            N
-          </text>
-        </svg>
+        <CompassRose />
+
+        {georgiaVisible && (
+          <div className="impact-ey-footprint__program-total" aria-label="Program totals">
+            <div className="impact-ey-footprint__program-total-title">Program total</div>
+            <div className="impact-ey-footprint__program-total-row">
+              <span className="v">4.57M</span>
+              <span className="l">Engagements</span>
+            </div>
+            <div className="impact-ey-footprint__program-total-row">
+              <span className="v">715</span>
+              <span className="l">Vaccinations</span>
+            </div>
+            <div className="impact-ey-footprint__program-total-row">
+              <span className="v">3</span>
+              <span className="l">Hubs</span>
+            </div>
+          </div>
+        )}
 
         {animating && isCityView(view) && !reduceMotion && (
           <div className="impact-ey-footprint__draw-hint" aria-hidden>
@@ -323,65 +318,50 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
             viewBox={`${VIEW_MIN_X} ${VIEW_MIN_Y} ${VIEW_W} ${VIEW_H}`}
             preserveAspectRatio="xMidYMid meet"
             aria-hidden
-            className="p3"
+            className="p3 impact-ey-footprint__georgia-svg"
           >
-            <g className="grid">
-              <line x1={VIEW_MIN_X + 70} y1={VIEW_MIN_Y} x2={VIEW_MIN_X + 70} y2={VIEW_MIN_Y + VIEW_H} />
-              <line
-                x1={VIEW_MIN_X + VIEW_W / 2}
-                y1={VIEW_MIN_Y}
-                x2={VIEW_MIN_X + VIEW_W / 2}
-                y2={VIEW_MIN_Y + VIEW_H}
-              />
-              <line
-                x1={VIEW_MIN_X + VIEW_W - 20}
-                y1={VIEW_MIN_Y}
-                x2={VIEW_MIN_X + VIEW_W - 20}
-                y2={VIEW_MIN_Y + VIEW_H}
-              />
-              <line x1={VIEW_MIN_X} y1={VIEW_MIN_Y + 60} x2={VIEW_MIN_X + VIEW_W} y2={VIEW_MIN_Y + 60} />
-              <line
-                x1={VIEW_MIN_X}
-                y1={VIEW_MIN_Y + VIEW_H / 2}
-                x2={VIEW_MIN_X + VIEW_W}
-                y2={VIEW_MIN_Y + VIEW_H / 2}
-              />
-            </g>
             <path className="outline" d={GEORGIA_PATH_D} />
-            <text className="map-label" x={VIEW_MIN_X + 4} y={VIEW_MIN_Y + 22}>
-              FIG. 03 · DELIVERY FOOTPRINT
-            </text>
+            <g className="impact-ey-footprint__pin-leaders">
+              {cityMeta.map((c) => (
+                <g key={c.code}>
+                  <line
+                    className="impact-ey-footprint__leader"
+                    x1={c.layout.cx}
+                    y1={c.layout.cy}
+                    x2={c.layout.lx}
+                    y2={c.layout.ly}
+                  />
+                  <g className="impact-ey-footprint__pin-tick" transform={`translate(${c.layout.cx} ${c.layout.cy})`}>
+                    <line x1="-5" y1="0" x2="5" y2="0" />
+                    <line x1="0" y1="-5" x2="0" y2="5" />
+                  </g>
+                </g>
+              ))}
+            </g>
           </svg>
 
-          {pinPositions.map((c) => (
-            <button
-              key={c.code}
-              type="button"
-              className={`impact-ey-footprint__pin${inspected.has(c.code) ? " is-inspected" : ""}${view === c.code ? " is-active" : ""}`}
-              style={{ left: c.left, top: c.top }}
-              onClick={() => void goToView(c.code)}
-              aria-label={`Inspect ${c.name} hub`}
-              aria-pressed={view === c.code}
-            >
-              <span className="dot" aria-hidden />
-              <span className="lbl">
-                <b>{c.name.slice(0, 3).toUpperCase()}</b> · Hub-{c.idLabel}
-              </span>
-            </button>
-          ))}
-        </div>
-
-        {view === "summary" && (
-          <div className="impact-ey-footprint__ghosts" aria-hidden>
-            {(["ATL", "ATH", "SAV"] as CityView[]).map((city) => (
-              <div
-                key={city}
-                className={`impact-ey-footprint__ghost impact-ey-footprint__ghost--${CITY_MAP[city]}`}
-                dangerouslySetInnerHTML={{ __html: ghostHtml[city] ?? "" }}
-              />
+          {georgiaVisible &&
+            cityMeta.map((c) => (
+              <div key={c.code} className="impact-ey-footprint__pin-wrap">
+                <button
+                  type="button"
+                  className={`impact-ey-footprint__pin${activeCity === c.code ? " is-active" : ""}`}
+                  style={c.dot}
+                  onClick={() => void zoomIn(c.code)}
+                  aria-label={`Inspect ${c.name} hub`}
+                >
+                  <span className="dot" aria-hidden />
+                </button>
+                <span
+                  className="impact-ey-footprint__pin-label"
+                  style={c.label}
+                  aria-hidden
+                >
+                  <b>{c.name.slice(0, 3).toUpperCase()}</b> · Hub-{c.idLabel}
+                </span>
+              </div>
             ))}
-          </div>
-        )}
+        </div>
 
         {isCityView(view) && (
           <div
@@ -392,11 +372,11 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
           />
         )}
 
-        {showChrome && (
+        {!georgiaVisible && (
           <button
             type="button"
             className="impact-ey-footprint__zoomout zoomout-stamp"
-            onClick={() => void goToView("georgia")}
+            onClick={() => void zoomOut()}
             aria-label="Zoom out to Georgia footprint"
           >
             <span className="ic" aria-hidden>
@@ -406,35 +386,8 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
           </button>
         )}
 
-        {showChrome && breadcrumbActive && (
-          <nav className="impact-ey-footprint__breadcrumb breadcrumb" aria-label="Footprint views">
-            <span className="impact-ey-footprint__breadcrumb-pos">
-              <span className="pos">{breadcrumbActive.index}/4</span>
-              {" · "}
-              <span className="city">{breadcrumbActive.label}</span>
-            </span>
-            <div className="impact-ey-footprint__breadcrumb-track track" role="tablist">
-              {BREADCRUMB.map((b) => {
-                const lit =
-                  b.slot === "SUM" ? view === "summary" : inspected.has(b.slot as CityView);
-                return (
-                  <button
-                    key={b.slot}
-                    type="button"
-                    role="tab"
-                    aria-selected={view === b.view}
-                    aria-label={`View ${b.label}`}
-                    className={`impact-ey-footprint__breadcrumb-dot${lit ? " is-lit lit" : ""}${view === b.view ? " is-active" : ""}`}
-                    onClick={() => void goToView(b.view)}
-                  />
-                );
-              })}
-            </div>
-          </nav>
-        )}
-
         <div
-          className={`impact-ey-footprint__card citycard${cardVisible ? " is-visible" : ""}`}
+          className={`impact-ey-footprint__card citycard${cardVisible && isCityView(view) ? " is-visible" : ""}`}
           aria-live="polite"
         >
           {isCityView(view) && (
@@ -454,29 +407,6 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
                 <div>
                   <div className="v">{CITY_CARDS[view].vaccinations}</div>
                   <div className="l">Vaccinations</div>
-                </div>
-              </div>
-            </>
-          )}
-          {view === "summary" && (
-            <>
-              <div className="pn">
-                <span>PROGRAM TOTAL</span>
-              </div>
-              <div className="stats stats--summary">
-                <div>
-                  <div className="v">
-                    4.57<span className="u">M</span>
-                  </div>
-                  <div className="l">Engagements</div>
-                </div>
-                <div>
-                  <div className="v">715</div>
-                  <div className="l">Vaccinations</div>
-                </div>
-                <div>
-                  <div className="v">3</div>
-                  <div className="l">Hubs</div>
                 </div>
               </div>
             </>
