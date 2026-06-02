@@ -1239,8 +1239,9 @@ body:has(.impact-console) {
 }
 .impact-ey-footprint__program-total{
   position:absolute;
-  bottom:14px;
-  right:14px;
+  top:52%;
+  left:42%;
+  transform:translate(-50%, -50%);
   z-index:4;
   padding:10px 12px;
   border:1px solid var(--rule);
@@ -1524,9 +1525,9 @@ body:has(.impact-console) {
     top:14px;
   }
   .impact-ey-footprint__program-total{
-    bottom:14px;
-    top:auto;
-    right:14px;
+    top:50%;
+    left:40%;
+    transform:translate(-50%, -50%);
     max-width:140px;
   }
   .impact-ey-footprint__fig-stamp{
