@@ -1197,11 +1197,14 @@ body:has(.impact-console) {
   stroke:var(--teal-dim);
   stroke-width:1.2;
 }
-.impact-ey-footprint__sequence-line{
+.impact-ey-footprint__ga-highways{
+  opacity:0.4;
+  pointer-events:none;
+}
+.impact-ey-footprint__ga-highways path{
   fill:none;
   stroke:var(--teal-dim);
   stroke-width:1;
-  stroke-dasharray:4 3;
 }
 .impact-ey-footprint__pin-label-text{
   font-family:var(--mono);

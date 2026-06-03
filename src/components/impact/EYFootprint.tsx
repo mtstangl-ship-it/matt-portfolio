@@ -42,9 +42,9 @@ function pinLabelPosition(code: CityView, cx: number, cy: number) {
 function sequenceNumPosition(code: CityView, cx: number, cy: number) {
   switch (code) {
     case "ATL":
-      return { x: cx + PIN_R + 6, y: cy + 3, anchor: "start" as const };
+      return { x: cx - 2, y: cy + PIN_R + 11, anchor: "middle" as const };
     case "ATH":
-      return { x: cx, y: cy + PIN_R + 10, anchor: "middle" as const };
+      return { x: cx + PIN_R + 10, y: cy + 2, anchor: "start" as const };
     case "SAV":
       return { x: cx - PIN_R - 6, y: cy + 3, anchor: "end" as const };
   }
@@ -58,6 +58,8 @@ const CITY_SVG: Record<CityView, string> = {
   ATH: "/maps/cities/ath-grid.svg",
   SAV: "/maps/cities/sav-grid.svg",
 };
+
+const GA_HIGHWAY_SVG = "/maps/cities/ga-grid.svg";
 
 const DRAW_MS = 600;
 const RETURN_MS = 450;
@@ -131,6 +133,15 @@ function hidePaths(svg: SVGSVGElement): void {
   });
 }
 
+function parseGaHighwayMarkup(svgText: string): string {
+  const doc = new DOMParser().parseFromString(svgText, "image/svg+xml");
+  const groups = doc.querySelectorAll('g[class*="road-"]');
+  if (!groups.length) return "";
+  return Array.from(groups)
+    .map((g) => g.outerHTML)
+    .join("");
+}
+
 function CompassRose() {
   return (
     <svg className="impact-ey-footprint__compass" viewBox="0 0 36 36" aria-hidden>
@@ -160,6 +171,7 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
   const [cardVisible, setCardVisible] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [cityHtml, setCityHtml] = useState("");
+  const [gaHighwayMarkup, setGaHighwayMarkup] = useState("");
   const [drawPhase, setDrawPhase] = useState<"idle" | "in" | "out">("idle");
 
   const cityMapRef = useRef<HTMLDivElement>(null);
@@ -173,11 +185,6 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
     const seqIndex = SEQ_ORDER.indexOf(code as CityView);
     return { ...c, code: code as CityView, layout, label, seqIndex };
   });
-
-  const sequencePathD = SEQ_ORDER.map((code, i) => {
-    const { cx, cy } = PIN_LAYOUT[code];
-    return `${i === 0 ? "M" : "L"} ${cx} ${cy}`;
-  }).join(" ");
 
   const clearTimers = useCallback(() => {
     timers.current.forEach((id) => window.clearTimeout(id));
@@ -206,7 +213,13 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
         })
         .catch(() => {});
     });
-  }, [tabActive]);
+    if (!gaHighwayMarkup) {
+      fetch(GA_HIGHWAY_SVG)
+        .then((r) => r.text())
+        .then((html) => setGaHighwayMarkup(parseGaHighwayMarkup(html)))
+        .catch(() => {});
+    }
+  }, [tabActive, gaHighwayMarkup]);
 
   const runDrawIn = useCallback(
     async (mode: "in" | "out") => {
@@ -325,14 +338,14 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
             aria-hidden={!georgiaVisible}
             className="impact-ey-footprint__georgia-svg"
           >
-            <path className="impact-ey-footprint__georgia-outline" d={GEORGIA_PATH_D} />
-            {georgiaVisible && (
-              <path
-                className="impact-ey-footprint__sequence-line"
-                d={sequencePathD}
+            {georgiaVisible && gaHighwayMarkup && (
+              <g
+                className="impact-ey-footprint__ga-highways"
                 aria-hidden
+                dangerouslySetInnerHTML={{ __html: gaHighwayMarkup }}
               />
             )}
+            <path className="impact-ey-footprint__georgia-outline" d={GEORGIA_PATH_D} />
             {georgiaVisible &&
               cityMeta.map((c) => {
                 const { cx, cy } = c.layout;
