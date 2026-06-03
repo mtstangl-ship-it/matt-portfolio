@@ -14,7 +14,7 @@ const VIEW_H = 350;
 const VIEW_MIN_X = -10;
 const VIEW_MIN_Y = -10;
 
-/** Single source of truth: pin center (cx, cy) + label anchor (lx, ly) in viewBox space. */
+/** Single source of truth: pin center (cx, cy) + legacy label anchors in viewBox space. */
 const PIN_LAYOUT: Record<
   CityView,
   { cx: number; cy: number; lx: number; ly: number; labelAnchor: "start" | "middle" | "end" }
@@ -23,6 +23,32 @@ const PIN_LAYOUT: Record<
   ATH: { cx: 120, cy: 95, lx: 120, ly: 44, labelAnchor: "middle" },
   SAV: { cx: 222, cy: 288, lx: 272, ly: 285, labelAnchor: "start" },
 };
+
+const SEQ_ORDER: CityView[] = ["ATL", "ATH", "SAV"];
+
+const LABEL_GAP = 8;
+
+function pinLabelPosition(code: CityView, cx: number, cy: number) {
+  switch (code) {
+    case "ATL":
+      return { x: cx - PIN_R - LABEL_GAP, y: cy + 3, anchor: "end" as const };
+    case "ATH":
+      return { x: cx, y: cy - PIN_R - LABEL_GAP, anchor: "middle" as const };
+    case "SAV":
+      return { x: cx + PIN_R + LABEL_GAP, y: cy + 3, anchor: "start" as const };
+  }
+}
+
+function sequenceNumPosition(code: CityView, cx: number, cy: number) {
+  switch (code) {
+    case "ATL":
+      return { x: cx + PIN_R + 6, y: cy + 3, anchor: "start" as const };
+    case "ATH":
+      return { x: cx, y: cy + PIN_R + 10, anchor: "middle" as const };
+    case "SAV":
+      return { x: cx - PIN_R - 6, y: cy + 3, anchor: "end" as const };
+  }
+}
 
 const PIN_R = 7;
 const PIN_HIT_R = 22;
@@ -143,9 +169,15 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
   const cityMeta = impactCaseHealth.cities.map((c) => {
     const code = c.id === "atlanta" ? "ATL" : c.id === "athens" ? "ATH" : "SAV";
     const layout = PIN_LAYOUT[code as CityView];
-    const label = `${c.name.slice(0, 3).toUpperCase()} · Hub-${c.idLabel}`;
-    return { ...c, code: code as CityView, layout, label };
+    const label = `${c.name.slice(0, 3).toUpperCase()} · HUB-${c.idLabel}`;
+    const seqIndex = SEQ_ORDER.indexOf(code as CityView);
+    return { ...c, code: code as CityView, layout, label, seqIndex };
   });
+
+  const sequencePathD = SEQ_ORDER.map((code, i) => {
+    const { cx, cy } = PIN_LAYOUT[code];
+    return `${i === 0 ? "M" : "L"} ${cx} ${cy}`;
+  }).join(" ");
 
   const clearTimers = useCallback(() => {
     timers.current.forEach((id) => window.clearTimeout(id));
@@ -278,24 +310,6 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
         </div>
         <CompassRose />
 
-        {georgiaVisible && (
-          <div className="impact-ey-footprint__program-total" aria-label="Program totals">
-            <div className="impact-ey-footprint__program-total-title">Program total</div>
-            <div className="impact-ey-footprint__program-total-row">
-              <span className="v">4.57M</span>
-              <span className="l">Engagements</span>
-            </div>
-            <div className="impact-ey-footprint__program-total-row">
-              <span className="v">715</span>
-              <span className="l">Vaccinations</span>
-            </div>
-            <div className="impact-ey-footprint__program-total-row">
-              <span className="v">3</span>
-              <span className="l">Hubs</span>
-            </div>
-          </div>
-        )}
-
         {animating && isCityView(view) && !reduceMotion && (
           <div className="impact-ey-footprint__draw-hint" aria-hidden>
             ▱ Topology drawing in · stroke-dash
@@ -312,41 +326,38 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
             className="impact-ey-footprint__georgia-svg"
           >
             <path className="impact-ey-footprint__georgia-outline" d={GEORGIA_PATH_D} />
+            {georgiaVisible && (
+              <path
+                className="impact-ey-footprint__sequence-line"
+                d={sequencePathD}
+                aria-hidden
+              />
+            )}
             {georgiaVisible &&
               cityMeta.map((c) => {
-                const { cx, cy, lx, ly, labelAnchor } = c.layout;
-                const labelW = c.label.length * 5.6 + 14;
-                const rectX =
-                  labelAnchor === "end"
-                    ? lx - labelW
-                    : labelAnchor === "start"
-                      ? lx
-                      : lx - labelW / 2;
-                const rectY = ly - 9;
+                const { cx, cy } = c.layout;
+                const labelPos = pinLabelPosition(c.code, cx, cy);
+                const seqPos = sequenceNumPosition(c.code, cx, cy);
+                const seqNum = String(c.seqIndex + 1).padStart(2, "0");
 
                 return (
                   <g key={c.code} className="impact-ey-footprint__pin-group">
-                    <line
-                      className="impact-ey-footprint__leader"
-                      x1={lx}
-                      y1={ly}
-                      x2={cx}
-                      y2={cy}
-                    />
-                    <rect
-                      className="impact-ey-footprint__pin-label-box"
-                      x={rectX}
-                      y={rectY}
-                      width={labelW}
-                      height={18}
-                    />
                     <text
                       className="impact-ey-footprint__pin-label-text"
-                      x={labelAnchor === "end" ? lx - 6 : labelAnchor === "start" ? lx + 6 : lx}
-                      y={ly + 4}
-                      textAnchor={labelAnchor}
+                      x={labelPos.x}
+                      y={labelPos.y}
+                      textAnchor={labelPos.anchor}
                     >
                       {c.label}
+                    </text>
+                    <text
+                      className="impact-ey-footprint__sequence-num"
+                      x={seqPos.x}
+                      y={seqPos.y}
+                      textAnchor={seqPos.anchor}
+                      aria-hidden
+                    >
+                      {seqNum}
                     </text>
                     <circle
                       className="impact-ey-footprint__pin-dot"
@@ -426,6 +437,32 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
           )}
         </div>
       </div>
+
+      {georgiaVisible && (
+        <p className="impact-ey-footprint__program-footer" aria-label="Program totals">
+          <span className="impact-ey-footprint__program-footer-title">Program total</span>
+          <span className="impact-ey-footprint__program-footer-sep" aria-hidden>
+            ·
+          </span>
+          <span>
+            <span className="v">4.57M</span>{" "}
+            <span className="l">Engagements</span>
+          </span>
+          <span className="impact-ey-footprint__program-footer-sep" aria-hidden>
+            ·
+          </span>
+          <span>
+            <span className="v">715</span>{" "}
+            <span className="l">Vaccinations</span>
+          </span>
+          <span className="impact-ey-footprint__program-footer-sep" aria-hidden>
+            ·
+          </span>
+          <span>
+            <span className="v">3</span> <span className="l">Hubs</span>
+          </span>
+        </p>
+      )}
     </div>
   );
 }
