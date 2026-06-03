@@ -181,7 +181,7 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
   const cityMeta = impactCaseHealth.cities.map((c) => {
     const code = c.id === "atlanta" ? "ATL" : c.id === "athens" ? "ATH" : "SAV";
     const layout = PIN_LAYOUT[code as CityView];
-    const label = `${c.name.slice(0, 3).toUpperCase()} · HUB-${c.idLabel}`;
+    const label = code;
     const seqIndex = SEQ_ORDER.indexOf(code as CityView);
     return { ...c, code: code as CityView, layout, label, seqIndex };
   });
