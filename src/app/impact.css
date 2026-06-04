@@ -1164,7 +1164,10 @@ body:has(.impact-console) {
 /* ============================================================
    TAB 03 · EY · FOOTPRINT (VAR 2 · draw-in overlay stage)
    ============================================================ */
-.impact-ey-footprint{ margin-top:8px; }
+.impact-ey-footprint{
+  margin-top:8px;
+  overflow:visible;
+}
 .impact-ey-footprint__stage{
   position:relative;
   width:100%;
@@ -1193,18 +1196,18 @@ body:has(.impact-console) {
   background:transparent;
 }
 .impact-ey-footprint__georgia-outline{
-  fill:rgba(29,207,170,0.04);
+  fill:none;
   stroke:var(--teal-dim);
   stroke-width:1.2;
 }
-.impact-ey-footprint__ga-highways{
-  opacity:0.4;
+.impact-ey-footprint__georgia-hatch{
+  stroke:none;
   pointer-events:none;
 }
-.impact-ey-footprint__ga-highways path{
-  fill:none;
+.impact-ey-footprint__ga-hatch-line{
   stroke:var(--teal-dim);
-  stroke-width:1;
+  stroke-width:0.5;
+  opacity:0.25;
 }
 .impact-ey-footprint__pin-label-text{
   font-family:var(--mono);
@@ -1243,18 +1246,22 @@ body:has(.impact-console) {
   stroke:var(--teal);
 }
 .impact-ey-footprint__program-footer{
-  margin-top:14px;
+  width:100%;
+  margin-top:16px;
+  padding:14px 0 4px;
+  border-top:1px solid var(--teal-dim);
   font-family:var(--mono);
-  font-size:9px;
+  font-size:10px;
   letter-spacing:0.12em;
   text-transform:uppercase;
-  color:var(--ink-2);
-  line-height:1.5;
+  color:var(--ink-3);
+  line-height:1.45;
   display:flex;
   flex-wrap:wrap;
   align-items:baseline;
-  gap:0.35em 0.5em;
+  gap:0.4em 0.65em;
   pointer-events:none;
+  flex-shrink:0;
 }
 .impact-ey-footprint__program-footer-title{
   color:var(--ink-2);
@@ -1264,14 +1271,14 @@ body:has(.impact-console) {
 }
 .impact-ey-footprint__program-footer .v{
   font-family:var(--sans, system-ui, sans-serif);
-  font-size:11px;
+  font-size:19px;
   font-weight:500;
-  letter-spacing:-0.01em;
+  letter-spacing:-0.02em;
   text-transform:none;
-  color:var(--ink-1);
+  color:var(--ink-0);
 }
 .impact-ey-footprint__program-footer .l{
-  color:var(--ink-2);
+  color:var(--ink-3);
 }
 .impact-ey-footprint__citymap{
   position:absolute;
@@ -1523,11 +1530,12 @@ body:has(.impact-console) {
     top:14px;
   }
   .impact-ey-footprint__program-footer{
-    font-size:8px;
-    gap:0.3em 0.4em;
+    padding:12px 0 2px;
+    font-size:9px;
+    gap:0.35em 0.5em;
   }
   .impact-ey-footprint__program-footer .v{
-    font-size:10px;
+    font-size:16px;
   }
   .impact-ey-footprint__fig-stamp{
     bottom:48px;

@@ -59,7 +59,7 @@ const CITY_SVG: Record<CityView, string> = {
   SAV: "/maps/cities/sav-grid.svg",
 };
 
-const GA_HIGHWAY_SVG = "/maps/cities/ga-grid.svg";
+const GA_HATCH_PATTERN_ID = "impact-ey-ga-hatch";
 
 const DRAW_MS = 600;
 const RETURN_MS = 450;
@@ -133,13 +133,26 @@ function hidePaths(svg: SVGSVGElement): void {
   });
 }
 
-function parseGaHighwayMarkup(svgText: string): string {
-  const doc = new DOMParser().parseFromString(svgText, "image/svg+xml");
-  const groups = doc.querySelectorAll('g[class*="road-"]');
-  if (!groups.length) return "";
-  return Array.from(groups)
-    .map((g) => g.outerHTML)
-    .join("");
+function GeorgiaHatchPattern() {
+  return (
+    <defs>
+      <pattern
+        id={GA_HATCH_PATTERN_ID}
+        patternUnits="userSpaceOnUse"
+        width="6"
+        height="6"
+        patternTransform="rotate(45)"
+      >
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="6"
+          className="impact-ey-footprint__ga-hatch-line"
+        />
+      </pattern>
+    </defs>
+  );
 }
 
 function CompassRose() {
@@ -171,7 +184,6 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
   const [cardVisible, setCardVisible] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [cityHtml, setCityHtml] = useState("");
-  const [gaHighwayMarkup, setGaHighwayMarkup] = useState("");
   const [drawPhase, setDrawPhase] = useState<"idle" | "in" | "out">("idle");
 
   const cityMapRef = useRef<HTMLDivElement>(null);
@@ -213,13 +225,7 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
         })
         .catch(() => {});
     });
-    if (!gaHighwayMarkup) {
-      fetch(GA_HIGHWAY_SVG)
-        .then((r) => r.text())
-        .then((html) => setGaHighwayMarkup(parseGaHighwayMarkup(html)))
-        .catch(() => {});
-    }
-  }, [tabActive, gaHighwayMarkup]);
+  }, [tabActive]);
 
   const runDrawIn = useCallback(
     async (mode: "in" | "out") => {
@@ -338,11 +344,13 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
             aria-hidden={!georgiaVisible}
             className="impact-ey-footprint__georgia-svg"
           >
-            {georgiaVisible && gaHighwayMarkup && (
-              <g
-                className="impact-ey-footprint__ga-highways"
+            <GeorgiaHatchPattern />
+            {georgiaVisible && (
+              <path
+                className="impact-ey-footprint__georgia-hatch"
+                d={GEORGIA_PATH_D}
+                fill={`url(#${GA_HATCH_PATTERN_ID})`}
                 aria-hidden
-                dangerouslySetInnerHTML={{ __html: gaHighwayMarkup }}
               />
             )}
             <path className="impact-ey-footprint__georgia-outline" d={GEORGIA_PATH_D} />
