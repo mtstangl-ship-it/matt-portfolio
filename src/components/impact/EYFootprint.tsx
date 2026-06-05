@@ -458,32 +458,6 @@ export function EYFootprint({ tabActive }: { tabActive: boolean }) {
           )}
         </div>
       </div>
-
-      {georgiaVisible && (
-        <p className="impact-ey-footprint__program-footer" aria-label="Program totals">
-          <span className="impact-ey-footprint__program-footer-title">Program total</span>
-          <span className="impact-ey-footprint__program-footer-sep" aria-hidden>
-            ·
-          </span>
-          <span>
-            <span className="v">4.57M</span>{" "}
-            <span className="l">Engagements</span>
-          </span>
-          <span className="impact-ey-footprint__program-footer-sep" aria-hidden>
-            ·
-          </span>
-          <span>
-            <span className="v">715</span>{" "}
-            <span className="l">Vaccinations</span>
-          </span>
-          <span className="impact-ey-footprint__program-footer-sep" aria-hidden>
-            ·
-          </span>
-          <span>
-            <span className="v">3</span> <span className="l">Hubs</span>
-          </span>
-        </p>
-      )}
     </div>
   );
 }
