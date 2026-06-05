@@ -303,18 +303,15 @@ export function ImpactShell() {
           </div>
 
           <MetricStrip cols={3}>
-            <MetricCell
-              value={<>4.57<span className="u">M</span></>}
-              label="Engagements (program-attributed)"
-            />
-            <MetricCell value="715" label="Vaccinations (program-attributed)" />
+            <MetricCell value={<>24<span className="u">+</span></>} label="Partners" />
+            <MetricCell value="CDC" label="National best practice" />
             <MetricCell value={<>8<span className="u">M+</span></>} label="Statewide vaccinations during comms leadership" />
           </MetricStrip>
 
           <SectionBreak
             label={
               <>
-                <span className="arrow">↓</span> Georgia delivery footprint · Scroll the cities
+                <span className="arrow">↓</span> Georgia delivery footprint · Tap to inspect each hub
               </>
             }
             meta={

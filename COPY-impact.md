@@ -356,10 +356,9 @@ At EY, I led the experience design for Georgia's two-stage COVID-19 engagement p
 
 **4 metrics**
 ```
-4.57M     Engagements (program-attributed)
-715       Vaccinations (program-attributed)
+24+       Partners
+CDC       National best practice
 8M+       Statewide vaccinations during my comms leadership
-3         City hubs
 ```
 
 **Map section head**
