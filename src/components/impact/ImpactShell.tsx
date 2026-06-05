@@ -305,8 +305,8 @@ export function ImpactShell() {
           <MetricStrip cols={3}>
             <MetricCell value={<>24<span className="u">+</span></>} label="Partners" />
             <div className="impact-metric-strip__credential">
-              <div className="impact-metric-strip__credential-primary">CDC</div>
-              <div className="impact-metric-strip__credential-secondary">National best practice</div>
+              <div className="v">CDC</div>
+              <div className="l">National best practice</div>
             </div>
             <MetricCell value={<>8<span className="u">M+</span></>} label="Statewide vaccinations during comms leadership" />
           </MetricStrip>
