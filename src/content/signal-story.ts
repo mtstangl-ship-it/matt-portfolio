@@ -22,6 +22,10 @@ export type SignalStoryVideo = {
   title: string;
   /** Very short optional label */
   label?: string;
+  /** Fiche fig code, e.g. F·01 (archive page) */
+  figCode?: string;
+  /** Uppercase slug for mono kicker line (archive page) */
+  figSlug?: string;
   /**
    * Desktop hover preview: loop starts here (seconds). Omit for thumbnail-only until click.
    */
@@ -61,32 +65,45 @@ export const signalStoryPageVideos: SignalStoryVideo[] = [
   {
     youtubeId: "heAtSMBa5i8",
     title: "Healthcare Heroes",
-    label: "Featured",
+    label: "Public health",
+    figCode: "F·01",
+    figSlug: "HEALTHCARE HEROES",
     previewStartSeconds: 8,
   },
   {
     youtubeId: "t-RAl7g2Olw",
     title: "Travel Wisconsin",
+    figCode: "F·02",
+    figSlug: "TRAVEL WISCONSIN",
     previewStartSeconds: 6,
   },
   {
     youtubeId: "XPZpVWSPZ2w",
     title: "No Limits to Discovery",
+    figCode: "F·03",
+    figSlug: "NO LIMITS TO DISCOVERY",
     previewStartSeconds: 10,
   },
   {
     youtubeId: "LiPIUNutKRw",
     title: "Doctors Without Borders",
+    figCode: "F·04",
+    figSlug: "DOCTORS WITHOUT BORDERS",
     previewStartSeconds: 7,
   },
   {
     youtubeId: "wnFTdF0VWM0",
     title: "Caron Butler",
+    label: "Sports & culture",
+    figCode: "F·05",
+    figSlug: "CARON BUTLER",
     previewStartSeconds: 9,
   },
   {
     youtubeId: "V5lIXv8idUU",
     title: "Next Protectors",
+    figCode: "F·06",
+    figSlug: "NEXT PROTECTORS",
     previewStartSeconds: 8,
   },
 ];

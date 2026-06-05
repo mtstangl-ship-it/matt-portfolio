@@ -26,7 +26,11 @@ export function ConditionalSiteChromeClient({
     "/case-studies/autodesk",
   ]);
   const hideLegacyChrome =
-    path === "/" || path === "/about" || path === "/impact" || tierACaseRoutes.has(path);
+    path === "/" ||
+    path === "/about" ||
+    path === "/impact" ||
+    path === "/signal-story" ||
+    tierACaseRoutes.has(path);
 
   if (hideLegacyChrome) {
     return <>{children}</>;
