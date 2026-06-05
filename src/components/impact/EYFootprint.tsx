@@ -35,7 +35,7 @@ function pinLabelPosition(code: CityView, cx: number, cy: number) {
     case "ATH":
       return { x: cx, y: cy - PIN_R - LABEL_GAP, anchor: "middle" as const };
     case "SAV":
-      return { x: cx + PIN_R + LABEL_GAP, y: cy + 3, anchor: "start" as const };
+      return { x: cx, y: cy - PIN_R - LABEL_GAP, anchor: "middle" as const };
   }
 }
 
