@@ -1,39 +1,5 @@
 /* Synthetic Users — four load-bearing artifacts (synth- prefix) */
 
-.tier-a-case-root .case-synthetic-portfolio .synth-metric-hero {
-  display: flex;
-  align-items: flex-end;
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-metric-hero__num {
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: clamp(3rem, 8vw, 5rem);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-  color: var(--synth-accent);
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-metric-hero__copy {
-  padding-bottom: 0.35rem;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-metric-hero__title {
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 1.125rem;
-  color: var(--synth-ink-0);
-  margin: 0;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-metric-hero__sub {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--synth-ink-2);
-  margin: 0.25rem 0 0;
-}
-
 /* ---------- Funnel */
 .tier-a-case-root .case-synthetic-portfolio .synth-funnel-wrap {
   margin-top: 1.5rem;
