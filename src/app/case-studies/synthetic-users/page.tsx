@@ -1,6 +1,20 @@
-import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { SyntheticCase } from "@/components/case-studies/cases/synthetic";
+import { caseStudyEntries } from "@/content/case-studies";
 
-/** Canonical case slug is `synthetic`; this URL is the editorial / handoff path. */
-export default function SyntheticUsersAliasPage() {
-  redirect("/case-studies/synthetic");
+export function generateMetadata(): Metadata {
+  const entry = caseStudyEntries.find((c) => c.slug === "synthetic");
+  if (!entry) return { title: "Case study" };
+  return {
+    title: entry.title,
+    description: entry.oneLine,
+  };
+}
+
+/** Tier A Synthetic Users — static route loads case-synthetic CSS via `./layout.tsx`. */
+export default function SyntheticUsersCasePage() {
+  const entry = caseStudyEntries.find((c) => c.slug === "synthetic");
+  if (!entry) notFound();
+  return <SyntheticCase entry={entry} />;
 }
