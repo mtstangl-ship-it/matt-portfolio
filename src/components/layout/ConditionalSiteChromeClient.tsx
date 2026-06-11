@@ -24,6 +24,7 @@ export function ConditionalSiteChromeClient({
     "/case-studies/ey",
     "/case-studies/wipro",
     "/case-studies/autodesk",
+    "/case-studies/synthetic-users",
   ]);
   const hideLegacyChrome =
     path === "/" ||
