@@ -66,39 +66,6 @@
   }
 }
 
-/* ---- Mobile · hide hero CASE NO. / BASED / ROLE / REV. identity strip ---- */
-@media (max-width: 768px) {
-  .tier-a-case-root .case-centaur-portfolio .hero__id-strip {
-    display: none !important;
-  }
-}
-
-@media (min-width: 881px) {
-  .tier-a-case-root .case-centaur-portfolio .hero .fig-stamp {
-    top: 1rem;
-    right: var(--gutter);
-    z-index: 14;
-  }
-  .tier-a-case-root .case-centaur-portfolio .hero__plate .hero__id-strip {
-    top: calc(1rem + var(--layer-a-fig-h) + 0.65rem);
-    right: var(--gutter);
-    z-index: 13;
-  }
-  /* Tier-A shell: nav + in-hero case picker — stamps sit below the picker band */
-  .tier-a-case-root .case-centaur-portfolio .hero .fig-stamp {
-    top: clamp(10.5rem, 22vw, 14rem);
-  }
-  .tier-a-case-root .case-centaur-portfolio .hero__plate .hero__id-strip {
-    top: clamp(11rem, 22vw, 14.75rem);
-  }
-}
-
-@media (min-width: 1024px) {
-  .tier-a-case-root .case-centaur-portfolio .hero .margin-note {
-    top: clamp(9.75rem, 17vw, 12.5rem);
-  }
-}
-
 @media (min-width: 1181px) {
   .tier-a-case-root .case-centaur-portfolio .centaur__head .case-schematic {
     margin-top: calc(var(--layer-a-stamp-stack-top) + 0.35rem);
@@ -164,19 +131,6 @@
 }
 
 /* ====================== HERO ====================== */
-/* Shell + headline/sub/meta typography → ../tier-a/hero-chrome.css */
-
-/* Case 01 · motorcycle crop only — hero treatment pipeline lives in hero-chrome.css */
-.tier-a-case-root .case-centaur-portfolio .hero__plate .hero__bgphoto-img {
-  object-position: 50% 90%;
-}
-
-@media (min-width: 881px) {
-  .tier-a-case-root .case-centaur-portfolio .hero__inner {
-    padding-right: calc(var(--gutter) + var(--layer-a-hero-id-reserve));
-  }
-}
-
 /* Hero watermark — split silhouette / circuit-like division of labor */
 .tier-a-case-root .hero__plate .hero__watermark {
   position: absolute;

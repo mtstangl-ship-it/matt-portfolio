@@ -41,121 +41,6 @@
   letter-spacing: 0.12em;
 }
 
-/* ---- Hero photo crop — workshop subject right-of-center ---- */
-.tier-a-case-root .case-wipro-portfolio .hero__plate .hero__bgphoto-img {
-  object-position: 55% 45%;
-}
-
-@media (max-width: 720px) {
-  .tier-a-case-root .case-wipro-portfolio .hero__plate .hero__bgphoto-img {
-    object-position: 55% 30%;
-  }
-}
-
-/* ---- Hero meta strip (mirrors EY's 4-cell mono strip) ---- */
-.tier-a-case-root .case-wipro-portfolio .hero__meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  border-top: 1px solid rgba(223, 233, 230, 0.22);
-  border-bottom: 1px solid rgba(223, 233, 230, 0.22);
-  margin: 0;
-  background: rgba(10, 17, 16, 0.55);
-  backdrop-filter: blur(2px);
-}
-.tier-a-case-root .case-wipro-portfolio .hero__meta-cell {
-  padding: 0.85rem 1rem;
-  border-right: 1px solid rgba(223, 233, 230, 0.18);
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-.tier-a-case-root .case-wipro-portfolio .hero__meta-cell:last-child {
-  border-right: 0;
-}
-.tier-a-case-root .case-wipro-portfolio .hero__meta-cell dt {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #9ca8a4;
-  margin: 0;
-}
-.tier-a-case-root .case-wipro-portfolio .hero__meta-cell dd {
-  margin: 0;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: #e6ebe9;
-  text-wrap: pretty;
-  line-height: 1.4;
-}
-.tier-a-case-root .case-wipro-portfolio .hero__meta-cell dd b {
-  color: var(--accent);
-  font-weight: 500;
-}
-.tier-a-case-root .case-wipro-portfolio .hero__meta-cell dd small {
-  display: block;
-  color: var(--ink-3);
-  font-size: 10px;
-  margin-top: 2px;
-}
-@media (max-width: 880px) {
-  .tier-a-case-root .case-wipro-portfolio .hero__meta {
-    grid-template-columns: 1fr 1fr;
-  }
-  .tier-a-case-root .case-wipro-portfolio .hero__meta-cell:nth-child(2) {
-    border-right: 0;
-  }
-  .tier-a-case-root .case-wipro-portfolio .hero__meta-cell:nth-child(1),
-  .tier-a-case-root .case-wipro-portfolio .hero__meta-cell:nth-child(2) {
-    border-bottom: 1px solid rgba(223, 233, 230, 0.18);
-  }
-}
-@media (max-width: 560px) {
-  .tier-a-case-root .case-wipro-portfolio .hero__meta {
-    grid-template-columns: 1fr;
-  }
-  .tier-a-case-root .case-wipro-portfolio .hero__meta-cell {
-    border-right: 0;
-    border-bottom: 1px solid rgba(223, 233, 230, 0.18);
-  }
-  .tier-a-case-root .case-wipro-portfolio .hero__meta-cell:last-child {
-    border-bottom: 0;
-  }
-}
-
-/* ---- Hero typography overrides (parity with EY / Centaur photo plate) ---- */
-.tier-a-case-root .case-wipro-portfolio .hero .hero__tag {
-  color: #5fe6c2;
-  text-shadow: 0 1px 6px rgba(10, 17, 16, 0.85);
-}
-.tier-a-case-root .case-wipro-portfolio .hero .hero__h1 {
-  color: #f4f1ea;
-  letter-spacing: -0.02em;
-  line-height: 1.04;
-  text-shadow: 0 2px 10px rgba(10, 17, 16, 0.65);
-  /* Tighter measure than shared Tier-A clamp — phrase-led headline */
-  max-width: min(26ch, 92vw);
-  text-wrap: balance;
-}
-.tier-a-case-root .case-wipro-portfolio .hero .hero__h1 em {
-  color: var(--accent);
-  font-style: italic;
-}
-.tier-a-case-root .case-wipro-portfolio .hero .hero__sub {
-  color: #d2dad7;
-  text-shadow: 0 1px 6px rgba(10, 17, 16, 0.7);
-  max-width: 60ch;
-}
-.tier-a-case-root .case-wipro-portfolio .hero .hero__sub b {
-  color: #f4f1ea;
-}
-.tier-a-case-root .case-wipro-portfolio .hero .hero__sub em {
-  color: var(--accent);
-  font-style: italic;
-}
-
 /* ---- Section frame baseline (parallel to ey-case.css `.case-section`) ---- */
 .tier-a-case-root .case-wipro-portfolio section[data-screen-label]:not(.hero) {
   position: relative;
@@ -246,13 +131,6 @@
 /* ---- Mobile · hide FIG. stamps (hero + section) to reclaim vertical space ---- */
 @media (max-width: 768px) {
   .tier-a-case-root .case-wipro-portfolio .fig-stamp {
-    display: none !important;
-  }
-}
-
-/* ---- Mobile · hide hero CASE NO. / BASED / ROLE / REV. identity strip ---- */
-@media (max-width: 768px) {
-  .tier-a-case-root .case-wipro-portfolio .hero__id-strip {
     display: none !important;
   }
 }

@@ -77,6 +77,7 @@ export function WiproCaseView() {
       </a>
 
       <CaseHero
+        heroImageSrc="/case-studies/wipro-elc-workshop-halftone.png"
         picker={<CasePicker activeSlug="wipro" />}
         caseNumber="04"
         totalCases={5}
@@ -94,22 +95,6 @@ export function WiproCaseView() {
           <>
             Estée Lauder&apos;s service desk was taking <b>3,515 password-reset tickets a month</b> — and escalating{" "}
             <b>42.6% of them</b>. I <em>led the transformation</em> that unified the experience.
-          </>
-        }
-        heroBgphotoSlot={
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element -- Tier-A shared hero pipeline (hero-chrome.css) */}
-            <img
-              className="hero__bgphoto-img"
-              src="/case-studies/wipro-elc-workshop-halftone.png"
-              alt=""
-              decoding="async"
-              fetchPriority="high"
-            />
-            <div className="hero__bgphoto-halftone" aria-hidden="true" />
-            <div className="hero__bgphoto-grain" aria-hidden="true" />
-            <div className="hero__bgphoto-scrim" aria-hidden="true" />
-            <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
           </>
         }
         metaSlot={

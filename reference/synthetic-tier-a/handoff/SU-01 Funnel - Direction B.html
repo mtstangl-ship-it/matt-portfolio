@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SU · Artifact 01 · Funnel · Direction B · Two-track</title>
+<!--
+  ============================================================
+  ARTIFACT 01 — THE FUNNEL · DIRECTION B · "TWO-TRACK / PARALLEL RUNS"
+  Synthetic Users case study · Section 02 hero metric
+  ------------------------------------------------------------
+  DESIGN DECISIONS WORTH FLAGGING (for the Cursor port):
+  · This direction frames Run A and Run B as TWO PARALLEL TRACKS
+    that converge on one shared object — the prioritized backlog.
+    Run B is a full peer column (same height as Run A's stack),
+    not a side rail. This is the strongest treatment if Matt wants
+    Run B read as a co-equal method, not a companion.
+  · The 3-of-10 gap still resolves below the merge: the backlog
+    renders as 10 countable cells (3 filled = self-review blind
+    spots) plus a "+53" chip for Run B's integrated fixes; the 3
+    filled flow down to "3 shipped."
+  · Fill-state (not color) carries the blind-spot encoding; accent
+    only reinforces. Single placeholder accent (#2dd4b2), swap later.
+  · Merge + throat drawn as construction lines (dashed), per fiche
+    grammar. Static — no motion.
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="synthetic-artifacts.css">
+<style>
+  /* ---- Funnel B geometry (artifact-specific) ---- */
+  .twotrack{ max-width:660px; margin:0 auto; width:100%; }
+
+  .tracks{ display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:stretch; }
+  .track__head{
+    font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--ink-2); padding-bottom:9px; margin-bottom:14px; border-bottom:1px solid var(--rule);
+    display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+  }
+  .track__head .who{ color:var(--accent); }
+  .track--a{ display:flex; flex-direction:column; }
+
+  .tnode{
+    border:1px solid var(--ink-3); background:var(--plate); padding:13px 15px;
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+  }
+  .tnode .num{ font-family:var(--sans); font-weight:600; font-size:27px; letter-spacing:-0.03em; color:var(--ink-0); line-height:1; }
+  .tnode .cap{ font-family:var(--mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); text-align:right; line-height:1.5; }
+  .tnode .cap b{ color:var(--ink-1); font-weight:500; }
+  .tconn{ display:flex; align-items:center; justify-content:center; height:26px; }
+  .tconn::before{ content:""; width:1px; height:100%; background:var(--ink-4); }
+  .tconn .a{ position:absolute; font-family:var(--mono); color:var(--ink-3); font-size:11px; }
+
+  /* Run B = one tall lane spanning Run A's height */
+  .track--b{
+    border:1px dashed var(--accent-dim); background:var(--accent-vlow);
+    padding:14px 16px; display:flex; flex-direction:column;
+  }
+  .track--b .track__head{ border-bottom-color:var(--accent-dim); }
+  .track--b .body{ display:flex; flex-direction:column; justify-content:space-evenly; flex:1; gap:14px; }
+  .rbn{ display:flex; align-items:baseline; gap:12px; }
+  .rbn .num{ font-family:var(--sans); font-weight:600; font-size:30px; letter-spacing:-0.03em; color:var(--ink-0); line-height:1; }
+  .rbn .l{ font-family:var(--sans); font-size:12.5px; line-height:1.4; color:var(--ink-1); }
+  .rbn .l b{ color:var(--ink-0); font-weight:500; }
+  .rbdiv{ height:1px; background:var(--ink-4); }
+  .rbflow{ font-family:var(--mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:8px; }
+
+  /* merge band */
+  .merge{ height:58px; width:100%; }
+  .merge svg{ width:100%; height:100%; display:block; overflow:visible; }
+  .merge path{ fill:none; stroke:var(--ink-3); stroke-width:1; stroke-dasharray:4 4; }
+  .merge .acc{ stroke:var(--accent-dim); }
+
+  /* backlog bar */
+  .backlog{ max-width:520px; margin:0 auto; }
+  .backlog__bar{
+    border:1px solid var(--accent); background:var(--plate-2);
+    padding:14px 16px; display:flex; flex-direction:column; gap:13px;
+  }
+  .backlog__top{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .backlog__top .t{ font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent); }
+  .backlog__top .n{ font-family:var(--mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); }
+  .blcells{ display:flex; gap:6px; justify-content:center; align-items:center; }
+  .blcell{ width:30px; height:36px; border:1px solid var(--ink-3); }
+  .blcell.on{ background:var(--accent); border-color:var(--accent); box-shadow:0 0 0 1px rgba(45,212,178,0.25); }
+  .blplus{
+    margin-left:8px; padding:6px 9px; border:1px dashed var(--accent-dim);
+    font-family:var(--mono); font-size:10px; letter-spacing:0.1em; color:var(--accent); white-space:nowrap;
+    display:flex; flex-direction:column; align-items:center; gap:2px; line-height:1.2;
+  }
+  .blplus .b{ font-family:var(--sans); font-weight:600; font-size:16px; letter-spacing:-0.02em; }
+  .bllegend{ display:flex; gap:20px; justify-content:center; }
+  .bllegend .it{ display:flex; gap:7px; align-items:center; font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-2); }
+  .bllegend .sw{ width:12px; height:12px; border:1px solid var(--ink-3); }
+  .bllegend .sw.on{ background:var(--accent); border-color:var(--accent); }
+
+  /* throat + terminus */
+  .throat{ height:40px; width:100%; max-width:520px; margin:0 auto; }
+  .throat svg{ width:100%; height:100%; display:block; overflow:visible; }
+  .throat path{ fill:none; stroke:var(--accent-dim); stroke-width:1; stroke-dasharray:4 4; }
+  .term{ display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .term__cells{ display:flex; gap:9px; }
+  .term__cell{ width:42px; height:52px; background:var(--accent); box-shadow:0 0 22px rgba(45,212,178,0.28); position:relative; }
+  .term__cell::after{ content:""; position:absolute; inset:5px; border:1px solid rgba(10,15,14,0.35); }
+  .term__lab{ text-align:center; }
+  .term__lab .n{ font-family:var(--sans); font-weight:600; font-size:42px; letter-spacing:-0.04em; color:var(--accent); line-height:1; }
+  .term__lab .t{ font-family:var(--mono); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-1); margin-top:7px; }
+
+  .fhead{
+    margin:0 auto 26px; max-width:660px;
+    font-family:var(--sans); font-weight:500; font-size:21px; letter-spacing:-0.02em;
+    line-height:1.3; color:var(--ink-1);
+  }
+  .fhead b{ color:var(--ink-0); font-weight:500; }
+  .fhead em{ color:var(--accent); font-style:normal; font-weight:600; }
+
+  @media (max-width:560px){
+    .tracks{ grid-template-columns:1fr; gap:18px; }
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ SHEET TOP ============ -->
+  <div class="sheet-top">
+    <div>
+      <span class="dot"></span>
+      CONSOLE <span class="sep">/</span> Case Studies <span class="sep">/</span>
+      <span class="active">Synthetic Users · §02 · The Funnel</span>
+      <span class="sep">/</span> SU-01 · DIR B
+    </div>
+    <div><b>Matt Stangl</b> · CX, Product &amp; Service Design Leader</div>
+  </div>
+
+  <!-- ============ TITLE ============ -->
+  <section class="title">
+    <div>
+      <p class="kicker">Artifact 01 · The Funnel · Direction B · 2026.06</p>
+      <h1>Two parallel runs, <em>one prioritized backlog</em> — and three items self-review never reaches.</h1>
+      <p class="sub">Run A (9 personas × 4 environments) and Run B (one design-systems persona auditing the whole site) run as co-equal tracks. They converge on a single backlog. Only then does the methodology argument resolve: three of those ten items were blind spots, and all three shipped.</p>
+    </div>
+    <dl class="idcard">
+      <dt>Artifact</dt>      <dd>01 · The Funnel</dd>
+      <dt>Direction</dt>     <dd>B · Two-track merge</dd>
+      <dt>Section</dt>       <dd>§02 · Hero metric</dd>
+      <dt>Run B</dt>         <dd>Co-equal column</dd>
+      <dt>Accent</dt>        <dd>Placeholder · 1 only</dd>
+      <dt>Register</dt>      <dd>Fiche · v2026.06</dd>
+    </dl>
+  </section>
+
+  <!-- ============ CONCEPT NOTE ============ -->
+  <div class="caveat">
+    <span class="stamp">SKETCH</span>
+    <div>
+      <p>Same locked numbers as Direction A — <b>9×4 → 18 → 10 → 3 → 3</b> and Run B's <b>1 persona → 53 fixes / 8 sections</b> — but composed as <b>two parallel paths joining at the prioritized backlog</b>, per the brief's two-track option.</p>
+      <p>Run B is drawn as a <em>full-height peer column</em>, not a footnote rail. The merge produces the 10-item backlog (with Run B's 53 line-level fixes integrated, shown as a <code>+53</code> chip); the three blind-spot items then flow down to the three shipped changes. Fill-state carries the encoding; accent <code>#2dd4b2</code> is a placeholder.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ THE ARTIFACT ============ -->
+  <section class="artband">
+    <div class="artband__head">
+      <div class="l">
+        <span class="arr">↓</span>
+        <span class="h">The funnel — rendered in isolation</span>
+      </div>
+      <div class="r">
+        DESKTOP · ~960PX ARTBOARD<br/>
+        <b>SU-01 · DIR B · TWO-TRACK</b>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="artboard">
+        <span class="artboard__tag">Artifact · no page chrome</span>
+        <span class="artboard__scale">1 : 1</span>
+
+        <div class="artboard__inner">
+
+          <p class="fhead"><b>Two methods, one backlog.</b> Three of the ten prioritized items <em>self-review would never have reached</em> — and all three shipped.</p>
+
+          <div class="twotrack">
+
+            <!-- parallel tracks -->
+            <div class="tracks">
+
+              <!-- RUN A -->
+              <div class="track--a">
+                <div class="track__head"><span class="who">● Run A · persona-driven QA</span><span>9 × 4</span></div>
+                <div class="tnode">
+                  <span class="num">36</span>
+                  <span class="cap"><b>9 personas × 4 envs</b><br/>evaluations run</span>
+                </div>
+                <div class="tconn"></div>
+                <div class="tnode">
+                  <span class="num">18</span>
+                  <span class="cap"><b>findings</b><br/>surfaced</span>
+                </div>
+                <div class="tconn"></div>
+                <div class="tnode">
+                  <span class="num">10</span>
+                  <span class="cap"><b>prioritized</b><br/>as actionable</span>
+                </div>
+              </div>
+
+              <!-- RUN B (peer lane) -->
+              <div class="track--b">
+                <div class="track__head"><span class="who">● Run B · design-systems audit</span><span>parallel</span></div>
+                <div class="body">
+                  <div class="rbn">
+                    <span class="num">1</span>
+                    <span class="l"><b>design-systems persona</b> running a full site audit</span>
+                  </div>
+                  <div class="rbdiv"></div>
+                  <div class="rbn">
+                    <span class="num">53</span>
+                    <span class="l"><b>line-level fixes</b> across 8 sections</span>
+                  </div>
+                  <div class="rbdiv"></div>
+                  <div class="rbflow"><span>↓</span> integrated into the prioritized backlog</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- merge band -->
+            <div class="merge">
+              <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path class="acc" d="M25,0 C25,60 50,40 50,100"/>
+                <path class="acc" d="M75,0 C75,60 50,40 50,100"/>
+              </svg>
+            </div>
+
+            <!-- prioritized backlog -->
+            <div class="backlog">
+              <div class="backlog__bar">
+                <div class="backlog__top">
+                  <span class="t">▣ Prioritized backlog</span>
+                  <span class="n">10 items · run B fixes folded in</span>
+                </div>
+                <div class="blcells">
+                  <div class="blcell"></div>
+                  <div class="blcell"></div>
+                  <div class="blcell"></div>
+                  <div class="blcell"></div>
+                  <div class="blcell on"></div>
+                  <div class="blcell on"></div>
+                  <div class="blcell on"></div>
+                  <div class="blcell"></div>
+                  <div class="blcell"></div>
+                  <div class="blcell"></div>
+                  <div class="blplus"><span class="b">+53</span>run B fixes</div>
+                </div>
+                <div class="bllegend">
+                  <div class="it"><span class="sw"></span>self-review reachable</div>
+                  <div class="it"><span class="sw on"></span>self-review blind spot</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- throat: only the 3 continue -->
+            <div class="throat">
+              <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M43,0 L46,100"/>
+                <path d="M57,0 L54,100"/>
+              </svg>
+            </div>
+
+            <!-- terminus -->
+            <div class="term">
+              <div class="term__cells">
+                <div class="term__cell"></div>
+                <div class="term__cell"></div>
+                <div class="term__cell"></div>
+              </div>
+              <div class="term__lab">
+                <div class="n">3</div>
+                <div class="t">became shipped changes</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- notes rail -->
+      <aside class="notes">
+        <h4>WHY THIS READS</h4>
+        <ul>
+          <li><b>Run B is a peer.</b> A full-height column beside Run A — equal weight, parallel, joining the same backlog. No subordination.</li>
+          <li><b>One shared object.</b> Both methods converge on the prioritized backlog; that convergence is the spine of the piece.</li>
+          <li><b>Gap resolves after the join.</b> Three of ten cells filled, then flowing down to three shipped — the argument still lands, just downstream of the merge.</li>
+        </ul>
+
+        <h4>RUN B INTEGRATION</h4>
+        <ul>
+          <li>Run B's 53 fixes enter as a <b>+53 chip</b> on the backlog, not as their own funnel — they're <em>integrated</em>, exactly as the copy says.</li>
+        </ul>
+
+        <h4>MIDPOINT (TABLET ~720PX)</h4>
+        <ul>
+          <li>Tracks stay side-by-side until ~560px; merge curves steepen. Backlog cells shrink to ~26px.</li>
+        </ul>
+
+        <h4>MOBILE (≤560PX)</h4>
+        <ul>
+          <li>Tracks <b>stack</b>: Run A first, then Run B, each full-width; the merge becomes a single "↓ both feed the backlog" junction.</li>
+          <li>Backlog → throat → terminus stay vertical and centered.</li>
+        </ul>
+
+        <div class="tags">
+          <span class="tag lb">LOAD-BEARING · Run B as peer</span>
+          <span class="tag ex">EXPLORATORY · merge geometry</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- ============ MOBILE COMPANION ============ -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">SU-01 · DIR B · MOBILE · TRACKS STACK</div>
+
+      <p style="font-family:var(--sans); font-size:13px; line-height:1.35; color:var(--ink-1); margin:0 0 16px; letter-spacing:-0.01em;">
+        <b style="color:var(--ink-0); font-weight:500;">Two methods,</b> one backlog —
+        <span style="color:var(--accent);">3 of 10 are blind spots.</span>
+      </p>
+
+      <!-- Run A mini -->
+      <div style="border:1px solid var(--ink-3); background:var(--plate); padding:9px 11px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--accent); text-transform:uppercase;">Run A</span>
+        <span style="font-family:var(--sans); font-size:12px; color:var(--ink-1);">36 → 18 → <b style="color:var(--ink-0);">10</b></span>
+      </div>
+      <div style="font-family:var(--mono); color:var(--ink-3); font-size:11px; text-align:center; padding:2px;">↓</div>
+      <!-- Run B mini -->
+      <div style="border:1px dashed var(--accent-dim); background:var(--accent-vlow); padding:9px 11px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--accent); text-transform:uppercase;">Run B</span>
+        <span style="font-family:var(--sans); font-size:12px; color:var(--ink-1);">1 persona → <b style="color:var(--ink-0);">53 fixes</b></span>
+      </div>
+      <div style="font-family:var(--mono); color:var(--accent); font-size:11px; text-align:center; padding:3px;">↓ both feed ↓</div>
+
+      <!-- backlog -->
+      <div style="border:1px solid var(--accent); background:var(--plate-2); padding:10px 11px;">
+        <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">▣ Backlog · 10 + 53</div>
+        <div style="display:flex; gap:4px; justify-content:center;">
+          <div style="width:20px;height:26px;border:1px solid var(--ink-3);"></div>
+          <div style="width:20px;height:26px;border:1px solid var(--ink-3);"></div>
+          <div style="width:20px;height:26px;border:1px solid var(--ink-3);"></div>
+          <div style="width:20px;height:26px;border:1px solid var(--ink-3);"></div>
+          <div style="width:20px;height:26px;background:var(--accent);border:1px solid var(--accent);"></div>
+          <div style="width:20px;height:26px;background:var(--accent);border:1px solid var(--accent);"></div>
+          <div style="width:20px;height:26px;background:var(--accent);border:1px solid var(--accent);"></div>
+          <div style="width:20px;height:26px;border:1px solid var(--ink-3);"></div>
+          <div style="width:20px;height:26px;border:1px solid var(--ink-3);"></div>
+          <div style="width:20px;height:26px;border:1px solid var(--ink-3);"></div>
+        </div>
+      </div>
+      <div style="font-family:var(--mono); color:var(--accent); font-size:11px; text-align:center; padding:3px;">↓ the 3</div>
+      <!-- terminus -->
+      <div style="display:flex; gap:6px; justify-content:center; margin-top:2px;">
+        <div style="width:28px;height:34px;background:var(--accent);box-shadow:0 0 14px rgba(45,212,178,0.3);"></div>
+        <div style="width:28px;height:34px;background:var(--accent);box-shadow:0 0 14px rgba(45,212,178,0.3);"></div>
+        <div style="width:28px;height:34px;background:var(--accent);box-shadow:0 0 14px rgba(45,212,178,0.3);"></div>
+      </div>
+      <div style="font-family:var(--mono); font-size:9px; letter-spacing:0.16em; color:var(--ink-1); text-transform:uppercase; text-align:center; margin-top:8px;">3 shipped changes</div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>SU-01 · DIR B · MOBILE LOGIC</h4>
+      <p><b>The two tracks stack</b> rather than sit side-by-side. Run A condenses to its number chain (36 → 18 → 10); Run B keeps its own framed block directly below. A <em>"both feed"</em> junction replaces the curved merge.</p>
+      <p><b>The backlog is the pivot</b> and stays full-width with all ten cells countable — protect the one-row cell layout down to 340px.</p>
+      <p><b>Run B never loses peer status</b> — even stacked, its dashed-accent frame keeps it visually distinct from Run A and clearly parallel, not sequential.</p>
+      <p><b>Terminus stays the heaviest</b> element so the "3 shipped" payoff still closes the sequence.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ ANALYSIS ============ -->
+  <section class="analysis">
+    <h2>↘ Direction B · read &amp; trade-offs</h2>
+
+    <h3><span class="pn">§ 1 · What this direction is best at</span>Run B as a co-equal method</h3>
+    <p>Where Direction A keeps Run B as a parallel <em>rail</em>, Direction B makes it a parallel <em>column</em> — a true second track that joins Run A at a shared backlog. If the case wants to argue that the methodology is two complementary runs (broad persona QA + deep design-systems audit), this composition carries that claim structurally. The merge is the thesis: <b>different inputs, one prioritized output</b>.</p>
+
+    <h3><span class="pn">§ 2 · The cost</span>The gap lands later</h3>
+    <p>The trade-off is sequencing. In Direction A the 3-of-10 gap is the spine; here it resolves <em>after</em> the merge, one beat later. The piece spends its first half on "two methods converge" and its second half on "and three of them were blind spots." That's a richer story but a slightly slower punch. If the single most important thing is the gap, A is more direct; if the parallel-methods framing matters as much, B wins.</p>
+
+    <h3><span class="pn">§ 3 · Risks for the port</span>Where it can strain</h3>
+    <ul>
+      <li><b>Equal-height columns.</b> Run B's lane must stretch to match Run A's stack height for the merge to read flat. Built with a stretch grid; verify at content changes.</li>
+      <li><b>Merge curve honesty.</b> The Bézier merge is decorative geometry, not data. Keep it subtle so it reads as a construction line, not a chart.</li>
+      <li><b>Backlog density.</b> Ten cells + a <code>+53</code> chip + legend is a lot in one bar; below ~480px the chip should drop under the cells, not beside them.</li>
+    </ul>
+
+    <h3><span class="pn">§ 4 · Recommendation between A and B</span></h3>
+    <p>Lead with <b>Direction A</b> if the page's job is to make the gap undeniable fast — it's the cleaner single-idea artifact. Choose <b>Direction B</b> if Run B deserves equal billing and the "two parallel runs" framing is load-bearing for the methodology argument. They're not blends; pick the spine. A third, more typographic "ratio-only" direction can be sketched if neither composition is right.</p>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div><b>SU-01</b> · FUNNEL · DIR B</div>
+    <div>SCALE · 1 : 1</div>
+    <div>DRAWN · M. STANGL</div>
+    <div>APPROVED · ─</div>
+    <div>DATE · 2026 · 06</div>
+    <div>REV · v2026.06 · LO-FI</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

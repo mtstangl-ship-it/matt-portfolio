@@ -66,6 +66,7 @@ export function CentaurCaseView() {
       </a>
 
       <CaseHero
+        heroImageSrc="/case-studies/centaur-literal.png"
         picker={<CasePicker activeSlug="ai" />}
         caseNumber="01"
         totalCases={5}

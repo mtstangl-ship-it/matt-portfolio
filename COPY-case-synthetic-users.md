@@ -99,7 +99,7 @@ Nine personas. Four QA environments. Three findings self-review missed — metho
 
 ### Design decision flags
 - [ ] Brief fields layout: 4-column grid (desktop) vs. 2-column (mobile) vs. inline (320px)
-- [ ] Hero image: placeholder retained — halftone-ready container matches siblings; asset TBD
+- [x] Hero image: robot portrait — raw `public/images/case-synthetic/synthetic-users-robot.png`; baked halftone `public/case-studies/synthetic-users-robot-halftone.png` via `scripts/process-synthetic-hero-halftone.mjs` (Tier-A Bayer pipeline, same as Wipro/EY/Autodesk)
 
 ---
 

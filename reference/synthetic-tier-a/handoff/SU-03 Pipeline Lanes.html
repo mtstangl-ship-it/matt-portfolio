@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SU · Artifact 03 · Pipeline Lanes</title>
+<!--
+  ============================================================
+  ARTIFACT 03 — PIPELINE LANES · Section 04
+  Four QA environments as a software release pipeline
+  ------------------------------------------------------------
+  DESIGN DECISIONS WORTH FLAGGING (for the Cursor port):
+  · Reads as a PIPELINE, not a 4-up grid. A continuous left-to-right
+    spine runs DEV -> QA -> UAT -> PROD -> SHIP, with PASS gates in
+    the gaps between lanes. The CI/CD release metaphor is evoked
+    (stages + gates + a terminal ship), not drawn literally.
+  · TWO prominent things per lane, by brief: the PERSONA CLASS
+    (Archetype / Thought-leader / LinkedIn-modeled / Adversarial)
+    sits as a labeled chip, and the DIAGNOSTIC QUESTION is the hero
+    text — large, sentence-case, with its key phrase accented
+    ("60 seconds", "Five practitioner worldviews", "the specific
+    person", "300 portfolios"). Questions are never body-text small.
+  · RUN B is a PARALLEL companion rail beneath the pipeline — full
+    width, visually distinct (dashed accent), explicitly "parallel,
+    not a 5th lane," folding into the prioritized backlog.
+  · Mobile: pipeline rotates to a vertical flow (lanes stacked, gates
+    become downward gate-ticks); Run B stays a distinct trailing block.
+  · Single placeholder accent (#2dd4b2). Swap later.
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="synthetic-artifacts.css">
+<style>
+  /* ---- PIPELINE LANES (artifact-specific) ---- */
+  .pipe{ width:100%; }
+
+  /* spine row: lanes + gates */
+  .pipe__flow{ display:flex; align-items:stretch; }
+  .lane{
+    flex:1 1 0; min-width:0; display:flex; flex-direction:column;
+    border:1px solid var(--ink-3); background:var(--plate);
+  }
+  .lane__rail{
+    display:flex; align-items:center; gap:9px;
+    padding:11px 14px; border-bottom:1px solid var(--ink-4); background:var(--bg-soft);
+    font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2);
+  }
+  .lane__rail .node{
+    width:11px; height:11px; border:1.5px solid var(--accent); border-radius:50%;
+    position:relative; flex:none;
+  }
+  .lane__rail .node::after{ content:""; position:absolute; inset:3px; background:var(--accent); border-radius:50%; }
+  .lane__rail .env{ color:var(--ink-0); font-weight:500; }
+  .lane__rail .kind{ color:var(--ink-3); }
+  .lane__rail .stg{ margin-left:auto; color:var(--ink-3); }
+
+  .lane__body{ padding:16px 15px 15px; display:flex; flex-direction:column; gap:14px; flex:1; }
+  .lane__class{
+    display:inline-flex; align-items:center; gap:7px; align-self:flex-start;
+    border:1px solid var(--accent-dim); padding:5px 9px;
+    font-family:var(--mono); font-size:9px; letter-spacing:0.13em; text-transform:uppercase; color:var(--accent);
+  }
+  .lane__class .px{ width:5px; height:5px; background:var(--accent); }
+  .lane__qlab{ font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); }
+  .lane__q{
+    font-family:var(--sans); font-weight:500; font-size:19px; line-height:1.22; letter-spacing:-0.02em;
+    color:var(--ink-0); margin:0;
+  }
+  .lane__q em{ font-style:normal; color:var(--accent); font-weight:600; }
+  .lane__note{
+    margin-top:auto; padding-top:12px; border-top:1px dashed var(--ink-4);
+    font-family:var(--mono); font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-2); line-height:1.5;
+  }
+  .lane__note b{ color:var(--ink-1); font-weight:500; }
+
+  /* gates between lanes */
+  .gate{
+    flex:none; width:62px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    position:relative;
+  }
+  .gate .ln{ position:absolute; top:21px; left:0; right:0; height:1px; background:var(--accent-dim); }
+  .gate .arw{
+    width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent;
+    border-left:8px solid var(--accent); position:relative; z-index:2; margin-top:16px;
+  }
+  .gate .lbl{ font-family:var(--mono); font-size:8px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); }
+
+  /* terminus */
+  .ship{
+    flex:none; width:96px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px;
+    border:1px solid var(--accent); background:var(--accent-vlow);
+  }
+  .ship .arw{ width:0; height:0; border-top:5px solid transparent; border-bottom:5px solid transparent; border-left:8px solid var(--accent); }
+  .ship .w{ font-family:var(--mono); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); }
+  .ship .s{ font-family:var(--mono); font-size:8px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); text-align:center; line-height:1.4; }
+
+  /* pipeline header strip */
+  .pipe__head{
+    display:flex; justify-content:space-between; align-items:baseline; gap:14px; flex-wrap:wrap;
+    margin-bottom:16px; padding-bottom:11px; border-bottom:1px solid var(--rule);
+  }
+  .pipe__head .t{ font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent); }
+  .pipe__head .t b{ color:var(--ink-1); font-weight:400; margin-left:10px; letter-spacing:0.04em; }
+  .pipe__head .m{ font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); }
+
+  /* Run B companion rail */
+  .runb{
+    margin-top:18px; border:1px dashed var(--accent-dim); background:var(--accent-vlow);
+    padding:15px 18px; display:flex; align-items:center; gap:22px; flex-wrap:wrap;
+    position:relative;
+  }
+  .runb::before{
+    content:"PARALLEL"; position:absolute; top:-8px; left:18px; background:var(--bg-soft); padding:0 8px;
+    font-family:var(--mono); font-size:8px; letter-spacing:0.2em; color:var(--accent);
+  }
+  .runb .tag{ font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
+  .runb .desc{ font-family:var(--sans); font-size:14px; color:var(--ink-1); line-height:1.4; flex:1; min-width:240px; }
+  .runb .desc b{ color:var(--ink-0); font-weight:500; }
+  .runb .fold{ font-family:var(--mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); white-space:nowrap; display:flex; align-items:center; gap:7px; }
+
+  /* full-width artboard for the pipeline; notes move below */
+  .stage{ display:block; }
+  .notes{ border-left:none; border-top:1px solid var(--ink-3); padding:24px 0 0; margin-top:26px; }
+  .notes__grid{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:30px; }
+  .ngroup{ min-width:0; }
+  .ngroup h4{ margin:0 0 10px; }
+  .ngroup h4 + h4{ margin-top:18px; }
+
+  @media (max-width:900px){
+    .pipe__flow{ flex-direction:column; }
+    .gate{ width:100%; height:42px; flex-direction:row; }
+    .gate .ln{ top:0; bottom:0; left:50%; right:auto; width:1px; height:auto; }
+    .gate .arw{ margin-top:0; transform:rotate(90deg); }
+    .ship{ width:100%; flex-direction:row; padding:14px; gap:14px; }
+    .ship .arw{ transform:rotate(90deg); }
+    .notes__grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+  }
+  @media (max-width:600px){
+    .notes__grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ SHEET TOP ============ -->
+  <div class="sheet-top">
+    <div>
+      <span class="dot"></span>
+      CONSOLE <span class="sep">/</span> Case Studies <span class="sep">/</span>
+      <span class="active">Synthetic Users · §04 · Pipeline Lanes</span>
+      <span class="sep">/</span> SU-03
+    </div>
+    <div><b>Matt Stangl</b> · CX, Product &amp; Service Design Leader</div>
+  </div>
+
+  <!-- ============ TITLE ============ -->
+  <section class="title">
+    <div>
+      <p class="kicker">Artifact 03 · Pipeline Lanes · 2026.06</p>
+      <h1>A release pipeline, <em>pointed at a portfolio</em>.</h1>
+      <p class="sub">DEV → QA → UAT → PROD — four QA environments staged like a software release, each with its own persona class and a single diagnostic question that decides whether the work advances. Run B audits in parallel.</p>
+    </div>
+    <dl class="idcard">
+      <dt>Artifact</dt>      <dd>03 · Pipeline Lanes</dd>
+      <dt>Shape</dt>         <dd>4 lanes + gates</dd>
+      <dt>Section</dt>       <dd>§04 · Pipeline</dd>
+      <dt>Per lane</dt>      <dd>Class + diagnostic Q</dd>
+      <dt>Accent</dt>        <dd>Placeholder · 1 only</dd>
+      <dt>Register</dt>      <dd>Fiche · v2026.06</dd>
+    </dl>
+  </section>
+
+  <!-- ============ CONCEPT NOTE ============ -->
+  <div class="caveat">
+    <span class="stamp">SKETCH</span>
+    <div>
+      <p>The four environments are composed as a <b>release pipeline</b> — a continuous spine with <b>pass gates</b> between lanes and a terminal <code>SHIP</code> — so it reads as DEV → QA → UAT → PROD, not a 4-up grid.</p>
+      <p>Each lane carries two prominent elements per the brief: the <b>persona class</b> (Archetype / Thought-leader / LinkedIn-modeled / Adversarial) as a labeled chip, and the <b>diagnostic question</b> as the hero line with its key phrase accented. Run B runs <em>parallel</em> beneath, never a fifth lane. Accent <code>#2dd4b2</code> is a placeholder.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ THE ARTIFACT ============ -->
+  <section class="artband">
+    <div class="artband__head">
+      <div class="l">
+        <span class="arr">↓</span>
+        <span class="h">The pipeline — rendered in isolation</span>
+      </div>
+      <div class="r">
+        DESKTOP · FULL-WIDTH ARTBOARD<br/>
+        <b>SU-03 · PIPELINE LANES</b>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="artboard" style="padding:40px 28px 36px;">
+        <span class="artboard__tag">Artifact · no page chrome</span>
+        <span class="artboard__scale">1 : 1</span>
+
+        <div class="artboard__inner">
+          <div class="pipe">
+
+            <div class="pipe__head">
+              <span class="t">QA.PIPELINE <b>Four environments · four pass criteria · staged before the session ran</b></span>
+              <span class="m">DEV → QA → UAT → PROD</span>
+            </div>
+
+            <div class="pipe__flow">
+
+              <!-- DEV -->
+              <div class="lane">
+                <div class="lane__rail">
+                  <span class="node"></span><span class="env">DEV</span> · <span class="kind">structural</span>
+                  <span class="stg">01</span>
+                </div>
+                <div class="lane__body">
+                  <span class="lane__class"><span class="px"></span>Archetype users</span>
+                  <span class="lane__qlab">Diagnostic</span>
+                  <p class="lane__q">Can any user find what they need in <em>60 seconds</em>?</p>
+                  <div class="lane__note"><b>Pass criteria ·</b> IA integrity</div>
+                </div>
+              </div>
+
+              <div class="gate"><span class="ln"></span><span class="arw"></span><span class="lbl">Pass</span></div>
+
+              <!-- QA -->
+              <div class="lane">
+                <div class="lane__rail">
+                  <span class="node"></span><span class="env">QA</span> · <span class="kind">content</span>
+                  <span class="stg">02</span>
+                </div>
+                <div class="lane__body">
+                  <span class="lane__class"><span class="px"></span>Thought-leader personas</span>
+                  <span class="lane__qlab">Diagnostic</span>
+                  <p class="lane__q">Does the copy communicate leadership?</p>
+                  <div class="lane__note"><em style="color:var(--accent); font-style:normal;">Five practitioner worldviews</em> stress-test method and metrics</div>
+                </div>
+              </div>
+
+              <div class="gate"><span class="ln"></span><span class="arw"></span><span class="lbl">Pass</span></div>
+
+              <!-- UAT -->
+              <div class="lane">
+                <div class="lane__rail">
+                  <span class="node"></span><span class="env">UAT</span> · <span class="kind">audience</span>
+                  <span class="stg">03</span>
+                </div>
+                <div class="lane__body">
+                  <span class="lane__class"><span class="px"></span>LinkedIn-modeled personas</span>
+                  <span class="lane__qlab">Diagnostic</span>
+                  <p class="lane__q">Would <em>the specific person</em> I'm targeting respond?</p>
+                  <div class="lane__note"><b>Pass criteria ·</b> Pre-outreach sharpening</div>
+                </div>
+              </div>
+
+              <div class="gate"><span class="ln"></span><span class="arw"></span><span class="lbl">Pass</span></div>
+
+              <!-- PROD -->
+              <div class="lane">
+                <div class="lane__rail">
+                  <span class="node"></span><span class="env">PROD</span> · <span class="kind">adversarial</span>
+                  <span class="stg">04</span>
+                </div>
+                <div class="lane__body">
+                  <span class="lane__class"><span class="px"></span>Adversarial users</span>
+                  <span class="lane__qlab">Diagnostic</span>
+                  <p class="lane__q">Does it survive a skeptical reviewer with <em>300 portfolios</em> this month?</p>
+                  <div class="lane__note"><b>Pass criteria ·</b> Ship only if it does</div>
+                </div>
+              </div>
+
+              <!-- terminus -->
+              <div class="ship">
+                <span class="arw"></span>
+                <span class="w">Ship</span>
+                <span class="s">survives all<br/>four gates</span>
+              </div>
+
+            </div>
+
+            <!-- Run B companion -->
+            <div class="runb">
+              <span class="tag">● Run B · companion</span>
+              <span class="desc"><b>One design-systems persona</b> running a full-site audit — runs <em style="color:var(--accent); font-style:normal;">parallel to the pipeline</em>, not as a fifth lane.</span>
+              <span class="fold">→ folds into the prioritized backlog</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- notes (full-width band below the pipeline) -->
+    <aside class="notes">
+      <div class="notes__grid">
+        <div class="ngroup">
+          <h4>WHY IT READS AS A PIPELINE</h4>
+          <ul>
+            <li><b>Spine + gates.</b> A continuous DEV→QA→UAT→PROD rail with PASS gates and a terminal SHIP — the CI/CD release shape, applied to portfolio review.</li>
+            <li><b>Advance, don't browse.</b> Gates imply sequence and a stop condition; a grid would imply four independent boxes.</li>
+          </ul>
+        </div>
+        <div class="ngroup">
+          <h4>TWO PROMINENT LAYERS</h4>
+          <ul>
+            <li><b>Persona class</b> as a chip (Archetype / Thought-leader / LinkedIn-modeled / Adversarial) — it matters as much as the environment.</li>
+            <li><b>Diagnostic question</b> is the hero line; the decisive phrase (<em>60 seconds</em>, <em>300 portfolios</em>…) is accented so it carries.</li>
+          </ul>
+        </div>
+        <div class="ngroup">
+          <h4>RUN B</h4>
+          <ul>
+            <li>Parallel rail beneath, dashed + tagged <b>PARALLEL</b> — a companion audit, explicitly not a fifth lane, folding into the backlog.</li>
+          </ul>
+        </div>
+        <div class="ngroup">
+          <h4>MOBILE (≤900PX)</h4>
+          <ul>
+            <li>Pipeline rotates <b>vertical</b>: lanes stack, gates become downward gate-ticks, SHIP closes the column. Questions stay large.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag lb">LOAD-BEARING · gated spine</span>
+            <span class="tag ex">EXPLORATORY · question scale</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+
+  <!-- ============ MOBILE COMPANION ============ -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">SU-03 · MOBILE · VERTICAL PIPELINE</div>
+
+      <!-- DEV -->
+      <div style="border:1px solid var(--ink-3); background:var(--plate);">
+        <div style="padding:8px 11px; border-bottom:1px solid var(--ink-4); background:var(--bg-soft); font-family:var(--mono); font-size:9px; letter-spacing:0.13em; color:var(--ink-1); text-transform:uppercase; display:flex; align-items:center; gap:7px;"><span style="width:9px;height:9px;border:1.5px solid var(--accent);border-radius:50%;"></span>DEV · <span style="color:var(--ink-3);">structural</span><span style="margin-left:auto; color:var(--ink-3);">01</span></div>
+        <div style="padding:11px;">
+          <span style="display:inline-block; border:1px solid var(--accent-dim); padding:3px 7px; font-family:var(--mono); font-size:8px; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:9px;">Archetype users</span>
+          <p style="margin:0; font-family:var(--sans); font-weight:500; font-size:15px; line-height:1.25; color:var(--ink-0);">Can any user find what they need in <span style="color:var(--accent);">60 seconds</span>?</p>
+        </div>
+      </div>
+      <div style="text-align:center; color:var(--accent); font-family:var(--mono); font-size:11px; padding:3px 0;">↓ pass</div>
+      <!-- QA -->
+      <div style="border:1px solid var(--ink-3); background:var(--plate);">
+        <div style="padding:8px 11px; border-bottom:1px solid var(--ink-4); background:var(--bg-soft); font-family:var(--mono); font-size:9px; letter-spacing:0.13em; color:var(--ink-1); text-transform:uppercase; display:flex; align-items:center; gap:7px;"><span style="width:9px;height:9px;border:1.5px solid var(--accent);border-radius:50%;"></span>QA · <span style="color:var(--ink-3);">content</span><span style="margin-left:auto; color:var(--ink-3);">02</span></div>
+        <div style="padding:11px;">
+          <span style="display:inline-block; border:1px solid var(--accent-dim); padding:3px 7px; font-family:var(--mono); font-size:8px; letter-spacing:0.12em; color:var(--accent); text-transform:uppercase; margin-bottom:9px;">Thought-leader personas</span>
+          <p style="margin:0; font-family:var(--sans); font-weight:500; font-size:15px; line-height:1.25; color:var(--ink-0);">Does the copy communicate leadership?</p>
+        </div>
+      </div>
+      <div style="text-align:center; color:var(--accent); font-family:var(--mono); font-size:11px; padding:3px 0;">↓ pass</div>
+      <div style="font-family:var(--mono); font-size:9px; letter-spacing:0.14em; color:var(--ink-3); text-align:center; text-transform:uppercase; padding:3px 0;">UAT · PROD · ↓ SHIP</div>
+
+      <!-- Run B -->
+      <div style="border:1px dashed var(--accent-dim); background:var(--accent-vlow); padding:11px; margin-top:10px;">
+        <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">● Run B · parallel companion</div>
+        <div style="font-family:var(--sans); font-size:12px; color:var(--ink-1); line-height:1.4;">1 design-systems persona · full-site audit → folds into the backlog</div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>SU-03 · MOBILE LOGIC</h4>
+      <p><b>The pipeline rotates 90°.</b> Lanes stack top-to-bottom; the spine becomes vertical; PASS gates become downward gate-ticks between lanes. The same DEV → QA → UAT → PROD → SHIP sequence, read by scrolling.</p>
+      <p><b>Questions stay the hero.</b> Even at 360px the diagnostic question never drops below ~15px — it's the thing a reader should remember from each lane, so it never demotes to caption size.</p>
+      <p><b>Persona-class chips persist</b> above each question; they're as load-bearing as the environment label and survive the collapse intact.</p>
+      <p><b>Run B</b> trails as a distinct dashed block after SHIP — still visibly parallel to (not part of) the lane sequence.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ ANALYSIS ============ -->
+  <section class="analysis">
+    <h2>↘ Pipeline Lanes · read &amp; trade-offs</h2>
+
+    <h3><span class="pn">§ 1 · The metaphor earns its keep</span>Gates, not cells</h3>
+    <p>The difference between this and the impact-vis 4-up grid is the <b>gate</b>. A gate says "advance only if you pass," which is exactly what staging a portfolio through DEV/QA/UAT/PROD means. The terminal <code>SHIP</code> gives the sequence a destination. Together they convert four parallel boxes into one directional process — the read the brief asked for.</p>
+
+    <h3><span class="pn">§ 2 · Question as hero</span>Diagnostics carry the lane</h3>
+    <p>Each lane's diagnostic question is set at display scale with its decisive phrase accented — <em>60 seconds</em>, <em>Five practitioner worldviews</em>, <em>the specific person</em>, <em>300 portfolios</em>. These are the lines a reviewer remembers; sizing them as headlines (not captions) is the point. The persona-class chip above each anchors <em>who</em> is asking, which the brief flags as equally important to <em>where</em>.</p>
+
+    <h3><span class="pn">§ 3 · Risks for the port</span></h3>
+    <ul>
+      <li><b>Lane height parity.</b> Question lengths differ (PROD is longest); lanes are flex-stretched to equal height. Verify the shortest lane's note still pins to the bottom rule.</li>
+      <li><b>Gate width at mid-widths.</b> 62px gates can crowd between ~820–980px; consider dropping the "PASS" label before rotating to vertical.</li>
+      <li><b>Run B prominence.</b> A dashed rail reads as parallel, but if Matt feels it's under-weighted, it can gain a left node aligned to the spine to show the parallel start more literally.</li>
+    </ul>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div><b>SU-03</b> · PIPELINE LANES</div>
+    <div>SCALE · 1 : 1</div>
+    <div>DRAWN · M. STANGL</div>
+    <div>APPROVED · ─</div>
+    <div>DATE · 2026 · 06</div>
+    <div>REV · v2026.06 · LO-FI</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

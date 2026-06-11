@@ -45,6 +45,7 @@ export function SyntheticCaseView() {
       </a>
 
       <CaseHero
+        heroImageSrc="/case-studies/synthetic-users-robot-halftone.png"
         picker={<CasePicker activeSlug="synthetic" />}
         caseNumber="02"
         totalCases={5}
@@ -64,25 +65,6 @@ export function SyntheticCaseView() {
             documented by running it on this portfolio. Structured personas, modeled on real practitioner
             worldviews, surface blind spots self-review can&apos;t.{" "}
             <em>Only if you build them the right way.</em>
-          </>
-        }
-        heroBgphotoSlot={
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element -- halftone-ready placeholder; swap src when hero asset is locked */}
-            <img
-              className="hero__bgphoto-img"
-              src="/case-studies/centaur-literal.png"
-              alt=""
-              decoding="async"
-              fetchPriority="high"
-            />
-            <span className="synth-hero-image-flag" aria-hidden="true">
-              PLACEHOLDER — HERO IMAGE TBD
-            </span>
-            <div className="hero__bgphoto-halftone" aria-hidden="true" />
-            <div className="hero__bgphoto-grain" aria-hidden="true" />
-            <div className="hero__bgphoto-scrim" aria-hidden="true" />
-            <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
           </>
         }
         metaSlot={

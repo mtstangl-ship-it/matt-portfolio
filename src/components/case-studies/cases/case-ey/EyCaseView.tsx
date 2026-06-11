@@ -88,6 +88,7 @@ export function EyCaseView() {
       </a>
 
       <CaseHero
+        heroImageSrc="/case-studies/ey-core-halftone.png"
         picker={<CasePicker activeSlug="ey" />}
         caseNumber="05"
         totalCases={5}
@@ -104,22 +105,6 @@ export function EyCaseView() {
         subhead={
           <>
             <b>Say YES Summer:</b> three cities, ten events — <b>715 vaccinations</b> where mass media couldn&apos;t land.
-          </>
-        }
-        heroBgphotoSlot={
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element -- Tier-A shared hero pipeline (hero-chrome.css) */}
-            <img
-              className="hero__bgphoto-img"
-              src="/case-studies/ey-core-halftone.png"
-              alt=""
-              decoding="async"
-              fetchPriority="high"
-            />
-            <div className="hero__bgphoto-halftone" aria-hidden="true" />
-            <div className="hero__bgphoto-grain" aria-hidden="true" />
-            <div className="hero__bgphoto-scrim" aria-hidden="true" />
-            <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
           </>
         }
         metaSlot={

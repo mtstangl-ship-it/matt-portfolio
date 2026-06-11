@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SU · Artifact 01 · Funnel · Direction A · Narrowing</title>
+<!--
+  ============================================================
+  ARTIFACT 01 — THE FUNNEL · DIRECTION A · "NARROWING / COUNTABLE THROAT"
+  Synthetic Users case study · Section 02 hero metric
+  ------------------------------------------------------------
+  DESIGN DECISIONS WORTH FLAGGING (for the Cursor port):
+  · The funnel uses AREA-ENCODED bars for the big narrowing
+    (36 -> 18 -> 10), then switches to DISCRETE UNIT CELLS at the
+    climactic "10 actionable" tier so the 3-of-10 ratio is literally
+    countable, not just area-implied. Count the cells: 7 hollow,
+    3 filled. That is the whole methodology argument, made undeniable.
+  · Confidence/identity of the 3 is encoded by FILL STATE + a
+    dimension bracket (shape/position), NOT color alone — so it
+    survives grayscale / colorblind reading. Accent is reinforcement.
+  · The terminus ("3 became shipped changes") is the heaviest object
+    on the board: largest cells, glow, biggest label. It must land last.
+  · Run B is a PARALLEL vertical rail to the right (a second track),
+    not a 5th funnel stage. Its merge arrow points back into Run A's
+    actionable backlog. Treatment keeps it a peer, not a footnote.
+  · Accent (#2dd4b2) is a PLACEHOLDER — single accent only. Swap later.
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="synthetic-artifacts.css">
+<style>
+  /* ---- Funnel A geometry (artifact-specific) ---- */
+  .funnel-wrap{ display:grid; grid-template-columns: minmax(0,1fr) 218px; gap:30px; align-items:start; }
+
+  .funnel{ max-width:560px; margin:0 auto; width:100%; }
+  .fstage{ display:flex; flex-direction:column; align-items:center; }
+
+  .fbar{
+    height:62px; margin:0 auto;
+    border:1px solid var(--ink-3); background:var(--plate);
+    display:flex; align-items:center; justify-content:space-between; gap:18px;
+    padding:0 20px; position:relative;
+  }
+  .fbar .num{ font-family:var(--sans); font-weight:600; font-size:30px; letter-spacing:-0.03em; color:var(--ink-0); line-height:1; }
+  .fbar .cap{ font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-2); text-align:right; line-height:1.5; }
+  .fbar .cap b{ color:var(--ink-1); font-weight:500; }
+
+  /* funnel-wall construction lines between stages */
+  .fgap{ width:100%; height:42px; }
+  .fgap svg{ width:100%; height:100%; display:block; overflow:visible; }
+  .fgap path{ fill:none; stroke:var(--ink-3); stroke-width:1; stroke-dasharray:4 4; }
+  .fgap .axis{ stroke:var(--ink-4); stroke-dasharray:none; stroke-width:1; }
+
+  /* climactic tier — 10 discrete cells */
+  .ftier{ position:relative; padding:6px 0 0; }
+  .ftier__head{
+    display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+    margin-bottom:12px;
+  }
+  .ftier__head .num{ font-family:var(--sans); font-weight:600; font-size:30px; letter-spacing:-0.03em; color:var(--ink-0); line-height:1; }
+  .ftier__head .cap{ font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-2); text-align:right; line-height:1.5; }
+  .ftier__head .cap b{ color:var(--ink-1); font-weight:500; }
+
+  .cells{ display:flex; gap:7px; justify-content:center; }
+  .cell{ width:34px; height:42px; border:1px solid var(--ink-3); background:transparent; position:relative; }
+  .cell.on{
+    background:var(--accent); border-color:var(--accent);
+    box-shadow:0 0 0 1px rgba(45,212,178,0.25);
+  }
+  /* dimension bracket under the 3 accent cells only — count is countable, bracket names it */
+  .bracketrow{ display:flex; gap:7px; justify-content:center; margin-top:9px; }
+  .brk-left{ width:157px; }              /* spans cells 1-4 (spacer) */
+  .brk3{ width:116px; }                  /* spans the 3 accent cells 5-7 */
+  .brk-right{ width:116px; }             /* spans cells 8-10 (spacer) */
+  .bracket{
+    position:relative; height:18px;
+    font-family:var(--mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase;
+    display:flex; align-items:flex-end; justify-content:center; text-align:center;
+    color:var(--accent);
+  }
+  .bracket::before{ content:""; position:absolute; top:0; left:0; right:0; height:1px; background:currentColor; }
+  .bracket::after{ content:""; position:absolute; top:0; left:50%; width:1px; height:5px; background:currentColor; transform:translateX(-50%); }
+  .bracket span{ padding-top:5px; }
+
+  /* fill-state legend — explicit encoding, no color dependency */
+  .flegend{ display:flex; gap:22px; justify-content:center; margin-top:16px; }
+  .flegend .it{ display:flex; gap:8px; align-items:center; font-family:var(--mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-2); }
+  .flegend .sw{ width:13px; height:13px; border:1px solid var(--ink-3); }
+  .flegend .sw.on{ background:var(--accent); border-color:var(--accent); }
+
+  /* terminus — shipped */
+  .terminus{ display:flex; flex-direction:column; align-items:center; gap:14px; padding-top:4px; }
+  .tcells{ display:flex; gap:9px; }
+  .tcell{
+    width:46px; height:58px; background:var(--accent); border:1px solid var(--accent);
+    box-shadow:0 0 22px rgba(45,212,178,0.28), inset 0 0 0 1px rgba(10,15,14,0.18);
+    position:relative;
+  }
+  .tcell::after{ content:""; position:absolute; inset:5px; border:1px solid rgba(10,15,14,0.35); }
+  .tlabel{ text-align:center; }
+  .tlabel .n{ font-family:var(--sans); font-weight:600; font-size:46px; letter-spacing:-0.04em; color:var(--accent); line-height:1; }
+  .tlabel .t{ font-family:var(--mono); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-1); margin-top:8px; }
+
+  /* the headline statement */
+  .fhead{
+    margin:0 auto 26px; max-width:560px;
+    font-family:var(--sans); font-weight:500; font-size:21px; letter-spacing:-0.02em;
+    line-height:1.3; color:var(--ink-1);
+  }
+  .fhead b{ color:var(--ink-0); font-weight:500; }
+  .fhead em{ color:var(--accent); font-style:normal; font-weight:600; }
+
+  /* Run B companion rail */
+  .runb{
+    border:1px dashed var(--accent-dim); background:var(--accent-vlow);
+    padding:16px 16px 18px; position:relative; align-self:stretch;
+  }
+  .runb__tag{
+    font-family:var(--mono); font-size:9px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:4px;
+  }
+  .runb__sub{ font-family:var(--mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-2); margin-bottom:16px; }
+  .runb__merge{
+    font-family:var(--mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--accent); border-top:1px dashed var(--ink-4); padding-top:12px; margin-top:4px;
+    display:flex; gap:8px; align-items:flex-start; line-height:1.5;
+  }
+  .runb__merge .ar{ color:var(--accent); }
+  .rbnode{ display:flex; flex-direction:column; gap:5px; margin-bottom:16px; }
+  .rbnode .n{ font-family:var(--sans); font-weight:600; font-size:24px; letter-spacing:-0.02em; color:var(--ink-0); line-height:1; }
+  .rbnode .l{ font-family:var(--sans); font-size:12px; line-height:1.45; color:var(--ink-1); }
+  .rbnode .l b{ color:var(--ink-0); font-weight:500; }
+  .rbconn{ font-family:var(--mono); font-size:11px; color:var(--ink-3); margin:-8px 0 8px; }
+
+  @media (max-width:1080px){
+    .funnel-wrap{ grid-template-columns:1fr; gap:26px; }
+    .runb{ max-width:560px; margin:0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ SHEET TOP ============ -->
+  <div class="sheet-top">
+    <div>
+      <span class="dot"></span>
+      CONSOLE <span class="sep">/</span> Case Studies <span class="sep">/</span>
+      <span class="active">Synthetic Users · §02 · The Funnel</span>
+      <span class="sep">/</span> SU-01 · DIR A
+    </div>
+    <div><b>Matt Stangl</b> · CX, Product &amp; Service Design Leader</div>
+  </div>
+
+  <!-- ============ TITLE ============ -->
+  <section class="title">
+    <div>
+      <p class="kicker">Artifact 01 · The Funnel · Direction A · 2026.06</p>
+      <h1>Make the <em>3-of-10 gap</em> impossible to miss by letting the eye count it.</h1>
+      <p class="sub">The case's hero metric. A literal narrowing — 36 evaluations down to 3 shipped changes — but the climactic tier resolves into discrete cells you can count: seven self-review could have reached, three it would have missed. Run B runs parallel and merges into the backlog.</p>
+    </div>
+    <dl class="idcard">
+      <dt>Artifact</dt>      <dd>01 · The Funnel</dd>
+      <dt>Direction</dt>     <dd>A · Narrowing throat</dd>
+      <dt>Section</dt>       <dd>§02 · Hero metric</dd>
+      <dt>Encoding</dt>      <dd>Area + countable cells</dd>
+      <dt>Accent</dt>        <dd>Placeholder · 1 only</dd>
+      <dt>Register</dt>      <dd>Fiche · v2026.06</dd>
+    </dl>
+  </section>
+
+  <!-- ============ CONCEPT NOTE ============ -->
+  <div class="caveat">
+    <span class="stamp">SKETCH</span>
+    <div>
+      <p>Locked copy, rendered verbatim from the funnel chain: <b>9 personas × 4 environments → 18 surfaced → 10 actionable → 3 self-review missed → 3 shipped</b>, plus the parallel Run B audit. No paraphrase.</p>
+      <p>The big narrowing (36 → 18 → 10) is <b>area-encoded</b> (bar width ∝ count). The decisive tier becomes <b>ten discrete cells</b> so the ratio is <em>countable, not asserted</em> — seven hollow, three filled. Identity of the three is carried by fill-state + a dimension bracket, so it reads without color. Accent <code>#2dd4b2</code> is a swap-later placeholder.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ THE ARTIFACT ============ -->
+  <section class="artband">
+    <div class="artband__head">
+      <div class="l">
+        <span class="arr">↓</span>
+        <span class="h">The funnel — rendered in isolation</span>
+      </div>
+      <div class="r">
+        DESKTOP · ~960PX ARTBOARD<br/>
+        <b>SU-01 · DIR A · NARROWING</b>
+      </div>
+    </div>
+
+    <div class="stage">
+      <!-- isolated artifact -->
+      <div class="artboard">
+        <span class="artboard__tag">Artifact · no page chrome</span>
+        <span class="artboard__scale">1 : 1</span>
+
+        <div class="artboard__inner">
+
+          <p class="fhead"><b>Three of ten</b> actionable findings <em>would not have been caught by self-review.</em> All three became shipped changes.</p>
+
+          <div class="funnel-wrap">
+
+            <!-- MAIN FUNNEL · RUN A -->
+            <div class="funnel">
+
+              <!-- Stage 1 · inputs -->
+              <div class="fstage">
+                <div class="fbar" style="width:100%;">
+                  <span class="num">36</span>
+                  <span class="cap"><b>9 personas × 4 environments</b><br/>evaluations run</span>
+                </div>
+              </div>
+              <div class="fgap">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <line class="axis" x1="50" y1="0" x2="50" y2="100"/>
+                  <path d="M0,0 L19,100"/>
+                  <path d="M100,0 L81,100"/>
+                </svg>
+              </div>
+
+              <!-- Stage 2 · surfaced -->
+              <div class="fstage">
+                <div class="fbar" style="width:62%;">
+                  <span class="num">18</span>
+                  <span class="cap"><b>findings surfaced</b><br/>across the four QA envs</span>
+                </div>
+              </div>
+              <div class="fgap">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <line class="axis" x1="50" y1="0" x2="50" y2="100"/>
+                  <path d="M19,0 L31,100"/>
+                  <path d="M81,0 L69,100"/>
+                </svg>
+              </div>
+
+              <!-- Stage 3 · the decisive tier (countable) -->
+              <div class="ftier">
+                <div class="ftier__head">
+                  <span class="num">10</span>
+                  <span class="cap"><b>prioritized as actionable</b><br/>the 10-item backlog</span>
+                </div>
+
+                <div class="cells">
+                  <div class="cell"></div>
+                  <div class="cell"></div>
+                  <div class="cell"></div>
+                  <div class="cell"></div>
+                  <div class="cell on"></div>
+                  <div class="cell on"></div>
+                  <div class="cell on"></div>
+                  <div class="cell"></div>
+                  <div class="cell"></div>
+                  <div class="cell"></div>
+                </div>
+
+                <div class="bracketrow">
+                  <div class="brk-left"></div>
+                  <div class="brk3"><div class="bracket"><span>3 of 10 · blind spots</span></div></div>
+                  <div class="brk-right"></div>
+                </div>
+
+                <div class="flegend">
+                  <div class="it"><span class="sw"></span>self-review reachable</div>
+                  <div class="it"><span class="sw on"></span>self-review blind spot → shipped</div>
+                </div>
+              </div>
+
+              <!-- gap: only the 3 flow through -->
+              <div class="fgap">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <path d="M43,0 L43,100"/>
+                  <path d="M57,0 L57,100"/>
+                </svg>
+              </div>
+
+              <!-- Stage 4 · terminus -->
+              <div class="terminus">
+                <div class="tcells">
+                  <div class="tcell"></div>
+                  <div class="tcell"></div>
+                  <div class="tcell"></div>
+                </div>
+                <div class="tlabel">
+                  <div class="n">3</div>
+                  <div class="t">became shipped changes</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RUN B · companion rail -->
+            <aside class="runb">
+              <div class="runb__tag">● Run B · companion run</div>
+              <div class="runb__sub">parallel · not a 5th stage</div>
+
+              <div class="rbnode">
+                <span class="n">1</span>
+                <span class="l"><b>design-systems persona</b> × full site audit</span>
+              </div>
+              <div class="rbconn">↓</div>
+              <div class="rbnode">
+                <span class="n">53</span>
+                <span class="l"><b>line-level fixes</b> across 8 sections</span>
+              </div>
+
+              <div class="runb__merge">
+                <span class="ar">→</span>
+                <span>integrated into Run A's prioritized backlog</span>
+              </div>
+            </aside>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- notes rail -->
+      <aside class="notes">
+        <h4>WHY THIS READS</h4>
+        <ul>
+          <li><b>Countable climax.</b> The eye verifies <em>3 of 10</em> directly — seven hollow, three filled. The argument isn't asserted, it's checkable.</li>
+          <li><b>Area then unit.</b> Bars taper for the big drop (36→18→10); cells take over exactly where the ratio matters.</li>
+          <li><b>Terminus wins.</b> Largest cells, the only glow, the biggest numeral. "3 shipped" is the last thing you see.</li>
+        </ul>
+
+        <h4>CONFIDENCE / IDENTITY ENCODING</h4>
+        <ul>
+          <li>The three are marked by <b>fill-state + bracket</b> (shape &amp; position), not hue. Survives grayscale.</li>
+          <li>Accent only <em>reinforces</em> what fill already says — single accent, swappable.</li>
+        </ul>
+
+        <h4>MIDPOINT (TABLET ~720PX)</h4>
+        <ul>
+          <li>Run B rail drops <b>below</b> the funnel as a full-width parallel strip; the merge arrow rotates to point up into the backlog tier.</li>
+          <li>Bars keep % widths; cells shrink to ~26px but stay one row (10 fit to ~360px).</li>
+        </ul>
+
+        <h4>MOBILE (≤520PX)</h4>
+        <ul>
+          <li>Funnel stays vertical (already is). Cells shrink to ~22px — still one countable row at 360px.</li>
+          <li>Headline statement moves above; Run B becomes a stacked card after the terminus.</li>
+        </ul>
+
+        <div class="tags">
+          <span class="tag lb">LOAD-BEARING · countable gap</span>
+          <span class="tag ex">EXPLORATORY · cell-grid climax</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- ============ MOBILE COMPANION ============ -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">SU-01 · DIR A · MOBILE · VERTICAL STACK</div>
+
+      <p style="font-family:var(--sans); font-size:13px; line-height:1.35; color:var(--ink-1); margin:0 0 16px; letter-spacing:-0.01em;">
+        <b style="color:var(--ink-0); font-weight:500;">3 of 10</b> actionable findings
+        <span style="color:var(--accent);">self-review would have missed.</span>
+      </p>
+
+      <!-- mini funnel -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+        <div style="width:100%; height:42px; border:1px solid var(--ink-3); background:var(--plate); display:flex; align-items:center; justify-content:space-between; padding:0 12px;">
+          <span style="font-family:var(--sans); font-weight:600; font-size:20px; color:var(--ink-0);">36</span>
+          <span style="font-family:var(--mono); font-size:8px; letter-spacing:0.12em; color:var(--ink-2); text-transform:uppercase;">9 × 4 evals</span>
+        </div>
+        <div style="font-family:var(--mono); color:var(--ink-3); font-size:12px; padding:3px 0;">▽</div>
+        <div style="width:64%; height:42px; border:1px solid var(--ink-3); background:var(--plate); display:flex; align-items:center; justify-content:space-between; padding:0 12px;">
+          <span style="font-family:var(--sans); font-weight:600; font-size:20px; color:var(--ink-0);">18</span>
+          <span style="font-family:var(--mono); font-size:8px; letter-spacing:0.12em; color:var(--ink-2); text-transform:uppercase;">surfaced</span>
+        </div>
+        <div style="font-family:var(--mono); color:var(--ink-3); font-size:12px; padding:3px 0;">▽</div>
+        <!-- 10 cells -->
+        <div style="display:flex; gap:4px; justify-content:center; margin:4px 0 6px;">
+          <div style="width:22px;height:30px;border:1px solid var(--ink-3);"></div>
+          <div style="width:22px;height:30px;border:1px solid var(--ink-3);"></div>
+          <div style="width:22px;height:30px;border:1px solid var(--ink-3);"></div>
+          <div style="width:22px;height:30px;border:1px solid var(--ink-3);"></div>
+          <div style="width:22px;height:30px;background:var(--accent);border:1px solid var(--accent);"></div>
+          <div style="width:22px;height:30px;background:var(--accent);border:1px solid var(--accent);"></div>
+          <div style="width:22px;height:30px;background:var(--accent);border:1px solid var(--accent);"></div>
+          <div style="width:22px;height:30px;border:1px solid var(--ink-3);"></div>
+          <div style="width:22px;height:30px;border:1px solid var(--ink-3);"></div>
+          <div style="width:22px;height:30px;border:1px solid var(--ink-3);"></div>
+        </div>
+        <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.12em; color:var(--ink-2); text-transform:uppercase; margin-bottom:4px;">10 actionable · <span style="color:var(--accent);">3 blind spots</span></div>
+        <div style="font-family:var(--mono); color:var(--accent); font-size:12px; padding:2px 0;">▽</div>
+        <!-- terminus -->
+        <div style="display:flex; gap:6px; margin-top:4px;">
+          <div style="width:30px;height:38px;background:var(--accent);box-shadow:0 0 16px rgba(45,212,178,0.3);"></div>
+          <div style="width:30px;height:38px;background:var(--accent);box-shadow:0 0 16px rgba(45,212,178,0.3);"></div>
+          <div style="width:30px;height:38px;background:var(--accent);box-shadow:0 0 16px rgba(45,212,178,0.3);"></div>
+        </div>
+        <div style="font-family:var(--mono); font-size:9px; letter-spacing:0.16em; color:var(--ink-1); text-transform:uppercase; margin-top:8px;">3 shipped changes</div>
+      </div>
+
+      <!-- Run B card -->
+      <div style="border:1px dashed var(--accent-dim); background:var(--accent-vlow); padding:11px 12px; margin-top:18px;">
+        <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.16em; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">● Run B · companion · parallel</div>
+        <div style="font-family:var(--sans); font-size:12px; color:var(--ink-1); line-height:1.4;">1 design-systems persona → <b style="color:var(--ink-0);">53 fixes</b> / 8 sections → folds into the backlog ↑</div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>SU-01 · DIR A · MOBILE LOGIC</h4>
+      <p><b>The funnel is already vertical</b>, so mobile is mostly a scale-down — no layout exception. The countable cell-row is the one thing to protect: at 360px the ten cells still fit one row at ~22px, so the <em>3-of-10</em> read never breaks.</p>
+      <p><b>Headline moves up.</b> The "3 of 10" statement leads, then the funnel proves it. On desktop the statement sits beside; on mobile it stacks above.</p>
+      <p><b>Run B</b> demotes from a side rail to a single stacked card after the terminus — still visually distinct (dashed accent border) so it reads as a parallel companion, not a funnel step.</p>
+      <p><b>Terminus stays the heaviest object</b> — the glow and the largest numerals carry down to mobile so the payoff still lands last.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ ANALYSIS ============ -->
+  <section class="analysis">
+    <h2>↘ Direction A · read &amp; trade-offs</h2>
+
+    <h3><span class="pn">§ 1 · What this direction is best at</span>The countable gap</h3>
+    <p>Direction A's whole bet is that a <em>countable</em> ratio beats a stated one. A hiring design leader doesn't take "3 of 10" on faith — here they can verify it in under a second by counting filled cells. The funnel silhouette earns the "research method" framing; the discrete throat earns the credibility. The terminus is deliberately the heaviest object so <b>"3 shipped changes"</b> is the last beat, not a quiet caption.</p>
+
+    <h3><span class="pn">§ 2 · Run B placement</span>Parallel rail, not a fifth step</h3>
+    <p>Run B sits as a second vertical track to the right with its own magnitude (1 persona, 53 fixes) and a merge arrow into Run A's backlog. It reads as a <b>companion run executed in parallel</b> — present at full weight, never subordinated into the main funnel's step sequence. If Run B deserves more prominence, Direction B (two-track) is the stronger frame.</p>
+
+    <h3><span class="pn">§ 3 · Risks for the port</span>Where it can strain</h3>
+    <ul>
+      <li><b>Cell row at small widths.</b> Ten cells must stay one row to keep the count legible. Below ~330px they'd need to drop to ~18px or wrap — wrapping kills the read. Hold a one-row minimum.</li>
+      <li><b>Bar-width honesty.</b> The bar widths are tuned to read as a funnel, not to be a precise area chart. If Matt wants strict proportional encoding, 18 should be 50% of 36 and 10 should be ~28% — slightly narrower than sketched. Flag the choice: legibility vs. strict proportionality.</li>
+      <li><b>Glow on the terminus</b> is the one ambient flourish; keep it static (no pulse) per the visual-grammar "single-fire / no looping" rule.</li>
+    </ul>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div><b>SU-01</b> · FUNNEL · DIR A</div>
+    <div>SCALE · 1 : 1</div>
+    <div>DRAWN · M. STANGL</div>
+    <div>APPROVED · ─</div>
+    <div>DATE · 2026 · 06</div>
+    <div>REV · v2026.06 · LO-FI</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

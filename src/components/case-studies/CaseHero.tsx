@@ -15,22 +15,22 @@ type CaseHeroPropsBase = {
   tag: string;
   headline: ReactNode;
   subhead: ReactNode;
+  /** Baked halftone hero image (public path). */
+  heroImageSrc: string;
   /** Case study picker (Tier-A) — rendered on the photo plate below site nav. */
   picker?: ReactNode;
   /** Override identity strip (default DEN · REMOTE). */
   basedLine?: string;
   /** Override identity strip role line (default DESIGN & BUILD). */
   roleLine?: string;
-  /** Optional brief paragraph below subhead inside the hero plate (e.g. EY). */
+  /** Optional brief paragraph below subhead inside the hero plate (e.g. Autodesk). */
   heroBrief?: ReactNode;
-  /** Replace default motorcycle plate layers (e.g. EY booth + duotone filter). */
-  heroBgphotoSlot?: ReactNode;
 };
 
 export type CaseHeroProps = CaseHeroPropsBase &
   ({ meta: CaseHeroMeta; metaSlot?: undefined } | { meta?: undefined; metaSlot: ReactNode });
 
-/** Shared halftone hero shell for Tier A case studies (Cases 01–05). Photo plate is fixed. */
+/** Shared halftone hero shell for Tier A case studies (Cases 01–05). Layout + image recipe are fixed. */
 export function CaseHero({
   caseNumber,
   totalCases,
@@ -39,13 +39,13 @@ export function CaseHero({
   tag,
   headline,
   subhead,
+  heroImageSrc,
   meta,
   metaSlot,
   picker,
   basedLine = "DEN · REMOTE",
   roleLine = "DESIGN & BUILD",
   heroBrief,
-  heroBgphotoSlot,
 }: CaseHeroProps) {
   const idStripCase = `${caseNumber} / ${String(totalCases).padStart(2, "0")}`;
 
@@ -75,26 +75,22 @@ export function CaseHero({
   return (
     <section className="hero" id="hero" aria-label="Hero" data-screen-label="01 Hero">
       <span className="margin-note">{marginNote}</span>
-      <span className="fig-stamp">{figStamp}</span>
 
       <div className="hero__plate">
         <div className="hero__bgphoto" aria-hidden="true">
-          {heroBgphotoSlot ?? (
-            <>
-              {/* eslint-disable-next-line @next/next/no-img-element -- hero plate matches prototype filter pipeline */}
-              <img
-                className="hero__bgphoto-img"
-                src="/case-studies/centaur-literal.png"
-                alt=""
-                decoding="async"
-                fetchPriority="high"
-              />
-              <div className="hero__bgphoto-halftone" aria-hidden="true" />
-              <div className="hero__bgphoto-grain" aria-hidden="true" />
-              <div className="hero__bgphoto-scrim" aria-hidden="true" />
-              <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
-            </>
-          )}
+          {/* eslint-disable-next-line @next/next/no-img-element -- hero plate uses shared CSS filter pipeline */}
+          <img
+            className="hero__bgphoto-img"
+            src={heroImageSrc}
+            alt=""
+            decoding="async"
+            fetchPriority="high"
+          />
+          <div className="hero__bgphoto-duotone" aria-hidden="true" />
+          <div className="hero__bgphoto-halftone" aria-hidden="true" />
+          <div className="hero__bgphoto-grain" aria-hidden="true" />
+          <div className="hero__bgphoto-scrim" aria-hidden="true" />
+          <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
         </div>
 
         {picker ? (
@@ -103,20 +99,23 @@ export function CaseHero({
           </div>
         ) : null}
 
+        <div className="hero__stamp-stack" aria-label="Sheet metadata">
+          <span className="fig-stamp hero__fig-stamp">{figStamp}</span>
+          <dl className="hero__id-strip">
+            <dt>CASE NO.</dt>
+            <dd>{idStripCase}</dd>
+            <dt>BASED</dt>
+            <dd>{basedLine}</dd>
+            <dt>ROLE</dt>
+            <dd>{roleLine}</dd>
+            <dt>REV.</dt>
+            <dd>v2026.04</dd>
+          </dl>
+        </div>
+
         <div className="hero__watermark" aria-hidden="true" hidden>
           {/* Fallback watermark SVG omitted — prototype ships hidden */}
         </div>
-
-        <dl className="hero__id-strip" aria-label="Identity">
-          <dt>CASE NO.</dt>
-          <dd>{idStripCase}</dd>
-          <dt>BASED</dt>
-          <dd>{basedLine}</dd>
-          <dt>ROLE</dt>
-          <dd>{roleLine}</dd>
-          <dt>REV.</dt>
-          <dd>v2026.04</dd>
-        </dl>
 
         <div className="hero__inner">
           <p className="hero__tag">{tag}</p>

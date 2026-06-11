@@ -53,6 +53,7 @@ export function AutodeskCaseView() {
       </a>
 
       <CaseHero
+        heroImageSrc="/case-studies/autodesk-design-manufacturing-halftone.png"
         picker={<CasePicker activeSlug="autodesk" />}
         caseNumber="03"
         totalCases={5}
@@ -64,7 +65,7 @@ export function AutodeskCaseView() {
         headline={
           <>
             Autodesk&apos;s <em>106% NRR</em> design.
-            <span className="autodesk-hero-h1-line2">The customer value journey behind it.</span>
+            <span className="hero__h1-line2">The customer value journey behind it.</span>
           </>
         }
         subhead={
@@ -78,22 +79,6 @@ export function AutodeskCaseView() {
             inside it meant customer outcomes and Autodesk&apos;s revenue had to be the same line.
             The work was to design that line.
           </p>
-        }
-        heroBgphotoSlot={
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element -- Tier-A shared hero pipeline (hero-chrome.css) */}
-            <img
-              className="hero__bgphoto-img"
-              src="/case-studies/autodesk-design-manufacturing-halftone.png"
-              alt=""
-              decoding="async"
-              fetchPriority="high"
-            />
-            <div className="hero__bgphoto-halftone" aria-hidden="true" />
-            <div className="hero__bgphoto-grain" aria-hidden="true" />
-            <div className="hero__bgphoto-scrim" aria-hidden="true" />
-            <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
-          </>
         }
         metaSlot={
           <>

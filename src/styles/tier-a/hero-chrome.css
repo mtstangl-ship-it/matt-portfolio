@@ -1,16 +1,24 @@
 /* =========================================================
    TIER-A SHARED HERO CHROME — CaseHero shell (all Tier-A cases)
-   Scoped under .tier-a-case-root only. Per-case overrides live in
-   case-{slug}.css under .tier-a-case-root .case-{slug}-portfolio.
-
-   Headline / subhead / meta typography lives HERE so routes that import
-   hero-chrome without case-ai.css (e.g. Wipro) still match Centaur/EY scale.
+   Scoped under .tier-a-case-root only.
+   Layout tokens, image recipe, stamp stack, and copy block live HERE.
+   Per-case hero overrides are forbidden — copy, image src, FIG text only.
    ========================================================= */
 
-/* Tier-A hero section — baseline shell (first hero padding-top zeroed below) */
+.tier-a-case-root {
+  --hero-plate-min-h: min(78vh, 820px);
+  --hero-stamp-width: clamp(11rem, 16vw, 14rem);
+  --hero-stamp-top: clamp(5.75rem, 10.5vh, 7.5rem);
+  --hero-eyebrow-top: clamp(10.25rem, 17.5vh, 13.25rem);
+  --hero-title-size: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
+  --hero-teal-highlight: #5fe6c2;
+  --hero-teal-shadow: #0a1110;
+}
+
+/* Tier-A hero section — baseline shell */
 .tier-a-case-root .hero {
   position: relative;
-  padding-top: clamp(7rem, 12vh, 9rem);
+  padding-top: 0;
   padding-bottom: clamp(1rem, 2vw, 1.75rem);
   padding-inline: var(--gutter);
   overflow: visible;
@@ -18,28 +26,30 @@
   background: var(--bg);
 }
 
-/* Tier-A React: hero is first under fixed nav — plate bleeds to viewport top */
 .tier-a-case-root .tier-a-react-case section.hero:first-of-type {
   margin-top: 0;
   padding-top: 0;
 }
 
-/* Photo + headline plate — meta strip renders below the plate (CaseHero shell, all Tier-A cases) */
+@media (min-width: 1024px) {
+  .tier-a-case-root .hero > .margin-note {
+    top: clamp(9.75rem, 17vw, 12.5rem);
+  }
+}
+
+/* Photo + headline plate — meta strip renders below the plate */
 .tier-a-case-root .hero__plate {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  /* Match Case 01 visible plate height (was centaur-only min-height override). */
-  min-height: min(78vh, 820px);
+  min-height: var(--hero-plate-min-h);
   padding-bottom: clamp(2rem, 5vw, 4rem);
   border-bottom: 1px solid rgba(223, 233, 230, 0.18);
   display: flex;
   flex-direction: column;
 }
 
-/* ---- Tier-A hero photo stack (binding pipeline — shared across cases 01–05) ----
- * Centaur's literal halftone is baked into centaur-literal.png; CSS halftone hook stays off.
- * Duotone is photographic correction only (no per-case SVG filter matrix). */
+/* ---- Tier-A hero photo stack — one bake + one render-time finish ---- */
 .tier-a-case-root .hero__plate .hero__bgphoto {
   position: absolute;
   inset: 0;
@@ -54,11 +64,26 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 38%;
-  filter: contrast(1.06) saturate(1.12) brightness(1.04);
+  object-position: center center;
+  filter: grayscale(1) contrast(1.12) brightness(0.7);
 }
 
-/* Halftone screen — disabled (baked into Centaur PNG; keep hook for consistency). */
+/* Teal duotone — accent highlight, near-black shadow */
+.tier-a-case-root .hero__plate .hero__bgphoto-duotone {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(10, 17, 16, 0.94) 0%,
+    rgba(29, 207, 170, 0.32) 48%,
+    rgba(10, 17, 16, 0.9) 100%
+  );
+  mix-blend-mode: color;
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+/* Halftone screen hook — baked into PNGs; CSS layer stays off */
 .tier-a-case-root .hero__plate .hero__bgphoto-halftone {
   position: absolute;
   inset: 0;
@@ -66,7 +91,7 @@
   opacity: 0;
 }
 
-/* Film grain — same mechanical noise layer on every case hero */
+/* Film grain */
 .tier-a-case-root .hero__plate .hero__bgphoto-grain {
   position: absolute;
   inset: 0;
@@ -77,29 +102,25 @@
   opacity: 0.16;
 }
 
-/* Left-anchored scrim + vignette — values aligned with Case 01 shipped hero */
+/* Bottom-left anchored scrim — tonal unity + text legibility */
 .tier-a-case-root .hero__plate .hero__bgphoto-scrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(
-      90deg,
-      rgba(10, 17, 16, 0.68) 0%,
-      rgba(10, 17, 16, 0.48) 24%,
-      rgba(10, 17, 16, 0.16) 48%,
-      rgba(10, 17, 16, 0.04) 72%,
-      rgba(10, 17, 16, 0) 100%
+    radial-gradient(
+      ellipse 130% 90% at 0% 100%,
+      rgba(10, 17, 16, 0.96) 0%,
+      rgba(10, 17, 16, 0.55) 35%,
+      transparent 68%
     ),
     linear-gradient(
-      180deg,
-      rgba(10, 17, 16, 0.14) 0%,
-      rgba(10, 17, 16, 0) 30%,
-      rgba(10, 17, 16, 0) 80%,
-      rgba(10, 17, 16, 0.09) 100%
+      90deg,
+      rgba(10, 17, 16, 0.82) 0%,
+      rgba(10, 17, 16, 0.35) 42%,
+      transparent 72%
     );
 }
 
-/* Bottom fade — Case 01 height + tint into page bg */
 .tier-a-case-root .hero__plate .hero__bgphoto-fadebottom {
   position: absolute;
   left: 0;
@@ -110,18 +131,6 @@
 }
 
 @media (max-width: 720px) {
-  .tier-a-case-root .hero__plate .hero__bgphoto-img {
-    object-position: center 30%;
-  }
-
-  .tier-a-case-root .case-ey-portfolio .hero__plate .hero__bgphoto-img {
-    object-position: center 30%;
-  }
-
-  .tier-a-case-root .case-centaur-portfolio .hero__plate .hero__bgphoto-img {
-    object-position: center 30%;
-  }
-
   .tier-a-case-root .hero__plate .hero__bgphoto-scrim {
     background:
       linear-gradient(
@@ -134,83 +143,179 @@
   }
 }
 
-/* Case 05 · booth framing only — treatment pipeline stays identical */
-.tier-a-case-root .case-ey-portfolio .hero__plate .hero__bgphoto-img {
-  object-position: 38% 52%;
+/* ---- Stamp stack — FIG tab + identity card, one fixed top-right anchor ---- */
+.tier-a-case-root .hero__stamp-stack {
+  position: absolute;
+  top: var(--hero-stamp-top);
+  right: var(--gutter);
+  z-index: 5;
+  width: var(--hero-stamp-width);
+  max-width: calc(100% - var(--gutter) * 2);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-/* Headline column — Centaur baseline; bottom-anchored in plate via flex + margin-top: auto */
+.tier-a-case-root .hero__stamp-stack .hero__fig-stamp {
+  position: static;
+  top: auto;
+  right: auto;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.5rem 0.65rem;
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  border-radius: 3px 3px 0 0;
+  border-bottom: none;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.tier-a-case-root .hero__stamp-stack .hero__id-strip {
+  position: static;
+  top: auto;
+  right: auto;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.5rem 1.35rem;
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink-line);
+  background: var(--bg-2);
+  padding: 0.85rem 1rem;
+  border-radius: 0 0 3px 3px;
+  white-space: nowrap;
+}
+
+.tier-a-case-root .hero__stamp-stack .hero__id-strip dt {
+  margin: 0;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+}
+
+.tier-a-case-root .hero__stamp-stack .hero__id-strip dd {
+  color: var(--ink);
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .tier-a-case-root .hero__stamp-stack {
+    display: none;
+  }
+}
+
+/* ---- Copy block — one gutter, one title size, top-anchored eyebrow ---- */
 .tier-a-case-root .hero__inner {
   max-width: var(--col-wide);
   margin-left: 0;
   margin-right: auto;
-  padding: 0 var(--gutter) clamp(1.75rem, 4vw, 3rem);
+  padding-inline: 0;
   position: relative;
   z-index: 2;
 }
 
-/* Zone 3 — copy sits at bottom of plate under picker band + fixed nav */
 .tier-a-case-root .tier-a-react-case section.hero:first-of-type .hero__plate .hero__inner {
-  margin-top: auto;
-  padding-top: clamp(2.25rem, 4vw, 3.75rem);
+  margin-top: 0;
+  padding-top: var(--hero-eyebrow-top);
+  padding-bottom: clamp(1.75rem, 4vw, 3rem);
 }
 
-/* ---- Tier-A hero copy stack (shared type scale — do not duplicate in case-ai only) ---- */
+@media (min-width: 769px) {
+  .tier-a-case-root .hero__inner {
+    padding-right: calc(var(--hero-stamp-width) + 1.25rem);
+  }
+}
+
 .tier-a-case-root .hero__tag {
   font-family: var(--mono);
   font-size: var(--t-mono);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--hero-teal-highlight);
   margin: 0 0 1.5rem;
+  text-shadow: 0 1px 6px rgba(10, 17, 16, 0.85);
 }
+
 .tier-a-case-root .hero__h1 {
   font-family: var(--sans);
   font-weight: 500;
-  font-size: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
+  font-size: var(--hero-title-size);
   line-height: 1.03;
   letter-spacing: -0.025em;
   margin: 0 0 clamp(1.35rem, 3vw, 1.75rem);
   text-wrap: balance;
-  max-width: min(75%, clamp(26rem, 52vw, 44rem));
-}
-.tier-a-case-root .hero__h1 em {
-  font-style: italic;
-  color: var(--accent);
-}
-.tier-a-case-root .hero__sub {
-  color: var(--ink-2);
-  font-size: var(--t-lead);
-  max-width: min(75%, clamp(34rem, 58vw, 52rem));
-  margin: 0 0 2.5rem;
-  text-wrap: pretty;
-}
-.tier-a-case-root .hero__sub b {
-  color: var(--ink);
-  font-weight: 500;
-}
-
-/* Photo-plate legibility — same values as legacy case-ai hero treatment */
-.tier-a-case-root .hero .hero__tag {
-  color: #5fe6c2;
-  text-shadow: 0 1px 6px rgba(10, 17, 16, 0.85);
-}
-.tier-a-case-root .hero .hero__h1 {
+  max-width: 38ch;
   color: #f4f1ea;
   text-shadow: 0 2px 10px rgba(10, 17, 16, 0.65);
 }
-.tier-a-case-root .hero .hero__h1 em {
-  color: #5fe6c2;
-}
-.tier-a-case-root .hero .hero__sub {
-  color: #d2dad7;
-  text-shadow: 0 1px 6px rgba(10, 17, 16, 0.7);
-}
-.tier-a-case-root .hero .hero__sub b {
-  color: #f4f1ea;
+
+.tier-a-case-root .hero__h1 em {
+  font-style: italic;
+  color: var(--hero-teal-highlight);
 }
 
-/* Meta strip — below photo plate */
+.tier-a-case-root .hero__h1-line2 {
+  display: block;
+  font-size: 0.62em;
+  color: var(--ink-2);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-top: 0.18em;
+}
+
+.tier-a-case-root .hero__sub {
+  color: #d2dad7;
+  font-size: var(--t-lead);
+  max-width: 52ch;
+  margin: 0 0 2.5rem;
+  text-wrap: pretty;
+  text-shadow: 0 1px 6px rgba(10, 17, 16, 0.7);
+}
+
+.tier-a-case-root .hero__sub b {
+  color: #f4f1ea;
+  font-weight: 500;
+}
+
+.tier-a-case-root .hero__sub em {
+  font-style: italic;
+  color: var(--hero-teal-highlight);
+}
+
+.tier-a-case-root .hero__brief {
+  margin: 0.85rem 0 0;
+  max-width: 52ch;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: #c2cbc9;
+  text-shadow: 0 1px 6px rgba(10, 17, 16, 0.7);
+}
+
+.tier-a-case-root .hero__brief p {
+  margin: 0;
+}
+
+.tier-a-case-root .hero__brief b {
+  color: #eef1ee;
+  font-weight: 500;
+}
+
+/* Meta strip — below photo plate, left edge aligns with copy block */
 .tier-a-case-root .hero__meta {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -224,6 +329,7 @@
   background: rgba(10, 17, 16, 0.92);
   backdrop-filter: blur(2px);
 }
+
 .tier-a-case-root .hero__meta-cell {
   padding: 1.15rem 1.35rem;
   border-right: 1px solid rgba(223, 233, 230, 0.18);
@@ -231,9 +337,11 @@
   flex-direction: column;
   gap: 0.35rem;
 }
+
 .tier-a-case-root .hero__meta-cell:last-child {
   border-right: 0;
 }
+
 .tier-a-case-root .hero__meta-cell dt {
   font-family: var(--mono);
   font-size: 9px;
@@ -242,17 +350,29 @@
   color: #9ca8a4;
   margin: 0;
 }
+
 .tier-a-case-root .hero__meta-cell dd {
   margin: 0;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.04em;
   color: #e6ebe9;
+  text-wrap: pretty;
+  line-height: 1.4;
 }
+
 .tier-a-case-root .hero__meta-cell dd b {
-  color: #5fe6c2;
+  color: var(--hero-teal-highlight);
   font-weight: 500;
 }
+
+.tier-a-case-root .hero__meta-cell dd small {
+  display: block;
+  color: var(--ink-3);
+  font-size: 10px;
+  margin-top: 2px;
+}
+
 @media (max-width: 880px) {
   .tier-a-case-root .hero__meta {
     grid-template-columns: 1fr 1fr;
@@ -265,6 +385,7 @@
     border-bottom: 1px solid rgba(223, 233, 230, 0.18);
   }
 }
+
 @media (max-width: 560px) {
   .tier-a-case-root .hero__meta {
     grid-template-columns: 1fr;
@@ -278,16 +399,7 @@
   }
 }
 
-/* Tier-A · hero FIG. stamp (direct child of section.hero) clears fixed nav band */
-@media (min-width: 769px) {
-  .tier-a-case-root .hero > .fig-stamp {
-    top: clamp(10.5rem, 22vw, 14rem);
-    right: var(--gutter);
-    z-index: 14;
-  }
-}
-
-/* Tier-A · case picker on the photo plate (zone 2) */
+/* Tier-A · case picker on the photo plate */
 .tier-a-case-root .hero__plate-picker {
   position: relative;
   z-index: 3;
@@ -305,50 +417,8 @@
   gap: 0.5rem 0.45rem;
 }
 
-/* Hero identity strip — top-right (CaseHero) */
-.tier-a-case-root .hero__id-strip {
-  position: absolute;
-  top: clamp(5rem, 10vh, 7rem);
-  right: var(--gutter);
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 0.5rem 1.35rem;
-  font-family: var(--mono);
-  font-size: var(--t-mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 1px solid var(--ink-line);
-  background: var(--bg-2);
-  padding: 0.85rem 1rem;
-  z-index: 4;
-  white-space: nowrap;
-}
-
-.tier-a-case-root .hero__id-strip dt {
-  margin: 0;
-  letter-spacing: 0.16em;
-  color: var(--ink-3);
-}
-
-.tier-a-case-root .hero__id-strip dd {
-  color: var(--ink);
-  margin: 0;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-}
-
-@media (max-width: 880px) {
-  .tier-a-case-root .hero__id-strip {
-    position: static;
-    margin: 0 auto 1.25rem;
-    max-width: max-content;
-  }
-}
-
-/* ---- Case picker · ≤1024px · inline dropdown (tablet→phone, no floating menu) ---- */
+/* ---- Case picker · ≤1024px · inline dropdown ---- */
 @media (max-width: 1024px) {
-  /* Flex column children default min-width:auto — without this the picker can force
-     the hero plate wider than the viewport (horizontal page scroll). */
   .tier-a-case-root .hero__plate-picker {
     min-width: 0;
     width: 100%;
@@ -409,7 +479,7 @@
   }
 }
 
-/* ---- Tier-A shared section head baseline (no grid — per-case layouts opt in) ---- */
+/* ---- Tier-A shared section head baseline ---- */
 .tier-a-case-root .case-section-head {
   box-sizing: border-box;
   max-width: var(--col-wide);
