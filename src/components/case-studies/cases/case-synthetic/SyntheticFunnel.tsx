@@ -181,9 +181,6 @@ export function SyntheticFunnel() {
               SHIPPED
             </text>
           </svg>
-          <div className="synth-fnl-payoff">
-            3 of 10 self-review had missed — <b>all 3 shipped</b>
-          </div>
         </div>
 
         <div className="synth-fnl-runside">

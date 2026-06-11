@@ -6,19 +6,13 @@ const ARCHETYPES = [
   { no: "05", role: "Discovery Lead", name: "Teresa H." },
 ] as const;
 
-const ACTIVE_ARCHETYPE = "01";
-
 /** Research spec-sheet persona — 5-archetype register is non-interactive legend. */
 export function SyntheticPersonaCard() {
   return (
     <div className="synth-persona-wrap">
-      <div className="synth-persona-register" role="list" aria-label="Five thought-leader archetypes">
+      <div className="synth-persona-register" role="list" aria-label="Five thought-leader archetypes (index)">
         {ARCHETYPES.map((a) => (
-          <div
-            key={a.no}
-            className={`synth-persona-register__item${a.no === ACTIVE_ARCHETYPE ? " is-active" : ""}`}
-            role="listitem"
-          >
+          <div key={a.no} className="synth-persona-register__item" role="listitem">
             <div className="synth-persona-register__no">{a.no}</div>
             <div className="synth-persona-register__role">{a.role}</div>
             <div className="synth-persona-register__name">{a.name}</div>

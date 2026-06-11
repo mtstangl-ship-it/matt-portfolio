@@ -41,54 +41,21 @@
   color: var(--ink);
 }
 
-/* Hero — placeholder treatment flagged open */
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-placeholder {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: linear-gradient(145deg, #0a1211 0%, #0e1a18 50%, #0a0f0e 100%);
+/* Hero — halftone-ready placeholder flag (swap img src when asset is locked) */
+.tier-a-case-root .case-synthetic-portfolio .hero__bgphoto {
+  position: relative;
 }
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-placeholder__grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.35;
-  background-image:
-    repeating-linear-gradient(0deg, var(--synth-line-3) 0 1px, transparent 1px 48px),
-    repeating-linear-gradient(90deg, var(--synth-line-3) 0 1px, transparent 1px 48px);
+.tier-a-case-root .case-synthetic-portfolio .hero__bgphoto-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-placeholder__nodes {
-  position: absolute;
-  inset: 0;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-placeholder__node {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1px solid var(--synth-accent-line);
-  background: rgba(57, 211, 192, 0.08);
-  transform: translate(-50%, -50%);
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-placeholder__node.is-lit {
-  background: var(--synth-accent);
-  box-shadow: 0 0 12px rgba(57, 211, 192, 0.55);
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-placeholder__crosshair {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 120px;
-  height: 120px;
-  transform: translate(-50%, -50%);
-  border: 1px dashed var(--synth-accent-line);
-  border-radius: 50%;
-  opacity: 0.35;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-placeholder__flag {
+.tier-a-case-root .case-synthetic-portfolio .synth-hero-image-flag {
   position: absolute;
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 5;
   font-family: var(--mono);
   font-size: 0.625rem;
   letter-spacing: 0.14em;
@@ -98,6 +65,7 @@
   padding: 0.35rem 0.65rem;
   background: rgba(10, 15, 14, 0.85);
   white-space: nowrap;
+  pointer-events: none;
 }
 
 .tier-a-case-root .case-synthetic-portfolio .hero .hero__tag {
@@ -114,42 +82,7 @@
 .tier-a-case-root .case-synthetic-portfolio .hero .hero__sub {
   max-width: 46ch;
 }
-.tier-a-case-root .case-synthetic-portfolio .hero .hero__sub .soft {
-  color: var(--synth-ink-2);
-}
-
-.tier-a-case-root .case-synthetic-portfolio .hero__brief {
-  margin-top: 1.75rem;
-  max-width: 62ch;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-problem {
-  font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
-  line-height: 1.65;
-  color: var(--synth-ink-1);
-  margin: 0 0 1.75rem;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-hypothesis {
-  margin-top: 0;
-  padding-left: 1.625rem;
-  border-left: 2px solid var(--synth-accent-line);
-  max-width: 64ch;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-hypothesis__lab {
-  font-family: var(--mono);
-  font-size: 0.65625rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--synth-accent);
-  margin-bottom: 0.875rem;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-hypothesis p {
-  font-size: clamp(1.0625rem, 2.3vw, 1.4375rem);
-  line-height: 1.45;
-  color: var(--synth-ink-0);
-  font-weight: 500;
-  margin: 0;
-}
-.tier-a-case-root .case-synthetic-portfolio .synth-hero-hypothesis p em {
+.tier-a-case-root .case-synthetic-portfolio .hero .hero__sub em {
   font-style: italic;
   color: var(--synth-accent-2);
 }
@@ -285,14 +218,6 @@
 .tier-a-case-root .case-synthetic-portfolio .synth-outcome-quote b {
   color: var(--synth-accent-2);
   font-weight: 600;
-}
-
-.tier-a-case-root .case-synthetic-portfolio .synth-framing-line {
-  margin-top: 1.75rem;
-  max-width: 62ch;
-  font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
-  line-height: 1.65;
-  color: var(--synth-ink-1);
 }
 
 .tier-a-case-root .case-synthetic-portfolio .synth-pipeline-lead {
@@ -459,58 +384,74 @@
   color: var(--synth-ink-0);
 }
 
-.tier-a-case-root .case-synthetic-portfolio .handoff-pair {
-  margin-top: 3rem;
-  border-top: 1px solid var(--ink-line);
-  padding-top: 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+.tier-a-case-root .case-synthetic-portfolio .handoff {
+  position: relative;
+  padding-block: clamp(4rem, 6vw, 6rem);
+  border-bottom: 1px solid var(--ink-line);
 }
-.tier-a-case-root .case-synthetic-portfolio .handoff-pair a {
-  border: 1px solid var(--ink-line);
-  padding: 1.375rem 1.5rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 1rem;
-  align-items: center;
-  transition: border-color 0.25s, background 0.25s;
-  color: inherit;
-  text-decoration: none;
-  min-height: 44px;
+.tier-a-case-root .case-synthetic-portfolio .handoff__inner {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
-.tier-a-case-root .case-synthetic-portfolio .handoff-pair a:hover,
-.tier-a-case-root .case-synthetic-portfolio .handoff-pair a:focus-visible {
-  border-color: var(--synth-accent-line);
-  background: var(--bg-3);
-}
-.tier-a-case-root .case-synthetic-portfolio .handoff-pair__lbl {
+.tier-a-case-root .case-synthetic-portfolio .handoff__eyebrow {
   font-family: var(--mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.22em;
-  color: var(--ink-3);
+  font-size: var(--t-mono);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  margin-bottom: 6px;
-  display: block;
+  color: var(--ink-3);
+  margin: 0 0 1rem;
 }
-.tier-a-case-root .case-synthetic-portfolio .handoff-pair__ttl {
-  font-size: 1.0625rem;
-  color: var(--ink);
-  display: block;
+.tier-a-case-root .case-synthetic-portfolio .handoff__h {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0 0 2rem;
+  text-wrap: balance;
+  max-width: 24ch;
 }
-.tier-a-case-root .case-synthetic-portfolio .handoff-pair__arrow {
-  font-family: var(--mono);
+.tier-a-case-root .case-synthetic-portfolio .handoff__h em {
+  font-style: italic;
+  color: var(--synth-accent-2);
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.25rem;
+  min-height: 44px;
+  border: 1px solid var(--synth-accent);
   color: var(--synth-accent);
-  font-size: 1.125rem;
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 200ms, color 200ms;
 }
-.tier-a-case-root .case-synthetic-portfolio .handoff-pair--back {
-  border-style: dashed;
+.tier-a-case-root .case-synthetic-portfolio .handoff__cta:hover,
+.tier-a-case-root .case-synthetic-portfolio .handoff__cta:focus-visible {
+  background: var(--synth-accent);
+  color: var(--bg);
 }
-.tier-a-case-root .case-synthetic-portfolio .handoff-pair--back .handoff-pair__ttl {
+.tier-a-case-root .case-synthetic-portfolio .handoff__cta::after {
+  content: "→";
+  font-size: 14px;
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__alt {
+  margin-top: 1rem;
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__alt a {
   color: var(--ink-2);
+  text-decoration: none;
 }
-@media (max-width: 880px) {
-  .tier-a-case-root .case-synthetic-portfolio .handoff-pair {
-    grid-template-columns: 1fr;
-  }
+.tier-a-case-root .case-synthetic-portfolio .handoff__alt a:hover {
+  color: var(--synth-accent);
 }

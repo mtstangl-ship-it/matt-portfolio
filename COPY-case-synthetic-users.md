@@ -27,7 +27,7 @@
 
 ---
 
-## STRUCTURE — SIX SECTIONS
+## STRUCTURE — SIX CONTENT SECTIONS + HANDOFF
 
 01 · HERO
 02 · OUTCOME / FUNNEL
@@ -35,8 +35,9 @@
 04 · THE PIPELINE
 05 · THREE FINDINGS
 06 · THE LESSON
+07 · HANDOFF
 
-Visual rhythm on mobile: text → visual → visual → visual → visual → text
+Visual rhythm on mobile: text → visual → visual → visual → visual → text → handoff
 
 ---
 
@@ -46,31 +47,20 @@ Visual rhythm on mobile: text → visual → visual → visual → visual → te
 
 **Tag**
 ```
-Simulation · Research · Case 02 of 05
+01 · SIMULATION · CASE 02 OF 05
 ```
 
 **Headline**
 ```
 Synthetic users as a research method.
 ```
+*(Teal-italic emphasis on "research method." — matches sibling hero pattern.)*
 
-**Dek**
+**Lede (single block — replaces former dek, problem paragraph, and Hypothesis callout)**
 ```
-Nine personas, four QA environments, three findings self-review missed. The methodology, documented by running it on this portfolio.
+Nine personas, four QA environments, three findings self-review missed — the methodology, documented by running it on this portfolio. Structured personas, modeled on real practitioner worldviews, surface blind spots self-review can't. Only if you build them the right way.
 ```
-
-**Problem framing (folded in from former Section 01 · The Gap)**
-```
-Design artifacts fail in predictable ways — evaluated by the wrong audience at the wrong moment, with no structured way to stress-test before live exposure. Traditional usability testing requires recruited participants, often impossible for portfolios, internal tools, or pre-launch strategy work.
-```
-
-**Hypothesis callout**
-```
-HYPOTHESIS
-
-Structured synthetic personas — modeled on practitioners with documented worldviews — can surface blind spots that self-review misses. Only if you build them the right way.
-```
-*(Italic emphasis on "Only if you build them the right way." preserved from live copy.)*
+*(Italic emphasis on "Only if you build them the right way." preserved.)*
 
 **Brief fields**
 ```
@@ -84,7 +74,7 @@ Outcome:             10-item prioritized backlog · 3 shipped changes
 
 **Tag**
 ```
-Simulation · Research · Case 02
+01 · SIMULATION · CASE 02
 ```
 
 **Headline**
@@ -92,19 +82,9 @@ Simulation · Research · Case 02
 Synthetic users as a research method.
 ```
 
-**Dek**
+**Lede**
 ```
-Nine personas. Four QA environments. Three findings self-review missed.
-```
-
-**Problem framing**
-```
-Design artifacts fail predictably — wrong audience, wrong moment, no stress-test before launch.
-```
-
-**Hypothesis**
-```
-Synthetic personas can surface blind spots. Only if you build them right.
+Nine personas. Four QA environments. Three findings self-review missed — methodology documented on this portfolio. Only if you build them right.
 ```
 
 **Brief fields**
@@ -113,13 +93,13 @@ Synthetic personas can surface blind spots. Only if you build them right.
 ```
 
 ### Cut priority
-1. Problem framing (compresses to dek if needed)
+1. Lede second sentence (compresses to dek if needed)
 2. Brief fields detail (compress to single line)
-3. Tag suffix "of 05" (drop on 320px)
+3. Tag suffix "OF 05" (drop on 320px)
 
 ### Design decision flags
-- [ ] Hypothesis callout: typographic treatment vs. boxed callout — Tuesday session
 - [ ] Brief fields layout: 4-column grid (desktop) vs. 2-column (mobile) vs. inline (320px)
+- [ ] Hero image: placeholder retained — halftone-ready container matches siblings; asset TBD
 
 ---
 
@@ -127,16 +107,25 @@ Synthetic personas can surface blind spots. Only if you build them right.
 
 ### Tier 1
 
-**Outcome statement**
+**Section eyebrow**
+```
+02 · OUTCOME · THREE FINDINGS, ALL SHIPPED
+```
+
+**Section head**
+```
+Three findings self-review missed — all three shipped.
+```
+
+**Outcome statement (closing prose — keep once)**
 ```
 Traceability from synthetic persona → specific design decision is what separates research from a feedback loop.
 ```
 
-**Hero metric (preserved verbatim from live)**
+**Argument callout (keep once — states the 3/10 gap)**
 ```
-3
-Findings self-review missed
-All three became shipped changes
+3 / 10
+actionable findings would not have been caught by self-review — all three became shipped changes.
 ```
 
 **Funnel artifact**
@@ -164,21 +153,21 @@ Integrated into Run A's shipped change list
 ```
 *(Visual: stair-step funnel on desktop horizontal, vertical stack on mobile. Run B is a parallel companion, not a fifth lane in Run A.)*
 
-**Methodology framing line**
+### Tier 2 — Tight
+
+**Section eyebrow**
 ```
-Three of ten actionable findings would not have been caught by self-review. That gap is the methodology argument.
+02 · OUTCOME · THREE SHIPPED
 ```
 
-### Tier 2 — Tight
+**Section head**
+```
+3 / Findings self-review missed / All three shipped
+```
 
 **Outcome statement**
 ```
 Synthetic persona → specific design decision = research, not feedback loop.
-```
-
-**Hero metric**
-```
-3 / Findings self-review missed / All three shipped
 ```
 
 **Funnel artifact**
@@ -187,15 +176,9 @@ Synthetic persona → specific design decision = research, not feedback loop.
 ```
 *(Single line on mobile. Run B as small footnote: "+ Run B · 53 line-fixes from design-system audit.")*
 
-**Methodology framing**
-```
-3 of 10 actionable findings missed without the pipeline. That gap is the argument.
-```
-
 ### Cut priority
-1. Methodology framing line (it's implied by the funnel)
-2. Run B companion (collapses to footnote on mobile)
-3. Outcome statement (the funnel says it visually)
+1. Run B companion (collapses to footnote on mobile)
+2. Outcome statement (the funnel says it visually)
 
 ### Design decision flags
 - [ ] Funnel composition: vertical stair-step (mobile) vs. horizontal flow (desktop)
@@ -206,6 +189,11 @@ Synthetic persona → specific design decision = research, not feedback loop.
 ## 03 · EVIDENCE LADDER
 
 ### Tier 1 — kept verbatim from live
+
+**Section eyebrow**
+```
+03 · EVIDENCE · WHERE THE METHOD HOLDS
+```
 
 **Band header**
 ```
@@ -265,6 +253,11 @@ Evidence Ladder structure preserved on mobile; collapses from 4-column grid (des
 ## 04 · THE PIPELINE
 
 ### Tier 1
+
+**Section eyebrow**
+```
+04 · PIPELINE · PORTFOLIO AS A RELEASE
+```
 
 **Stage label**
 ```
@@ -392,6 +385,11 @@ Fail: FAIL on Autodesk — tier model without backstage.
 
 ### Tier 1
 
+**Section eyebrow**
+```
+05 · FINDINGS · WHAT SELF-REVIEW MISSED
+```
+
 **Stage label**
 ```
 05 · Findings
@@ -498,6 +496,11 @@ H1 cliché. Voice mismatch. 12 cliché verdicts. See FIG. 04-B.
 
 ### Tier 1
 
+**Section eyebrow**
+```
+06 · LESSON · WHAT I'D DO DIFFERENTLY
+```
+
 **Stage label**
 ```
 06 · Lesson
@@ -552,7 +555,47 @@ A pre-research sharpening tool. Doesn't replace observation. Makes it more targe
 
 ### Design decision flags
 - [ ] Pull quote: typographic treatment vs. box treatment
-- [ ] Section closes the page — no footer artifact, just CaseShell prev/next
+- [ ] Section closes the page content — handoff drawing follows (07)
+
+---
+
+## 07 · HANDOFF
+
+### Tier 1
+
+**Dim ribbon**
+```
+↓ HANDOFF · THE LARGER STORY
+```
+
+**Drawing**
+```
+DRAWING 07 · HANDOFF
+FIG. 07 · HANDOFF
+```
+
+**Section eyebrow**
+```
+07 · HANDOFF
+```
+
+**Bridge headline**
+```
+A method, proven on my own work. The enterprise design it was built to sharpen — next.
+```
+*(Teal-italic emphasis on "enterprise design".)*
+
+**Next-case link**
+```
+Open next case · Autodesk
+→ /case-studies/autodesk
+```
+
+**Back link**
+```
+BACK TO ALL CASE STUDIES
+→ /case-studies
+```
 
 ---
 
@@ -560,8 +603,13 @@ A pre-research sharpening tool. Doesn't replace observation. Makes it more targe
 
 Sections that can drop entirely if layout demands:
 - Run B companion list (Section 05) — collapses to "see FIG. 04-B" footnote
-- Methodology framing line (Section 02) — funnel carries the argument visually
 - Persona construction principle (Section 04) — compresses to italicized inline
+
+Removed from hero (consistency pass):
+- Problem framing paragraph — funnel and evidence sections show the problem
+- Hypothesis bordered callout — thesis now in lede
+- Standalone "3 · Findings" stat block and funnel payoff caption — redundant with argument callout
+- Methodology framing line in §02 — redundant with section head + callout
 
 Phrases to cut on sight in this case:
 - "human-centered methodologies and systems thinking" (cliché kill list)

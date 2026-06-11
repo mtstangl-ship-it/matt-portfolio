@@ -9,18 +9,6 @@ import { SyntheticFunnel } from "./SyntheticFunnel";
 import { SyntheticPersonaCard } from "./SyntheticPersonaCard";
 import { SyntheticPipelineLanes } from "./SyntheticPipelineLanes";
 
-const HERO_NODES: { left: string; top: string; lit?: boolean }[] = [
-  { left: "14%", top: "30%" },
-  { left: "26%", top: "62%", lit: true },
-  { left: "38%", top: "24%" },
-  { left: "48%", top: "50%", lit: true },
-  { left: "60%", top: "70%" },
-  { left: "68%", top: "34%", lit: true },
-  { left: "78%", top: "58%" },
-  { left: "86%", top: "40%" },
-  { left: "32%", top: "80%", lit: true },
-];
-
 const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
 
 function DimRibbon({ label }: { label: string }) {
@@ -45,28 +33,9 @@ function DimRibbon({ label }: { label: string }) {
   );
 }
 
-function HeroPlaceholder() {
-  return (
-    <div className="synth-hero-placeholder" aria-hidden="true">
-      <div className="synth-hero-placeholder__grid" />
-      <div className="synth-hero-placeholder__nodes">
-        {HERO_NODES.map((n, i) => (
-          <span
-            key={i}
-            className={`synth-hero-placeholder__node${n.lit ? " is-lit" : ""}`}
-            style={{ left: n.left, top: n.top }}
-          />
-        ))}
-      </div>
-      <div className="synth-hero-placeholder__crosshair" />
-      <span className="synth-hero-placeholder__flag">PLACEHOLDER — hero image TBD</span>
-    </div>
-  );
-}
-
 /**
  * Synthetic Users — Tier A case (Case 02).
- * Six sections per COPY-case-synthetic-users.md (problem/hypothesis folded into hero).
+ * Six content sections + DRAWING 07 handoff (COPY-case-synthetic-users.md).
  */
 export function SyntheticCaseView() {
   return (
@@ -81,41 +50,39 @@ export function SyntheticCaseView() {
         totalCases={5}
         marginNote="DRAWING 01 · HERO"
         figStamp="FIG. 01 · COVER"
-        tag="Simulation · Research · Case 02 of 05"
+        tag="01 · SIMULATION · CASE 02 OF 05"
         basedLine="DEN · REMOTE"
         roleLine="DESIGN & BUILD"
-        headline="Synthetic users as a research method."
+        headline={
+          <>
+            Synthetic users as a <em>research method.</em>
+          </>
+        }
         subhead={
           <>
-            Nine personas, four QA environments, three findings self-review missed.{" "}
-            <span className="soft">The methodology, documented by running it on this portfolio.</span>
+            Nine personas, four QA environments, three findings self-review missed — the methodology,
+            documented by running it on this portfolio. Structured personas, modeled on real practitioner
+            worldviews, surface blind spots self-review can&apos;t.{" "}
+            <em>Only if you build them the right way.</em>
           </>
         }
         heroBgphotoSlot={
           <>
-            <HeroPlaceholder />
+            {/* eslint-disable-next-line @next/next/no-img-element -- halftone-ready placeholder; swap src when hero asset is locked */}
+            <img
+              className="hero__bgphoto-img"
+              src="/case-studies/centaur-literal.png"
+              alt=""
+              decoding="async"
+              fetchPriority="high"
+            />
+            <span className="synth-hero-image-flag" aria-hidden="true">
+              PLACEHOLDER — HERO IMAGE TBD
+            </span>
             <div className="hero__bgphoto-halftone" aria-hidden="true" />
             <div className="hero__bgphoto-grain" aria-hidden="true" />
             <div className="hero__bgphoto-scrim" aria-hidden="true" />
             <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
-          </>
-        }
-        heroBrief={
-          <>
-            <p className="synth-hero-problem">
-              Design artifacts fail in predictable ways — evaluated by the wrong audience at the wrong
-              moment, with no structured way to stress-test before live exposure. Traditional usability
-              testing requires recruited participants, often impossible for portfolios, internal tools, or
-              pre-launch strategy work.
-            </p>
-            <div className="synth-hero-hypothesis">
-              <div className="synth-hero-hypothesis__lab">Hypothesis</div>
-              <p>
-                Structured synthetic personas — modeled on practitioners with documented worldviews — can
-                surface blind spots that self-review misses.{" "}
-                <em>Only if you build them the right way.</em>
-              </p>
-            </div>
           </>
         }
         metaSlot={
@@ -152,7 +119,7 @@ export function SyntheticCaseView() {
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>02 / 06</dd>
+          <dd>02 / 07</dd>
           <dt>CLAIM</dt>
           <dd>9×4 → 18 → 10 → 3 → 3</dd>
           <dt>BASELINE</dt>
@@ -163,19 +130,11 @@ export function SyntheticCaseView() {
 
         <div className="case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">02 · Outcome / Funnel</p>
+            <p className="kicker">02 · OUTCOME · THREE FINDINGS, ALL SHIPPED</p>
             <h2>
               Three findings self-review missed — <em>all three shipped.</em>
             </h2>
           </header>
-
-          <div className="synth-metric-hero">
-            <span className="synth-metric-hero__num">3</span>
-            <div className="synth-metric-hero__copy">
-              <p className="synth-metric-hero__title">Findings self-review missed</p>
-              <p className="synth-metric-hero__sub">All three became shipped changes</p>
-            </div>
-          </div>
 
           <SyntheticFunnel />
 
@@ -185,11 +144,6 @@ export function SyntheticCaseView() {
               research from a feedback loop.
             </p>
           </div>
-
-          <p className="synth-framing-line">
-            Three of ten actionable findings would not have been caught by self-review. That gap is the
-            methodology argument.
-          </p>
         </div>
       </section>
 
@@ -201,7 +155,7 @@ export function SyntheticCaseView() {
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>03 / 06</dd>
+          <dd>03 / 07</dd>
           <dt>CLAIM</dt>
           <dd>REPLACE / AUGMENT</dd>
           <dt>BASELINE</dt>
@@ -212,7 +166,7 @@ export function SyntheticCaseView() {
 
         <div className="case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">03 · Evidence Ladder</p>
+            <p className="kicker">03 · EVIDENCE · WHERE THE METHOD HOLDS</p>
             <h2>
               What synthetic research <em>replaces</em>, augments, or fails to reach.
             </h2>
@@ -230,7 +184,7 @@ export function SyntheticCaseView() {
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>04 / 06</dd>
+          <dd>04 / 07</dd>
           <dt>CLAIM</dt>
           <dd>4 ENV · 4 GATES</dd>
           <dt>BASELINE</dt>
@@ -241,7 +195,7 @@ export function SyntheticCaseView() {
 
         <div className="case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">04 · Pipeline</p>
+            <p className="kicker">04 · PIPELINE · PORTFOLIO AS A RELEASE</p>
             <h2>Two synthetic runs, parallel methodologies.</h2>
             <p className="case-section-head__sub">
               The pipeline runs different persona classes against different artifacts. Run A stress-tests
@@ -309,7 +263,7 @@ export function SyntheticCaseView() {
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>05 / 06</dd>
+          <dd>05 / 07</dd>
           <dt>CLAIM</dt>
           <dd>3 SIGNALS</dd>
           <dt>BASELINE</dt>
@@ -320,7 +274,7 @@ export function SyntheticCaseView() {
 
         <div className="case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">05 · Findings</p>
+            <p className="kicker">05 · FINDINGS · WHAT SELF-REVIEW MISSED</p>
             <h2>What self-review missed.</h2>
           </header>
 
@@ -355,7 +309,7 @@ export function SyntheticCaseView() {
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>06 / 06</dd>
+          <dd>06 / 07</dd>
           <dt>CLAIM</dt>
           <dd>PRE-RESEARCH TOOL</dd>
           <dt>BASELINE</dt>
@@ -366,7 +320,7 @@ export function SyntheticCaseView() {
 
         <div className="case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">06 · Lesson</p>
+            <p className="kicker">06 · LESSON · WHAT I'D DO DIFFERENTLY</p>
             <h2>What I&apos;d do differently.</h2>
           </header>
 
@@ -384,27 +338,28 @@ export function SyntheticCaseView() {
             The method is a pre-research sharpening tool. It doesn&apos;t replace observation.{" "}
             <em>It makes observation more targeted when you get there.</em>
           </p>
+        </div>
+      </section>
 
-          <div className="handoff-pair" aria-label="Handoff CTAs">
-            <Link href="/case-studies/autodesk">
-              <span>
-                <span className="handoff-pair__lbl">Open next case</span>
-                <span className="handoff-pair__ttl">Autodesk →</span>
-              </span>
-              <span className="handoff-pair__arrow" aria-hidden="true">
-                →
-              </span>
+      <DimRibbon label="↓ HANDOFF · THE LARGER STORY" />
+
+      <section className="handoff" aria-label="Handoff" data-screen-label="07 Handoff">
+        <span className="margin-note">DRAWING 07 · HANDOFF</span>
+        <span className="fig-stamp">FIG. 07 · HANDOFF</span>
+
+        <div className="handoff__inner">
+          <p className="handoff__eyebrow">07 · HANDOFF</p>
+          <h2 className="handoff__h">
+            A method, proven on my own work. The <em>enterprise design</em> it was built to sharpen — next.
+          </h2>
+          <Link className="handoff__cta" href="/case-studies/autodesk">
+            Open next case · Autodesk
+          </Link>
+          <p className="handoff__alt">
+            <Link className="handoff__back-all" href="/case-studies">
+              BACK TO ALL CASE STUDIES
             </Link>
-            <Link href="/case-studies" className="handoff-pair--back">
-              <span>
-                <span className="handoff-pair__lbl">Back to all</span>
-                <span className="handoff-pair__ttl">Selected work · five builds</span>
-              </span>
-              <span className="handoff-pair__arrow" aria-hidden="true">
-                ↗
-              </span>
-            </Link>
-          </div>
+          </p>
         </div>
       </section>
 
