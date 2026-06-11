@@ -18,7 +18,7 @@ const CANVAS_REF = path.join(ROOT, "public/case-studies/centaur-literal.png");
 const CASES = [
   {
     slug: "centaur",
-    input: path.join(ROOT, "public/case-studies/centaur-literal.png"),
+    input: path.join(ROOT, "public/images/case-centaur/centaur-motorcycle-hero.png"),
     output: path.join(ROOT, "public/case-studies/centaur-literal.png"),
   },
   {
