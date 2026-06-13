@@ -137,8 +137,8 @@ export function AutodeskCaseView() {
               Five phases. Two tiers. <em>One journey.</em>
             </h2>
             <p className="case-section-head__sub">
-              Five phases of customer planning &mdash; identify outcomes, evaluate solutions, create a
-              plan, execute, assess value &mdash; exploded into frontstage and backstage. Customers see
+              Five phases of customer planning: identify outcomes, evaluate solutions, create a
+              plan, execute, assess value. Each exploded into frontstage and backstage. Customers see
               workshops, check-ins, QBRs. The design lived in the backstage system that made those
               run: enabled people, standard processes, shared platform.
             </p>
@@ -224,8 +224,8 @@ export function AutodeskCaseView() {
             A CSXD{" "}
             <span className="autodesk-prose-paren">(Customer Strategy &amp; Experience Design)</span>{" "}
             design sprint produced the journey above. The research surfaced{" "}
-            <b>five opportunity areas</b> &mdash; prioritized by CX/EX value to Autodesk&apos;s
-            customers &mdash; that the journey design had to deliver against.
+            <b>five opportunity areas</b>, prioritized by CX/EX value to Autodesk&apos;s
+            customers, that the journey design had to deliver against.
           </p>
         </div>
 
@@ -267,10 +267,6 @@ export function AutodeskCaseView() {
               deliver. The design made the gap visible. Once visible, it had to be closed.{" "}
               <b>100+ CX &amp; EX outcomes</b> surfaced. <b>8-figure tech modernization</b>{" "}
               initiated. <b>5 program areas</b> mobilized.
-            </p>
-            <p className="autodesk-load-bearing">
-              I led the design. I earned the modernization work for my larger org. The design
-              demanded it.
             </p>
           </div>
 
@@ -386,9 +382,9 @@ export function AutodeskCaseView() {
                 </span>
                 <h3 className="autodesk-marginalia-h">The investment was the validation.</h3>
                 <p>
-                  The org&apos;s response to the design &mdash; <b>100+ outcomes</b> prioritized,{" "}
-                  <b>8-figure tech modernization</b> initiated, <b>5 program areas</b> mobilized
-                  &mdash; was the proof the design worked. The 106% NRR path now has the
+                  The org&apos;s response was the proof the design worked: <b>100+ outcomes</b> prioritized,{" "}
+                  <b>8-figure tech modernization</b> initiated, <b>5 program areas</b> mobilized.
+                  The 106% NRR path now has the
                   infrastructure to be delivered against.
                 </p>
               </div>

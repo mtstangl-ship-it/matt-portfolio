@@ -50,8 +50,8 @@ export function SyntheticPersonaCard() {
           <div className="synth-prow">
             <dt>Pass criteria</dt>
             <dd>
-              At least one artifact per service-design engagement shows internal capability change — not
-              just customer-facing model.
+              At least one artifact per service-design engagement shows internal capability change, not
+              just a customer-facing model.
             </dd>
           </div>
           <div className="synth-prow">

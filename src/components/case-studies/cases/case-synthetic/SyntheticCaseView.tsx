@@ -199,8 +199,8 @@ export function SyntheticCaseView() {
           <div className="synth-runb-block">
             <div className="synth-runb-block__tag">RUN B · Design system audit (parallel run)</div>
             <p>
-              Run B is a different methodology against the same portfolio. One persona — a design-system
-              domain expert — auditing visual grammar, voice consistency, cadence, and cliché ledger across
+              Run B is a different methodology against the same portfolio. One persona, a design-system
+              domain expert, auditing visual grammar, voice consistency, cadence, and the cliché ledger across
               all pages, line by line. Not a stress test. A specification audit.
             </p>
             <p className="synth-runb-block__detail">
@@ -312,7 +312,7 @@ export function SyntheticCaseView() {
             </p>
           </div>
           <p className="synth-lesson-coda">
-            They surface hypotheses the designer was already able to form — not unknown unknowns. The
+            They surface hypotheses the designer could already form, not unknown unknowns. The
             quality of a session is bounded by the quality of the persona model. In this session,
             adversarial personas were the most productive; archetypes surfaced less.
           </p>

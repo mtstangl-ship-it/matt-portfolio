@@ -300,7 +300,7 @@ Worldview anchor: Stickdorn-derived. Service systems thinking. Backstage archite
 
 First question: "Where's the backstage? Who delivers this internally, and what changed in their work to make it real?"
 
-Pass criteria: At least one artifact per service-design engagement shows internal capability change — not just customer-facing model.
+Pass criteria: At least one artifact per service-design engagement shows internal capability change, not just a customer-facing model.
 
 Failure mode: Sees a tier structure with no organizational change behind it and stops trusting the service-design framing.
 
@@ -315,7 +315,7 @@ Each persona was built from a published worldview, not an invented archetype. Fo
 
 **RUN B · Design system audit (parallel run)**
 ```
-Run B is a different methodology against the same portfolio. One persona — a design-system domain expert — auditing visual grammar, voice consistency, cadence, and cliché ledger across all pages, line by line. Not a stress test. A specification audit.
+Run B is a different methodology against the same portfolio. One persona, a design-system domain expert, auditing visual grammar, voice consistency, cadence, and the cliché ledger across all pages, line by line. Not a stress test. A specification audit.
 
 Output: structured BEFORE/AFTER recommendations across 8 sections of the site. Findings integrated into the Run A prioritized backlog where they overlap; held separately where they don't.
 ```
@@ -404,7 +404,7 @@ What self-review missed.
 ```
 F·01 · PRESENTATION-TO-DEPTH RATIO
 
-The ratio of presentation quality to case study depth reads as an AI-generation signal to experienced reviewers — not the AI use itself.
+Experienced reviewers read the ratio of presentation quality to case-study depth as an AI-generation signal. *The AI use itself was never the tell.*
 
 The fix wasn't less AI. It was more depth.
 
@@ -518,7 +518,7 @@ Synthetic users cannot replace real ones. I under-invested in the ones I shipped
 
 **Body (preserved from live)**
 ```
-They surface hypotheses the designer was already able to form — not unknown unknowns. The quality of a session is bounded by the quality of the persona model. In this session, adversarial personas were the most productive; archetypes surfaced less.
+They surface hypotheses the designer could already form, not unknown unknowns. The quality of a session is bounded by the quality of the persona model. In this session, adversarial personas were the most productive; archetypes surfaced less.
 ```
 
 **Closing pull quote (preserved from live)**
@@ -540,7 +540,7 @@ Synthetic users can't replace real ones. I under-invested in the ones I shipped.
 
 **Body**
 ```
-They surface hypotheses you could already form — not unknown unknowns. Adversarial personas earned their keep. Archetypes surfaced less.
+They surface hypotheses you could already form, not unknown unknowns. Adversarial personas earned their keep. Archetypes surfaced less.
 ```
 
 **Pull quote**

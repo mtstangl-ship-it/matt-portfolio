@@ -108,7 +108,7 @@ export function HomePagePort() {
           </div>
           <div className="hero__identity-row">
             <span>BASED</span>
-            <b>ATL · REMOTE</b>
+            <b>DEN · REMOTE</b>
           </div>
           <div className="hero__identity-row">
             <span>ROLE</span>
@@ -588,7 +588,7 @@ export function HomePagePort() {
           </Link>
 
           <div className="cases__support">
-            <Link className="case" href="/case-studies/synthetic">
+            <Link className="case" href="/case-studies/synthetic-users">
               <span className="xhair xhair-tl" aria-hidden="true" />
               <span className="xhair xhair-tr" aria-hidden="true" />
               <span className="xhair xhair-bl" aria-hidden="true" />

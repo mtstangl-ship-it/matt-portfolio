@@ -151,7 +151,7 @@ Human in the saddle. Always.
 
 **Framing paragraph**
 ```
-Ethan Mollick's framework distinguishes Centaurs — humans and AI dividing tasks, human steering — from Cyborgs, where the integration is total and inseparable.
+Ethan Mollick's framework draws a line between **Centaurs** and **Cyborgs**. A Centaur divides tasks with AI and keeps steering. A Cyborg fuses with it completely.
 
 I'm a Centaur. The structure of every page, the positioning decisions, the copy that sounds like me — those were mine. AI produced faster drafts, better variations, sharper critique than I could generate alone. The decisions were mine.
 ```
@@ -169,7 +169,7 @@ WHY (caption below): The AI version is a job description. Mine is a positioning 
 
 **The pivot moment** (one short paragraph, woven in)
 ```
-The hardest version of this lesson came in week four. I let AI write three case study pages end to end. The output was fluent, professional, and completely generic — the same portfolio language I'd seen on a hundred other sites. I tore it down and rebuilt from the real stories, the real pivots, the real metrics. That version is what you're reading now.
+The hardest version of this lesson came in week four. I let AI write three case study pages end to end. The output was fluent, professional, and completely generic — the same portfolio language on a hundred other sites. **I tore it down and rebuilt from what actually happened: the real pivots, the real numbers.** That version is what you're reading now.
 ```
 
 ### Tier 2 — Tight version
@@ -352,13 +352,13 @@ I skipped the brief twice. I paid for it twice.
 ```
 Once: I asked Cursor to "design the impact dashboard" without specifying hierarchy, metric priority, or interaction logic. The output was technically correct and visually incoherent — every element equally weighted because I hadn't said what mattered most. Two hours fixing what a 15-minute brief would have prevented.
 
-Twice: the AI-written case studies covered earlier in this page. Same root cause. The fix was never less AI. It was more specificity.
+Twice: the AI-written case studies covered earlier in this page. Same root cause. Same generic result. **The fix was never less AI. It was more specificity.**
 ```
 
 **The Tell** (callout)
 ```
 EYEBROW: THE TELL
-The ratio of presentation quality to case study depth is the AI red flag — not the AI use itself. Experienced reviewers catch it in 30 seconds.
+The AI red flag is the ratio of *presentation quality to case-study depth*, not the AI use itself. Experienced reviewers catch it in 30 seconds.
 ```
 
 ### Tier 2 — Tight version

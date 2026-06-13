@@ -210,7 +210,7 @@ Time-to-resolve when escalated
 vs. cases closed at the Service Desk
 
 ROOT CAUSE · 43%
-Lockouts traced to browser-cached passwords — not AD policy, not user error in the classical sense. Invisible to legacy routing.
+Lockouts traced to browser-cached passwords, not AD policy and not user error in the usual sense. Invisible to legacy routing.
 ```
 
 **Stage 4 · intervention**

@@ -305,8 +305,7 @@ export function WiproCaseView() {
                 </div>
                 <div className="ec-card__notes">
                   <span>
-                    <b>ROOT CAUSE · 43%</b> of lockouts traced to browser-cached passwords — not AD policy, not user error in the
-                    classical sense. Invisible to legacy routing.
+                    <b>ROOT CAUSE · 43%</b> of lockouts traced to browser-cached passwords, not AD policy and not user error in the usual sense. Invisible to legacy routing.
                   </span>
                 </div>
               </article>

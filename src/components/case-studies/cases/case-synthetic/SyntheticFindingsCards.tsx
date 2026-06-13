@@ -6,8 +6,8 @@ const FINDINGS = [
     title: "PRESENTATION-TO-DEPTH RATIO",
     finding: (
       <>
-        The ratio of presentation quality to case study depth reads as an AI-generation signal to
-        experienced reviewers — <em>not the AI use itself.</em>
+        Experienced reviewers read the ratio of presentation quality to case-study depth as an AI-generation signal.{" "}
+        <em>The AI use itself was never the tell.</em>
       </>
     ),
     decision: (

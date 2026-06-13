@@ -125,7 +125,7 @@ Confidence. Awareness. Access. In that order.
 
 **Body**
 ```
-Say YES Summer was framed against three goals — sequenced, not stacked. Confidence had to come before awareness. Awareness had to come before access. A person who didn't trust the vaccine wouldn't convert no matter how visible the booth was.
+Say YES Summer was framed against three goals, **sequenced rather than stacked**. Confidence had to come before awareness. Awareness had to come before access. A person who didn't trust the vaccine wouldn't convert no matter how visible the booth was.
 
 The structural design call: make the vaccine available — don't make it the reason people show up. People came for the Savannah Bananas home game. They came for the Twilight Criterium festival in Athens. They came for the Georgia Aquarium in Atlanta. The vaccine was on the same block. The vaccine was always available. The vaccine was never the first thing asked of you.
 
@@ -283,7 +283,7 @@ Hesitant attendees cited "a lot of information from both sides" and didn't know 
 Offering both Pfizer and Johnson & Johnson — and letting the final choice be theirs — converted people who wouldn't have converted with a single option. Optionality read as respect. Design implication: every field event carried multiple manufacturers from then on. "The vaccine" stopped being monolithic; it became a decision you got to make.
 
 04 · WHY THE ART MATTERED · Multiple engagement levels let people reconsider.
-Writing on the wall. Watching live art being made. Listening to music. These weren't decoration — they gave bystanders time and distance to reconsider without having to commit. Reconsideration led to more shots in arms. Design implication: every event needed at least three things to do besides vaccinate.
+Writing on the wall. Watching live art being made. Listening to music. Live art, music, and murals gave bystanders a reason to stay and the distance to reconsider without having to commit. Reconsideration led to more shots in arms. Design implication: every event needed at least three things to do besides vaccinate.
 ```
 
 **Closing line**

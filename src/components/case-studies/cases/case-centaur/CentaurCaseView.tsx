@@ -210,7 +210,7 @@ export function CentaurCaseView() {
               </header>
               <h3 className="bulletin__entry-title">Let AI write three case studies end to end.</h3>
               <p className="bulletin__entry-body">
-                Same root cause as above. Fluent, professional, completely generic. <b>The fix was never less AI. It was more specificity.</b> The
+                Same root cause. Same generic result. <b>The fix was never less AI. It was more specificity.</b> The
                 version you&apos;re reading is the rebuild.
               </p>
             </article>
@@ -219,7 +219,7 @@ export function CentaurCaseView() {
           <aside className="tell" role="note">
             <span className="tell__eyebrow">THE TELL</span>
             <p>
-              The ratio of <em>presentation quality to case study depth</em> is the AI red flag — not the AI use itself. Experienced reviewers catch it in 30
+              The AI red flag is the ratio of <em>presentation quality to case-study depth</em>, not the AI use itself. Experienced reviewers catch it in 30
               seconds.
             </p>
           </aside>

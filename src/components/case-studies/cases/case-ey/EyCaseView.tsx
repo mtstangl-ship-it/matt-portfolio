@@ -198,7 +198,7 @@ export function EyCaseView() {
 
           <div className="approach__body">
             <p>
-              Say YES Summer was framed against three goals — <b>sequenced, not stacked</b>. Confidence had to come before awareness. Awareness had to come before
+              Say YES Summer was framed against three goals, <b>sequenced rather than stacked</b>. Confidence had to come before awareness. Awareness had to come before
               access. A person who didn&apos;t trust the vaccine wouldn&apos;t convert no matter how visible the booth was.
             </p>
             <p>
@@ -517,7 +517,7 @@ export function EyCaseView() {
               </header>
               <h3 className="learning__title">Multiple engagement levels let people reconsider.</h3>
               <p className="learning__body">
-                Live art, music, murals — <b>not decoration.</b> They gave bystanders distance to reconsider without having to commit. Reconsideration led to more shots in arms.
+                Live art, music, murals gave bystanders a reason to stay and the distance to reconsider without having to commit. Reconsideration led to more shots in arms.
               </p>
             </article>
           </div>
@@ -576,7 +576,7 @@ export function EyCaseView() {
         </div>
       </footer>
 
-      <p className="signature-line">Matt Stangl · CX, Service Design &amp; AI Experience · Atlanta, GA</p>
+      <p className="signature-line">Matt Stangl · CX, Product &amp; Service Design Leader · Atlanta, GA</p>
     </div>
   );
 }
