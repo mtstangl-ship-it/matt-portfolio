@@ -42,7 +42,9 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  aspect-ratio: 16 / 9;
   min-height: var(--hero-plate-min-h);
+  background: #0a1110;
   padding-bottom: clamp(2rem, 5vw, 4rem);
   border-bottom: 1px solid rgba(223, 233, 230, 0.18);
   display: flex;
@@ -56,6 +58,12 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+}
+
+.tier-a-case-root .hero__plate .hero__bgphoto > span {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
 }
 
 .tier-a-case-root .hero__plate .hero__bgphoto-img {
@@ -187,7 +195,7 @@
   box-sizing: border-box;
   margin: 0;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 0.5rem 1.35rem;
   font-family: var(--mono);
   font-size: var(--t-mono);
@@ -197,7 +205,7 @@
   background: var(--bg-2);
   padding: 0.85rem 1rem;
   border-radius: 0 0 3px 3px;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .tier-a-case-root .hero__stamp-stack .hero__id-strip dt {
@@ -211,6 +219,10 @@
   margin: 0;
   font-weight: 500;
   letter-spacing: 0.05em;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.35;
+  text-align: right;
 }
 
 @media (max-width: 768px) {
@@ -403,8 +415,13 @@
 .tier-a-case-root .hero__plate-picker {
   position: relative;
   z-index: 3;
-  padding: clamp(4.75rem, 4.25rem + 6vw, 6.75rem) var(--gutter) clamp(1.25rem, 2.5vw, 1.75rem);
+  padding: clamp(4.75rem, 4.25rem + 6vw, 6.75rem) 0 clamp(1.25rem, 2.5vw, 1.75rem);
   background: linear-gradient(180deg, rgba(10, 17, 16, 0.9) 0%, rgba(10, 17, 16, 0.42) 52%, transparent 100%);
+}
+
+.tier-a-case-root .hero__plate-picker .case-picker-wrap {
+  max-width: var(--col-wide);
+  margin-inline: 0;
 }
 
 .tier-a-case-root .hero__plate-picker .case-picker-hint--label {
@@ -426,7 +443,7 @@
     box-sizing: border-box;
     padding-top: clamp(4rem, 3.75rem + 4vw, 5.75rem);
     padding-bottom: clamp(0.75rem, 2vw, 1.25rem);
-    padding-inline: var(--gutter);
+    padding-inline: 0;
     overflow-x: clip;
   }
 

@@ -50,7 +50,7 @@ export function SyntheticCaseView() {
         caseNumber="02"
         totalCases={5}
         marginNote="DRAWING 01 · HERO"
-        figStamp="FIG. 01 · COVER"
+        figStamp="FIG. 01 · HERO"
         tag="01 · SIMULATION · CASE 02 OF 05"
         basedLine="DEN · REMOTE"
         roleLine="DESIGN & BUILD"

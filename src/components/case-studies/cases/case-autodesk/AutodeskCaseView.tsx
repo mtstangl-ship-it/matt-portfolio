@@ -58,7 +58,7 @@ export function AutodeskCaseView() {
         caseNumber="03"
         totalCases={5}
         marginNote="DRAWING 01 · HERO"
-        figStamp="FIG. 01 · AUTODESK / CUSTOMER VALUE JOURNEY"
+        figStamp="FIG. 01 · HERO"
         tag="01 · BRIEF · CASE 03 OF 05"
         basedLine="DEN · REMOTE"
         roleLine="SERVICE DESIGN · REVENUE"

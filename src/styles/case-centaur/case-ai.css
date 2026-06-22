@@ -32,7 +32,7 @@
 }
 
 @media (min-width: 1181px) {
-  .tier-a-case-root .case-centaur-portfolio .fig-stamp {
+  .tier-a-case-root .case-centaur-portfolio section[data-screen-label]:not(.hero) > .fig-stamp {
     top: 1rem;
     right: 1rem;
     z-index: 14;

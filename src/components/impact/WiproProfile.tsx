@@ -80,6 +80,13 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
     [reduceMotion],
   );
 
+  const resetOverview = useCallback(() => {
+    selectCurveView("before");
+    setPopover(null);
+  }, [selectCurveView]);
+
+  const needsVizReset = curveView !== "before";
+
   const startProfileIfNeeded = useCallback(() => {
     if (profileFired || !tabVisible) return;
     if (reduceMotion) {
@@ -208,6 +215,19 @@ export function WiproProfile({ tabVisible }: { tabVisible: boolean }) {
         </div>
 
         <div className="impact-profile__graph-wrap">
+          {needsVizReset ? (
+            <button
+              type="button"
+              className="impact-viz-reset"
+              onClick={resetOverview}
+              aria-label="Reset stress curve to before overview"
+            >
+              <span className="ic" aria-hidden>
+                ↺
+              </span>{" "}
+              RESET OVERVIEW
+            </button>
+          ) : null}
           <div
             ref={graphHostRef}
             className="impact-profile__graph"

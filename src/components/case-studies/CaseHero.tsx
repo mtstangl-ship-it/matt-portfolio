@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 export type CaseHeroMeta = {
@@ -78,13 +79,13 @@ export function CaseHero({
 
       <div className="hero__plate">
         <div className="hero__bgphoto" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element -- hero plate uses shared CSS filter pipeline */}
-          <img
+          <Image
             className="hero__bgphoto-img"
             src={heroImageSrc}
             alt=""
-            decoding="async"
-            fetchPriority="high"
+            fill
+            priority
+            sizes="(min-width: 1440px) 1440px, 100vw"
           />
           <div className="hero__bgphoto-duotone" aria-hidden="true" />
           <div className="hero__bgphoto-halftone" aria-hidden="true" />

@@ -31,6 +31,7 @@ export function ConditionalSiteChromeClient({
     path === "/about" ||
     path === "/impact" ||
     path === "/signal-story" ||
+    path.startsWith("/case-studies") ||
     tierACaseRoutes.has(path);
 
   if (hideLegacyChrome) {

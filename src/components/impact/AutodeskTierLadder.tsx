@@ -93,6 +93,13 @@ export function AutodeskTierLadder() {
 
   const dismissPin = useCallback(() => setPinnedPn(null), []);
 
+  const resetOverview = useCallback(() => {
+    setActiveTier("01");
+    setPinnedPn(null);
+  }, []);
+
+  const needsVizReset = activeTier !== "01" || pinnedPn !== null;
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") dismissPin();
@@ -186,6 +193,20 @@ export function AutodeskTierLadder() {
         className={`impact-tier-ladder__panel${motionClass}`}
         aria-label="Cumulative inheritance ring diagram"
       >
+        {needsVizReset ? (
+          <button
+            type="button"
+            className="impact-viz-reset"
+            onClick={resetOverview}
+            aria-label="Reset tier ladder to overview"
+          >
+            <span className="ic" aria-hidden>
+              ↺
+            </span>{" "}
+            RESET OVERVIEW
+          </button>
+        ) : null}
+
         <div className="impact-tier-ladder__panel-head">
           <span className="fig">
             FIG. 02-B · CUMULATIVE INHERITANCE · <em>5 → 9 → 15</em>
