@@ -42,7 +42,7 @@ export function AutodeskCaseView() {
         headline={<>Autodesk&apos;s <em>106% NRR</em> design.</>}
         subhead={
           <>
-            The customer value journey behind Autodesk&apos;s 106% NRR path — I <em>led the design</em> that
+            The customer value journey behind Autodesk&apos;s 106% NRR path. I <em>led the design</em> that
             tied post-purchase outcomes to revenue.
           </>
         }

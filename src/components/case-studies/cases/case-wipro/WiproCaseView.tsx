@@ -76,7 +76,7 @@ export function WiproCaseView() {
         }
         subhead={
           <>
-            Estée Lauder&apos;s desk was taking 3,515 password-reset tickets a month, escalating 42.6% — I{" "}
+            Estée Lauder&apos;s desk was taking 3,515 password-reset tickets a month, escalating 42.6%. I{" "}
             <em>unified six ITIL towers</em> into one operating model.
           </>
         }

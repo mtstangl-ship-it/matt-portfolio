@@ -38,8 +38,8 @@ export function SyntheticCaseView() {
         }
         subhead={
           <>
-            Nine personas across four QA environments surfaced three blind spots self-review couldn&apos;t —{" "}
-            <em>all three shipped</em> from a prioritized backlog.
+            Nine personas across four QA environments surfaced three blind spots self-review couldn&apos;t.{" "}
+            <em>All three shipped</em> from a prioritized backlog.
           </>
         }
         metaSlot={
