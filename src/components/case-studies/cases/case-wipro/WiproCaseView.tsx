@@ -76,8 +76,8 @@ export function WiproCaseView() {
         }
         subhead={
           <>
-            I unified six ITIL towers for Estée Lauder when 3,515 monthly lockouts were escalating 42.6%
-            of the time.
+            Estée Lauder&apos;s desk was taking 3,515 password-reset tickets a month, escalating 42.6% — I{" "}
+            <em>unified six ITIL towers</em> into one operating model.
           </>
         }
         metaSlot={

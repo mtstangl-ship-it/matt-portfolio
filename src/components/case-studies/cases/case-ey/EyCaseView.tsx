@@ -87,8 +87,8 @@ export function EyCaseView() {
         }
         subhead={
           <>
-            Say YES Summer delivered 715 vaccinations across three cities — where mass media couldn&apos;t
-            land.
+            Say YES Summer ran ten pop-up events across three cities, delivering <em>715 vaccinations</em>{" "}
+            where mass media and traditional outreach couldn&apos;t land.
           </>
         }
         metaSlot={

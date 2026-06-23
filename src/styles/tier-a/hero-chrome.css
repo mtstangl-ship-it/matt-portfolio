@@ -6,10 +6,10 @@
    ========================================================= */
 
 .tier-a-case-root {
-  --hero-plate-min-h: min(78vh, 820px);
+  --hero-plate-min-h: min(58vh, 640px);
   --hero-stamp-width: clamp(11rem, 16vw, 14rem);
-  --hero-stamp-top: clamp(5.75rem, 10.5vh, 7.5rem);
-  --hero-eyebrow-top: clamp(10.25rem, 17.5vh, 13.25rem);
+  --hero-stamp-top: clamp(5rem, 9vh, 6.75rem);
+  --hero-eyebrow-top: clamp(8.5rem, 14vh, 11rem);
   --hero-title-size: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
   --hero-teal-highlight: var(--accent);
   --hero-teal-shadow: #0a1110;
@@ -45,7 +45,7 @@
   aspect-ratio: 16 / 9;
   min-height: var(--hero-plate-min-h);
   background: #0a1110;
-  padding-bottom: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(1.25rem, 3vw, 2.25rem);
   border-bottom: 1px solid rgba(223, 233, 230, 0.18);
   display: flex;
   flex-direction: column;
@@ -293,10 +293,10 @@
 .tier-a-case-root .hero__sub {
   color: #d2dad7;
   font-size: var(--t-lead);
-  max-width: 42ch;
-  margin: 0 0 clamp(1.25rem, 2.5vw, 2rem);
+  max-width: 48ch;
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem);
   text-wrap: pretty;
-  line-height: 1.5;
+  line-height: 1.55;
   text-shadow: 0 1px 6px rgba(10, 17, 16, 0.7);
 }
 
@@ -416,7 +416,7 @@
 .tier-a-case-root .hero__plate-picker {
   position: relative;
   z-index: 3;
-  padding: clamp(4.75rem, 4.25rem + 6vw, 6.75rem) 0 clamp(1.25rem, 2.5vw, 1.75rem);
+  padding: clamp(4rem, 3.5rem + 5vw, 5.75rem) 0 clamp(1rem, 2vw, 1.5rem);
   background: linear-gradient(180deg, rgba(10, 17, 16, 0.9) 0%, rgba(10, 17, 16, 0.42) 52%, transparent 100%);
 }
 

@@ -68,7 +68,8 @@ export function CentaurCaseView() {
         }
         subhead={
           <>
-            Six weeks, four tools — one lesson I&apos;ll carry forward: taste still sets the ceiling.
+            Six weeks with Cursor, Claude, and Vercel — documenting how <em>human taste</em> still sets the
+            ceiling when AI raises the floor.
           </>
         }
         meta={{
