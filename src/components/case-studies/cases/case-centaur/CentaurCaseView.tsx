@@ -8,21 +8,7 @@ import { DeclarationCentaur } from "./DeclarationCentaur";
 import { DeploymentDiffCentaur, ReviewTerminalCentaur, SignalTelemetryCentaur } from "./RecordsCentaur";
 import { TelemetryCentaur } from "./TelemetryCentaur";
 
-function DimBetween({ label, compact }: { label: string; compact?: boolean }) {
-  return (
-    <div className={compact ? "dim-with-scale dim-with-scale--compact" : "dim-with-scale"}>
-      <p className="dim">{label}</p>
-      <svg className="dim-scale" viewBox="0 0 800 20" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="4" x2="800" y2="4" stroke="var(--ink-line)" strokeWidth="1" />
-        <g stroke="var(--ink-3)" strokeWidth="1">
-          {[0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800].map((x) => (
-            <line key={x} x1={x} y1="4" x2={x} y2="14" />
-          ))}
-        </g>
-      </svg>
-    </div>
-  );
-}
+import { DimScale } from "../../DimScale";
 
 export function CentaurCaseView() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -72,7 +58,9 @@ export function CentaurCaseView() {
         totalCases={5}
         marginNote="DRAWING 01 · HERO"
         figStamp="FIG. 01 · HERO"
-        tag="01 · BUILD · CASE 01 OF 05"
+        tag="01 · BRIEF · CASE 01 OF 05"
+        basedLine="DEN · REMOTE"
+        roleLine="DESIGN & BUILD"
         headline={
           <>
             I built this portfolio with AI, and kept the decisions <em>human.</em>
@@ -80,9 +68,7 @@ export function CentaurCaseView() {
         }
         subhead={
           <>
-            Six weeks. Four tools. One lesson I&apos;ll use for the rest of my career.
-            <br />
-            <b>AI raises the floor. Taste raises the ceiling.</b>
+            Six weeks, four tools — one lesson I&apos;ll carry forward: taste still sets the ceiling.
           </>
         }
         meta={{
@@ -103,12 +89,12 @@ export function CentaurCaseView() {
 
       <TelemetryCentaur />
 
-      <DimBetween label="↓ METHOD · HOW THE WORK SPLIT" />
+      <DimScale label="↓ METHOD · HOW THE WORK SPLIT" />
 
       <DeclarationCentaur />
 
       <section className="records" id="records" aria-label="Service Records" data-screen-label="04 Service Records">
-        <DimBetween label="↓ ARTIFACTS · PROOF FOLLOWS" compact />
+        <DimScale label="↓ ARTIFACTS · PROOF FOLLOWS" compact />
 
         <span className="margin-note">DRAWING 04 · ARTIFACTS</span>
         <span className="fig-stamp">FIG. 04 · ARTIFACTS</span>
@@ -143,7 +129,7 @@ export function CentaurCaseView() {
         </div>
       </section>
 
-      <DimBetween label="↓ BULLETIN · WHERE I PAID" />
+      <DimScale label="↓ BULLETIN · WHERE I PAID" />
 
       <section className="bulletin" id="bulletin" aria-label="Service Bulletin" data-screen-label="05 Service Bulletin">
         <span className="margin-note">DRAWING 05 · BULLETIN</span>
@@ -226,7 +212,7 @@ export function CentaurCaseView() {
         </div>
       </section>
 
-      <DimBetween label="↓ HANDOFF · THE LARGER STORY" />
+      <DimScale label="↓ HANDOFF · THE LARGER STORY" />
 
       <section className="handoff" aria-label="Handoff" data-screen-label="06 Handoff">
         <span className="margin-note">DRAWING 06 · HANDOFF</span>

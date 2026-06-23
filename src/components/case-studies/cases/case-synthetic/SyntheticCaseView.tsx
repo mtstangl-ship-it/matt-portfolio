@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { DimScale } from "../../DimScale";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
 import { SyntheticEvidenceLadder } from "./SyntheticEvidenceLadder";
@@ -8,30 +9,6 @@ import { SyntheticFindingsCards } from "./SyntheticFindingsCards";
 import { SyntheticFunnel } from "./SyntheticFunnel";
 import { SyntheticPersonaCard } from "./SyntheticPersonaCard";
 import { SyntheticPipelineLanes } from "./SyntheticPipelineLanes";
-
-const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
-
-function DimRibbon({ label }: { label: string }) {
-  return (
-    <div className="dim-with-scale">
-      <p className="dim">{label}</p>
-      <svg
-        className="dim-scale"
-        viewBox="0 0 800 20"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <line x1="0" y1="4" x2="800" y2="4" stroke="var(--ink-line)" strokeWidth="1" />
-        <g stroke="var(--ink-3)" strokeWidth="1">
-          {DIM_TICKS.map((x) => (
-            <line key={x} x1={x} y1="4" x2={x} y2="14" />
-          ))}
-        </g>
-      </svg>
-    </div>
-  );
-}
 
 /**
  * Synthetic Users — Tier A case (Case 02).
@@ -51,7 +28,7 @@ export function SyntheticCaseView() {
         totalCases={5}
         marginNote="DRAWING 01 · HERO"
         figStamp="FIG. 01 · HERO"
-        tag="01 · SIMULATION · CASE 02 OF 05"
+        tag="01 · BRIEF · CASE 02 OF 05"
         basedLine="DEN · REMOTE"
         roleLine="DESIGN & BUILD"
         headline={
@@ -61,10 +38,8 @@ export function SyntheticCaseView() {
         }
         subhead={
           <>
-            Nine personas, four QA environments, three findings self-review missed — the methodology,
-            documented by running it on this portfolio. Structured personas, modeled on real practitioner
-            worldviews, surface blind spots self-review can&apos;t.{" "}
-            <em>Only if you build them the right way.</em>
+            Nine personas and four QA passes surfaced three blind spots self-review missed — all three
+            shipped.
           </>
         }
         metaSlot={
@@ -93,7 +68,7 @@ export function SyntheticCaseView() {
         }
       />
 
-      <DimRibbon label="↓ OUTCOME · FUNNEL" />
+      <DimScale label="↓ OUTCOME · FUNNEL" />
 
       <section className="outcome" aria-label="Outcome funnel" data-screen-label="02 Outcome">
         <span className="margin-note">DRAWING 02 · OUTCOME</span>
@@ -129,7 +104,7 @@ export function SyntheticCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ EVIDENCE · WHERE THE METHOD HOLDS" />
+      <DimScale label="↓ EVIDENCE · WHERE THE METHOD HOLDS" />
 
       <section className="evidence" aria-label="Evidence ladder" data-screen-label="03 Evidence">
         <span className="margin-note">DRAWING 03 · EVIDENCE</span>
@@ -158,7 +133,7 @@ export function SyntheticCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ PIPELINE · PORTFOLIO AS A RELEASE" />
+      <DimScale label="↓ PIPELINE · PORTFOLIO AS A RELEASE" />
 
       <section className="pipeline" aria-label="Pipeline" data-screen-label="04 Pipeline">
         <span className="margin-note">DRAWING 04 · PIPELINE</span>
@@ -237,7 +212,7 @@ export function SyntheticCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ FINDINGS · WHAT SELF-REVIEW MISSED" />
+      <DimScale label="↓ FINDINGS · WHAT SELF-REVIEW MISSED" />
 
       <section className="findings" aria-label="Findings" data-screen-label="05 Findings">
         <span className="margin-note">DRAWING 05 · FINDINGS</span>
@@ -283,7 +258,7 @@ export function SyntheticCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ LESSON · WHAT I'D DO DIFFERENTLY" />
+      <DimScale label="↓ LESSON · WHAT I'D DO DIFFERENTLY" />
 
       <section className="lesson" aria-label="Lesson" data-screen-label="06 Lesson">
         <span className="margin-note">DRAWING 06 · LESSON</span>
@@ -323,7 +298,7 @@ export function SyntheticCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ HANDOFF · THE LARGER STORY" />
+      <DimScale label="↓ HANDOFF · THE LARGER STORY" />
 
       <section className="handoff" aria-label="Handoff" data-screen-label="07 Handoff">
         <span className="margin-note">DRAWING 07 · HANDOFF</span>

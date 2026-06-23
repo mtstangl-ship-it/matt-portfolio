@@ -2,26 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { DimScale } from "../../DimScale";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
-
-const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
-
-function DimRibbon({ label }: { label: string }) {
-  return (
-    <div className="dim-with-scale">
-      <p className="dim">{label}</p>
-      <svg className="dim-scale" viewBox="0 0 800 20" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="4" x2="800" y2="4" stroke="var(--ink-line)" strokeWidth="1" />
-        <g stroke="var(--ink-3)" strokeWidth="1">
-          {DIM_TICKS.map((x) => (
-            <line key={x} x1={x} y1="4" x2={x} y2="14" />
-          ))}
-        </g>
-      </svg>
-    </div>
-  );
-}
 
 /** Tier-A port of the Claude-Design Wipro V5 — case-specific artifacts only.
  * Production primitives (SiteNav via FicheNav, CaseHero, CasePicker, sheet footer, fiche stamps)
@@ -93,8 +76,8 @@ export function WiproCaseView() {
         }
         subhead={
           <>
-            Estée Lauder&apos;s service desk was taking <b>3,515 password-reset tickets a month</b> — and escalating{" "}
-            <b>42.6% of them</b>. I <em>led the transformation</em> that unified the experience.
+            I unified six ITIL towers for Estée Lauder when 3,515 monthly lockouts were escalating 42.6%
+            of the time.
           </>
         }
         metaSlot={
@@ -129,50 +112,26 @@ export function WiproCaseView() {
         }
       />
 
-      <DimRibbon label="↓ brief · what I walked into" />
+      <DimScale label="↓ delta · MTTR reduction for lockouts" />
 
-      {/* Section 01 · Brief */}
-      <section className="brief" aria-label="Brief" data-screen-label="01 Brief">
-        <span className="margin-note">DRAWING 01 · BRIEF</span>
-        <span className="fig-stamp">FIG. 01 · BRIEF</span>
+      {/* Section 01 · Delta · MONUMENT */}
+      <section className="delta" aria-label="Delta" data-screen-label="01 Delta">
+        <span className="margin-note">DRAWING 01 · DELTA</span>
+        <span className="fig-stamp">FIG. 01 · MTTR REDUCTION FOR LOCKOUTS</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
           <dd>01 / 05</dd>
           <dt>CLAIM</dt>
-          <dd>SME ENABLEMENT → STRUCTURAL</dd>
+          <dd>98.64% MTTR REDUCTION</dd>
           <dt>BASELINE</dt>
-          <dd>6 TOWERS · ~40K EMPLOYEES</dd>
+          <dd>27H → 22 MIN LOCKOUTS</dd>
           <dt>LAST REV.</dt>
           <dd>04/26</dd>
         </dl>
 
-        <div className="brief__inner case-section__inner">
-          <header className="case-section-head">
-            <p className="kicker">01 · BRIEF · WHAT I WALKED INTO</p>
-            <h2>
-              3,515 tickets a month. 42.6% escalating. <em>Nobody could say where they came from.</em>
-            </h2>
-          </header>
-
-          <p className="brief__lede">
-            I was hired to enable SME practitioners. I found <b>six towers operating as six companies</b> — no shared metrics, no common
-            escalation logic, customer experience managed as a function of IT delivery. The lockout workflow became the wedge: a routine
-            ticket type the towers couldn&apos;t agree on, escalating <em>42.6% of the time</em>, taking <em>4× longer</em> when it did.
-            The work pivoted from enablement to <b>redesigning the structures themselves</b>.
-          </p>
-        </div>
-      </section>
-
-      <DimRibbon label="↓ delta · MTTR reduction for lockouts" />
-
-      {/* Section 02 · Delta · MONUMENT */}
-      <section className="delta" aria-label="Delta" data-screen-label="02 Delta">
-        <span className="margin-note">DRAWING 02 · DELTA</span>
-        <span className="fig-stamp">FIG. 02 · MTTR REDUCTION FOR LOCKOUTS</span>
-
         <div className="delta__inner case-section__inner">
-          <p className="delta__kicker">02 · DELTA</p>
+          <p className="delta__kicker">01 · DELTA</p>
 
           <figure
             className="monument-card monument-card--decimal-pct"
@@ -224,16 +183,16 @@ export function WiproCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ diagnosis · where lockouts actually came from" />
+      <DimScale label="↓ diagnosis · where lockouts actually came from" />
 
-      {/* Section 03 · Diagnosis · LOCKOUT ECONOMICS */}
-      <section className="diagnosis" aria-label="Diagnosis" data-screen-label="03 Diagnosis">
-        <span className="margin-note">DRAWING 03 · DIAGNOSIS</span>
-        <span className="fig-stamp">FIG. 03 · LOCKOUT ECONOMICS</span>
+      {/* Section 02 · Diagnosis · LOCKOUT ECONOMICS */}
+      <section className="diagnosis" aria-label="Diagnosis" data-screen-label="02 Diagnosis">
+        <span className="margin-note">DRAWING 02 · DIAGNOSIS</span>
+        <span className="fig-stamp">FIG. 02 · LOCKOUT ECONOMICS</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>03 / 05</dd>
+          <dd>02 / 05</dd>
           <dt>CLAIM</dt>
           <dd>43% · BROWSER-CACHE ORIGIN</dd>
           <dt>BASELINE</dt>
@@ -244,7 +203,7 @@ export function WiproCaseView() {
 
         <div className="diagnosis__inner case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">03 · DIAGNOSIS · WHERE LOCKOUTS ACTUALLY CAME FROM</p>
+            <p className="kicker">02 · DIAGNOSIS · WHERE LOCKOUTS ACTUALLY CAME FROM</p>
           </header>
 
           <div className="economics" aria-label="Lockout Economics">
@@ -259,7 +218,7 @@ export function WiproCaseView() {
             <div className="economics__cards">
               <article className="ec-card ec-card--vol">
                 <div className="ec-card__stamp">
-                  <span className="figid">FIG. 03-A</span>
+                  <span className="figid">FIG. 02-A</span>
                   <span className="role">Intake</span>
                 </div>
                 <div className="ec-card__num">3,515</div>
@@ -274,7 +233,7 @@ export function WiproCaseView() {
 
               <article className="ec-card ec-card--leak">
                 <div className="ec-card__stamp">
-                  <span className="figid">FIG. 03-B</span>
+                  <span className="figid">FIG. 02-B</span>
                   <span className="role">Escalation</span>
                 </div>
                 <div className="ec-card__num">
@@ -294,7 +253,7 @@ export function WiproCaseView() {
 
               <article className="ec-card ec-card--cost">
                 <div className="ec-card__stamp">
-                  <span className="figid">FIG. 03-C</span>
+                  <span className="figid">FIG. 02-C</span>
                   <span className="role">Latency</span>
                 </div>
                 <div className="ec-card__num">4×</div>
@@ -312,7 +271,7 @@ export function WiproCaseView() {
 
               <article className="ec-card ec-card--target">
                 <div className="ec-card__stamp">
-                  <span className="figid">FIG. 03-D</span>
+                  <span className="figid">FIG. 02-D</span>
                   <span className="role">Target</span>
                 </div>
                 <div className="ec-card__num">
@@ -337,7 +296,7 @@ export function WiproCaseView() {
             <div className="diagnostic" aria-label="The query that made lockouts legible">
               <header className="diagnostic__head">
                 <span className="ttl">The query that made lockouts legible</span>
-                <span className="stamp">FIG. 03-E · Diagnostic</span>
+                <span className="stamp">FIG. 02-E · Diagnostic</span>
               </header>
               <div className="diagnostic__body">
                 <p>
@@ -381,16 +340,16 @@ export function WiproCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ flow · one ticket, two models" />
+      <DimScale label="↓ flow · one ticket, two models" />
 
-      {/* Section 04 · Flow · BEFORE / AFTER */}
-      <section className="flow-section" aria-label="Flow" data-screen-label="04 Flow">
-        <span className="margin-note">DRAWING 04 · FLOW</span>
-        <span className="fig-stamp">FIG. 04 · SERVICE RECORD</span>
+      {/* Section 03 · Flow · BEFORE / AFTER */}
+      <section className="flow-section" aria-label="Flow" data-screen-label="03 Flow">
+        <span className="margin-note">DRAWING 03 · FLOW</span>
+        <span className="fig-stamp">FIG. 03 · SERVICE RECORD</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>04 / 05</dd>
+          <dd>03 / 05</dd>
           <dt>CLAIM</dt>
           <dd>27H → 22MIN · SAME TICKET</dd>
           <dt>BASELINE</dt>
@@ -417,7 +376,7 @@ export function WiproCaseView() {
                 <span className="ttl">
                   <span className="accent">BEFORE</span> · Legacy
                 </span>
-                <span className="meta">FIG. 04-A · Service record</span>
+                <span className="meta">FIG. 03-A · Service record</span>
               </header>
               <p className="flow__sub">Context lost at every handoff · 6 towers · manual routing · customer restarts</p>
 
@@ -518,7 +477,7 @@ export function WiproCaseView() {
                 <span className="ttl">
                   <span className="accent">AFTER</span> · Redesigned
                 </span>
-                <span className="meta">FIG. 04-B · Service record</span>
+                <span className="meta">FIG. 03-B · Service record</span>
               </header>
               <p className="flow__sub">Context travels with the case · 3 tiers · SPLUNK-aware routing · structured intake</p>
 
@@ -593,16 +552,16 @@ export function WiproCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ design · six towers, three tiers" />
+      <DimScale label="↓ design · six towers, three tiers" />
 
-      {/* Section 05 · Design · Tier ladder + Move 02 */}
-      <section className="design" aria-label="Design" data-screen-label="05 Design">
-        <span className="margin-note">DRAWING 05 · DESIGN</span>
-        <span className="fig-stamp">FIG. 05 · OPERATING MODEL</span>
+      {/* Section 04 · Design · Tier ladder + Move 02 */}
+      <section className="design" aria-label="Design" data-screen-label="04 Design">
+        <span className="margin-note">DRAWING 04 · DESIGN</span>
+        <span className="fig-stamp">FIG. 04 · OPERATING MODEL</span>
 
         <dl className="section-stamp" aria-label="Section metadata">
           <dt>DRAWING NO.</dt>
-          <dd>05 / 05</dd>
+          <dd>04 / 05</dd>
           <dt>CLAIM</dt>
           <dd>6 TOWERS → 3 TIERS</dd>
           <dt>BASELINE</dt>
@@ -613,7 +572,7 @@ export function WiproCaseView() {
 
         <div className="design__inner case-section__inner">
           <header className="case-section-head">
-            <p className="kicker">05 · DESIGN · SIX TOWERS, THREE TIERS</p>
+            <p className="kicker">04 · DESIGN · SIX TOWERS, THREE TIERS</p>
             <h2>
               Ops said three tiers was the ceiling. <em>They were right.</em>
             </h2>
@@ -633,7 +592,7 @@ export function WiproCaseView() {
             <span className="ladder__stamp">REV. 02 · Redrawn</span>
 
             <header className="ladder__title-row">
-              <span className="ladder__title">FIG. 05 · Operating-model assembly</span>
+              <span className="ladder__title">FIG. 04 · Operating-model assembly</span>
               <span className="ladder__scale">
                 <span className="accent">SCALE</span> · 1 : 1
               </span>
@@ -741,12 +700,12 @@ export function WiproCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↘ closing · the larger story" />
+      <DimScale label="↘ closing · the larger story" />
 
       {/* Closing strip — aphorism + handoff CTAs */}
-      <section className="closing" aria-label="Closing" data-screen-label="06 Closing">
-        <span className="margin-note">DRAWING 06 · CLOSING</span>
-        <span className="fig-stamp">FIG. 06 · APHORISM</span>
+      <section className="closing" aria-label="Closing" data-screen-label="05 Closing">
+        <span className="margin-note">DRAWING 05 · CLOSING</span>
+        <span className="fig-stamp">FIG. 05 · APHORISM</span>
 
         <div className="closing__inner">
           <p className="closing__aphorism">

@@ -93,7 +93,7 @@
 
 /* ---- Section common spacing (hero plate uses hero-chrome.css — not this block) ---- */
 .tier-a-case-root section[data-screen-label]:not(.hero) {
-  padding-block: clamp(3rem, 4vw + 1rem, 6rem);
+  padding-block: clamp(4rem, 6vw, 7rem);
   position: relative;
 }
 

@@ -19,7 +19,6 @@
  
 .tier-a-case-root .case-ey-portfolio .case-section{
   position: relative;
-  padding-block: clamp(4.5rem, 8vw, 7.5rem);
   border-bottom: 1px solid var(--ink-line);
 }
 .tier-a-case-root .case-ey-portfolio .case-section__inner{
@@ -41,7 +40,7 @@
 }
 
  
-.tier-a-case-root .case-ey-portfolio .diagnosis{ position: relative; padding-block: clamp(4.5rem, 7vw, 7rem); border-bottom: 1px solid var(--ink-line); }
+.tier-a-case-root .case-ey-portfolio .diagnosis{ position: relative; border-bottom: 1px solid var(--ink-line); }
 .tier-a-case-root .case-ey-portfolio .diagnosis__inner{ max-width: var(--col-wide); margin: 0 auto; padding: 0 var(--gutter); }
 .tier-a-case-root .case-ey-portfolio .diagnosis__body{
   font-size: var(--t-lead); color: var(--ink-2);

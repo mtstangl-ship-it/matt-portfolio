@@ -44,7 +44,6 @@
 /* ---- Section frame baseline (parallel to ey-case.css `.case-section`) ---- */
 .tier-a-case-root .case-wipro-portfolio section[data-screen-label]:not(.hero) {
   position: relative;
-  padding-block: clamp(4.5rem, 8vw, 7.5rem);
   border-bottom: 1px solid var(--ink-line);
 }
 .tier-a-case-root .case-wipro-portfolio .case-section__inner {
@@ -58,7 +57,6 @@
 }
 .tier-a-case-root .case-wipro-portfolio .case-section-head h2 {
   font-family: var(--sans);
-  font-weight: 400;
   font-size: clamp(1.875rem, 1.4rem + 1.95vw, 2.625rem);
   line-height: 1.12;
   letter-spacing: -0.018em;

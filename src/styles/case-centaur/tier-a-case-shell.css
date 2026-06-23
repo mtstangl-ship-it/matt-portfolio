@@ -21,7 +21,7 @@ body:has(.tier-a-case-root) {
     var(--bg);
 
   /* Mirror scoped fiche tokens so `.nav__cta` / `.sheet` resolve on Centaur */
-  --sans: var(--font-inter, "Inter"), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: var(--font-inter-tight), system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: var(--font-jetbrains), "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
   --bg: #0a0f0e;
   --bg-2: #0d1413;

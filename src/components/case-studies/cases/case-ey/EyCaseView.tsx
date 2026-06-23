@@ -2,27 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { DimScale } from "../../DimScale";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
 import { EyCaseTallyFigure } from "./EyCaseTally";
-
-const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
-
-function DimRibbon({ label }: { label: string }) {
-  return (
-    <div className="dim-with-scale">
-      <p className="dim">{label}</p>
-      <svg className="dim-scale" viewBox="0 0 800 20" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="4" x2="800" y2="4" stroke="var(--ink-line)" strokeWidth="1" />
-        <g stroke="var(--ink-3)" strokeWidth="1">
-          {DIM_TICKS.map((x) => (
-            <line key={x} x1={x} y1="4" x2={x} y2="14" />
-          ))}
-        </g>
-      </svg>
-    </div>
-  );
-}
 
 export function EyCaseView() {
   const tallyRef = useRef<HTMLElement | null>(null);
@@ -104,7 +87,8 @@ export function EyCaseView() {
         }
         subhead={
           <>
-            <b>Say YES Summer:</b> three cities, ten events — <b>715 vaccinations</b> where mass media couldn&apos;t land.
+            Say YES Summer delivered 715 vaccinations across three cities — where mass media couldn&apos;t
+            land.
           </>
         }
         metaSlot={
@@ -131,7 +115,7 @@ export function EyCaseView() {
         }
       />
 
-      <DimRibbon label="↓ proof · 16px clearance" />
+      <DimScale label="↓ proof · 16px clearance" />
 
       <section className="diagnosis" id="diagnosis" aria-label="Diagnosis" data-screen-label="02 Diagnosis">
         <span className="margin-note">DRAWING 02 · DIAGNOSIS</span>
@@ -171,7 +155,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↘ pivot · diagnosis → field" />
+      <DimScale label="↘ pivot · diagnosis → field" />
 
       <section className="approach" id="approach" aria-label="Approach" data-screen-label="03 Approach">
         <span className="margin-note">DRAWING 03 · APPROACH</span>
@@ -247,7 +231,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ field · the three-city tour" />
+      <DimScale label="↓ field · the three-city tour" />
 
       <section className="tour" id="tour" aria-label="Design — three-city tour" data-screen-label="04 Design">
         <span className="margin-note">DRAWING 04 · TOUR</span>
@@ -359,7 +343,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS" />
+      <DimScale label="↓ EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS" />
 
       <section
         className="external-validation"
@@ -451,7 +435,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ lesson · four mechanisms a dashboard couldn't have produced" />
+      <DimScale label="↓ lesson · four mechanisms a dashboard couldn't have produced" />
 
       <section className="lesson" id="lesson" aria-label="Lesson — field learnings" data-screen-label="06 Lesson">
         <span className="margin-note">DRAWING 06 · LESSON</span>
@@ -529,7 +513,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↘ handoff · the larger story" />
+      <DimScale label="↘ handoff · the larger story" />
 
       <section className="handoff" aria-label="Handoff" data-screen-label="07 Handoff">
         <div className="handoff__inner">

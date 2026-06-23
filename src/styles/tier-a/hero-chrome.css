@@ -11,7 +11,7 @@
   --hero-stamp-top: clamp(5.75rem, 10.5vh, 7.5rem);
   --hero-eyebrow-top: clamp(10.25rem, 17.5vh, 13.25rem);
   --hero-title-size: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
-  --hero-teal-highlight: #5fe6c2;
+  --hero-teal-highlight: var(--accent);
   --hero-teal-shadow: #0a1110;
 }
 
@@ -293,9 +293,10 @@
 .tier-a-case-root .hero__sub {
   color: #d2dad7;
   font-size: var(--t-lead);
-  max-width: 52ch;
-  margin: 0 0 2.5rem;
+  max-width: 42ch;
+  margin: 0 0 clamp(1.25rem, 2.5vw, 2rem);
   text-wrap: pretty;
+  line-height: 1.5;
   text-shadow: 0 1px 6px rgba(10, 17, 16, 0.7);
 }
 
