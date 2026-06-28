@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Synthetic users as a research method. — Case 02 · Tier A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+<style>
+/* ============================================================
+   SYNTHETIC USERS · CASE 02 · TIER A FICHE PROTOTYPE
+   Scoped under .case-synthetic-portfolio
+   Tokens mirror the Tier A dark / teal / mono triad.
+   ============================================================ */
+
+:root{
+  --font-inter: "Inter Tight", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-jetbrains: "JetBrains Mono";
+  --mono: var(--font-jetbrains, "JetBrains Mono"), "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+  --sans: var(--font-inter);
+}
+
+.case-synthetic-portfolio{
+  /* surfaces */
+  --paper:   #0a0d0e;
+  --paper-2: #0e1314;
+  --paper-3: #121819;
+  --paper-card: #0f1516;
+  /* ink */
+  --ink-0: #eef3f1;
+  --ink-1: #c3cbc8;
+  --ink-2: #8a9491;
+  --ink-3: #5a6562;
+  --ink-4: #3a4341;
+  /* lines */
+  --line:   rgba(166,186,182,0.14);
+  --line-2: rgba(166,186,182,0.075);
+  --line-3: rgba(166,186,182,0.04);
+  /* accent — teal */
+  --accent:     #39d3c0;
+  --accent-2:   #6fe6d6;
+  --accent-dim: rgba(57,211,192,0.14);
+  --accent-line:rgba(57,211,192,0.42);
+  --accent-glow:rgba(57,211,192,0.07);
+  /* secondary signal — amber (real research / edge) */
+  --warn:    #e0a23a;
+  --warn-dim:rgba(224,162,58,0.13);
+  --warn-line:rgba(224,162,58,0.34);
+
+  --gutter: clamp(18px, 5vw, 64px);
+  --maxw: 1180px;
+
+  background:var(--paper);
+  color:var(--ink-1);
+  font-family:var(--sans);
+  font-weight:400;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  font-style:normal;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+.case-synthetic-portfolio :where(h1,h2,h3,p,dl,dd,dt,ul,li,figure){ margin:0; }
+
+/* blueprint atmosphere */
+.case-synthetic-portfolio{
+  position:relative;
+  min-height:100vh;
+  background-image:
+    repeating-linear-gradient(0deg, var(--line-3) 0 1px, transparent 1px 88px),
+    repeating-linear-gradient(90deg, var(--line-3) 0 1px, transparent 1px 88px),
+    radial-gradient(120% 80% at 50% -10%, rgba(57,211,192,0.05), transparent 60%);
+  background-attachment:fixed;
+}
+
+/* ---------------------------------------------------------- chrome type */
+.mono{
+  font-family:var(--mono);
+  font-weight:500;
+  font-style:normal;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+}
+.case-synthetic-portfolio button{
+  font-family:inherit;
+  font-weight:inherit;
+  font-style:normal;
+}
+
+/* ---------------------------------------------------------- fiche nav */
+.fiche-nav{
+  position:sticky; top:0; z-index:40;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px;
+  padding:14px var(--gutter);
+  background:rgba(10,13,14,0.82);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-2);
+}
+.fiche-nav .brand{
+  font-family:var(--mono); font-weight:700; letter-spacing:0.04em;
+  color:var(--ink-0); font-size:13px; text-transform:none;
+}
+.fiche-nav .brand b{ color:var(--accent); }
+.fiche-nav ul{ display:flex; gap:6px; list-style:none; padding:0; margin:0; }
+.fiche-nav a{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.13em; text-transform:uppercase;
+  color:var(--ink-2); text-decoration:none; padding:6px 10px; border-radius:999px;
+  transition:color .2s, background .2s;
+}
+.fiche-nav a:hover{ color:var(--ink-0); background:var(--accent-dim); }
+.fiche-nav a.active{ color:var(--accent); }
+.fiche-nav .nav-links{ display:flex; align-items:center; gap:4px; }
+.fiche-nav .pill{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--paper); background:var(--accent); padding:6px 12px; border-radius:999px; text-decoration:none;
+  font-weight:600;
+}
+@media (max-width:880px){
+  .fiche-nav .nav-links{ display:none; }
+}
+
+/* ---------------------------------------------------------- shell */
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter); }
+
+.section{
+  position:relative;
+  padding:clamp(56px,8vw,118px) 0;
+  border-top:1px solid var(--line-2);
+}
+.section:first-of-type{ border-top:0; }
+
+/* reveal (enhancement only; visible without JS) */
+.js .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+.js .reveal.in{ opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{ opacity:1 !important; transform:none !important; transition:none; }
+}
+
+/* margin note + fig stamp (gutter chrome) */
+.margin-note, .fig-stamp{
+  position:absolute; top:clamp(22px,4vw,40px);
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-3); white-space:nowrap; pointer-events:none;
+}
+.margin-note{ left:var(--gutter); }
+.margin-note::before{ content:""; display:inline-block; width:18px; height:1px; background:var(--accent-line); vertical-align:middle; margin-right:9px; transform:translateY(-2px); }
+.fig-stamp{ right:var(--gutter); color:var(--ink-3); }
+.fig-stamp::after{ content:""; display:inline-block; width:6px; height:6px; border:1px solid var(--accent-line); margin-left:9px; transform:translateY(1px) rotate(45deg); }
+
+/* section metadata grid */
+.section-stamp{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:1px; background:var(--line-2);
+  border:1px solid var(--line-2);
+  margin-bottom:34px;
+  max-width:560px;
+}
+.section-stamp > div{ background:var(--paper); padding:9px 12px; }
+.section-stamp dt{ font-family:var(--mono); font-size:8.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:3px; }
+.section-stamp dd{ font-family:var(--mono); font-size:11px; letter-spacing:0.04em; color:var(--ink-1); }
+@media (max-width:560px){
+  .section-stamp{ grid-template-columns:repeat(2,1fr); }
+}
+
+/* section head */
+.case-section-head{ max-width:760px; margin-bottom:40px; }
+.kicker{
+  display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:20px;
+}
+.case-section-head h2{
+  font-family:var(--sans); font-weight:600; line-height:1.07;
+  font-size:clamp(26px,4.4vw,46px); letter-spacing:-0.022em; color:var(--ink-0);
+}
+.case-section-head h2 em{ font-style:italic; color:var(--accent-2); }
+.case-section-head .sub{
+  margin-top:18px; font-size:clamp(15px,1.7vw,18px); line-height:1.62; color:var(--ink-2); max-width:62ch;
+}
+.case-section-head .sub em{ font-style:italic; color:var(--ink-1); }
+
+/* dim ribbon */
+.dim-ribbon{
+  display:flex; align-items:center; gap:14px;
+  padding:18px var(--gutter);
+  max-width:var(--maxw); margin:0 auto;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-3);
+  border-top:1px solid var(--line-2); border-bottom:1px solid var(--line-2);
+}
+.dim-ribbon .arrow{ color:var(--accent); }
+.dim-ribbon::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent); }
+
+/* ============================================================ HERO */
+.hero{ position:relative; padding-top:clamp(40px,7vw,86px); padding-bottom:clamp(40px,6vw,72px); }
+.hero-photo{
+  position:relative;
+  height:clamp(190px,30vw,340px);
+  margin:0 calc(-1 * var(--gutter)) clamp(34px,5vw,52px);
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(80% 120% at 22% 0%, rgba(57,211,192,0.16), transparent 55%),
+    radial-gradient(60% 100% at 100% 100%, rgba(224,162,58,0.07), transparent 60%),
+    linear-gradient(180deg,#0b1011,#0a0d0e);
+}
+/* faux blueprint grid of persona nodes inside hero photo */
+.hero-photo .grid-overlay{
+  position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(0deg, var(--line-2) 0 1px, transparent 1px 44px),
+    repeating-linear-gradient(90deg, var(--line-2) 0 1px, transparent 1px 44px);
+  mask-image:linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent);
+}
+.hero-photo .nodes{ position:absolute; inset:0; }
+.hero-photo .node{
+  position:absolute; width:9px; height:9px; border-radius:50%;
+  border:1px solid var(--accent-line); background:rgba(57,211,192,0.12);
+}
+.hero-photo .node.lit{ background:var(--accent); box-shadow:0 0 16px var(--accent-glow); border-color:var(--accent); }
+.hero-photo .crosshair{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:120px; height:120px; opacity:.5;
+}
+.hero-photo .crosshair::before,.hero-photo .crosshair::after{
+  content:""; position:absolute; background:var(--accent-line);
+}
+.hero-photo .crosshair::before{ left:50%; top:0; bottom:0; width:1px; transform:translateX(-.5px); }
+.hero-photo .crosshair::after{ top:50%; left:0; right:0; height:1px; transform:translateY(-.5px); }
+
+.hero-nav-ribbon{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-3);
+  margin-bottom:26px; display:flex; gap:12px; align-items:center;
+}
+.hero-nav-ribbon .arrow{ color:var(--accent); }
+
+.hero-brief{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; background:var(--line-2);
+  border:1px solid var(--line-2); margin-bottom:38px;
+}
+.hero-brief > div{ background:var(--paper); padding:14px 16px; }
+.hero-brief dt{ font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:6px; }
+.hero-brief dd{ font-family:var(--mono); font-size:12.5px; color:var(--ink-0); letter-spacing:0.02em; }
+.hero-brief dd b{ color:var(--accent); font-weight:600; }
+@media (max-width:760px){ .hero-brief{ grid-template-columns:repeat(2,1fr); } }
+
+.hero h1{
+  font-family:var(--sans); font-weight:600; letter-spacing:-0.03em; line-height:1.0;
+  font-size:clamp(38px,8vw,86px); color:var(--ink-0); margin-bottom:24px;
+}
+.hero h1 em{ font-style:italic; color:var(--accent-2); }
+.hero .lede{ font-size:clamp(17px,2.1vw,22px); line-height:1.5; color:var(--ink-1); max-width:46ch; }
+.hero .lede .soft{ color:var(--ink-2); }
+
+/* ============================================================ EVIDENCE.LADDER */
+.artifact{
+  background:
+    linear-gradient(180deg, var(--paper-2), var(--paper));
+  border:1px solid var(--line);
+  border-radius:3px;
+  overflow:hidden;
+  max-width:100%;
+}
+.artifact-head{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px;
+  padding:18px 22px; border-bottom:1px solid var(--line-2);
+  background:var(--paper-3);
+}
+.artifact-head .title{ font-family:var(--mono); font-weight:700; letter-spacing:0.06em; color:var(--ink-0); font-size:15px; }
+.artifact-head .desc{ font-family:var(--sans); font-size:13.5px; color:var(--ink-2); font-style:normal; }
+.artifact-head .n{ margin-left:auto; font-family:var(--mono); font-size:10px; letter-spacing:0.12em; color:var(--ink-3); text-transform:uppercase; }
+
+/* matrix */
+.ladder{ padding:6px; }
+.ladder-grid{ display:grid; grid-template-columns:168px repeat(4,minmax(0,1fr)); gap:1px; background:var(--line-2); }
+.ladder-grid > *{ background:var(--paper); }
+.l-corner{ padding:14px 16px; }
+.l-corner .axis{ font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); }
+.l-colhead{ padding:13px 12px; }
+.l-colhead .env{ font-family:var(--mono); font-weight:600; font-size:12px; letter-spacing:0.06em; color:var(--ink-0); }
+.l-colhead .layer{ font-family:var(--mono); font-size:9px; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-3); margin-top:3px; }
+
+.l-rowhead{ padding:16px; display:flex; flex-direction:column; justify-content:center; }
+.l-rowhead .who{ font-family:var(--mono); font-weight:700; font-size:12.5px; letter-spacing:0.08em; color:var(--ink-0); }
+.l-rowhead .meta{ font-family:var(--mono); font-size:10px; letter-spacing:0.04em; color:var(--ink-2); margin-top:5px; line-height:1.5; }
+.l-rowhead.real .who{ color:var(--ink-0); }
+.l-rowhead.synth .who{ color:var(--accent); }
+
+.cell{ padding:14px 12px; display:flex; flex-direction:column; gap:10px; min-height:96px; }
+.cell .signal{ font-family:var(--sans); font-size:13.5px; line-height:1.25; color:var(--ink-0); font-weight:500; }
+.cell .verdict{ font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-2); }
+.cell .conf-row{ display:flex; align-items:center; gap:9px; margin-top:auto; }
+.cell .conf-label{ font-family:var(--mono); font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; }
+
+/* confidence ladder mark — the <i> nodes */
+.ladder-mark{ display:inline-flex; flex-direction:column-reverse; gap:2px; width:11px; }
+.ladder-mark i{ display:block; height:3px; width:100%; background:var(--ink-4); border-radius:1px; }
+.ladder-mark[data-level="high"] i{ background:var(--accent); }
+.ladder-mark[data-level="mid"] i:nth-child(-n+2){ background:var(--accent); }
+.ladder-mark[data-level="mid"] i:nth-child(3){ background:var(--ink-4); }
+/* ship = gate glyph instead of rungs */
+.gate-mark{ width:13px; height:13px; position:relative; }
+.gate-mark::before{ content:"›"; position:absolute; inset:0; display:grid; place-items:center; transform:rotate(-90deg); font-family:var(--mono); font-weight:700; font-size:14px; color:var(--ink-2); line-height:1; }
+
+.cell.high .conf-label{ color:var(--accent); }
+.cell.mid  .conf-label{ color:var(--accent-2); }
+.cell.ship .conf-label{ color:var(--ink-2); }
+.cell.synth.replaces{ box-shadow: inset 3px 0 0 var(--accent); }
+.cell.real.required{ box-shadow: inset 3px 0 0 var(--ink-2); }
+
+/* per-column verdict row — REAL vs SYNTHETIC, shape-encoded */
+.l-verdlabel{ padding:13px 16px; display:flex; align-items:center; background:var(--paper-3) !important; }
+.l-verdlabel span{ font-family:var(--mono); font-size:9px; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-3); }
+.l-verdcell{ padding:13px 12px; display:flex; align-items:center; background:var(--paper-3) !important; }
+.l-verdcell .v{ font-family:var(--mono); font-weight:600; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:7px; }
+.l-verdcell .v::before{ content:"■"; font-size:7px; line-height:1; }
+.l-verdcell .v.aug{ color:var(--ink-1); }
+.l-verdcell .v.aug::before{ content:"▲"; font-size:9px; color:var(--ink-2); }
+.l-verdcell .v small{ display:block; font-size:8px; color:var(--ink-3); letter-spacing:0.08em; margin-top:2px; }
+
+/* verdict strip */
+.ladder-verdict{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line-2);
+  border-top:1px solid var(--line-2); margin-top:6px;
+}
+.ladder-verdict > div{ background:var(--paper-3); padding:18px 20px; }
+.ladder-verdict .big{ font-family:var(--sans); font-weight:600; font-size:clamp(26px,3.4vw,38px); letter-spacing:-0.02em; line-height:1; color:var(--ink-0); }
+.ladder-verdict .big.accent{ color:var(--accent); }
+.ladder-verdict .big.warn{ color:var(--ink-0); }
+.ladder-verdict .lab{ font-family:var(--sans); font-size:13px; color:var(--ink-2); margin-top:9px; line-height:1.4; }
+@media (max-width:680px){ .ladder-verdict{ grid-template-columns:1fr; } }
+
+.ladder-quote{
+  padding:22px var(--gutter); margin-top:0;
+}
+.ladder-quote p{
+  font-family:var(--sans); font-size:clamp(16px,2.2vw,21px); line-height:1.5; color:var(--ink-1); max-width:64ch; font-weight:500;
+}
+.ladder-quote b{ color:var(--accent-2); font-weight:600; }
+
+/* mobile collapse of matrix */
+.ladder-stacked{ display:none; }
+@media (max-width:760px){
+  .ladder-grid{ display:none; }
+  .ladder-stacked{ display:block; padding:4px; }
+  .lane-block{ border:1px solid var(--line-2); background:var(--paper); margin:6px; padding:0; }
+  .lane-block .lane-who{ padding:12px 14px; border-bottom:1px solid var(--line-2); }
+  .lane-block .lane-who .who{ font-family:var(--mono); font-weight:700; font-size:12.5px; letter-spacing:0.08em; }
+  .lane-block.real .lane-who .who{ color:var(--ink-0); }
+  .lane-block.synth .lane-who .who{ color:var(--accent); }
+  .lane-block .lane-who .meta{ font-family:var(--mono); font-size:10px; color:var(--ink-2); margin-top:4px; }
+  .scell{ display:flex; align-items:flex-start; gap:12px; padding:11px 14px; border-top:1px solid var(--line-3); }
+  .scell:first-child{ border-top:0; }
+  .scell .env-tag{ font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); width:42px; flex:none; padding-top:2px; }
+  .scell .scell-body .signal{ font-family:var(--sans); font-size:14px; color:var(--ink-0); font-weight:500; }
+  .scell .scell-body .verdict{ font-family:var(--mono); font-size:9px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-2); margin-top:3px; }
+  .scell .mk{ margin-left:auto; }
+}
+
+/* ============================================================ PROBLEM / hypothesis */
+.prose{ max-width:62ch; font-size:clamp(15px,1.8vw,17.5px); line-height:1.68; color:var(--ink-1); }
+.prose em{ font-style:italic; color:var(--ink-0); }
+
+.hypothesis{
+  margin-top:42px; padding-left:26px; border-left:2px solid var(--accent-line); max-width:64ch;
+}
+.hypothesis .lab{ font-family:var(--mono); font-size:10.5px; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.hypothesis p{ font-family:var(--sans); font-size:clamp(17px,2.3vw,23px); line-height:1.45; color:var(--ink-0); font-weight:500; }
+.hypothesis p em{ font-style:italic; color:var(--accent-2); }
+
+/* ============================================================ PIPELINE LANES — gated CI/CD rail */
+.pipeline{ margin-top:8px; }
+.pipe-rail{ display:flex; align-items:stretch; gap:0; }
+.pl-lane{
+  position:relative; flex:1 1 0; min-width:0;
+  border:1px solid var(--line); background:var(--paper-3); border-radius:3px;
+  padding:16px 16px 18px; display:flex; flex-direction:column; gap:11px;
+}
+.pl-lane .pl-top{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+.pl-lane .env{ font-family:var(--mono); font-weight:700; font-size:14px; letter-spacing:0.06em; color:var(--accent); }
+.pl-lane .layer{ font-family:var(--mono); font-size:9px; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-3); }
+.pl-lane .step{ font-family:var(--mono); font-size:9px; color:var(--ink-4); letter-spacing:0.1em; }
+.pl-chip{
+  align-self:flex-start; font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--accent-2); border:1px solid var(--accent-line); border-radius:3px; padding:4px 8px; line-height:1;
+  display:flex; align-items:center; gap:6px;
+}
+.pl-chip::before{ content:""; width:5px; height:5px; background:var(--accent); display:inline-block; }
+.pl-diaglab{ font-family:var(--mono); font-size:8.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3); }
+.pl-q{ font-family:var(--sans); font-size:clamp(15px,1.5vw,17px); line-height:1.32; color:var(--ink-0); font-weight:500; }
+.pl-q b{ color:var(--accent); font-weight:600; }
+.pl-crit{ font-family:var(--mono); font-size:9.5px; letter-spacing:0.04em; color:var(--ink-2); line-height:1.5; margin-top:auto; text-transform:uppercase; }
+.pl-crit b{ color:var(--ink-1); font-weight:600; }
+/* PASS gates between lanes */
+.pl-gate{
+  flex:0 0 auto; align-self:center; width:34px; display:flex; flex-direction:column; align-items:center; gap:5px;
+}
+.pl-gate .ar{ font-family:var(--mono); color:var(--accent); font-size:15px; line-height:1; }
+.pl-gate .gl{ font-family:var(--mono); font-size:8px; letter-spacing:0.12em; color:var(--ink-3); }
+/* terminal SHIP gate — a verdict, not a 5th environment */
+.pl-ship{
+  flex:0 0 92px; align-self:stretch; border:1px solid var(--accent-line); border-radius:3px;
+  background:linear-gradient(180deg,var(--accent-dim),rgba(57,211,192,0.03));
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; text-align:center; padding:14px 8px;
+}
+.pl-ship .gl{ font-family:var(--mono); font-weight:700; font-size:13px; letter-spacing:0.1em; color:var(--accent); }
+.pl-ship .sub{ font-family:var(--mono); font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-2); line-height:1.5; }
+.pl-ship .chev{ color:var(--accent); font-size:16px; line-height:1; }
+/* Run B parallel rail */
+.pipe-runb{ margin-top:14px; border:1px dashed var(--accent-line); border-radius:3px; background:var(--paper-2); padding:13px 16px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.pipe-runb .rbtag{ font-family:var(--mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent-line); padding:4px 8px; border-radius:3px; flex:none; }
+.pipe-runb .rbtxt{ font-family:var(--sans); font-size:13.5px; color:var(--ink-1); line-height:1.45; }
+.pipe-runb .rbtxt b{ color:var(--ink-0); font-weight:600; }
+.pipe-runb .rbtxt em{ font-style:italic; color:var(--accent-2); }
+.pipe-runb .rbfold{ font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-left:auto; }
+@media (max-width:900px){
+  .pipe-rail{ flex-direction:column; gap:0; }
+  .pl-lane{ border-radius:3px; }
+  .pl-gate{ width:100%; flex-direction:row; justify-content:center; padding:7px 0; }
+  .pl-gate .ar{ transform:rotate(90deg); }
+  .pl-ship{ flex-basis:auto; flex-direction:row; gap:12px; padding:14px 18px; }
+  .pipe-runb .rbfold{ margin-left:0; }
+}
+
+/* funnel — two-track (Run A flow + Run B companion joining at backlog) */
+.funnel-wrap{ margin-top:46px; }
+.funnel-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:18px; flex-wrap:wrap; }
+.funnel-head .ttl{ font-family:var(--mono); font-weight:700; font-size:13px; letter-spacing:0.08em; color:var(--ink-0); }
+.funnel-head .seq{ font-family:var(--mono); font-size:12px; letter-spacing:0.1em; color:var(--accent); }
+
+/* the methodology argument — the gap, stated first */
+.fnl-argument{
+  display:flex; align-items:center; gap:18px; padding:16px 20px; margin-bottom:22px;
+  border:1px solid var(--accent-line); border-radius:3px; background:var(--accent-glow);
+}
+.fnl-argument .frac{ font-family:var(--sans); font-weight:600; letter-spacing:-0.02em; line-height:.9; color:var(--accent); white-space:nowrap; display:flex; align-items:baseline; gap:4px; }
+.fnl-argument .frac .a{ font-size:clamp(38px,6vw,60px); }
+.fnl-argument .frac .b{ font-size:clamp(15px,2vw,22px); color:var(--ink-2); font-weight:500; }
+.fnl-argument .frac-text{ font-family:var(--sans); font-size:clamp(14px,1.7vw,16px); line-height:1.5; color:var(--ink-1); }
+.fnl-argument .frac-text b{ color:var(--accent-2); font-weight:600; }
+
+/* run A funnel — continuous tapering SVG vessel + Run B parallel */
+.fnl-body{ display:grid; grid-template-columns:1fr minmax(210px,288px); gap:30px; align-items:center; }
+.fnl-svgwrap{ position:relative; }
+.fnl-svgwrap::before{ content:""; position:absolute; left:50%; top:62%; width:74%; height:62%; transform:translate(-50%,-50%); background:radial-gradient(ellipse at center, rgba(57,211,192,0.18), transparent 70%); filter:blur(28px); pointer-events:none; z-index:0; }
+.fnl-funnelsvg{ position:relative; z-index:1; width:100%; max-width:540px; height:auto; display:block; margin:0 auto; overflow:visible; }
+@keyframes fnlThrob{ 0%,100%{ opacity:.4 } 50%{ opacity:.92 } }
+@keyframes fnlCell{ 0%,100%{ opacity:.78 } 50%{ opacity:1 } }
+.fnl-throat-glow{ animation:fnlThrob 3s ease-in-out infinite; transform-origin:center; }
+.fnl-cell-lit{ filter:drop-shadow(0 0 4px rgba(57,211,192,0.9)); animation:fnlCell 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion:reduce){ .fnl-throat-glow{ animation:none; opacity:.8; } .fnl-cell-lit{ animation:none; } }
+.fnl-payoff{ margin-top:8px; text-align:center; font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-2); }
+.fnl-payoff b{ color:var(--ink-0); font-weight:600; }
+/* Run B parallel companion */
+.fnl-runside{ border:1px dashed var(--accent-line); border-radius:3px; background:var(--paper-2); padding:15px 16px; display:flex; flex-direction:column; gap:11px; align-self:stretch; justify-content:center; }
+.fnl-runside .rbtag{ font-family:var(--mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); }
+.fnl-runside .rbline{ font-family:var(--sans); font-size:13px; line-height:1.4; color:var(--ink-1); display:flex; align-items:baseline; gap:8px; }
+.fnl-runside .rbline b{ font-family:var(--sans); font-weight:600; font-size:20px; color:var(--ink-0); flex:none; }
+.fnl-runside .rbmerge{ font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); border-top:1px dashed var(--line-2); padding-top:11px; line-height:1.5; }
+@media (max-width:760px){
+  .fnl-body{ grid-template-columns:1fr; gap:18px; }
+  .fnl-runside{ order:2; }
+}
+
+/* ============================================================ PERSONA CARD */
+.persona-wrap{ display:grid; grid-template-columns:1fr; gap:0; margin-top:8px; }
+.persona-card{
+  border:1px solid var(--line); border-radius:3px; overflow:hidden; background:var(--paper-2);
+  max-width:720px;
+}
+.persona-top{
+  display:flex; align-items:flex-start; gap:16px; padding:20px 22px; border-bottom:1px solid var(--line-2);
+  background:linear-gradient(180deg,var(--paper-3),var(--paper-2));
+}
+.persona-sil{
+  width:52px; height:52px; flex:none; border:1px solid var(--accent-line); border-radius:3px; position:relative; overflow:hidden;
+  background:radial-gradient(60% 70% at 50% 30%, rgba(57,211,192,0.25), transparent 70%);
+}
+.persona-sil::before{ content:""; position:absolute; left:50%; top:28%; width:16px; height:16px; border-radius:50%; background:var(--accent); transform:translateX(-50%); opacity:.85; }
+.persona-sil::after{ content:""; position:absolute; left:50%; bottom:-2px; width:30px; height:26px; border-radius:16px 16px 0 0; background:var(--accent); transform:translateX(-50%); opacity:.7; }
+.persona-top .meta-lab{ font-family:var(--mono); font-size:9.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); }
+.persona-top .name{ font-family:var(--sans); font-weight:600; font-size:clamp(20px,3vw,27px); letter-spacing:-0.01em; color:var(--ink-0); margin-top:5px; line-height:1.1; }
+.persona-top .name span{ color:var(--accent); }
+.persona-rows{ display:grid; }
+.prow{ display:grid; grid-template-columns:150px 1fr; gap:0; border-top:1px solid var(--line-2); }
+.prow:first-child{ border-top:0; }
+.prow dt{ padding:15px 22px; font-family:var(--mono); font-size:10px; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-3); border-right:1px solid var(--line-2); background:var(--paper-3); }
+.prow dd{ padding:15px 22px; font-family:var(--sans); font-size:14.5px; line-height:1.5; color:var(--ink-1); }
+.prow dd em{ font-style:italic; color:var(--ink-0); }
+.prow.finding dd{ color:var(--ink-0); }
+.prow.finding dd b{ color:var(--accent-2); font-weight:600; }
+.prow .qmark{ color:var(--accent); }
+.prow.first-q dd{ font-size:clamp(18px,2.4vw,22px); font-weight:500; color:var(--ink-0); line-height:1.38; }
+/* finding as a bordered logged verdict — the one place warning-orange is allowed */
+.prow.finding dd{ display:block; }
+.fail-verdict{ border:1px solid var(--warn-line); border-radius:3px; padding:14px 16px; background:var(--warn-dim); }
+.fail-verdict .stamp{ display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-weight:700; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--warn); margin-bottom:9px; }
+.fail-verdict .stamp::before{ content:""; width:7px; height:7px; background:var(--warn); transform:rotate(45deg); }
+.fail-verdict .txt{ font-family:var(--sans); font-size:14.5px; line-height:1.5; color:var(--ink-0); }
+.fail-verdict .rec{ display:block; margin-top:10px; padding-top:10px; border-top:1px solid var(--warn-line); font-family:var(--mono); font-size:10.5px; letter-spacing:0.03em; line-height:1.5; color:var(--ink-2); text-transform:uppercase; }
+.fail-verdict .rec b{ color:var(--ink-1); }
+
+/* archetype register — a legend, NOT interactive tabs */
+.persona-register{ display:flex; flex-wrap:wrap; gap:1px; background:var(--line-2); border:1px solid var(--line-2); border-bottom:0; margin-bottom:0; max-width:720px; }
+.persona-register .reg-item{ flex:1 1 0; min-width:118px; background:var(--paper); padding:10px 12px; }
+.persona-register .reg-item.active{ background:var(--paper-3); box-shadow:inset 0 -2px 0 var(--accent); }
+.persona-register .reg-no{ font-family:var(--mono); font-size:8.5px; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-3); }
+.persona-register .reg-item.active .reg-no{ color:var(--accent); }
+.persona-register .reg-role{ font-family:var(--sans); font-size:12px; color:var(--ink-1); margin-top:4px; line-height:1.2; }
+.persona-register .reg-name{ font-family:var(--mono); font-size:9px; letter-spacing:0.06em; color:var(--ink-3); margin-top:3px; }
+.persona-register .reg-item.active .reg-role{ color:var(--ink-0); font-weight:500; }
+.persona-register-note{ font-family:var(--mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-3); margin-top:10px; }
+@media (max-width:600px){
+  .prow{ grid-template-columns:1fr; }
+  .prow dt{ border-right:0; border-bottom:1px solid var(--line-3); padding-bottom:8px; }
+}
+
+/* ============================================================ F-CARDS (Service Records grammar) */
+.fcards-head{ font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:18px; }
+.fcards{ display:grid; gap:1px; background:var(--line-2); border:1px solid var(--line-2); }
+.fcard{ background:var(--paper); padding:22px 24px; display:grid; grid-template-columns:64px 1fr; gap:20px; align-items:start; }
+.fcard .fid{ display:flex; flex-direction:column; gap:8px; }
+.fcard .fid .num{ font-family:var(--mono); font-weight:700; font-size:13px; letter-spacing:0.04em; color:var(--accent); }
+.fcard .fid .tag{ font-family:var(--mono); font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--paper); background:var(--ink-3); padding:3px 6px; border-radius:3px; text-align:center; }
+.fcard .fid .tag.tell{ background:var(--warn); }
+.fcard .fid .tag.meta{ background:var(--accent); }
+.fcard .fbody .finding{ font-family:var(--sans); font-size:15.5px; line-height:1.55; color:var(--ink-1); }
+.fcard .fbody .finding em{ font-style:italic; color:var(--ink-0); }
+.fcard .fbody .finding b{ color:var(--ink-0); font-weight:600; }
+.fcard .fbody .decision{
+  margin-top:14px; padding-top:14px; border-top:1px solid var(--line-3);
+  font-family:var(--mono); font-size:11.5px; letter-spacing:0.02em; color:var(--ink-2); line-height:1.55; display:flex; gap:10px;
+}
+.fcard .fbody .decision .arrow{ color:var(--accent); flex:none; }
+.fcard .fbody .decision b{ color:var(--accent-2); font-weight:600; }
+@media (max-width:560px){ .fcard{ grid-template-columns:1fr; gap:14px; } .fcard .fid{ flex-direction:row; align-items:center; } }
+
+/* ============================================================ LESSON */
+.lesson-quote{ max-width:60ch; }
+.lesson-quote .big{
+  font-family:var(--sans); font-weight:600; font-size:clamp(22px,3.4vw,34px); line-height:1.22; letter-spacing:-0.02em; color:var(--ink-0);
+}
+.lesson-quote .big em{ font-style:italic; color:var(--accent-2); }
+.lesson-coda{ margin-top:30px; max-width:60ch; font-size:clamp(15px,1.8vw,17px); line-height:1.65; color:var(--ink-2); }
+.lesson-coda em{ font-style:italic; color:var(--ink-0); }
+.lesson-coda + .lesson-coda{ margin-top:18px; }
+
+.case-jump{ display:flex; flex-wrap:wrap; gap:12px; margin-top:48px; }
+.case-jump a{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; text-decoration:none;
+  padding:13px 20px; border:1px solid var(--line); border-radius:3px; color:var(--ink-1); transition:.2s;
+}
+.case-jump a.primary{ color:var(--paper); background:var(--accent); border-color:var(--accent); font-weight:600; }
+.case-jump a:hover{ border-color:var(--accent-line); color:var(--accent); }
+.case-jump a.primary:hover{ color:var(--paper); background:var(--accent-2); }
+
+/* ============================================================ SHEET FOOTER */
+.sheet-footer{
+  border-top:1px solid var(--line);
+  margin-top:0;
+}
+.sheet-grid{
+  max-width:var(--maxw); margin:0 auto;
+  display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:var(--line-2);
+}
+.sheet-grid > div{ background:var(--paper); padding:18px var(--gutter); }
+.sheet-grid > div:not(:first-child){ padding-left:18px; padding-right:18px; }
+.sheet-grid dt{ font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:6px; }
+.sheet-grid dd{ font-family:var(--mono); font-size:12px; letter-spacing:0.04em; color:var(--ink-0); font-weight:600; }
+@media (max-width:760px){ .sheet-grid{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:440px){ .sheet-grid{ grid-template-columns:repeat(2,1fr); } }
+
+.copyright{ max-width:var(--maxw); margin:0 auto; padding:18px var(--gutter); display:flex; justify-content:space-between; gap:12px; }
+.copyright span{ font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-3); }
+.copyright a{ color:var(--ink-2); text-decoration:none; }
+.copyright a:hover{ color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="case-synthetic-portfolio">
+
+  <!-- ============================ NAV ============================ -->
+  <nav class="fiche-nav">
+    <a class="brand" href="#">+<b>M.</b> STANGL</a>
+    <div class="nav-links">
+      <ul>
+        <li><a href="#">Impact</a></li>
+        <li><a href="#" class="active">Case Studies</a></li>
+        <li><a href="#">Signal → Story</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+      <a class="pill" href="#">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ============================ DRAWING 01 · HERO ============================ -->
+  <section class="section hero" id="hero">
+    <span class="margin-note">DRAWING 01 · HERO</span>
+    <span class="fig-stamp">FIG. 01 · COVER</span>
+    <div class="wrap">
+      <div class="hero-photo reveal">
+        <div class="grid-overlay"></div>
+        <div class="nodes">
+          <span class="node" style="left:14%;top:30%"></span>
+          <span class="node lit" style="left:26%;top:62%"></span>
+          <span class="node" style="left:38%;top:24%"></span>
+          <span class="node lit" style="left:48%;top:50%"></span>
+          <span class="node" style="left:60%;top:70%"></span>
+          <span class="node lit" style="left:68%;top:34%"></span>
+          <span class="node" style="left:78%;top:58%"></span>
+          <span class="node" style="left:86%;top:40%"></span>
+          <span class="node lit" style="left:32%;top:80%"></span>
+        </div>
+        <div class="crosshair"></div>
+      </div>
+
+      <div class="hero-nav-ribbon reveal"><span class="arrow">↓</span> NAVIGATE CASES · 02 · SYNTHETIC USERS</div>
+
+      <h1 class="reveal">Synthetic users as a research method.</h1>
+      <p class="lede reveal">Nine personas, four QA environments, three findings self-review missed. <span class="soft">The methodology, documented by running it on this portfolio.</span></p>
+
+      <dl class="hero-brief reveal" style="margin-top:42px">
+        <div><dt>Method</dt><dd>Persona-driven QA</dd></div>
+        <div><dt>Personas</dt><dd><b>9</b> across 4 environments</dd></div>
+        <div><dt>Artifact under test</dt><dd>This portfolio · v3 pre-ship</dd></div>
+        <div><dt>Outcome</dt><dd><b>10-item</b> prioritized backlog</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="dim-ribbon"><span class="arrow">↓</span> EVIDENCE · WHERE THE METHOD HOLDS</div>
+
+  <!-- ============================ DRAWING 02 · EVIDENCE ============================ -->
+  <section class="section" id="evidence">
+    <span class="margin-note">DRAWING 02 · EVIDENCE</span>
+    <span class="fig-stamp">FIG. 02 · LADDER</span>
+    <div class="wrap">
+      <dl class="section-stamp reveal">
+        <div><dt>Drawing No.</dt><dd>02 / 07</dd></div>
+        <div><dt>Claim</dt><dd>REPLACE / AUGMENT</dd></div>
+        <div><dt>Baseline</dt><dd>SELF-REVIEW</dd></div>
+        <div><dt>Last Rev.</dt><dd>06/26</dd></div>
+      </dl>
+
+      <header class="case-section-head reveal">
+        <span class="kicker">02 · Evidence Ladder</span>
+        <h2>What synthetic research <em>replaces</em>, augments, or fails to reach.</h2>
+        <p class="sub">Two research streams, four QA environments, one cost line. The ladder marks how far each signal can be trusted — and where real users stay the ground truth.</p>
+      </header>
+
+      <div class="artifact reveal">
+        <div class="artifact-head">
+          <span class="title">EVIDENCE.LADDER</span>
+          <span class="desc">Where synthetic research replaces, augments, or fails real research</span>
+          <span class="n">N=9 personas · 4 QA envs</span>
+        </div>
+
+        <!-- DESKTOP / TABLET MATRIX -->
+        <div class="ladder">
+          <div class="ladder-grid">
+            <div class="l-corner"><span class="axis">Signal × Method</span></div>
+            <div class="l-colhead"><div class="env">DEV</div><div class="layer">Structural</div></div>
+            <div class="l-colhead"><div class="env">QA</div><div class="layer">Content</div></div>
+            <div class="l-colhead"><div class="env">UAT</div><div class="layer">Audience</div></div>
+            <div class="l-colhead"><div class="env">PROD</div><div class="layer">Adversarial</div></div>
+
+            <!-- REAL USERS ROW -->
+            <div class="l-rowhead real">
+              <span class="who">REAL USERS</span>
+              <span class="meta">Recruited practitioners<br>N=12 · 6 wk · $8k</span>
+            </div>
+            <div class="cell real high">
+              <span class="signal">IA clarity</span>
+              <div class="conf-row"><span class="ladder-mark" data-level="high"><i></i><i></i><i></i></span><span class="conf-label">High · ground truth</span></div>
+            </div>
+            <div class="cell real ship">
+              <span class="signal">Copy resonance</span>
+              <div class="conf-row"><span class="gate-mark"></span><span class="conf-label">Ship · observational</span></div>
+            </div>
+            <div class="cell real ship required">
+              <span class="signal">Target-fit signal</span>
+              <div class="conf-row"><span class="gate-mark"></span><span class="conf-label">Ship · highest confidence</span></div>
+            </div>
+            <div class="cell real mid">
+              <span class="signal">Edge stress</span>
+              <div class="conf-row"><span class="ladder-mark" data-level="mid"><i></i><i></i><i></i></span><span class="conf-label">Mid · access-limited</span></div>
+            </div>
+
+            <!-- SYNTHETIC ROW -->
+            <div class="l-rowhead synth">
+              <span class="who">SYNTHETIC</span>
+              <span class="meta">Persona-driven QA<br>N=9 · 2 hr · $0</span>
+            </div>
+            <div class="cell synth high replaces">
+              <span class="signal">Structural gaps</span>
+              <div class="conf-row"><span class="ladder-mark" data-level="high"><i></i><i></i><i></i></span><span class="conf-label">High · replaces real</span></div>
+            </div>
+            <div class="cell synth high replaces">
+              <span class="signal">Positioning drift</span>
+              <div class="conf-row"><span class="ladder-mark" data-level="high"><i></i><i></i><i></i></span><span class="conf-label">High · replaces real</span></div>
+            </div>
+            <div class="cell synth mid">
+              <span class="signal">Audience targeting</span>
+              <div class="conf-row"><span class="ladder-mark" data-level="mid"><i></i><i></i><i></i></span><span class="conf-label">Mid · augments real</span></div>
+            </div>
+            <div class="cell synth ship">
+              <span class="signal">Adversarial review</span>
+              <div class="conf-row"><span class="gate-mark"></span><span class="conf-label">Ship · pre-flight stress</span></div>
+            </div>
+
+            <!-- PER-COLUMN VERDICT ROW -->
+            <div class="l-verdlabel"><span>Synthetic vs real</span></div>
+            <div class="l-verdcell"><span class="v rep">Replaces</span></div>
+            <div class="l-verdcell"><span class="v rep">Replaces</span></div>
+            <div class="l-verdcell"><span class="v aug">Augments<small>real still required</small></span></div>
+            <div class="l-verdcell"><span class="v rep">Replaces</span></div>
+          </div>
+
+          <!-- MOBILE STACKED -->
+          <div class="ladder-stacked">
+            <div class="lane-block real">
+              <div class="lane-who"><div class="who">REAL USERS</div><div class="meta">Recruited practitioners · N=12 · 6 wk · $8k</div></div>
+              <div class="scell"><span class="env-tag">DEV</span><div class="scell-body"><div class="signal">IA clarity</div><div class="verdict">High · ground truth</div></div><span class="mk ladder-mark" data-level="high"><i></i><i></i><i></i></span></div>
+              <div class="scell"><span class="env-tag">QA</span><div class="scell-body"><div class="signal">Copy resonance</div><div class="verdict">Ship · observational</div></div><span class="mk gate-mark"></span></div>
+              <div class="scell"><span class="env-tag">UAT</span><div class="scell-body"><div class="signal">Target-fit signal</div><div class="verdict">Ship · highest confidence</div></div><span class="mk gate-mark"></span></div>
+              <div class="scell"><span class="env-tag">PROD</span><div class="scell-body"><div class="signal">Edge stress</div><div class="verdict">Mid · access-limited</div></div><span class="mk ladder-mark" data-level="mid"><i></i><i></i><i></i></span></div>
+            </div>
+            <div class="lane-block synth">
+              <div class="lane-who"><div class="who">SYNTHETIC</div><div class="meta">Persona-driven QA · N=9 · 2 hr · $0</div></div>
+              <div class="scell"><span class="env-tag">DEV</span><div class="scell-body"><div class="signal">Structural gaps</div><div class="verdict">High · replaces real</div></div><span class="mk ladder-mark" data-level="high"><i></i><i></i><i></i></span></div>
+              <div class="scell"><span class="env-tag">QA</span><div class="scell-body"><div class="signal">Positioning drift</div><div class="verdict">High · replaces real</div></div><span class="mk ladder-mark" data-level="high"><i></i><i></i><i></i></span></div>
+              <div class="scell"><span class="env-tag">UAT</span><div class="scell-body"><div class="signal">Audience targeting</div><div class="verdict">Mid · augments real</div></div><span class="mk ladder-mark" data-level="mid"><i></i><i></i><i></i></span></div>
+              <div class="scell"><span class="env-tag">PROD</span><div class="scell-body"><div class="signal">Adversarial review</div><div class="verdict">Ship · pre-flight stress</div></div><span class="mk gate-mark"></span></div>
+            </div>
+          </div>
+
+          <!-- verdict strip -->
+          <div class="ladder-verdict">
+            <div><div class="big accent">3</div><div class="lab">decision types where synthetic <b>replaced</b> real research</div></div>
+            <div><div class="big warn">1</div><div class="lab">decision type where real research is <b>still required</b></div></div>
+            <div><div class="big">$8K → $0</div><div class="lab">pre-flight cost · self-review baseline</div></div>
+          </div>
+        </div>
+
+        <div class="ladder-quote">
+          <p><b>Traceability from synthetic persona → specific design decision</b> is what separates research from a feedback loop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dim-ribbon"><span class="arrow">↓</span> PROBLEM · WHY ARTIFACTS FAIL</div>
+
+  <!-- ============================ DRAWING 03 · PROBLEM ============================ -->
+  <section class="section" id="problem">
+    <span class="margin-note">DRAWING 03 · PROBLEM</span>
+    <span class="fig-stamp">FIG. 03 · THE GAP</span>
+    <div class="wrap">
+      <dl class="section-stamp reveal">
+        <div><dt>Drawing No.</dt><dd>03 / 07</dd></div>
+        <div><dt>Claim</dt><dd>BLIND-SPOT GAP</dd></div>
+        <div><dt>Baseline</dt><dd>NO ACCESS</dd></div>
+        <div><dt>Last Rev.</dt><dd>06/26</dd></div>
+      </dl>
+
+      <header class="case-section-head reveal">
+        <span class="kicker">01 · Problem · The gap</span>
+        <h2>Design artifacts fail in <em>predictable</em> ways.</h2>
+      </header>
+
+      <p class="prose reveal">They're evaluated by the wrong audience at the wrong moment, with no structured way to stress-test assumptions before live exposure. Traditional usability testing requires access to real participants — often impossible for portfolios, internal tools, or pre-launch strategy work.</p>
+
+      <div class="hypothesis reveal">
+        <div class="lab">Hypothesis</div>
+        <p>Structured synthetic personas — modeled on practitioners with documented worldviews — can surface blind spots that self-review misses. <em>Only if you build them the right way.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="dim-ribbon"><span class="arrow">↓</span> PIPELINE · PORTFOLIO AS A RELEASE</div>
+
+  <!-- ============================ DRAWING 04 · PIPELINE ============================ -->
+  <section class="section" id="pipeline">
+    <span class="margin-note">DRAWING 04 · PIPELINE</span>
+    <span class="fig-stamp">FIG. 04 · ENVIRONMENTS</span>
+    <div class="wrap">
+      <dl class="section-stamp reveal">
+        <div><dt>Drawing No.</dt><dd>04 / 07</dd></div>
+        <div><dt>Claim</dt><dd>4 ENV · 4 GATES</dd></div>
+        <div><dt>Baseline</dt><dd>PRE-SESSION</dd></div>
+        <div><dt>Last Rev.</dt><dd>06/26</dd></div>
+      </dl>
+
+      <header class="case-section-head reveal">
+        <span class="kicker">02 · Pipeline · Portfolio as a product release</span>
+        <h2>Four QA environments. Four pass criteria. <em>Staged before</em> the session ran.</h2>
+      </header>
+
+      <div class="pipeline reveal">
+        <div class="pipe-rail">
+          <div class="pl-lane">
+            <div class="pl-top"><span class="env">DEV</span><span class="step">#1</span></div>
+            <span class="layer">Structural</span>
+            <span class="pl-chip">Archetype users</span>
+            <span class="pl-diaglab">Diagnostic</span>
+            <p class="pl-q">Can any user find what they need in <b>60 seconds?</b></p>
+            <p class="pl-crit">Pass criteria · <b>IA integrity</b></p>
+          </div>
+          <div class="pl-gate"><span class="ar">→</span><span class="gl">PASS</span></div>
+          <div class="pl-lane">
+            <div class="pl-top"><span class="env">QA</span><span class="step">#2</span></div>
+            <span class="layer">Content</span>
+            <span class="pl-chip">Thought-leader personas</span>
+            <span class="pl-diaglab">Diagnostic</span>
+            <p class="pl-q">Does the copy communicate leadership? <b>Five practitioner worldviews</b> stress-test it.</p>
+            <p class="pl-crit">Pass criteria · <b>method + metrics hold</b></p>
+          </div>
+          <div class="pl-gate"><span class="ar">→</span><span class="gl">PASS</span></div>
+          <div class="pl-lane">
+            <div class="pl-top"><span class="env">UAT</span><span class="step">#3</span></div>
+            <span class="layer">Audience</span>
+            <span class="pl-chip">LinkedIn-modeled personas</span>
+            <span class="pl-diaglab">Diagnostic</span>
+            <p class="pl-q">Would <b>the specific person</b> I'm targeting respond?</p>
+            <p class="pl-crit">Pass criteria · <b>pre-outreach sharpening</b></p>
+          </div>
+          <div class="pl-gate"><span class="ar">→</span><span class="gl">PASS</span></div>
+          <div class="pl-lane">
+            <div class="pl-top"><span class="env">PROD</span><span class="step">#4</span></div>
+            <span class="layer">Adversarial</span>
+            <span class="pl-chip">Adversarial users</span>
+            <span class="pl-diaglab">Diagnostic</span>
+            <p class="pl-q">Does it survive a skeptical reviewer with <b>300 portfolios</b> this month?</p>
+            <p class="pl-crit">Pass criteria · <b>ship only if it does</b></p>
+          </div>
+          <div class="pl-ship">
+            <span class="chev">▸</span>
+            <span class="gl">SHIP</span>
+            <span class="sub">survives all<br>four gates</span>
+          </div>
+        </div>
+
+        <div class="pipe-runb">
+          <span class="rbtag">Run B · companion</span>
+          <span class="rbtxt"><b>One design-systems persona</b> running a full-site audit — runs <em>parallel to the pipeline</em>, not as a fifth lane.</span>
+          <span class="rbfold">↳ folds into the prioritized backlog</span>
+        </div>
+      </div>
+
+      <!-- FUNNEL -->
+      <div class="funnel-wrap reveal">
+        <div class="funnel-head">
+          <span class="ttl">OUTCOME.FUNNEL</span>
+          <span class="seq">9×4 → 18 → 10 → 3 → 3</span>
+        </div>
+
+        <div class="fnl-argument">
+          <span class="frac"><span class="a">3</span><span class="b">/ 10</span></span>
+          <span class="frac-text">actionable findings would not have been caught by self-review — <b>all three became shipped changes.</b></span>
+        </div>
+
+        <div class="fnl-body">
+          <div class="fnl-svgwrap">
+            <svg class="fnl-funnelsvg" viewBox="0 0 560 400" role="img" aria-label="Funnel: 36 evaluations narrow to 18 findings, then a 10-item backlog of which 3 were self-review blind spots, all 3 shipped">
+              <defs>
+                <linearGradient id="funnelFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#39d3c0" stop-opacity="0.05"/>
+                  <stop offset="0.55" stop-color="#39d3c0" stop-opacity="0.15"/>
+                  <stop offset="1" stop-color="#39d3c0" stop-opacity="0.46"/>
+                </linearGradient>
+                <filter id="fGlow" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="6"/>
+                </filter>
+                <pattern id="bpGrid" width="22" height="22" patternUnits="userSpaceOnUse">
+                  <path d="M22 0H0V22" fill="none" stroke="rgba(166,186,182,0.07)" stroke-width="1"/>
+                </pattern>
+                <clipPath id="fClip">
+                  <path d="M20,18 L540,18 L540,78 L456,108 L456,168 L398,198 L398,268 L348,298 L348,378 L212,378 L212,298 L162,268 L162,198 L104,168 L104,108 L20,78 Z"/>
+                </clipPath>
+              </defs>
+
+              <!-- glowing throat aura (behind) -->
+              <ellipse class="fnl-throat-glow" cx="280" cy="340" rx="86" ry="50" fill="#39d3c0" filter="url(#fGlow)"/>
+
+              <!-- funnel vessel -->
+              <path d="M20,18 L540,18 L540,78 L456,108 L456,168 L398,198 L398,268 L348,298 L348,378 L212,378 L212,298 L162,268 L162,198 L104,168 L104,108 L20,78 Z" fill="url(#funnelFill)" stroke="rgba(57,211,192,0.55)" stroke-width="1.25"/>
+              <!-- blueprint texture inside vessel -->
+              <g clip-path="url(#fClip)"><rect x="0" y="0" width="560" height="400" fill="url(#bpGrid)"/></g>
+              <!-- tier dividers at the shoulders -->
+              <g stroke="rgba(166,186,182,0.18)" stroke-width="1">
+                <line x1="104" y1="108" x2="456" y2="108"/>
+                <line x1="162" y1="198" x2="398" y2="198"/>
+                <line x1="212" y1="298" x2="348" y2="298"/>
+              </g>
+
+              <!-- tier 1 · 36 -->
+              <text x="280" y="54" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="600" font-size="34" letter-spacing="-1" fill="#6fe6d6">36</text>
+              <text x="280" y="71" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="1.4" fill="#8a9491">9×4 · EVALUATIONS RUN</text>
+
+              <!-- tier 2 · 18 -->
+              <text x="280" y="139" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="600" font-size="30" letter-spacing="-1" fill="#6fe6d6">18</text>
+              <text x="280" y="156" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="1.4" fill="#8a9491">FINDINGS SURFACED</text>
+
+              <!-- tier 3 · 10 backlog with countable cells -->
+              <text x="186" y="244" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="600" font-size="26" letter-spacing="-1" fill="#6fe6d6">10</text>
+              <g>
+                <rect class="fnl-cell-lit" x="214" y="227" width="13" height="18" rx="1.5" fill="#39d3c0"/>
+                <rect class="fnl-cell-lit" x="232" y="227" width="13" height="18" rx="1.5" fill="#39d3c0"/>
+                <rect class="fnl-cell-lit" x="250" y="227" width="13" height="18" rx="1.5" fill="#39d3c0"/>
+                <rect x="268" y="227" width="13" height="18" rx="1.5" fill="#1d2624"/>
+                <rect x="286" y="227" width="13" height="18" rx="1.5" fill="#1d2624"/>
+                <rect x="304" y="227" width="13" height="18" rx="1.5" fill="#1d2624"/>
+                <rect x="322" y="227" width="13" height="18" rx="1.5" fill="#1d2624"/>
+                <rect x="340" y="227" width="13" height="18" rx="1.5" fill="#1d2624"/>
+                <rect x="358" y="227" width="13" height="18" rx="1.5" fill="#1d2624"/>
+                <rect x="376" y="227" width="13" height="18" rx="1.5" fill="#1d2624"/>
+              </g>
+              <text x="280" y="262" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.3" fill="#39d3c0">BACKLOG · 3 OF 10 BLIND SPOTS</text>
+
+              <!-- tier 4 · throat · 3 shipped -->
+              <text x="280" y="350" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="700" font-size="48" letter-spacing="-1.5" fill="#39d3c0">3</text>
+              <text x="280" y="371" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="#cdd2d0">SHIPPED</text>
+            </svg>
+            <div class="fnl-payoff">3 of 10 self-review had missed — <b>all 3 shipped</b></div>
+          </div>
+          <div class="fnl-runside">
+            <span class="rbtag">Run B · companion · parallel</span>
+            <div class="rbline"><b>1</b><span>design-systems persona · full-site audit</span></div>
+            <div class="rbline"><b>53</b><span>line-level fixes · across 8 sections</span></div>
+            <span class="rbmerge">↳ folds into Run A's prioritized backlog — parallel track, not a fifth stage</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dim-ribbon"><span class="arrow">↓</span> CONSTRUCTION · HOW PERSONAS ARE BUILT</div>
+
+  <!-- ============================ DRAWING 05 · CONSTRUCTION ============================ -->
+  <section class="section" id="construction">
+    <span class="margin-note">DRAWING 05 · CONSTRUCTION</span>
+    <span class="fig-stamp">FIG. 05 · PERSONA LOGIC</span>
+    <div class="wrap">
+      <dl class="section-stamp reveal">
+        <div><dt>Drawing No.</dt><dd>05 / 07</dd></div>
+        <div><dt>Claim</dt><dd>WORLDVIEW-BUILT</dd></div>
+        <div><dt>Baseline</dt><dd>NOT ARCHETYPE</dd></div>
+        <div><dt>Last Rev.</dt><dd>06/26</dd></div>
+      </dl>
+
+      <header class="case-section-head reveal">
+        <span class="kicker">03 · Construction · Persona logic</span>
+        <h2>Hypothesis engines, <em>not</em> role stereotypes.</h2>
+        <p class="sub">Each QA persona was built from an actual practitioner's published worldview — not an invented archetype. For each: <em>what would this person look for first, and what would make them stop reading?</em></p>
+      </header>
+
+      <div class="persona-wrap reveal">
+        <div class="persona-register" role="list" aria-label="Five thought-leader archetypes">
+          <div class="reg-item active" role="listitem"><div class="reg-no">01</div><div class="reg-role">Systems Purist</div><div class="reg-name">Marc S.</div></div>
+          <div class="reg-item" role="listitem"><div class="reg-no">02</div><div class="reg-role">Outcome Enforcer</div><div class="reg-name">Indi Y.</div></div>
+          <div class="reg-item" role="listitem"><div class="reg-no">03</div><div class="reg-role">AI Pragmatist</div><div class="reg-name">Ethan M.</div></div>
+          <div class="reg-item" role="listitem"><div class="reg-no">04</div><div class="reg-role">Simplicity Thinker</div><div class="reg-name">John M.</div></div>
+          <div class="reg-item" role="listitem"><div class="reg-no">05</div><div class="reg-role">Discovery Lead</div><div class="reg-name">Teresa H.</div></div>
+        </div>
+        <article class="persona-card">
+          <div class="persona-top">
+            <div class="persona-sil" aria-hidden="true"></div>
+            <div>
+              <div class="meta-lab">Persona card · sample · PC-01 / 05 · QA · content</div>
+              <div class="name">Marc S. — <span>Systems Purist</span></div>
+            </div>
+          </div>
+          <dl class="persona-rows">
+            <div class="prow"><dt>Worldview anchor</dt><dd>Service systems thinking. Backstage architecture as the test of whether work is service design or product redesign with a service label.</dd></div>
+            <div class="prow first-q"><dt>First question</dt><dd><span class="qmark">“</span>Where's the backstage? Who delivers this internally, and what changed in their work to make it real?<span class="qmark">”</span></dd></div>
+            <div class="prow"><dt>Pass criteria</dt><dd>At least one artifact per service-design engagement shows internal capability change — not just customer-facing model.</dd></div>
+            <div class="prow"><dt>Failure mode</dt><dd>Sees a tier structure with no organizational change behind it and stops trusting the service-design framing.</dd></div>
+            <div class="prow finding"><dt>Finding</dt><dd>
+              <div class="fail-verdict">
+                <span class="stamp">FAIL · Autodesk</span>
+                <span class="txt">Three-tier model legible from the front, backstage architecture invisible.</span>
+                <span class="rec"><b>Recommendation logged:</b> service blueprint excerpt or org-behavior narrative required in Autodesk case study.</span>
+              </div>
+            </dd></div>
+          </dl>
+        </article>
+        <p class="persona-register-note">Card 01 of a 5-archetype system · QA · content lane</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="dim-ribbon"><span class="arrow">↓</span> FINDINGS · WHAT SELF-REVIEW MISSED</div>
+
+  <!-- ============================ DRAWING 06 · FINDINGS ============================ -->
+  <section class="section" id="findings">
+    <span class="margin-note">DRAWING 06 · FINDINGS</span>
+    <span class="fig-stamp">FIG. 06 · SIGNALS</span>
+    <div class="wrap">
+      <dl class="section-stamp reveal">
+        <div><dt>Drawing No.</dt><dd>06 / 07</dd></div>
+        <div><dt>Claim</dt><dd>3 SIGNALS</dd></div>
+        <div><dt>Baseline</dt><dd>SELF-REVIEW MISS</dd></div>
+        <div><dt>Last Rev.</dt><dd>06/26</dd></div>
+      </dl>
+
+      <header class="case-section-head reveal">
+        <span class="kicker">04 · Findings · What self-review missed</span>
+        <h2>Three signals I couldn't have surfaced <em>alone.</em></h2>
+      </header>
+
+      <div class="fcards-head reveal">SERVICE RECORD · 03 FINDINGS · ALL SHIPPED</div>
+      <div class="fcards reveal">
+        <article class="fcard">
+          <div class="fid"><span class="num">F·01</span><span class="tag tell">The tell</span></div>
+          <div class="fbody">
+            <p class="finding">The ratio of presentation quality to case study depth reads as an AI-generation signal to experienced reviewers — <em>not the AI use itself.</em></p>
+            <div class="decision"><span class="arrow">→</span><span>The fix wasn't less AI. It was <b>more depth.</b></span></div>
+          </div>
+        </article>
+        <article class="fcard">
+          <div class="fid"><span class="num">F·02</span><span class="tag">Metric class</span></div>
+          <div class="fbody">
+            <p class="finding"><b>“$50M YOY AOV”</b> and <b>“15 services shipped”</b> belong to different metric categories (outcome vs output) — their coexistence undermines the more defensible numbers.</p>
+            <div class="decision"><span class="arrow">→</span><span>A recruiter wouldn't notice. <b>A hiring design leader will.</b></span></div>
+          </div>
+        </article>
+        <article class="fcard">
+          <div class="fid"><span class="num">F·03</span><span class="tag meta">Meta</span></div>
+          <div class="fbody">
+            <p class="finding">The Synthetic Users case study — the very methodology being documented here — had no methodology shown. Meta-irony surfaced only by running the session.</p>
+            <div class="decision"><span class="arrow">→</span><span>Show the persona card, show the hypothesis, show the finding. <b>Which is what this case study now does.</b></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="dim-ribbon"><span class="arrow">↓</span> LESSON · WHAT I'D DO DIFFERENTLY</div>
+
+  <!-- ============================ DRAWING 07 · LESSON ============================ -->
+  <section class="section" id="lesson">
+    <span class="margin-note">DRAWING 07 · LESSON</span>
+    <span class="fig-stamp">FIG. 07 · LIMITS</span>
+    <div class="wrap">
+      <dl class="section-stamp reveal">
+        <div><dt>Drawing No.</dt><dd>07 / 07</dd></div>
+        <div><dt>Claim</dt><dd>PRE-RESEARCH TOOL</dd></div>
+        <div><dt>Baseline</dt><dd>UNDER-INVESTED</dd></div>
+        <div><dt>Last Rev.</dt><dd>06/26</dd></div>
+      </dl>
+
+      <header class="case-section-head reveal">
+        <span class="kicker">05 · Lesson · What I'd do differently</span>
+      </header>
+
+      <div class="lesson-quote reveal">
+        <p class="big">Synthetic users cannot replace real ones, and I <em>under-invested</em> in the ones I shipped.</p>
+      </div>
+      <p class="lesson-coda reveal">They surface hypotheses the designer was already able to form — not unknown unknowns. The quality of a session is bounded by the quality of the persona model. In this session, adversarial personas were the most productive; archetypes surfaced less.</p>
+      <p class="lesson-coda reveal">The method is a pre-research sharpening tool. It doesn't replace observation. <em>It makes observation more targeted when you get there.</em></p>
+
+      <div class="case-jump reveal">
+        <a class="primary" href="#">Open next case · Wipro →</a>
+        <a href="#">← Back to all case studies</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ SHEET FOOTER ============================ -->
+  <footer class="sheet-footer">
+    <dl class="sheet-grid">
+      <div><dt>Sheet</dt><dd>02 / 05</dd></div>
+      <div><dt>Drawn</dt><dd>M. STANGL</dd></div>
+      <div><dt>Based</dt><dd>DEN · REMOTE</dd></div>
+      <div><dt>Scale</dt><dd>1 : 1</dd></div>
+      <div><dt>Rev.</dt><dd>v2026.06</dd></div>
+      <div><dt>Page</dt><dd>CASE 02 · SYNTHETIC</dd></div>
+    </dl>
+    <div class="copyright">
+      <span>© 2026</span>
+      <span><a href="#">Contact</a></span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Reveal-on-scroll enhancement (content is fully visible without JS).
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+</body>
+</html>

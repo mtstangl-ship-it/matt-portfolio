@@ -91,9 +91,9 @@
   .tier-a-case-root .sheet__cell { border-bottom: 1px solid var(--ink-line); }
 }
 
-/* ---- Section common spacing ---- */
-.tier-a-case-root section[data-screen-label] {
-  padding-block: clamp(3rem, 4vw + 1rem, 6rem);
+/* ---- Section common spacing (hero plate uses hero-chrome.css — not this block) ---- */
+.tier-a-case-root section[data-screen-label]:not(.hero) {
+  padding-block: clamp(4rem, 6vw, 7rem);
   position: relative;
 }
 

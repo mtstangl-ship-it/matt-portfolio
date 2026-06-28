@@ -96,7 +96,7 @@ export const homeV2SignalIntro = {
   headlineLead: `I'm a design leader who can also write the spot, cut the film, and tell the story.`,
   headlineEm: `That's not common.`,
   subhead:
-    "A running record of the signals I catch — moments, behavior, culture, emotion — and the short films they turn into.",
+    "A running record of the signals I catch (moments, behavior, culture, emotion) and the short films they become.",
 } as const;
 
 export const homeV2SignalFilms = [

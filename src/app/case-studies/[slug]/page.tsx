@@ -13,7 +13,8 @@ export function generateStaticParams() {
         cs.slug !== "ai" &&
         cs.slug !== "ey" &&
         cs.slug !== "wipro" &&
-        cs.slug !== "autodesk",
+        cs.slug !== "autodesk" &&
+        cs.slug !== "synthetic",
     )
     .map((cs) => ({ slug: cs.slug }));
 }

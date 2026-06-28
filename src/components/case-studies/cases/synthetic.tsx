@@ -1,15 +1,12 @@
 import type { CaseStudyEntry } from "@/content/case-studies";
-import { loadCaseHtml } from "@/content/cases/loader";
 import { CaseShell } from "../CaseShell";
+import { SyntheticCaseView } from "./case-synthetic/SyntheticCaseView";
 
-/**
- * Synthetic Users case.
- * Route slug is `synthetic`, reference HTML uses `data-case="synth"`.
- * Passing the reference's ID preserves any future CSS rules the ported
- * stylesheet may scope to `synth`; the route-level accent vars in
- * globals.css are keyed on `synthetic` separately.
- */
+/** Tier A Synthetic Users case — canonical route `/case-studies/synthetic-users`. */
 export function SyntheticCase({ entry }: { entry: CaseStudyEntry }) {
-  const body = loadCaseHtml("synth");
-  return <CaseShell entry={entry} body={body} />;
+  return (
+    <CaseShell entry={entry}>
+      <SyntheticCaseView />
+    </CaseShell>
+  );
 }

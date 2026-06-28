@@ -1,34 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { DimScale } from "../../DimScale";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
 import { RevenueEnginePatentPlate } from "./revenue-engine/RevenueEnginePatentPlate";
 import { AutodeskOpportunitiesMatrix } from "./AutodeskOpportunitiesMatrix";
-
-const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
-
-function DimRibbon({ label }: { label: string }) {
-  return (
-    <div className="dim-with-scale">
-      <p className="dim">{label}</p>
-      <svg
-        className="dim-scale"
-        viewBox="0 0 800 20"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <line x1="0" y1="4" x2="800" y2="4" stroke="var(--ink-line)" strokeWidth="1" />
-        <g stroke="var(--ink-3)" strokeWidth="1">
-          {DIM_TICKS.map((x) => (
-            <line key={x} x1={x} y1="4" x2={x} y2="14" />
-          ))}
-        </g>
-      </svg>
-    </div>
-  );
-}
 
 /**
  * Tier-A port of the Autodesk case study (v3).
@@ -53,46 +30,20 @@ export function AutodeskCaseView() {
       </a>
 
       <CaseHero
+        heroImageSrc="/case-studies/autodesk-design-manufacturing-halftone.png"
         picker={<CasePicker activeSlug="autodesk" />}
         caseNumber="03"
         totalCases={5}
         marginNote="DRAWING 01 · HERO"
-        figStamp="FIG. 01 · AUTODESK / CUSTOMER VALUE JOURNEY"
+        figStamp="FIG. 01 · HERO"
         tag="01 · BRIEF · CASE 03 OF 05"
         basedLine="DEN · REMOTE"
         roleLine="SERVICE DESIGN · REVENUE"
-        headline={
-          <>
-            Autodesk&apos;s <em>106% NRR</em> design.
-            <span className="autodesk-hero-h1-line2">The customer value journey behind it.</span>
-          </>
-        }
+        headline={<>Autodesk&apos;s <em>106% NRR</em> design.</>}
         subhead={
           <>
-            I <em>led the design</em>. I earned the modernization. The design demanded it.
-          </>
-        }
-        heroBrief={
-          <p>
-            Autodesk put a <b>$10B revenue target</b> on the wall. A <b>106% NRR projection</b>{" "}
-            inside it meant customer outcomes and Autodesk&apos;s revenue had to be the same line.
-            The work was to design that line.
-          </p>
-        }
-        heroBgphotoSlot={
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element -- Tier-A shared hero pipeline (hero-chrome.css) */}
-            <img
-              className="hero__bgphoto-img"
-              src="/case-studies/autodesk-design-manufacturing-halftone.png"
-              alt=""
-              decoding="async"
-              fetchPriority="high"
-            />
-            <div className="hero__bgphoto-halftone" aria-hidden="true" />
-            <div className="hero__bgphoto-grain" aria-hidden="true" />
-            <div className="hero__bgphoto-scrim" aria-hidden="true" />
-            <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
+            The customer value journey behind Autodesk&apos;s 106% NRR path. I <em>led the design</em> that
+            tied post-purchase outcomes to revenue.
           </>
         }
         metaSlot={
@@ -127,7 +78,7 @@ export function AutodeskCaseView() {
         }
       />
 
-      <DimRibbon label="↓ design · five-phase service assembly" />
+      <DimScale label="↓ design · five-phase service assembly" />
 
       {/* Section 02 · DESIGN — load-bearing artifact, lifted to top */}
       <section className="design" aria-label="Design" data-screen-label="02 Design">
@@ -152,8 +103,8 @@ export function AutodeskCaseView() {
               Five phases. Two tiers. <em>One journey.</em>
             </h2>
             <p className="case-section-head__sub">
-              Five phases of customer planning &mdash; identify outcomes, evaluate solutions, create a
-              plan, execute, assess value &mdash; exploded into frontstage and backstage. Customers see
+              Five phases of customer planning: identify outcomes, evaluate solutions, create a
+              plan, execute, assess value. Each exploded into frontstage and backstage. Customers see
               workshops, check-ins, QBRs. The design lived in the backstage system that made those
               run: enabled people, standard processes, shared platform.
             </p>
@@ -165,7 +116,7 @@ export function AutodeskCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ diagnosis · what the NRR target asked for" />
+      <DimScale label="↓ diagnosis · what the NRR target asked for" />
 
       {/* Section 03 · DIAGNOSIS — what the artifact solved */}
       <section className="diagnosis" aria-label="Diagnosis" data-screen-label="03 Diagnosis">
@@ -209,7 +160,7 @@ export function AutodeskCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ approach · design as directional clarity" />
+      <DimScale label="↓ approach · design as directional clarity" />
 
       {/* Section 04 · APPROACH — compressed: 2 sentences + 4-cell CSXD mono row */}
       <section className="approach" aria-label="Approach" data-screen-label="04 Approach">
@@ -239,8 +190,8 @@ export function AutodeskCaseView() {
             A CSXD{" "}
             <span className="autodesk-prose-paren">(Customer Strategy &amp; Experience Design)</span>{" "}
             design sprint produced the journey above. The research surfaced{" "}
-            <b>five opportunity areas</b> &mdash; prioritized by CX/EX value to Autodesk&apos;s
-            customers &mdash; that the journey design had to deliver against.
+            <b>five opportunity areas</b>, prioritized by CX/EX value to Autodesk&apos;s
+            customers, that the journey design had to deliver against.
           </p>
         </div>
 
@@ -249,7 +200,7 @@ export function AutodeskCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ delta · what the design set in motion" />
+      <DimScale label="↓ delta · what the design set in motion" />
 
       {/* Section 05 · Delta — load-bearing sentence */}
       <section className="delta-autodesk" aria-label="Delta" data-screen-label="05 Delta">
@@ -283,10 +234,6 @@ export function AutodeskCaseView() {
               <b>100+ CX &amp; EX outcomes</b> surfaced. <b>8-figure tech modernization</b>{" "}
               initiated. <b>5 program areas</b> mobilized.
             </p>
-            <p className="autodesk-load-bearing">
-              I led the design. I earned the modernization work for my larger org. The design
-              demanded it.
-            </p>
           </div>
 
           <div className="autodesk-outcomes" aria-label="Delta outcomes">
@@ -318,7 +265,7 @@ export function AutodeskCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ lesson · notes from the design rationale" />
+      <DimScale label="↓ lesson · notes from the design rationale" />
 
       {/* Section 06 · Lesson — closes on the third rationale note, no closing aphorism */}
       <section className="lesson-autodesk" aria-label="Lesson" data-screen-label="06 Lesson">
@@ -401,9 +348,9 @@ export function AutodeskCaseView() {
                 </span>
                 <h3 className="autodesk-marginalia-h">The investment was the validation.</h3>
                 <p>
-                  The org&apos;s response to the design &mdash; <b>100+ outcomes</b> prioritized,{" "}
-                  <b>8-figure tech modernization</b> initiated, <b>5 program areas</b> mobilized
-                  &mdash; was the proof the design worked. The 106% NRR path now has the
+                  The org&apos;s response was the proof the design worked: <b>100+ outcomes</b> prioritized,{" "}
+                  <b>8-figure tech modernization</b> initiated, <b>5 program areas</b> mobilized.
+                  The 106% NRR path now has the
                   infrastructure to be delivered against.
                 </p>
               </div>
@@ -424,7 +371,7 @@ export function AutodeskCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↘ Next case" />
+      <DimScale label="↘ Next case" />
 
       {/* Closing — handoff CTA (no aphorism per spec) */}
       <section className="closing" aria-label="Closing" data-screen-label="07 Handoff">

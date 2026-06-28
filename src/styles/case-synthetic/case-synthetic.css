@@ -1,0 +1,353 @@
+/* Synthetic Users case shell — scoped under .tier-a-case-root .case-synthetic-portfolio */
+
+.tier-a-case-root .case-synthetic-portfolio {
+  --synth-accent: #1dcfaa;
+  --synth-accent-2: #5fe6c2;
+  --synth-accent-dim: rgba(29, 207, 170, 0.12);
+  --synth-accent-line: rgba(29, 207, 170, 0.45);
+  --synth-accent-glow: rgba(29, 207, 170, 0.07);
+  --synth-paper-2: #0e1314;
+  --synth-paper-3: #121819;
+  --synth-ink-0: #eef3f1;
+  --synth-ink-1: #c3cbc8;
+  --synth-ink-2: #8a9491;
+  --synth-ink-3: #5a6562;
+  --synth-ink-4: #3a4341;
+  --synth-line: rgba(166, 186, 182, 0.14);
+  --synth-line-2: rgba(166, 186, 182, 0.075);
+  --synth-line-3: rgba(166, 186, 182, 0.04);
+  /* Warning-orange — persona FAIL stamp only */
+  --synth-fail-warn: #e0a23a;
+  --synth-fail-warn-dim: rgba(224, 162, 58, 0.13);
+  --synth-fail-warn-line: rgba(224, 162, 58, 0.34);
+
+  --accent: var(--synth-accent);
+  --accent-line: var(--synth-accent-line);
+  --accent-soft: var(--synth-accent-dim);
+  --accent-glow: var(--synth-accent-glow);
+}
+
+.tier-a-case-root .case-synthetic-portfolio .skip {
+  position: absolute;
+  left: -9999px;
+}
+.tier-a-case-root .case-synthetic-portfolio .skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--bg-3);
+  border: 1px solid var(--accent-line);
+  color: var(--ink);
+}
+
+.tier-a-case-root .case-synthetic-portfolio section[data-screen-label]:not(.hero) {
+  position: relative;
+  border-bottom: 1px solid var(--ink-line);
+}
+.tier-a-case-root .case-synthetic-portfolio .case-section__inner {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.tier-a-case-root .case-synthetic-portfolio .case-section-head {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  max-width: 52rem;
+}
+.tier-a-case-root .case-synthetic-portfolio .case-section-head h2 {
+  font-family: var(--sans);
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0.5rem 0 0;
+}
+.tier-a-case-root .case-synthetic-portfolio .case-section-head h2 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.tier-a-case-root .case-synthetic-portfolio .case-section-head__sub {
+  margin-top: 1rem;
+  font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
+  line-height: 1.6;
+  color: var(--synth-ink-1);
+  max-width: 62ch;
+}
+.tier-a-case-root .case-synthetic-portfolio .case-section-head__sub em {
+  font-style: italic;
+  color: var(--synth-ink-0);
+}
+
+.tier-a-case-root .case-synthetic-portfolio dl.section-stamp {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 0 2rem;
+  margin: 0 0 2.5rem;
+  padding: 0 var(--gutter);
+  max-width: var(--col-wide);
+  margin-inline: auto;
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.tier-a-case-root .case-synthetic-portfolio dl.section-stamp dt {
+  color: var(--ink-3);
+}
+.tier-a-case-root .case-synthetic-portfolio dl.section-stamp dd {
+  color: var(--ink);
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.tier-a-case-root .case-synthetic-portfolio .synth-outcome-quote {
+  margin-top: 2rem;
+  max-width: 64ch;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-outcome-quote p {
+  font-size: clamp(1rem, 2.2vw, 1.3125rem);
+  line-height: 1.5;
+  color: var(--synth-ink-1);
+  font-weight: 500;
+  margin: 0;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-outcome-quote b {
+  color: var(--synth-accent-2);
+  font-weight: 600;
+}
+
+.tier-a-case-root .case-synthetic-portfolio .synth-pipeline-lead {
+  max-width: 62ch;
+  font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
+  line-height: 1.68;
+  color: var(--synth-ink-1);
+  margin-bottom: 2rem;
+}
+
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-block {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--synth-line-2);
+  max-width: 62ch;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-block__tag {
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--synth-accent);
+  margin-bottom: 0.75rem;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-block p {
+  font-size: clamp(0.9375rem, 1.8vw, 1rem);
+  line-height: 1.6;
+  color: var(--synth-ink-1);
+  margin: 0;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-block__detail {
+  margin-top: 0.875rem;
+}
+
+.tier-a-case-root .case-synthetic-portfolio .synth-persona-principle {
+  margin-top: 1.25rem;
+  max-width: 62ch;
+  font-size: clamp(0.9375rem, 1.8vw, 1rem);
+  line-height: 1.6;
+  color: var(--synth-ink-1);
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-persona-principle em {
+  font-style: italic;
+  color: var(--synth-ink-0);
+}
+
+.tier-a-case-root .case-synthetic-portfolio .synth-artifact-links {
+  display: grid;
+  gap: 1px;
+  margin-top: 2.5rem;
+  background: var(--synth-line-2);
+  border: 1px solid var(--synth-line-2);
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-artifact-link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.125rem 1.375rem;
+  background: var(--bg-2);
+  text-decoration: none;
+  color: inherit;
+  min-height: 44px;
+  transition: background 0.2s;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-artifact-link:hover {
+  background: var(--synth-paper-3);
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-artifact-link__eyebrow {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--synth-accent);
+  margin-bottom: 0.35rem;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-artifact-link__title {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--synth-ink-0);
+  font-weight: 600;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-artifact-link__arrow {
+  font-family: var(--mono);
+  color: var(--synth-accent);
+  font-size: 1rem;
+}
+
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-findings {
+  margin-top: 2rem;
+  padding: 1.25rem 1.375rem;
+  border: 1px solid var(--synth-line);
+  background: var(--synth-paper-2);
+  max-width: 62ch;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-findings__tag {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--synth-accent);
+  margin-bottom: 0.875rem;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-findings ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-findings li {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--synth-ink-1);
+  padding-left: 1rem;
+  position: relative;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-findings li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--synth-ink-3);
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-findings li b {
+  color: var(--synth-ink-0);
+  font-weight: 600;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-runb-findings__see {
+  margin-top: 0.875rem;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--synth-ink-2);
+}
+
+.tier-a-case-root .case-synthetic-portfolio .synth-lesson-quote {
+  max-width: 60ch;
+  margin-bottom: 1.75rem;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-lesson-quote p {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: clamp(1.375rem, 3.4vw, 2.125rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: var(--synth-ink-0);
+  margin: 0;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-lesson-quote p em {
+  font-style: italic;
+  color: var(--synth-accent-2);
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-lesson-coda {
+  max-width: 60ch;
+  font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
+  line-height: 1.65;
+  color: var(--synth-ink-2);
+  margin: 0 0 1.125rem;
+}
+.tier-a-case-root .case-synthetic-portfolio .synth-lesson-coda em {
+  font-style: italic;
+  color: var(--synth-ink-0);
+}
+
+.tier-a-case-root .case-synthetic-portfolio .handoff {
+  position: relative;
+  padding-block: clamp(4rem, 6vw, 6rem);
+  border-bottom: 1px solid var(--ink-line);
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__inner {
+  max-width: var(--col-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__eyebrow {
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 1rem;
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__h {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0 0 2rem;
+  text-wrap: balance;
+  max-width: 24ch;
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__h em {
+  font-style: italic;
+  color: var(--synth-accent-2);
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.25rem;
+  min-height: 44px;
+  border: 1px solid var(--synth-accent);
+  color: var(--synth-accent);
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 200ms, color 200ms;
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__cta:hover,
+.tier-a-case-root .case-synthetic-portfolio .handoff__cta:focus-visible {
+  background: var(--synth-accent);
+  color: var(--bg);
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__cta::after {
+  content: "→";
+  font-size: 14px;
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__alt {
+  margin-top: 1rem;
+  font-family: var(--mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__alt a {
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.tier-a-case-root .case-synthetic-portfolio .handoff__alt a:hover {
+  color: var(--synth-accent);
+}

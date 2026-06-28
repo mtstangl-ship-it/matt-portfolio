@@ -44,7 +44,7 @@ I work on old BMWs in my garage.
 
 **Subhead**
 ```
-Alice is a 1978 R100/7. Ayda is a 1977 R75/7. They've taught me more about leadership than most management books — care and forethought, respect for what can go wrong, and the discipline of designing for systems people can actually service. The same instincts show up in how I lead design.
+Alice is a 1978 R100/7. Ayda is a 1977 R75/7. They've taught me more about leadership than most management books: care and forethought, respect for what can go wrong, and the discipline of designing for systems people can actually service. The same instincts show up in how I lead design.
 ```
 
 ### Tier 2 — Tight version

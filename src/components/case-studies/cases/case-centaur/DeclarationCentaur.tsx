@@ -84,8 +84,8 @@ export function DeclarationCentaur() {
 
         <div className="centaur__framing">
           <p>
-            Ethan Mollick&apos;s framework distinguishes <b>Centaurs</b> — humans and AI dividing tasks, human steering — from{" "}
-            <b>Cyborgs</b>, where the integration is total and inseparable.
+            Ethan Mollick&apos;s framework draws a line between <b>Centaurs</b> and <b>Cyborgs</b>. A Centaur divides tasks with AI and keeps
+            steering. A Cyborg fuses with it completely.
           </p>
           <p>
             I&apos;m a Centaur. The structure of every page, the positioning decisions, the copy that sounds like me — those were mine. AI produced
@@ -128,8 +128,8 @@ export function DeclarationCentaur() {
         <div className="centaur__pivot">
           <p>
             The hardest version of this lesson came in <b>week four</b>. I let AI write three case study pages end to end. The output was fluent,
-            professional, and completely generic — the same portfolio language I&apos;d seen on a hundred other sites.{" "}
-            <b>I tore it down and rebuilt from the real stories, the real pivots, the real metrics.</b> That version is what you&apos;re reading now.
+            professional, and completely generic — the same portfolio language on a hundred other sites.{" "}
+            <b>I tore it down and rebuilt from what actually happened: the real pivots, the real numbers.</b> That version is what you&apos;re reading now.
           </p>
           <span className="centaur__pivot-marg" aria-hidden="true">
             <b>PIVOT · WK 04</b>

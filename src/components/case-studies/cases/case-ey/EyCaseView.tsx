@@ -2,27 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { DimScale } from "../../DimScale";
 import { CaseHero } from "../../CaseHero";
 import { CasePicker } from "../../CasePicker";
 import { EyCaseTallyFigure } from "./EyCaseTally";
-
-const DIM_TICKS = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
-
-function DimRibbon({ label }: { label: string }) {
-  return (
-    <div className="dim-with-scale">
-      <p className="dim">{label}</p>
-      <svg className="dim-scale" viewBox="0 0 800 20" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="4" x2="800" y2="4" stroke="var(--ink-line)" strokeWidth="1" />
-        <g stroke="var(--ink-3)" strokeWidth="1">
-          {DIM_TICKS.map((x) => (
-            <line key={x} x1={x} y1="4" x2={x} y2="14" />
-          ))}
-        </g>
-      </svg>
-    </div>
-  );
-}
 
 export function EyCaseView() {
   const tallyRef = useRef<HTMLElement | null>(null);
@@ -88,6 +71,7 @@ export function EyCaseView() {
       </a>
 
       <CaseHero
+        heroImageSrc="/case-studies/ey-core-halftone.png"
         picker={<CasePicker activeSlug="ey" />}
         caseNumber="05"
         totalCases={5}
@@ -103,23 +87,8 @@ export function EyCaseView() {
         }
         subhead={
           <>
-            <b>Say YES Summer:</b> three cities, ten events — <b>715 vaccinations</b> where mass media couldn&apos;t land.
-          </>
-        }
-        heroBgphotoSlot={
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element -- Tier-A shared hero pipeline (hero-chrome.css) */}
-            <img
-              className="hero__bgphoto-img"
-              src="/case-studies/ey-core-halftone.png"
-              alt=""
-              decoding="async"
-              fetchPriority="high"
-            />
-            <div className="hero__bgphoto-halftone" aria-hidden="true" />
-            <div className="hero__bgphoto-grain" aria-hidden="true" />
-            <div className="hero__bgphoto-scrim" aria-hidden="true" />
-            <div className="hero__bgphoto-fadebottom" aria-hidden="true" />
+            Say YES Summer ran ten pop-up events across three cities, delivering <em>715 vaccinations</em>{" "}
+            where mass media and traditional outreach couldn&apos;t land.
           </>
         }
         metaSlot={
@@ -146,7 +115,7 @@ export function EyCaseView() {
         }
       />
 
-      <DimRibbon label="↓ proof · 16px clearance" />
+      <DimScale label="↓ proof · 16px clearance" />
 
       <section className="diagnosis" id="diagnosis" aria-label="Diagnosis" data-screen-label="02 Diagnosis">
         <span className="margin-note">DRAWING 02 · DIAGNOSIS</span>
@@ -186,7 +155,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↘ pivot · diagnosis → field" />
+      <DimScale label="↘ pivot · diagnosis → field" />
 
       <section className="approach" id="approach" aria-label="Approach" data-screen-label="03 Approach">
         <span className="margin-note">DRAWING 03 · APPROACH</span>
@@ -213,7 +182,7 @@ export function EyCaseView() {
 
           <div className="approach__body">
             <p>
-              Say YES Summer was framed against three goals — <b>sequenced, not stacked</b>. Confidence had to come before awareness. Awareness had to come before
+              Say YES Summer was framed against three goals, <b>sequenced rather than stacked</b>. Confidence had to come before awareness. Awareness had to come before
               access. A person who didn&apos;t trust the vaccine wouldn&apos;t convert no matter how visible the booth was.
             </p>
             <p>
@@ -262,7 +231,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ field · the three-city tour" />
+      <DimScale label="↓ field · the three-city tour" />
 
       <section className="tour" id="tour" aria-label="Design — three-city tour" data-screen-label="04 Design">
         <span className="margin-note">DRAWING 04 · TOUR</span>
@@ -374,7 +343,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS" />
+      <DimScale label="↓ EXTERNAL VALIDATION · WHAT 715 ACTUALLY MEANS" />
 
       <section
         className="external-validation"
@@ -466,7 +435,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↓ lesson · four mechanisms a dashboard couldn't have produced" />
+      <DimScale label="↓ lesson · four mechanisms a dashboard couldn't have produced" />
 
       <section className="lesson" id="lesson" aria-label="Lesson — field learnings" data-screen-label="06 Lesson">
         <span className="margin-note">DRAWING 06 · LESSON</span>
@@ -532,7 +501,7 @@ export function EyCaseView() {
               </header>
               <h3 className="learning__title">Multiple engagement levels let people reconsider.</h3>
               <p className="learning__body">
-                Live art, music, murals — <b>not decoration.</b> They gave bystanders distance to reconsider without having to commit. Reconsideration led to more shots in arms.
+                Live art, music, murals gave bystanders a reason to stay and the distance to reconsider without having to commit. Reconsideration led to more shots in arms.
               </p>
             </article>
           </div>
@@ -544,7 +513,7 @@ export function EyCaseView() {
         </div>
       </section>
 
-      <DimRibbon label="↘ handoff · the larger story" />
+      <DimScale label="↘ handoff · the larger story" />
 
       <section className="handoff" aria-label="Handoff" data-screen-label="07 Handoff">
         <div className="handoff__inner">
@@ -591,7 +560,7 @@ export function EyCaseView() {
         </div>
       </footer>
 
-      <p className="signature-line">Matt Stangl · CX, Service Design &amp; AI Experience · Atlanta, GA</p>
+      <p className="signature-line">Matt Stangl · CX, Product &amp; Service Design Leader · Atlanta, GA</p>
     </div>
   );
 }

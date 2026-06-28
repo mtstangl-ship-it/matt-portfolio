@@ -1,7 +1,7 @@
 /* Fiche tokens scoped to Centaur (and future Tier A case shells).
    Does not replace site-wide editorial tokens on other routes. */
 .case-centaur-portfolio {
-  --sans: var(--font-inter, "Inter"), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: var(--font-inter-tight), system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: var(--font-jetbrains), "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
   --font-mono: var(--mono);
 

@@ -190,7 +190,7 @@ Each phase shows what the customer sees (executive programs, capability assessme
 ### Tier 2 — Tight version
 ```
 HEADLINE: Five phases. Two tiers. One journey.
-BODY: Five phases of customer planning — identify outcomes, evaluate solutions, create a plan, execute, assess value — exploded into frontstage and backstage. Customers see workshops, check-ins, QBRs. The design lived in the backstage system that made those run: enabled people, standard processes, shared platform.
+BODY: Five phases of customer planning: identify outcomes, evaluate solutions, create a plan, execute, assess value. Each exploded into frontstage and backstage. Customers see workshops, check-ins, QBRs. The design lived in the backstage system that made those run: enabled people, standard processes, shared platform.
 ```
 
 ### Cut priority
@@ -232,8 +232,6 @@ What followed wasn't part of the design brief. It was the org's response to a di
 8-figure tech modernization initiated — to support delivery of the journey across Sales, Success, Product, Partners, and the customer-facing platform. The platforms that needed to talk to each other (Gainsight, Salesforce, the planning workspace, the customer health system) hadn't been designed to. The journey design surfaced what coordination required.
 
 5 program areas mobilized — GRO (program management, business operations), CSD (CX design, offering management, success/value practice), ESE (product management, UX), DXC (product, UX). Each took ownership of initiative roadmaps tied to specific motions in the design.
-
-I led the design. I earned the modernization work for my larger org. The design demanded it.
 ```
 
 **Outcomes strip** (mono)
@@ -247,7 +245,7 @@ I led the design. I earned the modernization work for my larger org. The design 
 ### Tier 2 — Tight version
 ```
 HEADLINE: The design's downstream consequences were larger than the design itself.
-BODY: The 106% NRR projection required a journey the existing tech couldn't deliver. The design made the gap visible. Once visible, it had to be closed. 100+ CX & EX outcomes surfaced. 8-figure tech modernization initiated. 5 program areas mobilized. I led the design. I earned the modernization for my larger org. The design demanded it.
+BODY: The 106% NRR projection required a journey the existing tech couldn't deliver. The design made the gap visible. Once visible, it had to be closed. 100+ CX & EX outcomes surfaced. 8-figure tech modernization initiated. 5 program areas mobilized.
 ```
 
 ### Cut priority
@@ -284,7 +282,7 @@ Two tiers share one journey. Growth Plus runs 1:few, high-touch. Nurture Plus ru
 Customers saw five phases. Behind them: enabled people on common methods, shared process across Sales/Success/Partners, telemetry-driven platform across Gainsight and SFDC. The design was the backstage, not the journey label. The journey was the customer's surface; the assembly was the org's commitment.
 
 03 · OUTCOME · The investment was the validation.
-The org's response to the design — 100+ outcomes prioritized, 8-figure tech modernization initiated, 5 program areas mobilized — was the proof the directional document worked. Companies don't put eight figures behind designs they don't believe in. The 106% NRR path now has the infrastructure to be delivered against.
+The org's response was the proof the design worked: **100+ outcomes** prioritized, **8-figure tech modernization** initiated, **5 program areas** mobilized. Companies don't put eight figures behind designs they don't believe in. The 106% NRR path now has the infrastructure to be delivered against.
 ```
 
 ### Tier 2 — Tight version
@@ -292,7 +290,7 @@ The org's response to the design — 100+ outcomes prioritized, 8-figure tech mo
 HEADLINE: Three notes from the design rationale.
 01 TRADEOFF: Two tiers share one journey. Growth Plus 1:few. Nurture Plus 1:many. Same phases, different delivery.
 02 SYSTEM: Customers saw five phases. The design lived in the backstage — enabled people, shared process, platform telemetry.
-03 OUTCOME: The org's response to the design — 100+ outcomes prioritized, 8-figure modernization initiated, 5 program areas mobilized — was the proof the design worked.
+03 OUTCOME: The org's response was the proof the design worked: **100+ outcomes** prioritized, 8-figure modernization initiated, 5 program areas mobilized.
 ```
 
 ### Cut priority

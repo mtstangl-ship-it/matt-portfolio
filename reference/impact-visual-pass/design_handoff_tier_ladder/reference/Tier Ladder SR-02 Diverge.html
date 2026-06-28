@@ -1,0 +1,1693 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tier Ladder · SR-02 · Diverge &amp; Diagnose · Impact / Autodesk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — same fiche register as SR-01
+   ============================================================ */
+:root{
+  --bg:        #0a0f0e;
+  --bg-soft:   #0d1413;
+  --plate:     #0e1716;
+  --plate-2:   #11201d;
+  --ink-0:     #e8efec;
+  --ink-1:     #b6c2bd;
+  --ink-2:     #6f7d78;
+  --ink-3:     #3a4744;
+  --ink-4:     #1d2624;
+  --rule:      #1a2422;
+  --teal:      #2dd4b2;
+  --teal-dim:  #1d8c75;
+  --teal-low:  rgba(45,212,178,0.22);
+  --teal-vlow: rgba(45,212,178,0.08);
+  --rev:       #c47155;
+  --sans:      "Helvetica Neue","Helvetica",system-ui,-apple-system,sans-serif;
+  --mono:      "IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
+  --gutter:    clamp(20px, 4vw, 56px);
+  --maxw:      1280px;
+}
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; background:var(--bg); color:var(--ink-0); }
+body{
+  font-family:var(--sans); font-weight:400;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  line-height:1.5; letter-spacing:-0.005em;
+}
+::selection{ background:rgba(45,212,178,0.3); color:var(--ink-0); }
+
+.page{ max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter); }
+
+.mono{ font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); }
+.mono.teal{ color:var(--teal); }
+.mono.ink0{ color:var(--ink-0); }
+.mono.sm{ font-size:10px; }
+.mono.lg{ font-size:13px; letter-spacing:0.18em; }
+
+/* sheet top */
+.sheet-top{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 0 14px; border-bottom:1px solid var(--rule);
+  font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.sheet-top .dot{
+  width:7px; height:7px; background:var(--teal); display:inline-block;
+  vertical-align:middle; margin-right:10px;
+  box-shadow:0 0 0 3px rgba(45,212,178,0.12);
+}
+.sheet-top .active{ color:var(--ink-0); }
+.sheet-top .sep{ color:var(--ink-3); margin:0 8px; }
+
+/* title */
+.title{
+  padding:36px 0 28px;
+  border-bottom:1px solid var(--rule);
+  display:grid;
+  grid-template-columns: 1fr minmax(280px, 400px);
+  gap:40px; align-items:end;
+}
+.title .kicker{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--teal); margin:0 0 14px;
+}
+.title h1{
+  font-family:var(--sans); font-weight:500;
+  font-size:clamp(28px, 3.6vw, 44px);
+  line-height:1.05; letter-spacing:-0.02em; max-width:23ch;
+  margin:0 0 12px;
+}
+.title h1 em{ font-style:italic; color:var(--teal); font-weight:500; }
+.title .sub{ color:var(--ink-1); font-size:15px; max-width:54ch; margin:0; }
+
+.idcard{
+  display:grid; grid-template-columns:auto 1fr;
+  gap:8px 18px;
+  border:1px solid var(--rule);
+  padding:16px 18px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+  background:linear-gradient(180deg, rgba(45,212,178,0.025), transparent 60%);
+  position:relative;
+}
+.idcard dt{ color:var(--ink-2); margin:0; }
+.idcard dd{ margin:0; color:var(--ink-0); text-align:right; }
+.idcard::before,.idcard::after{
+  content:""; position:absolute; width:8px; height:8px;
+  background:
+    linear-gradient(var(--ink-2),var(--ink-2)) center/100% 1px no-repeat,
+    linear-gradient(var(--ink-2),var(--ink-2)) center/1px 100% no-repeat;
+}
+.idcard::before{ top:-4px; left:-4px; }
+.idcard::after{ bottom:-4px; right:-4px; }
+
+/* ============================================================
+   DIAGNOSIS — first block. The 200-word concept-level write-up.
+   ============================================================ */
+.diagnosis{
+  margin:36px 0 8px;
+  border:1px solid var(--rev);
+  background:linear-gradient(180deg, rgba(196,113,85,0.06), rgba(196,113,85,0.02));
+  padding:0;
+  position:relative;
+}
+.diagnosis__hd{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 22px; border-bottom:1px dashed var(--rev);
+  font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--rev);
+}
+.diagnosis__hd .pn b{ color:var(--ink-0); font-weight:500; }
+.diagnosis__body{
+  padding:22px 26px 26px;
+  display:grid; grid-template-columns: 1fr 280px; gap:32px; align-items:start;
+}
+.diagnosis__body p{
+  margin:0 0 12px; color:var(--ink-1); font-size:15px; line-height:1.65; max-width:78ch;
+}
+.diagnosis__body p:last-child{ margin-bottom:0; }
+.diagnosis__body b{ color:var(--ink-0); font-weight:500; }
+.diagnosis__body em{ color:var(--teal); font-style:normal; }
+.diagnosis__count{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--rev); border:1px solid var(--rev); padding:5px 9px;
+}
+
+.dx-panel{
+  border:1px solid var(--ink-3); padding:14px 16px;
+  background:var(--bg);
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2); display:grid; gap:10px;
+}
+.dx-panel h5{
+  margin:0; font-size:10px; letter-spacing:0.22em; color:var(--teal);
+}
+.dx-panel .row{
+  display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:baseline;
+}
+.dx-panel .row .k{ color:var(--ink-3); font-size:9px; }
+.dx-panel .row .v{ color:var(--ink-1); font-family:var(--sans); font-size:12px; letter-spacing:-0.005em; text-transform:none; line-height:1.45; }
+.dx-panel .row .v b{ color:var(--ink-0); font-weight:500; }
+
+/* ============================================================
+   SECTION BREAK
+   ============================================================ */
+.brk{
+  margin:64px 0 18px;
+  display:grid; grid-template-columns:1fr auto;
+  gap:24px; align-items:end;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--rule);
+}
+.brk .l{ display:flex; gap:14px; align-items:baseline; flex-wrap:wrap; }
+.brk .l .arr{ color:var(--teal); font-family:var(--mono); font-size:13px; }
+.brk .l .h{
+  font-family:var(--sans); font-weight:500;
+  font-size:clamp(18px, 2vw, 24px); letter-spacing:-0.01em; color:var(--ink-0);
+}
+.brk .r{ text-align:right; }
+.brk .r .fig{ color:var(--ink-0); }
+
+.var-banner{
+  display:grid; grid-template-columns: auto 1fr auto auto; gap:18px; align-items:center;
+  margin-top:18px; padding:12px 16px;
+  border:1px solid var(--ink-3);
+  background:var(--bg-soft);
+  font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+}
+.var-banner .vlabel{ color:var(--teal); }
+.var-banner .vhero{
+  color:var(--ink-2); font-family:var(--sans); font-size:13px; letter-spacing:-0.005em; text-transform:none;
+}
+.var-banner .vhero b{ color:var(--ink-0); font-weight:500; }
+.var-banner .vdemo{
+  color:var(--ink-3); font-size:9px;
+}
+.var-banner .vactive{ color:var(--ink-2); }
+.var-banner .vactive b{ color:var(--teal); }
+
+@media (max-width:880px){
+  .var-banner{ grid-template-columns:1fr; gap:6px; }
+}
+
+/* ============================================================
+   SKETCH FRAME (shared)
+   ============================================================ */
+.sketch{
+  display:grid; grid-template-columns: minmax(0,1fr) 280px;
+  gap:32px; margin-top:18px;
+  padding:24px 24px 28px;
+  border:1px solid var(--rule);
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(45,212,178,0.025), transparent 70%),
+    linear-gradient(0deg, var(--bg-soft), var(--bg-soft));
+  position:relative;
+}
+.sketch::before{
+  content:""; position:absolute; inset:8px;
+  background-image:
+    linear-gradient(rgba(45,212,178,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,212,178,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events:none;
+}
+.sketch__art{ position:relative; min-height:520px; }
+.sketch__notes{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+  color:var(--ink-1);
+  border-left:1px solid var(--ink-3);
+  padding-left:18px;
+  position:relative;
+}
+.sketch__notes h4{
+  margin:0 0 10px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; color:var(--teal);
+}
+.sketch__notes h4 + h4{ margin-top:18px; }
+.sketch__notes ul{ list-style:none; padding:0; margin:0 0 14px; display:grid; gap:6px; }
+.sketch__notes li{
+  position:relative; padding-left:14px;
+  font-family:var(--sans); font-size:12px; letter-spacing:-0.005em; color:var(--ink-1); text-transform:none;
+  line-height:1.5;
+}
+.sketch__notes li::before{
+  content:""; position:absolute; left:0; top:8px;
+  width:6px; height:1px; background:var(--ink-3);
+}
+.sketch__notes li b{ color:var(--ink-0); font-weight:500; }
+.sketch__notes li em{ color:var(--teal); font-style:normal; }
+
+.sketch__notes .tags{ display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+.tag{
+  display:inline-block; padding:3px 8px;
+  border:1px solid var(--ink-3);
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; text-transform:uppercase;
+}
+.tag.lb{ border-color:var(--teal); color:var(--teal); }
+.tag.st{ border-color:var(--ink-2); color:var(--ink-1); }
+.tag.ex{ border-color:var(--rev); color:var(--rev); }
+
+.art-stamp{
+  position:absolute; top:0; right:0;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-2);
+  padding:6px 10px; border:1px solid var(--ink-3); background:var(--bg);
+  z-index:9;
+}
+
+.mobile-row{
+  display:grid; grid-template-columns: 400px 1fr;
+  gap:32px; margin-top:24px;
+  padding:22px 24px 26px;
+  border:1px solid var(--rule);
+  background:var(--bg-soft);
+  align-items:start;
+}
+.mobile-frame{
+  width:380px;
+  border:1px solid var(--ink-3);
+  background:var(--bg);
+  padding:18px 14px;
+  position:relative;
+}
+.mobile-frame::before{
+  content:"MOBILE · 380PX";
+  position:absolute; top:-10px; left:14px; background:var(--bg-soft); padding:0 8px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--ink-2);
+}
+.mobile-notes{ border-left:1px solid var(--ink-3); padding-left:20px; }
+.mobile-notes h4{
+  margin:0 0 10px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; color:var(--teal);
+}
+.mobile-notes p{ font-size:12px; line-height:1.55; color:var(--ink-1); margin:0 0 10px; max-width:52ch; }
+.mobile-notes p b{ color:var(--ink-0); font-weight:500; }
+
+@media (max-width:1080px){
+  .sketch{ grid-template-columns:1fr; }
+  .sketch__notes{ border-left:none; border-top:1px solid var(--ink-3); padding-left:0; padding-top:18px; }
+  .mobile-row{ grid-template-columns:1fr; }
+  .mobile-frame{ width:100%; max-width:380px; }
+  .mobile-notes{ border-left:none; border-top:1px solid var(--ink-3); padding-left:0; padding-top:18px; }
+  .title{ grid-template-columns:1fr; gap:24px; }
+  .diagnosis__body{ grid-template-columns:1fr; }
+}
+
+/* ============================================================
+   SHARED — subordinate sidecar (used by D and E)
+   ============================================================ */
+.sidecar{
+  position:absolute; z-index:8;
+  border:1px solid var(--teal);
+  background:rgba(14,23,22,0.96);
+  padding:14px 16px 16px;
+  width:260px;
+  display:grid; gap:8px;
+  font-family:var(--sans);
+}
+.sidecar .pn{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-2); display:flex; justify-content:space-between; align-items:baseline;
+}
+.sidecar .pn b{ color:var(--teal); font-weight:500; }
+.sidecar h5{
+  margin:0; font-family:var(--sans); font-weight:500; font-size:16px;
+  letter-spacing:-0.01em; color:var(--ink-0); line-height:1.2;
+}
+.sidecar .meta{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; color:var(--ink-2);
+  padding:6px 0; border-top:1px solid var(--ink-4); border-bottom:1px solid var(--ink-4);
+  display:grid; grid-template-columns:1fr 1fr; gap:4px;
+}
+.sidecar .meta .k{ color:var(--ink-3); font-size:9px; }
+.sidecar .meta .v{ color:var(--ink-0); }
+.sidecar .meta .v b{ color:var(--teal); font-weight:500; }
+.sidecar .chips{
+  display:flex; flex-wrap:wrap; gap:4px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.12em; color:var(--ink-2); text-transform:uppercase;
+}
+.sidecar .chips span{
+  border:1px solid var(--ink-3); padding:3px 6px;
+}
+.sidecar .chips span.lit{ border-color:var(--teal); color:var(--teal); }
+.sidecar .chips span.inh{ border-style:dashed; color:var(--ink-3); }
+.sidecar .foot{
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--ink-3);
+  text-transform:uppercase; padding-top:6px;
+}
+
+/* ============================================================
+   VARIATION D — SEQUENCE-HERO
+   ============================================================ */
+.var-d-art .canvas-d{
+  position:relative;
+  width:100%; height:520px;
+  border:1px solid var(--ink-4);
+  background:
+    linear-gradient(0deg, var(--bg-soft), var(--bg-soft));
+  padding:50px 60px 60px 80px;
+}
+
+/* Top fiche stamp */
+.var-d-art .canvas-d::before{
+  content:"FIG. 02-A · LAUNCH SEQUENCE · 12-MO";
+  position:absolute; top:14px; left:80px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.22em; color:var(--ink-2); text-transform:uppercase;
+}
+
+/* time axis */
+.var-d-art .axis-d{
+  position:relative;
+  display:grid; grid-template-columns: repeat(12, 1fr);
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; color:var(--ink-3);
+  text-transform:uppercase;
+  border-bottom:1px solid var(--ink-3);
+  padding-bottom:8px;
+}
+.var-d-art .axis-d > div{ text-align:center; }
+.var-d-art .axis-d > div.major{ color:var(--ink-1); }
+.var-d-art .axis-d > div.acc{ color:var(--teal); }
+.var-d-art .axis-d > div.now{ color:var(--rev); }
+
+/* "now" vertical line */
+.var-d-art .nowline{
+  position:absolute;
+  top:30px; bottom:96px;
+  width:1px;
+  background:repeating-linear-gradient(180deg, var(--rev) 0 4px, transparent 4px 8px);
+  z-index:4;
+}
+.var-d-art .nowline::before{
+  content:"NOW"; position:absolute; top:-16px; left:50%; transform:translateX(-50%);
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--rev);
+  background:var(--bg-soft); padding:1px 4px;
+}
+
+/* tier rails */
+.var-d-art .rails{
+  margin-top:18px;
+  display:grid; gap:36px;
+}
+.var-d-art .rail{
+  position:relative; height:60px;
+  display:grid; grid-template-columns: repeat(12, 1fr);
+}
+.var-d-art .rail .row-label{
+  position:absolute; left:-78px; top:14px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ink-2); width:72px; text-align:right;
+}
+.var-d-art .rail .row-label b{ color:var(--ink-1); display:block; font-size:12px; }
+
+/* the bar = lit segment */
+.var-d-art .rail .bar{
+  grid-row:1;
+  background:rgba(45,212,178,0.10);
+  border-top:1px solid var(--teal); border-bottom:1px solid var(--teal);
+  height:38px; margin-top:11px;
+  position:relative;
+}
+.var-d-art .rail .bar.dim{
+  background:rgba(45,212,178,0.05);
+  border-color:var(--teal-dim);
+}
+.var-d-art .rail .bar.thin{ height:18px; margin-top:21px; }
+
+/* unlit dashed rail under the bar */
+.var-d-art .rail::after{
+  content:""; position:absolute; left:0; right:0; top:50%; height:1px;
+  background:repeating-linear-gradient(90deg, var(--ink-3) 0 4px, transparent 4px 9px);
+  z-index:0;
+}
+
+/* launch marker */
+.var-d-art .launch-flag{
+  position:absolute; top:-46px;
+  display:grid; gap:2px; justify-items:start;
+  font-family:var(--mono); text-transform:uppercase;
+  z-index:5;
+}
+.var-d-art .launch-flag .date{
+  font-size:18px; letter-spacing:0.04em; color:var(--ink-0); font-weight:500;
+}
+.var-d-art .launch-flag .lbl{
+  font-size:9px; letter-spacing:0.22em; color:var(--teal);
+}
+.var-d-art .launch-flag::after{
+  /* drop line from flag to bar */
+  content:""; position:absolute; left:8px; top:44px; width:1px; height:36px;
+  background:var(--teal);
+}
+.var-d-art .launch-flag .dot{
+  width:11px; height:11px; background:var(--teal); border-radius:50%;
+  box-shadow: 0 0 0 4px rgba(45,212,178,0.18);
+  position:absolute; left:3px; top:78px;
+}
+
+/* "always-on" stamp at left edge of T03 bar */
+.var-d-art .always-on{
+  position:absolute; top:50%; left:-2px; transform:translateY(-50%);
+  font-family:var(--mono); font-size:9px; letter-spacing:0.22em; color:var(--ink-2); text-transform:uppercase;
+  padding:3px 6px;
+  background:var(--bg-soft); border:1px solid var(--ink-3); border-left:2px solid var(--teal-dim);
+  z-index:5;
+}
+
+/* subordinate sidecar */
+.var-d-art .sidecar{
+  bottom:18px; right:18px;
+}
+
+/* duration ticks under T01 bar */
+.var-d-art .duration-tick{
+  position:absolute;
+  bottom:-22px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--ink-3); text-transform:uppercase;
+  display:flex; align-items:center; gap:6px;
+}
+.var-d-art .duration-tick::before, .var-d-art .duration-tick::after{
+  content:""; width:6px; height:1px; background:var(--ink-3);
+}
+
+/* ============================================================
+   VARIATION E — HIERARCHY-HERO (concentric rings)
+   ============================================================ */
+.var-e-art .canvas-e{
+  position:relative;
+  width:100%; height:600px;
+  border:1px solid var(--ink-4);
+  background:linear-gradient(0deg, var(--bg-soft), var(--bg-soft));
+  overflow:visible;
+}
+
+.var-e-art .canvas-e::before{
+  content:"FIG. 02-B · TIER INHERITANCE · EXPLODED RINGS";
+  position:absolute; top:14px; left:18px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.22em; color:var(--ink-2); text-transform:uppercase;
+}
+
+.var-e-art .ring-stage{
+  position:absolute; left:0; top:0; right:0; bottom:0;
+  display:grid; place-items:center;
+}
+.var-e-art .ring-stage svg{ display:block; overflow:visible; }
+
+/* fiche tier stamps on the right */
+.var-e-art .stamps{
+  position:absolute; right:24px; top:60px; width:240px;
+  display:grid; gap:14px;
+}
+.var-e-art .stamps .stamp{
+  border:1px solid var(--ink-3); background:var(--bg);
+  padding:10px 12px;
+  font-family:var(--mono); text-transform:uppercase;
+  display:grid; gap:4px;
+}
+.var-e-art .stamps .stamp.active{ border-color:var(--teal); background:var(--plate-2); }
+.var-e-art .stamps .stamp .tier{
+  font-size:10px; letter-spacing:0.22em; color:var(--ink-2);
+}
+.var-e-art .stamps .stamp .tier b{ color:var(--ink-0); font-weight:500; }
+.var-e-art .stamps .stamp.active .tier b{ color:var(--teal); }
+.var-e-art .stamps .stamp .meta{
+  font-size:9px; letter-spacing:0.18em; color:var(--ink-3);
+}
+.var-e-art .stamps .stamp .count{
+  font-family:var(--sans); font-size:22px; font-weight:500; color:var(--ink-0); letter-spacing:-0.01em;
+  margin-top:2px;
+}
+.var-e-art .stamps .stamp .count .u{ font-size:11px; color:var(--ink-2); margin-left:3px;
+  font-family:var(--mono); letter-spacing:0.18em; }
+.var-e-art .stamps .stamp.active .count{ color:var(--teal); }
+
+/* legend (bottom left) */
+.var-e-art .legend{
+  position:absolute; left:18px; bottom:14px;
+  display:flex; gap:18px; flex-wrap:wrap;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--ink-2); text-transform:uppercase;
+}
+.var-e-art .legend .sw{ display:inline-flex; gap:6px; align-items:center; }
+.var-e-art .legend .sw i{
+  display:inline-block; width:9px; height:9px; border:1px solid var(--teal);
+}
+.var-e-art .legend .sw i.lit{ background:var(--teal); }
+.var-e-art .legend .sw i.dim{ background:var(--teal-dim); }
+.var-e-art .legend .sw i.un{ background:transparent; border-color:var(--ink-3); }
+
+/* the math callout (top right of canvas) */
+.var-e-art .math{
+  position:absolute; top:14px; right:18px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.18em; color:var(--ink-2); text-transform:uppercase;
+  border:1px solid var(--teal); background:var(--bg);
+  padding:6px 10px;
+  display:flex; gap:8px; align-items:baseline;
+}
+.var-e-art .math b{ color:var(--ink-0); font-weight:500; font-size:13px; }
+.var-e-art .math em{ color:var(--teal); font-style:normal; font-weight:500; }
+
+/* ============================================================
+   VARIATION F — INHERITANCE-HERO (cumulative cell-bar)
+   ============================================================ */
+.var-f-art .canvas-f{
+  position:relative;
+  width:100%; min-height:540px;
+  border:1px solid var(--ink-4);
+  background:linear-gradient(0deg, var(--bg-soft), var(--bg-soft));
+  padding:50px 28px 28px;
+}
+.var-f-art .canvas-f::before{
+  content:"FIG. 02-C · CUMULATIVE INHERITANCE · 5 → 9 → 15";
+  position:absolute; top:14px; left:28px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.22em; color:var(--ink-2); text-transform:uppercase;
+}
+
+/* the big math headline */
+.var-f-art .math-h{
+  display:flex; align-items:baseline; gap:18px;
+  margin-bottom:20px;
+  font-family:var(--sans);
+}
+.var-f-art .math-h .step{
+  display:flex; align-items:baseline; gap:8px;
+}
+.var-f-art .math-h .step .v{
+  font-size:54px; font-weight:500; color:var(--ink-0); letter-spacing:-0.02em; line-height:1;
+}
+.var-f-art .math-h .step.active .v{ color:var(--teal); }
+.var-f-art .math-h .step .lbl{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.22em; color:var(--ink-3); text-transform:uppercase;
+}
+.var-f-art .math-h .arr{
+  font-family:var(--mono); font-size:24px; color:var(--ink-3); align-self:center; padding-top:8px;
+}
+
+/* the cell bar */
+.var-f-art .bar-h{
+  display:grid; grid-template-columns: repeat(15, 1fr); gap:3px;
+  margin-top:8px;
+}
+.var-f-art .cell{
+  aspect-ratio:1/1;
+  border:1px solid var(--ink-3);
+  background:var(--bg);
+  position:relative;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.08em; color:var(--ink-3);
+  display:grid; place-items:center; text-transform:uppercase;
+}
+/* added at native tier */
+.var-f-art .cell.t03{
+  border-color:var(--teal); background:var(--teal-low); color:var(--teal);
+}
+.var-f-art .cell.t02{
+  border-color:var(--teal); background:rgba(45,212,178,0.12); color:var(--teal);
+}
+.var-f-art .cell.t01{
+  border-color:var(--teal); background:rgba(45,212,178,0.05); color:var(--teal);
+}
+.var-f-art .cell .pn{
+  display:block; font-size:8px; line-height:1.1;
+}
+
+/* tier brackets above bar */
+.var-f-art .brackets{
+  position:relative;
+  display:grid; grid-template-columns: repeat(15, 1fr);
+  height:78px;
+  margin-top:8px;
+}
+.var-f-art .bracket{
+  grid-row:1;
+  border-top:1px solid var(--ink-3);
+  border-left:1px solid var(--ink-3);
+  border-right:1px solid var(--ink-3);
+  position:relative;
+  margin-bottom:6px;
+}
+.var-f-art .bracket .lbl{
+  position:absolute; top:-22px; left:8px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-2); background:var(--bg-soft); padding:1px 6px;
+}
+.var-f-art .bracket .lbl b{ color:var(--ink-1); font-weight:500; }
+.var-f-art .bracket .meta{
+  position:absolute; top:8px; right:8px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.16em; color:var(--ink-3); text-transform:uppercase;
+}
+.var-f-art .bracket.lit{
+  border-color:var(--teal);
+}
+.var-f-art .bracket.lit .lbl{ color:var(--teal); }
+.var-f-art .bracket.lit .lbl b{ color:var(--teal); }
+.var-f-art .bracket.lit .meta{ color:var(--ink-1); }
+.var-f-art .bracket.t03 { grid-column: 1 / 6;  margin-top:48px; }
+.var-f-art .bracket.t02 { grid-column: 1 / 10; margin-top:24px; }
+.var-f-art .bracket.t01 { grid-column: 1 / 16; margin-top:0;   }
+
+/* annotations under the bar */
+.var-f-art .ann-row{
+  display:grid; grid-template-columns: repeat(15, 1fr); gap:3px; margin-top:8px;
+}
+.var-f-art .ann-row .ann{
+  font-family:var(--mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-3); padding-top:4px;
+}
+.var-f-art .ann-row .ann.t03{ grid-column: 1 / 6; border-top:1px solid var(--teal-dim); color:var(--teal-dim); }
+.var-f-art .ann-row .ann.t02{ grid-column: 6 / 10; border-top:1px solid var(--teal); color:var(--teal); }
+.var-f-art .ann-row .ann.t01{ grid-column: 10 / 16; border-top:1px solid var(--teal); color:var(--teal); }
+
+/* timestamp pill */
+.var-f-art .ann-row .ts{ float:right; color:var(--ink-2); }
+
+/* sidecar bottom for F */
+.var-f-art .sidecar-f{
+  margin-top:28px;
+  display:grid; grid-template-columns: 1fr 1fr 1fr; gap:14px;
+  font-family:var(--mono); text-transform:uppercase;
+}
+.var-f-art .sidecar-f .slot{
+  border:1px solid var(--ink-3); padding:10px 12px; background:var(--bg);
+  display:grid; gap:4px;
+}
+.var-f-art .sidecar-f .slot.active{ border-color:var(--teal); background:var(--plate-2); }
+.var-f-art .sidecar-f .slot .tier{
+  font-size:9px; letter-spacing:0.22em; color:var(--ink-3);
+}
+.var-f-art .sidecar-f .slot.active .tier{ color:var(--teal); }
+.var-f-art .sidecar-f .slot .name{
+  font-family:var(--sans); font-size:14px; color:var(--ink-0); letter-spacing:-0.005em; text-transform:none;
+}
+.var-f-art .sidecar-f .slot .v{
+  font-family:var(--sans); font-size:18px; font-weight:500; color:var(--ink-1);
+}
+.var-f-art .sidecar-f .slot.active .v{ color:var(--teal); }
+.var-f-art .sidecar-f .slot .breakdown{
+  font-size:9px; letter-spacing:0.18em; color:var(--ink-3);
+}
+
+/* ============================================================
+   MOBILE COMMON
+   ============================================================ */
+.mob-title{
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--teal);
+  border-bottom:1px solid var(--ink-3); padding-bottom:6px; margin:0 0 12px;
+}
+
+/* MOBILE D — vertical time, three thin columns + sticky sidecar at bottom */
+.mob-d-time{
+  display:grid; grid-template-columns: 38px 1fr 1fr 1fr;
+  gap:0; height:320px;
+  border-top:1px solid var(--ink-3);
+}
+.mob-d-time .y-axis{
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding:4px 6px 4px 0; text-align:right;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.14em; color:var(--ink-3); text-transform:uppercase;
+}
+.mob-d-time .y-axis .acc{ color:var(--teal); }
+.mob-d-time .y-axis .maj{ color:var(--ink-1); }
+.mob-d-time .col{
+  position:relative; border-left:1px solid var(--ink-4);
+  padding:0 6px;
+}
+.mob-d-time .col .ch{
+  text-align:center; padding:4px 0;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.14em; color:var(--ink-2);
+  border-bottom:1px solid var(--ink-4);
+}
+.mob-d-time .col .ch.lit{ color:var(--teal); }
+.mob-d-time .col .seg{
+  position:absolute; left:6px; right:6px;
+  background:rgba(45,212,178,0.10);
+  border-left:1px solid var(--teal); border-right:1px solid var(--teal);
+}
+.mob-d-time .col .seg.dim{ background:rgba(45,212,178,0.05); border-color:var(--teal-dim); }
+.mob-d-time .col .flag{
+  position:absolute; left:0; right:0; text-align:center;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--teal);
+}
+.mob-sidecar{
+  margin-top:14px;
+  border:1px solid var(--teal);
+  padding:10px 12px;
+  display:grid; gap:6px; font-family:var(--sans);
+}
+.mob-sidecar .pn{
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--teal); text-transform:uppercase;
+}
+.mob-sidecar h6{ margin:0; font-size:13px; font-weight:500; color:var(--ink-0); line-height:1.2; }
+.mob-sidecar .meta{
+  font-family:var(--mono); font-size:9px; letter-spacing:0.14em; color:var(--ink-2);
+  padding:6px 0; border-top:1px solid var(--ink-4); border-bottom:1px solid var(--ink-4);
+  display:grid; grid-template-columns:1fr 1fr; gap:4px; text-transform:uppercase;
+}
+.mob-sidecar .meta .k{ color:var(--ink-3); font-size:8px; }
+.mob-sidecar .meta .v{ color:var(--ink-0); }
+.mob-sidecar .meta .v b{ color:var(--teal); font-weight:500; }
+
+/* MOBILE E — rings scaled down + stamp list under */
+.mob-e-stage{
+  position:relative; width:100%; aspect-ratio: 1/1;
+  border:1px solid var(--ink-4); display:grid; place-items:center;
+  background:var(--bg);
+}
+.mob-e-stamps{
+  margin-top:12px; display:grid; gap:6px;
+}
+.mob-e-stamps .row{
+  display:grid; grid-template-columns: 1fr auto; gap:8px;
+  border:1px solid var(--ink-3); padding:6px 10px;
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.mob-e-stamps .row.active{ border-color:var(--teal); }
+.mob-e-stamps .row .v{ color:var(--ink-1); }
+.mob-e-stamps .row.active .v{ color:var(--teal); }
+
+/* MOBILE F — vertical cumulative columns */
+.mob-f-stack{
+  display:grid; gap:18px; margin-top:6px;
+}
+.mob-f-stack .tier-block{
+  position:relative;
+  border:1px solid var(--ink-3); padding:12px;
+  display:grid; gap:8px;
+}
+.mob-f-stack .tier-block.active{ border-color:var(--teal); background:var(--plate-2); }
+.mob-f-stack .tier-block .hd{
+  display:flex; justify-content:space-between; align-items:baseline;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.mob-f-stack .tier-block.active .hd .pn b{ color:var(--teal); }
+.mob-f-stack .tier-block .hd b{ color:var(--ink-1); font-weight:500; }
+.mob-f-stack .tier-block .hd .v{
+  font-family:var(--sans); font-size:26px; font-weight:500; color:var(--ink-0); letter-spacing:-0.01em;
+}
+.mob-f-stack .tier-block.active .hd .v{ color:var(--teal); }
+.mob-f-stack .tier-block .row-cells{
+  display:grid; grid-template-columns: repeat(15, 1fr); gap:2px;
+}
+.mob-f-stack .tier-block .row-cells .c{
+  aspect-ratio:1/1;
+  border:1px solid var(--ink-4); background:var(--bg);
+}
+.mob-f-stack .tier-block .row-cells .c.in{ background:rgba(45,212,178,0.06); border-color:var(--teal-dim); }
+.mob-f-stack .tier-block .row-cells .c.ad{ background:rgba(45,212,178,0.22); border-color:var(--teal); }
+.mob-f-stack .tier-block .breakdown{
+  font-family:var(--mono); font-size:9px; letter-spacing:0.14em; color:var(--ink-3); text-transform:uppercase;
+  display:flex; gap:14px;
+}
+.mob-f-stack .tier-block .breakdown .ad{ color:var(--teal); }
+.mob-f-stack .tier-block .breakdown .in{ color:var(--teal-dim); }
+.mob-f-stack .tier-block .ts{
+  font-family:var(--mono); font-size:9px; letter-spacing:0.18em; color:var(--ink-2); text-transform:uppercase;
+}
+
+/* ============================================================
+   ANALYSIS
+   ============================================================ */
+.analysis{
+  margin:72px 0 24px;
+  padding:32px 0 0;
+  border-top:1px solid var(--rule);
+}
+.analysis h2{
+  font-family:var(--mono); font-size:13px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--teal); margin:0 0 18px;
+}
+.analysis h3{
+  font-family:var(--sans); font-size:22px; font-weight:500; letter-spacing:-0.015em;
+  margin:32px 0 12px; color:var(--ink-0);
+}
+.analysis h3 .pn{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.18em; color:var(--ink-2);
+  display:block; margin-bottom:4px;
+}
+.analysis p, .analysis li{ color:var(--ink-1); font-size:15px; line-height:1.65; max-width:80ch; }
+.analysis p b, .analysis li b{ color:var(--ink-0); font-weight:500; }
+.analysis ul{ padding:0; margin:8px 0 18px; list-style:none; display:grid; gap:8px; }
+.analysis ul li{ padding-left:18px; position:relative; }
+.analysis ul li::before{ content:"·"; position:absolute; left:6px; color:var(--teal); font-weight:700; }
+.analysis .quad{
+  display:grid; grid-template-columns:repeat(3, 1fr);
+  gap:18px; margin:12px 0 18px;
+}
+.analysis .qbox{
+  border:1px solid var(--rule); padding:16px 18px; background:var(--bg-soft);
+}
+.analysis .qbox .lbl{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; color:var(--teal);
+  margin-bottom:8px;
+}
+.analysis .qbox p{ font-size:13px; line-height:1.55; margin:0; }
+
+.recco{
+  margin:28px 0;
+  border:1px solid var(--teal);
+  padding:22px 26px;
+  background:rgba(45,212,178,0.04);
+  display:grid; grid-template-columns: auto 1fr; gap:24px; align-items:start;
+}
+.recco .stamp{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--teal); border:1px solid var(--teal); padding:6px 10px;
+  align-self:start;
+}
+.recco h3{
+  margin:0 0 8px; font-family:var(--sans); font-size:24px; font-weight:500; color:var(--ink-0); letter-spacing:-0.015em;
+}
+.recco h3 em{ color:var(--teal); font-style:normal; }
+.recco p{ margin:0 0 10px; color:var(--ink-1); font-size:14px; line-height:1.6; max-width:78ch; }
+.recco p b{ color:var(--ink-0); font-weight:500; }
+
+@media (max-width:1080px){
+  .analysis .quad{ grid-template-columns:1fr; }
+  .recco{ grid-template-columns:1fr; }
+}
+
+/* footer */
+.footer{
+  margin-top:48px;
+  padding:18px 0 24px;
+  border-top:1px solid var(--rule);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.footer b{ color:var(--ink-0); font-weight:500; }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ SHEET TOP ============ -->
+  <div class="sheet-top">
+    <div>
+      <span class="dot"></span>
+      CONSOLE <span class="sep">/</span> Impact <span class="sep">/</span>
+      <span class="active">Autodesk · Tier Ladder · SR-02</span>
+      <span class="sep">/</span> Diverge &amp; Diagnose
+    </div>
+    <div>
+      <b style="color:var(--ink-0);">Matt Stangl</b> · CX, Product &amp; Service Design Leader
+    </div>
+  </div>
+
+  <!-- ============ TITLE ============ -->
+  <section class="title">
+    <div>
+      <p class="kicker">Sketch · SR-02 · 2026.05 · DIVERGE</p>
+      <h1>Three new sketches, each with <em>one hero story</em> and the others demoted.</h1>
+      <p class="sub">SR-01 produced three dashboards. SR-02 produces three visualizations — sequence-hero, hierarchy-hero, inheritance-hero. Diagnosis is the deliverable's opening section; if it's wrong, the variations are wrong.</p>
+    </div>
+    <dl class="idcard">
+      <dt>Round</dt>             <dd>SR-02 · DIVERGE</dd>
+      <dt>Replaces</dt>          <dd>SR-01 dashboard variations</dd>
+      <dt>Variations</dt>        <dd>3 · D · E · F</dd>
+      <dt>Hero this render</dt>  <dd>T01 · Business · 950</dd>
+      <dt>Diagnosis</dt>         <dd>200 words · concept-level</dd>
+      <dt>Register</dt>          <dd>Fiche · v2026.05</dd>
+    </dl>
+  </section>
+
+  <!-- ============ DIAGNOSIS (200 words) ============ -->
+  <section class="diagnosis">
+    <div class="diagnosis__hd">
+      <span class="pn"><b>§ 0 · DIAGNOSIS</b> · WHAT SR-01 GOT WRONG AT THE CONCEPT LEVEL</span>
+      <span class="diagnosis__count">~200 WORDS</span>
+    </div>
+    <div class="diagnosis__body">
+      <div>
+        <p>SR-01's three variations shared one unstated assumption: <b>that a single canvas, in a single grammar, could carry sequence, hierarchy, and inheritance at co-equal weight.</b> All three were Gantt-with-chip-cluster hybrids. The Gantt brought the time axis. The chip cluster brought the inventory. Neither could be subordinated because both were sized to compete.</p>
+        <p>That assumption produced predictable failures. <b>VAR A's T02-active layout exception</b> wasn't an edge case — it was the canvas confessing that four chips don't fit in one month-cell when chips are sized to also carry inheritance markers. <b>VAR B's 280px manifest column</b> wasn't a trade-off — it was the timeline conceding half its width because the chip inventory needed somewhere to live at full size. <b>VAR C's "we'll need to expose the inheritance math at the lane label too"</b> wasn't a polish note — it was the diagram admitting it wasn't carrying the math visually.</p>
+        <p>When you reach for a layout exception, an external annotation, or a redundant readout, the visualization isn't doing the work. <em>The geometry should be the math.</em> SR-02 fixes this by picking one hero story per variation and demoting the other two to readable subordinates — small, dim, off-stage, or revealed-on-tap. Three relationships, three diagrams, one hero each.</p>
+      </div>
+      <aside class="dx-panel">
+        <h5>DIAGNOSIS · CHECK-AGAINST</h5>
+        <div class="row"><span class="k">PASS IF</span><span class="v">One element clearly dominates. The other two are present but subordinated.</span></div>
+        <div class="row"><span class="k">PASS IF</span><span class="v">The hero relationship is <b>visible in geometry</b>, not described in annotation.</span></div>
+        <div class="row"><span class="k">PASS IF</span><span class="v">No layout exception is required for any tier-active state.</span></div>
+        <div class="row"><span class="k">PASS IF</span><span class="v">Mobile expression follows from the desktop concept — not a separate design.</span></div>
+        <div class="row"><span class="k">PASS IF</span><span class="v">A service exists in <b>exactly one</b> place on the canvas. No duplication.</span></div>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       VAR D — SEQUENCE-HERO
+       ========================================================================= -->
+  <section class="brk">
+    <div class="l">
+      <span class="arr">↓</span>
+      <span class="h">Variation D · sequence-hero · the timeline owns the canvas</span>
+    </div>
+    <div class="r">
+      <span class="mono">FIG. 02-A · TIER-LADDER · SEQUENCE</span><br/>
+      <span class="mono fig">SR-02 · VAR D · LAUNCH MOMENTS</span>
+    </div>
+  </section>
+
+  <div class="var-banner">
+    <span class="vlabel">VAR D · SEQUENCE-HERO</span>
+    <span class="vhero">Hero: <b>three launch moments</b> — T03 always-on, T01 JUL, T02 DEC. Time owns the canvas; the visualization <i>is</i> the launch sequence.</span>
+    <span class="vdemo">DEMOTED · HIERARCHY (sidecar text) · INHERITANCE (sidecar count)</span>
+    <span class="vactive">ACTIVE · <b>T01</b></span>
+  </div>
+
+  <div class="sketch">
+    <div class="sketch__art var-d-art">
+      <div class="art-stamp">SHEET D-01 · 1 : 1</div>
+
+      <div class="canvas-d">
+
+        <!-- 12-month time axis -->
+        <div class="axis-d">
+          <div class="major acc">JAN</div>
+          <div>FEB</div><div>MAR</div><div>APR</div><div>MAY</div><div>JUN</div>
+          <div class="major acc">JUL</div>
+          <div>AUG</div>
+          <div class="now">SEP</div>
+          <div>OCT</div><div>NOV</div>
+          <div class="major acc">DEC</div>
+        </div>
+
+        <!-- "now" vertical line (SEP is column 9 of 12 → 8.5/12 from left of grid area) -->
+        <div class="nowline" style="left: calc(80px + (100% - 140px) * (8.5/12));"></div>
+
+        <!-- THE RAILS -->
+        <div class="rails">
+
+          <!-- T03 always-on -->
+          <div class="rail">
+            <div class="row-label">T03<br/><b>Included</b></div>
+
+            <!-- bar spans full 12 columns -->
+            <div class="bar dim thin" style="grid-column: 1 / 13;">
+              <div class="always-on">ALWAYS-ON</div>
+            </div>
+            <!-- duration label under -->
+            <div class="duration-tick" style="left:50%; transform:translateX(-50%);">IN MARKET · 12-MO+</div>
+          </div>
+
+          <!-- T01 JUL launch -->
+          <div class="rail">
+            <div class="row-label">T01<br/><b>Premium</b></div>
+
+            <!-- launch flag -->
+            <div class="launch-flag" style="left: calc((100% / 12) * 6);">
+              <span class="lbl">↓ LAUNCH</span>
+              <span class="date">JUL 2025</span>
+              <span class="dot"></span>
+            </div>
+
+            <!-- bar JUL→DEC -->
+            <div class="bar" style="grid-column: 7 / 13;"></div>
+
+            <div class="duration-tick" style="left:75%; transform:translateX(-50%); bottom:-22px;">6 MO IN MARKET</div>
+          </div>
+
+          <!-- T02 DEC launch -->
+          <div class="rail">
+            <div class="row-label">T02<br/><b>Professional</b></div>
+
+            <div class="launch-flag" style="left: calc((100% / 12) * 11);">
+              <span class="lbl">↓ LAUNCH</span>
+              <span class="date">DEC 2025</span>
+              <span class="dot"></span>
+            </div>
+
+            <div class="bar thin" style="grid-column: 12 / 13;"></div>
+            <div class="duration-tick" style="left:96%; transform:translateX(-50%); bottom:-22px;">0 MO · LAUNCHING</div>
+          </div>
+
+        </div>
+
+        <!-- SUBORDINATE SIDECAR (corner-pinned, NOT a co-equal column) -->
+        <aside class="sidecar">
+          <div class="pn"><span>SIDECAR</span><b>UPDATES ON TIER-TAP</b></div>
+          <h5>T01 · Premium</h5>
+          <div class="meta">
+            <span class="k">Added here</span><span class="v"><b>6</b> services</span>
+            <span class="k">Inherited</span><span class="v">9 from T02 · T03</span>
+            <span class="k">Total</span><span class="v"><b>15</b> services</span>
+            <span class="k">Scale</span><span class="v">950 accts</span>
+          </div>
+          <div class="chips">
+            <span class="lit">01-A</span><span class="lit">01-B</span><span class="lit">01-C</span>
+            <span class="lit">01-D</span><span class="lit">01-E</span><span class="lit">01-F</span>
+            <span class="inh">+ 9 INH</span>
+          </div>
+          <div class="foot">↳ TAP CHIP · FULL SERVICE NAME</div>
+        </aside>
+
+      </div>
+    </div>
+
+    <aside class="sketch__notes">
+      <h4>VAR D · HERO &amp; SUBORDINATION</h4>
+      <ul>
+        <li><b>Hero.</b> The 12-month axis at the top + three horizontal bars below + the two big JUL / DEC launch flags. <em>That's the diagram.</em></li>
+        <li><b>Demoted: hierarchy.</b> A label in the sidecar reads "T01 · Premium". Tier ordering visible only in the vertical rail order, which is incidental.</li>
+        <li><b>Demoted: inheritance.</b> A line of mono in the sidecar: "6 added · 9 inherited · 15 total". No chip duplication. No nested geometry.</li>
+      </ul>
+
+      <h4>INTERACTION</h4>
+      <ul>
+        <li><b>Tap a rail.</b> The sidecar swaps to that tier. The timeline does not move.</li>
+        <li><b>Tap a chip in sidecar.</b> Full service name appears inline below the chip row. No modal.</li>
+        <li><b>Default state.</b> T01 active (matches Autodesk's flagship tier).</li>
+      </ul>
+
+      <h4>SEMANTIC GAINS</h4>
+      <ul>
+        <li>The JUL / DEC dates dominate. Anyone glancing at the diagram leaves with the launch-sequence story <em>before</em> they read the sidecar.</li>
+        <li>"NOW" line + duration ticks make in-market-time the implicit unit.</li>
+        <li>Zero chip duplication. Inheritance math lives in a single text field.</li>
+      </ul>
+
+      <h4>WHAT STRAINS</h4>
+      <ul>
+        <li>Visually, T01 and T03 dominate (longest bars). T02's 0-mo sliver is correct but barely visible. <i>This is honest, not broken.</i></li>
+        <li>Sidecar is small. If a reviewer wants the full chip inventory at-a-glance, they don't get it without tapping in.</li>
+      </ul>
+
+      <div class="tags">
+        <span class="tag lb">LOAD-BEARING · Time owns the canvas</span>
+        <span class="tag st">STRONG · Zero chip duplication</span>
+        <span class="tag ex">EXPLORATORY · T02 sliver visibility</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MOBILE D -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">VAR D · MOBILE · TIME GOES VERTICAL</div>
+
+      <!-- vertical time axis + three thin columns -->
+      <div class="mob-d-time">
+        <div class="y-axis">
+          <span class="maj acc">JAN</span>
+          <span>MAR</span>
+          <span>MAY</span>
+          <span class="maj acc">JUL</span>
+          <span style="color:var(--rev);">NOW</span>
+          <span>OCT</span>
+          <span class="maj acc">DEC</span>
+        </div>
+
+        <div class="col">
+          <div class="ch">T03</div>
+          <div class="seg dim" style="top:24px; bottom:0;"></div>
+        </div>
+
+        <div class="col">
+          <div class="ch lit">T01</div>
+          <div class="seg" style="top:54%; bottom:0;"></div>
+          <div class="flag" style="top:50%;">↓ JUL</div>
+        </div>
+
+        <div class="col">
+          <div class="ch">T02</div>
+          <div class="seg" style="top:94%; bottom:0;"></div>
+          <div class="flag" style="top:90%;">↓ DEC</div>
+        </div>
+      </div>
+
+      <!-- sidecar below -->
+      <div class="mob-sidecar">
+        <div class="pn">ACTIVE · T01 · PREMIUM</div>
+        <h6>15 services · 950 accounts</h6>
+        <div class="meta">
+          <span class="k">Added here</span><span class="v"><b>6</b></span>
+          <span class="k">Inherited</span><span class="v">9</span>
+          <span class="k">Launched</span><span class="v">JUL 2025</span>
+          <span class="k">In market</span><span class="v">3 mo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>VAR D · MOBILE LOGIC</h4>
+      <p><b>The desktop concept rotates cleanly.</b> Time becomes the vertical axis (JAN top → DEC bottom). The three tier rails become parallel narrow columns. The sidecar drops to a sticky panel under the time grid — same content, same role.</p>
+      <p><b>No layout exception.</b> Every tier-active state just swaps the sidecar contents. Geometry is unchanged.</p>
+      <p><b>Read still works at-a-glance.</b> The JUL / DEC labels still land on the vertical axis; T03's full-length column reads "always-on" without needing a stamp. T02's sliver is small but visible because the vertical scale is taller than horizontal would be.</p>
+      <p><b>Tap targets</b> ≥44px: column headers extend full-width hit area; sidecar tappable as a region to expand.</p>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       VAR E — HIERARCHY-HERO
+       ========================================================================= -->
+  <section class="brk">
+    <div class="l">
+      <span class="arr">↓</span>
+      <span class="h">Variation E · hierarchy-hero · concentric rings, lit = cumulative</span>
+    </div>
+    <div class="r">
+      <span class="mono">FIG. 02-B · TIER-LADDER · INHERITANCE GEOMETRY</span><br/>
+      <span class="mono fig">SR-02 · VAR E · EXPLODED RINGS</span>
+    </div>
+  </section>
+
+  <div class="var-banner">
+    <span class="vlabel">VAR E · HIERARCHY-HERO</span>
+    <span class="vhero">Hero: <b>tier containment as concentric rings</b>. Each chip exists once, on its native ring. Lit area <i>is</i> the cumulative count.</span>
+    <span class="vdemo">DEMOTED · TIME (right-edge stamps) · INHERITANCE (implicit in lit set)</span>
+    <span class="vactive">ACTIVE · <b>T01</b> → all 15 lit</span>
+  </div>
+
+  <div class="sketch">
+    <div class="sketch__art var-e-art">
+      <div class="art-stamp">SHEET E-01 · 1 : 1</div>
+
+      <div class="canvas-e">
+
+        <!-- top-right math callout -->
+        <div class="math">
+          T01 ACTIVE · LIT SET = <b>15</b> SERVICES <em>· =</em> 6 + 4 + 5
+        </div>
+
+        <!-- THE RINGS, centered -->
+        <div class="ring-stage">
+          <svg viewBox="-260 -260 520 520" width="520" height="520" aria-hidden="true">
+            <!-- construction crosshair -->
+            <line x1="-260" y1="0" x2="260" y2="0" stroke="rgba(180,200,195,0.05)" stroke-width="1"/>
+            <line x1="0" y1="-260" x2="0" y2="260" stroke="rgba(180,200,195,0.05)" stroke-width="1"/>
+
+            <!-- outer ring (T01) -->
+            <circle cx="0" cy="0" r="210" fill="none" stroke="#2dd4b2" stroke-width="1" stroke-dasharray="3 4"/>
+            <!-- middle ring (T02) -->
+            <circle cx="0" cy="0" r="140" fill="none" stroke="#2dd4b2" stroke-width="1" stroke-dasharray="3 4"/>
+            <!-- inner ring (T03) -->
+            <circle cx="0" cy="0" r="70"  fill="none" stroke="#2dd4b2" stroke-width="1" stroke-dasharray="3 4"/>
+
+            <!-- T03 inner dots — 5 at 72° -->
+            <g fill="#2dd4b2" stroke="#2dd4b2" stroke-width="1">
+              <circle cx="70"     cy="0"      r="7"/>
+              <circle cx="21.6"   cy="66.6"   r="7"/>
+              <circle cx="-56.6"  cy="41.2"   r="7"/>
+              <circle cx="-56.6"  cy="-41.2"  r="7"/>
+              <circle cx="21.6"   cy="-66.6"  r="7"/>
+            </g>
+
+            <!-- T02 middle dots — 4 at 90°, offset 45° -->
+            <g fill="#2dd4b2" stroke="#2dd4b2" stroke-width="1">
+              <circle cx="99"   cy="99"    r="7"/>
+              <circle cx="-99"  cy="99"    r="7"/>
+              <circle cx="-99"  cy="-99"   r="7"/>
+              <circle cx="99"   cy="-99"   r="7"/>
+            </g>
+
+            <!-- T01 outer dots — 6 at 60°, offset 30° -->
+            <g fill="#2dd4b2" stroke="#2dd4b2" stroke-width="1">
+              <circle cx="181.9"  cy="105"    r="7"/>
+              <circle cx="0"      cy="210"    r="7"/>
+              <circle cx="-181.9" cy="105"    r="7"/>
+              <circle cx="-181.9" cy="-105"   r="7"/>
+              <circle cx="0"      cy="-210"   r="7"/>
+              <circle cx="181.9"  cy="-105"   r="7"/>
+            </g>
+
+            <!-- ring labels on the rings (mono, fiche style) -->
+            <text x="0" y="-220" text-anchor="middle" fill="#2dd4b2"
+                  font-family="IBM Plex Mono" font-size="11" letter-spacing="2">T01 · OUTER · +6</text>
+            <text x="0" y="-150" text-anchor="middle" fill="#2dd4b2"
+                  font-family="IBM Plex Mono" font-size="10" letter-spacing="2">T02 · MIDDLE · +4</text>
+            <text x="0" y="-80" text-anchor="middle" fill="#2dd4b2"
+                  font-family="IBM Plex Mono" font-size="9" letter-spacing="2">T03 · INNER · +5</text>
+
+            <!-- center fiche stamp -->
+            <text x="0" y="6" text-anchor="middle" fill="#6f7d78"
+                  font-family="IBM Plex Mono" font-size="9" letter-spacing="2">CORE</text>
+
+            <!-- example part-number leaders for the active tier -->
+            <g stroke="#3a4744" stroke-width="1" fill="none">
+              <line x1="181.9" y1="105"  x2="240" y2="135"/>
+              <line x1="0"     y1="210"  x2="0"   y2="244"/>
+              <line x1="-181.9" y1="105" x2="-240" y2="135"/>
+              <line x1="-181.9" y1="-105" x2="-240" y2="-135"/>
+              <line x1="0" y1="-210" x2="0" y2="-244"/>
+              <line x1="181.9" y1="-105" x2="240" y2="-135"/>
+            </g>
+            <g font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5" fill="#6f7d78">
+              <text x="244" y="138">01-A</text>
+              <text x="0"   y="256" text-anchor="middle">01-B</text>
+              <text x="-244" y="138" text-anchor="end">01-C</text>
+              <text x="-244" y="-128" text-anchor="end">01-D</text>
+              <text x="0"   y="-248" text-anchor="middle">01-E</text>
+              <text x="244" y="-128">01-F</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- right-edge tier stamps (subordinate; time lives here) -->
+        <div class="stamps">
+          <div class="stamp active">
+            <span class="tier">T01 · <b>PREMIUM</b></span>
+            <span class="meta">LAUNCHED JUL 2025 · 950 ACCTS</span>
+            <span class="count">15<span class="u">SERV</span></span>
+          </div>
+          <div class="stamp">
+            <span class="tier">T02 · <b>PROFESSIONAL</b></span>
+            <span class="meta">LAUNCHED DEC 2025 · 25K+ ACCTS</span>
+            <span class="count">9<span class="u">SERV</span></span>
+          </div>
+          <div class="stamp">
+            <span class="tier">T03 · <b>INCLUDED</b></span>
+            <span class="meta">ALWAYS-ON · 1M+ ACCTS</span>
+            <span class="count">5<span class="u">SERV</span></span>
+          </div>
+        </div>
+
+        <!-- legend bottom-left -->
+        <div class="legend">
+          <span class="sw"><i class="lit"></i> Lit · in active tier's set</span>
+          <span class="sw"><i class="un"></i> Dim · outside active set</span>
+          <span class="sw"><i></i> Hollow · construction (ring lines)</span>
+        </div>
+      </div>
+
+    </div>
+
+    <aside class="sketch__notes">
+      <h4>VAR E · HERO &amp; SUBORDINATION</h4>
+      <ul>
+        <li><b>Hero.</b> The concentric ring composition. T01 contains T02 contains T03 — <em>visible geometry</em>, not annotation.</li>
+        <li><b>Demoted: time.</b> "LAUNCHED JUL 2025" lives as one line of the right-edge tier stamp. Not on the diagram.</li>
+        <li><b>Demoted: inheritance.</b> <em>The lit-set IS the inheritance.</em> No chip duplication. No "↓ INH" callouts. Counting dots = counting services.</li>
+      </ul>
+
+      <h4>HOW IT SHOWS INHERITANCE WITHOUT DUPLICATION</h4>
+      <ul>
+        <li>Each chip exists in <b>exactly one place</b>: its native tier's ring.</li>
+        <li>Tap T01 → all 15 dots light (T01's 6 + T02's 4 + T03's 5). Tap T02 → 9 light (T02 + T03). Tap T03 → 5 light.</li>
+        <li>The <em>lit area is the math</em>. SR-01's failure mode — repeating the inheritance count as annotation — is gone.</li>
+      </ul>
+
+      <h4>INTERACTION</h4>
+      <ul>
+        <li><b>Tap a tier stamp</b> (right-edge) or any dot in its ring → that tier becomes active. Lit set updates.</li>
+        <li><b>Hover/tap a dot</b> → full service name appears as a fiche leader (shown here for T01).</li>
+        <li><b>Default state.</b> T01 active — flagship; all rings lit; widest read.</li>
+      </ul>
+
+      <h4>WHAT STRAINS</h4>
+      <ul>
+        <li>Outer ring perimeter has limited space for 6 chip-labels at-once. We show them as fiche leaders extending outward — works at this scale; tight on narrow viewports.</li>
+        <li>"Concentric containment" doesn't read as "time-sequenced" — visitors who arrive expecting a roadmap may need a beat to recalibrate. Time stamps on the right help but don't lead.</li>
+        <li>Risk of reading as <em>target / scope</em> rather than <em>inheritance</em>. Mitigation: ring labels say "+6 / +4 / +5" not just service counts.</li>
+      </ul>
+
+      <div class="tags">
+        <span class="tag lb">LOAD-BEARING · Geometry = math</span>
+        <span class="tag st">STRONG · Zero chip duplication</span>
+        <span class="tag ex">EXPLORATORY · Reads as scope, not seq</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MOBILE E -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">VAR E · MOBILE · RINGS SCALE, STAMPS STACK</div>
+
+      <div class="mob-e-stage">
+        <svg viewBox="-150 -150 300 300" width="300" height="300">
+          <line x1="-150" y1="0" x2="150" y2="0" stroke="rgba(180,200,195,0.05)" stroke-width="1"/>
+          <line x1="0" y1="-150" x2="0" y2="150" stroke="rgba(180,200,195,0.05)" stroke-width="1"/>
+          <circle cx="0" cy="0" r="120" fill="none" stroke="#2dd4b2" stroke-width="1" stroke-dasharray="3 4"/>
+          <circle cx="0" cy="0" r="80"  fill="none" stroke="#2dd4b2" stroke-width="1" stroke-dasharray="3 4"/>
+          <circle cx="0" cy="0" r="40"  fill="none" stroke="#2dd4b2" stroke-width="1" stroke-dasharray="3 4"/>
+          <!-- T03 5 dots -->
+          <g fill="#2dd4b2">
+            <circle cx="40" cy="0" r="4.5"/>
+            <circle cx="12.4" cy="38" r="4.5"/>
+            <circle cx="-32.4" cy="23.5" r="4.5"/>
+            <circle cx="-32.4" cy="-23.5" r="4.5"/>
+            <circle cx="12.4" cy="-38" r="4.5"/>
+          </g>
+          <!-- T02 4 dots -->
+          <g fill="#2dd4b2">
+            <circle cx="56.6" cy="56.6" r="4.5"/>
+            <circle cx="-56.6" cy="56.6" r="4.5"/>
+            <circle cx="-56.6" cy="-56.6" r="4.5"/>
+            <circle cx="56.6" cy="-56.6" r="4.5"/>
+          </g>
+          <!-- T01 6 dots -->
+          <g fill="#2dd4b2">
+            <circle cx="103.9" cy="60" r="4.5"/>
+            <circle cx="0" cy="120" r="4.5"/>
+            <circle cx="-103.9" cy="60" r="4.5"/>
+            <circle cx="-103.9" cy="-60" r="4.5"/>
+            <circle cx="0" cy="-120" r="4.5"/>
+            <circle cx="103.9" cy="-60" r="4.5"/>
+          </g>
+          <text x="0" y="-128" text-anchor="middle" fill="#2dd4b2"
+                font-family="IBM Plex Mono" font-size="8" letter-spacing="1.5">T01 · +6</text>
+          <text x="0" y="-88" text-anchor="middle" fill="#2dd4b2"
+                font-family="IBM Plex Mono" font-size="7" letter-spacing="1.5">T02 · +4</text>
+          <text x="0" y="-48" text-anchor="middle" fill="#2dd4b2"
+                font-family="IBM Plex Mono" font-size="7" letter-spacing="1.5">T03 · +5</text>
+          <text x="0" y="4" text-anchor="middle" fill="#6f7d78"
+                font-family="IBM Plex Mono" font-size="7" letter-spacing="1.5">CORE</text>
+        </svg>
+      </div>
+
+      <div class="mob-e-stamps">
+        <div class="row active"><span><b style="color:var(--ink-0);">T01</b> · Premium · JUL 25</span><span class="v">15</span></div>
+        <div class="row"><span><b style="color:var(--ink-1);">T02</b> · Professional · DEC 25</span><span class="v">9</span></div>
+        <div class="row"><span><b style="color:var(--ink-1);">T03</b> · Included · always-on</span><span class="v">5</span></div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>VAR E · MOBILE LOGIC</h4>
+      <p><b>Rings scale by SVG viewBox. No layout exception.</b> The 520×520 desktop stage becomes 300×300; ring radii and dot radii scale proportionally. The composition is identical at any size.</p>
+      <p><b>Tier stamps stack vertically below the diagram.</b> Same content, denser layout. Active state still readable.</p>
+      <p><b>Chip leader-lines are dropped at mobile</b>. Tap a dot → full service name appears in a fiche tooltip below the rings. Better than crowding the perimeter with text.</p>
+      <p><b>Tap targets.</b> Each dot is 9px visual + 44px hit area (invisible tap-pad layered over each dot).</p>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       VAR F — INHERITANCE-HERO
+       ========================================================================= -->
+  <section class="brk">
+    <div class="l">
+      <span class="arr">↓</span>
+      <span class="h">Variation F · inheritance-hero · cumulative cell-bar with tier brackets</span>
+    </div>
+    <div class="r">
+      <span class="mono">FIG. 02-C · TIER-LADDER · CUMULATIVE INHERITANCE</span><br/>
+      <span class="mono fig">SR-02 · VAR F · 5 → 9 → 15</span>
+    </div>
+  </section>
+
+  <div class="var-banner">
+    <span class="vlabel">VAR F · INHERITANCE-HERO</span>
+    <span class="vhero">Hero: <b>the math, in cells</b>. 15 squares left-to-right, owned by tier. Brackets above show what each tier inherits (its bracket spans cumulative cells).</span>
+    <span class="vdemo">DEMOTED · TIME (small stamps under tier sections) · HIERARCHY (bracket nesting)</span>
+    <span class="vactive">ACTIVE · <b>T01</b> bracket lit → all 15 cells own</span>
+  </div>
+
+  <div class="sketch">
+    <div class="sketch__art var-f-art">
+      <div class="art-stamp">SHEET F-01 · 1 : 1</div>
+
+      <div class="canvas-f">
+
+        <!-- huge math headline -->
+        <div class="math-h">
+          <div class="step">
+            <span class="v">5</span>
+            <span class="lbl">T03</span>
+          </div>
+          <span class="arr">→</span>
+          <div class="step">
+            <span class="v">9</span>
+            <span class="lbl">T02 · +4</span>
+          </div>
+          <span class="arr">→</span>
+          <div class="step active">
+            <span class="v">15</span>
+            <span class="lbl">T01 · +6 · ACTIVE</span>
+          </div>
+        </div>
+
+        <!-- brackets above the cells -->
+        <div class="brackets">
+          <div class="bracket t01 lit">
+            <span class="lbl"><b>T01</b> · CUMULATIVE OWNS</span>
+            <span class="meta">15 SERVICES</span>
+          </div>
+          <div class="bracket t02">
+            <span class="lbl"><b>T02</b> · INHERITS T03 + ADDS 4</span>
+            <span class="meta">9</span>
+          </div>
+          <div class="bracket t03">
+            <span class="lbl"><b>T03</b> · CORE</span>
+            <span class="meta">5</span>
+          </div>
+        </div>
+
+        <!-- 15 cells, in 3 visual tiers by background -->
+        <div class="bar-h">
+          <!-- T03 cells (cells 1-5) -->
+          <div class="cell t03"><span class="pn">03<br/>A</span></div>
+          <div class="cell t03"><span class="pn">03<br/>B</span></div>
+          <div class="cell t03"><span class="pn">03<br/>C</span></div>
+          <div class="cell t03"><span class="pn">03<br/>D</span></div>
+          <div class="cell t03"><span class="pn">03<br/>E</span></div>
+
+          <!-- T02 cells (cells 6-9) -->
+          <div class="cell t02"><span class="pn">02<br/>A</span></div>
+          <div class="cell t02"><span class="pn">02<br/>B</span></div>
+          <div class="cell t02"><span class="pn">02<br/>C</span></div>
+          <div class="cell t02"><span class="pn">02<br/>D</span></div>
+
+          <!-- T01 cells (cells 10-15) -->
+          <div class="cell t01"><span class="pn">01<br/>A</span></div>
+          <div class="cell t01"><span class="pn">01<br/>B</span></div>
+          <div class="cell t01"><span class="pn">01<br/>C</span></div>
+          <div class="cell t01"><span class="pn">01<br/>D</span></div>
+          <div class="cell t01"><span class="pn">01<br/>E</span></div>
+          <div class="cell t01"><span class="pn">01<br/>F</span></div>
+        </div>
+
+        <!-- annotation under the cells: ownership + time stamps -->
+        <div class="ann-row">
+          <div class="ann t03">↓ T03 · ALWAYS-ON <span class="ts">JAN ←</span></div>
+          <div class="ann t02">↓ T02 · DEC 2025 <span class="ts">→</span></div>
+          <div class="ann t01">↓ T01 · JUL 2025 <span class="ts">→</span></div>
+        </div>
+
+        <!-- bottom subordinate sidecar: tier accounts -->
+        <div class="sidecar-f">
+          <div class="slot">
+            <span class="tier">T03 · INCLUDED</span>
+            <span class="name">Foundation</span>
+            <span class="v">1M+ <span style="font-size:10px;color:var(--ink-3);">ACCTS</span></span>
+            <span class="breakdown">5 SERVICES · 5 ADDED · 0 INH</span>
+          </div>
+          <div class="slot">
+            <span class="tier">T02 · PRO</span>
+            <span class="name">Professional</span>
+            <span class="v">25K+ <span style="font-size:10px;color:var(--ink-3);">ACCTS</span></span>
+            <span class="breakdown">9 SERVICES · 4 ADDED · 5 INH</span>
+          </div>
+          <div class="slot active">
+            <span class="tier">T01 · BUSINESS</span>
+            <span class="name">Premium</span>
+            <span class="v">950 <span style="font-size:10px;color:var(--ink-3);">ACCTS</span></span>
+            <span class="breakdown">15 SERVICES · 6 ADDED · 9 INH</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <aside class="sketch__notes">
+      <h4>VAR F · HERO &amp; SUBORDINATION</h4>
+      <ul>
+        <li><b>Hero.</b> The big "5 → 9 → 15" headline + 15 cells + nested brackets. <em>The diagram IS the arithmetic.</em></li>
+        <li><b>Demoted: time.</b> "JUL 2025 / DEC 2025 / ALWAYS-ON" lives as small annotation under each tier section.</li>
+        <li><b>Demoted: hierarchy.</b> Tier identity emerges from bracket nesting + cell background tone. No tier "lanes".</li>
+      </ul>
+
+      <h4>HOW THE MATH IS THE DIAGRAM</h4>
+      <ul>
+        <li>15 cells = 15 services. <b>One cell per service. No duplication.</b></li>
+        <li>T03 bracket spans cells 1–5 = T03's 5. T02 bracket spans 1–9 = T02 inherits all 5 + adds 4. T01 bracket spans 1–15 = T01 inherits all 9 + adds 6.</li>
+        <li>Bracket length is cumulative count. Visual width = math.</li>
+      </ul>
+
+      <h4>INTERACTION</h4>
+      <ul>
+        <li><b>Tap a bracket</b> or a sidecar slot → that bracket lights teal; the bracket's range of cells lights with it; other brackets dim.</li>
+        <li><b>Tap a cell</b> → full service name appears in a fiche tooltip below.</li>
+        <li><b>Default state.</b> T01 bracket lit; all 15 cells in T01's set.</li>
+      </ul>
+
+      <h4>WHAT STRAINS</h4>
+      <ul>
+        <li>The metaphor is most abstract of the three — visitors who don't speak "set theory" may not grok the bracket-nesting at-a-glance. The 5 → 9 → 15 headline carries that for them.</li>
+        <li>Sequence is the most demoted here — JUL / DEC dates are small mono lines. Visitors who care about launches first may miss them on first scan.</li>
+      </ul>
+
+      <div class="tags">
+        <span class="tag lb">LOAD-BEARING · Cells = services</span>
+        <span class="tag st">STRONG · Cumulative geometry</span>
+        <span class="tag ex">EXPLORATORY · Bracket-nesting literacy</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MOBILE F -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">VAR F · MOBILE · CUMULATIVE STACK</div>
+
+      <div class="mob-f-stack">
+        <!-- T01 block (active) -->
+        <div class="tier-block active">
+          <div class="hd">
+            <span class="pn">T01 · <b>PREMIUM</b> · JUL 2025</span>
+            <span class="v">15</span>
+          </div>
+          <div class="row-cells">
+            <!-- 9 inherited -->
+            <div class="c in"></div><div class="c in"></div><div class="c in"></div><div class="c in"></div>
+            <div class="c in"></div><div class="c in"></div><div class="c in"></div><div class="c in"></div>
+            <div class="c in"></div>
+            <!-- 6 added -->
+            <div class="c ad"></div><div class="c ad"></div><div class="c ad"></div>
+            <div class="c ad"></div><div class="c ad"></div><div class="c ad"></div>
+          </div>
+          <div class="breakdown">
+            <span class="ad">■ +6 ADDED</span>
+            <span class="in">■ 9 INHERITED</span>
+            <span style="color:var(--ink-2); margin-left:auto;">950 ACCTS</span>
+          </div>
+        </div>
+
+        <!-- T02 block -->
+        <div class="tier-block">
+          <div class="hd">
+            <span class="pn">T02 · <b>PROFESSIONAL</b> · DEC 2025</span>
+            <span class="v">9</span>
+          </div>
+          <div class="row-cells">
+            <div class="c in"></div><div class="c in"></div><div class="c in"></div><div class="c in"></div>
+            <div class="c in"></div>
+            <div class="c ad"></div><div class="c ad"></div><div class="c ad"></div><div class="c ad"></div>
+            <div class="c"></div><div class="c"></div><div class="c"></div>
+            <div class="c"></div><div class="c"></div><div class="c"></div>
+          </div>
+          <div class="breakdown">
+            <span class="ad">■ +4 ADDED</span>
+            <span class="in">■ 5 INHERITED</span>
+            <span style="color:var(--ink-2); margin-left:auto;">25K+</span>
+          </div>
+        </div>
+
+        <!-- T03 block -->
+        <div class="tier-block">
+          <div class="hd">
+            <span class="pn">T03 · <b>INCLUDED</b> · ALWAYS-ON</span>
+            <span class="v">5</span>
+          </div>
+          <div class="row-cells">
+            <div class="c ad"></div><div class="c ad"></div><div class="c ad"></div><div class="c ad"></div>
+            <div class="c ad"></div>
+            <div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div>
+            <div class="c"></div><div class="c"></div><div class="c"></div>
+            <div class="c"></div><div class="c"></div><div class="c"></div>
+          </div>
+          <div class="breakdown">
+            <span class="ad">■ +5 ADDED</span>
+            <span class="in">0 INHERITED</span>
+            <span style="color:var(--ink-2); margin-left:auto;">1M+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>VAR F · MOBILE LOGIC</h4>
+      <p><b>The cumulative bar stacks vertically.</b> Each tier becomes its own block; each block contains a 15-cell row showing that tier's own composition: solid = added at this tier, faint = inherited, empty = belongs to a higher tier.</p>
+      <p><b>The bracket abstraction collapses</b> — visual relationship between blocks is now top-down stacking. Active block highlights with teal border + filled background.</p>
+      <p><b>The cumulative math reads vertically.</b> Scanning top-to-bottom: 15 cells worth of content (T01), 9 (T02), 5 (T03). Same hero relationship, expressed in a different axis. No layout exception.</p>
+      <p><b>Tap a tier block</b> → active state changes; chip-name list slides in below the active block.</p>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       ANALYSIS · COMPARISON · RECOMMENDATION
+       ========================================================================= -->
+  <section class="analysis">
+    <h2>↘ Comparison &amp; recommendation · SR-02</h2>
+
+    <h3><span class="pn">§ 1 · WHICH HERO MATCHES THE PAGE'S REGISTER</span>Reading the variations against the rest of Impact</h3>
+
+    <p>The Impact page elsewhere treats time as <b>structural</b> — engagement years, hero metric strips, the FIG-stamped timeline patterns we've already shipped. The page's grammar is technical-illustration with date stamps; sequence is the page's natural axis. <b>VAR D</b> fits this register most cleanly. The launch flags read like the rest of the page's date-pinned fiche.</p>
+
+    <p><b>VAR E</b> is the most novel — concentric rings appear nowhere else on Impact. That's a feature (the diagram earns its own visual identity) and a risk (it doesn't share grammar with siblings). It fights the page only if Impact is meant to be tonally uniform top-to-bottom; if "each tab gets its own diagram" is acceptable, the ring is a strong outlier.</p>
+
+    <p><b>VAR F</b> reads as a chart, not a drawing. The big "5 → 9 → 15" headline is closest to the Impact hero-metric strip pattern — that's a tonal match. But the cell-grid below feels like a Marimekko / set-theory diagram, which doesn't appear elsewhere on the page. <em>Mixed register fit.</em></p>
+
+    <div class="quad">
+      <div class="qbox">
+        <div class="lbl">VAR D · FITS PAGE</div>
+        <p>Highest grammar-fit. Looks like the rest of Impact. Risk: looks like the rest of Impact, may not earn a "moment".</p>
+      </div>
+      <div class="qbox">
+        <div class="lbl">VAR E · STRONG OUTLIER</div>
+        <p>Most novel diagram. Earns a moment. Risk: doesn't share grammar with the page; may feel like a transplant.</p>
+      </div>
+      <div class="qbox">
+        <div class="lbl">VAR F · MIXED FIT</div>
+        <p>Headline matches hero-metric register. Cell grid is foreign. Most abstract metaphor.</p>
+      </div>
+    </div>
+
+    <h3><span class="pn">§ 2 · WHICH HERO IS THE RIGHT ONE FOR <em>THIS</em> STORY</span>What the tier ladder is actually about</h3>
+
+    <p>The tier ladder's most important truth, for a reader evaluating Matt's work at Autodesk, is <b>not</b> "we phased launches across 12 months". Phased launch sequencing is what shipped, but it's not what makes the work credible. What makes the work credible is: <em>we designed a cumulative service inheritance model where higher tiers genuinely contain lower-tier services</em>, and we did it at coherent population scale (950 / 25K+ / 1M+). That's the architecture story. Phased launch is the rollout footnote.</p>
+
+    <p>If that read is right, <b>VAR D understates the most important relationship</b>. It treats inheritance as a count in a sidecar — accurate but unweighted. <b>VAR E and VAR F</b> both make inheritance the hero. Between them, VAR E shows inheritance as <i>containment</i> (the structural truth) and VAR F shows it as <i>arithmetic</i> (the proof).</p>
+
+    <h3><span class="pn">§ 3 · WHAT CHANGES IF THE TIMELINE WAS NEVER THE RIGHT FRAME</span>Permission used</h3>
+
+    <p>Reading SR-01 and SR-02 together, I now believe <b>the timeline direction was a strategic choice that became a visual constraint</b>. "Phased launch" is a true and meaningful story but it isn't the load-bearing one for a portfolio reader. The previous chat picked timeline because (a) it gave a strong calendar moment, (b) mobile rotation worked, and (c) it was fiche-native. Those are real, but (a) is a moment, not the story; (b) is fine but mobile-friendliness shouldn't drive desktop concept; (c) is true of any axis-based diagram including rings and bracket-nests.</p>
+
+    <p>I'd put the timeline direction down. The cost is losing the JUL / DEC launch moments as scenography. The win is putting the structural story — cumulative inheritance — in the seat of the diagram, which is where the credit lives.</p>
+
+    <!-- RECOMMENDATION -->
+    <div class="recco">
+      <span class="stamp">RECOMMEND</span>
+      <div>
+        <h3>Build <em>Variation E · concentric rings</em>, with a small VAR D launch-strip pinned above as the introductory "scene-set".</h3>
+        <p><b>Why E.</b> It's the only variation where the hero relationship (inheritance) is carried by geometry visitors can read without instructions. Lit-area = service count. Containment = inheritance. Zero chip duplication.</p>
+        <p><b>Why a small launch strip above.</b> The phased-launch story is real and we shouldn't lose it entirely. A thin one-line timeline pinned above the ring diagram ("JAN — JUL — DEC · 12 months · three launches") gives the date pegs without compromising the hero. This is intentional <i>subordination</i>, not a fourth dashboard.</p>
+        <p><b>What this kills.</b> The Gantt-with-chip metaphor from SR-01. The 280px manifest column. The "inheritance shown three ways" problem.</p>
+        <p><b>Mobile.</b> Rings scale by SVG viewBox. Stamps stack. No layout exception. Already validated in the mobile sketch.</p>
+        <p><b>Open risk.</b> Concentric rings don't appear elsewhere on Impact. If that becomes a visual coherence problem during build, we fall back to <b>VAR F</b> (cells + brackets) — the headline matches Impact's hero-metric register, and the inheritance story still lands.</p>
+      </div>
+    </div>
+
+    <h3><span class="pn">§ 4 · OPEN QUESTIONS FOR MATT</span>Resolve before build</h3>
+    <ul>
+      <li><b>Is the cumulative inheritance story actually the load-bearing one?</b> If the portfolio read is "phased launch was the achievement", the recommendation flips back toward VAR D.</li>
+      <li><b>Tolerance for tonal outliers on Impact.</b> Concentric rings appear nowhere else. Acceptable as "each tab gets its diagram", or does Impact need grammar uniformity?</li>
+      <li><b>How much of the launch story can we sacrifice?</b> A pinned strip above the rings carries the date pegs but loses the "duration in market" read VAR D had.</li>
+      <li><b>The diagnosis pass-criteria above</b> — do they match how you'd evaluate? If not, we're using the wrong rubric.</li>
+      <li><b>Should we test VAR E and VAR F as a paired flip</b> (rings as the "T01 active" default, brackets as the "compare tiers" alt-view)? Or commit to one geometry?</li>
+      <li><b>Does Autodesk's actual product structure</b> match the strict 5 / 9 / 15 cumulative model, or are there services in T01 that are NOT in T02 + T03's union? If there are deviations, both E and F need an exception path — go back to the diagnosis.</li>
+    </ul>
+
+  </section>
+
+  <!-- footer -->
+  <footer class="footer">
+    <div><b>SR-02</b> · TIER LADDER · DIVERGE</div>
+    <div>SCALE · 1 : 1</div>
+    <div>DRAWN · M. STANGL</div>
+    <div>APPROVED · ─</div>
+    <div>DATE · 2026 · 05</div>
+    <div>REV · v2026.05 · LO-FI</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+/* Synthetic Users Tier-A — shares Centaur/EY/Wipro/Autodesk chrome stack */
+@import "../case-centaur/tokens-scoped.css";
+@import "../case-centaur/grammar.css";
+@import "../tier-a/fiche-nav.css";
+@import "../case-centaur/density.css";
+@import "../case-centaur/tier-a-case-shell.css";
+@import "../tier-a/hero-chrome.css";
+@import "./case-synthetic.css";
+@import "./artifacts.css";

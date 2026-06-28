@@ -8,21 +8,7 @@ import { DeclarationCentaur } from "./DeclarationCentaur";
 import { DeploymentDiffCentaur, ReviewTerminalCentaur, SignalTelemetryCentaur } from "./RecordsCentaur";
 import { TelemetryCentaur } from "./TelemetryCentaur";
 
-function DimBetween({ label, compact }: { label: string; compact?: boolean }) {
-  return (
-    <div className={compact ? "dim-with-scale dim-with-scale--compact" : "dim-with-scale"}>
-      <p className="dim">{label}</p>
-      <svg className="dim-scale" viewBox="0 0 800 20" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="4" x2="800" y2="4" stroke="var(--ink-line)" strokeWidth="1" />
-        <g stroke="var(--ink-3)" strokeWidth="1">
-          {[0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800].map((x) => (
-            <line key={x} x1={x} y1="4" x2={x} y2="14" />
-          ))}
-        </g>
-      </svg>
-    </div>
-  );
-}
+import { DimScale } from "../../DimScale";
 
 export function CentaurCaseView() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -66,12 +52,15 @@ export function CentaurCaseView() {
       </a>
 
       <CaseHero
+        heroImageSrc="/case-studies/centaur-literal.png"
         picker={<CasePicker activeSlug="ai" />}
         caseNumber="01"
         totalCases={5}
         marginNote="DRAWING 01 · HERO"
         figStamp="FIG. 01 · HERO"
-        tag="01 · BUILD · CASE 01 OF 05"
+        tag="01 · BRIEF · CASE 01 OF 05"
+        basedLine="DEN · REMOTE"
+        roleLine="DESIGN & BUILD"
         headline={
           <>
             I built this portfolio with AI, and kept the decisions <em>human.</em>
@@ -79,9 +68,8 @@ export function CentaurCaseView() {
         }
         subhead={
           <>
-            Six weeks. Four tools. One lesson I&apos;ll use for the rest of my career.
-            <br />
-            <b>AI raises the floor. Taste raises the ceiling.</b>
+            Six weeks with Cursor, Claude, and Vercel, documenting how <em>human taste</em> still sets the
+            ceiling when AI raises the floor.
           </>
         }
         meta={{
@@ -102,12 +90,12 @@ export function CentaurCaseView() {
 
       <TelemetryCentaur />
 
-      <DimBetween label="↓ METHOD · HOW THE WORK SPLIT" />
+      <DimScale label="↓ METHOD · HOW THE WORK SPLIT" />
 
       <DeclarationCentaur />
 
       <section className="records" id="records" aria-label="Service Records" data-screen-label="04 Service Records">
-        <DimBetween label="↓ ARTIFACTS · PROOF FOLLOWS" compact />
+        <DimScale label="↓ ARTIFACTS · PROOF FOLLOWS" compact />
 
         <span className="margin-note">DRAWING 04 · ARTIFACTS</span>
         <span className="fig-stamp">FIG. 04 · ARTIFACTS</span>
@@ -142,7 +130,7 @@ export function CentaurCaseView() {
         </div>
       </section>
 
-      <DimBetween label="↓ BULLETIN · WHERE I PAID" />
+      <DimScale label="↓ BULLETIN · WHERE I PAID" />
 
       <section className="bulletin" id="bulletin" aria-label="Service Bulletin" data-screen-label="05 Service Bulletin">
         <span className="margin-note">DRAWING 05 · BULLETIN</span>
@@ -209,7 +197,7 @@ export function CentaurCaseView() {
               </header>
               <h3 className="bulletin__entry-title">Let AI write three case studies end to end.</h3>
               <p className="bulletin__entry-body">
-                Same root cause as above. Fluent, professional, completely generic. <b>The fix was never less AI. It was more specificity.</b> The
+                Same root cause. Same generic result. <b>The fix was never less AI. It was more specificity.</b> The
                 version you&apos;re reading is the rebuild.
               </p>
             </article>
@@ -218,14 +206,14 @@ export function CentaurCaseView() {
           <aside className="tell" role="note">
             <span className="tell__eyebrow">THE TELL</span>
             <p>
-              The ratio of <em>presentation quality to case study depth</em> is the AI red flag — not the AI use itself. Experienced reviewers catch it in 30
+              The AI red flag is the ratio of <em>presentation quality to case-study depth</em>, not the AI use itself. Experienced reviewers catch it in 30
               seconds.
             </p>
           </aside>
         </div>
       </section>
 
-      <DimBetween label="↓ HANDOFF · THE LARGER STORY" />
+      <DimScale label="↓ HANDOFF · THE LARGER STORY" />
 
       <section className="handoff" aria-label="Handoff" data-screen-label="06 Handoff">
         <span className="margin-note">DRAWING 06 · HANDOFF</span>

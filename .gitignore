@@ -13,6 +13,13 @@ tmp_py/
 # Local reference snapshots (HTML exports for external design tools, not source)
 reference/html-export/
 
+# Verification artifacts — regenerated each gate run
+reference/impact-visual-pass/verification-screenshots/
+reference/impact-visual-pass/polish-pass-*-screenshots/
+
+# Tooling cache (Playwright / local QA runs)
+cache/
+
 # One-time design handoffs (not source)
 .handoff/
 
