@@ -733,6 +733,8 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-bar {
   display: flex;
@@ -771,6 +773,47 @@
   padding: 1rem;
   touch-action: manipulation;
   -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-desktop {
+  display: block;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-mobile {
+  display: none;
+}
+
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 100%;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-card-sep {
+  border: 0;
+  border-top: 1px solid var(--ink-line);
+  margin: 0.5rem 0 0;
+}
+
+@media (max-width: 768px) {
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-desktop {
+    display: none;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-mobile {
+    display: block;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal {
+    padding: 0.75rem;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-modal-scroll {
+    padding: 0.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
