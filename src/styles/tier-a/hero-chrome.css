@@ -232,6 +232,13 @@
 }
 
 /* ---- Copy block — one gutter, one title size, top-anchored eyebrow ---- */
+.tier-a-case-root .hero__plate .hero__inner {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .tier-a-case-root .hero__inner {
   max-width: var(--col-wide);
   margin-left: 0;
@@ -275,16 +282,28 @@
   text-shadow: 0 2px 10px rgba(10, 17, 16, 0.65);
   overflow-wrap: break-word;
   hyphens: auto;
+  text-wrap: wrap;
+  min-width: 0;
 }
 
 @media (max-width: 768px) {
-  .tier-a-case-root .hero__h1 {
-    font-size: clamp(2rem, 8.5vw, var(--hero-title-size));
+  /* min-height + aspect-ratio was blowing plate width past the viewport (870px @ 390). */
+  .tier-a-case-root .hero__plate {
+    width: 100%;
     max-width: 100%;
+    aspect-ratio: auto;
+    overflow-x: clip;
+  }
+
+  .tier-a-case-root .hero__h1 {
+    font-size: clamp(2rem, 8.5vw, 2.5rem);
+    max-width: 100%;
+    width: 100%;
   }
 
   .tier-a-case-root .hero__sub {
     max-width: 100%;
+    width: 100%;
     overflow-wrap: break-word;
   }
 }
