@@ -163,6 +163,11 @@ section > * { position: relative; }
   z-index: 5;
   pointer-events: none;
 }
+@media (max-width: 768px) {
+  #about-v3 .fig-stamp {
+    display: none;
+  }
+}
 .hero, .ledger, .cases { position: relative; }
 
 /* ============ 5C · DRAFTING MARGINALIA (DESKTOP ONLY) ============ */
