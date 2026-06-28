@@ -114,13 +114,15 @@
   line-height: 1.02;
   letter-spacing: -0.025em;
   margin: 0.6rem 0 1rem;
-  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 .home-v2-root .hero__sub {
   color: var(--ink-2);
   font-size: var(--t-lead);
   max-width: 38ch;
   margin: 0 0 1.5rem;
+  overflow-wrap: break-word;
 }
 .hero__avail {
   display: inline-flex;
@@ -287,8 +289,8 @@
     aspect-ratio: 13/16;
   }
   .hero__stamp { display: none; }
-  .home-v2-root .hero__h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
-  .home-v2-root .hero__sub { font-size: 1rem; }
+  .home-v2-root .hero__h1 { font-size: clamp(2rem, 8.5vw, 2.6rem); max-width: 100%; }
+  .home-v2-root .hero__sub { font-size: 1rem; max-width: 100%; }
   .hero--pointillism .hero__copy {
     max-width: 100%;
   }
