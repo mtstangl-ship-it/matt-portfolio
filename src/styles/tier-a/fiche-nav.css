@@ -153,6 +153,14 @@
   }
 }
 
+/* Anchored sections · clear fixed fiche nav on in-page jumps */
+.home-v2-root [id],
+#about-v3 [id],
+.tier-a-case-root [id],
+.impact-shell [id] {
+  scroll-margin-top: var(--fiche-nav-clearance);
+}
+
 /* Desktop: never show hamburger (defense vs cascade order / Tailwind). */
 @media (min-width: 1025px) {
   .nav__menu {
