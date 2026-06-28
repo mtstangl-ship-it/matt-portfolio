@@ -629,6 +629,20 @@
   .dd__phase--diverging { border-right: 0; border-bottom: 1px dashed var(--ink-line); }
 }
 
+@media (max-width: 768px) {
+  .dd__diamond-svg {
+    opacity: 0.12;
+  }
+  .journey-span {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .journey-span__bookend {
+    max-width: 100%;
+  }
+}
+
 /* Service Manual photo cluster (anchor + secondary) — equal 50/50 desktop */
 .sm-photos {
   display: grid;

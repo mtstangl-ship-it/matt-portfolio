@@ -167,6 +167,9 @@ section > * { position: relative; }
   #about-v3 .fig-stamp {
     display: none;
   }
+  #about-v3 .dim::after {
+    display: none;
+  }
 }
 .hero, .ledger, .cases { position: relative; }
 
