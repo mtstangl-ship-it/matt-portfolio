@@ -9,7 +9,7 @@ export const homeV2Hero = {
   subhead:
     "For enterprises where the journey has splintered across operational silos.",
   availability:
-    "Available for senior design leadership roles, especially in healthcare.",
+    "Available for senior design leadership roles.",
   contacts: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/mattstangl", external: true },
     { label: "mtstangl@gmail.com", href: "mailto:mtstangl@gmail.com", external: true },
@@ -49,10 +49,10 @@ export const homeV2LedgerSolved = [
 
 export const homeV2LedgerIntent = [
   `Scaling healthcare access for populations the system was never built to serve`,
-  `Friction between patients, providers, and insurers that nobody owns by design`,
-  `Stigmatized care treated as a clinical experience, not a moral one`,
+  `Friction between the teams, systems, and partners that nobody owns by design`,
+  `Human moments in a journey designed as transactions`,
   `Experience design as an operating model, not a team`,
-  `Service tiers designed around what customers actually value — not what we can charge for`,
+  `Service tiers built around what customers value, not what we can charge for`,
   `AI strategy that raises the ceiling of what teams can do, not just the floor`,
 ] as const;
 
@@ -84,7 +84,7 @@ export const homeV2CentaurArtifacts = [
 
 /** Bottom Contact strip — aligned with COPY-home.md Tier 1 */
 export const homeV2Contact = {
-  subhead: "Senior design leadership roles. Healthcare preferred.",
+  subhead: "Senior design leadership roles.",
 } as const;
 
 /** Preserved viz mapping: prototype paths → repo dashboard components */
