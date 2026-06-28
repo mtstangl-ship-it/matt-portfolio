@@ -226,11 +226,12 @@
 }
 
 @media (max-width: 768px) {
-  .tier-a-case-root .hero__stamp-stack .hero__fig-stamp {
+  .tier-a-case-root .hero__stamp-stack .hero__id-strip {
     display: none;
   }
-  .tier-a-case-root .hero__stamp-stack .hero__id-strip {
+  .tier-a-case-root .hero__stamp-stack .hero__fig-stamp {
     border-radius: 3px;
+    border-bottom: 1px solid var(--ink-line);
   }
 }
 
