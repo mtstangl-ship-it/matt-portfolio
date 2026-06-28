@@ -706,6 +706,14 @@
   .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-mobile {
     display: flex;
   }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-matrix {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .autodesk-opps-carousel {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
 }
 
 /* ---- Fullscreen modal ---- */

@@ -38,4 +38,11 @@ body:has(.tier-a-case-root) {
   --col-wide: 1440px;
 }
 
+@media (max-width: 768px) {
+  .tier-a-case-root {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+}
+
 /* Case picker + “CASE STUDY” chrome live inside CaseHero on Tier-A routes (see CaseHero + CentaurCaseView). */

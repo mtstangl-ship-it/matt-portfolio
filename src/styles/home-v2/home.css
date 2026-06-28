@@ -5,6 +5,13 @@
    ========================================================= */
 
 /* ====================== HERO ====================== */
+@media (max-width: 768px) {
+  .home-v2-root {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+}
+
 .home-v2-root .hero {
   padding-top: clamp(7rem, 12vh, 9rem);
   padding-bottom: 0;
@@ -301,6 +308,8 @@
   padding: 0.85rem 0;
   border-bottom: 1px solid var(--ink-line);
   overflow: hidden;
+  overflow-x: clip;
+  max-width: 100%;
   background: var(--bg);
   -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
