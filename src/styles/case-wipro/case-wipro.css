@@ -1237,8 +1237,21 @@
 .tier-a-case-root .case-wipro-portfolio .handoff-pair--back .handoff-pair__ttl {
   color: var(--ink-2);
 }
-@media (max-width: 880px) {
+@media (max-width: 768px) {
   .tier-a-case-root .case-wipro-portfolio .handoff-pair {
     grid-template-columns: 1fr;
+  }
+  .tier-a-case-root .case-wipro-portfolio .handoff-pair a {
+    grid-template-columns: 1fr;
+    align-items: start;
+    position: relative;
+    padding-right: 2.5rem;
+    min-height: 44px;
+  }
+  .tier-a-case-root .case-wipro-portfolio .handoff-pair__arrow {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
   }
 }

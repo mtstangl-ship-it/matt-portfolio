@@ -411,9 +411,22 @@
 .tier-a-case-root .case-autodesk-portfolio .handoff-pair--back a {
   border-style: dashed;
 }
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .tier-a-case-root .case-autodesk-portfolio .handoff-pair {
     grid-template-columns: 1fr;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .handoff-pair a {
+    grid-template-columns: 1fr;
+    align-items: start;
+    position: relative;
+    padding-right: 2.5rem;
+    min-height: 44px;
+  }
+  .tier-a-case-root .case-autodesk-portfolio .handoff-pair__arrow {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
   }
 }
 
