@@ -47,6 +47,11 @@
     display: none;
   }
 }
+@media (max-width: 1023px) {
+  .home-v2-root .fig-stamp {
+    right: max(12px, env(safe-area-inset-right, 0px));
+  }
+}
 .home-v2-root .hero, .home-v2-root .ledger, .home-v2-root .cases { position: relative; }
 
 /* ============ 5C · DRAFTING MARGINALIA (DESKTOP ONLY) ============ */

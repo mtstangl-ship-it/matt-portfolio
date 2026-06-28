@@ -226,6 +226,17 @@
   }
 }
 
+@media (max-width: 768px) {
+  body.nav-open .tier-a-case-root .nav__list a,
+  body.nav-open .home-v2-root .nav__list a,
+  body.nav-open #about-v3 .nav__list a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 10px;
+  }
+}
+
 /* Drawer — Tier-A case shell (FicheNav lives inside .tier-a-case-root) */
 @media (max-width: 1024px) {
   body.nav-open .tier-a-case-root .nav__list,
