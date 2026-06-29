@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SU · Artifact 02 · EVIDENCE.LADDER</title>
+<!--
+  ============================================================
+  ARTIFACT 02 — EVIDENCE.LADDER · Section 03
+  4 environments × 2 research methods comparison matrix
+  ------------------------------------------------------------
+  DESIGN DECISIONS WORTH FLAGGING (for the Cursor port):
+  · CONFIDENCE LADDER MARKS are the key spec here. The four levels
+    (SHIP / HIGH / MID / baseline) are encoded as a 4-segment
+    signal meter where the COUNT OF FILLED SEGMENTS = level. This
+    is position/quantity encoding — fully legible in grayscale,
+    no color dependency (the brief's accessibility requirement).
+    The old impact-vis version used teal-vs-amber bars (color-only)
+    for MID; that is replaced here by fewer-filled-segments + a
+    distinct hollow state. Accent only reinforces.
+  · It is a COMPARISON matrix, not a feature grid. The two method
+    rows share columns so the eye reads DOWN each environment to
+    compare REAL vs SYNTHETIC meters at the same x-position. A
+    per-column verdict strip (REPLACES / AUGMENTS) makes the
+    contrast explicit.
+  · MOBILE: the bordered container gets max-width:100% + explicit
+    padding (the brief's margin-violation fix). The matrix
+    re-flows to per-ENVIRONMENT cards (each card stacks REAL over
+    SYNTHETIC) so the head-to-head comparison survives the
+    collapse — see mobile companion + notes for the rationale vs.
+    the brief's "two method blocks" alternative.
+  · Footer metrics (3 / 1 / $8K→$0) are the punchline and land last.
+  · Single placeholder accent (#2dd4b2). Swap later.
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="synthetic-artifacts.css">
+<style>
+  /* ---- EVIDENCE.LADDER (artifact-specific) ---- */
+  .ladder{ border:1px solid var(--ink-3); background:var(--bg); max-width:100%; }
+
+  /* matrix header band (artifact's own caption, not page chrome) */
+  .ladder__cap{
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;
+    padding:13px 18px; border-bottom:1px solid var(--ink-3); background:var(--bg-soft);
+  }
+  .ladder__cap .id{ font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent); }
+  .ladder__cap .id b{ color:var(--ink-1); font-weight:400; margin-left:10px; letter-spacing:0.06em; }
+  .ladder__cap .meta{ font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); }
+  .ladder__cap .meta .dot{ width:6px; height:6px; background:var(--accent); display:inline-block; margin-right:7px; vertical-align:middle; }
+
+  /* the grid */
+  .matrix{ display:grid; grid-template-columns:1.15fr 1fr 1fr 1fr 1fr; }
+  .mh{ /* column header */
+    padding:11px 16px; border-bottom:1px solid var(--ink-3);
+    font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2);
+  }
+  .mh + .mh, .mcell + .mcell, .mrowlab + .mcell{ border-left:1px solid var(--ink-4); }
+  .mh .env{ color:var(--ink-1); }
+  .mh .kind{ color:var(--ink-3); }
+
+  /* method row label cell */
+  .mrowlab{
+    padding:18px 16px; border-bottom:1px solid var(--ink-4);
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .mrowlab.real{ background:var(--bg); }
+  .mrowlab.synth{ background:var(--accent-vlow); border-bottom:none; }
+  .mrowlab .tag{ font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; }
+  .mrowlab.real .tag{ color:var(--ink-2); }
+  .mrowlab.synth .tag{ color:var(--accent); }
+  .mrowlab .name{ font-family:var(--sans); font-weight:500; font-size:17px; letter-spacing:-0.015em; color:var(--ink-0); line-height:1.1; }
+  .mrowlab .spec{ font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-2); margin:0; display:block; }
+  .mrowlab .spec b{ color:var(--ink-1); font-weight:500; }
+
+  /* data cell */
+  .mcell{
+    padding:16px 16px 14px; border-bottom:1px solid var(--ink-4);
+    display:flex; flex-direction:column; gap:11px; min-height:118px;
+  }
+  .mcell.synth{ background:var(--accent-vlow); border-bottom:none; }
+  .mcell .sig{ font-family:var(--sans); font-weight:500; font-size:15px; letter-spacing:-0.01em; color:var(--ink-0); line-height:1.15; }
+  .mcell .qual{ font-family:var(--mono); font-size:9px; letter-spacing:0.13em; text-transform:uppercase; color:var(--ink-2); margin-top:auto; }
+  .mcell .qual .lv{ color:var(--accent); }
+  .mcell .qual.augk .lv{ color:var(--rev); }
+
+  /* the confidence meter — 4 segments, fill-count = level */
+  .meter{ display:flex; align-items:flex-end; gap:4px; height:30px; }
+  .meter .seg{ width:9px; border:1px solid var(--ink-3); background:transparent; }
+  .meter .seg:nth-child(1){ height:30%; }
+  .meter .seg:nth-child(2){ height:52%; }
+  .meter .seg:nth-child(3){ height:74%; }
+  .meter .seg:nth-child(4){ height:100%; }
+  .meter .seg.on{ background:var(--accent); border-color:var(--accent); }
+  .meter.mid .seg.on{ background:var(--ink-1); border-color:var(--ink-1); } /* MID = filled but de-emphasised tone, still count-distinct */
+  .meterline{ display:flex; align-items:center; gap:11px; }
+  .meterline .lvl{ font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-1); }
+
+  /* per-column verdict strip */
+  .verdict{
+    grid-column:1 / -1; display:grid; grid-template-columns:1.15fr 1fr 1fr 1fr 1fr;
+    border-top:1px solid var(--ink-3);
+  }
+  .verdict .vlab{
+    padding:10px 16px; font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3);
+    display:flex; align-items:center;
+  }
+  .verdict .vc{
+    padding:10px 16px; border-left:1px solid var(--ink-4);
+    font-family:var(--mono); font-size:10px; letter-spacing:0.13em; text-transform:uppercase; color:var(--accent);
+    display:flex; align-items:center; gap:7px;
+  }
+  .verdict .vc.aug{ color:var(--rev); }
+  .verdict .vc .m{ font-size:8px; color:var(--ink-3); letter-spacing:0.1em; }
+
+  /* legend for the ladder marks */
+  .ladkey{
+    display:flex; gap:26px; flex-wrap:wrap; align-items:center;
+    margin-top:16px; padding:13px 16px; border:1px dashed var(--ink-3); background:var(--bg-soft);
+  }
+  .ladkey .lab{ font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); }
+  .ladkey .it{ display:flex; align-items:center; gap:9px; }
+  .ladkey .it .nm{ font-family:var(--mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); }
+  .ladkey .it .nm b{ color:var(--ink-1); font-weight:500; }
+  .km{ display:flex; align-items:flex-end; gap:3px; height:18px; }
+  .km .s{ width:6px; border:1px solid var(--ink-3); }
+  .km .s:nth-child(1){ height:35%; } .km .s:nth-child(2){ height:58%; }
+  .km .s:nth-child(3){ height:80%; } .km .s:nth-child(4){ height:100%; }
+  .km .s.on{ background:var(--accent); border-color:var(--accent); }
+  .km.mid .s.on{ background:var(--ink-1); border-color:var(--ink-1); }
+
+  /* punchline footer */
+  .punch{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:22px; border:1px solid var(--ink-3); }
+  .punch .p{ padding:22px 22px 20px; border-left:1px solid var(--ink-4); }
+  .punch .p:first-child{ border-left:none; }
+  .punch .p .big{ font-family:var(--sans); font-weight:600; font-size:38px; letter-spacing:-0.03em; color:var(--accent); line-height:1; }
+  .punch .p .lab{ font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); margin-top:12px; line-height:1.5; }
+  .punch .p .lab b{ color:var(--ink-1); font-weight:500; }
+
+  @media (max-width:900px){
+    /* re-flow to per-environment cards — comparison survives */
+    .ladder{ border:none; }
+    .ladder__cap{ border:1px solid var(--ink-3); }
+    .matrix{ display:flex; flex-direction:column; gap:14px; margin-top:14px; }
+    .mh, .mrowlab{ display:none; }
+    .verdict{ display:none; }
+    .envcard{ display:block; }
+    .punch{ grid-template-columns:1fr; }
+    .punch .p{ border-left:none; border-top:1px solid var(--ink-4); }
+    .punch .p:first-child{ border-top:none; }
+  }
+  /* desktop: hide the mobile-only env cards */
+  .envcard{ display:none; }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ SHEET TOP ============ -->
+  <div class="sheet-top">
+    <div>
+      <span class="dot"></span>
+      CONSOLE <span class="sep">/</span> Case Studies <span class="sep">/</span>
+      <span class="active">Synthetic Users · §03 · EVIDENCE.LADDER</span>
+      <span class="sep">/</span> SU-02
+    </div>
+    <div><b>Matt Stangl</b> · CX, Product &amp; Service Design Leader</div>
+  </div>
+
+  <!-- ============ TITLE ============ -->
+  <section class="title">
+    <div>
+      <p class="kicker">Artifact 02 · EVIDENCE.LADDER · 2026.06</p>
+      <h1>Where synthetic research <em>replaces, augments, or fails</em> real research.</h1>
+      <p class="sub">A two-method comparison across four QA environments. The contrast is the content — read down each environment to compare a six-week, $8K recruited study against a two-hour, $0 persona run. Confidence is encoded by a countable signal meter, not by color.</p>
+    </div>
+    <dl class="idcard">
+      <dt>Artifact</dt>      <dd>02 · Evidence Ladder</dd>
+      <dt>Shape</dt>         <dd>2 methods × 4 envs</dd>
+      <dt>Section</dt>       <dd>§03 · Comparison</dd>
+      <dt>Confidence</dt>    <dd>4-seg meter · count = level</dd>
+      <dt>Accent</dt>        <dd>Placeholder · 1 only</dd>
+      <dt>Register</dt>      <dd>Fiche · v2026.06</dd>
+    </dl>
+  </section>
+
+  <!-- ============ CONCEPT NOTE ============ -->
+  <div class="caveat">
+    <span class="stamp">SKETCH</span>
+    <div>
+      <p>The four <b>confidence ladder marks</b> are the spec this artifact exists to settle. They're drawn as a <b>4-segment signal meter</b> where filled-segment count is the level — <code>SHIP</code> = 4, <code>HIGH</code> = 3, <code>MID</code> = 2, <code>baseline</code> = 1. Count is grayscale-legible, so the encoding survives without color (the brief's accessibility rule). The old amber-for-MID color cue is gone.</p>
+      <p>Structure and qualifiers are verbatim. The contrast between <b>REAL USERS</b> and <b>SYNTHETIC</b> is reinforced structurally: shared columns, aligned meters, and a per-column verdict strip. Accent <code>#2dd4b2</code> is a placeholder.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ THE ARTIFACT ============ -->
+  <section class="artband">
+    <div class="artband__head">
+      <div class="l">
+        <span class="arr">↓</span>
+        <span class="h">The matrix — rendered in isolation</span>
+      </div>
+      <div class="r">
+        DESKTOP · FULL-WIDTH ARTBOARD<br/>
+        <b>SU-02 · EVIDENCE.LADDER</b>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="artboard" style="padding:40px 32px 36px;">
+        <span class="artboard__tag">Artifact · no page chrome</span>
+        <span class="artboard__scale">1 : 1</span>
+
+        <div class="artboard__inner">
+
+          <div class="ladder">
+            <!-- matrix caption -->
+            <div class="ladder__cap">
+              <span class="id">EVIDENCE.LADDER <b>Where synthetic research replaces, augments, or fails real research</b></span>
+              <span class="meta"><span class="dot"></span>N=9 personas · 4 QA envs</span>
+            </div>
+
+            <!-- grid -->
+            <div class="matrix">
+              <!-- header row -->
+              <div class="mh">METHOD</div>
+              <div class="mh"><span class="env">DEV</span> · <span class="kind">structural</span></div>
+              <div class="mh"><span class="env">QA</span> · <span class="kind">content</span></div>
+              <div class="mh"><span class="env">UAT</span> · <span class="kind">audience</span></div>
+              <div class="mh"><span class="env">PROD</span> · <span class="kind">adversarial</span></div>
+
+              <!-- REAL USERS row -->
+              <div class="mrowlab real">
+                <span class="tag">Real users</span>
+                <span class="name">Recruited practitioners</span>
+                <span class="spec"><b>N=12</b> · 6 wk · <b>$8K</b></span>
+              </div>
+              <div class="mcell">
+                <div class="sig">IA clarity</div>
+                <div class="meterline">
+                  <div class="meter"><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg"></div></div>
+                  <span class="lvl">High</span>
+                </div>
+                <div class="qual"><span class="lv">High</span> · Ground truth</div>
+              </div>
+              <div class="mcell">
+                <div class="sig">Copy resonance</div>
+                <div class="meterline">
+                  <div class="meter"><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div></div>
+                  <span class="lvl">Ship</span>
+                </div>
+                <div class="qual"><span class="lv">Ship</span> · Observational</div>
+              </div>
+              <div class="mcell">
+                <div class="sig">Target-fit signal</div>
+                <div class="meterline">
+                  <div class="meter"><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div></div>
+                  <span class="lvl">Ship</span>
+                </div>
+                <div class="qual"><span class="lv">Ship</span> · Highest confidence</div>
+              </div>
+              <div class="mcell">
+                <div class="sig">Edge stress</div>
+                <div class="meterline">
+                  <div class="meter mid"><div class="seg on"></div><div class="seg on"></div><div class="seg"></div><div class="seg"></div></div>
+                  <span class="lvl">Mid</span>
+                </div>
+                <div class="qual augk"><span class="lv">Mid</span> · Access-limited</div>
+              </div>
+
+              <!-- SYNTHETIC row -->
+              <div class="mrowlab synth">
+                <span class="tag">● Synthetic</span>
+                <span class="name">Persona-driven QA</span>
+                <span class="spec"><b>N=9</b> · 2 hr · <b>$0</b></span>
+              </div>
+              <div class="mcell synth">
+                <div class="sig">Structural gaps</div>
+                <div class="meterline">
+                  <div class="meter"><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg"></div></div>
+                  <span class="lvl">High</span>
+                </div>
+                <div class="qual"><span class="lv">High</span> · Replaces real</div>
+              </div>
+              <div class="mcell synth">
+                <div class="sig">Positioning drift</div>
+                <div class="meterline">
+                  <div class="meter"><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg"></div></div>
+                  <span class="lvl">High</span>
+                </div>
+                <div class="qual"><span class="lv">High</span> · Replaces real</div>
+              </div>
+              <div class="mcell synth">
+                <div class="sig">Audience targeting</div>
+                <div class="meterline">
+                  <div class="meter mid"><div class="seg on"></div><div class="seg on"></div><div class="seg"></div><div class="seg"></div></div>
+                  <span class="lvl">Mid</span>
+                </div>
+                <div class="qual augk"><span class="lv">Mid</span> · Augments real</div>
+              </div>
+              <div class="mcell synth">
+                <div class="sig">Adversarial review</div>
+                <div class="meterline">
+                  <div class="meter"><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div></div>
+                  <span class="lvl">Ship</span>
+                </div>
+                <div class="qual"><span class="lv">Ship</span> · Pre-flight stress</div>
+              </div>
+
+              <!-- verdict strip -->
+              <div class="verdict">
+                <div class="vlab">Synthetic vs real</div>
+                <div class="vc"><span>▣ Replaces</span></div>
+                <div class="vc"><span>▣ Replaces</span></div>
+                <div class="vc aug"><span>△ Augments</span><span class="m">real still required</span></div>
+                <div class="vc"><span>▣ Replaces</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ladder-mark legend -->
+          <div class="ladkey">
+            <span class="lab">Confidence ladder ·</span>
+            <div class="it"><div class="km"><div class="s on"></div><div class="s on"></div><div class="s on"></div><div class="s on"></div></div><span class="nm"><b>Ship</b> · decision-ready</span></div>
+            <div class="it"><div class="km"><div class="s on"></div><div class="s on"></div><div class="s on"></div><div class="s"></div></div><span class="nm"><b>High</b> · trustworthy</span></div>
+            <div class="it"><div class="km mid"><div class="s on"></div><div class="s on"></div><div class="s"></div><div class="s"></div></div><span class="nm"><b>Mid</b> · directional</span></div>
+            <div class="it"><div class="km"><div class="s on"></div><div class="s"></div><div class="s"></div><div class="s"></div></div><span class="nm"><b>Baseline</b> · weak</span></div>
+          </div>
+
+          <!-- punchline -->
+          <div class="punch">
+            <div class="p">
+              <div class="big">3</div>
+              <div class="lab"><b>decision types</b><br/>synthetic replaced real research</div>
+            </div>
+            <div class="p">
+              <div class="big">1</div>
+              <div class="lab"><b>decision type</b><br/>real research still required</div>
+            </div>
+            <div class="p">
+              <div class="big">$8K → $0</div>
+              <div class="lab"><b>pre-flight cost</b><br/>self-review baseline</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- notes rail -->
+      <aside class="notes">
+        <h4>CONFIDENCE LADDER MARKS</h4>
+        <ul>
+          <li><b>Count = level.</b> Four segments; filled count reads the level — <em>Ship 4, High 3, Mid 2, Baseline 1</em>. No hue dependency.</li>
+          <li><b>Mid is also toned down</b> (neutral fill, not accent) so it's distinct by both count <em>and</em> weight — redundant encoding, deliberately.</li>
+          <li>Legend below the matrix states all four marks explicitly.</li>
+        </ul>
+
+        <h4>READING THE CONTRAST</h4>
+        <ul>
+          <li>Shared columns + aligned meters let the eye compare <b>REAL vs SYNTHETIC</b> straight down each environment.</li>
+          <li>The <b>verdict strip</b> resolves each column: replaces, replaces, <em>augments (UAT)</em>, replaces.</li>
+        </ul>
+
+        <h4>MOBILE (≤900PX)</h4>
+        <ul>
+          <li>Container gets <b>max-width:100% + padding</b> — fixes the margin-overflow flagged in design-notes.</li>
+          <li>Re-flows to <b>per-environment cards</b> (REAL stacked over SYNTHETIC) so the head-to-head survives the collapse.</li>
+        </ul>
+
+        <div class="tags">
+          <span class="tag lb">LOAD-BEARING · ladder spec</span>
+          <span class="tag ex">EXPLORATORY · verdict strip</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- ============ MOBILE COMPANION ============ -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">SU-02 · MOBILE · PER-ENVIRONMENT CARDS</div>
+
+      <div style="border:1px solid var(--ink-3); padding:9px 11px; background:var(--bg-soft); margin-bottom:12px;">
+        <span style="font-family:var(--mono); font-size:9px; letter-spacing:0.14em; color:var(--accent); text-transform:uppercase;">EVIDENCE.LADDER</span>
+        <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.1em; color:var(--ink-2); text-transform:uppercase; margin-top:4px;">N=9 · 4 QA envs</div>
+      </div>
+
+      <!-- one env card: DEV -->
+      <div style="border:1px solid var(--ink-3); margin-bottom:10px;">
+        <div style="padding:8px 11px; border-bottom:1px solid var(--ink-4); font-family:var(--mono); font-size:9px; letter-spacing:0.14em; color:var(--ink-1); text-transform:uppercase;">DEV · <span style="color:var(--ink-3);">structural</span></div>
+        <!-- real -->
+        <div style="padding:9px 11px; border-bottom:1px solid var(--ink-4); display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <div>
+            <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--ink-2); text-transform:uppercase;">Real</div>
+            <div style="font-family:var(--sans); font-size:13px; color:var(--ink-0);">IA clarity</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:7px;">
+            <div style="display:flex; align-items:flex-end; gap:2px; height:18px;">
+              <div style="width:5px;height:35%;background:var(--accent);"></div>
+              <div style="width:5px;height:58%;background:var(--accent);"></div>
+              <div style="width:5px;height:80%;background:var(--accent);"></div>
+              <div style="width:5px;height:100%;border:1px solid var(--ink-3);"></div>
+            </div>
+            <span style="font-family:var(--mono); font-size:8px; color:var(--ink-1); letter-spacing:0.12em;">HIGH</span>
+          </div>
+        </div>
+        <!-- synth -->
+        <div style="padding:9px 11px; background:var(--accent-vlow); display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <div>
+            <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--accent); text-transform:uppercase;">● Synthetic</div>
+            <div style="font-family:var(--sans); font-size:13px; color:var(--ink-0);">Structural gaps</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:7px;">
+            <div style="display:flex; align-items:flex-end; gap:2px; height:18px;">
+              <div style="width:5px;height:35%;background:var(--accent);"></div>
+              <div style="width:5px;height:58%;background:var(--accent);"></div>
+              <div style="width:5px;height:80%;background:var(--accent);"></div>
+              <div style="width:5px;height:100%;border:1px solid var(--ink-3);"></div>
+            </div>
+            <span style="font-family:var(--mono); font-size:8px; color:var(--accent); letter-spacing:0.12em;">REPL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- UAT card (the contrast case) -->
+      <div style="border:1px solid var(--ink-3);">
+        <div style="padding:8px 11px; border-bottom:1px solid var(--ink-4); font-family:var(--mono); font-size:9px; letter-spacing:0.14em; color:var(--ink-1); text-transform:uppercase;">UAT · <span style="color:var(--ink-3);">audience</span></div>
+        <div style="padding:9px 11px; border-bottom:1px solid var(--ink-4); display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <div>
+            <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--ink-2); text-transform:uppercase;">Real</div>
+            <div style="font-family:var(--sans); font-size:13px; color:var(--ink-0);">Target-fit signal</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:7px;">
+            <div style="display:flex; align-items:flex-end; gap:2px; height:18px;">
+              <div style="width:5px;height:35%;background:var(--accent);"></div>
+              <div style="width:5px;height:58%;background:var(--accent);"></div>
+              <div style="width:5px;height:80%;background:var(--accent);"></div>
+              <div style="width:5px;height:100%;background:var(--accent);"></div>
+            </div>
+            <span style="font-family:var(--mono); font-size:8px; color:var(--accent); letter-spacing:0.12em;">SHIP</span>
+          </div>
+        </div>
+        <div style="padding:9px 11px; background:var(--accent-vlow); display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <div>
+            <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--accent); text-transform:uppercase;">● Synthetic</div>
+            <div style="font-family:var(--sans); font-size:13px; color:var(--ink-0);">Audience targeting</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:7px;">
+            <div style="display:flex; align-items:flex-end; gap:2px; height:18px;">
+              <div style="width:5px;height:35%;background:var(--ink-1);"></div>
+              <div style="width:5px;height:58%;background:var(--ink-1);"></div>
+              <div style="width:5px;height:80%;border:1px solid var(--ink-3);"></div>
+              <div style="width:5px;height:100%;border:1px solid var(--ink-3);"></div>
+            </div>
+            <span style="font-family:var(--mono); font-size:8px; color:var(--rev); letter-spacing:0.12em;">AUG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>SU-02 · MOBILE LOGIC</h4>
+      <p><b>The matrix re-groups by environment, not by method.</b> Each card is one QA environment with REAL stacked directly over SYNTHETIC — so the comparison the matrix exists to make survives the vertical collapse. The meters sit at the right edge of each row, aligned, so you still read the head-to-head at a glance.</p>
+      <p><b>Why not the brief's "two method blocks"?</b> Stacking all of REAL then all of SYNTHETIC separates the two halves of every comparison by a full scroll. Per-environment keeps each duel intact. The two-block pattern is the fallback if Matt prefers method-first reading.</p>
+      <p><b>Margin fix.</b> The bordered container takes <em>max-width:100% + explicit padding</em>, resolving the edge-overflow flagged in design-notes for boxed elements at 320–414px.</p>
+      <p><b>The punchline metrics</b> stack full-width beneath the cards — 3, 1, $8K→$0 still close the section.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ ANALYSIS ============ -->
+  <section class="analysis">
+    <h2>↘ Evidence Ladder · read &amp; trade-offs</h2>
+
+    <h3><span class="pn">§ 1 · The ladder marks</span>Why count beats color</h3>
+    <p>The brief asked for four visually distinguishable confidence levels without color-only encoding. A 4-segment meter where <b>filled count is the level</b> solves it cleanly: Ship reads as four, High as three, Mid as two, Baseline as one — verifiable in grayscale, by a screen reader (segment count), and at a glance. Mid additionally drops from accent to a neutral fill, giving it redundant encoding (count <em>and</em> weight) so the "directional, not decision-ready" status reads even faster. This is the single most portable decision in the artifact.</p>
+
+    <h3><span class="pn">§ 2 · Comparison, not grid</span>Structural contrast</h3>
+    <p>The two methods share columns and meter positions, so the comparison is spatial: drop your eye down any environment and the two meters line up for direct height comparison. The <b>verdict strip</b> names the outcome per column — three replaces, one augments — which sets up the footer metrics without restating them. UAT is the honest one: synthetic <em>augments</em> rather than replaces, and the artifact says so in the open.</p>
+
+    <h3><span class="pn">§ 3 · Risks for the port</span></h3>
+    <ul>
+      <li><b>Meter legibility at density.</b> 9px segments are fine on desktop; on the mobile cards they shrink to ~5px — keep the four-segment count readable, don't let them blur into one bar.</li>
+      <li><b>Verdict glyphs.</b> ▣ / △ carry meaning alongside the words; if Matt wants pure type, drop the glyphs but keep "Replaces / Augments."</li>
+      <li><b>Synthetic-row tint.</b> The faint accent wash on the synthetic row aids scanning but is close to the verdict accent — verify it doesn't muddy at final accent color.</li>
+    </ul>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div><b>SU-02</b> · EVIDENCE.LADDER</div>
+    <div>SCALE · 1 : 1</div>
+    <div>DRAWN · M. STANGL</div>
+    <div>APPROVED · ─</div>
+    <div>DATE · 2026 · 06</div>
+    <div>REV · v2026.06 · LO-FI</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

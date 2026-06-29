@@ -1,8 +1,10 @@
 export { Hero } from "./Hero";
 export { CredibilityRail } from "./CredibilityRail";
-export { BrandThesis } from "./BrandThesis";
+export { ClientTicker } from "./ClientTicker";
+export { ProblemLedger } from "./ProblemLedger";
 export { TransformationImpactDashboard } from "./TransformationImpactDashboard";
-export { StanfordAICapability } from "./StanfordAICapability";
-export { FeaturedThinking } from "./FeaturedThinking";
+export { StanfordAICapability, StanfordAICapabilityEmbedded } from "./StanfordAICapability";
+export { SignalStorySection } from "./SignalStorySection";
+export { YouTubeInline } from "./YouTubeInline";
 export { FeaturedCaseStudiesPreview } from "./FeaturedCaseStudiesPreview";
 export { ContactCTA } from "./ContactCTA";

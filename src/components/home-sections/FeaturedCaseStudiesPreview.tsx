@@ -1,58 +1,47 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/Section";
-import { CompanyWordmark } from "@/components/ui/CompanyWordmark";
-import { logoPaths } from "@/content/logos";
-import { featuredCaseStudies } from "@/content/home";
+import { CaseStudyIntelPanel } from "@/components/case-studies";
+import { caseStudyEntries } from "@/content/case-studies";
+import { caseStudiesHomeSection } from "@/content/home";
+
+const preview = caseStudyEntries.slice(0, 3);
+const [featured, ...supporting] = preview;
 
 export function FeaturedCaseStudiesPreview() {
   return (
-    <Section className="border-t border-ink-200 py-section">
-      <div className="flex flex-col gap-14 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <h2 className="font-display text-section font-semibold tracking-tight text-ink-950">
-            {featuredCaseStudies.headline}
-          </h2>
-          <p className="font-body mt-6 text-subhead text-ink-600 max-w-md">
-            {featuredCaseStudies.subhead}
+    <Section className="relative overflow-hidden border-t border-ink-200/55 bg-support py-section">
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse 75% 55% at 50% -5%, rgba(34,211,199,0.08), transparent 55%), radial-gradient(ellipse 50% 40% at 80% 100%, rgba(13,148,136,0.04), transparent 50%)",
+        }}
+      />
+      <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+        <div className="min-w-0 max-w-lg">
+          <h2 className=" text-section font-bold text-ink-950">{caseStudiesHomeSection.headline}</h2>
+          <p className=" mt-2 max-w-md text-subhead font-semibold text-ink-700">
+            {caseStudiesHomeSection.subhead}
           </p>
         </div>
         <Link
-          href={featuredCaseStudies.ctaHref}
-          className="font-body shrink-0 text-metric-sm font-medium text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
+          href={caseStudiesHomeSection.ctaHref}
+          className=" shrink-0 text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent-dark hover:decoration-accent"
         >
-          {featuredCaseStudies.cta} →
+          {caseStudiesHomeSection.cta} →
         </Link>
       </div>
-      <ul className="mt-16 grid divide-y divide-ink-200 lg:grid-cols-3 lg:divide-x lg:divide-y-0">
-        {featuredCaseStudies.items.map((item) => (
-          <li
-            key={item.slug}
-            className="group py-10 first:pt-0 lg:px-10 lg:py-0 lg:first:pl-0 lg:last:pr-0"
-          >
-            <Link
-              href={`/work#${item.slug}`}
-              className="block transition-colors hover:text-ink-950"
-            >
-              <div className="mb-5">
-                <CompanyWordmark
-                  name={item.client}
-                  src={logoPaths[item.client]}
-                  size="sm"
-                />
-              </div>
-              <span className="font-body text-eyebrow font-medium uppercase tracking-[0.12em] text-ink-500">
-                {item.category}
-              </span>
-              <h3 className="font-display mt-4 text-card-title font-semibold tracking-tight text-ink-950 transition-colors group-hover:text-ink-700">
-                {item.title}
-              </h3>
-              <p className="font-body mt-4 text-body text-ink-600 leading-[1.65] max-w-sm">
-                {item.description}
-              </p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+
+      <div className="relative z-10 mt-8 flex flex-col gap-4 sm:mt-10 sm:gap-5">
+        {featured ? <CaseStudyIntelPanel entry={featured} mode="homeFeatured" /> : null}
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
+          {supporting.map((entry) => (
+            <CaseStudyIntelPanel key={entry.slug} entry={entry} mode="homeSupporting" />
+          ))}
+        </div>
+      </div>
     </Section>
   );
 }

@@ -1,0 +1,1973 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Impact · M. Stangl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<style>
+/* ============================================================
+   TOKENS — fiche register (locked)
+   ============================================================ */
+:root{
+  --bg:        #0a0f0e;
+  --bg-soft:   #0d1413;
+  --plate:     #0e1716;
+  --plate-2:   #11201d;
+  --ink-0:     #e8efec;
+  --ink-1:     #b6c2bd;
+  --ink-2:     #6f7d78;
+  --ink-3:     #3a4744;
+  --ink-4:     #1d2624;
+  --rule:      #1a2422;
+  --teal:      #2dd4b2;
+  --teal-dim:  #1d8c75;
+  --teal-low:  rgba(45,212,178,0.22);
+  --rev:       #c47155;
+  --sans:      "Helvetica Neue","Helvetica",system-ui,-apple-system,sans-serif;
+  --mono:      "IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
+  --gutter:    clamp(20px, 4vw, 64px);
+  --maxw:      1280px;
+}
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; background:var(--bg); color:var(--ink-0); }
+body{
+  font-family:var(--sans); font-weight:400;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  line-height:1.5; letter-spacing:-0.005em;
+  overflow-x:hidden;
+}
+::selection{ background:rgba(45,212,178,0.3); color:var(--ink-0); }
+a{ color:inherit; }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+:focus-visible{ outline:1px solid var(--teal); outline-offset:3px; }
+
+/* ============================================================
+   BRAND BAR
+   ============================================================ */
+.brand-bar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(10,15,14,0.92);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.brand-bar__inner{
+  max-width:var(--maxw); margin:0 auto; padding:14px var(--gutter);
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.brand-bar__mark{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--ink-0); text-decoration:none;
+}
+.brand-bar__mark .plus{
+  width:18px; height:18px; border:1px solid var(--ink-2);
+  display:inline-grid; place-items:center; color:var(--teal);
+}
+.brand-bar__nav{ display:flex; gap:24px; }
+.brand-bar__nav a{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--ink-2); text-decoration:none;
+}
+.brand-bar__nav a[aria-current="page"]{
+  color:var(--ink-0); border-bottom:1px solid var(--teal); padding-bottom:2px;
+}
+@media (max-width: 640px){
+  .brand-bar__nav{ gap:14px; }
+  .brand-bar__nav a:not([aria-current="page"]){ display:none; }
+}
+
+/* ============================================================
+   PAGE / breadcrumb
+   ============================================================ */
+.page{ max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter); position:relative; }
+
+.breadcrumb{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:22px 0 18px; gap:14px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--ink-2);
+  border-bottom:1px solid var(--rule);
+}
+.breadcrumb__path{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.breadcrumb__dot{ width:7px; height:7px; background:var(--teal); border-radius:50%; box-shadow:0 0 0 3px rgba(45,212,178,0.12); }
+.breadcrumb__path .sep{ color:var(--ink-3); }
+.breadcrumb__path .active{ color:var(--ink-0); }
+.breadcrumb__sig{ color:var(--ink-2); white-space:nowrap; }
+.breadcrumb__sig b{ color:var(--ink-0); font-weight:500; margin-right:6px; }
+@media (max-width: 640px){
+  .breadcrumb__sig{ display:none; }
+}
+
+/* ============================================================
+   TITLE BLOCK + ID STRIP
+   ============================================================ */
+.title-block{
+  display:grid; grid-template-columns:1.45fr 1fr;
+  gap:48px;
+  padding:40px 0 32px;
+  border-bottom:1px solid var(--rule);
+  align-items:start;
+}
+.title-block .kicker{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--teal); margin:0 0 16px;
+}
+.title-block h1{
+  font-family:var(--sans); font-weight:500;
+  font-size:clamp(34px, 4.6vw, 60px);
+  line-height:1.04; letter-spacing:-0.024em;
+  margin:0 0 14px; max-width:18ch; text-wrap:balance;
+}
+.title-block .sub{
+  font-size:15px; line-height:1.55; color:var(--ink-1);
+  max-width:48ch; margin:0;
+}
+.id-strip{
+  display:grid; grid-template-columns:max-content 1fr;
+  gap:10px 24px;
+  padding:18px 22px;
+  border:1px solid var(--rule);
+  background:linear-gradient(180deg, rgba(45,212,178,0.025), transparent 60%);
+  font-family:var(--mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+  position:relative;
+}
+.id-strip dt{ color:var(--ink-2); margin:0; }
+.id-strip dd{ margin:0; color:var(--ink-0); text-align:right; }
+.id-strip::before,.id-strip::after{
+  content:""; position:absolute; width:8px; height:8px;
+  background:
+    linear-gradient(var(--ink-2),var(--ink-2)) center/100% 1px no-repeat,
+    linear-gradient(var(--ink-2),var(--ink-2)) center/1px 100% no-repeat;
+}
+.id-strip::before{ top:-4px; left:-4px; }
+.id-strip::after{ bottom:-4px; right:-4px; }
+@media (max-width: 880px){
+  .title-block{ grid-template-columns:1fr; gap:24px; }
+}
+@media (max-width: 390px){
+  .id-strip{ display:none; }
+  .title-block .sub{ display:none; }
+}
+
+/* ============================================================
+   TAB NAV
+   ============================================================ */
+.tab-nav{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  border-bottom:1px solid var(--rule);
+  position:sticky; top:46px; z-index:40;
+  background:rgba(10,15,14,0.92);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.tab-btn{
+  position:relative;
+  padding:18px 22px 16px;
+  border-right:1px solid var(--rule);
+  text-align:left;
+  display:grid; gap:6px;
+  cursor:pointer;
+  transition:background 180ms ease, color 180ms ease;
+  min-height:64px;
+}
+.tab-btn:last-child{ border-right:none; }
+.tab-btn:hover{ background:rgba(45,212,178,0.03); }
+.tab-btn .num{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.tab-btn .ttl{ font-size:15px; font-weight:500; color:var(--ink-1); }
+.tab-btn .cl{
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.tab-btn[aria-selected="true"]{ background:rgba(45,212,178,0.04); }
+.tab-btn[aria-selected="true"] .num{ color:var(--teal); }
+.tab-btn[aria-selected="true"] .ttl{ color:var(--ink-0); }
+.tab-btn[aria-selected="true"]::after{
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px;
+  background:var(--teal);
+}
+@media (max-width: 640px){
+  .tab-nav{ top:54px; }
+  .tab-btn{ padding:12px 14px; min-height:56px; }
+  .tab-btn .ttl{ display:none; }
+}
+@media (max-width: 390px){
+  .tab-btn .num{ font-size:10px; letter-spacing:0.1em; }
+}
+
+/* ============================================================
+   TAB PANEL — section identity
+   ============================================================ */
+.tab-panel{
+  padding:40px 0 56px;
+  border-bottom:1px solid var(--rule);
+}
+.tab-panel[hidden]{ display:none; }
+
+.cat-badge{
+  display:inline-flex; align-items:center; gap:14px;
+  padding:8px 14px;
+  border:1px solid var(--ink-3);
+  font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink-1);
+  margin-bottom:24px;
+}
+.cat-badge .num{ color:var(--teal); }
+.cat-badge .sep{ color:var(--ink-3); }
+.cat-badge .cat{ color:var(--ink-0); }
+.cat-badge .org{ color:var(--ink-2); }
+
+/* Hero metric area */
+.hero{
+  display:grid; grid-template-columns:1.25fr 1fr;
+  gap:42px;
+  padding:8px 0 24px;
+  align-items:end;
+}
+.hero__copy{ max-width:54ch; }
+.hero__copy h2{
+  font-family:var(--sans); font-weight:500;
+  font-size:clamp(26px, 3.1vw, 40px);
+  line-height:1.1; letter-spacing:-0.018em;
+  margin:0 0 14px; max-width:22ch; text-wrap:balance;
+}
+.hero__copy h2 em{ font-style:italic; color:var(--teal); font-weight:500; }
+.hero__copy p{
+  font-size:15px; line-height:1.55; color:var(--ink-1); margin:0;
+  max-width:54ch;
+}
+.hero__metric{
+  display:flex; flex-direction:column; align-items:flex-end; gap:8px;
+  padding:6px 0;
+}
+.hero__metric .v{
+  font-family:var(--sans); font-weight:500;
+  font-size:clamp(44px, 5.8vw, 76px);
+  line-height:0.95; letter-spacing:-0.028em; color:var(--ink-0);
+  display:inline-flex; align-items:baseline;
+}
+.hero__metric .v .accent{ color:var(--teal); }
+.hero__metric .v .unit{
+  font-family:var(--sans); font-size:0.45em; color:var(--ink-2); font-weight:500;
+  margin-left:4px;
+}
+.hero__metric .lbl{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ink-2); text-align:right; max-width:30ch;
+}
+@media (max-width: 880px){
+  .hero{ grid-template-columns:1fr; gap:24px; align-items:start; }
+  .hero__metric{ align-items:flex-start; }
+  .hero__metric .lbl{ text-align:left; }
+}
+
+.metric-strip{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--rule);
+  background:var(--plate);
+  margin-top:8px;
+}
+.metric-strip.cols-4{ grid-template-columns:repeat(4,1fr); }
+.metric-strip > div{ padding:18px 20px; border-right:1px solid var(--rule); }
+.metric-strip > div:last-child{ border-right:none; }
+.metric-strip .v{
+  font-size:24px; font-weight:500; letter-spacing:-0.015em; color:var(--ink-0);
+  display:inline-flex; align-items:baseline; line-height:1;
+}
+.metric-strip .v .u{ font-size:13px; color:var(--ink-2); font-family:var(--mono); margin-left:4px; }
+.metric-strip .l{
+  margin-top:6px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+@media (max-width: 880px){
+  .metric-strip,
+  .metric-strip.cols-4{ grid-template-columns:repeat(2,1fr); }
+  .metric-strip > div{ border-bottom:1px solid var(--rule); }
+  .metric-strip > div:nth-last-child(1),
+  .metric-strip > div:nth-last-child(2){ border-bottom:0; }
+  .metric-strip > div:nth-child(2n){ border-right:none; }
+}
+@media (max-width: 480px){
+  .metric-strip,
+  .metric-strip.cols-4{ grid-template-columns:1fr; }
+  .metric-strip > div{ border-right:none; border-bottom:1px solid var(--rule); }
+  .metric-strip > div:last-child{ border-bottom:none; }
+}
+
+/* Section break */
+.section-break{
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap:16px; padding:36px 0 16px; margin-top:28px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2); border-top:1px solid var(--rule);
+}
+.section-break__label{ color:var(--ink-1); }
+.section-break__label .arrow{ color:var(--teal); margin-right:8px; }
+.section-break__meta{ display:flex; gap:18px; flex-wrap:wrap; justify-content:flex-end; }
+@media (max-width: 640px){
+  .section-break{ flex-direction:column; align-items:flex-start; gap:8px; }
+  .section-break__meta{ justify-content:flex-start; }
+}
+
+/* ============================================================
+   TAB 01 · AUTODESK · ASSEMBLY
+   ============================================================ */
+.assembly{
+  position:relative;
+  border:1px solid var(--rule);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(45,212,178,0.04), transparent 65%),
+    var(--plate);
+  margin-top:8px;
+  padding:32px 28px;
+  overflow:hidden;
+}
+.assembly::before{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--ink-4) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ink-4) 1px, transparent 1px);
+  background-size:48px 48px;
+  opacity:0.35;
+  pointer-events:none;
+}
+.assembly__corner{
+  position:absolute; top:14px; right:18px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ink-3);
+  z-index:2;
+}
+
+.tier-stack{
+  position:relative;
+  display:flex; flex-direction:column;
+  gap:14px;
+  z-index:1;
+}
+.tier{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr minmax(360px, 520px) 1fr;
+  gap:24px;
+  align-items:center;
+  min-height:64px;
+  transition:min-height 600ms cubic-bezier(.2,.7,.2,1);
+}
+.tier__chips{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  align-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 280ms ease 180ms;
+}
+.tier[data-state="active"] .tier__chips{
+  opacity:1; pointer-events:auto;
+}
+.tier__chips--left{ justify-items:end; }
+.tier__chips--right{ justify-items:start; }
+
+.chip{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:8px 12px;
+  border:1px solid var(--rule);
+  background:rgba(10,15,14,0.92);
+  font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--ink-0);
+  max-width:100%;
+  transform:translateX(0);
+  transition:transform 600ms cubic-bezier(.2,.7,.2,1), opacity 280ms ease;
+}
+.tier__chips--left .chip{ transform:translateX(8px); }
+.tier__chips--right .chip{ transform:translateX(-8px); }
+.tier[data-state="active"] .tier__chips--left .chip{ transform:translateX(0); }
+.tier[data-state="active"] .tier__chips--right .chip{ transform:translateX(0); }
+
+.chip .pn{ color:var(--ink-2); font-size:10px; }
+.chip .nm{ color:var(--ink-0); text-transform:none; letter-spacing:-0.005em; font-size:12px; font-family:var(--sans); }
+.chip .cls{
+  display:inline-flex; flex:none;
+  width:9px; height:9px; border-radius:50%;
+  border:1px solid var(--teal);
+  background:transparent;
+  align-self:center;
+}
+.chip[data-cls="innovated"] .cls{ background:var(--teal); }
+.chip[data-cls="optimized"] .cls{
+  background:linear-gradient(90deg, var(--teal) 50%, transparent 50%);
+}
+.chip[data-cls="refined"] .cls{ background:transparent; }
+
+/* Tier deck — the strip in the center column */
+.tier__deck{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:18px;
+  align-items:center;
+  padding:14px 18px;
+  border:1px solid var(--ink-3);
+  background:rgba(10,15,14,0.6);
+  font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--ink-1);
+  min-height:48px;
+  cursor:pointer;
+  width:100%;
+  text-align:left;
+  transition:padding 600ms cubic-bezier(.2,.7,.2,1),
+             border-color 280ms ease,
+             background 280ms ease,
+             transform 600ms cubic-bezier(.2,.7,.2,1),
+             box-shadow 280ms ease;
+}
+.tier__deck:hover{ border-color:var(--ink-2); }
+.tier__deck .pn{ color:var(--ink-2); }
+.tier__deck .nm{
+  text-align:center; color:var(--ink-0);
+  font-family:var(--sans); font-size:16px; letter-spacing:-0.005em; text-transform:none;
+  font-weight:500;
+}
+.tier__deck .lift{ color:var(--ink-2); white-space:nowrap; }
+.tier__deck .chev{
+  position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  color:var(--ink-2); font-family:var(--mono); font-size:14px;
+  transition:opacity 200ms ease;
+}
+.tier[data-state="active"] .tier__deck .chev{ opacity:0; }
+.tier[data-state="stowed"] .tier__deck{
+  border-color:var(--teal-low);
+  background:rgba(10,15,14,0.4);
+}
+.tier[data-state="active"] .tier__deck{
+  padding:22px 26px;
+  border-color:var(--teal);
+  background:linear-gradient(180deg, rgba(45,212,178,0.08), rgba(45,212,178,0.02));
+  box-shadow:0 0 0 4px rgba(45,212,178,0.06);
+}
+.tier[data-state="active"] .tier__deck .pn{ color:var(--teal); }
+.tier[data-state="active"] .tier__deck .lift{ color:var(--ink-1); }
+.tier[data-state="active"] .tier__deck .nm{ font-size:18px; }
+
+/* Leader-line SVG layer */
+.leaders{
+  position:absolute; inset:0; pointer-events:none; z-index:0;
+}
+.leaders line{ stroke:var(--teal-low); stroke-width:1; }
+.leaders .tick{ fill:var(--teal); stroke:none; }
+
+/* Tier description below deck (only on active) */
+.tier__desc{
+  grid-column:1 / -1;
+  margin-top:10px;
+  display:none;
+  font-size:13.5px; line-height:1.55; color:var(--ink-1);
+  font-family:var(--sans);
+  text-align:center;
+  max-width:64ch;
+  justify-self:center;
+}
+.tier[data-state="active"] .tier__desc{ display:block; }
+
+/* Assembly mobile: stack chips below tier in 2-col grid; no leader lines */
+@media (max-width: 880px){
+  .tier{ grid-template-columns:1fr; gap:14px; }
+  .tier__chips{
+    grid-template-columns:1fr 1fr;
+    grid-column:1 / -1;
+    order:2;
+  }
+  .tier__deck{ order:1; }
+  .tier__desc{ order:3; }
+  .tier__chips--left .chip,
+  .tier__chips--right .chip{ transform:translateY(8px); }
+  .tier[data-state="active"] .tier__chips--left .chip,
+  .tier[data-state="active"] .tier__chips--right .chip{ transform:translateY(0); }
+  .leaders{ display:none; }
+}
+@media (max-width: 480px){
+  .assembly{ padding:18px 14px; }
+  .tier__chips{ grid-template-columns:1fr; }
+  .tier__deck{ grid-template-columns:1fr; gap:6px; text-align:left; padding:14px 16px; }
+  .tier__deck .nm{ text-align:left; }
+  .tier__deck .lift{ font-size:10px; }
+}
+
+/* Classification legend */
+.cls-legend{
+  display:flex; gap:24px; flex-wrap:wrap;
+  margin-top:16px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.cls-legend .item{ display:inline-flex; align-items:center; gap:8px; }
+.cls-legend .sw{
+  width:9px; height:9px; border-radius:50%;
+  border:1px solid var(--teal);
+}
+.cls-legend .sw.full{ background:var(--teal); }
+.cls-legend .sw.half{ background:linear-gradient(90deg, var(--teal) 50%, transparent 50%); }
+.cls-legend .sw.outline{ background:transparent; }
+
+/* ============================================================
+   TAB 02 · WIPRO · PROFILE (Option 2: shared canvas, strong framing)
+   ============================================================ */
+.profile{
+  position:relative;
+  border:1px solid var(--rule);
+  background:var(--plate);
+  margin-top:8px;
+  padding:24px 28px 28px;
+  overflow:hidden;
+}
+.profile__corner{
+  position:absolute; top:14px; right:18px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ink-3); z-index:2;
+}
+.profile__graph{
+  position:relative;
+  width:100%; aspect-ratio:1000 / 460;
+  min-height:320px;
+}
+.profile__graph svg{ width:100%; height:100%; overflow:visible; display:block; }
+
+/* SVG element styling */
+.p2 .grid{ stroke:var(--ink-4); stroke-width:1; }
+.p2 .axis{ stroke:var(--ink-2); stroke-width:1; }
+.p2 .ax-label,
+.p2 .y-label,
+.p2 .day-num{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:0.14em;
+  fill:var(--ink-2); text-transform:uppercase;
+}
+.p2 .day-tick{ stroke:var(--ink-2); stroke-width:1; }
+.p2 .lane-before{ fill:var(--rev); opacity:0.045; }
+.p2 .lane-after{ fill:var(--teal); opacity:0.045; }
+.p2 .lane-label{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:0.22em;
+  text-transform:uppercase;
+}
+.p2 .lane-label.before{ fill:var(--rev); opacity:0.6; }
+.p2 .lane-label.after{ fill:var(--teal); opacity:0.7; }
+.p2 .curve-before-shade{ fill:var(--rev); opacity:0.08; }
+.p2 .curve-before{
+  fill:none; stroke:var(--rev); stroke-width:1.8;
+  stroke-linejoin:round; stroke-linecap:round;
+}
+.p2 .curve-after{
+  fill:none; stroke:var(--teal); stroke-width:2;
+  stroke-linejoin:round; stroke-linecap:round;
+}
+.p2 .endpoint{ stroke-width:1.6; }
+.p2 .endpoint.before{ stroke:var(--rev); fill:var(--bg); }
+.p2 .endpoint.after{ stroke:var(--teal); fill:var(--teal); }
+.p2 .restart-line{ stroke:var(--rev); stroke-width:1; stroke-dasharray:2 3; }
+.p2 .restart{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:0.14em;
+  fill:var(--rev); text-transform:uppercase;
+}
+.p2 .preserve-line{ stroke:var(--teal); stroke-width:1; stroke-dasharray:2 3; opacity:0.6; }
+.p2 .preserve{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:0.14em;
+  fill:var(--teal); text-transform:uppercase;
+}
+.p2 .stamp-box{ fill:none; stroke-width:1; }
+.p2 .stamp-box.before{ stroke:var(--rev); stroke-dasharray:2 3; }
+.p2 .stamp-box.after{ stroke:var(--teal); stroke-dasharray:2 3; }
+.p2 .stamp{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:0.2em;
+  text-transform:uppercase;
+}
+.p2 .stamp.before{ fill:var(--rev); }
+.p2 .stamp.after{ fill:var(--teal); }
+.p2 .dim-line{ stroke:var(--ink-1); stroke-width:1; fill:none; }
+.p2 .dim-arr{ fill:var(--teal); }
+.p2 .dim{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:0.18em;
+  fill:var(--ink-0); text-transform:uppercase;
+}
+.p2 .dim-sub{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:0.14em;
+  fill:var(--ink-2); text-transform:uppercase;
+}
+
+/* Animated states: draw stroke on enter */
+.profile.is-anim .p2 .curve-before{
+  stroke-dasharray:1400; stroke-dashoffset:1400;
+  animation:drawBefore 1400ms cubic-bezier(.55,.05,.5,.95) 80ms forwards;
+}
+.profile.is-anim .p2 .curve-before-shade{
+  opacity:0; animation:fadeIn 600ms ease 1300ms forwards;
+}
+.profile.is-anim .p2 .curve-after{
+  stroke-dasharray:1100; stroke-dashoffset:1100;
+  animation:drawAfter 1200ms cubic-bezier(.55,.05,.5,.95) 1700ms forwards;
+}
+.profile.is-anim .p2 .restart-line,
+.profile.is-anim .p2 .restart,
+.profile.is-anim .p2 .stamp-box.before,
+.profile.is-anim .p2 .stamp.before,
+.profile.is-anim .p2 .endpoint.before{
+  opacity:0; animation:fadeIn 400ms ease 900ms forwards;
+}
+.profile.is-anim .p2 .preserve-line,
+.profile.is-anim .p2 .preserve,
+.profile.is-anim .p2 .stamp-box.after,
+.profile.is-anim .p2 .stamp.after,
+.profile.is-anim .p2 .endpoint.after{
+  opacity:0; animation:fadeIn 400ms ease 2500ms forwards;
+}
+.profile.is-anim .p2 .dim-line,
+.profile.is-anim .p2 .dim-arr,
+.profile.is-anim .p2 .dim,
+.profile.is-anim .p2 .dim-sub{
+  opacity:0; animation:fadeIn 500ms ease 3000ms forwards;
+}
+@keyframes drawBefore{ to{ stroke-dashoffset:0; } }
+@keyframes drawAfter{ to{ stroke-dashoffset:0; } }
+@keyframes fadeIn{ to{ opacity:1; } }
+
+/* Mobile rotation: vertical viewBox swap (real SVG re-draw via JS) */
+.profile__graph[data-orient="vertical"]{
+  aspect-ratio:1 / 1.7;
+  max-height:680px;
+}
+
+/* ============================================================
+   HANDOFF TIMELINE (T1 → T2 → T3)
+   ============================================================ */
+.handoff{
+  position:relative;
+  border:1px solid var(--rule);
+  background:var(--plate);
+  margin-top:8px;
+  padding:28px 32px;
+  overflow:hidden;
+}
+.handoff__corner{
+  position:absolute; top:14px; right:18px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.handoff__label{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+  padding-bottom:14px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:24px;
+}
+.handoff__flow{
+  display:grid; grid-template-columns:1fr 36px 1fr 36px 1fr;
+  gap:0; align-items:stretch;
+}
+.handoff__node{
+  display:flex; flex-direction:column; gap:10px;
+  padding:18px 18px;
+  border:1px solid var(--rule);
+  background:rgba(10,15,14,0.4);
+  min-height:200px;
+}
+.handoff__node .tn{
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--teal);
+}
+.handoff__node .tn .num{
+  display:inline-grid; place-items:center;
+  width:24px; height:24px; border:1px solid var(--teal);
+  color:var(--teal); font-size:11px;
+}
+.handoff__node .lbl{ font-size:17px; font-weight:500; letter-spacing:-0.01em; }
+.handoff__node .det{ font-size:13.5px; line-height:1.55; color:var(--ink-1); margin:0; }
+.handoff__node .sla{
+  margin-top:auto;
+  display:flex; align-items:baseline; gap:10px;
+  padding-top:12px;
+  border-top:1px dashed var(--rule);
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.handoff__node .sla b{ color:var(--ink-0); font-weight:500; font-size:13px; }
+
+.handoff__conn{
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+}
+.handoff__conn::before{
+  content:""; position:absolute; left:6px; right:6px; top:50%;
+  height:1px; background:var(--ink-3);
+}
+.handoff__conn::after{
+  content:""; position:absolute; right:6px; top:50%;
+  width:0; height:0; transform:translateY(-50%);
+  border-left:7px solid var(--teal); border-top:5px solid transparent; border-bottom:5px solid transparent;
+}
+
+@media (max-width: 880px){
+  .handoff__flow{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .handoff__conn{
+    height:36px;
+  }
+  .handoff__conn::before{
+    left:50%; right:auto; top:6px; bottom:6px;
+    width:1px; height:auto;
+  }
+  .handoff__conn::after{
+    left:50%; right:auto; top:auto; bottom:6px; transform:translateX(-50%);
+    border-left:5px solid transparent; border-right:5px solid transparent;
+    border-top:7px solid var(--teal); border-bottom:none;
+  }
+}
+@media (max-width: 480px){
+  .handoff{ padding:18px 16px; }
+}
+
+/* ============================================================
+   TAB 03 · EY · FOOTPRINT (sticky map + scroll-pin sequence)
+   ============================================================ */
+.footprint{
+  margin-top:8px;
+}
+.footprint__layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+  align-items:flex-start;
+}
+
+/* Map: sticky on left */
+.map-pin{
+  position:sticky; top:140px;
+  align-self:flex-start;
+}
+.map-stage{
+  position:relative;
+  border:1px solid var(--rule);
+  background:
+    radial-gradient(circle at 50% 55%, rgba(45,212,178,0.04), transparent 65%),
+    var(--plate);
+  padding:20px;
+  aspect-ratio:1 / 1.05;
+  max-height:80vh;
+  overflow:hidden;
+}
+.map-stage svg{ width:100%; height:100%; overflow:visible; display:block; }
+
+.p3 .grid{ stroke:var(--ink-4); stroke-width:0.6; stroke-dasharray:2 5; fill:none; }
+.p3 .outline{ fill:rgba(45,212,178,0.02); stroke:var(--ink-2); stroke-width:1.2; }
+.p3 .route{ stroke:var(--ink-3); stroke-width:1; fill:none; stroke-dasharray:3 4;
+            transition:stroke 480ms ease, stroke-dasharray 480ms ease; }
+.p3 .route.lit{ stroke:var(--teal); stroke-dasharray:none; }
+.p3 .compass{ fill:none; stroke:var(--ink-2); stroke-width:1; }
+.p3 .compass-n{ fill:var(--ink-2); }
+.p3 .scale{ stroke:var(--ink-2); stroke-width:1; }
+.p3 .map-label{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:0.14em;
+  fill:var(--ink-2); text-transform:uppercase;
+}
+.p3 .map-tbd{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:0.14em;
+  fill:var(--ink-3); text-transform:uppercase;
+}
+
+.map-pin-marker{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+  pointer-events:none;
+}
+.map-pin-marker .dot{
+  width:14px; height:14px; border-radius:50%;
+  border:1.4px solid var(--ink-3);
+  background:var(--bg);
+  flex:none;
+  transition:background 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+}
+.map-pin-marker .lbl{
+  padding:5px 9px;
+  background:rgba(10,15,14,0.85);
+  border:1px solid var(--rule);
+  color:var(--ink-2);
+  white-space:nowrap;
+  transition:color 280ms ease, border-color 280ms ease;
+}
+.map-pin-marker.is-active .dot{
+  background:var(--teal); border-color:var(--teal);
+  box-shadow:0 0 0 5px rgba(45,212,178,0.18);
+}
+.map-pin-marker.is-active .lbl{ color:var(--teal); border-color:var(--teal); }
+
+/* "You are here" position indicator on map */
+.map-progress{
+  position:absolute;
+  bottom:14px; left:14px;
+  display:flex; align-items:center; gap:10px;
+  padding:8px 12px;
+  border:1px solid var(--rule);
+  background:rgba(10,15,14,0.92);
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.map-progress .pip{
+  width:7px; height:7px; border-radius:50%;
+  background:var(--ink-3); border:1px solid var(--ink-3);
+}
+.map-progress .pip.is-active{ background:var(--teal); border-color:var(--teal); }
+.map-progress b{ color:var(--ink-0); font-weight:500; margin-left:6px; }
+
+.map-endstamp{
+  position:absolute;
+  top:18px; left:50%; transform:translateX(-50%);
+  padding:5px 10px;
+  border:1px dashed var(--teal);
+  font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--teal);
+  background:rgba(45,212,178,0.05);
+  opacity:0; pointer-events:none;
+  transition:opacity 320ms ease;
+}
+.map-endstamp.is-on{ opacity:1; }
+
+/* Right column: scroll panels */
+.city-stack{
+  display:flex; flex-direction:column;
+  gap:18px;
+}
+.city-panel{
+  position:relative;
+  border:1px solid var(--rule);
+  background:var(--plate);
+  padding:24px 26px;
+  min-height:340px;
+  display:flex; flex-direction:column; gap:14px;
+}
+.city-panel .pn{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.city-panel .pn b{ color:var(--teal); font-weight:500; margin-right:6px; }
+.city-panel h4{
+  margin:0; font-size:22px; font-weight:500; letter-spacing:-0.012em;
+}
+.city-panel .frame{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--ink-1);
+}
+.city-panel p{ font-size:14px; line-height:1.6; color:var(--ink-1); margin:0; }
+.city-panel .stats{
+  display:grid; grid-template-columns:1fr 1fr;
+  border:1px solid var(--rule);
+  margin-top:auto;
+}
+.city-panel .stats > div{ padding:14px 16px; border-right:1px solid var(--rule); }
+.city-panel .stats > div:last-child{ border-right:none; }
+.city-panel .stats .v{ font-size:22px; font-weight:500; color:var(--ink-0); line-height:1; }
+.city-panel .stats .v .u{ font-size:13px; color:var(--ink-2); font-family:var(--mono); margin-left:3px; }
+.city-panel .stats .l{
+  margin-top:6px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.city-panel.is-active{
+  border-color:var(--teal);
+  background:linear-gradient(180deg, rgba(45,212,178,0.05), rgba(45,212,178,0.01));
+}
+.city-panel.is-active .pn b{ color:var(--teal); }
+
+/* Summary card at end */
+.city-panel--summary .stamp{
+  display:inline-flex; align-items:center;
+  padding:5px 10px;
+  border:1px dashed var(--teal);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--teal);
+  align-self:flex-start;
+}
+.city-panel--summary .totals{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--teal);
+  margin-top:auto;
+  background:rgba(45,212,178,0.02);
+}
+.city-panel--summary .totals > div{ padding:14px 16px; border-right:1px solid rgba(45,212,178,0.25); }
+.city-panel--summary .totals > div:last-child{ border-right:none; }
+.city-panel--summary .totals .v{
+  font-size:22px; font-weight:500; color:var(--ink-0); line-height:1;
+}
+.city-panel--summary .totals .v .u{ font-size:13px; color:var(--teal); font-family:var(--mono); margin-left:3px; }
+.city-panel--summary .totals .l{
+  margin-top:6px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+
+@media (max-width: 880px){
+  .footprint__layout{ grid-template-columns:1fr; gap:18px; }
+  .map-pin{ position:sticky; top:120px; }
+  .map-stage{ max-height:50vh; aspect-ratio:auto; min-height:300px; }
+  .city-panel{ min-height:auto; }
+}
+@media (max-width: 480px){
+  .map-pin{ position:relative; top:0; }
+  .map-stage{ aspect-ratio:1 / 1; max-height:none; min-height:0; }
+}
+
+/* Horizontal "you are here" pill for mobile (alt) */
+@media (max-width: 880px){
+  .map-progress{
+    bottom:auto; left:14px; top:14px;
+  }
+}
+
+/* ============================================================
+   CLOSING / HANDOFF CTA
+   ============================================================ */
+.closing{
+  padding:48px 0 32px;
+  border-bottom:1px solid var(--rule);
+}
+.closing__ruler{
+  display:flex; align-items:center; gap:16px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ink-2);
+  padding-bottom:18px;
+  border-bottom:1px solid var(--rule);
+  margin-bottom:24px;
+}
+.closing__ruler::after{
+  content:""; flex:1; height:1px; background:var(--rule);
+}
+.closing__inner{
+  display:grid; grid-template-columns:1.4fr 1fr; gap:36px; align-items:end;
+}
+.closing__eyebrow{
+  font-family:var(--mono); font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--teal); margin:0 0 10px;
+}
+.closing__hl{
+  font-family:var(--sans); font-weight:500;
+  font-size:clamp(24px, 3vw, 36px);
+  line-height:1.08; letter-spacing:-0.018em;
+  margin:0; max-width:22ch; text-wrap:balance;
+}
+.closing__cta{
+  display:inline-flex; align-items:center; gap:12px;
+  padding:14px 18px;
+  border:1px solid var(--teal);
+  font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-0); text-decoration:none;
+  background:rgba(45,212,178,0.05);
+  transition:background 200ms ease, border-color 200ms ease;
+}
+.closing__cta:hover{ background:rgba(45,212,178,0.12); }
+.closing__cta .arrow{ color:var(--teal); }
+.closing__cta .url{ color:var(--ink-2); font-size:10.5px; }
+@media (max-width: 640px){
+  .closing__inner{ grid-template-columns:1fr; gap:18px; align-items:start; }
+}
+
+/* ============================================================
+   SHEET FOOTER
+   ============================================================ */
+.sheet-footer{
+  display:grid; grid-template-columns:repeat(6, minmax(0,1fr));
+  gap:0;
+  padding:18px var(--gutter) 24px;
+  border-top:1px solid var(--rule);
+  max-width:var(--maxw); margin:0 auto;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-2);
+}
+.sheet-footer > div{ padding:8px 14px; border-right:1px solid var(--rule); }
+.sheet-footer > div:last-child{ border-right:none; }
+.sheet-footer dt{ display:block; color:var(--ink-3); margin-bottom:4px; }
+.sheet-footer dd{ margin:0; color:var(--ink-0); }
+@media (max-width: 880px){
+  .sheet-footer{ grid-template-columns:repeat(3, 1fr); }
+  .sheet-footer > div:nth-child(3){ border-right:none; }
+  .sheet-footer > div{ border-bottom:1px solid var(--rule); }
+  .sheet-footer > div:nth-last-child(-n+3){ border-bottom:none; }
+}
+@media (max-width: 480px){
+  .sheet-footer{ grid-template-columns:repeat(2, 1fr); }
+  .sheet-footer > div{ border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+  .sheet-footer > div:nth-child(2n){ border-right:none; }
+  .sheet-footer > div:nth-last-child(-n+2){ border-bottom:none; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:0.001ms !important;
+    animation-delay:0ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.001ms !important;
+    transition-delay:0ms !important;
+  }
+  .profile .p2 .curve-before,
+  .profile .p2 .curve-after{ stroke-dasharray:none !important; stroke-dashoffset:0 !important; }
+  .profile.is-anim .p2 *{ opacity:1 !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     BRAND BAR
+     ============================================================ -->
+<header class="brand-bar" role="banner">
+  <div class="brand-bar__inner">
+    <a href="#" class="brand-bar__mark"><span class="plus">+</span>M · STANGL</a>
+    <nav class="brand-bar__nav" aria-label="Primary">
+      <a href="#">About</a>
+      <a href="#" aria-current="page">Impact</a>
+      <a href="#">Case Studies</a>
+      <a href="#">Signal · Story</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page" id="top">
+
+  <!-- ============================================================
+       BREADCRUMB
+       ============================================================ -->
+  <div class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb__path">
+      <span class="breadcrumb__dot" aria-hidden="true"></span>
+      <span>Console</span>
+      <span class="sep">/</span>
+      <span>Impact</span>
+      <span class="sep">/</span>
+      <span class="active" id="crumbActive">Autodesk</span>
+    </div>
+    <div class="breadcrumb__sig">
+      <b>Matt Stangl</b>CX, Product &amp; Service Design Leader
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TITLE BLOCK + ID STRIP
+       ============================================================ -->
+  <section class="title-block" data-screen-label="00 Title">
+    <div>
+      <p class="kicker">Impact · 2020–2026</p>
+      <h1>Three enterprise transformations. In numbers.</h1>
+      <p class="sub">What shipped, what moved, what carried.</p>
+    </div>
+    <dl class="id-strip" aria-label="Identification">
+      <dt>Operator</dt>      <dd>Matt Stangl</dd>
+      <dt>Role</dt>          <dd>CX, Product &amp; Service Design Leader</dd>
+      <dt>Engagements</dt>   <dd>Autodesk · Wipro · EY</dd>
+      <dt>Scope</dt>         <dd>Practice building · Service transformation · Ecosystem design</dd>
+    </dl>
+  </section>
+
+  <!-- ============================================================
+       TAB NAV
+       ============================================================ -->
+  <nav class="tab-nav" role="tablist" aria-label="Engagements">
+    <button class="tab-btn" id="tab-btn-01" role="tab" aria-selected="true"  aria-controls="tab-01" data-tab="01">
+      <span class="num">01 / Revenue</span>
+      <span class="ttl">Service as revenue motion</span>
+      <span class="cl">Autodesk</span>
+    </button>
+    <button class="tab-btn" id="tab-btn-02" role="tab" aria-selected="false" aria-controls="tab-02" data-tab="02">
+      <span class="num">02 / Operations</span>
+      <span class="ttl">Six towers, one model</span>
+      <span class="cl">Wipro</span>
+    </button>
+    <button class="tab-btn" id="tab-btn-03" role="tab" aria-selected="false" aria-controls="tab-03" data-tab="03">
+      <span class="num">03 / Healthcare</span>
+      <span class="ttl">Care pathways, built for adoption</span>
+      <span class="cl">EY</span>
+    </button>
+  </nav>
+
+  <!-- ============================================================
+       TAB 01 · AUTODESK · ASSEMBLY
+       ============================================================ -->
+  <section class="tab-panel" id="tab-01" role="tabpanel" aria-labelledby="tab-btn-01" data-screen-label="01 Autodesk">
+
+    <div class="cat-badge">
+      <span class="num">01</span>
+      <span class="sep">·</span>
+      <span class="cat">Assembly</span>
+      <span class="sep">·</span>
+      <span class="org">Autodesk</span>
+    </div>
+
+    <div class="hero">
+      <div class="hero__copy">
+        <h2>My team designed Autodesk's new <em>Post-Purchase Model</em>.</h2>
+        <p>I led strategy, design direction, and experience reviews on the new post-purchase service model.</p>
+      </div>
+      <div class="hero__metric">
+        <span class="v"><span class="accent">+$</span>50<span class="unit">M+</span></span>
+        <span class="lbl">Projected incremental revenue · YoY after 2 quarters</span>
+      </div>
+    </div>
+
+    <div class="metric-strip">
+      <div>
+        <div class="v">+27<span class="u">%</span></div>
+        <div class="l">Revenue lift · Q1 post-launch</div>
+      </div>
+      <div>
+        <div class="v">106<span class="u">%</span></div>
+        <div class="l">NRR path</div>
+      </div>
+      <div>
+        <div class="v">75<span class="u">%+</span></div>
+        <div class="l">Business Plan renewal · Q1</div>
+      </div>
+    </div>
+
+    <div class="section-break">
+      <span class="section-break__label"><span class="arrow">↓</span> The three-tier service ladder · Tap a tier to open</span>
+      <span class="section-break__meta">
+        <span>FIG. 01-A · Assembly</span>
+        <span>Exploded view</span>
+      </span>
+    </div>
+
+    <!-- Assembly stage -->
+    <div class="assembly" id="assembly">
+      <span class="assembly__corner">SHEET 01-A · 1 : 1</span>
+      <svg class="leaders" id="leaders" aria-hidden="true" preserveAspectRatio="none"></svg>
+
+      <div class="tier-stack" role="list">
+
+        <!-- T01 Business Plan -->
+        <div class="tier" data-tier="01" data-state="active" role="listitem">
+          <div class="tier__chips tier__chips--left" aria-hidden="false">
+            <div class="chip" data-cls="innovated" data-chip-id="01-L-1"><span class="cls"></span><span class="pn">01-A</span><span class="nm">Strategic success planning</span></div>
+            <div class="chip" data-cls="innovated" data-chip-id="01-L-2"><span class="cls"></span><span class="pn">01-B</span><span class="nm">Executive business review</span></div>
+            <div class="chip" data-cls="innovated" data-chip-id="01-L-3"><span class="cls"></span><span class="pn">01-C</span><span class="nm">Adoption roadmap</span></div>
+          </div>
+          <button class="tier__deck" type="button" data-deck-id="01" aria-expanded="true" aria-controls="tier-01-detail">
+            <span class="pn">T01</span>
+            <span class="nm">Business Plan · Premium</span>
+            <span class="lift">950 customers · 6 services · coaching</span>
+            <span class="chev">›</span>
+          </button>
+          <div class="tier__chips tier__chips--right">
+            <div class="chip" data-cls="optimized" data-chip-id="01-R-1"><span class="pn">01-D</span><span class="nm">Named success manager</span><span class="cls"></span></div>
+            <div class="chip" data-cls="optimized" data-chip-id="01-R-2"><span class="pn">01-E</span><span class="nm">Quarterly health score</span><span class="cls"></span></div>
+            <div class="chip" data-cls="refined" data-chip-id="01-R-3"><span class="pn">01-F</span><span class="nm">Priority escalation</span><span class="cls"></span></div>
+          </div>
+          <p class="tier__desc" id="tier-01-detail">
+            Strategic planning and coaching-heavy delivery. Designed to expand accounts.
+          </p>
+        </div>
+
+        <!-- T02 Professional Plan -->
+        <div class="tier" data-tier="02" data-state="stowed" role="listitem">
+          <div class="tier__chips tier__chips--left">
+            <div class="chip" data-cls="innovated" data-chip-id="02-L-1"><span class="cls"></span><span class="pn">02-A</span><span class="nm">Deployment accelerators</span></div>
+            <div class="chip" data-cls="optimized" data-chip-id="02-L-2"><span class="cls"></span><span class="pn">02-B</span><span class="nm">Capability workshops</span></div>
+          </div>
+          <button class="tier__deck" type="button" data-deck-id="02" aria-expanded="false" aria-controls="tier-02-detail">
+            <span class="pn">T02</span>
+            <span class="nm">Professional Plan · Targeted</span>
+            <span class="lift">25K+ customers · 4 services · attach</span>
+            <span class="chev">›</span>
+          </button>
+          <div class="tier__chips tier__chips--right">
+            <div class="chip" data-cls="optimized" data-chip-id="02-R-1"><span class="pn">02-C</span><span class="nm">Integration advisory</span><span class="cls"></span></div>
+            <div class="chip" data-cls="refined" data-chip-id="02-R-2"><span class="pn">02-D</span><span class="nm">On-demand expert hours</span><span class="cls"></span></div>
+          </div>
+          <p class="tier__desc" id="tier-02-detail">
+            Targeted engagements that accelerate deployment and close capability gaps.
+          </p>
+        </div>
+
+        <!-- T03 Included Plan -->
+        <div class="tier" data-tier="03" data-state="stowed" role="listitem">
+          <div class="tier__chips tier__chips--left">
+            <div class="chip" data-cls="innovated" data-chip-id="03-L-1"><span class="cls"></span><span class="pn">03-A</span><span class="nm">Guided onboarding</span></div>
+            <div class="chip" data-cls="innovated" data-chip-id="03-L-2"><span class="cls"></span><span class="pn">03-B</span><span class="nm">Self-serve learning paths</span></div>
+            <div class="chip" data-cls="optimized" data-chip-id="03-L-3"><span class="cls"></span><span class="pn">03-C</span><span class="nm">Community access</span></div>
+          </div>
+          <button class="tier__deck" type="button" data-deck-id="03" aria-expanded="false" aria-controls="tier-03-detail">
+            <span class="pn">T03</span>
+            <span class="nm">Included Plan · Foundational</span>
+            <span class="lift">1M+ customers · 5 services · retain</span>
+            <span class="chev">›</span>
+          </button>
+          <div class="tier__chips tier__chips--right">
+            <div class="chip" data-cls="refined" data-chip-id="03-R-1"><span class="pn">03-D</span><span class="nm">Knowledge base</span><span class="cls"></span></div>
+            <div class="chip" data-cls="refined" data-chip-id="03-R-2"><span class="pn">03-E</span><span class="nm">Product telemetry nudges</span><span class="cls"></span></div>
+          </div>
+          <p class="tier__desc" id="tier-03-detail">
+            Self-service and onboarding paths that feed customers upsell-ready into higher tiers.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="cls-legend" aria-label="Classification legend">
+        <span class="item"><span class="sw full"></span>Innovated</span>
+        <span class="item"><span class="sw half"></span>Optimized</span>
+        <span class="item"><span class="sw outline"></span>Refined</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       TAB 02 · WIPRO · PROFILE
+       ============================================================ -->
+  <section class="tab-panel" id="tab-02" role="tabpanel" aria-labelledby="tab-btn-02" data-screen-label="02 Wipro" hidden>
+
+    <div class="cat-badge">
+      <span class="num">02</span>
+      <span class="sep">·</span>
+      <span class="cat">Profile</span>
+      <span class="sep">·</span>
+      <span class="org">Wipro</span>
+    </div>
+
+    <div class="hero">
+      <div class="hero__copy">
+        <h2>I unified six service towers into one <em>operating model</em>.</h2>
+        <p>At Wipro, I led transformation across six ITIL service towers for Estée Lauder, building the frameworks, metrics, and delivery model that improved NPS past goal.</p>
+      </div>
+      <div class="hero__metric">
+        <span class="v">13<span class="unit">%+</span></span>
+        <span class="lbl">NPS goal exceeded</span>
+      </div>
+    </div>
+
+    <div class="metric-strip">
+      <div>
+        <div class="v">30<span class="u">+</span></div>
+        <div class="l">Outcomes shipped</div>
+      </div>
+      <div>
+        <div class="v">3</div>
+        <div class="l">Handoff tiers</div>
+      </div>
+      <div>
+        <div class="v">13<span class="u">K</span></div>
+        <div class="l">Annual reduction in lockout cases</div>
+      </div>
+    </div>
+
+    <div class="section-break">
+      <span class="section-break__label"><span class="arrow">↓</span> Before vs. after, unified service delivery · Normalized across ticket classes</span>
+      <span class="section-break__meta">
+        <span>FIG. 02-A · Test bench</span>
+        <span>RUN 01 → RUN 02</span>
+      </span>
+    </div>
+
+    <!-- Stress-profile graph (Option 2: shared canvas, strong framing) -->
+    <div class="profile p2" id="profile">
+      <span class="profile__corner">SHEET 02-A · NORMALIZED</span>
+      <div class="profile__graph" id="profileGraph" data-orient="horizontal">
+        <!-- SVG injected by JS so we can swap horizontal/vertical at mobile breakpoint -->
+      </div>
+    </div>
+
+    <div class="section-break">
+      <span class="section-break__label"><span class="arrow">↓</span> The redesigned handoff, tier by tier · Flow → speed</span>
+      <span class="section-break__meta">
+        <span>FIG. 02-B · Lifecycle</span>
+        <span>Resolve at lowest tier</span>
+      </span>
+    </div>
+
+    <!-- Handoff timeline -->
+    <div class="handoff">
+      <span class="handoff__corner">SHEET 02-B</span>
+      <div class="handoff__label">Case lifecycle · resolve at the lowest possible tier</div>
+      <div class="handoff__flow">
+        <div class="handoff__node">
+          <div class="tn"><span class="num">T1</span>Triage &amp; resolve</div>
+          <div class="lbl">Structured intake</div>
+          <p class="det">72% of cases close here with a named owner from minute one.</p>
+          <div class="sla">SLA target<b>&lt; 4h</b></div>
+        </div>
+        <div class="handoff__conn" aria-hidden="true"></div>
+        <div class="handoff__node">
+          <div class="tn"><span class="num">T2</span>Specialist engage</div>
+          <div class="lbl">Domain engineer picks up</div>
+          <p class="det">Domain engineer picks up a full context payload, no customer restart.</p>
+          <div class="sla">SLA target<b>&lt; 2d</b></div>
+        </div>
+        <div class="handoff__conn" aria-hidden="true"></div>
+        <div class="handoff__node">
+          <div class="tn"><span class="num">T3</span>Product &amp; engineering</div>
+          <div class="lbl">Defects &amp; architectural fixes</div>
+          <p class="det">Reserved for defects and architectural fixes. Feeds the roadmap directly.</p>
+          <div class="sla">SLA target<b>&lt; 5d</b></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       TAB 03 · EY · FOOTPRINT
+       ============================================================ -->
+  <section class="tab-panel" id="tab-03" role="tabpanel" aria-labelledby="tab-btn-03" data-screen-label="03 EY" hidden>
+
+    <div class="cat-badge">
+      <span class="num">03</span>
+      <span class="sep">·</span>
+      <span class="cat">Footprint</span>
+      <span class="sep">·</span>
+      <span class="org">EY</span>
+    </div>
+
+    <div class="hero">
+      <div class="hero__copy">
+        <h2>A national-best-practice <em>COVID engagement program</em>.</h2>
+        <p>At EY, I led the experience design for Georgia's two-stage COVID-19 engagement program — awareness at scale, activation through partners. CDC-recognized national best practice.</p>
+      </div>
+      <div class="hero__metric">
+        <span class="v">4.57M <span style="color:var(--ink-2);font-weight:400;font-size:0.55em;margin:0 0.18em;">→</span> <span class="accent">715</span></span>
+        <span class="lbl">Engagements → vaccinations · gap by design</span>
+      </div>
+    </div>
+
+    <div class="metric-strip">
+      <div>
+        <div class="v">4.57<span class="u">M</span></div>
+        <div class="l">Engagements (program-attributed)</div>
+      </div>
+      <div>
+        <div class="v">715</div>
+        <div class="l">Vaccinations (program-attributed)</div>
+      </div>
+      <div>
+        <div class="v">8<span class="u">M+</span></div>
+        <div class="l">Statewide vaccinations during comms leadership</div>
+      </div>
+    </div>
+
+    <div class="section-break">
+      <span class="section-break__label"><span class="arrow">↓</span> Georgia delivery footprint · Scroll the cities</span>
+      <span class="section-break__meta">
+        <span>FIG. 03-A · Delivery</span>
+        <span>3 hubs · sequenced</span>
+      </span>
+    </div>
+
+    <div class="footprint">
+      <div class="footprint__layout">
+
+        <!-- Sticky map -->
+        <div class="map-pin">
+          <div class="map-stage" id="mapStage">
+            <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true" class="p3">
+              <g class="grid">
+                <line x1="60"  y1="0" x2="60"  y2="600"/>
+                <line x1="300" y1="0" x2="300" y2="600"/>
+                <line x1="540" y1="0" x2="540" y2="600"/>
+                <line x1="0" y1="60"  x2="600" y2="60"/>
+                <line x1="0" y1="300" x2="600" y2="300"/>
+                <line x1="0" y1="540" x2="600" y2="540"/>
+              </g>
+              <!-- Placeholder Georgia outline — real SVG path TBD at Cursor port -->
+              <path class="outline" d="M 138 88 L 174 86 L 212 88 L 256 88 L 302 90 L 348 90 L 390 88 L 432 92 L 478 100 L 492 130 L 488 170 L 502 198 L 494 232 L 506 268 L 498 302 L 506 336 L 488 368 L 494 400 L 478 430 L 484 462 L 462 488 L 442 510 L 408 526 L 372 528 L 332 532 L 292 532 L 252 530 L 214 528 L 178 528 L 154 522 L 148 504 L 144 472 L 138 436 L 134 396 L 130 354 L 132 308 L 128 264 L 130 220 L 134 174 L 138 130 Z"/>
+              <!-- routes: ATL → ATH, ATL → SAV, ATH → SAV -->
+              <line id="route-atl-ath" class="route" x1="228" y1="200" x2="290" y2="188"/>
+              <line id="route-atl-sav" class="route" x1="228" y1="200" x2="454" y2="480"/>
+              <line id="route-ath-sav" class="route" x1="290" y1="188" x2="454" y2="480"/>
+
+              <!-- compass -->
+              <g transform="translate(540 538)">
+                <circle class="compass" r="20"/>
+                <line class="compass" x1="0" y1="-26" x2="0" y2="26"/>
+                <line class="compass" x1="-26" y1="0" x2="26" y2="0"/>
+                <polygon class="compass-n" points="-5,-14 0,-26 5,-14"/>
+                <text class="map-label" x="0" y="-30" text-anchor="middle">N</text>
+              </g>
+              <!-- scale -->
+              <g transform="translate(60 570)">
+                <line class="scale" x1="0" y1="0" x2="120" y2="0"/>
+                <line class="scale" x1="0" y1="-4" x2="0" y2="4"/>
+                <line class="scale" x1="60" y1="-3" x2="60" y2="3"/>
+                <line class="scale" x1="120" y1="-4" x2="120" y2="4"/>
+                <text class="map-label" x="0" y="14">0</text>
+                <text class="map-label" x="118" y="14">100 mi</text>
+              </g>
+
+              <text class="map-label" x="14" y="22">FIG. 03 · DELIVERY FOOTPRINT</text>
+              <text class="map-tbd" x="586" y="22" text-anchor="end">SVG · PLACEHOLDER · TBD</text>
+            </svg>
+
+            <!-- Pins overlay -->
+            <div class="map-pin-marker is-active" id="pin-atl" style="left:38%; top:33%;">
+              <span class="dot"></span>
+              <span class="lbl"><b>ATL</b> · Hub-01</span>
+            </div>
+            <div class="map-pin-marker" id="pin-ath" style="left:48.3%; top:31.3%;">
+              <span class="dot"></span>
+              <span class="lbl"><b>ATH</b> · Hub-02</span>
+            </div>
+            <div class="map-pin-marker" id="pin-sav" style="left:75.8%; top:80%;">
+              <span class="dot"></span>
+              <span class="lbl"><b>SAV</b> · Hub-03</span>
+            </div>
+
+            <!-- "You are here" map progress pill -->
+            <div class="map-progress" aria-hidden="true">
+              <span class="pip is-active" id="pip-atl"></span>
+              <span class="pip" id="pip-ath"></span>
+              <span class="pip" id="pip-sav"></span>
+              <span>You are here<b id="mapProgressLabel">1 / 3 · Atlanta</b></span>
+            </div>
+
+            <!-- End-of-program stamp -->
+            <div class="map-endstamp" id="mapEndstamp">End of program · 3 hubs lit</div>
+          </div>
+        </div>
+
+        <!-- Scroll panels -->
+        <div class="city-stack" id="cityStack">
+
+          <article class="city-panel is-active" id="panel-atl" data-city="atl">
+            <div class="pn"><b>HUB-01</b> · Atlanta</div>
+            <h4>Metro hub · anchor partner sites</h4>
+            <div class="frame">Reach &amp; depth</div>
+            <p>Anchor partner sites across metro Atlanta carried the bulk of program awareness. The hub paired large-venue activation with neighborhood-level partner clinics.</p>
+            <div class="stats">
+              <div><div class="v">2.41<span class="u">M</span></div><div class="l">Engagements</div></div>
+              <div><div class="v">452</div><div class="l">Vaccinations</div></div>
+            </div>
+          </article>
+
+          <article class="city-panel" id="panel-ath" data-city="ath">
+            <div class="pn"><b>HUB-02</b> · Athens</div>
+            <h4>Twilight Criterium · UGA Athletics partnership</h4>
+            <div class="frame">Cultural anchor</div>
+            <p>Embedded the program in the city's signature events, with UGA Athletics carrying the activation message into student and family channels.</p>
+            <div class="stats">
+              <div><div class="v">1.65<span class="u">M</span></div><div class="l">Engagements</div></div>
+              <div><div class="v">175</div><div class="l">Vaccinations</div></div>
+            </div>
+          </article>
+
+          <article class="city-panel" id="panel-sav" data-city="sav">
+            <div class="pn"><b>HUB-03</b> · Savannah</div>
+            <h4>Coastal delivery · mobile teams</h4>
+            <div class="frame">Last-mile reach</div>
+            <p>Mobile teams across coastal communities, paired with maritime &amp; tourism employers to extend the program past the metro footprint.</p>
+            <div class="stats">
+              <div><div class="v">0.51<span class="u">M</span></div><div class="l">Engagements</div></div>
+              <div><div class="v">88</div><div class="l">Vaccinations</div></div>
+            </div>
+          </article>
+
+          <article class="city-panel city-panel--summary" id="panel-sum" data-city="sum">
+            <span class="stamp">End of program · footprint complete</span>
+            <h4>Three hubs. One program.</h4>
+            <p>Awareness at scale, activation through partners. Coordinates reconcile across hubs — math on the page matches math in the field.</p>
+            <div class="totals">
+              <div><div class="v">4.57<span class="u">M</span></div><div class="l">Aware</div></div>
+              <div><div class="v">715</div><div class="l">Vaccines</div></div>
+              <div><div class="v">3</div><div class="l">Hubs</div></div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       CLOSING / HANDOFF CTA  (persists across tabs)
+       ============================================================ -->
+  <section class="closing" aria-label="Handoff">
+    <div class="closing__ruler">↘ Case studies</div>
+    <div class="closing__inner">
+      <div>
+        <p class="closing__eyebrow">Handoff · the larger story</p>
+        <h3 class="closing__hl">The work behind the numbers, in case study form.</h3>
+      </div>
+      <a class="closing__cta" href="/case-studies/autodesk">
+        <span>Open case studies</span>
+        <span class="arrow">→</span>
+        <span class="url">/case-studies/autodesk</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     SHEET FOOTER
+     ============================================================ -->
+<footer class="sheet-footer" role="contentinfo">
+  <div><dt>Sheet</dt><dd>IMPACT · 01–03</dd></div>
+  <div><dt>Scale</dt><dd>1 : 1</dd></div>
+  <div><dt>Drawn</dt><dd>M. Stangl</dd></div>
+  <div><dt>Approved</dt><dd>M. Stangl</dd></div>
+  <div><dt>Date</dt><dd>2026 · 04</dd></div>
+  <div><dt>Rev.</dt><dd>v2026.04</dd></div>
+</footer>
+
+<script>
+(function(){
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ============================================================
+  // TAB SWITCHING
+  // ============================================================
+  const tabs    = Array.from(document.querySelectorAll('.tab-btn'));
+  const panels  = Array.from(document.querySelectorAll('.tab-panel'));
+  const crumb   = document.getElementById('crumbActive');
+  const crumbLabels = { '01': 'Autodesk', '02': 'Wipro', '03': 'EY' };
+
+  function showTab(id, opts){
+    opts = opts || {};
+    tabs.forEach(t => {
+      const sel = (t.dataset.tab === id);
+      t.setAttribute('aria-selected', sel ? 'true' : 'false');
+    });
+    panels.forEach(p => {
+      const want = (p.id === 'tab-' + id);
+      if(want){ p.hidden = false; } else { p.hidden = true; }
+    });
+    crumb.textContent = crumbLabels[id] || '';
+    // tab 02: trigger curve animation (single fire when made visible)
+    if(id === '02') startProfileIfNeeded();
+    // tab 03: re-evaluate intersection observer (panels just became visible)
+    if(id === '03') refreshCityActive();
+    if(!opts.noScroll && window.scrollY > 320){
+      // scroll up to title block on switch so user sees fresh hero
+      const title = document.querySelector('.tab-nav');
+      if(title) window.scrollTo({ top: title.offsetTop - 60, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    // hash sync
+    try{ history.replaceState(null, '', '#tab-' + id); }catch(e){}
+  }
+
+  tabs.forEach(t => {
+    t.addEventListener('click', () => showTab(t.dataset.tab));
+    t.addEventListener('keydown', (e) => {
+      if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+        e.preventDefault();
+        const i = tabs.indexOf(t);
+        const next = e.key === 'ArrowRight' ? (i+1) % tabs.length : (i-1+tabs.length) % tabs.length;
+        tabs[next].focus(); tabs[next].click();
+      }
+    });
+  });
+
+  // Initial: honor hash if present
+  const hash = (location.hash || '').replace('#tab-','');
+  if(['01','02','03'].includes(hash)){ showTab(hash, {noScroll:true}); }
+
+  // ============================================================
+  // TAB 01 · ASSEMBLY — click-to-raise tier
+  // ============================================================
+  const tiers = Array.from(document.querySelectorAll('.tier'));
+  const leadersSvg = document.getElementById('leaders');
+  const assembly = document.getElementById('assembly');
+
+  function setActiveTier(id){
+    tiers.forEach(t => {
+      const isActive = (t.dataset.tier === id);
+      t.dataset.state = isActive ? 'active' : 'stowed';
+      const btn = t.querySelector('.tier__deck');
+      btn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    });
+    // redraw leaders after a tick so layout settles
+    requestAnimationFrame(() => requestAnimationFrame(drawLeaders));
+  }
+
+  tiers.forEach(tier => {
+    const btn = tier.querySelector('.tier__deck');
+    btn.addEventListener('click', () => setActiveTier(tier.dataset.tier));
+    btn.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault(); setActiveTier(tier.dataset.tier);
+      }
+    });
+  });
+
+  function drawLeaders(){
+    if(!leadersSvg || !assembly) return;
+    const isMobile = window.matchMedia('(max-width: 880px)').matches;
+    if(isMobile){ leadersSvg.innerHTML = ''; return; }
+    const rect = assembly.getBoundingClientRect();
+    leadersSvg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+    leadersSvg.setAttribute('width',  rect.width);
+    leadersSvg.setAttribute('height', rect.height);
+
+    const active = document.querySelector('.tier[data-state="active"]');
+    if(!active){ leadersSvg.innerHTML = ''; return; }
+    const deck = active.querySelector('.tier__deck');
+    const deckRect = deck.getBoundingClientRect();
+
+    const chips = Array.from(active.querySelectorAll('.chip'));
+    const aRect = assembly.getBoundingClientRect();
+    let svg = '';
+    chips.forEach(chip => {
+      const cr = chip.getBoundingClientRect();
+      const isLeft = chip.parentElement.classList.contains('tier__chips--left');
+      const x1 = (isLeft ? cr.right : cr.left) - aRect.left;
+      const y1 = (cr.top + cr.height/2) - aRect.top;
+      const x2 = (isLeft ? deckRect.left : deckRect.right) - aRect.left;
+      const y2 = (deckRect.top + deckRect.height/2) - aRect.top;
+      // 2-segment leader: horizontal then diagonal
+      const mid = isLeft ? (x1 + 18) : (x1 - 18);
+      svg += `<polyline points="${x1},${y1} ${mid},${y1} ${x2},${y2}" fill="none" stroke="var(--teal-low)" stroke-width="1" />`;
+      svg += `<circle cx="${x2}" cy="${y2}" r="2.4" class="tick" />`;
+    });
+    leadersSvg.innerHTML = svg;
+  }
+
+  window.addEventListener('resize', () => {
+    clearTimeout(window.__resizeT);
+    window.__resizeT = setTimeout(drawLeaders, 120);
+  });
+  // Initial draw — wait for layout
+  setTimeout(drawLeaders, 60);
+  setTimeout(drawLeaders, 320);
+
+  // ============================================================
+  // TAB 02 · STRESS PROFILE — SVG render + animation
+  // ============================================================
+  const profile = document.getElementById('profile');
+  const graphHost = document.getElementById('profileGraph');
+  let profileFired = false;
+
+  function buildHorizontalSVG(){
+    return `
+<svg viewBox="0 0 1000 460" preserveAspectRatio="none" class="p2-svg" aria-hidden="true">
+  <!-- lane shading: full-height for before zone, after zone narrower in time -->
+  <rect class="lane-before" x="60"  y="20"  width="880" height="380"/>
+  <rect class="lane-after"  x="60"  y="20"  width="660" height="380"/>
+  <text class="lane-label before" x="930" y="42"  text-anchor="end">Before · legacy</text>
+  <text class="lane-label after"  x="70"  y="42"  text-anchor="start">After · redesign</text>
+
+  <!-- grid -->
+  <g class="grid">
+    <line x1="60" y1="80"  x2="940" y2="80"/>
+    <line x1="60" y1="160" x2="940" y2="160"/>
+    <line x1="60" y1="240" x2="940" y2="240"/>
+    <line x1="60" y1="320" x2="940" y2="320"/>
+  </g>
+  <line class="axis" x1="60"  y1="20"  x2="60"  y2="400"/>
+  <line class="axis" x1="60"  y1="400" x2="940" y2="400"/>
+
+  <!-- Y end labels -->
+  <text class="y-label" x="30"  y="60"  text-anchor="start" transform="rotate(-90 30 60)">↑ CALM</text>
+  <text class="y-label" x="30"  y="380" text-anchor="end"   transform="rotate(-90 30 380)">↓ DISTRESSED</text>
+  <text class="ax-label" x="500" y="436" text-anchor="middle">TIME · DAYS POST-CASE-OPEN</text>
+
+  <!-- X day ticks 0..7 -->
+  <g class="day-tick">
+    <line x1="60"  y1="400" x2="60"  y2="406"/>
+    <line x1="186" y1="400" x2="186" y2="406"/>
+    <line x1="312" y1="400" x2="312" y2="406"/>
+    <line x1="438" y1="400" x2="438" y2="406"/>
+    <line x1="564" y1="400" x2="564" y2="406"/>
+    <line x1="690" y1="400" x2="690" y2="406"/>
+    <line x1="816" y1="400" x2="816" y2="406"/>
+    <line x1="940" y1="400" x2="940" y2="406"/>
+  </g>
+  <g class="day-num">
+    <text x="60"  y="418" text-anchor="middle">D0</text>
+    <text x="186" y="418" text-anchor="middle">D1</text>
+    <text x="312" y="418" text-anchor="middle">D2</text>
+    <text x="438" y="418" text-anchor="middle">D3</text>
+    <text x="564" y="418" text-anchor="middle">D4</text>
+    <text x="690" y="418" text-anchor="middle">D5</text>
+    <text x="816" y="418" text-anchor="middle">D6</text>
+    <text x="940" y="418" text-anchor="middle">D7</text>
+  </g>
+
+  <!-- BEFORE curve shade -->
+  <path class="curve-before-shade"
+        d="M 60 140
+           C 110 130, 150 130, 186 150
+           C 220 220, 254 300, 270 290
+           C 280 240, 300 170, 312 150
+           C 360 240, 410 310, 438 300
+           C 460 250, 470 180, 478 160
+           C 580 270, 640 315, 690 310
+           C 706 260, 718 180, 728 170
+           C 800 130, 880 112, 916 110
+           L 916 400 L 60 400 Z"/>
+
+  <!-- BEFORE curve -->
+  <path class="curve-before"
+        d="M 60 140
+           C 110 130, 150 130, 186 150
+           C 220 220, 254 300, 270 290
+           C 280 240, 300 170, 312 150
+           C 360 240, 410 310, 438 300
+           C 460 250, 470 180, 478 160
+           C 580 270, 640 315, 690 310
+           C 706 260, 718 180, 728 170
+           C 800 130, 880 112, 916 110"/>
+  <rect class="endpoint before" x="908" y="102" width="16" height="16"/>
+
+  <!-- restart annotations -->
+  <line class="restart-line" x1="270" y1="290" x2="270" y2="62"/>
+  <text class="restart" x="276" y="66">⚠ RESTART · CONTEXT LOST · D2.1</text>
+  <line class="restart-line" x1="438" y1="300" x2="438" y2="76"/>
+  <text class="restart" x="444" y="80">⚠ RESTART · CONTEXT LOST · D3.5</text>
+  <line class="restart-line" x1="690" y1="310" x2="690" y2="62"/>
+  <text class="restart" x="696" y="66">⚠ RESTART · CONTEXT LOST · D5.4</text>
+
+  <!-- AFTER curve -->
+  <path class="curve-after"
+        d="M 60 130
+           C 140 130, 220 150, 280 180
+           C 340 210, 380 235, 420 240
+           C 460 240, 500 232, 540 215
+           C 580 196, 620 170, 660 140
+           L 720 110"/>
+  <polygon class="endpoint after" points="720,98 732,110 720,122 708,110"/>
+
+  <!-- preserve annotations along after-curve -->
+  <line class="preserve-line" x1="60"  y1="130" x2="60"  y2="356"/>
+  <text class="preserve" x="68"  y="380">✓ NAMED OWNER · D0</text>
+  <line class="preserve-line" x1="312" y1="208" x2="312" y2="356"/>
+  <text class="preserve" x="320" y="380">✓ CONTEXT PRESERVED · D2</text>
+  <line class="preserve-line" x1="720" y1="110" x2="720" y2="356"/>
+  <text class="preserve" x="640" y="380">✓ RESOLVED · D4.7</text>
+
+  <!-- stamps -->
+  <rect class="stamp-box before" x="624" y="74"  width="170" height="22"/>
+  <text class="stamp before" x="709" y="90" text-anchor="middle">RUN 01 · LEGACY</text>
+  <rect class="stamp-box after"  x="80" y="240" width="180" height="22"/>
+  <text class="stamp after" x="170" y="256" text-anchor="middle">RUN 02 · REDESIGN</text>
+
+  <!-- dimension callout: D4.7 → D6.8 -->
+  <line class="dim-line" x1="720" y1="60" x2="916" y2="60"/>
+  <polygon class="dim-arr" points="720,60 736,54 736,66"/>
+  <polygon class="dim-arr" points="916,60 900,54 900,66"/>
+  <line class="dim-line" x1="720" y1="110" x2="720" y2="60"/>
+  <line class="dim-line" x1="916" y1="110" x2="916" y2="60"/>
+  <text class="dim"     x="818" y="48"  text-anchor="middle">6.8 D → 4.7 D · −31% MTTR</text>
+  <text class="dim-sub" x="818" y="30"  text-anchor="middle">≈ 2.1 days returned per case</text>
+</svg>`;
+  }
+
+  function buildVerticalSVG(){
+    // Same data, rotated to vertical for narrow viewports.
+    // Y axis (time) grows downward; X axis is calm(left) → distressed(right).
+    return `
+<svg viewBox="0 0 460 1000" preserveAspectRatio="none" class="p2-svg" aria-hidden="true">
+  <rect class="lane-before" x="60" y="60"  width="380" height="880"/>
+  <rect class="lane-after"  x="60" y="60"  width="380" height="660"/>
+  <text class="lane-label before" x="430" y="36" text-anchor="end">Before · legacy ↓</text>
+  <text class="lane-label after"  x="70"  y="36" text-anchor="start">After · redesign ↑</text>
+
+  <g class="grid">
+    <line x1="140" y1="60" x2="140" y2="940"/>
+    <line x1="220" y1="60" x2="220" y2="940"/>
+    <line x1="300" y1="60" x2="300" y2="940"/>
+    <line x1="380" y1="60" x2="380" y2="940"/>
+  </g>
+  <line class="axis" x1="60" y1="60" x2="60"  y2="940"/>
+  <line class="axis" x1="60" y1="60" x2="440" y2="60"/>
+
+  <text class="ax-label" x="250" y="48" text-anchor="middle">← CALM        DISTRESSED →</text>
+  <text class="y-label" x="20" y="56" text-anchor="end">D0</text>
+  <text class="y-label" x="20" y="200" text-anchor="end">D2</text>
+  <text class="y-label" x="20" y="345" text-anchor="end">D3</text>
+  <text class="y-label" x="20" y="490" text-anchor="end">D4</text>
+  <text class="y-label" x="20" y="635" text-anchor="end">D5</text>
+  <text class="y-label" x="20" y="780" text-anchor="end">D6</text>
+  <text class="y-label" x="20" y="925" text-anchor="end">D7</text>
+
+  <!-- BEFORE curve (vertical): time → y, distress → x -->
+  <path class="curve-before"
+        d="M 140 70
+           C 130 110, 130 150, 150 186
+           C 220 220, 300 254, 290 270
+           C 240 280, 170 300, 150 312
+           C 240 360, 310 410, 300 438
+           C 250 460, 180 470, 160 478
+           C 270 580, 315 640, 310 690
+           C 260 706, 180 718, 170 728
+           C 130 800, 112 880, 110 916"/>
+  <rect class="endpoint before" x="102" y="908" width="16" height="16"/>
+
+  <line class="restart-line" x1="290" y1="270" x2="60" y2="270"/>
+  <text class="restart" x="296" y="266">⚠ RESTART · D2.1</text>
+  <line class="restart-line" x1="300" y1="438" x2="60" y2="438"/>
+  <text class="restart" x="306" y="434">⚠ RESTART · D3.5</text>
+  <line class="restart-line" x1="310" y1="690" x2="60" y2="690"/>
+  <text class="restart" x="316" y="686">⚠ RESTART · D5.4</text>
+
+  <!-- AFTER curve -->
+  <path class="curve-after"
+        d="M 130 70
+           C 130 140, 150 220, 180 280
+           C 210 340, 235 380, 240 420
+           C 240 460, 232 500, 215 540
+           C 196 580, 170 620, 140 660
+           L 110 720"/>
+  <polygon class="endpoint after" points="98,720 110,708 122,720 110,732"/>
+
+  <line class="preserve-line" x1="130" y1="70"  x2="380" y2="70"/>
+  <text class="preserve" x="380" y="62" text-anchor="end">✓ NAMED OWNER · D0</text>
+  <line class="preserve-line" x1="208" y1="312" x2="380" y2="312"/>
+  <text class="preserve" x="380" y="304" text-anchor="end">✓ CONTEXT PRESERVED · D2</text>
+  <line class="preserve-line" x1="110" y1="720" x2="380" y2="720"/>
+  <text class="preserve" x="380" y="712" text-anchor="end">✓ RESOLVED · D4.7</text>
+
+  <rect class="stamp-box before" x="234" y="600" width="170" height="22"/>
+  <text class="stamp before" x="319" y="616" text-anchor="middle">RUN 01 · LEGACY</text>
+  <rect class="stamp-box after" x="160" y="240" width="180" height="22"/>
+  <text class="stamp after" x="250" y="256" text-anchor="middle">RUN 02 · REDESIGN</text>
+
+  <line class="dim-line" x1="60" y1="720" x2="60" y2="916"/>
+  <polygon class="dim-arr" points="60,720 54,736 66,736"/>
+  <polygon class="dim-arr" points="60,916 54,900 66,900"/>
+  <text class="dim" x="92" y="822">6.8 D → 4.7 D · −31% MTTR</text>
+  <text class="dim-sub" x="92" y="840">≈ 2.1 days returned per case</text>
+</svg>`;
+  }
+
+  function renderProfile(){
+    if(!graphHost) return;
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+    const wantOrient = isMobile ? 'vertical' : 'horizontal';
+    if(graphHost.dataset.orient === wantOrient && graphHost.querySelector('svg')) return;
+    graphHost.dataset.orient = wantOrient;
+    graphHost.innerHTML = isMobile ? buildVerticalSVG() : buildHorizontalSVG();
+    // If we re-render after first fire, keep final state
+    if(profileFired || reduceMotion){
+      profile.classList.remove('is-anim');
+    }
+  }
+
+  function startProfileIfNeeded(){
+    if(profileFired) return;
+    if(reduceMotion){ profileFired = true; return; }
+    profileFired = true;
+    profile.classList.add('is-anim');
+  }
+
+  // IntersectionObserver to fire animation when in view
+  const profileIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting && !profile.hidden) startProfileIfNeeded();
+    });
+  }, { threshold:0.18 });
+  profileIO.observe(profile);
+
+  renderProfile();
+  window.addEventListener('resize', () => {
+    clearTimeout(window.__profileT);
+    window.__profileT = setTimeout(renderProfile, 140);
+  });
+
+  // ============================================================
+  // TAB 03 · FOOTPRINT — IntersectionObserver pin sequence
+  // ============================================================
+  const panelEls = ['panel-atl','panel-ath','panel-sav','panel-sum'].map(id => document.getElementById(id));
+  const cityOrder = ['atl','ath','sav','sum'];
+  const pinEls = {
+    atl: document.getElementById('pin-atl'),
+    ath: document.getElementById('pin-ath'),
+    sav: document.getElementById('pin-sav')
+  };
+  const pipEls = {
+    atl: document.getElementById('pip-atl'),
+    ath: document.getElementById('pip-ath'),
+    sav: document.getElementById('pip-sav')
+  };
+  const routes = {
+    'atl-ath': document.getElementById('route-atl-ath'),
+    'atl-sav': document.getElementById('route-atl-sav'),
+    'ath-sav': document.getElementById('route-ath-sav')
+  };
+  const endstamp = document.getElementById('mapEndstamp');
+  const progressLbl = document.getElementById('mapProgressLabel');
+  const labels = {
+    atl: '1 / 3 · Atlanta',
+    ath: '2 / 3 · Athens',
+    sav: '3 / 3 · Savannah',
+    sum: '3 / 3 · Complete'
+  };
+
+  function setActiveCity(city){
+    panelEls.forEach(p => {
+      if(!p) return;
+      p.classList.toggle('is-active', p.dataset.city === city);
+    });
+    // Lit pins: cumulative — all cities up to and including current
+    const idx = cityOrder.indexOf(city);
+    const lit = new Set();
+    for(let i=0;i<=idx;i++){
+      const c = cityOrder[i];
+      if(c !== 'sum') lit.add(c);
+    }
+    Object.entries(pinEls).forEach(([k, el]) => {
+      if(!el) return;
+      el.classList.toggle('is-active', lit.has(k));
+    });
+    Object.entries(pipEls).forEach(([k, el]) => {
+      if(!el) return;
+      el.classList.toggle('is-active', lit.has(k));
+    });
+    if(routes['atl-ath']) routes['atl-ath'].classList.toggle('lit', lit.has('atl') && lit.has('ath'));
+    if(routes['atl-sav']) routes['atl-sav'].classList.toggle('lit', lit.has('atl') && lit.has('sav'));
+    if(routes['ath-sav']) routes['ath-sav'].classList.toggle('lit', lit.has('ath') && lit.has('sav'));
+
+    if(endstamp) endstamp.classList.toggle('is-on', city === 'sum');
+    if(progressLbl) progressLbl.textContent = labels[city] || '';
+  }
+
+  const cityIO = new IntersectionObserver((entries) => {
+    // Pick the entry closest to the upper-middle of the viewport
+    let best = null, bestScore = -Infinity;
+    entries.forEach(e => {
+      if(!e.isIntersecting) return;
+      const r = e.boundingClientRect;
+      const vh = window.innerHeight || 800;
+      // prefer panels whose top is near 25% of viewport
+      const score = -Math.abs(r.top - vh*0.25);
+      if(score > bestScore){ bestScore = score; best = e.target; }
+    });
+    if(best){ setActiveCity(best.dataset.city); }
+  }, { rootMargin: '-25% 0px -50% 0px', threshold: [0,0.2,0.5,1] });
+
+  panelEls.forEach(p => { if(p) cityIO.observe(p); });
+
+  function refreshCityActive(){
+    // After tab switch, the IO may need a re-evaluation. Find current best by scroll position.
+    const vh = window.innerHeight || 800;
+    let bestEl = null, bestScore = -Infinity;
+    panelEls.forEach(p => {
+      if(!p) return;
+      const r = p.getBoundingClientRect();
+      if(r.bottom < 0 || r.top > vh) return;
+      const score = -Math.abs(r.top - vh*0.25);
+      if(score > bestScore){ bestScore = score; bestEl = p; }
+    });
+    if(bestEl){ setActiveCity(bestEl.dataset.city); }
+  }
+})();
+</script>
+
+</body>
+</html>

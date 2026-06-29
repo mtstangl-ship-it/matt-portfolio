@@ -1,0 +1,89 @@
+/* ============================================================
+   Impact Console — Design Tokens
+   v2026.04 · Matt Stangl portfolio
+
+   USAGE (2 steps):
+   1. Import this file ONCE at the top of your global stylesheet:
+        @import './tokens-impact.css';
+   2. Wrap any page you want styled with the class "impact-console":
+        <div className="impact-console"> ... </div>
+
+   Typography is site-wide (tokens-type.css). This file is color + chrome only.
+   ============================================================ */
+
+.impact-console {
+  /* ---------- color ---------- */
+  --bg:        oklch(0.17 0.015 220);
+  --bg-2:      oklch(0.205 0.015 220);
+  --panel:     oklch(0.225 0.015 220);
+  --panel-2:   oklch(0.26 0.015 220);
+  --line:      oklch(0.32 0.018 220);
+  --line-2:    oklch(0.40 0.02 220);
+  --muted:     oklch(0.60 0.012 220);
+  --ink-2:     oklch(0.82 0.01 220);
+  --ink:       oklch(0.97 0.006 220);
+  --teal:      oklch(0.82 0.13 190);
+  --teal-2:    oklch(0.70 0.11 190);
+  --teal-dim:  oklch(0.48 0.07 190);
+  --teal-wash: oklch(0.82 0.13 190 / .10);
+
+  /* Secondary signal colors, referenced by ported case CSS
+     (.callout.warn, .trace.ai, flow-chart accents, etc.). */
+  --amber: oklch(0.82 0.12 70);
+  --red:   oklch(0.70 0.14 25);
+  --green: oklch(0.78 0.14 150);
+
+  /* Type + motion tokens used by ported case layouts. The sans/mono
+     values re-expose the next/font variables from layout.tsx so
+     `font-family: var(--sans)` inside cases.css resolves correctly. */
+  --sans: var(--font-inter-tight), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mono: var(--font-jetbrains), ui-monospace, monospace;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  /* ---------- spacing (8px base) ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  /* ---------- radius ---------- */
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-3: 8px;
+
+  /* ---------- motion ---------- */
+  --dur: 220ms;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.impact-console p {
+  color: var(--ink-2);
+}
+
+/* Mono utility — color only (face/size/tracking are global .mono) */
+.impact-console .mono,
+.impact-console [data-mono] {
+  color: var(--muted);
+}
+
+/* Teal accent utility */
+.impact-console .teal,
+.impact-console [data-teal] { color: var(--teal); }
+
+/* Selection */
+.impact-console ::selection { background: var(--teal); color: var(--bg); }
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .impact-console * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

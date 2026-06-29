@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Impact Console — Implementation Bundle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg: oklch(0.17 0.015 220);
+  --bg-2: oklch(0.205 0.015 220);
+  --panel: oklch(0.225 0.015 220);
+  --line: oklch(0.32 0.018 220);
+  --line-2: oklch(0.40 0.02 220);
+  --muted: oklch(0.60 0.012 220);
+  --ink-2: oklch(0.82 0.01 220);
+  --ink: oklch(0.97 0.006 220);
+  --teal: oklch(0.82 0.13 190);
+  --teal-dim: oklch(0.48 0.07 190);
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:'Inter Tight','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(to right, oklch(0.32 0.02 220 / .06) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.32 0.02 220 / .06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 20%, black 10%, transparent 75%);
+}
+.shell{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:32px 24px 120px}
+@media(min-width:860px){.shell{padding:48px 48px 160px}}
+
+.mono{font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:var(--muted)}
+.mono.teal{color:var(--teal)}
+a{color:var(--teal)}
+a:hover{color:var(--ink)}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line);gap:16px}
+.crumb{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px}
+.crumb .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal)}
+.crumb b{color:var(--ink-2);font-weight:500}
+.crumb span[aria-current]{color:var(--teal)}
+.sig{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sig b{font-family:var(--sans);letter-spacing:0;text-transform:none;font-size:12px;color:var(--ink);font-weight:500}
+@media(max-width:720px){.sig{display:none}}
+
+h1{font-weight:500;font-size:clamp(36px,5.5vw,56px);letter-spacing:-.02em;line-height:1.04;margin:48px 0 12px}
+h1 span{color:var(--muted)}
+.lede{color:var(--ink-2);font-size:17px;max-width:56ch;text-wrap:pretty;margin:0 0 32px}
+
+section.block{margin:56px 0;padding-top:24px;border-top:1px solid var(--line)}
+section.block > .head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:20px}
+section.block h2{font-weight:500;font-size:26px;letter-spacing:-.015em;margin:0}
+section.block .meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* TOC */
+.toc{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:24px 0 0}
+@media(min-width:720px){.toc{grid-template-columns:repeat(5,1fr)}}
+.toc a{display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:var(--bg-2);text-decoration:none;color:var(--ink)}
+.toc a:hover{background:var(--panel)}
+.toc a .n{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--teal)}
+.toc a .t{font-size:14px}
+
+/* tokens */
+.tokens{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:720px){.tokens{grid-template-columns:1fr 1fr}}
+.card{border:1px solid var(--line);background:var(--bg-2);padding:20px}
+.card h3{margin:0 0 12px;font-weight:500;font-size:16px;letter-spacing:-.005em}
+.swatch-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:8px 0;border-top:1px dashed var(--line)}
+.swatch-row:first-of-type{border-top:0}
+.swatch{width:24px;height:24px;border:1px solid var(--line)}
+.kv{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--ink-2);display:flex;gap:10px}
+.kv .k{color:var(--muted)}
+.val{font-family:var(--mono);font-size:12px;color:var(--ink);text-align:right;white-space:nowrap}
+
+.typescale{display:grid;grid-template-columns:auto 1fr auto;gap:12px 20px;align-items:baseline;padding:10px 0;border-top:1px dashed var(--line)}
+.typescale:first-of-type{border-top:0}
+.typescale .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.typescale .spec{font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+
+pre{
+  margin:0;padding:16px;background:var(--bg);border:1px solid var(--line);
+  font-family:var(--mono);font-size:12.5px;color:var(--ink-2);
+  overflow:auto;line-height:1.65;
+}
+pre .c{color:var(--muted)}
+pre .k{color:var(--teal)}
+pre .s{color:var(--ink)}
+
+/* component spec */
+.spec-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.spec-row{display:grid;grid-template-columns:180px 1fr;gap:0;background:var(--bg-2)}
+.spec-row > div{padding:12px 16px}
+.spec-row > div:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--line)}
+.spec-row > div:last-child{color:var(--ink-2);font-size:14px}
+.spec-row > div:last-child code{font-family:var(--mono);font-size:12.5px;color:var(--teal)}
+
+/* copy deck */
+.copy-card{border:1px solid var(--line);background:var(--bg-2);padding:24px;margin-top:16px}
+.copy-card .tab{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.copy-card h3{margin:0 0 6px;font-weight:500;font-size:22px;letter-spacing:-.01em}
+.copy-card .hero{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted);margin:12px 0 4px;text-transform:uppercase}
+.copy-card blockquote{margin:0;padding:12px 14px;border-left:2px solid var(--teal);background:var(--bg);color:var(--ink);font-size:15px}
+.copy-card .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
+@media(min-width:720px){.copy-card .grid{grid-template-columns:1fr 1fr}}
+.copy-card .grid .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+
+/* interaction notes */
+.notes{display:grid;grid-template-columns:1fr;gap:12px}
+.note{display:grid;grid-template-columns:60px 1fr;gap:16px;border:1px solid var(--line);background:var(--bg-2);padding:14px 16px}
+.note .n{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.note .b{color:var(--ink-2);font-size:14px}
+.note .b b{color:var(--ink);font-weight:500}
+
+/* accept criteria */
+.acc{display:grid;grid-template-columns:1fr;gap:8px}
+.acc li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:12px;padding:10px 0;border-top:1px dashed var(--line)}
+.acc li:first-child{border-top:0}
+.acc li::before{content:"";display:none}
+.acc .mark{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.1em}
+ul.acc{padding:0;margin:0}
+
+.foot{margin-top:64px;display:grid;grid-template-columns:1fr;gap:12px;padding-top:20px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media(min-width:720px){.foot{grid-template-columns:repeat(3,1fr)}}
+.foot a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.foot a:hover{color:var(--teal);border-color:var(--teal-dim)}
+::selection{background:var(--teal);color:var(--bg)}
+</style>
+</head>
+<body>
+<main class="shell">
+
+  <header class="topbar">
+    <div class="crumb">
+      <span class="dot"></span>
+      <span><b>CONSOLE</b> / Impact / <span aria-current="true">Bundle</span></span>
+    </div>
+    <div class="sig"><b>Matt Stangl</b> · Product &amp; Service Design Leader</div>
+  </header>
+
+  <div class="mono teal" style="margin-top:40px">— Handoff package · v2026.04 · for Cursor</div>
+  <h1>Implementation bundle. <span>Everything the agent needs, in one briefing.</span></h1>
+  <p class="lede">Tokens, component specs, per-tab copy, and interaction notes for the Impact Console. Pair this with <a href="Impact Dashboard.html">Impact Dashboard.html</a> as the visual spec.</p>
+
+  <nav class="toc" aria-label="Bundle contents">
+    <a href="#tokens"><span class="n">01</span><span class="t">Design tokens</span></a>
+    <a href="#type"><span class="n">02</span><span class="t">Type system</span></a>
+    <a href="#components"><span class="n">03</span><span class="t">Components</span></a>
+    <a href="#copy"><span class="n">04</span><span class="t">Copy deck</span></a>
+    <a href="#notes"><span class="n">05</span><span class="t">Interaction</span></a>
+  </nav>
+
+  <!-- 01 TOKENS -->
+  <section class="block" id="tokens">
+    <div class="head"><h2>01 — Design tokens</h2><span class="meta">CSS custom properties · OKLCH</span></div>
+
+    <div class="tokens">
+      <div class="card">
+        <h3>Color</h3>
+        <div class="swatch-row"><span class="swatch" style="background:var(--bg)"></span><span class="kv"><span class="k">--bg</span>background base</span><span class="val">oklch(0.17 0.015 220)</span></div>
+        <div class="swatch-row"><span class="swatch" style="background:var(--bg-2)"></span><span class="kv"><span class="k">--bg-2</span>secondary surface</span><span class="val">oklch(0.205 0.015 220)</span></div>
+        <div class="swatch-row"><span class="swatch" style="background:var(--panel)"></span><span class="kv"><span class="k">--panel</span>elevated panel</span><span class="val">oklch(0.225 0.015 220)</span></div>
+        <div class="swatch-row"><span class="swatch" style="background:var(--line)"></span><span class="kv"><span class="k">--line</span>hairline</span><span class="val">oklch(0.32 0.018 220)</span></div>
+        <div class="swatch-row"><span class="swatch" style="background:var(--muted)"></span><span class="kv"><span class="k">--muted</span>meta copy</span><span class="val">oklch(0.60 0.012 220)</span></div>
+        <div class="swatch-row"><span class="swatch" style="background:var(--ink-2)"></span><span class="kv"><span class="k">--ink-2</span>body</span><span class="val">oklch(0.82 0.01 220)</span></div>
+        <div class="swatch-row"><span class="swatch" style="background:var(--ink)"></span><span class="kv"><span class="k">--ink</span>heading</span><span class="val">oklch(0.97 0.006 220)</span></div>
+        <div class="swatch-row"><span class="swatch" style="background:var(--teal)"></span><span class="kv"><span class="k">--teal</span>accent</span><span class="val">oklch(0.82 0.13 190)</span></div>
+        <div class="swatch-row"><span class="swatch" style="background:var(--teal-dim)"></span><span class="kv"><span class="k">--teal-dim</span>accent subdued</span><span class="val">oklch(0.48 0.07 190)</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Spacing · radius · motion</h3>
+        <div class="swatch-row"><span class="kv"><span class="k">--sp-1..8</span></span><span></span><span class="val">4 · 8 · 12 · 16 · 24 · 32 · 48 · 64</span></div>
+        <div class="swatch-row"><span class="kv"><span class="k">--r-1..3</span>radius</span><span></span><span class="val">2 · 4 · 8 px</span></div>
+        <div class="swatch-row"><span class="kv"><span class="k">Grid</span>base</span><span></span><span class="val">8px, content max 1200</span></div>
+        <div class="swatch-row"><span class="kv"><span class="k">--dur</span>default</span><span></span><span class="val">220ms</span></div>
+        <div class="swatch-row"><span class="kv"><span class="k">--ease</span>default</span><span></span><span class="val">cubic-bezier(.2,.7,.2,1)</span></div>
+        <div class="swatch-row"><span class="kv"><span class="k">Breakpoints</span></span><span></span><span class="val">720 · 860 · 1200</span></div>
+        <div class="swatch-row"><span class="kv"><span class="k">Focus</span>ring</span><span></span><span class="val">1px solid var(--teal), offset 2</span></div>
+        <div class="swatch-row"><span class="kv"><span class="k">Selection</span></span><span></span><span class="val">bg: teal · fg: --bg</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px">
+      <pre><span class="c">/* drop into tokens.css */</span>
+<span class="k">:root</span> {
+  <span class="c">/* color */</span>
+  --bg: oklch(0.17 0.015 220);
+  --bg-2: oklch(0.205 0.015 220);
+  --panel: oklch(0.225 0.015 220);
+  --line: oklch(0.32 0.018 220);
+  --muted: oklch(0.60 0.012 220);
+  --ink-2: oklch(0.82 0.01 220);
+  --ink: oklch(0.97 0.006 220);
+  --teal: oklch(0.82 0.13 190);
+  --teal-dim: oklch(0.48 0.07 190);
+
+  <span class="c">/* spacing */</span>
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+
+  <span class="c">/* type */</span>
+  --sans: <span class="s">'Inter Tight'</span>, system-ui, sans-serif;
+  --mono: <span class="s">'JetBrains Mono'</span>, ui-monospace, monospace;
+
+  <span class="c">/* motion */</span>
+  --dur: 220ms;
+  --ease: cubic-bezier(.2,.7,.2,1);
+}</pre>
+    </div>
+  </section>
+
+  <!-- 02 TYPE -->
+  <section class="block" id="type">
+    <div class="head"><h2>02 — Type system</h2><span class="meta">2 families · 6 roles</span></div>
+    <p class="lede" style="margin:0 0 20px">Inter Tight for UI and display. JetBrains Mono for labels, meta, console breadcrumbs. One display face keeps the briefing feel; mono does the signaling.</p>
+
+    <div class="card" style="padding:24px">
+      <div class="typescale">
+        <span class="lbl">HERO</span>
+        <span style="font-weight:300;font-size:clamp(56px,9vw,112px);letter-spacing:-.04em;line-height:.9">$50M</span>
+        <span class="spec">Inter Tight · 300 · clamp(56,11vw,132) · -.04em</span>
+      </div>
+      <div class="typescale">
+        <span class="lbl">H1</span>
+        <span style="font-weight:500;font-size:48px;letter-spacing:-.02em;line-height:1.04">Measured at altitude.</span>
+        <span class="spec">Inter Tight · 500 · 40–64 · -.02em</span>
+      </div>
+      <div class="typescale">
+        <span class="lbl">H2</span>
+        <span style="font-weight:500;font-size:32px;letter-spacing:-.015em">Service as revenue motion.</span>
+        <span class="spec">Inter Tight · 500 · 26–36 · -.015em</span>
+      </div>
+      <div class="typescale">
+        <span class="lbl">H3</span>
+        <span style="font-weight:500;font-size:18px;letter-spacing:-.005em">The three-tier service ladder</span>
+        <span class="spec">Inter Tight · 500 · 18 · -.005em</span>
+      </div>
+      <div class="typescale">
+        <span class="lbl">BODY</span>
+        <span style="font-size:15px;color:var(--ink-2);line-height:1.55">Restraint signals confidence.</span>
+        <span class="spec">Inter Tight · 400 · 15/24</span>
+      </div>
+      <div class="typescale">
+        <span class="lbl">META</span>
+        <span class="mono" style="font-size:12px">01 · Autodesk · Revenue</span>
+        <span class="spec">JetBrains Mono · 400 · 12 · .08em · UPPER</span>
+      </div>
+      <div class="typescale">
+        <span class="lbl">LABEL</span>
+        <span class="mono" style="font-size:11px">Incremental AOV</span>
+        <span class="spec">JetBrains Mono · 500 · 11 · .1em · UPPER</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 COMPONENTS -->
+  <section class="block" id="components">
+    <div class="head"><h2>03 — Component specs</h2><span class="meta">Five primitives do the whole page</span></div>
+
+    <h3 style="font-weight:500;font-size:18px;margin:24px 0 12px">A. Tab bar</h3>
+    <div class="spec-grid">
+      <div class="spec-row"><div>Role</div><div>Top-level case switcher. Sticky on scroll. Three children only.</div></div>
+      <div class="spec-row"><div>States</div><div><code>default</code> · <code>hover</code> (bg shift) · <code>selected</code> (panel bg + 2px teal top bar + teal index label)</div></div>
+      <div class="spec-row"><div>Anatomy</div><div>index (mono, teal when active) → name → client (mono, hidden &lt; 720)</div></div>
+      <div class="spec-row"><div>Persistence</div><div><code>localStorage['stangl-impact-tab']</code></div></div>
+      <div class="spec-row"><div>Keyboard</div><div>arrow L/R switches, Home/End jumps, Enter activates</div></div>
+    </div>
+
+    <h3 style="font-weight:500;font-size:18px;margin:32px 0 12px">B. Hero metric</h3>
+    <div class="spec-grid">
+      <div class="spec-row"><div>Role</div><div>One big number per tab. Always first after tab switch.</div></div>
+      <div class="spec-row"><div>Anatomy</div><div>numeral (300 weight, clamp 56–132) → teal label (mono) → unit line (mono muted)</div></div>
+      <div class="spec-row"><div>Emphasis</div><div>Numeric digits get <code>em</code> wrap and are teal; unit characters ($, %, M) stay ink.</div></div>
+      <div class="spec-row"><div>Placement</div><div>Mobile: left-aligned, below role sentence. Desktop: right-aligned, sits opposite role sentence.</div></div>
+    </div>
+
+    <h3 style="font-weight:500;font-size:18px;margin:32px 0 12px">C. Tier ladder <span class="mono" style="color:var(--muted);margin-left:8px">revenue</span></h3>
+    <div class="spec-grid">
+      <div class="spec-row"><div>Role</div><div>Replaces the tile-grid. Three rows, each a strategic tier in a clear hierarchy.</div></div>
+      <div class="spec-row"><div>Row anatomy</div><div>step label (T01 / T02 / T03) · name + description · lift %· progress bar · expandable service list</div></div>
+      <div class="spec-row"><div>Bar semantics</div><div>Width = tier's share of total lift, not services count. Top tier is widest by design.</div></div>
+      <div class="spec-row"><div>Accordion</div><div>Single-open. Expanded state persists until another row is opened.</div></div>
+      <div class="spec-row"><div>Service chips</div><div>Three states: <code>innovated</code> (teal) · <code>optimized</code> (ink border) · <code>refined</code> (muted)</div></div>
+    </div>
+
+    <h3 style="font-weight:500;font-size:18px;margin:32px 0 12px">D. Before/after compare + handoff track <span class="mono" style="color:var(--muted);margin-left:8px">operations</span></h3>
+    <div class="spec-grid">
+      <div class="spec-row"><div>Compare</div><div>Two columns. Before (muted bar, full width) · After (teal bar, 69%). Delta row closes with −31% MTTR.</div></div>
+      <div class="spec-row"><div>Handoff</div><div>Three circular nodes on a horizontal rail with arrow glyphs between. On mobile, rail becomes vertical; arrows hide.</div></div>
+      <div class="spec-row"><div>Node ring</div><div>T1 teal ring to signal the resolve-early goal. T2/T3 muted.</div></div>
+      <div class="spec-row"><div>SLA chip</div><div>Target per tier: &lt;4h · &lt;2d · &lt;5d. Teal bolded numeral.</div></div>
+    </div>
+
+    <h3 style="font-weight:500;font-size:18px;margin:32px 0 12px">E. Geo anchor + city list <span class="mono" style="color:var(--muted);margin-left:8px">healthcare</span></h3>
+    <div class="spec-grid">
+      <div class="spec-row"><div>Map</div><div>Original illustrative outline of Georgia in SVG, filled <code>--bg-2</code>, stroked <code>--line-2</code>. Faint grid behind.</div></div>
+      <div class="spec-row"><div>Markers</div><div>Teal filled dot with 1–2 concentric rings. Active city gets amplified ring opacity + dot.</div></div>
+      <div class="spec-row"><div>Connectors</div><div>Thin teal-dim lines between all four cities form the delivery mesh. Decorative, not interactive.</div></div>
+      <div class="spec-row"><div>City row</div><div>Hover/click links to marker. Number right-aligned (engagements count). Underline on hover.</div></div>
+    </div>
+  </section>
+
+  <!-- 04 COPY -->
+  <section class="block" id="copy">
+    <div class="head"><h2>04 — Copy deck</h2><span class="meta">One page, one voice</span></div>
+    <p class="lede" style="margin:0 0 8px">Each tab opens with a single sentence of <b style="color:var(--ink);font-weight:500">what Matt did</b>, then the metric, then the evidence. Don't add hedges.</p>
+
+    <div class="copy-card">
+      <div class="tab">Tab 01 · Revenue · Autodesk</div>
+      <h3>Service as a revenue motion, not a cost center.</h3>
+      <blockquote>I designed a tiered service model — Business, Professional, Included — that turned post-purchase support at Autodesk into an expansion engine, shipped inside twelve months.</blockquote>
+      <div class="hero">Hero metric</div>
+      <div>$50M incremental AOV · Monetized AOV engine · 12 mo</div>
+      <div class="grid">
+        <div><div class="lbl">Secondary</div>+27% rev lift · 106% NRR path · 15+ services · &lt;12mo to launch</div>
+        <div><div class="lbl">Tier one-liners</div>Business = strategic (coaching). Professional = targeted (attach). Included = foundational (retain).</div>
+      </div>
+    </div>
+
+    <div class="copy-card">
+      <div class="tab">Tab 02 · Operations · Wipro</div>
+      <h3>I made the support handoff stop costing days.</h3>
+      <blockquote>I redesigned the three-tier support handoff model at Wipro — who owns what, when it moves, and what travels with the case — cutting mean-time-to-resolution without adding headcount.</blockquote>
+      <div class="hero">Hero metric</div>
+      <div>−31% MTTR · Across 16,000+ cases</div>
+      <div class="grid">
+        <div><div class="lbl">Before / after</div>6.8 days → 4.7 days · −2.1 days per case</div>
+        <div><div class="lbl">Tier targets</div>T1 &lt;4h triage · T2 &lt;2d specialist · T3 &lt;5d product</div>
+      </div>
+    </div>
+
+    <div class="copy-card">
+      <div class="tab">Tab 03 · Healthcare · EY</div>
+      <h3>Care pathways designed for adoption speed.</h3>
+      <blockquote>For EY, I designed care pathways tuned for adoption velocity across a multi-state delivery model — turning four Georgia hubs into a measurable engagement program.</blockquote>
+      <div class="hero">Hero metric</div>
+      <div>4.57M engagements · 4 cities · 10+ partners</div>
+      <div class="grid">
+        <div><div class="lbl">City split</div>Atlanta 2.41M · Augusta 0.94M · Macon 0.71M · Savannah 0.51M</div>
+        <div><div class="lbl">Outcomes</div>715 vaccinations administered · 10+ delivery partners</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 NOTES -->
+  <section class="block" id="notes">
+    <div class="head"><h2>05 — Interaction notes</h2><span class="meta">For the build agent</span></div>
+
+    <div class="notes">
+      <div class="note"><div class="n">N·01</div><div class="b"><b>Tabs persist.</b> Active tab is written to <code style="font-family:var(--mono);color:var(--teal)">localStorage['stangl-impact-tab']</code> on every switch, read on load. Invalid values fall back to <code style="font-family:var(--mono);color:var(--teal)">revenue</code>.</div></div>
+      <div class="note"><div class="n">N·02</div><div class="b"><b>Breadcrumb mirrors the tab.</b> <code style="font-family:var(--mono);color:var(--teal)">CONSOLE / Impact / {Revenue | Operations | Healthcare}</code>. The final crumb shifts to teal.</div></div>
+      <div class="note"><div class="n">N·03</div><div class="b"><b>Tier accordion is single-open.</b> Opening one tier collapses the others. Default state opens Tier 01 so first paint shows a populated drawer, never an empty ladder.</div></div>
+      <div class="note"><div class="n">N·04</div><div class="b"><b>Map and list are linked.</b> Hover/click on either surface highlights the matching pair. Active marker bumps ring opacity to .9; inactive dots dim to <code style="color:var(--teal)">--teal-dim</code>.</div></div>
+      <div class="note"><div class="n">N·05</div><div class="b"><b>Mobile first.</b> Layouts start single-column. Side metadata rail only appears ≥ 860. Handoff rail rotates to vertical &lt; 720. Hero metric stacks under the role sentence.</div></div>
+      <div class="note"><div class="n">N·06</div><div class="b"><b>Motion budget.</b> One easing, one duration. No parallax, no shimmer, no particle grid. The background grid is static and masked.</div></div>
+      <div class="note"><div class="n">N·07</div><div class="b"><b>No placeholder data.</b> Every chip, node, and count is a real number from the briefing. If a value is missing, remove the element — don't pad.</div></div>
+      <div class="note"><div class="n">N·08</div><div class="b"><b>Accessibility.</b> Tabs use <code style="color:var(--teal)">role="tab"</code> + <code style="color:var(--teal)">aria-selected</code>. Panels use <code style="color:var(--teal)">role="tabpanel"</code>. Every interactive element reaches focus via keyboard; focus ring is 1px teal, offset 2.</div></div>
+      <div class="note"><div class="n">N·09</div><div class="b"><b>Reduced motion.</b> All transitions collapse to 0 under <code style="color:var(--teal)">prefers-reduced-motion</code>.</div></div>
+      <div class="note"><div class="n">N·10</div><div class="b"><b>Identity is never below the fold.</b> "Matt Stangl · Product &amp; Service Design Leader" shows in the top bar on desktop and inside the identity card on entry.</div></div>
+    </div>
+
+    <h3 style="font-weight:500;font-size:18px;margin:40px 0 12px">Acceptance criteria</h3>
+    <ul class="acc">
+      <li><span class="mark">AC·01</span><span>On first load, Revenue tab is active, Tier 01 ladder row is expanded, identity block renders above the tab bar.</span></li>
+      <li><span class="mark">AC·02</span><span>Each tab's first sentence names exactly what Matt did — not an outcome, not a team. Visible within the first screen on mobile.</span></li>
+      <li><span class="mark">AC·03</span><span>No tile grids, no node diagrams, no placeholder squares anywhere in the tree.</span></li>
+      <li><span class="mark">AC·04</span><span>Dark background + teal are the only chromatic colors. Neutrals share hue 220, accent shares hue 190.</span></li>
+      <li><span class="mark">AC·05</span><span>At 375px wide, every tab scrolls cleanly with no horizontal overflow and no text smaller than 12px.</span></li>
+      <li><span class="mark">AC·06</span><span>Map + city list stay in sync under hover and click on any input device.</span></li>
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <div>Matt Stangl · Product &amp; Service Design Leader</div>
+    <div>Bundle · v2026.04</div>
+    <div style="text-align:right"><a href="Impact Dashboard.html">← Back to console</a></div>
+  </footer>
+
+</main>
+</body>
+</html>

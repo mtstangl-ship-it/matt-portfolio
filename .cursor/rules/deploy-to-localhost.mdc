@@ -1,0 +1,13 @@
+---
+description: Run build and start server after each iteration so changes are visible at localhost
+alwaysApply: true
+---
+
+# Deploy to Localhost After Each Iteration
+
+After making changes to this project:
+
+1. Run `npm run refresh` — this kills all Next.js processes, builds, and starts the server at **http://localhost:3333**
+2. Or run `npm run kill` first to clear dev servers, then `npm run build` and `npx next start -p 3333`
+
+Do this after every iteration so the user can review changes immediately.

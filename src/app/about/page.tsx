@@ -1,10 +1,12 @@
-import { PageContainer } from "@/components/layout";
+import type { Metadata } from "next";
+import { AboutV3View } from "./AboutV3View";
 
-export default function About() {
-  return (
-    <PageContainer>
-      <h1 className="text-3xl font-semibold">About</h1>
-      <p className="mt-4 text-neutral-600">Background and experience.</p>
-    </PageContainer>
-  );
+export const metadata: Metadata = {
+  title: "About · Matt Stangl",
+  description:
+    "Personal posture — beliefs, working approach, career arc, and how I show up as a CX, product, and service design leader.",
+};
+
+export default function AboutPage() {
+  return <AboutV3View />;
 }

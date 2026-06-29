@@ -1,0 +1,12 @@
+/* Autodesk Tier-A case shell — imports shared Tier-A chrome + scoped case CSS.
+ * Mirrors Wipro's import stack one-for-one. Per BUILD-NOTES the hand-maintained
+ * `case-autodesk.css` lives next to this barrel; no auto-generated layer.
+ */
+@import "../case-centaur/tokens-scoped.css";
+@import "../case-centaur/grammar.css";
+@import "../tier-a/fiche-nav.css";
+@import "../case-centaur/density.css";
+@import "../case-centaur/tier-a-case-shell.css";
+@import "../tier-a/hero-chrome.css";
+@import "./case-autodesk.css";
+@import "./revenue-engine.css";

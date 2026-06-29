@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SU · Artifact 04 · Marc S. Persona Card</title>
+<!--
+  ============================================================
+  ARTIFACT 04 — MARC S. PERSONA CARD · Section 04
+  Single sample persona card — the "show, don't tell" of the method
+  ------------------------------------------------------------
+  DESIGN DECISIONS WORTH FLAGGING (for the Cursor port):
+  · Reads as a RESEARCH ARTIFACT (a fiche-format spec sheet), not a
+    "meet our user" marketing card. Left mono label gutter + value
+    column + dashed dividers = a structured research output.
+  · TYPE HIERARCHY by brief: (1) the NAME + role "Marc S. — Systems
+    Purist" is the strongest object; (2) the FIRST QUESTION is pulled
+    out at display scale, in quotes, as the second-strongest; (3) the
+    FINDING reads as "this happened" — a bordered verdict block with a
+    FAIL flag and the Autodesk reference bold, never small print.
+  · The FAIL flag uses the grammar's warning/revision orange (a
+    semantic stamp color, not a second accent). Teal accent stays the
+    single accent; the logged recommendation is accent because it's
+    the constructive action. Color encodes meaning.
+  · SCALES TO THE SET: a 5-archetype index strip (by archetype role)
+    shows this is card 01 of a system; the same template renders the
+    other four. No real practitioner surnames are used — personas are
+    referenced by pseudonym (Marc S.) and archetype role only.
+  · Single placeholder accent (#2dd4b2). Swap later.
+  ============================================================
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="synthetic-artifacts.css">
+<style>
+  /* ---- MARC S. PERSONA CARD (artifact-specific) ---- */
+  .pcard{ max-width:640px; margin:0 auto; border:1px solid var(--ink-3); background:var(--plate); }
+
+  /* archetype set index (shows this is 1 of 5) */
+  .pset{
+    display:flex; align-items:stretch; border-bottom:1px solid var(--ink-3); background:var(--bg-soft);
+    overflow:hidden;
+  }
+  .pset .it{
+    flex:1; padding:9px 10px; border-left:1px solid var(--ink-4);
+    font-family:var(--mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3);
+    display:flex; flex-direction:column; gap:2px; line-height:1.3;
+  }
+  .pset .it:first-child{ border-left:none; }
+  .pset .it .n{ color:var(--ink-3); }
+  .pset .it .who{ color:var(--ink-2); }
+  .pset .it.on{ background:var(--accent-vlow); }
+  .pset .it.on .n{ color:var(--accent); }
+  .pset .it.on .who{ color:var(--ink-0); font-weight:500; }
+
+  /* header band */
+  .pcard__cap{
+    display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+    padding:13px 22px; border-bottom:1px solid var(--ink-4);
+  }
+  .pcard__cap .l{ font-family:var(--mono); font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-2); }
+  .pcard__cap .r{ font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3); }
+
+  /* name block — strongest */
+  .pcard__name{ padding:24px 22px 22px; border-bottom:1px solid var(--ink-4); }
+  .pcard__name .h{
+    font-family:var(--sans); font-weight:600; font-size:clamp(30px,4.4vw,42px); letter-spacing:-0.03em;
+    line-height:1.0; color:var(--ink-0);
+  }
+  .pcard__name .h .role{ color:var(--accent); font-weight:500; }
+  .pcard__name .after{
+    margin-top:11px; font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-2);
+  }
+
+  /* field rows */
+  .pf{ display:grid; grid-template-columns:148px 1fr; gap:24px; padding:18px 22px; border-bottom:1px dashed var(--ink-4); }
+  .pf .k{ font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-2); padding-top:3px; }
+  .pf .v{ font-family:var(--sans); font-size:15px; line-height:1.5; color:var(--ink-1); }
+  .pf .v b{ color:var(--ink-0); font-weight:500; }
+
+  /* first question — second-strongest */
+  .pf--q .v{ font-family:var(--sans); font-weight:500; font-size:22px; line-height:1.32; letter-spacing:-0.015em; color:var(--ink-0); position:relative; }
+  .pf--q .v .qm{ color:var(--accent); font-weight:600; }
+
+  /* finding — the payoff */
+  .pf--find{ display:block; padding:0; border-bottom:none; }
+  .finding{
+    margin:4px 22px 22px; border:1px solid var(--ink-3); border-left:3px solid var(--rev);
+    background:var(--bg);
+  }
+  .finding__top{
+    display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--ink-4);
+  }
+  .finding__flag{
+    font-family:var(--mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--rev); border:1px solid var(--rev); padding:4px 9px;
+  }
+  .finding__k{ font-family:var(--mono); font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-2); }
+  .finding__case{ margin-left:auto; font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-1); }
+  .finding__body{ padding:14px 16px; }
+  .finding__body p{ margin:0; font-family:var(--sans); font-size:15px; line-height:1.55; color:var(--ink-1); }
+  .finding__body p b{ color:var(--ink-0); font-weight:500; }
+  .finding__rec{
+    margin-top:12px; padding-top:12px; border-top:1px dashed var(--ink-4);
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .finding__rec .tag{ font-family:var(--mono); font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent); white-space:nowrap; padding-top:2px; }
+  .finding__rec .t{ font-family:var(--sans); font-size:14px; line-height:1.5; color:var(--ink-0); }
+  .finding__rec .t em{ font-style:normal; color:var(--accent); }
+
+  @media (max-width:560px){
+    .pf{ grid-template-columns:1fr; gap:7px; }
+    .pset{ display:none; } /* index strip hidden on narrow; card stands alone */
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ SHEET TOP ============ -->
+  <div class="sheet-top">
+    <div>
+      <span class="dot"></span>
+      CONSOLE <span class="sep">/</span> Case Studies <span class="sep">/</span>
+      <span class="active">Synthetic Users · §04 · Persona Card</span>
+      <span class="sep">/</span> SU-04
+    </div>
+    <div><b>Matt Stangl</b> · CX, Product &amp; Service Design Leader</div>
+  </div>
+
+  <!-- ============ TITLE ============ -->
+  <section class="title">
+    <div>
+      <p class="kicker">Artifact 04 · Marc S. Persona Card · 2026.06</p>
+      <h1>A persona built as a <em>research instrument</em> — and the failure it logged.</h1>
+      <p class="sub">The methodology's show-don't-tell. One sample card, structured like a spec sheet: a worldview anchor, a first question, pass criteria, a failure mode, and a finding that names a real miss on a real case in this very portfolio.</p>
+    </div>
+    <dl class="idcard">
+      <dt>Artifact</dt>      <dd>04 · Persona Card</dd>
+      <dt>Sample</dt>        <dd>Marc S. · Systems Purist</dd>
+      <dt>Section</dt>       <dd>§04 · Persona logic</dd>
+      <dt>Set</dt>           <dd>1 of 5 archetypes</dd>
+      <dt>Accent</dt>        <dd>Placeholder · 1 only</dd>
+      <dt>Register</dt>      <dd>Fiche · v2026.06</dd>
+    </dl>
+  </section>
+
+  <!-- ============ CONCEPT NOTE ============ -->
+  <div class="caveat">
+    <span class="stamp">SKETCH</span>
+    <div>
+      <p>Copy is verbatim. The card is drawn as a <b>research artifact</b> — mono label gutter, value column, dashed dividers — not a marketing persona. Hierarchy follows the brief: the <b>name</b> is loudest, the <b>first question</b> is pulled to display scale, and the <b>finding</b> reads as "this happened," not fine print.</p>
+      <p>The <code>FAIL</code> flag uses the grammar's warning orange (a semantic stamp, not a second accent); the logged recommendation is teal because it's the constructive action. A five-archetype index shows this is one card in a system that renders the other four. Accent <code>#2dd4b2</code> is a placeholder.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ THE ARTIFACT ============ -->
+  <section class="artband">
+    <div class="artband__head">
+      <div class="l">
+        <span class="arr">↓</span>
+        <span class="h">The persona card — rendered in isolation</span>
+      </div>
+      <div class="r">
+        DESKTOP · ~640PX CARD<br/>
+        <b>SU-04 · PERSONA CARD</b>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="artboard" style="padding:44px 32px 40px;">
+        <span class="artboard__tag">Artifact · no page chrome</span>
+        <span class="artboard__scale">1 : 1</span>
+
+        <div class="artboard__inner">
+
+          <div class="pcard">
+
+            <!-- archetype set index -->
+            <div class="pset">
+              <div class="it on"><span class="n">01 · Systems Purist</span><span class="who">Marc S.</span></div>
+              <div class="it"><span class="n">02 · Outcome Enforcer</span><span class="who">Indi Y.</span></div>
+              <div class="it"><span class="n">03 · AI Pragmatist</span><span class="who">Ethan M.</span></div>
+              <div class="it"><span class="n">04 · Simplicity Thinker</span><span class="who">John M.</span></div>
+              <div class="it"><span class="n">05 · Discovery Lead</span><span class="who">Teresa H.</span></div>
+            </div>
+
+            <!-- header -->
+            <div class="pcard__cap">
+              <span class="l">Persona card · sample</span>
+              <span class="r">PC-01 / 05 · QA · CONTENT</span>
+            </div>
+
+            <!-- name -->
+            <div class="pcard__name">
+              <div class="h">Marc S. <span class="role">— Systems Purist</span></div>
+              <div class="after">Modeled on a documented service-design worldview</div>
+            </div>
+
+            <!-- fields -->
+            <div class="pf">
+              <div class="k">Worldview anchor</div>
+              <div class="v">Service-systems thinking. <b>Backstage architecture as the test</b> of whether work is service design or product redesign with a service label.</div>
+            </div>
+
+            <div class="pf pf--q">
+              <div class="k">First question</div>
+              <div class="v"><span class="qm">“</span>Where's the backstage? Who delivers this internally, and what changed in their work to make it real?<span class="qm">”</span></div>
+            </div>
+
+            <div class="pf">
+              <div class="k">Pass criteria</div>
+              <div class="v">At least one artifact per service-design engagement shows <b>internal capability change</b> — not just customer-facing model.</div>
+            </div>
+
+            <div class="pf">
+              <div class="k">Failure mode</div>
+              <div class="v">Sees a tier structure with no organizational change behind it and <b>stops trusting</b> the service-design framing.</div>
+            </div>
+
+            <!-- finding -->
+            <div class="pf pf--find">
+              <div class="finding">
+                <div class="finding__top">
+                  <span class="finding__flag">▲ Fail</span>
+                  <span class="finding__k">Finding</span>
+                  <span class="finding__case">on · Autodesk case study</span>
+                </div>
+                <div class="finding__body">
+                  <p><b>Three-tier model legible from the front, backstage architecture invisible.</b> The card's first question went unanswered — no internal capability change shown behind the tier structure.</p>
+                  <div class="finding__rec">
+                    <span class="tag">▣ Logged →</span>
+                    <span class="t"><em>Service blueprint excerpt or org-behavior narrative</em> required in the Autodesk case study.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- notes rail -->
+      <aside class="notes">
+        <h4>HIERARCHY (BY BRIEF)</h4>
+        <ul>
+          <li><b>Name loudest.</b> "Marc S. — Systems Purist" at display scale anchors the whole card.</li>
+          <li><b>Question second.</b> Pulled out at 22px in quotes — it's the persona's lens, so it carries weight.</li>
+          <li><b>Finding as event.</b> A bordered verdict block, not a caption — "this happened," with the case named.</li>
+        </ul>
+
+        <h4>RESEARCH ARTIFACT, NOT MARKETING</h4>
+        <ul>
+          <li>Mono label gutter + dashed dividers read as a <b>spec sheet / research output</b>. No avatar, no fluff.</li>
+          <li><b>FAIL</b> in warning orange = the verdict on the audited case; <em>recommendation</em> in teal = the action. Color carries meaning.</li>
+        </ul>
+
+        <h4>SCALES TO THE SET</h4>
+        <ul>
+          <li>The 5-archetype index makes this <b>card 01 of 05</b>; the same template renders the other four archetypes.</li>
+        </ul>
+
+        <h4>MOBILE (≤560PX)</h4>
+        <ul>
+          <li>Label gutter collapses — labels sit <b>above</b> values. Index strip hides; the card stands alone.</li>
+          <li>Finding block stays bordered and full-width so the payoff never shrinks to body text.</li>
+        </ul>
+
+        <div class="tags">
+          <span class="tag lb">LOAD-BEARING · finding block</span>
+          <span class="tag ex">EXPLORATORY · set index</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- ============ MOBILE COMPANION ============ -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">SU-04 · MOBILE · LABELS STACK ABOVE VALUES</div>
+
+      <div style="border:1px solid var(--ink-3); background:var(--plate);">
+        <div style="padding:10px 12px; border-bottom:1px solid var(--ink-4);">
+          <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.16em; color:var(--ink-2); text-transform:uppercase;">Persona card · sample</div>
+        </div>
+        <div style="padding:14px 12px; border-bottom:1px solid var(--ink-4);">
+          <div style="font-family:var(--sans); font-weight:600; font-size:26px; letter-spacing:-0.03em; color:var(--ink-0); line-height:1.05;">Marc S. <span style="color:var(--accent); font-weight:500;">— Systems Purist</span></div>
+          <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--ink-2); text-transform:uppercase; margin-top:8px;">service-design worldview</div>
+        </div>
+        <div style="padding:12px; border-bottom:1px dashed var(--ink-4);">
+          <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--ink-2); text-transform:uppercase; margin-bottom:6px;">First question</div>
+          <div style="font-family:var(--sans); font-weight:500; font-size:17px; line-height:1.3; color:var(--ink-0);"><span style="color:var(--accent);">“</span>Where's the backstage? Who delivers this internally?<span style="color:var(--accent);">”</span></div>
+        </div>
+        <div style="padding:12px; border-bottom:1px dashed var(--ink-4);">
+          <div style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--ink-2); text-transform:uppercase; margin-bottom:6px;">Failure mode</div>
+          <div style="font-family:var(--sans); font-size:13px; line-height:1.45; color:var(--ink-1);">Sees a tier structure with no org change behind it and <b style="color:var(--ink-0); font-weight:500;">stops trusting</b> the framing.</div>
+        </div>
+        <!-- finding -->
+        <div style="margin:10px 12px 12px; border:1px solid var(--ink-3); border-left:3px solid var(--rev); background:var(--bg);">
+          <div style="display:flex; align-items:center; gap:8px; padding:9px 11px; border-bottom:1px solid var(--ink-4);">
+            <span style="font-family:var(--mono); font-size:8px; letter-spacing:0.18em; color:var(--rev); border:1px solid var(--rev); padding:3px 7px; text-transform:uppercase;">▲ Fail</span>
+            <span style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--ink-1); text-transform:uppercase; margin-left:auto;">on · Autodesk</span>
+          </div>
+          <div style="padding:11px;">
+            <div style="font-family:var(--sans); font-size:13px; line-height:1.45; color:var(--ink-1);"><b style="color:var(--ink-0); font-weight:500;">Tier model legible up front, backstage invisible.</b></div>
+            <div style="margin-top:9px; padding-top:9px; border-top:1px dashed var(--ink-4); font-family:var(--sans); font-size:12px; color:var(--ink-0); line-height:1.4;"><span style="font-family:var(--mono); font-size:8px; letter-spacing:0.14em; color:var(--accent); text-transform:uppercase;">▣ Logged →</span> service blueprint excerpt required.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>SU-04 · MOBILE LOGIC</h4>
+      <p><b>The label gutter collapses.</b> Each field's mono label sits directly above its value rather than beside it — the spec-sheet rhythm holds vertically, and no value gets squeezed into a narrow column.</p>
+      <p><b>The name and first question</b> stay the two loudest elements; both scale down but never demote below the surrounding fields. The persona's lens still leads.</p>
+      <p><b>The finding block is protected</b> — it keeps its border, its FAIL flag, and the Autodesk reference at full weight. On a phone it's the last thing a reader sees, and it should still read as a logged event, not a footnote.</p>
+      <p><b>The archetype index hides</b> at ≤560px (it's a set-navigation affordance, not card content), so the single card stands cleanly on its own.</p>
+    </div>
+  </div>
+
+
+  <!-- ============ ANALYSIS ============ -->
+  <section class="analysis">
+    <h2>↘ Persona Card · read &amp; trade-offs</h2>
+
+    <h3><span class="pn">§ 1 · The finding is the point</span>Self-implicating credibility</h3>
+    <p>What makes this card land is that the finding is a <b>FAIL on a real case in the same portfolio</b> — Autodesk. A persona card that praises itself proves nothing; one that catches a documented miss and logs a specific fix proves the method works. The verdict block is sized and bordered to read as a logged event, and the Autodesk reference is bold because the specificity is the credibility. This is the artifact's whole job: show, don't tell.</p>
+
+    <h3><span class="pn">§ 2 · Why the spec-sheet form</span>Instrument, not avatar</h3>
+    <p>The five fields are a deliberate rhythm: anchor → question → pass → failure → finding. Setting them as a labeled spec sheet (mono gutter, dashed rules) signals "this is a research instrument," which is the frame the brief insists on. The first question gets display weight because it's the operative lens — everything the persona does flows from it. No photo, no demographic fluff; the worldview <em>is</em> the persona.</p>
+
+    <h3><span class="pn">§ 3 · Risks for the port</span></h3>
+    <ul>
+      <li><b>Two-color discipline.</b> Teal (accent) + orange (warning stamp) is the intended split. If Matt wants strictly one color, the FAIL flag can become a hollow/▲ outline with no orange — but the semantic loss is real; flag before removing.</li>
+      <li><b>Set index as chrome.</b> The 5-archetype strip is card-system content, not page chrome — but verify it doesn't get mistaken for the site's case picker when ported into the live section.</li>
+      <li><b>Quote scale.</b> The 22px first question is tuned for a ~640px card. If the live card is wider, cap the quote's measure (~46ch) so it doesn't run too long per line.</li>
+    </ul>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div><b>SU-04</b> · PERSONA CARD</div>
+    <div>SCALE · 1 : 1</div>
+    <div>DRAWN · M. STANGL</div>
+    <div>APPROVED · ─</div>
+    <div>DATE · 2026 · 06</div>
+    <div>REV · v2026.06 · LO-FI</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

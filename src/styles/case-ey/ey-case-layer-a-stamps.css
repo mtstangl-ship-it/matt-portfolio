@@ -1,0 +1,54 @@
+/* ============================================================
+   EY · Layer A stamp stack (Centaur parity)
+   grammar.css uses `section > *:not(.section-stamp):not(.fig-stamp):not(.margin-note)`
+   so density `.section-stamp { position: absolute }` applies to stamps on Tier-A routes.
+   EY reinforces stacking offsets here under `.case-ey-portfolio` only — no bleed.
+   ============================================================ */
+
+.tier-a-case-root .case-ey-portfolio {
+  --layer-a-stamp-reserve: clamp(10rem, 24vw, 15rem);
+  --layer-a-fig-h: 2.625rem;
+  --layer-a-stamp-stack-top: calc(1rem + var(--layer-a-fig-h) + 1rem);
+}
+
+@media (min-width: 1181px) {
+  .tier-a-case-root .case-ey-portfolio .fig-stamp {
+    top: 1rem;
+    right: 1rem;
+    z-index: 14;
+  }
+
+  .tier-a-case-root .case-ey-portfolio section[data-screen-label]:not(#hero) > dl.section-stamp {
+    position: absolute !important;
+    top: var(--layer-a-stamp-stack-top) !important;
+    right: 1rem !important;
+    z-index: 13 !important;
+    width: max-content;
+    max-width: min(100%, 24rem);
+    display: grid !important;
+  }
+
+  .tier-a-case-root .case-ey-portfolio .diagnosis__inner,
+  .tier-a-case-root .case-ey-portfolio .approach__inner,
+  .tier-a-case-root .case-ey-portfolio .tour__inner,
+  .tier-a-case-root .case-ey-portfolio .external-validation__inner,
+  .tier-a-case-root .case-ey-portfolio .lesson__inner {
+    padding-right: calc(var(--gutter) + var(--layer-a-stamp-reserve));
+  }
+}
+
+/* ---- Mobile · hide section metadata stamps to reclaim vertical space ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-ey-portfolio dl.section-stamp,
+  .tier-a-case-root .case-ey-portfolio .section-stamp {
+    display: none !important;
+  }
+}
+
+/* ---- Mobile · hide FIG. stamps (hero + section) to reclaim vertical space ---- */
+@media (max-width: 768px) {
+  .tier-a-case-root .case-ey-portfolio .fig-stamp {
+    display: none !important;
+  }
+}
+

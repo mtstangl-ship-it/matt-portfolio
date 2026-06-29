@@ -1,5 +1,132 @@
-export const caseStudies: Array<{
-  slug: string;
+/**
+ * Case Studies — canonical catalogue.
+ *
+ * Per the handoff brief, the site carries exactly five cases (in order):
+ *   1. Centaur Practice, 2. Synthetic Users, 3. Autodesk, 4. Wipro, 5. EY.
+ *
+ * Each case's long-form body + bespoke artifacts live in its own component
+ * under `src/components/case-studies/cases/<slug>.tsx`. This file holds only
+ * the metadata used by the index cards, the homepage teasers, and the
+ * per-route hero.
+ */
+
+export const caseStudiesPage = {
+  eyebrow: "Selected work",
+  title: "Selected work.",
+  subhead:
+    "Five missions where strategy left the hangar. What shipped, what moved, and the trajectory each one actually traced.",
+} as const;
+
+export type CaseSlug = "ai" | "synthetic" | "autodesk" | "wipro" | "ey";
+
+/** Canonical URL for case picker + deep links (static `/ai`, editorial `/synthetic-users` alias). */
+export function caseStudyDetailHref(slug: CaseSlug): string {
+  if (slug === "ai") return "/case-studies/ai";
+  if (slug === "synthetic") return "/case-studies/synthetic-users";
+  return `/case-studies/${slug}`;
+}
+
+export type CaseStudyEntry = {
+  slug: CaseSlug;
+  /** Full hero headline as shown on /case-studies/[slug]. */
   title: string;
-  description?: string;
-}> = [];
+  /** Hero sub-line under the headline. */
+  oneLine: string;
+  /** Mono tag shown in the hero meta row, e.g. "SERVICE DESIGN · REVENUE". */
+  tag: string;
+  /** 1-based position. Used for "CASE 01 OF 05" meta. */
+  caseNumber: number;
+  /** Short label for the case picker, e.g. "Centaur Practice", "EY Healthcare". */
+  shortName: string;
+
+  // ------- Index + home tile metadata (existing schema) -------
+  panelLabel: string;
+  teaserLine: string;
+  tools?: string;
+  mode?: string;
+  method?: string;
+  output?: string;
+  supportingMeta?: string;
+  artifact?: string;
+};
+
+export const caseStudyEntries: CaseStudyEntry[] = [
+  {
+    slug: "ai",
+    title: "I built this portfolio with AI, and kept the decisions human.",
+    oneLine:
+      "Six weeks. Four tools. One lesson I'll use for the rest of my career: AI raises the floor. Taste raises the ceiling.",
+    tag: "CENTAUR PRACTICE",
+    caseNumber: 1,
+    shortName: "Centaur Practice",
+    panelLabel: "CENTAUR PRACTICE",
+    teaserLine:
+      "Six weeks, four tools, one portfolio. What AI did, what it got wrong, and the decisions that stayed mine.",
+    tools: "Cursor · Claude · Claude Design · Vercel",
+    mode: "Centaur, human in the saddle",
+    method: "Design a system, then use models for variation, critique, and scaffolding",
+    output: "Coherent portfolio system, reusable build pipeline, and a review trace you can inspect",
+    artifact:
+      "Map the system first, then use models for variation and critique. Human owns narrative and architecture.",
+  },
+  {
+    slug: "synthetic",
+    title: "Synthetic users as a research method.",
+    oneLine:
+      "A structured way to pressure-test experience decisions before live traffic, as a complement to research, not a replacement.",
+    tag: "SIMULATION · RESEARCH",
+    caseNumber: 2,
+    shortName: "Synthetic Users",
+    panelLabel: "SIMULATION · RESEARCH",
+    teaserLine:
+      "Nine synthetic reviewers stress-tested this portfolio before launch. Three findings self-review missed.",
+    supportingMeta: "COMPLEMENT: Research · Hypothesis · Pre-launch",
+  },
+  {
+    slug: "autodesk",
+    title: "Autodesk's 106% NRR design. The customer value journey behind it.",
+    oneLine:
+      "From consideration to renewal: the customer value journey that put Autodesk on a 106% NRR path.",
+    tag: "SERVICE DESIGN · REVENUE TRANSFORMATION · AUTODESK",
+    caseNumber: 3,
+    shortName: "Autodesk",
+    panelLabel: "SERVICE DESIGN · REVENUE",
+    teaserLine:
+      "From consideration to renewal: the customer value journey that put Autodesk on a 106% NRR path.",
+    tools: "Service Design · Journey Architecture · Customer planning",
+    mode: "CX · Revenue transformation · FY22–FY24",
+    method: "Directional journey design across Sales, Success, and Product",
+    output: "Five-phase assembly · dual-tier delivery · org-wide modernization pull",
+    supportingMeta: "SCOPE: Customer planning · Outcome & value selling · NRR path",
+  },
+  {
+    slug: "wipro",
+    title: "Lockouts: From 27 Hour MTTR to 22 minutes",
+    oneLine:
+      "Estée Lauder's service desk was taking 3,515 password-reset tickets a month — and escalating 42.6% of them. I led the transformation that unified the experience across six towers.",
+    tag: "OPERATIONS · ITIL",
+    caseNumber: 4,
+    shortName: "Wipro · ITIL",
+    panelLabel: "OPERATIONS · ITIL",
+    teaserLine:
+      "Diagnosed a 42.6% escalation tax; redesigned the handoff between six ITIL towers into three tiers.",
+    tools: "Service Design · ITIL · Case Flow",
+    mode: "Diagnostic sprint · Operations reset",
+    supportingMeta: "SCOPE: Service desk · Six towers · Handoff redesign",
+  },
+  {
+    slug: "ey",
+    title: "Vaccine hesitancy isn't a comms problem. It's a showing-up problem.",
+    oneLine:
+      "Say YES Summer: three cities, ten events, live art, music, and murals. And 715 vaccinations delivered where mass media couldn't land.",
+    tag: "HEALTHCARE · COMMUNITY",
+    caseNumber: 5,
+    shortName: "EY Healthcare",
+    panelLabel: "HEALTHCARE · COMMUNITY",
+    teaserLine:
+      "Community-led field activation: 715 vaccinations across Georgia.",
+    tools: "Field Activation · Community Design · Public Health",
+    mode: "Awareness + activation, one program design",
+    supportingMeta: "SCOPE: Georgia DPH · Say YES Summer Tour",
+  },
+];

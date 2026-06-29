@@ -4,24 +4,38 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "dev:3001": "next dev -p 3001",
+    "dev:3002": "next dev -p 3002",
+    "dev:3333": "next dev -p 3333",
+    "dev:1000": "next dev -p 1000 -H 0.0.0.0",
+    "build": "rm -rf .next && next build",
     "start": "next start",
-    "lint": "next lint"
+    "kill": "pkill -f 'next dev' 2>/dev/null; pkill -f 'next start' 2>/dev/null; (lsof -ti:1000 | xargs kill -9 2>/dev/null); (lsof -ti:3000 | xargs kill -9 2>/dev/null); (lsof -ti:3001 | xargs kill -9 2>/dev/null); (lsof -ti:3002 | xargs kill -9 2>/dev/null); (lsof -ti:3333 | xargs kill -9 2>/dev/null); sleep 2; echo 'Ports cleared'",
+    "refresh": "npm run kill && npm run build && sleep 1 && npx next start -p 3333",
+    "dev:clean": "npm run kill && next dev -p 3000",
+    "lint": "next lint",
+    "export:centaur-html": "node scripts/export-centaur-html.mjs",
+    "extract:pointillism": "node scripts/extract-pointillism.mjs",
+    "build:ey-css": "node scripts/build-ey-v4-css.mjs",
+    "halftone:ey-hero": "node scripts/process-ey-hero-halftone.mjs",
+    "halftone:wipro-hero": "node scripts/process-wipro-hero-halftone.mjs"
   },
   "dependencies": {
+    "framer-motion": "^12.36.0",
     "next": "14.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.2.5",
-    "tailwindcss": "^3.4.1",
-    "postcss": "^8",
-    "autoprefixer": "^10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
 }

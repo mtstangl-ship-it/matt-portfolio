@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EY Tab · Zoom-Into-City · SR-03 · Impact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ey-sketch.css">
+<link rel="stylesheet" href="ey-sr03.css">
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ============ SHEET TOP ============ -->
+  <div class="sheet-top">
+    <div>
+      <span class="dot"></span>
+      CONSOLE <span class="sep">/</span> Impact <span class="sep">/</span>
+      <span class="active">EY · Footprint · Zoom-Into-City</span>
+      <span class="sep">/</span> SR-03
+    </div>
+    <div>
+      <b style="color:var(--ink-0);">Matt Stangl</b> · CX, Product &amp; Service Design Leader
+    </div>
+  </div>
+
+  <!-- ============ TITLE ============ -->
+  <section class="title">
+    <div>
+      <p class="kicker">Sketch · SR-03 · 2026.05</p>
+      <h1>Tap a pin and the map <em>zooms from Georgia into the city</em>.</h1>
+      <p class="sub">SR-02's balloon, corner-manifest and bottom-rail all fought the same tension — card vs. geography on one canvas. This round resolves it structurally: the geography changes scale to make room for the card. Three variations, each with its default + ATL-active state, mobile, and notes.</p>
+    </div>
+    <dl class="idcard">
+      <dt>Round</dt>            <dd>SR-03 · Sketch · LO-FI</dd>
+      <dt>Concept</dt>         <dd>Locked · zoom-into-city</dd>
+      <dt>Variations</dt>      <dd>3 · split · overlay · tab-stack</dd>
+      <dt>Replaces</dt>        <dd>SR-02 anchor strategies</dd>
+      <dt>Active example</dt>  <dd>HUB-01 · Atlanta</dd>
+      <dt>Register</dt>        <dd>Fiche · v2026.05</dd>
+    </dl>
+  </section>
+
+  <!-- ============ CONCEPT NOTE ============ -->
+  <div class="caveat">
+    <span class="stamp">SKETCH</span>
+    <div>
+      <p>The locked direction: <b>tap a pin → the map zooms from state-level Georgia into a stylized representation of that city's local geography</b>. The card lives in the viewport space the zoom frees up. The map never shrinks into a column — its <i>scale</i> changes, and the narrative changes with it.</p>
+      <p>Three relationships: <b>(1) default scope</b> — Georgia + three pins, the spread is the hero; <b>(2) active specificity</b> — stylized local topology that feels like Atlanta / Savannah without literal accuracy; <b>(3) return</b> — get back to Georgia with a sense of having traveled and come back.</p>
+      <p>Georgia is the <i>preserved production SVG</i> (placeholder box). City topology is <i>stylized placeholder</i> — grids, coastline, arterials — labelled <code>[CITY-GRID PLACEHOLDER · STYLIZED TOPOLOGY · PROD SVG TBD]</code>. Real city art is sourced separately at Cursor time.</p>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       VARIATION 1 · SPLIT-ZOOM
+       ========================================================================= -->
+  <section class="brk">
+    <div class="l">
+      <span class="arr">↓</span>
+      <span class="h">Variation 1 · split-zoom · camera pans in, viewport splits city ‖ card</span>
+    </div>
+    <div class="r">
+      <span class="mono">FIG. 03-A · DELIVERY 3 HUBS · SEQUENCED</span><br/>
+      <span class="mono fig">SR-03 · VAR 1 · SPLIT-ZOOM</span>
+    </div>
+  </section>
+
+  <div class="var-banner sr03">
+    <span class="vlabel">VAR 1 · SPLIT-ZOOM</span>
+    <span class="vdesc">Camera zooms into the tapped pin; the viewport then splits — city settles left, card slides into the freed right half. Other cities become breadcrumb badges.</span>
+    <span class="vactive" style="text-transform:none; font-family:var(--sans);">Zoom · <b style="color:var(--teal);">camera-pan</b></span>
+    <span class="vactive">CARD · <b>BESIDE (R)</b></span>
+  </div>
+
+  <div class="sketch">
+    <div class="sketch__art">
+      <div class="art-stamp">SHEET 1 · 1 : 1</div>
+
+      <div class="product-break">
+        <span><span class="arr">↓</span>GEORGIA DELIVERY FOOTPRINT · TAP TO INSPECT EACH HUB</span>
+        <span class="meta">FIG. 03-A · DELIVERY · 3 HUBS · <b>SEQUENCED</b></span>
+      </div>
+
+      <div class="state-pair">
+
+        <!-- DEFAULT STATE -->
+        <div class="state-frame">
+          <span class="state-frame__tab"><span class="n">STATE 1 ·</span> DEFAULT · GEORGIA</span>
+          <div class="map" style="aspect-ratio:1/1;">
+            <div class="map-stamp tl">FIG. 03</div>
+            <div class="compass"><span class="n">N</span></div>
+            <div class="scalebar"><span>0</span><span class="ruler"></span><span>100 MI</span></div>
+
+            <!-- pins, hollow -->
+            <div class="pin" style="left:30%; top:40%;"><div class="dot"></div><div class="lbl"><b>ATL</b> · HUB-01</div></div>
+            <div class="pin" style="left:43%; top:37%;"><div class="dot"></div><div class="lbl"><b>ATH</b> · HUB-02</div></div>
+            <div class="pin" style="left:78%; top:74%;"><div class="dot"></div><div class="lbl"><b>SAV</b> · HUB-03</div></div>
+
+            <div style="position:absolute; bottom:10px; right:10px; z-index:6;">
+              <div class="breadcrumb"><span class="pos">TAP A PIN</span><span class="track"><i></i><i></i><i></i></span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- transition gutter -->
+        <div class="transition">
+          <span class="glyph">⤢</span>
+          <span class="word">TAP ATL · <b>ZOOM IN</b></span>
+          <span class="glyph">→</span>
+        </div>
+
+        <!-- ACTIVE STATE · ATL -->
+        <div class="state-frame">
+          <span class="state-frame__tab active"><span class="n">STATE 2 ·</span> ACTIVE · ATL</span>
+
+          <div class="split">
+            <div class="citymap citymap--grid">
+              <div class="back-aff"><span class="ar">←</span> GEORGIA</div>
+              <div class="map-stamp br">FIG. 03-B</div>
+              <div class="scalebar"><span>0</span><span class="ruler"></span><span>10 MI</span></div>
+              <div class="citymap__reticle"></div>
+              <div class="citymap__cap"><b>[ CITY-GRID PLACEHOLDER ]</b>STYLIZED TOPOLOGY · PROD SVG TBD<br/>ATL · METRO STREET GRID</div>
+
+              <!-- other cities as badges · sit below the back-aff row (narrow column) -->
+              <div class="pin-badges" style="top:38px;">
+                <div class="pin-badge"><span class="dot"></span>ATH <span class="n">02</span></div>
+                <div class="pin-badge"><span class="dot"></span>SAV <span class="n">03</span></div>
+              </div>
+            </div>
+
+            <div class="citycard">
+              <div class="pn"><span><b>HUB-01</b> · ATLANTA</span><span class="num">01 / 03</span></div>
+              <h5>Metro hub · anchor partner sites</h5>
+              <div class="frame">Reach &amp; depth</div>
+              <p>Anchor partner sites across metro Atlanta carried the bulk of program awareness. The hub paired large-venue activation with neighborhood-level partner clinics.</p>
+              <div class="stats">
+                <div><div class="v">2.41<span class="u">M</span></div><div class="l">Engagements</div></div>
+                <div><div class="v">452</div><div class="l">Vaccinations</div></div>
+              </div>
+            </div>
+
+            <div class="split-meta">
+              <span>↳ CITY OCCUPIES ~56% · CARD FILLS FREED 44%</span>
+              <span>BREADCRUMB · 1 / 3 · ATLANTA</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <aside class="sketch__notes">
+      <h4>VAR 1 · ZOOM MECHANIC</h4>
+      <div class="zoomspec">
+        <div class="r"><span class="k">MOTION</span><span class="v"><b>Camera-pan zoom</b> — Georgia scales up centred on the tapped pin; <em>pin location becomes viewport center</em>, then the right ~44% wipes to plate as the card slides in.</span></div>
+        <div class="r"><span class="k">TIMING</span><span class="v">~420ms ease-in-out · single-fire. No loop.</span></div>
+        <div class="r"><span class="k">CAMERA</span><span class="v">Follows the pin — ATL zoom lands NW-biased, SAV zoom lands SE-biased. <em>Each city lands differently.</em></span></div>
+      </div>
+
+      <h4>CARD PLACEMENT</h4>
+      <ul>
+        <li><b>Beside, right.</b> Consistent across all three cities. Card never overlaps the city topology.</li>
+        <li>City keeps ~56% (left), card fills the freed ~44% (right). The split itself is the "space the zoom created".</li>
+      </ul>
+
+      <h4>RETURN</h4>
+      <ul>
+        <li><b>Persistent "← GEORGIA"</b> top-left of the city view. Tap → camera zooms back out, split collapses, Georgia re-centers.</li>
+        <li>Esc also returns. Scroll does <i>not</i> auto-return (avoids accidental loss of place).</li>
+      </ul>
+
+      <h4>OTHER CITIES</h4>
+      <ul>
+        <li><b>Stacked badges</b> top-right (ATH · SAV). Tap a badge → lateral zoom straight to that city (no Georgia round-trip).</li>
+        <li>Breadcrumb "1 / 3 · ATLANTA" in the split-meta strip keeps sequence legible.</li>
+      </ul>
+
+      <h4>SUMMARY STATE</h4>
+      <ul>
+        <li>Lives in <b>Georgia (default) state</b> — a 4th badge "PROGRAM · 4.57M" bottom-center. Tapping it shows all three pins lit + the total card, no zoom.</li>
+      </ul>
+
+      <div class="tags">
+        <span class="tag lb">LOAD-BEARING · Split frees real space</span>
+        <span class="tag st">STRONG · Card never occludes city</span>
+        <span class="tag ex">EXPLORATORY · Per-city camera framing</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MOBILE 1 -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">VAR 1 · MOBILE · ZOOM REPLACES MAP, CARD BELOW</div>
+
+      <div class="mob-back-bar">
+        <span><span style="margin-right:4px;">←</span> GEORGIA</span>
+        <span class="crumb">1 / 3 · <b>ATL</b></span>
+      </div>
+      <div class="mob-citymap citymap--grid" style="aspect-ratio:5/4;">
+        <div class="citymap__reticle"></div>
+        <div class="citymap__cap"><b>[ CITY-GRID ]</b>ATL · STREET GRID · TBD</div>
+        <div class="scalebar"><span>0</span><span class="ruler" style="width:40px;"></span><span>10MI</span></div>
+      </div>
+
+      <div class="citycard" style="width:auto; border-top:none; margin-top:0;">
+        <div class="pn"><span><b>HUB-01</b> · ATLANTA</span><span class="num">01/03</span></div>
+        <h5>Metro hub · anchor partner sites</h5>
+        <p style="font-size:11px;">Anchor partner sites across metro Atlanta carried the bulk of program awareness.</p>
+        <div class="stats">
+          <div><div class="v">2.41<span class="u">M</span></div><div class="l">Engage</div></div>
+          <div><div class="v">452</div><div class="l">Vax</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>VAR 1 · MOBILE LOGIC</h4>
+      <p><b>No room for a side-by-side split at 380px.</b> The zoom <i>replaces</i> the Georgia map entirely — only the city is visible — and the card docks directly below it. Vertical stack, not split.</p>
+      <p><b>Gesture.</b> Tap a pin to zoom (no pinch — taps are unambiguous). The zoom is the same camera-pan but ends full-bleed rather than split.</p>
+      <p><b>Return</b> is a persistent top bar ("← GEORGIA" + breadcrumb), always visible above the city so the visitor is never stranded.</p>
+      <p><b>Other cities</b> aren't badges here (no room) — the visitor returns to Georgia and taps the next pin, or swipes the card left/right to advance city-to-city.</p>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       VARIATION 2 · DRAW-IN OVERLAY
+       ========================================================================= -->
+  <section class="brk">
+    <div class="l">
+      <span class="arr">↓</span>
+      <span class="h">Variation 2 · draw-in overlay · the city draws itself in, card is a fiche callout</span>
+    </div>
+    <div class="r">
+      <span class="mono">FIG. 03-A · DELIVERY 3 HUBS · SEQUENCED</span><br/>
+      <span class="mono fig">SR-03 · VAR 2 · DRAW-IN</span>
+    </div>
+  </section>
+
+  <div class="var-banner sr03">
+    <span class="vlabel">VAR 2 · DRAW-IN OVERLAY</span>
+    <span class="vdesc">Georgia dissolves while the city topology draws in stroke-by-stroke (schematic-redrawing-itself). All cities land in the same centred viewport. Card overlays as a corner callout.</span>
+    <span class="vactive" style="text-transform:none; font-family:var(--sans);">Zoom · <b style="color:var(--teal);">draw-in</b></span>
+    <span class="vactive">CARD · <b>OVERLAID</b></span>
+  </div>
+
+  <div class="sketch">
+    <div class="sketch__art">
+      <div class="art-stamp">SHEET 2 · 1 : 1</div>
+
+      <div class="product-break">
+        <span><span class="arr">↓</span>GEORGIA DELIVERY FOOTPRINT · TAP TO INSPECT EACH HUB</span>
+        <span class="meta">FIG. 03-A · DELIVERY · 3 HUBS · <b>SEQUENCED</b></span>
+      </div>
+
+      <div class="state-pair">
+
+        <!-- DEFAULT -->
+        <div class="state-frame">
+          <span class="state-frame__tab"><span class="n">STATE 1 ·</span> DEFAULT · GEORGIA</span>
+          <div class="map" style="aspect-ratio:4/3;">
+            <div class="map-stamp tl">FIG. 03</div>
+            <div class="compass"><span class="n">N</span></div>
+            <div class="scalebar"><span>0</span><span class="ruler"></span><span>100 MI</span></div>
+            <div class="pin" style="left:30%; top:42%;"><div class="dot"></div><div class="lbl"><b>ATL</b> · 01</div></div>
+            <div class="pin" style="left:43%; top:39%;"><div class="dot"></div><div class="lbl"><b>ATH</b> · 02</div></div>
+            <div class="pin" style="left:78%; top:76%;"><div class="dot"></div><div class="lbl"><b>SAV</b> · 03</div></div>
+          </div>
+        </div>
+
+        <div class="transition">
+          <span class="glyph">✎</span>
+          <span class="word">TAP ATL · <b>DRAW IN</b></span>
+          <span class="glyph">→</span>
+        </div>
+
+        <!-- ACTIVE · ATL -->
+        <div class="state-frame">
+          <span class="state-frame__tab active"><span class="n">STATE 2 ·</span> ACTIVE · ATL</span>
+
+          <div class="overlay-stage">
+            <div class="citymap citymap--grid">
+              <div class="drawin-hint">▱ TOPOLOGY DRAWING IN · STROKE-DASH</div>
+              <div class="zoomout-stamp"><span class="ic">↺</span> FIG. 03 · ZOOM OUT</div>
+              <div class="map-stamp tl" style="top:34px;">FIG. 03-B</div>
+              <div class="scalebar"><span>0</span><span class="ruler"></span><span>10 MI</span></div>
+              <div class="citymap__cap"><b>[ CITY-GRID PLACEHOLDER ]</b>STYLIZED TOPOLOGY · PROD SVG TBD<br/>ATL · GRID + ARTERIALS</div>
+
+              <!-- breadcrumb register bottom-right -->
+              <div style="position:absolute; bottom:10px; right:10px; z-index:6;">
+                <div class="breadcrumb"><span class="pos">1/3</span><span class="city">ATL</span><span class="track"><i class="lit"></i><i></i><i></i></span></div>
+              </div>
+
+              <!-- card overlay -->
+              <div class="citycard">
+                <div class="pn"><span><b>HUB-01</b> · ATLANTA</span><span class="num">01 / 03</span></div>
+                <h5>Metro hub · anchor partner sites</h5>
+                <div class="frame">Reach &amp; depth</div>
+                <p>Anchor partner sites across metro Atlanta carried the bulk of program awareness. The hub paired large-venue activation with neighborhood-level partner clinics.</p>
+                <div class="stats">
+                  <div><div class="v">2.41<span class="u">M</span></div><div class="l">Engagements</div></div>
+                  <div><div class="v">452</div><div class="l">Vaccinations</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <aside class="sketch__notes">
+      <h4>VAR 2 · ZOOM MECHANIC</h4>
+      <div class="zoomspec">
+        <div class="r"><span class="k">MOTION</span><span class="v"><b>Diagram draws itself in.</b> Georgia fades to ~8% while the city grid <em>strokes in</em> via dash-offset, arterials last. Reads as a schematic being plotted.</span></div>
+        <div class="r"><span class="k">TIMING</span><span class="v">~600ms draw + 150ms card fade · single-fire. Matches visual-grammar "schematic redrawing itself".</span></div>
+        <div class="r"><span class="k">CAMERA</span><span class="v"><b>Fixed.</b> Every city lands in the <em>same centred viewport</em> — no per-city framing logic.</span></div>
+      </div>
+
+      <h4>CARD PLACEMENT</h4>
+      <ul>
+        <li><b>Overlaid, lower-left</b> as a fiche detail callout. Consistent position for all three cities.</li>
+        <li>Card covers ~30% of the city. Mitigated because the city is <i>stylized</i> — no precise geography is lost behind it.</li>
+      </ul>
+
+      <h4>RETURN</h4>
+      <ul>
+        <li><b>"↺ FIG. 03 · ZOOM OUT" stamp</b> top-right. Tap → city un-draws (reverse dash) and Georgia fades back. Esc also returns.</li>
+        <li>The un-draw reversal preserves the "I traveled and came back" feeling better than a hard cut.</li>
+      </ul>
+
+      <h4>OTHER CITIES</h4>
+      <ul>
+        <li><b>Persistent breadcrumb</b> (1/3 · ATL + 3-dot track) bottom-right. The track dots are tappable to jump cities directly.</li>
+        <li>ATH / SAV pins are <i>not</i> drawn in this view — only the active city's topology exists at this scale.</li>
+      </ul>
+
+      <h4>SUMMARY STATE</h4>
+      <ul>
+        <li><b>Its own 4th state.</b> After all three inspected, the breadcrumb track fills (3/3) and a "PROGRAM TOTAL" plate draws in — all three city glyphs ghosted behind 4.57M · 715 · 3 HUBS.</li>
+      </ul>
+
+      <div class="tags">
+        <span class="tag lb">LOAD-BEARING · Draw-in = most fiche</span>
+        <span class="tag st">STRONG · Fixed camera, simple logic</span>
+        <span class="tag ex">EXPLORATORY · Overlay covers ~30%</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MOBILE 2 -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">VAR 2 · MOBILE · DRAW-IN FULL-BLEED, CARD OVERLAY BOTTOM</div>
+
+      <div class="mob-citymap citymap--grid" style="aspect-ratio:4/5;">
+        <div class="drawin-hint" style="font-size:7px;">▱ DRAWING IN</div>
+        <div class="zoomout-stamp" style="font-size:8px; padding:4px 7px;"><span class="ic">↺</span> OUT</div>
+        <div class="citymap__cap"><b>[ CITY-GRID ]</b>ATL · GRID · TBD</div>
+
+        <!-- card overlay docked to bottom -->
+        <div class="citycard" style="position:absolute; left:8px; right:8px; bottom:8px; width:auto; z-index:7;">
+          <div class="pn"><span><b>HUB-01</b> · ATLANTA</span><span class="num">01/03</span></div>
+          <h5 style="font-size:14px;">Metro hub · anchor sites</h5>
+          <div class="stats">
+            <div><div class="v">2.41<span class="u">M</span></div><div class="l">Engage</div></div>
+            <div><div class="v">452</div><div class="l">Vax</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>VAR 2 · MOBILE LOGIC</h4>
+      <p><b>Draw-in works beautifully on mobile</b> — the stroke-by-stroke plot is a small-screen-friendly moment that doesn't depend on viewport width. City fills the frame; card overlays the bottom third as a docked callout.</p>
+      <p><b>Gesture.</b> Tap to zoom/draw-in. The un-draw reversal on "↺ OUT" is identical to desktop, just full-bleed.</p>
+      <p><b>Card overlay vs. below:</b> overlay chosen for mobile too — keeps the city visible as context. The card sits low so the upper topology + breadcrumb stay readable.</p>
+      <p><b>Return</b> stamp shrinks to "↺ OUT" top-right; always reachable by thumb.</p>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       VARIATION 3 · CITY-TAB STACK
+       ========================================================================= -->
+  <section class="brk">
+    <div class="l">
+      <span class="arr">↓</span>
+      <span class="h">Variation 3 · city-tab stack · a tab strip drives zoom, return &amp; summary</span>
+    </div>
+    <div class="r">
+      <span class="mono">FIG. 03-A · DELIVERY 3 HUBS · SEQUENCED</span><br/>
+      <span class="mono fig">SR-03 · VAR 3 · TAB-STACK</span>
+    </div>
+  </section>
+
+  <div class="var-banner sr03">
+    <span class="vlabel">VAR 3 · CITY-TAB STACK</span>
+    <span class="vdesc">A persistent GA · ATL · ATH · SAV · PROGRAM tab strip. Selecting a city hard-cuts (crossfade) to its band on top with the card docked below. Tabs are nav, return, and summary in one register.</span>
+    <span class="vactive" style="text-transform:none; font-family:var(--sans);">Zoom · <b style="color:var(--teal);">cut + fade</b></span>
+    <span class="vactive">CARD · <b>BELOW</b></span>
+  </div>
+
+  <div class="sketch">
+    <div class="sketch__art">
+      <div class="art-stamp">SHEET 3 · 1 : 1</div>
+
+      <div class="product-break">
+        <span><span class="arr">↓</span>GEORGIA DELIVERY FOOTPRINT · TAP TO INSPECT EACH HUB</span>
+        <span class="meta">FIG. 03-A · DELIVERY · 3 HUBS · <b>SEQUENCED</b></span>
+      </div>
+
+      <div class="state-pair">
+
+        <!-- DEFAULT -->
+        <div class="state-frame">
+          <span class="state-frame__tab"><span class="n">STATE 1 ·</span> DEFAULT · GA TAB</span>
+          <div class="city-tabs">
+            <div class="tab active">GA<span class="n">MAP</span></div>
+            <div class="tab">ATL<span class="n">01</span></div>
+            <div class="tab">ATH<span class="n">02</span></div>
+            <div class="tab">SAV<span class="n">03</span></div>
+            <div class="tab sum">PROG<span class="n">TOT</span></div>
+          </div>
+          <div class="map" style="aspect-ratio:16/10; border-top:none;">
+            <div class="map-stamp tl">FIG. 03</div>
+            <div class="compass"><span class="n">N</span></div>
+            <div class="scalebar"><span>0</span><span class="ruler"></span><span>100 MI</span></div>
+            <div class="pin" style="left:30%; top:42%;"><div class="dot"></div><div class="lbl"><b>ATL</b></div></div>
+            <div class="pin" style="left:43%; top:38%;"><div class="dot"></div><div class="lbl"><b>ATH</b></div></div>
+            <div class="pin" style="left:78%; top:78%;"><div class="dot"></div><div class="lbl"><b>SAV</b></div></div>
+          </div>
+        </div>
+
+        <div class="transition">
+          <span class="glyph">⊡</span>
+          <span class="word">TAB ATL · <b>CUT + FADE</b></span>
+          <span class="glyph">→</span>
+        </div>
+
+        <!-- ACTIVE · ATL -->
+        <div class="state-frame">
+          <span class="state-frame__tab active"><span class="n">STATE 2 ·</span> ACTIVE · ATL TAB</span>
+
+          <div class="stack">
+            <div class="city-tabs">
+              <div class="tab">GA<span class="n">MAP</span></div>
+              <div class="tab active">ATL<span class="n">01</span></div>
+              <div class="tab">ATH<span class="n">02</span></div>
+              <div class="tab">SAV<span class="n">03</span></div>
+              <div class="tab sum">PROG<span class="n">TOT</span></div>
+            </div>
+
+            <div class="citymap citymap--grid">
+              <div class="map-stamp br">FIG. 03-B</div>
+              <div class="scalebar"><span>0</span><span class="ruler"></span><span>10 MI</span></div>
+              <div class="citymap__cap"><b>[ CITY-GRID PLACEHOLDER ]</b>STYLIZED TOPOLOGY · PROD SVG TBD · ATL</div>
+            </div>
+
+            <div class="citycard">
+              <div class="copy">
+                <div class="pn"><span><b>HUB-01</b> · ATLANTA</span><span class="num">01 / 03</span></div>
+                <h5>Metro hub · anchor partner sites</h5>
+                <div class="frame">Reach &amp; depth</div>
+                <p>Anchor partner sites across metro Atlanta carried the bulk of program awareness. The hub paired large-venue activation with neighborhood-level partner clinics.</p>
+              </div>
+              <div class="stats">
+                <div><div class="v">2.41<span class="u">M</span></div><div class="l">Engagements</div></div>
+                <div><div class="v">452</div><div class="l">Vaccinations</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <aside class="sketch__notes">
+      <h4>VAR 3 · ZOOM MECHANIC</h4>
+      <div class="zoomspec">
+        <div class="r"><span class="k">MOTION</span><span class="v"><b>Hard cut + crossfade.</b> Tab selection crossfades the band content (Georgia → city) over ~180ms. Fast, no camera travel.</span></div>
+        <div class="r"><span class="k">TIMING</span><span class="v">~180ms crossfade · single-fire. The quickest of the three — feels like switching a sheet, not flying.</span></div>
+        <div class="r"><span class="k">CAMERA</span><span class="v"><b>None.</b> No zoom illusion — the band simply <em>becomes</em> the city. Most "UI", least "cartographic".</span></div>
+      </div>
+
+      <h4>CARD PLACEMENT</h4>
+      <ul>
+        <li><b>Below</b> the city band, two-column (copy ‖ stats). Consistent for all cities.</li>
+        <li>City band is a wide letterbox (16:6) so the card below always has room — no vertical fight.</li>
+      </ul>
+
+      <h4>RETURN</h4>
+      <ul>
+        <li><b>The "GA" tab is the return.</b> Always present, leftmost. Tap → crossfade back to the Georgia map. Return is never more than one tap away.</li>
+        <li>No travel metaphor — this is the trade-off. You switch sheets rather than fly home.</li>
+      </ul>
+
+      <h4>OTHER CITIES</h4>
+      <ul>
+        <li><b>Always visible as tabs.</b> ATH / SAV are one tap away at all times — the strongest other-cities affordance of the three.</li>
+        <li>Sequence reads left-to-right in the tab order (GA · 01 · 02 · 03 · TOT).</li>
+      </ul>
+
+      <h4>SUMMARY STATE</h4>
+      <ul>
+        <li><b>The "PROG / TOT" tab</b> (rev-tinted) holds the program total. Always reachable — a peer state to the cities. 4.57M · 715 · 3 HUBS render in the band + card.</li>
+      </ul>
+
+      <div class="tags">
+        <span class="tag lb">LOAD-BEARING · Tabs unify nav+return+sum</span>
+        <span class="tag st">STRONG · Other cities always 1 tap</span>
+        <span class="tag ex">EXPLORATORY · Least "zoom", most "UI"</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- MOBILE 3 -->
+  <div class="mobile-row">
+    <div class="mobile-frame">
+      <div class="mob-title">VAR 3 · MOBILE · TAB STRIP + CITY + CARD STACK</div>
+
+      <div class="mob-tabs">
+        <div class="t">GA</div>
+        <div class="t active">ATL</div>
+        <div class="t">ATH</div>
+        <div class="t">SAV</div>
+        <div class="t sum">TOT</div>
+      </div>
+      <div class="mob-citymap citymap--grid" style="aspect-ratio:5/3; border-top:none;">
+        <div class="citymap__cap"><b>[ CITY-GRID ]</b>ATL · TBD</div>
+        <div class="scalebar"><span>0</span><span class="ruler" style="width:38px;"></span><span>10MI</span></div>
+      </div>
+
+      <div class="citycard" style="width:auto; border-top:none;">
+        <div class="pn"><span><b>HUB-01</b> · ATLANTA</span><span class="num">01/03</span></div>
+        <h5 style="font-size:14px;">Metro hub · anchor sites</h5>
+        <p style="font-size:11px;">Anchor partner sites carried the bulk of program awareness.</p>
+        <div class="stats">
+          <div><div class="v">2.41<span class="u">M</span></div><div class="l">Engage</div></div>
+          <div><div class="v">452</div><div class="l">Vax</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-notes">
+      <h4>VAR 3 · MOBILE LOGIC</h4>
+      <p><b>The tab strip translates to mobile almost unchanged</b> — 5 narrow tabs across the top. This is the variation that survives 380px most gracefully because it never relied on a zoom illusion or a split.</p>
+      <p><b>Stack:</b> tabs → city letterbox → card, all vertical. No layout exception from desktop; just narrower.</p>
+      <p><b>Gesture.</b> Tap a tab. Optionally swipe the city band left/right to advance tabs. No pinch.</p>
+      <p><b>Return + summary</b> are both tabs (GA, TOT) — same one-tap reach as desktop. Strongest mobile story of the three.</p>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       WRITTEN ANALYSIS
+       ========================================================================= -->
+  <section class="analysis">
+    <h2>↘ Written Analysis · SR-03</h2>
+
+    <h3><span class="pn">§ 1 · COMPOSITION READ</span>Which lands hardest, where each strains</h3>
+    <p><b>VAR 2 (draw-in overlay)</b> lands hardest <i>as fiche</i>. The schematic-drawing-itself zoom is the only one of the three that's native to this page's visual grammar — it's a technical illustration plotting itself, not a camera move. The strain is the overlay: the card covers ~30% of the city, the same occlusion problem SR-02's balloon had, only partly excused by the city being stylized.</p>
+    <p><b>VAR 1 (split-zoom)</b> lands hardest <i>as spatial narrative</i>. The camera-pan into the pin genuinely sells "we traveled into Atlanta", and the split means the card never fights the map. Its strain is execution: per-city camera framing (ATL lands NW, SAV lands SE) is real logic to build and tune, and the split layout is the most fragile to port.</p>
+    <p><b>VAR 3 (tab-stack)</b> lands hardest <i>as a usable interface</i>. Everything is one tap; nothing is ever hidden; it survives mobile untouched. But it barely honors the locked direction — there's no zoom illusion, the band just becomes the city. It's the safe choice that quietly abandons the concept's romance.</p>
+
+    <h3><span class="pn">§ 2 · ZOOM MECHANICS PER VARIATION</span>What each animation actually looks like</h3>
+    <p><b>VAR 1 · camera-pan (~420ms).</b> Georgia scales up centered on the tapped pin until the pin is viewport-center at ~6× zoom; the right 44% then wipes to plate and the card slides in from the right edge. Feels like a map app flying in — the most "UI animation" of the spatial options, but grounded by landing on real stylized topology.</p>
+    <p><b>VAR 2 · draw-in (~600ms + 150ms).</b> Georgia fades to ~8% opacity while the city grid strokes in via dash-offset (minor streets first, arterials last), then the card fades up. This is the most "fiche" — it looks like a plotter drawing a sheet. <em>This is the one that matches visual-grammar.md's "schematic redrawing itself" principle.</em></p>
+    <p><b>VAR 3 · cut + crossfade (~180ms).</b> No travel. The band's contents crossfade from Georgia to the city. Reads as switching a drawing sheet on a light table — fast and legible, but there's no zoom and therefore no sense of scale change. Most "UI", least "cartographic".</p>
+
+    <h3><span class="pn">§ 3 · CARD PLACEMENT COMPARISON</span>Beside · overlaid · below</h3>
+    <div class="quad">
+      <div class="qbox">
+        <div class="lbl">BESIDE (VAR 1)</div>
+        <p>Never occludes the city. Needs the most horizontal room — only works because the split is the freed space. Breaks at mobile (falls back to below). Best desktop read.</p>
+      </div>
+      <div class="qbox">
+        <div class="lbl">OVERLAID (VAR 2)</div>
+        <p>Covers ~30% of the city. Excused by stylized topology (no precise geography lost). Works identically desktop + mobile. Most compact, slight occlusion cost.</p>
+      </div>
+      <div class="qbox">
+        <div class="lbl">BELOW (VAR 3)</div>
+        <p>Zero occlusion, infinite card room. Costs vertical space — city compresses to a letterbox band. Most consistent across breakpoints, least "immersive".</p>
+      </div>
+    </div>
+
+    <h3><span class="pn">§ 4 · RISKS PER VARIATION</span>Execution &amp; Cursor-port</h3>
+    <p><b>VAR 1.</b> Per-city camera framing must be authored (each pin's zoom target + final crop). The split transition (map scaling while a panel wipes in) is the hardest single animation to get smooth, and iOS Safari can stutter on simultaneous transform + layout change. <i>Most dependent on the production city SVGs landing well</i> — a camera that flies into a weak SVG exposes it.</p>
+    <p><b>VAR 2.</b> Draw-in depends entirely on the city SVGs being <i>strokeable</i> (clean paths with usable lengths for dash animation). If the prod SVGs are filled shapes rather than strokes, the signature mechanic collapses to a fade. <b>Confirm SVG construction before committing.</b> Otherwise lowest-risk logic (fixed camera).</p>
+    <p><b>VAR 3.</b> Lowest risk overall — crossfading tab content is routine, no camera math, no per-city logic. The risk is conceptual, not technical: it may read as "we didn't really build the zoom".</p>
+
+    <h3><span class="pn">§ 5 · RETURN-INTERACTION COMPARISON</span>Which return feels most natural</h3>
+    <p><b>VAR 2's un-draw reversal</b> feels most natural <i>to the concept</i> — the city un-plots and Georgia fades back, preserving the "traveled and returned" loop the brief asks for. <b>VAR 1's "← GEORGIA" + zoom-out</b> is close and more conventional (it's a literal zoom-out). <b>VAR 3's "GA" tab</b> is the most reliable and least romantic — you don't return, you just switch back. For "sense of having traveled", VAR 2 &gt; VAR 1 &gt; VAR 3. For "never get stranded", VAR 3 &gt; VAR 1 &gt; VAR 2.</p>
+
+    <h3><span class="pn">§ 6 · END-OF-PROGRAM SUMMARY STATE</span>Where the 4.57M total lives</h3>
+    <p><b>VAR 1</b> parks it in Georgia (default) state as a "PROGRAM · 4.57M" badge — you must zoom out to see the total, which reinforces "the whole is seen at state level". <b>VAR 2</b> gives it its own 4th state that draws in after 3/3 cities are inspected — the most ceremonial, rewards completion. <b>VAR 3</b> makes it a peer tab (PROG/TOT) — always reachable, never ceremonial. Cinematic-to-quiet runs VAR 2 → VAR 1 → VAR 3, same axis as everything else here.</p>
+
+    <h3><span class="pn">§ 7 · OPEN QUESTIONS FOR MATT</span>Resolve before committing</h3>
+    <ul>
+      <li><b>Are the production city SVGs strokes or fills?</b> This single fact decides whether VAR 2's draw-in is even possible. If fills, VAR 2 degrades to a fade and loses its whole reason for being.</li>
+      <li><b>Is "sense of travel" worth the execution cost?</b> VAR 1 and VAR 2 buy romance with real animation complexity. VAR 3 abandons it for reliability. Which matters more for this audience?</li>
+      <li><b>Does the zoom concept actually beat SR-02's bottom-rail?</b> VAR 3 is honest enough to admit it's close to a tab UI. If we land on VAR 3, we should ask whether the zoom premise earned its round.</li>
+      <li><b>How literal should city stylization be?</b> Grid for ATL, coastline for SAV, arterials for ATH — enough to feel like the place, or does that invite "this doesn't look like Athens" nitpicks? A uniform abstract treatment is safer but loses specificity.</li>
+      <li><b>One mechanic for all three cities, or per-city?</b> Mixing (e.g. draw-in for coastal SAV, split for metro ATL) would fragment the register — recommend committing to one.</li>
+      <li><b>Mobile parity.</b> VAR 3 is the only one that's truly identical desktop↔mobile. If mobile is a primary surface, that's a strong thumb on the scale toward VAR 3 — is it?</li>
+    </ul>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div><b>SR-03</b> · EY ZOOM-INTO-CITY</div>
+    <div>SCALE · 1 : 1</div>
+    <div>DRAWN · M. STANGL</div>
+    <div>APPROVED · ─</div>
+    <div>DATE · 2026 · 05</div>
+    <div>REV · v2026.05 · LO-FI</div>
+  </footer>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+/* Home v2 prototype styles — bundled for Next.js import on Home route only */
+@import "./tokens.css";
+@import "./grammar.css";
+@import "../tier-a/fiche-nav.css";
+@import "./home.css";
+@import "./v2.css";
+
+/* Hide global chrome when v2 home shell is mounted (prototype brings its own nav + sheet footer) */
+body:has(.home-v2-root) .site-primary-nav,
+body:has(.home-v2-root) .site-primary-footer {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-v2-root .ticker__track {
+    animation: none !important;
+  }
+}

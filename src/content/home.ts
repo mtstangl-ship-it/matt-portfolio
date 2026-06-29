@@ -1,84 +1,131 @@
 export const hero = {
-  tagline: "From fragmentation to flow",
-  headlines: [
-    "Journey architecture that reduces effort, eliminates manual work, and improves end-to-end resolution.",
-    "I design and operationalize service systems that flow — from cross-channel support to closed-loop insight.",
-    "AI-native transformation leader. Journey design. Service modernization. Cross-functional execution.",
-  ] as const,
-  activeHeadlineIndex: 0, // 0, 1, or 2 — pick your preferred headline
+  /**
+   * Mono kicker above the headline. Per brief #1, this surfaces role +
+   * seniority so the hero answers "what is this person" in a single line.
+   */
+  tagline: "Product & Service Design Leader · IC to director-level, enterprise transformation",
+  headline: "I rebuild fragmented enterprise experience into one operating model that ships.",
   subhead:
-    "Journey architecture, service modernization, and cross-functional execution — reducing effort, eliminating manual work, and improving end-to-end resolution for enterprises.",
-  proofStrip: ["Autodesk", "Wipro", "EY", "Stanford AI Certified"] as const,
+    "For enterprises where the journey has splintered across teams, channels, and systems.",
+  /**
+   * Availability + contact row under the subhead. Brief #6 + #9 require a
+   * visible LinkedIn and "Get in touch" surface in or immediately below the
+   * hero (footer-only was the prior bug).
+   */
+  availability: "Available for senior design leadership roles, especially in healthcare.",
+  contactLinks: [
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/mattstangl",
+      external: true,
+    },
+    {
+      label: "Get in touch",
+      href: "/contact",
+      external: false,
+    },
+  ] as const,
+  proofStrip: [
+    "Autodesk",
+    "Wipro",
+    "EY",
+    "Discovery Communications",
+    "Stanford AI Certified",
+  ] as const,
 };
 
-export const brandThesis = {
-  headline: "Experience isn't one moment. It's the whole journey.",
-  body: [
-    "Most organizations fix touchpoints in isolation. The result: fragmented experiences, frustrated customers, and wasted effort.",
-    "I work at the system level — mapping journeys, aligning teams, and designing services that flow. The outcome: experiences that feel intentional, teams that move in sync, and outcomes that compound.",
-  ],
+export const clientTicker = [
+  "Estée Lauder Companies",
+  "University of Georgia Athletics",
+  "Humana",
+  "Citi",
+  "Travel Wisconsin",
+  "Molson Coors",
+] as const;
+
+export const problemLedger = {
+  solved: {
+    eyebrow: "PROBLEMS SOLVED",
+    items: [
+      "Turned Autodesk's post-purchase support into a $50M revenue motion",
+      "Unified Wipro's six ITIL towers into one operating model for Estée Lauder",
+      "De-politicized vaccination engagement across Georgia — CDC national best practice",
+      "Cut MTTR by 31% — 13K annual lockouts eliminated",
+      "Built a global CX practice from zero at an enterprise consultancy",
+      "Made synthetic users a research method with documented QA pipeline",
+    ],
+  },
+  intent: {
+    eyebrow: "PROBLEMS I WANT TO SOLVE",
+    items: [
+      "Scaling healthcare access for populations the system was never built to serve",
+      "Friction between patients, providers, and insurers that nobody owns by design",
+      "Stigmatized care treated as a clinical experience, not a moral one",
+      "Experience design as an operating model, not a team",
+      "Service tiers designed around what customers actually value, not what we can charge for",
+      "AI strategy that raises the ceiling of what teams can do, not just the floor",
+    ],
+  },
+  dimensionLabel: "TRACK RECORD → INTENT",
 };
 
 export const transformationDashboard = {
-  headline: "Transformation impact",
-  subhead:
-    "Outcomes from engagements across Autodesk, Wipro, and EY — journey-led operating models, service design, and operational transformation.",
-  cta: "View full dashboard",
-  ctaHref: "/work",
+  headline: "Three transformations. In numbers.",
+  subhead: "Autodesk · Wipro · EY — what shipped, what moved.",
+  cta: "View impact",
+  ctaHref: "/impact",
   companies: [
     {
       name: "Autodesk",
-      headline: "Cross-channel service & support transformation",
+      headline: "Built a Net-New Service & CX Practice That Drove New Revenue",
       narrative:
-        "Led design and operationalization of cross-channel customer servicing and support systems. Defined scalable journey models, platform requirements, and workflow logic. Drove CX strategy across Product, Engineering, Support, and Customer Success. Operationalized a 3–5 year experience vision and launched 3-tiered post-purchase service packages.",
+        "Connected Design, Product, Support, and Engineering through journey architecture and experience design. Delivered post-purchase service innovation, new offering models, and a 3–5 year CX vision that shaped Sales and Success modernization.",
       kpis: [
-        { value: "+27%", label: "RR in first quarter" },
-        { value: "10M+", label: "YOY AOV" },
-        { value: "3-tier", label: "post-purchase packages" },
-        { value: "5 yr", label: "experience vision" },
+        { value: "+27%", label: "RR in Q1 post launch of new offering model" },
+        { value: "$50M+", label: "incremental AOV · 12-mo post-launch window · prior-year AOV flat" },
+        { value: "0→1→2", label: "experience management community of practice" },
+        { value: "106%", label: "NRR path achieved via customer relationship design" },
       ],
       capabilityTags: [
-        "Journey Models",
-        "Platform Requirements",
-        "CX Strategy",
-        "Operating Models",
-        "Closed-Loop Insight",
+        "Service Design",
+        "Customer Co Creation",
+        "Research Leadership",
+        "Prototype Builds",
       ],
     },
     {
       name: "Wipro",
-      headline: "CX practice build & eight-figure renewal",
+      headline: "Led CX & EX Transformation Across Onboarding and Support Operations",
       narrative:
-        "Built a CX practice from the ground up. Led transformation across six operating towers and partnered with C-suite stakeholders on financial and CX/EX outcomes. Delivered beyond target on customer experience improvement.",
+        "Led an EX transformation effort across onboarding and support operations, aligning leaders across product, IT, and operations through executive workshops, journey architecture, and system-level experience design. Identified and reduced friction across service workflows while improving operational performance and employee outcomes.",
       kpis: [
-        { value: "15%+", label: "NPS improvement" },
-        { value: "8-figure", label: "client renewal" },
-        { value: "6", label: "operating towers" },
-        { value: "C-suite", label: "stakeholder partnership" },
+        { value: "31%", label: "MTTR reduction across support operations" },
+        { value: "30+", label: "CX & EX outcomes delivered across onboarding and support" },
+        { value: "13%+", label: "NPS improvement across EX" },
+        { value: "16k", label: "annual reduction in lockout cases QoQ" },
       ],
       capabilityTags: [
-        "Practice Build",
-        "Transformation",
-        "Operating Towers",
-        "CX/EX Outcomes",
+        "CX Transformation",
+        "Service Design",
+        "Operational Alignment",
+        "Executive Facilitation",
       ],
     },
     {
       name: "EY",
-      headline: "Experience strategy & large-scale transformation",
+      headline: "Drove COVID-19 Vaccination Engagement Across the Southeast",
       narrative:
-        "Led experience strategy and service design initiatives focused on large-scale operational transformation across public and private sector clients.",
+        "Led public health experience strategy for Georgia Department of Public Health and multi-state initiatives, designing engagement models that increased vaccine uptake across diverse populations. Aligned state agencies, healthcare providers, and partner organizations to reduce barriers to access, improve navigation into care, and translate outreach into real vaccinations. Delivered measurable outcomes across patient, provider, and system levels in high-pressure public health conditions.",
       kpis: [
-        { value: "Public", label: "sector experience" },
-        { value: "Private", label: "sector experience" },
-        { value: "Large-scale", label: "operational transformation" },
-        { value: "Service Design", label: "& strategy" },
+        { value: "24+", label: "statewide healthcare & brand partnerships" },
+        { value: "4.57M → 715", label: "engagements (awareness layer) to vaccinations (activation layer) — two stages, one program. The gap is the design, not a conversion failure." },
+        { value: "8-figure", label: "renewal driven by program performance" },
       ],
       capabilityTags: [
-        "Experience Strategy",
-        "Service Design",
-        "Operational Transformation",
-        "Public & Private Sector",
+        "Public Health Strategy",
+        "Healthcare Experience",
+        "Patient Engagement",
+        "Ecosystem Orchestration",
       ],
     },
   ] as const,
@@ -88,77 +135,23 @@ export const stanfordAI = {
   badge: "Stanford",
   title: "AI for Product Strategy",
   credential: "Professional Certificate",
-  description:
-    "Formal certification in AI applications for product and experience strategy — building AI literacy into how I advise on transformation.",
+  description: "AI for product and experience strategy.",
+  certImage: "/images/certifications/stanford-certificate.png",
   cta: "View credential",
   ctaHref: "https://credentials.stanford.edu",
   ctaExternal: true,
 };
 
-export const featuredThinking = {
-  headline: "Thinking",
-  subhead: "Curated insights from LinkedIn — on experience design, transformation, and leadership.",
-  cta: "Read more",
-  ctaHref: "/thinking",
-  items: [
-    {
-      quote:
-        "The best service design is invisible. When everything flows, customers don't notice the design — they just get what they need.",
-      topic: "Service design",
-      date: "Nov 2024",
-    },
-    {
-      quote:
-        "Transformation fails when we optimize for efficiency before we understand the journey. Map first. Prescribe second.",
-      topic: "Transformation",
-      date: "Oct 2024",
-    },
-    {
-      quote:
-        "AI won't replace experience strategy — but leaders who understand AI will replace those who don't.",
-      topic: "AI & Strategy",
-      date: "Sep 2024",
-    },
-  ] as const,
-};
-
-export const featuredCaseStudies = {
-  headline: "Selected work",
-  subhead: "Deep dives into service and experience transformations.",
-  cta: "View all case studies",
-  ctaHref: "/work",
-  items: [
-    {
-      slug: "financial-services-omni",
-      client: "Financial Services",
-      title: "Omni-channel redesign",
-      description:
-        "Unifying fragmented touchpoints into a single, coherent customer journey.",
-      category: "Service Design",
-    },
-    {
-      slug: "healthcare-care-pathway",
-      client: "Healthcare",
-      title: "Care pathway transformation",
-      description:
-        "Redesigning the patient journey from first contact through follow-up.",
-      category: "Journey Design",
-    },
-    {
-      slug: "retail-experience-strategy",
-      client: "Retail",
-      title: "Experience strategy",
-      description:
-        "Aligning digital and physical experiences around a shared vision.",
-      category: "Experience Strategy",
-    },
-  ] as const,
-};
+export const caseStudiesHomeSection = {
+  headline: "Case Studies",
+  subhead: "How I turn ideas into systems, and systems into results.",
+  cta: "View all",
+  ctaHref: "/case-studies",
+} as const;
 
 export const contactCta = {
-  headline: "Let's talk transformation",
-  subhead:
-    "Whether you're navigating a complex journey redesign or rethinking how your organization delivers value — I'd like to hear from you.",
+  headline: "Let's talk.",
+  subhead: "Senior design leadership roles. Journey redesign. Experience strategy. Operational transformation. Healthcare preferred.",
   cta: "Get in touch",
   ctaHref: "/contact",
 };

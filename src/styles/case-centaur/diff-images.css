@@ -1,0 +1,111 @@
+/* Deployment Diff — full-bleed layered reveal (v1 base, v2 clipped by handle) */
+.case-centaur-portfolio .diff__pane {
+  padding: 0;
+  display: block;
+}
+
+.case-centaur-portfolio .diff__pane--v1,
+.case-centaur-portfolio .diff__pane--v2 {
+  justify-content: initial;
+  align-items: initial;
+}
+
+.case-centaur-portfolio .diff__pane-card,
+.case-centaur-portfolio .diff__pane--v1 .diff__pane-card,
+.case-centaur-portfolio .diff__pane--v2 .diff__pane-card {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  max-width: none;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  min-height: 0;
+  aspect-ratio: unset;
+  overflow: hidden;
+}
+
+.case-centaur-portfolio .diff__pane--v1 .diff__pane-card::before,
+.case-centaur-portfolio .diff__pane--v2 .diff__pane-card::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center top;
+}
+
+.case-centaur-portfolio .diff__pane--v1 .diff__pane-card::before {
+  background-image: url("/case-studies/centaur/diff/home-hero-v1.png");
+  /* Crop dead band above capture so frame reads flush like v2 */
+  background-position: center 22%;
+}
+
+.case-centaur-portfolio .diff__pane--v2 .diff__pane-card::before {
+  background-image: url("/case-studies/centaur/diff/home-hero-v2.png");
+  background-position: center 18%;
+}
+
+.case-centaur-portfolio .diff__pane--v1 .diff__pane-label,
+.case-centaur-portfolio .diff__pane--v1 .diff__pane-name,
+.case-centaur-portfolio .diff__pane--v1 .diff__pane-caption,
+.case-centaur-portfolio .diff__pane--v1 .diff__pane-tag,
+.case-centaur-portfolio .diff__pane--v2 .diff__pane-label,
+.case-centaur-portfolio .diff__pane--v2 .diff__pane-name,
+.case-centaur-portfolio .diff__pane--v2 .diff__pane-caption,
+.case-centaur-portfolio .diff__pane--v2 .diff__pane-tag {
+  display: none;
+}
+
+.case-centaur-portfolio .diff__pane-stamp {
+  top: 0.65rem;
+  z-index: 4;
+}
+
+.case-centaur-portfolio .diff__pane--v1 .diff__pane-stamp {
+  left: 0.65rem;
+}
+
+.case-centaur-portfolio .diff__pane--v2 .diff__pane-stamp {
+  right: 0.65rem;
+  left: auto;
+}
+
+@media (max-width: 768px) {
+  .case-centaur-portfolio .diff__viewport {
+    aspect-ratio: auto;
+    min-height: 0;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .case-centaur-portfolio .diff__pane {
+    position: relative;
+    inset: auto;
+    flex: 0 0 auto;
+    min-height: 220px;
+    padding: 0.75rem;
+  }
+  .case-centaur-portfolio .diff__pane--v2 {
+    clip-path: none;
+  }
+  .case-centaur-portfolio .diff__handle,
+  .case-centaur-portfolio .diff__markers {
+    display: none;
+  }
+  .case-centaur-portfolio .diff__pane-card {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: min(52vw, 280px);
+  }
+}
+
+@media (max-width: 720px) {
+  .case-centaur-portfolio .diff__pane-card {
+    width: 100%;
+    max-width: none;
+  }
+}

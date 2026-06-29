@@ -5,6 +5,9 @@ interface SectionProps {
   container?: boolean;
 }
 
+/** Shared grid: max-w-6xl, responsive horizontal padding. Use for all section content. */
+const containerClass = "mx-auto w-full max-w-6xl px-4 sm:px-6";
+
 export function Section({
   children,
   className = "",
@@ -12,9 +15,7 @@ export function Section({
   container = true,
 }: SectionProps) {
   return (
-    <Component
-      className={`${container ? "mx-auto max-w-6xl px-6" : ""} ${className}`.trim()}
-    >
+    <Component className={`${container ? containerClass : ""} ${className}`.trim()}>
       {children}
     </Component>
   );

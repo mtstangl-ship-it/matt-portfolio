@@ -1,0 +1,46 @@
+/* ============================================================
+   Site-wide Typography Tokens
+   Applied to every page. Color and layout are NOT touched here.
+   ============================================================ */
+
+:root {
+  /* Font stacks — values come from next/font variables set in layout.tsx */
+  --sans: var(--font-inter-tight), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  /* Type scale */
+  --fs-label: 11px;
+  --fs-meta:  12px;
+  --fs-body:  15px;
+  --fs-h3:    18px;
+  --fs-h2:    clamp(26px, 3.4vw, 36px);
+  --fs-h1:    clamp(40px, 6vw, 64px);
+  --fs-hero:  clamp(56px, 11vw, 132px);
+}
+
+html, body {
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--sans);
+  font-weight: 500;
+  margin: 0;
+}
+h1 { font-size: var(--fs-h1); letter-spacing: -0.02em;  line-height: 1.02; }
+h2 { font-size: var(--fs-h2); letter-spacing: -0.015em; line-height: 1.15; }
+h3 { font-size: var(--fs-h3); letter-spacing: -0.005em; }
+
+p { text-wrap: pretty; }
+
+.mono,
+[data-mono] {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
