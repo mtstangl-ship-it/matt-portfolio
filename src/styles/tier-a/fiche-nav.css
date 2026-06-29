@@ -153,6 +153,14 @@
   }
 }
 
+/* Anchored sections · clear fixed fiche nav on in-page jumps */
+.home-v2-root [id],
+#about-v3 [id],
+.tier-a-case-root [id],
+.impact-shell [id] {
+  scroll-margin-top: var(--fiche-nav-clearance);
+}
+
 /* Desktop: never show hamburger (defense vs cascade order / Tailwind). */
 @media (min-width: 1025px) {
   .nav__menu {
@@ -170,23 +178,23 @@
   }
 }
 
-/* Drawer — Home v2 (hamburger breakpoint) */
+/* Mobile drawer — wrapper-independent (FicheNav is the only .nav__list on site) */
 @media (max-width: 1024px) {
-  body.nav-open .home-v2-root .nav__list,
-  body.nav-open .home-v2-root .nav__cta {
+  body.nav-open .nav__list,
+  body.nav-open .nav__cta {
     display: flex !important;
     position: fixed;
     top: 70px;
     left: 14px;
     right: 14px;
-    background: var(--bg-2);
+    background: var(--bg-2, var(--bg-soft, #0d1413));
     border: 1px solid var(--ink-line);
     flex-direction: column;
     padding: 1rem 1.25rem;
     gap: 1rem;
     z-index: 99;
   }
-  body.nav-open .home-v2-root .nav__cta {
+  body.nav-open .nav__cta {
     top: auto;
     bottom: 90px;
     justify-content: center;
@@ -194,50 +202,11 @@
   }
 }
 
-/* Drawer — About v3 (replaces old .nav__panel sheet) */
-@media (max-width: 1024px) {
-  body.nav-open #about-v3 .nav__list,
-  body.nav-open #about-v3 .nav__cta {
-    display: flex !important;
-    position: fixed;
-    top: 70px;
-    left: 14px;
-    right: 14px;
-    background: var(--bg-2);
-    border: 1px solid var(--ink-line);
-    flex-direction: column;
-    padding: 1rem 1.25rem;
-    gap: 1rem;
-    z-index: 99;
-  }
-  body.nav-open #about-v3 .nav__cta {
-    top: auto;
-    bottom: 90px;
-    justify-content: center;
-    padding: 1rem;
-  }
-}
-
-/* Drawer — Tier-A case shell (FicheNav lives inside .tier-a-case-root) */
-@media (max-width: 1024px) {
-  body.nav-open .tier-a-case-root .nav__list,
-  body.nav-open .tier-a-case-root .nav__cta {
-    display: flex !important;
-    position: fixed;
-    top: 70px;
-    left: 14px;
-    right: 14px;
-    background: var(--bg-2);
-    border: 1px solid var(--ink-line);
-    flex-direction: column;
-    padding: 1rem 1.25rem;
-    gap: 1rem;
-    z-index: 99;
-  }
-  body.nav-open .tier-a-case-root .nav__cta {
-    top: auto;
-    bottom: 90px;
-    justify-content: center;
-    padding: 1rem;
+@media (max-width: 768px) {
+  body.nav-open .nav__list a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 10px;
   }
 }

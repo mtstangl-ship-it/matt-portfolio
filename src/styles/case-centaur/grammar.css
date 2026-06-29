@@ -211,6 +211,22 @@
   background: currentColor;
 }
 .tier-a-case-root .xhair::before { left: 0; right: 0; top: 50%; height: 1px; }
+@media (max-width: 768px) {
+  .tier-a-case-root .fig-stamp,
+  .tier-a-case-root .ref-code,
+  .tier-a-case-root .hero__meta-cell dt {
+    font-size: max(11px, var(--t-mono, 11px));
+  }
+  .tier-a-case-root .handoff-pair__lbl {
+    font-size: max(11px, 0.6875rem);
+  }
+  .tier-a-case-root .handoff__alt a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 10px;
+  }
+}
 .tier-a-case-root .xhair::after  { top: 0; bottom: 0; left: 50%; width: 1px; }
 .tier-a-case-root .xhair-tl { top: -6px; left: -6px; }
 .tier-a-case-root .xhair-tr { top: -6px; right: -6px; }

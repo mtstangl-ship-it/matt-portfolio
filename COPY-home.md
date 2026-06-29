@@ -38,7 +38,7 @@ For enterprises where the journey has splintered across operational silos.
 
 **Availability line** (below subhead)
 ```
-Available for senior design leadership roles, especially in healthcare.
+Available for senior design leadership roles.
 ```
 
 **Contact links** (rendered below availability)
@@ -124,10 +124,10 @@ PROBLEMS I WANT TO SOLVE
 **Rotating items** (cycle independently, offset timing from left column)
 ```
 01 · Scaling healthcare access for populations the system was never built to serve
-02 · Friction between patients, providers, and insurers that nobody owns by design
-03 · Stigmatized care treated as a clinical experience, not a moral one
+02 · Friction between the teams, systems, and partners that nobody owns by design
+03 · Human moments in a journey designed as transactions
 04 · Experience design as an operating model, not a team
-05 · Service tiers designed around what customers actually value — not what we can charge for
+05 · Service tiers built around what customers value, not what we can charge for
 06 · AI strategy that raises the ceiling of what teams can do, not just the floor
 ```
 
@@ -572,7 +572,7 @@ Let's talk.
 
 **Subhead**
 ```
-Senior design leadership roles. Healthcare preferred.
+Senior design leadership roles.
 ```
 
 **CTA**

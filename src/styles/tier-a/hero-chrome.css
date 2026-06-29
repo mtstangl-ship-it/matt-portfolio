@@ -226,12 +226,23 @@
 }
 
 @media (max-width: 768px) {
-  .tier-a-case-root .hero__stamp-stack {
+  .tier-a-case-root .hero__stamp-stack .hero__id-strip {
     display: none;
+  }
+  .tier-a-case-root .hero__stamp-stack .hero__fig-stamp {
+    border-radius: 3px;
+    border-bottom: 1px solid var(--ink-line);
   }
 }
 
 /* ---- Copy block — one gutter, one title size, top-anchored eyebrow ---- */
+.tier-a-case-root .hero__plate .hero__inner {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .tier-a-case-root .hero__inner {
   max-width: var(--col-wide);
   margin-left: 0;
@@ -270,10 +281,35 @@
   line-height: 1.03;
   letter-spacing: -0.025em;
   margin: 0 0 clamp(1.35rem, 3vw, 1.75rem);
-  text-wrap: balance;
   max-width: 38ch;
   color: #f4f1ea;
   text-shadow: 0 2px 10px rgba(10, 17, 16, 0.65);
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-wrap: wrap;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  /* min-height + aspect-ratio was blowing plate width past the viewport (870px @ 390). */
+  .tier-a-case-root .hero__plate {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: auto;
+    overflow-x: clip;
+  }
+
+  .tier-a-case-root .hero__h1 {
+    font-size: clamp(2rem, 8.5vw, 2.5rem);
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tier-a-case-root .hero__sub {
+    max-width: 100%;
+    width: 100%;
+    overflow-wrap: break-word;
+  }
 }
 
 .tier-a-case-root .hero__h1 em {

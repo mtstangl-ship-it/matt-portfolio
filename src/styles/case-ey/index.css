@@ -6,3 +6,10 @@
 @import "../tier-a/hero-chrome.css";
 @import "./ey-case.css";
 @import "./ey-case-layer-a-stamps.css";
+
+/* EY hero · desktop handshake crop (mobile uses shared hero-chrome center default) */
+@media (min-width: 769px) {
+  .tier-a-case-root .case-ey-portfolio .hero__bgphoto-img {
+    object-position: 50% 65%;
+  }
+}

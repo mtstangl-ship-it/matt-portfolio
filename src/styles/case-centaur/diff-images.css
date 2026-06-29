@@ -72,6 +72,37 @@
   left: auto;
 }
 
+@media (max-width: 768px) {
+  .case-centaur-portfolio .diff__viewport {
+    aspect-ratio: auto;
+    min-height: 0;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .case-centaur-portfolio .diff__pane {
+    position: relative;
+    inset: auto;
+    flex: 0 0 auto;
+    min-height: 220px;
+    padding: 0.75rem;
+  }
+  .case-centaur-portfolio .diff__pane--v2 {
+    clip-path: none;
+  }
+  .case-centaur-portfolio .diff__handle,
+  .case-centaur-portfolio .diff__markers {
+    display: none;
+  }
+  .case-centaur-portfolio .diff__pane-card {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: min(52vw, 280px);
+  }
+}
+
 @media (max-width: 720px) {
   .case-centaur-portfolio .diff__pane-card {
     width: 100%;

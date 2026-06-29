@@ -122,13 +122,13 @@ export function CompassRose() {
         <text x="80" y="10">
           CALM
         </text>
-        <text x="153" y="83" textAnchor="start">
+        <text x="136" y="83" textAnchor="end">
           TRANSL.
         </text>
         <text x="80" y="158">
           ADOPTION
         </text>
-        <text x="7" y="83" textAnchor="end">
+        <text x="24" y="83" textAnchor="start">
           CRAFT
         </text>
       </g>

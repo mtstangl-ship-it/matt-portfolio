@@ -124,6 +124,29 @@ function BandLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
+function MatrixMobileStack() {
+  return (
+    <div className="autodesk-opps-modal-stack">
+      {OPPORTUNITIES.map((opp, i) => (
+        <article className="autodesk-opps-modal-card" key={opp.idx}>
+          <OppHeader opp={opp} />
+          <div className="autodesk-opps-mobile-band">
+            <BandLabel>{DIGITAL_LABEL}</BandLabel>
+            <BulletList items={opp.digital} />
+          </div>
+          <div className="autodesk-opps-mobile-band">
+            <BandLabel>{OUTCOMES_LABEL}</BandLabel>
+            <BulletList items={opp.outcomes} />
+          </div>
+          {i < OPPORTUNITIES.length - 1 ? (
+            <hr className="autodesk-opps-modal-card-sep" aria-hidden="true" />
+          ) : null}
+        </article>
+      ))}
+    </div>
+  );
+}
+
 function MatrixGrid({ minWidth }: { minWidth?: number }) {
   return (
     <div
@@ -205,7 +228,7 @@ function MatrixModal({
       <div className="autodesk-opps-modal-frame">
         <header className="autodesk-opps-modal-bar">
           <span className="autodesk-opps-modal-k">
-            TOP 5 OPPORTUNITIES · pinch-zoom &amp; pan supported
+            TOP 5 OPPORTUNITIES · full matrix
           </span>
           <button
             type="button"
@@ -218,7 +241,12 @@ function MatrixModal({
           </button>
         </header>
         <div className="autodesk-opps-modal-scroll">
-          <MatrixGrid minWidth={1100} />
+          <div className="autodesk-opps-modal-desktop">
+            <MatrixGrid minWidth={1100} />
+          </div>
+          <div className="autodesk-opps-modal-mobile">
+            <MatrixMobileStack />
+          </div>
         </div>
       </div>
     </div>

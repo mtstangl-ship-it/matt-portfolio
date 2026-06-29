@@ -17,9 +17,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   body {
+    overflow-x: hidden;
+    max-width: 100%;
     color: rgb(var(--foreground));
     background-color: rgb(var(--background));
     /* Editorial atmosphere: layered luminous gradients with depth. */

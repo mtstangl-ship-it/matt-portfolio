@@ -5,6 +5,13 @@
    ========================================================= */
 
 /* ====================== HERO ====================== */
+@media (max-width: 768px) {
+  .home-v2-root {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+}
+
 .home-v2-root .hero {
   padding-top: clamp(7rem, 12vh, 9rem);
   padding-bottom: 0;
@@ -107,13 +114,16 @@
   line-height: 1.02;
   letter-spacing: -0.025em;
   margin: 0.6rem 0 1rem;
-  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-wrap: wrap;
 }
 .home-v2-root .hero__sub {
   color: var(--ink-2);
   font-size: var(--t-lead);
   max-width: 38ch;
   margin: 0 0 1.5rem;
+  overflow-wrap: break-word;
 }
 .hero__avail {
   display: inline-flex;
@@ -280,8 +290,8 @@
     aspect-ratio: 13/16;
   }
   .hero__stamp { display: none; }
-  .home-v2-root .hero__h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
-  .home-v2-root .hero__sub { font-size: 1rem; }
+  .home-v2-root .hero__h1 { font-size: clamp(2rem, 8.5vw, 2.6rem); max-width: 100%; }
+  .home-v2-root .hero__sub { font-size: 1rem; max-width: 100%; }
   .hero--pointillism .hero__copy {
     max-width: 100%;
   }
@@ -301,6 +311,8 @@
   padding: 0.85rem 0;
   border-bottom: 1px solid var(--ink-line);
   overflow: hidden;
+  overflow-x: clip;
+  max-width: 100%;
   background: var(--bg);
   -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
@@ -468,6 +480,26 @@
   transition: right linear;
 }
 
+@media (max-width: 768px) {
+  .case {
+    overflow: hidden;
+  }
+  .home-v2-root .xhair-tl { top: 4px; left: 4px; }
+  .home-v2-root .xhair-tr { top: 4px; right: 4px; }
+  .home-v2-root .xhair-bl { bottom: 4px; left: 4px; }
+  .home-v2-root .xhair-br { bottom: 4px; right: 4px; }
+}
+
+@media (max-width: 768px) {
+  .ledger__rule-line::before,
+  .ledger__rule-line::after {
+    display: none;
+  }
+  .ledger__rule .ledger__rule-line:last-of-type {
+    display: none;
+  }
+}
+
 @media (max-width: 880px) {
   .ledger__diptych {
     grid-template-columns: 1fr;
@@ -629,6 +661,18 @@
   /* drop tags + narrative tightens at narrow widths */
   .card__tags { display: none; }
   .card__narr { font-size: 0.9rem; }
+}
+@media (max-width: 768px) {
+  .home-v2-root .fig-stamp,
+  .home-v2-root .dim {
+    font-size: max(11px, var(--t-mono));
+  }
+  .home-v2-root .case__open {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 10px;
+  }
 }
 @media (max-width: 480px) {
   .kpi { min-height: 84px; padding: 0.7rem; }
