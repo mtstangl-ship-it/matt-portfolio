@@ -11,7 +11,7 @@ export const homeV2Hero = {
   availability:
     "Available for senior design leadership roles.",
   contacts: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/mattstangl", external: true },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/matthewtstangl/", external: true },
     { label: "mtstangl@gmail.com", href: "mailto:mtstangl@gmail.com", external: true },
   ] as const,
   proofStrip: [

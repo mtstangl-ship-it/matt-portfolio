@@ -509,7 +509,7 @@ export function HomePagePort() {
           <div className="cred__foot">
             <a
               className="cta cta--quiet"
-              href="https://credentials.stanford.edu"
+              href="https://programs.stanfordonline.global-alumni.com/ai-driven-leadership?utm_source=Google&utm_medium=c&utm_term=stanford%20ai%20certificate&utm_location=9028841&utm_network=g&utm_campaign=b-365d_US_GG_SE_STF-DLA_Brand&utm_content=AI_Generic_Course&gad_source=1&gad_campaignid=21487178073&gbraid=0AAAAAC-ids2opJ-GsShjjgpDbM7pvg5pI&gclid=Cj0KCQjwr4jSBhCSARIsAOX1E-Kp9AYxo1KRiA_ADIhOV7yfF6bg898AzubhRs_hi_cQfr1ZemndPCQaAnXmEALw_wcB"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -736,7 +736,7 @@ export function HomePagePort() {
         </a>
         <ul className="contact__alt">
           <li>
-            <a href="https://www.linkedin.com/in/mattstangl" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/matthewtstangl/" target="_blank" rel="noopener noreferrer">
               LinkedIn →
             </a>
           </li>
