@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Eyebrow, PageHero, Section, SiteGrid } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact · Matt Stangl",
   description:
     "Start a mission brief, share a problem worth solving, or send a note.",
 };

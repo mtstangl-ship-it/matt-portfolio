@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { ConditionalSiteChrome } from "@/components/layout/ConditionalSiteChrome";
+import {
+  defaultDescription,
+  defaultTitle,
+  ogImage,
+  siteName,
+  siteUrl,
+} from "@/lib/site-metadata";
 import "./globals.css";
 
 /** Canonical sans for Tier A fiche case shells (README specifies Inter 400/500/600). */
@@ -26,9 +33,27 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Matt, Service & Experience Transformation",
-  description:
-    "From fragmentation to flow. Senior service design and experience transformation leader.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: defaultTitle,
+    template: "%s",
+  },
+  description: defaultDescription,
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName,
+    title: defaultTitle,
+    description: defaultDescription,
+    url: siteUrl,
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [ogImage.url],
+  },
 };
 
 export default function RootLayout({

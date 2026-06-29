@@ -3,7 +3,7 @@ import { signalStoryCopy } from "@/content/signal-story";
 import { SignalStoryView } from "@/components/signal-story/SignalStoryView";
 
 export const metadata: Metadata = {
-  title: "Signal → Story",
+  title: "Signal → Story · Matt Stangl",
   description: signalStoryCopy.intro,
 };
 
